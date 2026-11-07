@@ -580,7 +580,7 @@ function direct(t, wt) {
     hp = { x: FISH.x, z: FISH.z, ry: Math.PI + 0.1, armR: A.hold, armL: A.rest, fish: true, nut: false, look: [0, 0.6] };
     if (lt < c1 - 0.2) { const k = ease(clamp(lt / (c1 - 0.2))); cam.pos = vl(V(FISH.x + 0.7, hy(FISH.x, FISH.z, 1.4), FISH.z + 2.4), V(FISH.x + 0.8, hy(FISH.x, FISH.z, 1.5), FISH.z + 1.9), k); cam.tgt = V(0, 4, -190); cam.fov = lerp(45, 30, k); }
     else if (lt < c2) { const k = (lt - c1) / (c2 - c1); cam.pos = V(FISH.x, 2.5, FISH.z - 3); cam.tgt = V(-6, 6.5, -185); cam.fov = lerp(16, 13, k); }
-    else { cam.pos = V(FISH.x + 0.3, hy(FISH.x, FISH.z, 1.15), FISH.z - 1.3); cam.tgt = V(FISH.x, hy(FISH.x, FISH.z, 1.15), FISH.z); cam.fov = 36; hp.eyesWide = true; hp.brow = 1; hp.smile = 0; hp.look = [0, 0.2]; hp.armR = A.hold; }
+    else { const k = ease(clamp((lt - c2) / (g.dur - c2))); cam.pos = vl(V(FISH.x + 4.2, hy(FISH.x, FISH.z, 1.3), FISH.z + 0.6), V(FISH.x + 3.4, hy(FISH.x, FISH.z, 1.1), FISH.z + 1.2), k); cam.tgt = V(FISH.x - 1.0, hy(FISH.x, FISH.z, 0.8), FISH.z - 1.6); cam.fov = 46; hp.eyesWide = true; hp.brow = 1; hp.smile = 0; hp.look = [0.5, 0.2]; hp.armR = A.hold; if (lt > g.dur - 1.0) { hp.ry = Math.PI - 0.6; hp.look = [0.8, 0]; } }
   } else if (n === 'ficha') {
     const cRun = capAt('correr', g.start) - g.start, cWhere = capAt('pra onde', g.start) - g.start;
     hp = { x: FISH.x, z: FISH.z, ry: Math.PI + 0.1, fish: true, nut: false, eyesWide: true, brow: 1, smile: 0, shout: 0, wob: lt < cRun ? 0.35 : 0, armL: A.rest, armR: A.hold };
@@ -659,9 +659,9 @@ function direct(t, wt) {
       const y = waterH(sf.x, sf.z, wt) + 0.06;
       sp = { x: sf.x, z: sf.z, y, ry: 0.15, legs: 'crouch', armL: [0.25, 1.35 + 0.2 * sway, -0.35], armR: [0.35, 1.25 - 0.2 * sway, -0.4], tilt: 0.12 * sway, smile: 1, mouth: 0.25, look: [-0.6, 0] }; bm = 'surf';
     } else if (n === 'horizon') {
-      const u = ss(0, g.dur - 1.2, lt); const x = lerp(0.2, FISH.x - 1.6, u), z = lerp(-18, FISH.z + 0.3, u);
-      sp = u < 1 ? { x, z, ry: 0.15, run: 1, phase: lt * 14, armL: carryArm, eyesWide: true, brow: 0.9, shout: 0.5, smile: 0 }
-                 : { x, z, ry: Math.PI + 0.25, armL: carryArm, armR: A.rest, eyesWide: true, brow: 0.9, smile: 0 };
+      const u = clamp(lt / (g.dur - 0.7)); const x = lerp(2.4, FISH.x - 0.6, u), z = lerp(-15, FISH.z - 2.4, u);
+      sp = u < 1 ? { x, z, ry: 0.12, run: 1, phase: lt * 14, armL: carryArm, armR: A.up, eyesWide: true, brow: 0.9, shout: 0.6, smile: 0 }
+                 : { x, z, ry: 0.5, armL: carryArm, armR: [1.4, 0.2, -0.1], eyesWide: true, brow: 0.9, shout: 0.5, smile: 0, look: [-0.6, 0] };
       bm = 'carry';
     } else if (n === 'ficha') {
       const cRun = capAt('correr', g.start) - g.start, cWhere = capAt('pra onde', g.start) - g.start;
