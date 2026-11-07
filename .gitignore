@@ -1,0 +1,5 @@
+node_modules/
+tts/
+frames/
+*.raw.wav
+*.tar.bz2
