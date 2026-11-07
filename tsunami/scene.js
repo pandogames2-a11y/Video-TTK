@@ -530,7 +530,7 @@ function worldTime(t) {
 }
 
 // ---------- director ----------
-let shake = 0, flash = 0;
+let shake = 0, flash = 0, heroU = 0;
 function direct(t, wt) {
   const g = seg(t), lt = t - g.start, p = clamp(lt / g.dur), n = g.scene;
   const hm = clamp(mouthOf(TL.heroMouth, t) * 1.4), tm = clamp(mouthOf(TL.tourMouth, t) * 1.4);
@@ -600,7 +600,7 @@ function direct(t, wt) {
     const keys = [[0, 0.03], [cT + 0.4, U_TOWEL], [cP + 0.6, U_SIGN], [g.dur, 1]];
     let u = 0; for (let i = 0; i < keys.length - 1; i++) if (lt >= keys[i][0] && lt <= keys[i + 1][0]) u = lerp(keys[i][1], keys[i + 1][1], (lt - keys[i][0]) / (keys[i + 1][0] - keys[i][0]));
     if (lt > g.dur) u = 1;
-    const pp = onPath(heroPath, u);
+    const pp = onPath(heroPath, u); heroU = u;
     hp = { x: pp.x, z: pp.z, ry: pp.ry, run: 1, phase: lt * 14, eyesWide: true, brow: 0.8, smile: 0, fish: lt < cF + 0.4, nut: false, shout: 0.3 };
     if (lt > cF && lt < cF + 0.6) { hp.armR = A.pointUp; }
     const hpos = V(pp.x, terrainH(pp.x, pp.z), pp.z);
@@ -638,19 +638,75 @@ function direct(t, wt) {
   } else if (n === 'q2' || n === 'q3' || n === 'swallow') {
     hp.visible = false;
     tp = { x: TOWEL.x, z: TOWEL.z, ry: Math.PI - 0.35, legs: 'sit', lean: -0.85, sitY: 0.5, armL: A.relax, armR: A.relax, shades: true, smile: 1, mouth: tm, visible: t < TSW + 0.05 };
-    if (n === 'q2') { cam.pos = vl(V(5.6, 1.5, 9.8), V(5.2, 1.3, 9.4), p); cam.tgt = V(TOWEL.x, 0.7, TOWEL.z - 1); cam.fov = 42; }
-    else if (n === 'q3') { cam.pos = vl(V(4.2, 0.9, 8.6), V(4.0, 0.8, 8.2), p); cam.tgt = vl(V(TOWEL.x, 0.8, TOWEL.z), V(TOWEL.x, 2.2, TOWEL.z - 3), p); cam.fov = 48; }
+    if (n === 'q2') { cam.pos = vl(V(5.2, 1.6, 11.2), V(4.8, 1.4, 10.8), p); cam.tgt = V(TOWEL.x - 0.9, 0.7, TOWEL.z - 0.4); cam.fov = 44; }
+    else if (n === 'q3') { cam.pos = vl(V(4.4, 1.0, 10.0), V(4.2, 0.9, 9.6), p); cam.tgt = vl(V(TOWEL.x - 0.8, 0.8, TOWEL.z + 0.4), V(TOWEL.x - 0.8, 2.2, TOWEL.z - 2.6), p); cam.fov = 50; }
     else {
-      if (t < TSW + 0.1) { cam.pos = V(4.0, 0.8, 8.2); cam.tgt = V(TOWEL.x, 3.5, TOWEL.z - 4); cam.fov = 55; shake = 0.6 * ss(TSW - 0.8, TSW, t); if (t > TSW - 0.35) { tp.shades = false; tp.eyesWide = true; tp.brow = 1; tp.shout = 0.7; tp.smile = 0; tp.armL = A.up; tp.armR = A.up; } }
+      if (t < TSW + 0.1) { cam.pos = V(4.2, 0.9, 9.6); cam.tgt = V(TOWEL.x - 0.8, 3.5, TOWEL.z - 3.5); cam.fov = 56; shake = 0.6 * ss(TSW - 0.8, TSW, t); if (t > TSW - 0.35) { tp.shades = false; tp.eyesWide = true; tp.brow = 1; tp.shout = 0.7; tp.smile = 0; tp.armL = A.up; tp.armR = A.up; } }
       else { const k = ss(TSW + 0.1, TE('swallow'), t); const cx = TOWEL.x + 1.5 + (t - TSW) * 0.8, cz = TOWEL.z + 2 + (t - TSW) * 1.2; cam.pos = vl(V(cx + 3, 7, cz + 5), V(cx + 2, 5.5, cz + 3.5), k); cam.tgt = V(cx + 0.5, 3.3, cz - 0.3); cam.fov = 45; }
     }
   } else if (n === 'end') {
     hp = Object.assign({}, sunbathe, { armL: A.wave, armR: A.hold });
     cam.pos = vl(V(4.2, 1.5, 2.4), V(8, 6, -8), ease(p)); cam.tgt = V(2.6, 1.0, 6.4); cam.fov = 45;
   }
-  { const sf = surferAt(wt); const y = waterH(sf.x, sf.z, wt) + 0.06; const sway = Math.sin(t * 2.3);
-    surferBean.pose(t, { x: sf.x, z: sf.z, y, ry: 0.15, legs: 'crouch', armL: [0.25, 1.35 + 0.2 * sway, -0.35], armR: [0.35, 1.25 - 0.2 * sway, -0.4], tilt: 0.12 * sway, smile: 1, mouth: 0.25, visible: sf.on, look: [-0.6, 0] });
-    board.visible = sf.on; board.position.set(sf.x, y + 0.02, sf.z); board.rotation.set(0, 0.15, 0.08 * sway - 0.05); }
+  // ----- surfer: surfs, runs away with the hero, survives with him (and gets swallowed in the gag)
+  {
+    const sf = surferAt(wt); const sway = Math.sin(t * 2.3);
+    const carryArm = [0.35, 0.45, -0.5];
+    const HS = { x: TOP.x - 1.15, z: TOP.z - 0.95 }, HRY = Math.PI * 0.75 + 0.2;
+    const SUN2 = { x: TOWEL.x - 1.5, z: TOWEL.z + 1.1 };
+    let sp = { visible: false, x: 0, z: 0 }, bm = 'hide';
+    if (sf.on && n !== 'end') {
+      const y = waterH(sf.x, sf.z, wt) + 0.06;
+      sp = { x: sf.x, z: sf.z, y, ry: 0.15, legs: 'crouch', armL: [0.25, 1.35 + 0.2 * sway, -0.35], armR: [0.35, 1.25 - 0.2 * sway, -0.4], tilt: 0.12 * sway, smile: 1, mouth: 0.25, look: [-0.6, 0] }; bm = 'surf';
+    } else if (n === 'horizon') {
+      const u = ss(0, g.dur - 1.2, lt); const x = lerp(0.2, FISH.x - 1.6, u), z = lerp(-18, FISH.z + 0.3, u);
+      sp = u < 1 ? { x, z, ry: 0.15, run: 1, phase: lt * 14, armL: carryArm, eyesWide: true, brow: 0.9, shout: 0.5, smile: 0 }
+                 : { x, z, ry: Math.PI + 0.25, armL: carryArm, armR: A.rest, eyesWide: true, brow: 0.9, smile: 0 };
+      bm = 'carry';
+    } else if (n === 'ficha') {
+      const cRun = capAt('correr', g.start) - g.start, cWhere = capAt('pra onde', g.start) - g.start;
+      const bx = FISH.x - 1.6, bz = FISH.z + 0.3;
+      if (lt < cRun) sp = { x: bx, z: bz, ry: Math.PI + 0.25, armL: carryArm, armR: A.rest, eyesWide: true, brow: 1, smile: 0, wob: 0.3 };
+      else if (lt < cWhere) sp = { x: bx, z: bz + (lt - cRun) * 0.6, ry: 0, run: 1, phase: lt * 14 + 1, armL: carryArm, eyesWide: true, brow: 1, shout: 0.6, smile: 0 };
+      else sp = { x: bx, z: bz + (cWhere - cRun) * 0.6, ry: -Math.sin((lt - cWhere) * 7 + 1) * 1.1, run: 0.5, phase: lt * 16, armL: carryArm, armR: A.shrug, eyesWide: true, brow: 1, smile: 0, look: [-Math.sin((lt - cWhere) * 7), 0] };
+      bm = 'carry';
+    } else if (n === 'answer') {
+      const u = Math.max(0, heroU - 0.04); const pp = onPath(heroPath, u);
+      const nx = Math.cos(pp.ry), nz = -Math.sin(pp.ry); // sideways offset
+      let x = pp.x + nx * 0.9, z = pp.z + nz * 0.9; const k = ss(0.88, 1.0, heroU);
+      x = lerp(x, HS.x, k); z = lerp(z, HS.z, k);
+      sp = { x, z, ry: pp.ry, run: k < 1 ? 1 : 0, phase: lt * 14 + 1.5, armL: carryArm, eyesWide: true, brow: 0.8, shout: 0.3, smile: 0 }; bm = 'carry';
+    } else if (n === 'building' || n === 'hit' || n === 'safe' || n === 'q1') {
+      sp = { x: HS.x, z: HS.z, ry: HRY, armL: A.rest, armR: A.rest, smile: 1 }; bm = 'stand';
+      if (n === 'hit') Object.assign(sp, { armL: A.up, armR: A.up, eyesWide: true, brow: 0.9, shout: 0.4, smile: 0 });
+      if (n === 'safe') {
+        const cB = capAt('comemore', g.start) - g.start, cS = capAt('desça', g.start) - g.start;
+        if (lt >= cB && lt < cS) Object.assign(sp, { eyesWide: true, brow: 0.6, smile: 0, armR: A.pointUp });
+        if (lt >= cS) Object.assign(sp, { legs: 'sit', armL: A.knee, armR: A.knee });
+        sp.bob = Math.sin(lt * 2.2 + 1) * 0.03;
+      }
+      if (n === 'q1') Object.assign(sp, { armR: A.thumb, armL: A.hips, shades: true, brow: -0.2 });
+    } else if (n === 'q2' || n === 'q3' || n === 'swallow') {
+      sp = { x: SUN2.x, z: SUN2.z, ry: Math.PI - 0.35, legs: 'sit', lean: -0.85, sitY: 0.5, armL: A.relax, armR: A.relax, shades: true, smile: 1, visible: t < TSW + 0.05 };
+      if (n === 'swallow' && t > TSW - 0.35) Object.assign(sp, { shades: false, eyesWide: true, brow: 1, shout: 0.7, smile: 0, armL: A.up, armR: A.up });
+      bm = t < TSW + 0.05 ? 'lie' : 'float';
+    } else if (n === 'end') {
+      sp = { x: TOWEL.x - 1.7, z: TOWEL.z - 0.3, ry: Math.PI - 0.35, legs: 'sit', lean: -0.55, sitY: 0.55, armL: A.relax, armR: A.thumb, shades: true, smile: 1 }; bm = 'stand';
+    }
+    surferBean.pose(t, sp);
+    // board
+    board.visible = bm !== 'hide';
+    if (bm === 'carry') {
+      const el = surferBean.arms[0].el; if (board.parent !== el) el.add(board);
+      board.position.set(-0.13, -0.5, 0.05); board.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(V(0, 0, 1), V(1, 0, 0), V(0, 1, 0)));
+    } else {
+      if (board.parent !== scene) scene.add(board);
+      if (bm === 'surf') { const y = waterH(sf.x, sf.z, wt) + 0.08; board.position.set(sf.x, y, sf.z); board.rotation.set(0, 0.15, 0.08 * sway - 0.05); }
+      else if (bm === 'stand') { const bx = sp.x - 0.75, bz = sp.z + 0.5; board.position.set(bx, terrainH(bx, bz) + 0.85, bz); board.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(V(0, 1, 0), V(1, 0, 0), V(0, 0, -1))); board.rotateX(0.5); }
+      else if (bm === 'lie') { board.position.set(sp.x, terrainH(sp.x, sp.z) + 0.05, sp.z - 0.2); board.rotation.set(0, Math.PI - 0.35 + Math.PI / 2, 0); }
+      else if (bm === 'float') { const k = t - TSW; const x = TOWEL.x - 0.5 + k * 0.7, z = TOWEL.z + 3 + k * 1.1; board.position.set(x, waterH(x, z, wt) + 0.08, z); board.rotation.set(Math.sin(t * 1.7) * 0.12, k * 0.5, Math.sin(t * 2.1) * 0.1); }
+    }
+  }
   hero.pose(t, hp); tourist.pose(t, tp); neighbor.pose(t, np);
   // floating cap after the gag
   const after = (n === 'swallow' && t > TSW + 0.1);
