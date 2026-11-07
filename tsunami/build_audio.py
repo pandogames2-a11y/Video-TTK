@@ -18,9 +18,9 @@ def readwav(f):
 EL_KEY = os.environ.get('ELEVENLABS_API_KEY', 'proxy-injected')
 EL_MODEL = os.environ.get('ELEVENLABS_MODEL', 'eleven_multilingual_v2')
 VOICES = {  # voice_id do ElevenLabs por papel (podem ser trocados por variável de ambiente)
-    'narr': os.environ.get('EL_VOICE_NARR', 'nPczCjzI2devNBz1zQrb'),     # Brian: narrador grave
-    'hero': os.environ.get('EL_VOICE_HERO', 'bIHbv24MWmeRgasZH58o'),     # Will: protagonista
-    'tourist': os.environ.get('EL_VOICE_TOURIST', 'N2lVS1w4EtoT3dr4eOWO'),  # Callum: turista preguiçoso
+    'narr': os.environ.get('EL_VOICE_NARR', 'czQ9pLzjRaF61EAYjcPC'),     # Viraj: narrador
+    'hero': os.environ.get('EL_VOICE_HERO', 'Iq9IDbsAh0XiIAKtSuSg'),     # Diego: protagonista
+    'tourist': os.environ.get('EL_VOICE_TOURIST', 'Iq9IDbsAh0XiIAKtSuSg'),  # Diego: turista preguiçoso
 }
 SETTINGS = {
     'narr': dict(stability=0.45, similarity_boost=0.8, style=0.35, use_speaker_boost=True, speed=1.0),
