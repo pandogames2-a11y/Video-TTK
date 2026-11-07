@@ -4,7 +4,7 @@ Animações 3D com personagens grãos de café explicando como sobreviver a desa
 
 | Episódio | Pasta | Vídeo |
 |---|---|---|
-| 1 — Tsunami | `tsunami/` | `tsunami/tsunami_episodio1_v4.mp4` (versão atual, 2:19) |
+| 1 — Tsunami | `tsunami/` | `tsunami/tsunami_episodio1_v5.mp4` (versão atual, 2:19) |
 
 ## Como cada episódio é feito
 - `script.json` — roteiro da narração (cena, texto, falas dos personagens)
