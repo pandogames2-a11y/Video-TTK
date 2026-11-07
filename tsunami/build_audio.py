@@ -19,7 +19,7 @@ EL_KEY = os.environ.get('ELEVENLABS_API_KEY', 'proxy-injected')
 EL_MODEL = os.environ.get('ELEVENLABS_MODEL', 'eleven_multilingual_v2')
 VOICES = {  # voice_id do ElevenLabs por papel (podem ser trocados por variável de ambiente)
     'narr': os.environ.get('EL_VOICE_NARR', 'nPczCjzI2devNBz1zQrb'),     # Brian: narrador grave
-    'hero': os.environ.get('EL_VOICE_HERO', 'TX3LPaxmHKxFdv7VPQEU'),     # Liam: protagonista
+    'hero': os.environ.get('EL_VOICE_HERO', 'bIHbv24MWmeRgasZH58o'),     # Will: protagonista
     'tourist': os.environ.get('EL_VOICE_TOURIST', 'N2lVS1w4EtoT3dr4eOWO'),  # Callum: turista preguiçoso
 }
 SETTINGS = {
