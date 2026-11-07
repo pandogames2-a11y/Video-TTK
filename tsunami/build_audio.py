@@ -1,9 +1,8 @@
-import json, wave, re, subprocess, os
+import json, wave, re, subprocess, os, time, hashlib, urllib.request, urllib.error
 import numpy as np
 from scipy.signal import lfilter, butter
 
 SR = 44100; FPS = 30
-D = 'tts/vits-piper-pt_BR-faber-medium/pt_BR-faber-medium'
 os.makedirs('audio', exist_ok=True)
 S = json.load(open('script.json'))
 
@@ -14,15 +13,42 @@ def readwav(f):
     t = np.arange(int(len(x) * SR / sr)) / SR
     return np.interp(t, np.arange(len(x)) / sr, x).astype(np.float32)
 
+# ---- ElevenLabs TTS (narração e falas dos personagens)
+# A chave vem de ELEVENLABS_API_KEY (ou é injetada pelo proxy do ambiente).
+EL_KEY = os.environ.get('ELEVENLABS_API_KEY', 'proxy-injected')
+EL_MODEL = os.environ.get('ELEVENLABS_MODEL', 'eleven_multilingual_v2')
+VOICES = {  # voice_id do ElevenLabs por papel (podem ser trocados por variável de ambiente)
+    'narr': os.environ.get('EL_VOICE_NARR', 'nPczCjzI2devNBz1zQrb'),     # Brian: narrador grave
+    'hero': os.environ.get('EL_VOICE_HERO', 'TX3LPaxmHKxFdv7VPQEU'),     # Liam: protagonista
+    'tourist': os.environ.get('EL_VOICE_TOURIST', 'N2lVS1w4EtoT3dr4eOWO'),  # Callum: turista preguiçoso
+}
+SETTINGS = {
+    'narr': dict(stability=0.45, similarity_boost=0.8, style=0.35, use_speaker_boost=True, speed=1.0),
+    'hero': dict(stability=0.35, similarity_boost=0.75, style=0.6, use_speaker_boost=True, speed=1.0),
+    'tourist': dict(stability=0.4, similarity_boost=0.75, style=0.5, use_speaker_boost=True, speed=0.9),
+}
+
+def eleven(text, voice, out_mp3):
+    body = json.dumps(dict(text=text, model_id=EL_MODEL, language_code='pt', voice_settings=SETTINGS[voice])).encode()
+    req = urllib.request.Request(f'https://api.elevenlabs.io/v1/text-to-speech/{VOICES[voice]}?output_format=mp3_44100_128',
+                                 data=body, method='POST', headers={'xi-api-key': EL_KEY, 'Content-Type': 'application/json', 'Accept': 'audio/mpeg'})
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r: open(out_mp3, 'wb').write(r.read()); return
+        except urllib.error.HTTPError as e:
+            msg = e.read().decode(errors='replace')
+            if e.code in (429, 500, 502, 503) and attempt < 3: time.sleep(2 ** (attempt + 1)); continue
+            raise SystemExit(f'ElevenLabs {e.code}: {msg}')
+
 def tts(text, out, voice):
-    raw = out + '.raw.wav'
-    ls = {'narr': '1.02', 'hero': '0.95', 'tourist': '1.25'}[voice]
-    subprocess.run(['python3', '-m', 'piper', '-m', D + '.onnx', '-c', D + '.onnx.json', '-f', raw, '--length-scale', ls, '--sentence-silence', '0.25'],
-                   input=text.encode(), check=True, capture_output=True)
-    af = {'narr': 'highpass=f=70,acompressor=threshold=0.1:ratio=3,volume=1.3',
-          'hero': 'asetrate=22050*1.28,aresample=22050,atempo=0.85,volume=1.2',
-          'tourist': 'asetrate=22050*0.86,aresample=22050,atempo=1.05,volume=1.2'}[voice]
-    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', raw, '-af', af, '-ar', '44100', '-ac', '1', out], check=True)
+    # cache por texto+voz para não gastar créditos à toa ao refazer o áudio
+    key = hashlib.sha1(json.dumps([text, voice, VOICES[voice], EL_MODEL, SETTINGS[voice]]).encode()).hexdigest()[:16]
+    os.makedirs('audio/cache', exist_ok=True); mp3 = f'audio/cache/{voice}_{key}.mp3'
+    if not os.path.exists(mp3): eleven(text, voice, mp3)
+    af = {'narr': 'highpass=f=70,acompressor=threshold=0.1:ratio=3,volume=1.2',
+          'hero': 'highpass=f=80,volume=1.2',
+          'tourist': 'highpass=f=80,volume=1.2'}[voice]
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', mp3, '-af', af, '-ar', '44100', '-ac', '1', out], check=True)
 
 def chunks(text, maxc=42):
     parts = [p.strip() for p in re.findall(r'[^,.?!:]+[,.?!:]*', text) if p.strip()]
