@@ -1,7 +1,26 @@
 {
-  "_comment": "Vozes do ElevenLabs (modelo multilíngue, fala português). Troque o voice_id para usar outra voz da sua conta.",
+  "_comment": "Vozes do ElevenLabs (modelo multilíngue, fala português). Uma voz fixa por personagem: estabilidade alta, sem estilo e seed fixa para não variar entre as falas. Troque o voice_id para usar outra voz da sua conta.",
   "model_id": "eleven_multilingual_v2",
-  "narr":   { "name": "Brian",   "voice_id": "nPczCjzI2devNBz1zQrb", "stability": 0.45, "similarity_boost": 0.8, "style": 0.35 },
-  "hero":   { "name": "Liam",    "voice_id": "TX3LPaxmHKxFdv7VOQHJ", "stability": 0.35, "similarity_boost": 0.8, "style": 0.55 },
-  "friend": { "name": "Charlie", "voice_id": "IKne3meq5aSn9XLyUdCD", "stability": 0.30, "similarity_boost": 0.8, "style": 0.65 }
+  "narr": {
+    "name": "Brian",
+    "voice_id": "nPczCjzI2devNBz1zQrb",
+    "stability": 0.8,
+    "similarity_boost": 0.85,
+    "style": 0.0
+  },
+  "hero": {
+    "name": "Liam",
+    "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
+    "stability": 0.8,
+    "similarity_boost": 0.85,
+    "style": 0.0
+  },
+  "friend": {
+    "name": "Charlie",
+    "voice_id": "IKne3meq5aSn9XLyUdCD",
+    "stability": 0.8,
+    "similarity_boost": 0.85,
+    "style": 0.0
+  },
+  "seed": 4242
 }

@@ -27,21 +27,22 @@ def tts_piper(text, out, voice):
 
 # ElevenLabs: TTS=eleven python3 build_audio.py  (the API key is injected by the session's network proxy)
 VOICES = json.load(open('voices.json')) if os.path.exists('voices.json') else {}
-def tts_eleven(text, out, voice):
+def tts_eleven(text, out, voice, prev='', nxt=''):
     import hashlib, urllib.request
     v = VOICES[voice]; os.makedirs('audio/cache', exist_ok=True)
-    key = hashlib.sha1(json.dumps([text, v, VOICES.get('model_id')], sort_keys=True).encode()).hexdigest()[:16]
+    key = hashlib.sha1(json.dumps([text, v, VOICES.get('model_id'), VOICES.get('seed'), prev, nxt], sort_keys=True).encode()).hexdigest()[:16]
     mp3 = f'audio/cache/{voice}_{key}.mp3'
     if not os.path.exists(mp3):   # cached, so re-running does not spend credits again
-        body = json.dumps({'text': text, 'model_id': VOICES.get('model_id', 'eleven_multilingual_v2'),
+        body = json.dumps({'text': text, 'model_id': VOICES.get('model_id', 'eleven_multilingual_v2'), 'seed': VOICES.get('seed', 4242),
+                           'previous_text': prev, 'next_text': nxt,
                            'voice_settings': {'stability': v['stability'], 'similarity_boost': v['similarity_boost'], 'style': v.get('style', 0), 'use_speaker_boost': True}}).encode()
         req = urllib.request.Request(f"https://api.elevenlabs.io/v1/text-to-speech/{v['voice_id']}?output_format=mp3_44100_128", data=body, method='POST',
                                      headers={'Content-Type': 'application/json', 'Accept': 'audio/mpeg', 'xi-api-key': os.environ.get('ELEVEN_KEY', 'proxy-injected')})
         with urllib.request.urlopen(req, timeout=120) as r: open(mp3, 'wb').write(r.read())
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', mp3, '-af', 'highpass=f=60,acompressor=threshold=0.12:ratio=2.5,volume=1.15', '-ar', '44100', '-ac', '1', out], check=True)
 
-def tts(text, out, voice):
-    return tts_eleven(text, out, voice) if os.environ.get('TTS') == 'eleven' else tts_piper(text, out, voice)
+def tts(text, out, voice, prev='', nxt=''):
+    return tts_eleven(text, out, voice, prev, nxt) if os.environ.get('TTS') == 'eleven' else tts_piper(text, out, voice)
 
 def chunks(text, maxc=42):
     parts = [p.strip() for p in re.findall(r'[^,.?!:]+[,.?!:]*', text) if p.strip()]
@@ -53,11 +54,17 @@ def chunks(text, maxc=42):
         else: out.append(p)
     return out
 
+def ctx(i, step):
+    j = i + step
+    while 0 <= j < len(S):
+        if S[j]['voice'] == S[i]['voice']: return S[j]['text']
+        j += step
+    return ''
 segs = []; t = 0.0
 for i, s in enumerate(S):
     v = np.zeros(1, np.float32)
     if s['voice'] != 'none':
-        f = f'audio/v{i:02d}.wav'; tts(s['text'], f, s['voice']); v = readwav(f)
+        f = f'audio/v{i:02d}.wav'; tts(s['text'], f, s['voice'], ctx(i, -1), ctx(i, 1)); v = readwav(f)
         nz = np.where(np.abs(v) > 0.01)[0]
         if len(nz): v = v[max(0, nz[0] - 200): nz[-1] + 2000]
     lead = s.get('lead', 0.25); vl = len(v) / SR if s['voice'] != 'none' else 0
@@ -268,8 +275,13 @@ drums(TE('idea') - 0.1, TE('stairs2'), 150, 0.16); boom(TE('idea') - 0.1, 0.5, 5
 # building: elevator ding + "no" buzzer, footsteps up the stairs
 ding(VS('elev') - 0.3, 0.1, (1318, 1046)); buzzer(VS('stairs') - 0.05, 0.1, 0.35)
 for k, at in enumerate(np.arange(T0('stairs') + 0.8, TE('stairs2') - 0.3, 0.19)): step(at, 0.1 if k % 2 else 0.13)
+# rescued dog: little woofs when the friend scoops it up
+def woof(at, amp=0.22):
+    n = int(0.22 * SR); x = np.arange(n) / SR; f = 520 - 900 * x
+    put(fx, (np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.7 + band(rng.standard_normal(n), 300, 2500) * 0.5) * np.exp(-x * 14) * np.minimum(1, x * 80) * amp, at)
+dg = capT('morro', 'answer'); woof(dg + 0.1); woof(dg + 0.45, 0.18)
 # hit
-e = gate(T0('hit') + 0.6, TE('friend3'), 1.0) * np.clip(1 - (tt - T0('hit')) / (TE('friend3') - T0('hit')) * 0.7, 0.25, 1)
+e = gate(T0('hit') + 0.6, TE('backwash'), 1.0) * np.clip(1 - (tt - T0('hit')) / (TE('backwash') - T0('hit')) * 0.7, 0.25, 1)
 amb += (lowp(noise, 500) * 1.2 + band(noise, 700, 5000) * 0.35) * e * 0.5
 boom(T0('hit') + 1.2, 0.9, 35)
 for k in range(5):
@@ -281,6 +293,15 @@ for k in range(10):
 fz = capT('fios', 'backwash')
 for k in range(4):
     n = int(0.25 * SR); x = np.arange(n) / SR; put(fx, band(rng.standard_normal(n), 3000, 9000) * (rng.random(n) > 0.85) * np.exp(-x * 8) * 0.25, fz + 0.2 + k * 0.4)
+# electrocution gag
+z0 = T0('zap2') + 0.5; n = int(1.3 * SR); x = np.arange(n) / SR
+buzz = (np.sign(np.sin(2 * np.pi * 60 * x)) * 0.5 + np.sign(np.sin(2 * np.pi * 120 * x + 1)) * 0.3) * (0.6 + 0.4 * np.sign(np.sin(2 * np.pi * 11 * x)))
+put(fx, (lowp(buzz, 3000) * 0.25 + band(rng.standard_normal(n), 2000, 9000) * (rng.random(n) > 0.7) * 0.35) * np.minimum(1, x * 30) * np.minimum(1, (1.3 - x) * 10), z0)
+crack(z0, 0.5); splash(z0 - 0.05, 0.15, 0.4)
+n = int(0.6 * SR); x = np.arange(n) / SR; put(fx, lowp(rng.standard_normal(n), 900) * np.exp(-x * 5) * 0.35, z0 + 1.35)   # poof of smoke
+for k, (m, d_) in enumerate([(55, 0.45), (54, 0.45), (53, 0.45), (52, 1.1)]):   # sad trombone for the facepalm
+    f = 440 * 2 ** ((m - 69) / 12); n = int(d_ * SR); x = np.arange(n) / SR
+    put(mus, (np.sin(2 * np.pi * f * x + 0.25 * np.sin(2 * np.pi * 5 * x * (k == 3))) + 0.5 * np.sin(4 * np.pi * f * x) + 0.25 * np.sin(6 * np.pi * f * x)) * np.minimum(1, x * 20) * np.exp(-x * 1.2) * 0.07, z0 + 2.2 + k * 0.45)
 pad(T0('safe') + 1, TE('safe'), [57, 60, 64], 0.02)
 ding(VS('safe') - 0.1, 0.08, (988, 784))
 # gag: happy ukulele -> surfer swallowed -> "oh-oh" -> swallowed
