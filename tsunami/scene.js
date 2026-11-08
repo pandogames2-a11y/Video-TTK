@@ -625,8 +625,8 @@ const stairPts = [];
   const tile = canvasTex(256, 256, (g, w) => { for (let i = 0; i < 8; i++) for (let j = 0; j < 8; j++) { g.fillStyle = (i + j) % 2 ? '#d8d2c6' : '#ece7dd'; g.fillRect(i * 32, j * 32, 32, 32); } }); tile.wrapS = tile.wrapT = THREE.RepeatWrapping; tile.repeat.set(5, 3);
   const floor = new THREE.Mesh(new THREE.BoxGeometry(16, 0.2, 5.2), std(0xffffff, { map: tile, roughness: 0.6 })); floor.position.set(-1.5, -0.1, 1.6); interior.add(floor);
   const back = new THREE.Mesh(new THREE.PlaneGeometry(16, 16), wallM); back.position.set(-1.5, 8, -1.0); interior.add(back);
-  const west = new THREE.Mesh(new THREE.PlaneGeometry(5.2, 16), wallM); west.rotation.y = Math.PI / 2; west.position.set(-9.5, 8, 1.6); interior.add(west);
-  const east = new THREE.Mesh(new THREE.PlaneGeometry(5.2, 16), wallM); east.rotation.y = -Math.PI / 2; east.position.set(6.5, 8, 1.6); interior.add(east);
+  const west = new THREE.Mesh(new THREE.PlaneGeometry(11, 16), wallM); west.rotation.y = Math.PI / 2; west.position.set(-9.5, 8, 4.5); interior.add(west);
+  const east = new THREE.Mesh(new THREE.PlaneGeometry(11, 16), wallM); east.rotation.y = -Math.PI / 2; east.position.set(6.5, 8, 4.5); interior.add(east);
   const base = new THREE.Mesh(new THREE.BoxGeometry(16, 0.5, 0.05), std(0x8c7a64)); base.position.set(-1.5, 0.25, -0.97); interior.add(base);
   // elevator
   const steel = std(0xb9c2c8, { metalness: 0.7, roughness: 0.3 });
@@ -650,6 +650,16 @@ const stairPts = [];
     const ly = y0 + 1.5, lx = f % 2 ? -0.5 : 4.5;
     const land = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.15, 3.1), stepM); land.position.set(lx, ly - 0.075, 1.35); interior.add(land);
     const rail = new THREE.Mesh(new THREE.BoxGeometry(4.2, 0.06, 0.06), railM); rail.position.set(2, y0 + 0.75 + 0.95, lanes[1] + 0.75); rail.rotation.z = dir * Math.atan2(1.5, 4); if (f % 2) interior.add(rail);
+  }
+  // solid floors on every storey (the stairwell opening stays clear) so the climb never floats over empty space
+  const slabM = std(0xffffff, { map: tile, roughness: 0.6 }), edgeM = std(0xb9b0a2, { roughness: 0.9 });
+  for (let n = 1; n <= 3; n++) {
+    const y = n * FLOOR_H;
+    for (const [x0, x1] of [[-9.5, -1.0], [5.0, 6.5]]) {
+      const w = x1 - x0; const sl = new THREE.Mesh(new THREE.BoxGeometry(w, 0.3, 5.2), slabM); sl.position.set((x0 + x1) / 2, y - 0.15, 1.6); interior.add(sl);
+      const ed = new THREE.Mesh(new THREE.BoxGeometry(w, 0.32, 0.06), edgeM); ed.position.set((x0 + x1) / 2, y - 0.15, 4.21); interior.add(ed);
+    }
+    const back = new THREE.Mesh(new THREE.BoxGeometry(6.0, 0.3, 0.9), slabM); back.position.set(2, y - 0.15, -0.55); interior.add(back);
   }
   // floor numbers on the west wall at each landing
   [1, 2, 3].forEach(n => {

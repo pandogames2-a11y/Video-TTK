@@ -19,11 +19,29 @@ LS = {'narr': '1.02', 'hero': '0.95', 'friend': '0.92'}
 AF = {'narr': 'highpass=f=70,acompressor=threshold=0.1:ratio=3,volume=1.3',
       'hero': 'asetrate=22050*1.28,aresample=22050,atempo=0.85,volume=1.2',
       'friend': 'asetrate=22050*1.1,aresample=22050,atempo=0.98,volume=1.25'}
-def tts(text, out, voice):
+def tts_piper(text, out, voice):
     raw = out + '.raw.wav'
     subprocess.run(['python3', '-m', 'piper', '-m', D + '.onnx', '-c', D + '.onnx.json', '-f', raw, '--length-scale', LS[voice], '--sentence-silence', '0.25'],
                    input=text.encode(), check=True, capture_output=True)
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', raw, '-af', AF[voice], '-ar', '44100', '-ac', '1', out], check=True)
+
+# ElevenLabs: TTS=eleven python3 build_audio.py  (the API key is injected by the session's network proxy)
+VOICES = json.load(open('voices.json')) if os.path.exists('voices.json') else {}
+def tts_eleven(text, out, voice):
+    import hashlib, urllib.request
+    v = VOICES[voice]; os.makedirs('audio/cache', exist_ok=True)
+    key = hashlib.sha1(json.dumps([text, v, VOICES.get('model_id')], sort_keys=True).encode()).hexdigest()[:16]
+    mp3 = f'audio/cache/{voice}_{key}.mp3'
+    if not os.path.exists(mp3):   # cached, so re-running does not spend credits again
+        body = json.dumps({'text': text, 'model_id': VOICES.get('model_id', 'eleven_multilingual_v2'),
+                           'voice_settings': {'stability': v['stability'], 'similarity_boost': v['similarity_boost'], 'style': v.get('style', 0), 'use_speaker_boost': True}}).encode()
+        req = urllib.request.Request(f"https://api.elevenlabs.io/v1/text-to-speech/{v['voice_id']}?output_format=mp3_44100_128", data=body, method='POST',
+                                     headers={'Content-Type': 'application/json', 'Accept': 'audio/mpeg', 'xi-api-key': os.environ.get('ELEVEN_KEY', 'proxy-injected')})
+        with urllib.request.urlopen(req, timeout=120) as r: open(mp3, 'wb').write(r.read())
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', mp3, '-af', 'highpass=f=60,acompressor=threshold=0.12:ratio=2.5,volume=1.15', '-ar', '44100', '-ac', '1', out], check=True)
+
+def tts(text, out, voice):
+    return tts_eleven(text, out, voice) if os.environ.get('TTS') == 'eleven' else tts_piper(text, out, voice)
 
 def chunks(text, maxc=42):
     parts = [p.strip() for p in re.findall(r'[^,.?!:]+[,.?!:]*', text) if p.strip()]
