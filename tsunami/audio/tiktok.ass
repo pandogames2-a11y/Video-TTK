@@ -1,0 +1,104 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Inter Display Black,76,&H00FFFFFF,&H00FFFFFF,&H00281410,&H00000000,0,0,0,0,100,100,0,0,1,7,0,8,70,70,0,1
+Style: Head,Inter Display Black,96,&H00FFFFFF,&H00FFFFFF,&H004A2A0A,&H00000000,0,0,0,0,100,100,0,0,1,8,0,8,40,40,0,1
+Style: Small,Inter Display Black,38,&H00FFFFFF,&H00FFFFFF,&H004A2A0A,&H00000000,0,0,0,0,100,100,2,0,1,5,0,8,40,40,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.40,0:03:43.19,Small,,0,0,0,,{\pos(540,150)}GUIA DE SOBREVIVÊNCIA • EP. 1
+Dialogue: 0,0:00:00.40,0:03:43.19,Head,,0,0,0,,{\pos(540,215)}VOCÊ SOBREVIVERIA
+Dialogue: 0,0:00:00.40,0:03:43.19,Head,,0,0,0,,{\pos(540,330)\fs118\c&H3FD2FF&}A UM TSUNAMI?
+Dialogue: 0,0:03:38.19,0:03:43.19,Small,,0,0,0,,{\pos(540,1720)\c&H2A8AFF&}SEGUE PRA VER O EP. 2: TERREMOTO
+Dialogue: 1,0:00:04.85,0:00:06.50,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}É um dia ensolarado.
+Dialogue: 1,0:00:06.38,0:00:08.62,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Você está na praia {\c&H3FD2FF&}tomando sol
+Dialogue: 1,0:00:08.51,0:00:11.16,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}enquanto o seu amigo pega umas ondas.
+Dialogue: 1,0:00:11.04,0:00:12.57,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}As gaivotas voando
+Dialogue: 1,0:00:12.45,0:00:14.40,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}aquele som gostoso do mar
+Dialogue: 1,0:00:14.28,0:00:17.05,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}e um ventinho soprando lá do horizonte.
+Dialogue: 1,0:00:17.78,0:00:19.04,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Tudo tranquilo.
+Dialogue: 1,0:00:18.92,0:00:20.51,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Tranquilo até demais.
+Dialogue: 1,0:00:21.84,0:00:23.31,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Até que {\c&H3FD2FF&}de repente
+Dialogue: 1,0:00:23.19,0:00:25.66,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}você repara que o mar está voltando.
+Dialogue: 1,0:00:25.54,0:00:26.39,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Rápido.
+Dialogue: 1,0:00:26.27,0:00:27.29,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Tão rápido
+Dialogue: 1,0:00:27.17,0:00:29.65,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}que tem {\c&H3FD2FF&}peixe{\c&HFFFFFF&} se debatendo na areia.
+Dialogue: 1,0:00:30.28,0:00:31.67,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“Ué... cadê o mar?!”
+Dialogue: 1,0:00:32.40,0:00:33.62,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Por um momento
+Dialogue: 1,0:00:33.50,0:00:36.10,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}você até acha que isso é uma coisa boa.
+Dialogue: 1,0:00:35.98,0:00:37.09,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}E ainda diz:
+Dialogue: 1,0:00:37.42,0:00:39.92,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“Opa! A janta de hoje tá garantida!”
+Dialogue: 1,0:00:40.65,0:00:42.60,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Mas o que você não esperava
+Dialogue: 1,0:00:42.48,0:00:44.82,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}é que estava diante de um {\c&H3FD2FF&}tsunami{\c&HFFFFFF&}.
+Dialogue: 1,0:00:46.95,0:00:49.96,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}E {\c&H3FD2FF&}tsunami{\c&HFFFFFF&} não é uma onda de surfe gigante.
+Dialogue: 1,0:00:49.84,0:00:52.73,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}É o oceano sendo empurrado de uma vez só
+Dialogue: 1,0:00:52.62,0:00:55.75,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}geralmente por um {\c&H3FD2FF&}terremoto{\c&HFFFFFF&} no fundo do mar.
+Dialogue: 1,0:00:55.63,0:00:56.77,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Em alto-mar
+Dialogue: 1,0:00:56.65,0:00:59.25,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}ele viaja na velocidade de um {\c&H3FD2FF&}avião
+Dialogue: 1,0:00:59.13,0:01:01.05,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}e quase ninguém percebe.
+Dialogue: 1,0:01:00.93,0:01:03.89,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Mas quando chega perto da costa ele {\c&H3FD2FF&}freia
+Dialogue: 1,0:01:03.77,0:01:06.24,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}{\c&H3FD2FF&}cresce{\c&HFFFFFF&} e vira um {\c&H3FD2FF&}paredão de água{\c&HFFFFFF&}.
+Dialogue: 1,0:01:07.17,0:01:08.99,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}E aquele mar recuando?
+Dialogue: 1,0:01:08.87,0:01:12.10,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Era o {\c&H3FD2FF&}tsunami{\c&HFFFFFF&} puxando a água antes de chegar.
+Dialogue: 1,0:01:11.98,0:01:14.65,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}O {\c&H3FD2FF&}último aviso{\c&HFFFFFF&} que a natureza te dá.
+Dialogue: 1,0:01:15.58,0:01:18.38,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Então você olha pro horizonte e vê.
+Dialogue: 1,0:01:18.26,0:01:21.51,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Uma onda com mais de {\c&H3FD2FF&}dez metros{\c&HFFFFFF&} de altura.
+Dialogue: 1,0:01:21.39,0:01:22.62,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}{\c&H3FD2FF&}Densa{\c&HFFFFFF&} {\c&H3FD2FF&}forte
+Dialogue: 1,0:01:22.50,0:01:25.29,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}e chegando numa velocidade absurda.
+Dialogue: 1,0:01:26.22,0:01:27.45,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}A ficha cai.
+Dialogue: 1,0:01:27.33,0:01:29.43,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Seu corpo inteiro arrepia.
+Dialogue: 1,0:01:29.86,0:01:31.84,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“E agora? O que a gente faz?!”
+Dialogue: 1,0:01:33.17,0:01:35.05,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“Já sei! Bora pegar o carro!”
+Dialogue: 1,0:01:35.58,0:01:36.80,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}{\c&H3FD2FF&}Péssima ideia{\c&HFFFFFF&}.
+Dialogue: 1,0:01:36.68,0:01:39.15,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Com todo mundo fugindo ao mesmo tempo
+Dialogue: 1,0:01:39.03,0:01:41.56,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}o {\c&H3FD2FF&}trânsito trava{\c&HFFFFFF&} e a água chega antes.
+Dialogue: 1,0:01:47.94,0:01:50.09,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“Tenho uma ideia melhor. Vem comigo!”
+Dialogue: 1,0:01:50.62,0:01:53.08,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}{\c&H3FD2FF&}Pra cima{\c&HFFFFFF&} e pra {\c&H3FD2FF&}longe do mar{\c&HFFFFFF&}.
+Dialogue: 1,0:01:52.96,0:01:56.17,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Esquece a toalha o guarda-sol a prancha
+Dialogue: 1,0:01:56.05,0:01:58.43,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}e principalmente os {\c&H3FD2FF&}peixe{\c&HFFFFFF&}s.
+Dialogue: 1,0:01:58.31,0:02:00.90,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Siga as placas de {\c&H3FD2FF&}rota de fuga
+Dialogue: 1,0:02:00.78,0:02:03.23,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}e suba o {\c&H3FD2FF&}morro{\c&HFFFFFF&} mais próximo.
+Dialogue: 1,0:02:03.97,0:02:05.51,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Sem {\c&H3FD2FF&}morro{\c&HFFFFFF&} por perto?
+Dialogue: 1,0:02:05.39,0:02:07.76,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Entre num {\c&H3FD2FF&}prédio alto{\c&HFFFFFF&} e {\c&H3FD2FF&}resistente{\c&HFFFFFF&}.
+Dialogue: 1,0:02:08.19,0:02:09.17,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“Bora de {\c&H3FD2FF&}elevador{\c&HFFFFFF&}!”
+Dialogue: 1,0:02:09.60,0:02:11.49,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“Nada disso, vem comigo pela {\c&H3FD2FF&}escada{\c&HFFFFFF&}!”
+Dialogue: 1,0:02:11.92,0:02:13.33,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}{\c&H3FD2FF&}Elevador{\c&HFFFFFF&} nunca:
+Dialogue: 1,0:02:13.21,0:02:14.74,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}se a energia cair
+Dialogue: 1,0:02:14.62,0:02:16.70,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}você fica preso lá dentro.
+Dialogue: 1,0:02:16.58,0:02:18.05,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Suba pela {\c&H3FD2FF&}escada
+Dialogue: 1,0:02:17.93,0:02:20.38,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}pelo menos até o {\c&H3FD2FF&}terceiro andar{\c&HFFFFFF&}.
+Dialogue: 1,0:02:22.66,0:02:24.15,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}E aí ela chega.
+Dialogue: 1,0:02:24.03,0:02:26.42,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Um {\c&H3FD2FF&}tsunami{\c&HFFFFFF&} não quebra e volta
+Dialogue: 1,0:02:26.30,0:02:28.17,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}como uma onda normal.
+Dialogue: 1,0:02:28.05,0:02:30.77,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Ele continua avançando por minutos
+Dialogue: 1,0:02:30.65,0:02:33.89,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}invadindo ruas e arrastando {\c&H3FD2FF&}carros{\c&HFFFFFF&} {\c&H3FD2FF&}árvores
+Dialogue: 1,0:02:33.77,0:02:36.36,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}e tudo o que estiver no caminho.
+Dialogue: 1,0:02:37.09,0:02:40.73,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}E quando a água finalmente resolve voltar pro mar
+Dialogue: 1,0:02:40.61,0:02:42.85,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}ela volta com a {\c&H3FD2FF&}mesma força
+Dialogue: 1,0:02:42.73,0:02:44.45,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}puxando tudo junto:
+Dialogue: 1,0:02:44.33,0:02:47.27,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}entulho {\c&H3FD2FF&}carros{\c&HFFFFFF&} e até pedaços de casas.
+Dialogue: 1,0:02:47.15,0:02:49.26,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}A água fica cheia de lixo
+Dialogue: 1,0:02:49.14,0:02:51.18,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}galhos e {\c&H3FD2FF&}fios elétricos{\c&HFFFFFF&}.
+Dialogue: 1,0:02:51.06,0:02:52.08,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Ou seja:
+Dialogue: 1,0:02:51.96,0:02:55.67,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}nada de dar aquele mergulhinho pra ver como ficou.
+Dialogue: 1,0:02:56.55,0:02:58.37,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“Desce aqui, mano, agora tá de boa!”
+Dialogue: 1,0:03:03.00,0:03:04.50,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“Tô bem... tô bem!”
+Dialogue: 1,0:03:05.12,0:03:06.02,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Viu só?
+Dialogue: 1,0:03:05.90,0:03:08.83,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Água de enchente com fio solto dá {\c&H3FD2FF&}choque{\c&HFFFFFF&}.
+Dialogue: 1,0:03:08.71,0:03:10.20,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Fique lá em cima:
+Dialogue: 1,0:03:10.08,0:03:12.23,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}{\c&H3FD2FF&}tsunami{\c&HFFFFFF&}s vêm em {\c&H3FD2FF&}várias ondas
+Dialogue: 1,0:03:12.11,0:03:14.62,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}e a primeira nem sempre é a maior.
+Dialogue: 1,0:03:14.50,0:03:18.14,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Só desça quando as {\c&H3FD2FF&}autoridades{\c&HFFFFFF&} disserem que é seguro.
+Dialogue: 1,0:03:19.27,0:03:20.15,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}E você?
+Dialogue: 1,0:03:20.03,0:03:22.41,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}Tentaria sobreviver ao {\c&H3FD2FF&}tsunami{\c&HFFFFFF&}...
+Dialogue: 1,0:03:23.44,0:03:25.96,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}ou continuaria {\c&H3FD2FF&}tomando sol{\c&HFFFFFF&} e surfando?
+Dialogue: 1,0:03:26.69,0:03:29.26,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“Ahh... que solzinho bom.”
+Dialogue: 1,0:03:29.69,0:03:31.00,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“Melhor ainda, só essa onda!”
+Dialogue: 1,0:03:33.28,0:03:34.01,Cap,,0,0,0,,{\pos(540,1330)\fad(60,0)}“Oh-oh...”

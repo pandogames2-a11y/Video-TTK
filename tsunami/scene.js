@@ -1099,6 +1099,7 @@ function world(t, wt, n) {
 
 // ---------- 2D overlay ----------
 const ui = document.getElementById('ui').getContext('2d');
+const NOCAP = new URLSearchParams(location.search).has('nocap');   // vertical (TikTok) version draws its own bigger captions
 function rr(x, y, w, h, r) { ui.beginPath(); ui.roundRect(x, y, w, h, r); }
 function outlined(text, x, y, size, fill = '#fff', stroke = '#1b1b1b', weight = 900, lw = 0.16) {
   ui.font = `${weight} ${size}px "Inter Display", Inter, "DejaVu Sans", sans-serif`; ui.lineJoin = 'round';
@@ -1387,7 +1388,7 @@ function overlay(t, g, wt) {
     ui.translate(640, 185); const s = pop(lt - 1.0, 0.4); ui.scale(s, s); ui.rotate(-0.03 + (lt > 1 ? Math.sin(lt * 20) * 0.01 : 0));
     outlined('TERREMOTO', 0, 0, 96, '#ff8a2a', '#0a1428', 900, 0.16); ui.restore();
   }
-  if (n !== 'title' && n !== 'end') caption(t);
+  if (n !== 'title' && n !== 'end' && !NOCAP) caption(t);
   if (flash > 0) { ui.fillStyle = `rgba(255,255,255,${flash})`; ui.fillRect(0, 0, W, H); }
   if (t < 0.5) { ui.fillStyle = `rgba(0,0,0,${1 - t / 0.5})`; ui.fillRect(0, 0, W, H); }
   const fo = ss(TL.total - 1.0, TL.total, t); if (fo > 0) { ui.fillStyle = `rgba(0,0,0,${fo})`; ui.fillRect(0, 0, W, H); }
