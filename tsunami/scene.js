@@ -1406,3 +1406,35 @@ window.renderFrame = (t) => {
 window.TOTAL = TL.total; window.FPS = TL.fps;
 await document.fonts.load('900 40px "Inter Display"'); await document.fonts.load('800 40px "Inter Display"');
 window.READY = true;
+
+// ---------- channel avatar (index.html?portrait=1, then window.renderPortrait()) ----------
+if (new URLSearchParams(location.search).has('portrait')) {
+  window.renderPortrait = (size = 1024) => {
+    const wrap = document.getElementById('wrap'); wrap.style.width = size + 'px'; wrap.style.height = size + 'px';
+    renderer.setSize(size, size); camera.aspect = 1; camera.updateProjectionMatrix();
+    document.getElementById('ui').style.display = 'none';
+    scene.children.forEach(o => { o.visible = o === hero.root || o.isLight || o === sun.target; });
+    scene.fog = null;
+    scene.background = canvasTex(1024, 1024, (g, w, h) => {
+      const c = w / 2;
+      const gr = g.createRadialGradient(c, c * 0.92, 40, c, c, w * 0.72); gr.addColorStop(0, '#fff3b0'); gr.addColorStop(0.35, '#ffc93c'); gr.addColorStop(1, '#ff7a2a');
+      g.fillStyle = gr; g.fillRect(0, 0, w, h);
+      g.save(); g.translate(c, c * 0.92); g.fillStyle = 'rgba(255,255,255,0.18)';
+      for (let i = 0; i < 16; i++) { g.rotate(Math.PI / 8); g.beginPath(); g.moveTo(-30, 0); g.lineTo(30, 0); g.lineTo(90, -w); g.lineTo(-90, -w); g.closePath(); g.fill(); }
+      g.restore();
+      // stylised waves at the bottom
+      [['#0b6fa8', 0.80], ['#1a9fd0', 0.86], ['#5fd6e8', 0.93]].forEach(([col, y0], k) => {
+        g.fillStyle = col; g.beginPath(); g.moveTo(0, h);
+        for (let x = 0; x <= w; x += 8) g.lineTo(x, h * y0 + Math.sin(x / w * Math.PI * 4 + k * 1.3) * 22);
+        g.lineTo(w, h); g.closePath(); g.fill();
+        g.strokeStyle = 'rgba(255,255,255,0.85)'; g.lineWidth = 6; g.beginPath();
+        for (let x = 0; x <= w; x += 8) g.lineTo(x, h * y0 + Math.sin(x / w * Math.PI * 4 + k * 1.3) * 22); g.stroke();
+      });
+    });
+    hero.pose(1.0, { x: 0, y: 0, z: 0, ry: 0.22, armR: A.thumb, armL: A.hips, smile: 1, brow: -0.25, look: [0, 0.05], nut: false });
+    sun.position.set(3, 6, 7); sun.target.position.set(0, 1, 0); sun.intensity = 2.4; sun.color.set(0xfff1d6); hemi.intensity = 1.1;
+    camera.fov = 34; camera.position.set(0.2, 1.15, 4.1); camera.updateProjectionMatrix(); camera.lookAt(0, 1.0, 0);
+    renderer.render(scene, camera);
+    return true;
+  };
+}
