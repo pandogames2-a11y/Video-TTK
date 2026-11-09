@@ -4,3 +4,4 @@ frames/
 *.raw.wav
 *.tar.bz2
 audio/cache/
+terremoto/audio/align/
