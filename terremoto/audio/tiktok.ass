@@ -1,0 +1,384 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Inter Display Black,76,&H00FFFFFF,&H00FFFFFF,&H00281410,&H00000000,0,0,0,0,100,100,0,0,1,7,0,8,70,70,0,1
+Style: Head,Inter Display Black,96,&H00FFFFFF,&H00FFFFFF,&H004A2A0A,&H00000000,0,0,0,0,100,100,0,0,1,8,0,8,40,40,0,1
+Style: Small,Inter Display Black,38,&H00FFFFFF,&H00FFFFFF,&H004A2A0A,&H00000000,0,0,0,0,100,100,2,0,1,5,0,8,40,40,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.40,0:03:03.87,Small,,0,0,0,,{\pos(540,200)}GUIA DE SOBREVIVÊNCIA • EP. 2
+Dialogue: 0,0:00:00.40,0:03:03.87,Head,,0,0,0,,{\pos(540,262)}VOCÊ SOBREVIVERIA
+Dialogue: 0,0:00:00.40,0:03:03.87,Head,,0,0,0,,{\pos(540,375)\fs108\c&H2A8AFF&}A UM TERREMOTO?
+Dialogue: 0,0:02:58.87,0:03:03.87,Small,,0,0,0,,{\pos(540,1540)\c&H2A8AFF&}SEGUE PRA VER O EP. 3: ENCHENTE
+Dialogue: 1,0:00:04.84,0:00:04.94,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}É{\c&HFFFFFF&\fscx100\fscy100} uma tarde tranquila.
+Dialogue: 1,0:00:04.94,0:00:05.12,Cap,,0,0,0,,{\pos(540,1330)}É {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}uma{\c&HFFFFFF&\fscx100\fscy100} tarde tranquila.
+Dialogue: 1,0:00:05.12,0:00:05.36,Cap,,0,0,0,,{\pos(540,1330)}É uma {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tarde{\c&HFFFFFF&\fscx100\fscy100} tranquila.
+Dialogue: 1,0:00:05.36,0:00:06.19,Cap,,0,0,0,,{\pos(540,1330)}É uma tarde {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tranquila.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:06.30,0:00:06.72,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Você{\c&HFFFFFF&\fscx100\fscy100} e o seu amigo estão
+Dialogue: 1,0:00:06.72,0:00:06.78,Cap,,0,0,0,,{\pos(540,1330)}Você {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} o seu amigo estão
+Dialogue: 1,0:00:06.78,0:00:06.90,Cap,,0,0,0,,{\pos(540,1330)}Você e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} seu amigo estão
+Dialogue: 1,0:00:06.90,0:00:07.08,Cap,,0,0,0,,{\pos(540,1330)}Você e o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}seu{\c&HFFFFFF&\fscx100\fscy100} amigo estão
+Dialogue: 1,0:00:07.08,0:00:07.40,Cap,,0,0,0,,{\pos(540,1330)}Você e o seu {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}amigo{\c&HFFFFFF&\fscx100\fscy100} estão
+Dialogue: 1,0:00:07.40,0:00:07.62,Cap,,0,0,0,,{\pos(540,1330)}Você e o seu amigo {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}estão{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:07.58,0:00:07.76,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}em{\c&HFFFFFF&\fscx100\fscy100} casa, jogando
+Dialogue: 1,0:00:07.76,0:00:08.16,Cap,,0,0,0,,{\pos(540,1330)}em {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}casa,{\c&HFFFFFF&\fscx100\fscy100} jogando
+Dialogue: 1,0:00:08.16,0:00:08.48,Cap,,0,0,0,,{\pos(540,1330)}em casa, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}jogando{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:08.44,0:00:09.37,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}videogame,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:09.34,0:00:09.74,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}enquanto{\c&HFFFFFF&\fscx100\fscy100} o cachorro que
+Dialogue: 1,0:00:09.74,0:00:09.84,Cap,,0,0,0,,{\pos(540,1330)}enquanto {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} cachorro que
+Dialogue: 1,0:00:09.84,0:00:10.34,Cap,,0,0,0,,{\pos(540,1330)}enquanto o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}cachorro{\c&HFFFFFF&\fscx100\fscy100} que
+Dialogue: 1,0:00:10.34,0:00:10.48,Cap,,0,0,0,,{\pos(540,1330)}enquanto o cachorro {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:10.44,0:00:10.84,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}vocês{\c&HFFFFFF&\fscx100\fscy100} resgataram no último
+Dialogue: 1,0:00:10.84,0:00:11.50,Cap,,0,0,0,,{\pos(540,1330)}vocês {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}resgataram{\c&HFFFFFF&\fscx100\fscy100} no último
+Dialogue: 1,0:00:11.50,0:00:11.60,Cap,,0,0,0,,{\pos(540,1330)}vocês resgataram {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}no{\c&HFFFFFF&\fscx100\fscy100} último
+Dialogue: 1,0:00:11.60,0:00:11.84,Cap,,0,0,0,,{\pos(540,1330)}vocês resgataram no {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}último{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:11.80,0:00:12.78,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}episódio{\c&HFFFFFF&\fscx100\fscy100} tira um cochilo
+Dialogue: 1,0:00:12.78,0:00:13.02,Cap,,0,0,0,,{\pos(540,1330)}episódio {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tira{\c&HFFFFFF&\fscx100\fscy100} um cochilo
+Dialogue: 1,0:00:13.02,0:00:13.14,Cap,,0,0,0,,{\pos(540,1330)}episódio tira {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}um{\c&HFFFFFF&\fscx100\fscy100} cochilo
+Dialogue: 1,0:00:13.14,0:00:13.60,Cap,,0,0,0,,{\pos(540,1330)}episódio tira um {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}cochilo{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:13.56,0:00:13.72,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}no{\c&HFFFFFF&\fscx100\fscy100} tapete.
+Dialogue: 1,0:00:13.72,0:00:14.53,Cap,,0,0,0,,{\pos(540,1330)}no {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tapete.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:15.09,0:00:15.37,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Tudo{\c&HFFFFFF&\fscx100\fscy100} tranquilo.
+Dialogue: 1,0:00:15.37,0:00:16.22,Cap,,0,0,0,,{\pos(540,1330)}Tudo {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tranquilo.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:16.35,0:00:16.85,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Tranquilo{\c&HFFFFFF&\fscx100\fscy100} até demais.
+Dialogue: 1,0:00:16.85,0:00:17.05,Cap,,0,0,0,,{\pos(540,1330)}Tranquilo {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}até{\c&HFFFFFF&\fscx100\fscy100} demais.
+Dialogue: 1,0:00:17.05,0:00:17.92,Cap,,0,0,0,,{\pos(540,1330)}Tranquilo até {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}demais.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:19.10,0:00:19.36,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Até{\c&HFFFFFF&\fscx100\fscy100} que, de repente,
+Dialogue: 1,0:00:19.36,0:00:19.52,Cap,,0,0,0,,{\pos(540,1330)}Até {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que,{\c&HFFFFFF&\fscx100\fscy100} de repente,
+Dialogue: 1,0:00:19.52,0:00:19.68,Cap,,0,0,0,,{\pos(540,1330)}Até que, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} repente,
+Dialogue: 1,0:00:19.68,0:00:20.20,Cap,,0,0,0,,{\pos(540,1330)}Até que, de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}repente,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:20.16,0:00:20.30,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} chão começa a tremer.
+Dialogue: 1,0:00:20.30,0:00:20.54,Cap,,0,0,0,,{\pos(540,1330)}o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}chão{\c&HFFFFFF&\fscx100\fscy100} começa a tremer.
+Dialogue: 1,0:00:20.54,0:00:20.88,Cap,,0,0,0,,{\pos(540,1330)}o chão {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}começa{\c&HFFFFFF&\fscx100\fscy100} a tremer.
+Dialogue: 1,0:00:20.88,0:00:21.00,Cap,,0,0,0,,{\pos(540,1330)}o chão começa {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}a{\c&HFFFFFF&\fscx100\fscy100} tremer.
+Dialogue: 1,0:00:21.00,0:00:21.73,Cap,,0,0,0,,{\pos(540,1330)}o chão começa a {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tremer.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:21.90,0:00:22.12,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Os{\c&HFFFFFF&\fscx100\fscy100} copos chacoalham,
+Dialogue: 1,0:00:22.12,0:00:22.44,Cap,,0,0,0,,{\pos(540,1330)}Os {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}copos{\c&HFFFFFF&\fscx100\fscy100} chacoalham,
+Dialogue: 1,0:00:22.44,0:00:23.41,Cap,,0,0,0,,{\pos(540,1330)}Os copos {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}chacoalham,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:23.40,0:00:23.58,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} lustre balança,
+Dialogue: 1,0:00:23.58,0:00:23.98,Cap,,0,0,0,,{\pos(540,1330)}o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}lustre{\c&HFFFFFF&\fscx100\fscy100} balança,
+Dialogue: 1,0:00:23.98,0:00:24.83,Cap,,0,0,0,,{\pos(540,1330)}o lustre {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}balança,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:24.86,0:00:24.98,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} os livros despencam da
+Dialogue: 1,0:00:24.98,0:00:25.14,Cap,,0,0,0,,{\pos(540,1330)}e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}os{\c&HFFFFFF&\fscx100\fscy100} livros despencam da
+Dialogue: 1,0:00:25.14,0:00:25.52,Cap,,0,0,0,,{\pos(540,1330)}e os {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}livros{\c&HFFFFFF&\fscx100\fscy100} despencam da
+Dialogue: 1,0:00:25.52,0:00:26.10,Cap,,0,0,0,,{\pos(540,1330)}e os livros {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}despencam{\c&HFFFFFF&\fscx100\fscy100} da
+Dialogue: 1,0:00:26.10,0:00:26.20,Cap,,0,0,0,,{\pos(540,1330)}e os livros despencam {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}da{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:26.16,0:00:26.99,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}estante.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:27.45,0:00:27.97,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“Mano,{\c&HFFFFFF&\fscx100\fscy100} é um terremoto!”
+Dialogue: 1,0:00:27.97,0:00:28.03,Cap,,0,0,0,,{\pos(540,1330)}“Mano, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}é{\c&HFFFFFF&\fscx100\fscy100} um terremoto!”
+Dialogue: 1,0:00:28.03,0:00:28.17,Cap,,0,0,0,,{\pos(540,1330)}“Mano, é {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}um{\c&HFFFFFF&\fscx100\fscy100} terremoto!”
+Dialogue: 1,0:00:28.17,0:00:29.04,Cap,,0,0,0,,{\pos(540,1330)}“Mano, é um {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}terremoto!”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:29.13,0:00:29.25,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“O{\c&HFFFFFF&\fscx100\fscy100} que a gente faz?!”
+Dialogue: 1,0:00:29.25,0:00:29.35,Cap,,0,0,0,,{\pos(540,1330)}“O {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que{\c&HFFFFFF&\fscx100\fscy100} a gente faz?!”
+Dialogue: 1,0:00:29.35,0:00:29.43,Cap,,0,0,0,,{\pos(540,1330)}“O que {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}a{\c&HFFFFFF&\fscx100\fscy100} gente faz?!”
+Dialogue: 1,0:00:29.43,0:00:29.67,Cap,,0,0,0,,{\pos(540,1330)}“O que a {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}gente{\c&HFFFFFF&\fscx100\fscy100} faz?!”
+Dialogue: 1,0:00:29.67,0:00:30.28,Cap,,0,0,0,,{\pos(540,1330)}“O que a gente {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}faz?!”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:30.72,0:00:31.45,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Calma.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:31.76,0:00:32.40,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Antes,{\c&HFFFFFF&\fscx100\fscy100} entenda o que está
+Dialogue: 1,0:00:32.40,0:00:32.92,Cap,,0,0,0,,{\pos(540,1330)}Antes, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}entenda{\c&HFFFFFF&\fscx100\fscy100} o que está
+Dialogue: 1,0:00:32.92,0:00:33.00,Cap,,0,0,0,,{\pos(540,1330)}Antes, entenda {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} que está
+Dialogue: 1,0:00:33.00,0:00:33.06,Cap,,0,0,0,,{\pos(540,1330)}Antes, entenda o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que{\c&HFFFFFF&\fscx100\fscy100} está
+Dialogue: 1,0:00:33.06,0:00:33.28,Cap,,0,0,0,,{\pos(540,1330)}Antes, entenda o que {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}está{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:33.24,0:00:34.29,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}acontecendo.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:35.38,0:00:35.54,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}A{\c&HFFFFFF&\fscx100\fscy100} Terra é dividida em
+Dialogue: 1,0:00:35.54,0:00:35.76,Cap,,0,0,0,,{\pos(540,1330)}A {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Terra{\c&HFFFFFF&\fscx100\fscy100} é dividida em
+Dialogue: 1,0:00:35.76,0:00:35.84,Cap,,0,0,0,,{\pos(540,1330)}A Terra {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}é{\c&HFFFFFF&\fscx100\fscy100} dividida em
+Dialogue: 1,0:00:35.84,0:00:36.34,Cap,,0,0,0,,{\pos(540,1330)}A Terra é {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}dividida{\c&HFFFFFF&\fscx100\fscy100} em
+Dialogue: 1,0:00:36.34,0:00:36.48,Cap,,0,0,0,,{\pos(540,1330)}A Terra é dividida {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}em{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:36.44,0:00:36.82,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}placas{\c&HFFFFFF&\fscx100\fscy100} gigantes,
+Dialogue: 1,0:00:36.82,0:00:37.82,Cap,,0,0,0,,{\pos(540,1330)}placas {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}gigantes,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:37.78,0:00:37.96,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que{\c&HFFFFFF&\fscx100\fscy100} se encaixam como um
+Dialogue: 1,0:00:37.96,0:00:38.04,Cap,,0,0,0,,{\pos(540,1330)}que {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}se{\c&HFFFFFF&\fscx100\fscy100} encaixam como um
+Dialogue: 1,0:00:38.04,0:00:38.66,Cap,,0,0,0,,{\pos(540,1330)}que se {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}encaixam{\c&HFFFFFF&\fscx100\fscy100} como um
+Dialogue: 1,0:00:38.66,0:00:38.86,Cap,,0,0,0,,{\pos(540,1330)}que se encaixam {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}como{\c&HFFFFFF&\fscx100\fscy100} um
+Dialogue: 1,0:00:38.86,0:00:38.98,Cap,,0,0,0,,{\pos(540,1330)}que se encaixam como {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}um{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:38.94,0:00:40.14,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}quebra-cabeça{\c&HFFFFFF&\fscx100\fscy100} e se movem
+Dialogue: 1,0:00:40.14,0:00:40.26,Cap,,0,0,0,,{\pos(540,1330)}quebra-cabeça {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} se movem
+Dialogue: 1,0:00:40.26,0:00:40.44,Cap,,0,0,0,,{\pos(540,1330)}quebra-cabeça e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}se{\c&HFFFFFF&\fscx100\fscy100} movem
+Dialogue: 1,0:00:40.44,0:00:40.88,Cap,,0,0,0,,{\pos(540,1330)}quebra-cabeça e se {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}movem{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:40.84,0:00:41.04,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}bem{\c&HFFFFFF&\fscx100\fscy100} devagar.
+Dialogue: 1,0:00:41.04,0:00:41.83,Cap,,0,0,0,,{\pos(540,1330)}bem {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}devagar.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:42.02,0:00:42.26,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Às{\c&HFFFFFF&\fscx100\fscy100} vezes, elas travam umas
+Dialogue: 1,0:00:42.26,0:00:42.68,Cap,,0,0,0,,{\pos(540,1330)}Às {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}vezes,{\c&HFFFFFF&\fscx100\fscy100} elas travam umas
+Dialogue: 1,0:00:42.68,0:00:42.96,Cap,,0,0,0,,{\pos(540,1330)}Às vezes, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}elas{\c&HFFFFFF&\fscx100\fscy100} travam umas
+Dialogue: 1,0:00:42.96,0:00:43.46,Cap,,0,0,0,,{\pos(540,1330)}Às vezes, elas {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}travam{\c&HFFFFFF&\fscx100\fscy100} umas
+Dialogue: 1,0:00:43.46,0:00:43.74,Cap,,0,0,0,,{\pos(540,1330)}Às vezes, elas travam {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}umas{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:43.70,0:00:43.96,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}nas{\c&HFFFFFF&\fscx100\fscy100} outras,
+Dialogue: 1,0:00:43.96,0:00:44.65,Cap,,0,0,0,,{\pos(540,1330)}nas {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}outras,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:44.62,0:00:44.76,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} a pressão vai
+Dialogue: 1,0:00:44.76,0:00:44.84,Cap,,0,0,0,,{\pos(540,1330)}e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}a{\c&HFFFFFF&\fscx100\fscy100} pressão vai
+Dialogue: 1,0:00:44.84,0:00:45.26,Cap,,0,0,0,,{\pos(540,1330)}e a {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pressão{\c&HFFFFFF&\fscx100\fscy100} vai
+Dialogue: 1,0:00:45.26,0:00:45.42,Cap,,0,0,0,,{\pos(540,1330)}e a pressão {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}vai{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:45.38,0:00:46.35,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}acumulando,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:46.44,0:00:46.76,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}até{\c&HFFFFFF&\fscx100\fscy100} que, de uma vez só,
+Dialogue: 1,0:00:46.76,0:00:46.90,Cap,,0,0,0,,{\pos(540,1330)}até {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que,{\c&HFFFFFF&\fscx100\fscy100} de uma vez só,
+Dialogue: 1,0:00:46.90,0:00:47.00,Cap,,0,0,0,,{\pos(540,1330)}até que, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} uma vez só,
+Dialogue: 1,0:00:47.00,0:00:47.24,Cap,,0,0,0,,{\pos(540,1330)}até que, de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}uma{\c&HFFFFFF&\fscx100\fscy100} vez só,
+Dialogue: 1,0:00:47.24,0:00:47.52,Cap,,0,0,0,,{\pos(540,1330)}até que, de uma {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}vez{\c&HFFFFFF&\fscx100\fscy100} só,
+Dialogue: 1,0:00:47.52,0:00:48.07,Cap,,0,0,0,,{\pos(540,1330)}até que, de uma vez {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}só,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:48.06,0:00:48.34,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}elas{\c&HFFFFFF&\fscx100\fscy100} se soltam.
+Dialogue: 1,0:00:48.34,0:00:48.54,Cap,,0,0,0,,{\pos(540,1330)}elas {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}se{\c&HFFFFFF&\fscx100\fscy100} soltam.
+Dialogue: 1,0:00:48.54,0:00:49.27,Cap,,0,0,0,,{\pos(540,1330)}elas se {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}soltam.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:49.50,0:00:49.72,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Essa{\c&HFFFFFF&\fscx100\fscy100} energia viaja em
+Dialogue: 1,0:00:49.72,0:00:50.34,Cap,,0,0,0,,{\pos(540,1330)}Essa {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}energia{\c&HFFFFFF&\fscx100\fscy100} viaja em
+Dialogue: 1,0:00:50.34,0:00:50.80,Cap,,0,0,0,,{\pos(540,1330)}Essa energia {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}viaja{\c&HFFFFFF&\fscx100\fscy100} em
+Dialogue: 1,0:00:50.80,0:00:50.96,Cap,,0,0,0,,{\pos(540,1330)}Essa energia viaja {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}em{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:50.92,0:00:51.24,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}ondas{\c&HFFFFFF&\fscx100\fscy100} pelo chão,
+Dialogue: 1,0:00:51.24,0:00:51.50,Cap,,0,0,0,,{\pos(540,1330)}ondas {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pelo{\c&HFFFFFF&\fscx100\fscy100} chão,
+Dialogue: 1,0:00:51.50,0:00:52.11,Cap,,0,0,0,,{\pos(540,1330)}ondas pelo {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}chão,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:52.24,0:00:52.40,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} é isso que faz tudo
+Dialogue: 1,0:00:52.40,0:00:52.60,Cap,,0,0,0,,{\pos(540,1330)}e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}é{\c&HFFFFFF&\fscx100\fscy100} isso que faz tudo
+Dialogue: 1,0:00:52.60,0:00:52.86,Cap,,0,0,0,,{\pos(540,1330)}e é {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}isso{\c&HFFFFFF&\fscx100\fscy100} que faz tudo
+Dialogue: 1,0:00:52.86,0:00:53.00,Cap,,0,0,0,,{\pos(540,1330)}e é isso {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que{\c&HFFFFFF&\fscx100\fscy100} faz tudo
+Dialogue: 1,0:00:53.00,0:00:53.24,Cap,,0,0,0,,{\pos(540,1330)}e é isso que {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}faz{\c&HFFFFFF&\fscx100\fscy100} tudo
+Dialogue: 1,0:00:53.24,0:00:53.48,Cap,,0,0,0,,{\pos(540,1330)}e é isso que faz {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tudo{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:53.44,0:00:54.17,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tremer.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:54.75,0:00:54.95,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}A{\c&HFFFFFF&\fscx100\fscy100} força é medida na escala
+Dialogue: 1,0:00:54.95,0:00:55.25,Cap,,0,0,0,,{\pos(540,1330)}A {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}força{\c&HFFFFFF&\fscx100\fscy100} é medida na escala
+Dialogue: 1,0:00:55.25,0:00:55.33,Cap,,0,0,0,,{\pos(540,1330)}A força {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}é{\c&HFFFFFF&\fscx100\fscy100} medida na escala
+Dialogue: 1,0:00:55.33,0:00:55.79,Cap,,0,0,0,,{\pos(540,1330)}A força é {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}medida{\c&HFFFFFF&\fscx100\fscy100} na escala
+Dialogue: 1,0:00:55.79,0:00:55.89,Cap,,0,0,0,,{\pos(540,1330)}A força é medida {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}na{\c&HFFFFFF&\fscx100\fscy100} escala
+Dialogue: 1,0:00:55.89,0:00:56.29,Cap,,0,0,0,,{\pos(540,1330)}A força é medida na {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}escala{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:56.25,0:00:57.25,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Richter.{\c&HFFFFFF&\fscx100\fscy100} Abaixo de quatro,
+Dialogue: 1,0:00:57.25,0:00:57.71,Cap,,0,0,0,,{\pos(540,1330)}Richter. {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Abaixo{\c&HFFFFFF&\fscx100\fscy100} de quatro,
+Dialogue: 1,0:00:57.71,0:00:57.89,Cap,,0,0,0,,{\pos(540,1330)}Richter. Abaixo {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} quatro,
+Dialogue: 1,0:00:57.89,0:00:58.59,Cap,,0,0,0,,{\pos(540,1330)}Richter. Abaixo de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}quatro,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:58.55,0:00:58.91,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}quase{\c&HFFFFFF&\fscx100\fscy100} ninguém sente.
+Dialogue: 1,0:00:58.91,0:00:59.35,Cap,,0,0,0,,{\pos(540,1330)}quase {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}ninguém{\c&HFFFFFF&\fscx100\fscy100} sente.
+Dialogue: 1,0:00:59.35,0:00:60.00,Cap,,0,0,0,,{\pos(540,1330)}quase ninguém {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}sente.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:00.17,0:01:00.55,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Acima{\c&HFFFFFF&\fscx100\fscy100} de sete,
+Dialogue: 1,0:01:00.55,0:01:00.77,Cap,,0,0,0,,{\pos(540,1330)}Acima {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} sete,
+Dialogue: 1,0:01:00.77,0:01:01.42,Cap,,0,0,0,,{\pos(540,1330)}Acima de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}sete,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:01.41,0:01:01.59,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}dá{\c&HFFFFFF&\fscx100\fscy100} pra derrubar prédios.
+Dialogue: 1,0:01:01.59,0:01:01.73,Cap,,0,0,0,,{\pos(540,1330)}dá {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pra{\c&HFFFFFF&\fscx100\fscy100} derrubar prédios.
+Dialogue: 1,0:01:01.73,0:01:02.21,Cap,,0,0,0,,{\pos(540,1330)}dá pra {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}derrubar{\c&HFFFFFF&\fscx100\fscy100} prédios.
+Dialogue: 1,0:01:02.21,0:01:03.02,Cap,,0,0,0,,{\pos(540,1330)}dá pra derrubar {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}prédios.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:03.79,0:01:04.03,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“Já{\c&HFFFFFF&\fscx100\fscy100} sei! Bora sair correndo”
+Dialogue: 1,0:01:04.03,0:01:04.75,Cap,,0,0,0,,{\pos(540,1330)}“Já {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}sei!{\c&HFFFFFF&\fscx100\fscy100} Bora sair correndo”
+Dialogue: 1,0:01:04.75,0:01:05.01,Cap,,0,0,0,,{\pos(540,1330)}“Já sei! {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Bora{\c&HFFFFFF&\fscx100\fscy100} sair correndo”
+Dialogue: 1,0:01:05.01,0:01:05.25,Cap,,0,0,0,,{\pos(540,1330)}“Já sei! Bora {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}sair{\c&HFFFFFF&\fscx100\fscy100} correndo”
+Dialogue: 1,0:01:05.25,0:01:05.57,Cap,,0,0,0,,{\pos(540,1330)}“Já sei! Bora sair {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}correndo”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:05.53,0:01:05.73,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“pra{\c&HFFFFFF&\fscx100\fscy100} rua!”
+Dialogue: 1,0:01:05.73,0:01:06.34,Cap,,0,0,0,,{\pos(540,1330)}“pra {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}rua!”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:06.69,0:01:07.11,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Péssima{\c&HFFFFFF&\fscx100\fscy100} ideia.
+Dialogue: 1,0:01:07.11,0:01:07.82,Cap,,0,0,0,,{\pos(540,1330)}Péssima {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}ideia.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:08.05,0:01:08.41,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Durante{\c&HFFFFFF&\fscx100\fscy100} o tremor,
+Dialogue: 1,0:01:08.41,0:01:08.51,Cap,,0,0,0,,{\pos(540,1330)}Durante {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} tremor,
+Dialogue: 1,0:01:08.51,0:01:09.21,Cap,,0,0,0,,{\pos(540,1330)}Durante o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tremor,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:09.17,0:01:09.33,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} maior perigo é o que cai
+Dialogue: 1,0:01:09.33,0:01:09.77,Cap,,0,0,0,,{\pos(540,1330)}o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}maior{\c&HFFFFFF&\fscx100\fscy100} perigo é o que cai
+Dialogue: 1,0:01:09.77,0:01:10.39,Cap,,0,0,0,,{\pos(540,1330)}o maior {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}perigo{\c&HFFFFFF&\fscx100\fscy100} é o que cai
+Dialogue: 1,0:01:10.39,0:01:10.45,Cap,,0,0,0,,{\pos(540,1330)}o maior perigo {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}é{\c&HFFFFFF&\fscx100\fscy100} o que cai
+Dialogue: 1,0:01:10.45,0:01:10.53,Cap,,0,0,0,,{\pos(540,1330)}o maior perigo é {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} que cai
+Dialogue: 1,0:01:10.53,0:01:10.71,Cap,,0,0,0,,{\pos(540,1330)}o maior perigo é o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que{\c&HFFFFFF&\fscx100\fscy100} cai
+Dialogue: 1,0:01:10.71,0:01:10.89,Cap,,0,0,0,,{\pos(540,1330)}o maior perigo é o que {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}cai{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:10.85,0:01:11.03,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}lá{\c&HFFFFFF&\fscx100\fscy100} de cima:
+Dialogue: 1,0:01:11.03,0:01:11.21,Cap,,0,0,0,,{\pos(540,1330)}lá {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} cima:
+Dialogue: 1,0:01:11.21,0:01:11.82,Cap,,0,0,0,,{\pos(540,1330)}lá de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}cima:{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:12.03,0:01:12.95,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}telhas,{\c&HFFFFFF&\fscx100\fscy100} vidros,
+Dialogue: 1,0:01:12.95,0:01:13.80,Cap,,0,0,0,,{\pos(540,1330)}telhas, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}vidros,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:13.83,0:01:14.67,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}vasos,{\c&HFFFFFF&\fscx100\fscy100} e pedaços de
+Dialogue: 1,0:01:14.67,0:01:14.77,Cap,,0,0,0,,{\pos(540,1330)}vasos, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} pedaços de
+Dialogue: 1,0:01:14.77,0:01:15.21,Cap,,0,0,0,,{\pos(540,1330)}vasos, e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pedaços{\c&HFFFFFF&\fscx100\fscy100} de
+Dialogue: 1,0:01:15.21,0:01:15.35,Cap,,0,0,0,,{\pos(540,1330)}vasos, e pedaços {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:15.31,0:01:16.04,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}prédio.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:21.85,0:01:22.07,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“Tenho{\c&HFFFFFF&\fscx100\fscy100} uma ideia melhor.”
+Dialogue: 1,0:01:22.07,0:01:22.23,Cap,,0,0,0,,{\pos(540,1330)}“Tenho {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}uma{\c&HFFFFFF&\fscx100\fscy100} ideia melhor.”
+Dialogue: 1,0:01:22.23,0:01:22.57,Cap,,0,0,0,,{\pos(540,1330)}“Tenho uma {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}ideia{\c&HFFFFFF&\fscx100\fscy100} melhor.”
+Dialogue: 1,0:01:22.57,0:01:23.26,Cap,,0,0,0,,{\pos(540,1330)}“Tenho uma ideia {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}melhor.”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:23.41,0:01:23.59,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“Vem{\c&HFFFFFF&\fscx100\fscy100} pra debaixo da mesa!”
+Dialogue: 1,0:01:23.59,0:01:23.73,Cap,,0,0,0,,{\pos(540,1330)}“Vem {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pra{\c&HFFFFFF&\fscx100\fscy100} debaixo da mesa!”
+Dialogue: 1,0:01:23.73,0:01:24.05,Cap,,0,0,0,,{\pos(540,1330)}“Vem pra {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}debaixo{\c&HFFFFFF&\fscx100\fscy100} da mesa!”
+Dialogue: 1,0:01:24.05,0:01:24.19,Cap,,0,0,0,,{\pos(540,1330)}“Vem pra debaixo {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}da{\c&HFFFFFF&\fscx100\fscy100} mesa!”
+Dialogue: 1,0:01:24.19,0:01:24.84,Cap,,0,0,0,,{\pos(540,1330)}“Vem pra debaixo da {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}mesa!”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:25.20,0:01:25.54,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Regra{\c&HFFFFFF&\fscx100\fscy100} de ouro:
+Dialogue: 1,0:01:25.54,0:01:25.70,Cap,,0,0,0,,{\pos(540,1330)}Regra {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} ouro:
+Dialogue: 1,0:01:25.70,0:01:26.27,Cap,,0,0,0,,{\pos(540,1330)}Regra de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}ouro:{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:26.44,0:01:27.48,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}abaixe,{\c&HFFFFFF&\fscx100\fscy100} proteja-se e
+Dialogue: 1,0:01:27.48,0:01:28.52,Cap,,0,0,0,,{\pos(540,1330)}abaixe, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}proteja-se{\c&HFFFFFF&\fscx100\fscy100} e
+Dialogue: 1,0:01:28.52,0:01:28.66,Cap,,0,0,0,,{\pos(540,1330)}abaixe, proteja-se {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:28.62,0:01:29.70,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}segure.{\c&HFFFFFF&\fscx100\fscy100} Abaixe no chão,
+Dialogue: 1,0:01:29.70,0:01:30.20,Cap,,0,0,0,,{\pos(540,1330)}segure. {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Abaixe{\c&HFFFFFF&\fscx100\fscy100} no chão,
+Dialogue: 1,0:01:30.20,0:01:30.38,Cap,,0,0,0,,{\pos(540,1330)}segure. Abaixe {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}no{\c&HFFFFFF&\fscx100\fscy100} chão,
+Dialogue: 1,0:01:30.38,0:01:31.01,Cap,,0,0,0,,{\pos(540,1330)}segure. Abaixe no {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}chão,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:31.04,0:01:31.56,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}proteja{\c&HFFFFFF&\fscx100\fscy100} a cabeça debaixo
+Dialogue: 1,0:01:31.56,0:01:31.66,Cap,,0,0,0,,{\pos(540,1330)}proteja {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}a{\c&HFFFFFF&\fscx100\fscy100} cabeça debaixo
+Dialogue: 1,0:01:31.66,0:01:32.14,Cap,,0,0,0,,{\pos(540,1330)}proteja a {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}cabeça{\c&HFFFFFF&\fscx100\fscy100} debaixo
+Dialogue: 1,0:01:32.14,0:01:32.60,Cap,,0,0,0,,{\pos(540,1330)}proteja a cabeça {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}debaixo{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:32.56,0:01:32.68,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} uma mesa firme,
+Dialogue: 1,0:01:32.68,0:01:32.86,Cap,,0,0,0,,{\pos(540,1330)}de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}uma{\c&HFFFFFF&\fscx100\fscy100} mesa firme,
+Dialogue: 1,0:01:32.86,0:01:33.22,Cap,,0,0,0,,{\pos(540,1330)}de uma {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}mesa{\c&HFFFFFF&\fscx100\fscy100} firme,
+Dialogue: 1,0:01:33.22,0:01:33.87,Cap,,0,0,0,,{\pos(540,1330)}de uma mesa {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}firme,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:33.92,0:01:34.10,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} segure no pé da mesa até
+Dialogue: 1,0:01:34.10,0:01:34.54,Cap,,0,0,0,,{\pos(540,1330)}e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}segure{\c&HFFFFFF&\fscx100\fscy100} no pé da mesa até
+Dialogue: 1,0:01:34.54,0:01:34.70,Cap,,0,0,0,,{\pos(540,1330)}e segure {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}no{\c&HFFFFFF&\fscx100\fscy100} pé da mesa até
+Dialogue: 1,0:01:34.70,0:01:34.82,Cap,,0,0,0,,{\pos(540,1330)}e segure no {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pé{\c&HFFFFFF&\fscx100\fscy100} da mesa até
+Dialogue: 1,0:01:34.82,0:01:34.98,Cap,,0,0,0,,{\pos(540,1330)}e segure no pé {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}da{\c&HFFFFFF&\fscx100\fscy100} mesa até
+Dialogue: 1,0:01:34.98,0:01:35.60,Cap,,0,0,0,,{\pos(540,1330)}e segure no pé da {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}mesa{\c&HFFFFFF&\fscx100\fscy100} até
+Dialogue: 1,0:01:35.60,0:01:35.88,Cap,,0,0,0,,{\pos(540,1330)}e segure no pé da mesa {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}até{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:35.84,0:01:35.98,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} tremor passar.
+Dialogue: 1,0:01:35.98,0:01:36.36,Cap,,0,0,0,,{\pos(540,1330)}o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tremor{\c&HFFFFFF&\fscx100\fscy100} passar.
+Dialogue: 1,0:01:36.36,0:01:37.07,Cap,,0,0,0,,{\pos(540,1330)}o tremor {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}passar.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:37.28,0:01:37.44,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}E{\c&HFFFFFF&\fscx100\fscy100} fique longe de janelas,
+Dialogue: 1,0:01:37.44,0:01:37.72,Cap,,0,0,0,,{\pos(540,1330)}E {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}fique{\c&HFFFFFF&\fscx100\fscy100} longe de janelas,
+Dialogue: 1,0:01:37.72,0:01:38.08,Cap,,0,0,0,,{\pos(540,1330)}E fique {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}longe{\c&HFFFFFF&\fscx100\fscy100} de janelas,
+Dialogue: 1,0:01:38.08,0:01:38.22,Cap,,0,0,0,,{\pos(540,1330)}E fique longe {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} janelas,
+Dialogue: 1,0:01:38.22,0:01:39.02,Cap,,0,0,0,,{\pos(540,1330)}E fique longe de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}janelas,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:38.98,0:01:39.62,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}espelhos{\c&HFFFFFF&\fscx100\fscy100} e estantes.
+Dialogue: 1,0:01:39.62,0:01:39.72,Cap,,0,0,0,,{\pos(540,1330)}espelhos {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} estantes.
+Dialogue: 1,0:01:39.72,0:01:40.63,Cap,,0,0,0,,{\pos(540,1330)}espelhos e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}estantes.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:41.21,0:01:41.35,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Se{\c&HFFFFFF&\fscx100\fscy100} você estiver na rua,
+Dialogue: 1,0:01:41.35,0:01:41.57,Cap,,0,0,0,,{\pos(540,1330)}Se {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}você{\c&HFFFFFF&\fscx100\fscy100} estiver na rua,
+Dialogue: 1,0:01:41.57,0:01:41.87,Cap,,0,0,0,,{\pos(540,1330)}Se você {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}estiver{\c&HFFFFFF&\fscx100\fscy100} na rua,
+Dialogue: 1,0:01:41.87,0:01:42.03,Cap,,0,0,0,,{\pos(540,1330)}Se você estiver {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}na{\c&HFFFFFF&\fscx100\fscy100} rua,
+Dialogue: 1,0:01:42.03,0:01:42.66,Cap,,0,0,0,,{\pos(540,1330)}Se você estiver na {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}rua,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:42.65,0:01:42.85,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}vá{\c&HFFFFFF&\fscx100\fscy100} para um lugar aberto,
+Dialogue: 1,0:01:42.85,0:01:42.99,Cap,,0,0,0,,{\pos(540,1330)}vá {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}para{\c&HFFFFFF&\fscx100\fscy100} um lugar aberto,
+Dialogue: 1,0:01:42.99,0:01:43.09,Cap,,0,0,0,,{\pos(540,1330)}vá para {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}um{\c&HFFFFFF&\fscx100\fscy100} lugar aberto,
+Dialogue: 1,0:01:43.09,0:01:43.37,Cap,,0,0,0,,{\pos(540,1330)}vá para um {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}lugar{\c&HFFFFFF&\fscx100\fscy100} aberto,
+Dialogue: 1,0:01:43.37,0:01:44.22,Cap,,0,0,0,,{\pos(540,1330)}vá para um lugar {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}aberto,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:44.27,0:01:44.61,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}longe{\c&HFFFFFF&\fscx100\fscy100} de prédios,
+Dialogue: 1,0:01:44.61,0:01:44.79,Cap,,0,0,0,,{\pos(540,1330)}longe {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} prédios,
+Dialogue: 1,0:01:44.79,0:01:45.37,Cap,,0,0,0,,{\pos(540,1330)}longe de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}prédios,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:45.33,0:01:45.85,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}postes{\c&HFFFFFF&\fscx100\fscy100} e fios.
+Dialogue: 1,0:01:45.85,0:01:46.01,Cap,,0,0,0,,{\pos(540,1330)}postes {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} fios.
+Dialogue: 1,0:01:46.01,0:01:46.70,Cap,,0,0,0,,{\pos(540,1330)}postes e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}fios.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:46.87,0:01:47.01,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}E{\c&HFFFFFF&\fscx100\fscy100} se estiver dirigindo,
+Dialogue: 1,0:01:47.01,0:01:47.09,Cap,,0,0,0,,{\pos(540,1330)}E {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}se{\c&HFFFFFF&\fscx100\fscy100} estiver dirigindo,
+Dialogue: 1,0:01:47.09,0:01:47.51,Cap,,0,0,0,,{\pos(540,1330)}E se {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}estiver{\c&HFFFFFF&\fscx100\fscy100} dirigindo,
+Dialogue: 1,0:01:47.51,0:01:48.46,Cap,,0,0,0,,{\pos(540,1330)}E se estiver {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}dirigindo,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:48.49,0:01:48.83,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pare{\c&HFFFFFF&\fscx100\fscy100} longe de pontes e
+Dialogue: 1,0:01:48.83,0:01:49.15,Cap,,0,0,0,,{\pos(540,1330)}pare {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}longe{\c&HFFFFFF&\fscx100\fscy100} de pontes e
+Dialogue: 1,0:01:49.15,0:01:49.37,Cap,,0,0,0,,{\pos(540,1330)}pare longe {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} pontes e
+Dialogue: 1,0:01:49.37,0:01:49.75,Cap,,0,0,0,,{\pos(540,1330)}pare longe de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pontes{\c&HFFFFFF&\fscx100\fscy100} e
+Dialogue: 1,0:01:49.75,0:01:49.87,Cap,,0,0,0,,{\pos(540,1330)}pare longe de pontes {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:49.83,0:01:50.95,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}viadutos,{\c&HFFFFFF&\fscx100\fscy100} e fique dentro
+Dialogue: 1,0:01:50.95,0:01:51.09,Cap,,0,0,0,,{\pos(540,1330)}viadutos, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} fique dentro
+Dialogue: 1,0:01:51.09,0:01:51.39,Cap,,0,0,0,,{\pos(540,1330)}viadutos, e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}fique{\c&HFFFFFF&\fscx100\fscy100} dentro
+Dialogue: 1,0:01:51.39,0:01:51.73,Cap,,0,0,0,,{\pos(540,1330)}viadutos, e fique {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}dentro{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:51.69,0:01:51.87,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}do{\c&HFFFFFF&\fscx100\fscy100} carro.
+Dialogue: 1,0:01:51.87,0:01:52.52,Cap,,0,0,0,,{\pos(540,1330)}do {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}carro.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:53.05,0:01:53.27,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Quando{\c&HFFFFFF&\fscx100\fscy100} o tremor para,
+Dialogue: 1,0:01:53.27,0:01:53.39,Cap,,0,0,0,,{\pos(540,1330)}Quando {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} tremor para,
+Dialogue: 1,0:01:53.39,0:01:53.83,Cap,,0,0,0,,{\pos(540,1330)}Quando o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tremor{\c&HFFFFFF&\fscx100\fscy100} para,
+Dialogue: 1,0:01:53.83,0:01:54.50,Cap,,0,0,0,,{\pos(540,1330)}Quando o tremor {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}para,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:54.53,0:01:54.89,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}ainda{\c&HFFFFFF&\fscx100\fscy100} não é hora de
+Dialogue: 1,0:01:54.89,0:01:55.07,Cap,,0,0,0,,{\pos(540,1330)}ainda {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}não{\c&HFFFFFF&\fscx100\fscy100} é hora de
+Dialogue: 1,0:01:55.07,0:01:55.15,Cap,,0,0,0,,{\pos(540,1330)}ainda não {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}é{\c&HFFFFFF&\fscx100\fscy100} hora de
+Dialogue: 1,0:01:55.15,0:01:55.39,Cap,,0,0,0,,{\pos(540,1330)}ainda não é {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}hora{\c&HFFFFFF&\fscx100\fscy100} de
+Dialogue: 1,0:01:55.39,0:01:55.49,Cap,,0,0,0,,{\pos(540,1330)}ainda não é hora {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:55.45,0:01:56.34,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}relaxar.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:01:57.17,0:01:57.97,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“Ufa...{\c&HFFFFFF&\fscx100\fscy100} acabou?”
+Dialogue: 1,0:01:57.97,0:01:58.74,Cap,,0,0,0,,{\pos(540,1330)}“Ufa... {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}acabou?”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:00.75,0:02:01.03,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Nem{\c&HFFFFFF&\fscx100\fscy100} sempre.
+Dialogue: 1,0:02:01.03,0:02:01.70,Cap,,0,0,0,,{\pos(540,1330)}Nem {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}sempre.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:01.83,0:02:02.17,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Depois{\c&HFFFFFF&\fscx100\fscy100} do terremoto,
+Dialogue: 1,0:02:02.17,0:02:02.29,Cap,,0,0,0,,{\pos(540,1330)}Depois {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}do{\c&HFFFFFF&\fscx100\fscy100} terremoto,
+Dialogue: 1,0:02:02.29,0:02:02.91,Cap,,0,0,0,,{\pos(540,1330)}Depois do {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}terremoto,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:02.87,0:02:03.17,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}podem{\c&HFFFFFF&\fscx100\fscy100} vir réplicas:
+Dialogue: 1,0:02:03.17,0:02:03.37,Cap,,0,0,0,,{\pos(540,1330)}podem {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}vir{\c&HFFFFFF&\fscx100\fscy100} réplicas:
+Dialogue: 1,0:02:03.37,0:02:04.24,Cap,,0,0,0,,{\pos(540,1330)}podem vir {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}réplicas:{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:04.39,0:02:04.89,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tremores{\c&HFFFFFF&\fscx100\fscy100} menores,
+Dialogue: 1,0:02:04.89,0:02:05.45,Cap,,0,0,0,,{\pos(540,1330)}tremores {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}menores,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:05.41,0:02:05.57,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que{\c&HFFFFFF&\fscx100\fscy100} derrubam o que já
+Dialogue: 1,0:02:05.57,0:02:06.17,Cap,,0,0,0,,{\pos(540,1330)}que {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}derrubam{\c&HFFFFFF&\fscx100\fscy100} o que já
+Dialogue: 1,0:02:06.17,0:02:06.25,Cap,,0,0,0,,{\pos(540,1330)}que derrubam {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} que já
+Dialogue: 1,0:02:06.25,0:02:06.39,Cap,,0,0,0,,{\pos(540,1330)}que derrubam o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que{\c&HFFFFFF&\fscx100\fscy100} já
+Dialogue: 1,0:02:06.39,0:02:06.53,Cap,,0,0,0,,{\pos(540,1330)}que derrubam o que {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}já{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:06.49,0:02:06.87,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}ficou{\c&HFFFFFF&\fscx100\fscy100} frágil.
+Dialogue: 1,0:02:06.87,0:02:07.62,Cap,,0,0,0,,{\pos(540,1330)}ficou {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}frágil.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:08.21,0:02:08.33,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}E{\c&HFFFFFF&\fscx100\fscy100} atenção:
+Dialogue: 1,0:02:08.33,0:02:09.22,Cap,,0,0,0,,{\pos(540,1330)}E {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}atenção:{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:09.21,0:02:09.41,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}se{\c&HFFFFFF&\fscx100\fscy100} sentir cheiro de gás,
+Dialogue: 1,0:02:09.41,0:02:09.91,Cap,,0,0,0,,{\pos(540,1330)}se {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}sentir{\c&HFFFFFF&\fscx100\fscy100} cheiro de gás,
+Dialogue: 1,0:02:09.91,0:02:10.23,Cap,,0,0,0,,{\pos(540,1330)}se sentir {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}cheiro{\c&HFFFFFF&\fscx100\fscy100} de gás,
+Dialogue: 1,0:02:10.23,0:02:10.37,Cap,,0,0,0,,{\pos(540,1330)}se sentir cheiro {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} gás,
+Dialogue: 1,0:02:10.37,0:02:10.97,Cap,,0,0,0,,{\pos(540,1330)}se sentir cheiro de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}gás,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:10.93,0:02:11.11,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}não{\c&HFFFFFF&\fscx100\fscy100} acenda nada.
+Dialogue: 1,0:02:11.11,0:02:11.49,Cap,,0,0,0,,{\pos(540,1330)}não {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}acenda{\c&HFFFFFF&\fscx100\fscy100} nada.
+Dialogue: 1,0:02:11.49,0:02:12.12,Cap,,0,0,0,,{\pos(540,1330)}não acenda {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}nada.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:12.25,0:02:12.57,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Nem{\c&HFFFFFF&\fscx100\fscy100} fósforo,
+Dialogue: 1,0:02:12.57,0:02:13.40,Cap,,0,0,0,,{\pos(540,1330)}Nem {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}fósforo,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:13.39,0:02:13.61,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}nem{\c&HFFFFFF&\fscx100\fscy100} isqueiro,
+Dialogue: 1,0:02:13.61,0:02:14.44,Cap,,0,0,0,,{\pos(540,1330)}nem {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}isqueiro,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:14.45,0:02:14.71,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}nem{\c&HFFFFFF&\fscx100\fscy100} interruptor.
+Dialogue: 1,0:02:14.71,0:02:15.74,Cap,,0,0,0,,{\pos(540,1330)}nem {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}interruptor.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:16.47,0:02:16.62,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“Tá{\c&HFFFFFF&\fscx100\fscy100} escuro...”
+Dialogue: 1,0:02:16.62,0:02:17.38,Cap,,0,0,0,,{\pos(540,1330)}“Tá {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}escuro...”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:17.53,0:02:17.68,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“vou{\c&HFFFFFF&\fscx100\fscy100} acender uma velinha!”
+Dialogue: 1,0:02:17.68,0:02:18.06,Cap,,0,0,0,,{\pos(540,1330)}“vou {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}acender{\c&HFFFFFF&\fscx100\fscy100} uma velinha!”
+Dialogue: 1,0:02:18.06,0:02:18.19,Cap,,0,0,0,,{\pos(540,1330)}“vou acender {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}uma{\c&HFFFFFF&\fscx100\fscy100} velinha!”
+Dialogue: 1,0:02:18.19,0:02:18.91,Cap,,0,0,0,,{\pos(540,1330)}“vou acender uma {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}velinha!”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:23.38,0:02:23.58,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“Tô{\c&HFFFFFF&\fscx100\fscy100} bem... tô bem!”
+Dialogue: 1,0:02:23.58,0:02:24.30,Cap,,0,0,0,,{\pos(540,1330)}“Tô {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}bem...{\c&HFFFFFF&\fscx100\fscy100} tô bem!”
+Dialogue: 1,0:02:24.30,0:02:24.46,Cap,,0,0,0,,{\pos(540,1330)}“Tô bem... {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tô{\c&HFFFFFF&\fscx100\fscy100} bem!”
+Dialogue: 1,0:02:24.46,0:02:25.05,Cap,,0,0,0,,{\pos(540,1330)}“Tô bem... tô {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}bem!”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:25.77,0:02:26.29,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Depois,{\c&HFFFFFF&\fscx100\fscy100} saia com calma,
+Dialogue: 1,0:02:26.29,0:02:26.57,Cap,,0,0,0,,{\pos(540,1330)}Depois, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}saia{\c&HFFFFFF&\fscx100\fscy100} com calma,
+Dialogue: 1,0:02:26.57,0:02:26.75,Cap,,0,0,0,,{\pos(540,1330)}Depois, saia {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}com{\c&HFFFFFF&\fscx100\fscy100} calma,
+Dialogue: 1,0:02:26.75,0:02:27.41,Cap,,0,0,0,,{\pos(540,1330)}Depois, saia com {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}calma,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:27.37,0:02:27.57,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pela{\c&HFFFFFF&\fscx100\fscy100} escada,
+Dialogue: 1,0:02:27.57,0:02:28.42,Cap,,0,0,0,,{\pos(540,1330)}pela {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}escada,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:28.45,0:02:28.79,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}nunca{\c&HFFFFFF&\fscx100\fscy100} pelo elevador,
+Dialogue: 1,0:02:28.79,0:02:28.97,Cap,,0,0,0,,{\pos(540,1330)}nunca {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pelo{\c&HFFFFFF&\fscx100\fscy100} elevador,
+Dialogue: 1,0:02:28.97,0:02:29.84,Cap,,0,0,0,,{\pos(540,1330)}nunca pelo {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}elevador,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:29.91,0:02:30.07,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} vá para uma área aberta,
+Dialogue: 1,0:02:30.07,0:02:30.25,Cap,,0,0,0,,{\pos(540,1330)}e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}vá{\c&HFFFFFF&\fscx100\fscy100} para uma área aberta,
+Dialogue: 1,0:02:30.25,0:02:30.39,Cap,,0,0,0,,{\pos(540,1330)}e vá {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}para{\c&HFFFFFF&\fscx100\fscy100} uma área aberta,
+Dialogue: 1,0:02:30.39,0:02:30.59,Cap,,0,0,0,,{\pos(540,1330)}e vá para {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}uma{\c&HFFFFFF&\fscx100\fscy100} área aberta,
+Dialogue: 1,0:02:30.59,0:02:30.77,Cap,,0,0,0,,{\pos(540,1330)}e vá para uma {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}área{\c&HFFFFFF&\fscx100\fscy100} aberta,
+Dialogue: 1,0:02:30.77,0:02:31.62,Cap,,0,0,0,,{\pos(540,1330)}e vá para uma área {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}aberta,{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:31.63,0:02:32.07,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}longe{\c&HFFFFFF&\fscx100\fscy100} de prédios
+Dialogue: 1,0:02:32.07,0:02:32.25,Cap,,0,0,0,,{\pos(540,1330)}longe {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} prédios
+Dialogue: 1,0:02:32.25,0:02:32.55,Cap,,0,0,0,,{\pos(540,1330)}longe de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}prédios{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:32.51,0:02:33.68,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}danificados.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:34.22,0:02:34.36,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}E{\c&HFFFFFF&\fscx100\fscy100} se você estiver perto do
+Dialogue: 1,0:02:34.36,0:02:34.48,Cap,,0,0,0,,{\pos(540,1330)}E {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}se{\c&HFFFFFF&\fscx100\fscy100} você estiver perto do
+Dialogue: 1,0:02:34.48,0:02:34.72,Cap,,0,0,0,,{\pos(540,1330)}E se {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}você{\c&HFFFFFF&\fscx100\fscy100} estiver perto do
+Dialogue: 1,0:02:34.72,0:02:35.14,Cap,,0,0,0,,{\pos(540,1330)}E se você {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}estiver{\c&HFFFFFF&\fscx100\fscy100} perto do
+Dialogue: 1,0:02:35.14,0:02:35.40,Cap,,0,0,0,,{\pos(540,1330)}E se você estiver {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}perto{\c&HFFFFFF&\fscx100\fscy100} do
+Dialogue: 1,0:02:35.40,0:02:35.54,Cap,,0,0,0,,{\pos(540,1330)}E se você estiver perto {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}do{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:35.50,0:02:36.06,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}mar,{\c&HFFFFFF&\fscx100\fscy100} e o tremor foi
+Dialogue: 1,0:02:36.06,0:02:36.14,Cap,,0,0,0,,{\pos(540,1330)}mar, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}e{\c&HFFFFFF&\fscx100\fscy100} o tremor foi
+Dialogue: 1,0:02:36.14,0:02:36.22,Cap,,0,0,0,,{\pos(540,1330)}mar, e {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} tremor foi
+Dialogue: 1,0:02:36.22,0:02:36.62,Cap,,0,0,0,,{\pos(540,1330)}mar, e o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}tremor{\c&HFFFFFF&\fscx100\fscy100} foi
+Dialogue: 1,0:02:36.62,0:02:36.88,Cap,,0,0,0,,{\pos(540,1330)}mar, e o tremor {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}foi{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:36.84,0:02:37.63,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}forte...{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:37.92,0:02:38.22,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}você{\c&HFFFFFF&\fscx100\fscy100} já sabe o que fazer.
+Dialogue: 1,0:02:38.22,0:02:38.42,Cap,,0,0,0,,{\pos(540,1330)}você {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}já{\c&HFFFFFF&\fscx100\fscy100} sabe o que fazer.
+Dialogue: 1,0:02:38.42,0:02:38.66,Cap,,0,0,0,,{\pos(540,1330)}você já {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}sabe{\c&HFFFFFF&\fscx100\fscy100} o que fazer.
+Dialogue: 1,0:02:38.66,0:02:38.72,Cap,,0,0,0,,{\pos(540,1330)}você já sabe {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} que fazer.
+Dialogue: 1,0:02:38.72,0:02:38.86,Cap,,0,0,0,,{\pos(540,1330)}você já sabe o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que{\c&HFFFFFF&\fscx100\fscy100} fazer.
+Dialogue: 1,0:02:38.86,0:02:39.57,Cap,,0,0,0,,{\pos(540,1330)}você já sabe o que {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}fazer.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:39.69,0:02:39.97,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“Corre{\c&HFFFFFF&\fscx100\fscy100} pro alto!”
+Dialogue: 1,0:02:39.97,0:02:40.21,Cap,,0,0,0,,{\pos(540,1330)}“Corre {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pro{\c&HFFFFFF&\fscx100\fscy100} alto!”
+Dialogue: 1,0:02:40.21,0:02:40.80,Cap,,0,0,0,,{\pos(540,1330)}“Corre pro {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}alto!”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:41.54,0:02:41.66,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}E{\c&HFFFFFF&\fscx100\fscy100} você?
+Dialogue: 1,0:02:41.66,0:02:42.37,Cap,,0,0,0,,{\pos(540,1330)}E {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}você?{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:42.70,0:02:43.14,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Seguiria{\c&HFFFFFF&\fscx100\fscy100} as dicas pra
+Dialogue: 1,0:02:43.14,0:02:43.30,Cap,,0,0,0,,{\pos(540,1330)}Seguiria {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}as{\c&HFFFFFF&\fscx100\fscy100} dicas pra
+Dialogue: 1,0:02:43.30,0:02:43.66,Cap,,0,0,0,,{\pos(540,1330)}Seguiria as {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}dicas{\c&HFFFFFF&\fscx100\fscy100} pra
+Dialogue: 1,0:02:43.66,0:02:43.82,Cap,,0,0,0,,{\pos(540,1330)}Seguiria as dicas {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}pra{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:43.78,0:02:44.81,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}sobreviver...{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:45.71,0:02:45.89,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}ou{\c&HFFFFFF&\fscx100\fscy100} continuaria jogando
+Dialogue: 1,0:02:45.89,0:02:46.57,Cap,,0,0,0,,{\pos(540,1330)}ou {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}continuaria{\c&HFFFFFF&\fscx100\fscy100} jogando
+Dialogue: 1,0:02:46.57,0:02:46.93,Cap,,0,0,0,,{\pos(540,1330)}ou continuaria {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}jogando{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:46.89,0:02:47.82,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}videogame?{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:48.43,0:02:48.59,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“Só{\c&HFFFFFF&\fscx100\fscy100} mais uma partida!”
+Dialogue: 1,0:02:48.59,0:02:48.73,Cap,,0,0,0,,{\pos(540,1330)}“Só {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}mais{\c&HFFFFFF&\fscx100\fscy100} uma partida!”
+Dialogue: 1,0:02:48.73,0:02:48.89,Cap,,0,0,0,,{\pos(540,1330)}“Só mais {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}uma{\c&HFFFFFF&\fscx100\fscy100} partida!”
+Dialogue: 1,0:02:48.89,0:02:49.62,Cap,,0,0,0,,{\pos(540,1330)}“Só mais uma {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}partida!”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:49.88,0:02:50.62,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“Relaxa,{\c&HFFFFFF&\fscx100\fscy100} é só o controle”
+Dialogue: 1,0:02:50.62,0:02:50.76,Cap,,0,0,0,,{\pos(540,1330)}“Relaxa, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}é{\c&HFFFFFF&\fscx100\fscy100} só o controle”
+Dialogue: 1,0:02:50.76,0:02:50.88,Cap,,0,0,0,,{\pos(540,1330)}“Relaxa, é {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}só{\c&HFFFFFF&\fscx100\fscy100} o controle”
+Dialogue: 1,0:02:50.88,0:02:50.96,Cap,,0,0,0,,{\pos(540,1330)}“Relaxa, é só {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}o{\c&HFFFFFF&\fscx100\fscy100} controle”
+Dialogue: 1,0:02:50.96,0:02:51.38,Cap,,0,0,0,,{\pos(540,1330)}“Relaxa, é só o {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}controle”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:51.34,0:02:52.15,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“vibrando.”{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:02:54.09,0:02:54.94,Cap,,0,0,0,,{\pos(540,1330)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}“Oh-oh...”{\c&HFFFFFF&\fscx100\fscy100}
