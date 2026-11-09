@@ -455,12 +455,13 @@ class Bean {
     this.pupils.forEach(pu => { pu.position.x = look[0] * 0.04; pu.position.y = look[1] * 0.04; const sc = p.eyesWide ? 0.75 : 1; pu.scale.set(sc, sc * 1.2, 0.6); });
     this.eyes.forEach(e => e.scale.setScalar(p.eyesWide ? 1.15 : 1));
     const brow = p.brow || 0; // + worried, - angry
-    this.brows.forEach((br, i) => { const s = i ? 1 : -1; br.rotation.z = -s * brow * 0.4; br.position.y = 0.4 + Math.abs(brow) * 0.03 + (p.eyesWide ? 0.05 : 0); });
+    this.brows.forEach((br, i) => { const s = i ? 1 : -1; br.rotation.z = -s * brow * 0.4; br.position.y = 0.4 + Math.abs(brow) * 0.03 + (p.eyesWide ? 0.05 : 0); if (p.smirk && i === 1) { br.position.y += 0.05; br.rotation.z = -0.25; } });
     const m = clamp(p.mouth || 0);
     this.mouthIn.scale.set(lerp(0.8, 1.0, m), lerp(0.08, 0.75, m) + (p.shout || 0) * 0.6, 0.3);
     this.mouthIn.visible = m > 0.03 || p.shout;
     this.smile.visible = (p.smile ?? 1) > 0 && m < 0.15 && !p.shout;
     this.smile.rotation.z = (p.smile ?? 1) > 0 ? Math.PI : 0;
+    if (p.smirk) { this.smile.visible = true; this.smile.rotation.z = Math.PI + 0.2; this.smile.scale.set(0.95, 1.05, 1.3); this.smile.position.set(0.025, 0.05, 0.01); } else { this.smile.scale.set(1, 1, 1); this.smile.position.set(0, 0.03, 0); }
     if (this.nut) this.nut.visible = p.nut !== false;
     if (this.cam) this.cam.visible = p.camOn !== false;
     this.root.visible = p.visible !== false;
@@ -1431,10 +1432,40 @@ if (new URLSearchParams(location.search).has('portrait')) {
         for (let x = 0; x <= w; x += 8) g.lineTo(x, h * y0 + Math.sin(x / w * Math.PI * 4 + k * 1.3) * 22); g.stroke();
       });
     });
-    hero.pose(1.0, { x: 0, y: 0, z: 0, ry: 0.22, armR: A.thumb, armL: A.hips, smile: 1, brow: -0.25, look: [0, 0.05], nut: false });
+    hero.pose(1.0, { x: 0, y: 0, z: 0, ry: 0.22, armR: A.thumb, armL: A.hips, smile: 1, smirk: true, squint: 0.25, brow: -0.15, look: [0.15, 0.05], nut: false });
     sun.position.set(3, 6, 7); sun.target.position.set(0, 1, 0); sun.intensity = 2.4; sun.color.set(0xfff1d6); hemi.intensity = 1.1;
     camera.fov = 34; camera.position.set(0.2, 1.15, 4.1); camera.updateProjectionMatrix(); camera.lookAt(0, 1.0, 0);
     renderer.render(scene, camera);
+    return true;
+  };
+}
+
+// ---------- channel banner (index.html?portrait=1, then window.renderBanner()) ----------
+if (new URLSearchParams(location.search).has('portrait')) {
+  window.renderBanner = () => {
+    const BW = 2560, BH = 1440;
+    const wrap = document.getElementById('wrap'); wrap.style.width = BW + 'px'; wrap.style.height = BH + 'px';
+    renderer.setSize(BW, BH); camera.aspect = BW / BH;
+    const uc = document.getElementById('ui'); uc.width = BW; uc.height = BH; uc.style.width = BW + 'px'; uc.style.height = BH + 'px';
+    const t = 6; GAG = false; REAL_T = t; world(t, t, 'sunny');
+    friend.root.visible = true; hero.root.visible = true;
+    const cx = 2.6, gz = 8.2;
+    hero.pose(1.0, { x: cx - 3.1, z: gz + 0.4, ry: 0.3, armR: A.thumb, armL: A.hips, smile: 1, smirk: true, squint: 0.25, brow: -0.15, look: [0.1, 0.05], nut: false });
+    friend.pose(1.0, { x: cx + 3.0, z: gz + 0.2, ry: -0.3, armL: A.rest, armR: A.wave, smile: 1, brow: -0.2, look: [-0.1, 0.05] });
+    scene.add(board); board.visible = true; const bx = cx + 4.0, bz = gz - 0.6; board.position.set(bx, terrainH(bx, bz) + 0.85, bz); board.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(V(0, 1, 0), V(1, 0, 0), V(0, 0, -1))); board.rotateX(0.35);
+    scene.add(dog); dog.scale.setScalar(1.25); dogPose(1.0, 'sit', cx + 1.9, terrainH(cx + 1.9, gz + 1.3), gz + 1.3, -0.3);
+    camera.fov = 38; camera.position.set(cx, 2.0, gz + 7.2); camera.updateProjectionMatrix(); camera.lookAt(cx, 1.55, gz - 4);
+    sun.target.position.set(cx, 0, gz); sun.position.set(cx + 20, 45, gz + 35); sun.intensity = 2.5;
+    sunSprite.position.copy(camera.position).addScaledVector(skyU.sunDir.value, 420); sunHalo.position.copy(sunSprite.position);
+    renderer.render(scene, camera);
+    // title inside YouTube's safe area (centre 1546 x 423)
+    const g2 = uc.getContext('2d'); g2.clearRect(0, 0, BW, BH);
+    const out = (txt, x, y, size, fill, stroke, lw = 0.16) => { g2.font = `900 ${size}px "Inter Display"`; g2.lineJoin = 'round'; g2.lineWidth = size * lw; g2.strokeStyle = stroke; g2.strokeText(txt, x, y); g2.fillStyle = fill; g2.fillText(txt, x, y); };
+    g2.textAlign = 'center'; g2.textBaseline = 'middle';
+    out('GUIA DE', BW / 2, 590, 88, '#ffffff', '#0a2a4a');
+    out('SOBREVIVÊNCIA', BW / 2, 700, 150, '#ffd23f', '#0a2a4a', 0.15);
+    g2.fillStyle = 'rgba(10,30,60,0.78)'; const sub = 'Tsunamis, terremotos e outras roubadas: aprenda rindo'; g2.font = '800 44px "Inter Display"'; const sw = g2.measureText(sub).width + 70;
+    g2.beginPath(); g2.roundRect(BW / 2 - sw / 2, 790, sw, 82, 41); g2.fill(); g2.fillStyle = '#ffffff'; g2.fillText(sub, BW / 2, 833);
     return true;
   };
 }
