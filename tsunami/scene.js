@@ -1099,7 +1099,8 @@ function world(t, wt, n) {
 
 // ---------- 2D overlay ----------
 const ui = document.getElementById('ui').getContext('2d');
-const NOCAP = new URLSearchParams(location.search).has('nocap');   // vertical (TikTok) version draws its own bigger captions
+const NOCAP = new URLSearchParams(location.search).has('nocap');
+const NOTITLE = new URLSearchParams(location.search).has('notitle');   // vertical version shows the title above the video instead   // vertical (TikTok) version draws its own bigger captions
 function rr(x, y, w, h, r) { ui.beginPath(); ui.roundRect(x, y, w, h, r); }
 function outlined(text, x, y, size, fill = '#fff', stroke = '#1b1b1b', weight = 900, lw = 0.16) {
   ui.font = `${weight} ${size}px "Inter Display", Inter, "DejaVu Sans", sans-serif`; ui.lineJoin = 'round';
@@ -1301,7 +1302,7 @@ function overlay(t, g, wt) {
   if (n === 'ficha') vignette(0.6);
   if (n === 'explain') diagram(t, g, 'explain');
   if (n === 'retreat') diagram(t, g, 'retreat');
-  if (n === 'title') {
+  if (n === 'title' && !NOTITLE) {
     if (lt > 0.6) {
       const s = pop(lt - 0.6, 0.5);
       ui.save(); ui.translate(640, 300); ui.scale(s, s); ui.rotate(-0.02); ui.textAlign = 'center'; ui.textBaseline = 'middle';

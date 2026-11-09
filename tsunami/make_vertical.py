@@ -34,8 +34,31 @@ lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Small,,0,0,0,,{{\\pos(540,200)}}GUI
 lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,262)}}VOCÊ SOBREVIVERIA')
 lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,375)\\fs118\\c&H3FD2FF&}}A UM TSUNAMI?')
 lines.append(f'Dialogue: 0,{ts(end_start)},{ts(T)},Small,,0,0,0,,{{\\pos(540,1540)\\c&H2A8AFF&}}SEGUE PRA VER O EP. 2: TERREMOTO')
-for c in d['caps']:
-    lines.append(f"Dialogue: 1,{ts(c['t0'])},{ts(c['t1'] + 0.12)},Cap,,0,0,0,,{{\\pos(540,1330)\\fad(60,0)}}{highlight(c['text'])}")
+# karaoke captions: short chunks; the word being spoken turns yellow and pops
+W = json.load(open('audio/words.json'))
+chunks, cur = [], []
+for w in W:
+    txt = ' '.join(x['text'] for x in cur)
+    if cur and (w['seg'] != cur[-1]['seg'] or len(txt) + len(w['text']) + 1 > 26 or (len(txt) >= 10 and cur[-1]['text'][-1] in '.?!:,') or w['t0'] - cur[-1]['t1'] > 0.6):
+        chunks.append(cur); cur = []
+    cur.append(w)
+if cur: chunks.append(cur)
+for ci, ch in enumerate(chunks):
+    nxt = chunks[ci + 1][0]['t0'] if ci + 1 < len(chunks) else T
+    end = min(ch[-1]['t1'] + 0.35, nxt)
+    quote = ch[0]['who'] != 'narr'
+    for j, w in enumerate(ch):
+        s0 = w['t0'] if j else ch[0]['t0'] - 0.04
+        s1 = ch[j + 1]['t0'] if j + 1 < len(ch) else end
+        parts = []
+        for k, x in enumerate(ch):
+            t_ = x['text']
+            if quote and k == 0: t_ = '“' + t_
+            if quote and k == len(ch) - 1: t_ = t_ + '”'
+            if k == j: parts.append('{\\c&H3FD2FF&\\fscx100\\fscy100\\t(0,90,\\fscx126\\fscy126)\\t(90,210,\\fscx114\\fscy114)}' + t_ + '{\\c&HFFFFFF&\\fscx100\\fscy100}')
+            else: parts.append(t_)
+        intro = '{\\fscx88\\fscy88\\t(0,90,\\fscx100\\fscy100)}' if j == 0 else ''
+        lines.append(f"Dialogue: 1,{ts(s0)},{ts(s1)},Cap,,0,0,0,,{{\\pos(540,1330)}}{intro}{' '.join(parts)}")
 open('audio/tiktok.ass', 'w').write('\n'.join(lines) + '\n')
 flt = ('[0:v]split=2[a][b];'
        '[a]scale=-2:1920,crop=1080:1920,gblur=sigma=28,eq=brightness=-0.18:saturation=1.1[bg];'
