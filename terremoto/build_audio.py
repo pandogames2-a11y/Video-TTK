@@ -47,8 +47,14 @@ def tts(text, out, voice, prev='', nxt=''):
 def chunks(text, maxc=42):
     parts = [p.strip() for p in re.findall(r'[^,.?!:]+[,.?!:]*', text) if p.strip()]
     out = []
-    for p in parts:
-        p = p.rstrip(',')
+    pieces = []
+    for p in parts:   # split clauses that are too long on their own, at word boundaries
+        p = p.rstrip(','); cur = ''
+        for w in p.split():
+            if cur and len(cur) + len(w) + 1 > maxc: pieces.append(cur); cur = w
+            else: cur = (cur + ' ' + w).strip()
+        if cur: pieces.append(cur)
+    for p in pieces:
         if out and len(out[-1]) + len(p) + 1 <= maxc and not out[-1].endswith(('.', '?', '!', ':')):
             out[-1] += ' ' + p
         else: out.append(p)
