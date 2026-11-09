@@ -817,8 +817,19 @@ const books = [], cups = [], plaster = [];
   const gtop = new THREE.Mesh(new THREE.SphereGeometry(0.28, 18, 8, 0, Math.PI * 2, 0, Math.PI / 2), gbody.material); gtop.position.y = 0.65; gas.add(gtop);
   const gring = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.025, 6, 18), std(0x5b8fd6)); gring.rotation.x = Math.PI / 2; gring.position.y = 0.95; gas.add(gring);
   const gvalve = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.12, 8), std(0xd9b44a, { metalness: 0.6 })); gvalve.position.y = 0.95; gas.add(gvalve);
+  // gas hose from the cylinder to the stove; the quake pulls it loose
+  const hoseM = std(0xd9a441, { roughness: 0.6 });
+  const hoseOn = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([V(4.15, 0.98, -0.35), V(4.15, 1.15, -0.15), V(4.2, 0.6, 0.05), V(4.35, 0.45, 0.15)]), 24, 0.03, 8), hoseM); apt.add(hoseOn); aptParts.hoseOn = hoseOn;
+  const hoseOff = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([V(4.35, 0.45, 0.15), V(4.1, 0.25, 0.05), V(3.8, 0.04, -0.2), V(3.55, 0.04, -0.55)]), 24, 0.03, 8), hoseM); apt.add(hoseOff); aptParts.hoseOff = hoseOff;
+  const nozzle = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.1, 10), std(0xb8b8b8, { metalness: 0.6 })); nozzle.rotation.z = Math.PI / 2; nozzle.position.set(3.52, 0.05, -0.57); apt.add(nozzle); aptParts.nozzle = nozzle;
   // door to the hallway (front of the right wall)
   const door = new THREE.Mesh(new THREE.BoxGeometry(0.08, 2.4, 1.1), std(0x8a5a32)); door.position.set(4.56, 1.2, 2.9); apt.add(door);
+  // a big slab of ceiling that comes down on the sofa in the ending gag
+  const slab = new THREE.Group(); apt.add(slab); aptParts.slab = slab;
+  const slabTop = new THREE.Mesh(new THREE.BoxGeometry(2.7, 0.22, 1.5), std(0xf3eee6, { roughness: 1 })); slab.add(slabTop);
+  const slabCore = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.2, 1.4), std(0x9e9488, { roughness: 1, flatShading: true })); slabCore.position.y = -0.03; slab.add(slabCore);
+  for (let i = 0; i < 4; i++) { const r2 = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1.7, 6), std(0x6b5a48)); r2.rotation.z = Math.PI / 2; r2.position.set(0, -0.12, -0.5 + i * 0.33); slab.add(r2); }
+  slab.visible = false;
   // plaster chunks waiting in the ceiling for the ending gag
   const pr = rnd(77);
   for (let i = 0; i < 14; i++) { const c = new THREE.Mesh(new THREE.DodecahedronGeometry(0.15 + pr() * 0.2, 0), std(0xeee8de, { flatShading: true })); const x = -2.3 + pr() * 2.6, z = -3.0 + pr() * 1.3; c.userData = { x, z, delay: pr() * 0.6, spin: pr() * 6, land: 0.6 + pr() * 0.5 }; c.position.set(x, 3.7, z); c.visible = false; apt.add(c); plaster.push(c); }
@@ -830,7 +841,7 @@ const SH0 = T0('shake') + 0.9;                        // the ground starts shaki
 const BOOKS_T = capAt('livros', T0('shake'));
 const BONK_T = T0('bonk') + 0.95;
 const FW_T = T0('gas3') + 1.05;                        // fwoomp
-const CRASH_T = T0('crash') + 0.4;
+const CRASH_T = T0('crash') + 1.0;      // the slab hits them
 function seg(t) { for (let i = TL.segs.length - 1; i >= 0; i--) if (t >= TL.segs[i].start) return TL.segs[i]; return TL.segs[0]; }
 function quake(t, n, lt) {   // shaking strength 0..1
   if (n === 'shake') return ss(SH0 - T0('shake'), SH0 - T0('shake') + 0.6, lt);
@@ -867,6 +878,7 @@ function updateApartment(t, n, lt, q) {
   const v = aptParts.vase, vt = BOOKS_T + 0.7;
   if (gag || t < vt) v.position.copy(v.userData.home); else { const k = clamp((t - vt) / 0.45); v.position.set(lerp(v.userData.home.x, -3.5, k), lerp(v.userData.home.y, 0.0, k * k), v.userData.home.z); v.rotation.z = -1.4 * k; }
   aptParts.wcrack.visible = !gag && t > SH0 + 1.6;
+  const loose = !gag && t > SH0 + 2.2; aptParts.hoseOn.visible = !loose; aptParts.hoseOff.visible = aptParts.nozzle.visible = loose;
   // power goes out a few seconds into the quake
   const dark = gag ? 0 : ss(SH0 + 3.0, SH0 + 3.3, t) * (Math.floor(t * 9) % 4 === 0 && t < SH0 + 3.6 ? 0.3 : 1);
   aptParts.lamp.intensity = 2.2 * (1 - dark); aptParts.bulb.material.color.setScalar(1 - dark * 0.75); aptParts.tvLight.intensity = 1.2 * (1 - dark);
@@ -874,7 +886,10 @@ function updateApartment(t, n, lt, q) {
   // ending gag: ceiling cracks, then the plaster comes down
   aptParts.ceilCrack.visible = gag && t > T0('crack');
   aptParts.ceilCrack.material.opacity = ss(T0('crack'), T0('crack') + 1.0, t);
-  plaster.forEach(c => { const u = c.userData, t0 = CRASH_T + u.delay * 0.4; c.visible = gag && t > t0 - 0.05; if (!c.visible) return; const k = clamp((t - t0) / 0.5); c.position.set(AO.x + u.x, AO.y + lerp(3.7, u.land, k * k), AO.z + u.z); c.rotation.set(u.spin * k, u.spin * 0.5 * k, 0); });
+  { const sl = aptParts.slab, t0 = CRASH_T - 0.45; sl.visible = gag && t > T0('crash') + 0.2;
+    if (sl.visible) { const k = clamp((t - t0) / 0.45), land = 2.05, bounce = t > CRASH_T ? 0.12 * Math.abs(Math.sin((t - CRASH_T) * 9)) * Math.exp(-(t - CRASH_T) * 5) : 0;
+      sl.position.set(-1.0, t < t0 ? 3.68 - Math.sin(t * 60) * 0.02 : lerp(3.68, land, k * k) + bounce, -2.65); sl.rotation.set(t < t0 ? 0 : 0.12 * k, 0, t < t0 ? Math.sin(t * 50) * 0.02 : -0.08 * k); } }
+  plaster.forEach(c => { const u = c.userData, t0 = CRASH_T - 0.3 + u.delay * 0.5; c.visible = gag && t > t0 - 0.05; if (!c.visible) return; const k = clamp((t - t0) / 0.5); c.position.set(AO.x + u.x, AO.y + lerp(3.7, u.land, k * k), AO.z + u.z); c.rotation.set(u.spin * k, u.spin * 0.5 * k, 0); });
   return dark;
 }
 
@@ -980,7 +995,7 @@ function direct(t, n, lt, g, q) {
     } else {
       // in the car: brake and stay inside
       const k = ss(wC - 0.3, wC + 2.2, lt);
-      myCar.position.set(lerp(30, 20, 1 - Math.pow(1 - k, 2)), myCar.userData.home.y, ROAD.z); myCar.rotation.set(0, 0.04, 0);
+      myCar.position.set(lerp(46, 31, 1 - Math.pow(1 - k, 2)), myCar.userData.home.y, ROAD.z); myCar.rotation.set(0, 0.04, 0);
       setParent(hero, myCar); setParent(friend, myCar); hero.root.scale.setScalar(1 / CAR_S); friend.root.scale.setScalar(1 / CAR_S);
       hp = { x: -0.15, y: 0.46, z: 0.24, ry: -Math.PI / 2, legs: 'sit', sitY: 0.6, armL: A.drive, armR: A.drive, nut: false, eyesWide: true, brow: 0.8, smile: 0, hat: false };
       fp = { x: -0.15, y: 0.46, z: -0.24, ry: -Math.PI / 2, legs: 'sit', sitY: 0.6, armL: A.up, armR: A.up, eyesWide: true, brow: 0.9, smile: 0 };
@@ -1007,7 +1022,12 @@ function direct(t, n, lt, g, q) {
     hp = { x: AO.x + 2.1, z: AO.z + 1.0, y: AO.y, ry: 1.2, armL: A.rest, armR: A.rest, brow: 0.3, smile: 0, nut: false, squint: n === 'gas1' ? 0.3 : 0 };
     fp = { x: AO.x + 3.3, z: AO.z + 1.4, y: AO.y, ry: -1.6, armL: A.rest, armR: A.rest, brow: 0, smile: 1 };
     dg = { mode: 'sit', x: AO.x + 1.4, y: AO.y, z: AO.z + 1.5, ry: 0.8 };
-    if (n === 'gas1') { cam.pos = AP(1.6, 1.6, 3.4); cam.tgt = AP(3.4, 1.0, 0.4); cam.fov = 50; }
+    if (n === 'gas1') {
+      const wF = wordAt('faísca', g.start) - g.start, wC = wordAt('cheiro', g.start) - g.start;
+      if (lt < wF + 0.5) { const k = ease(clamp(lt / (wF + 0.5))); cam.pos = vl(AP(2.4, 0.8, -0.1), AP(2.8, 0.7, -0.2), k); cam.tgt = AP(4.0, 0.45, -0.4); cam.fov = 50; hp.visible = fp.visible = false; dg.mode = 'hide'; }
+      else if (lt < wC - 0.3) { cam.pos = AP(1.0, 1.9, 3.8); cam.tgt = AP(3.0, 1.0, 0.2); cam.fov = 52; hp.eyesWide = fp.eyesWide = true; fp.smile = 0; hp.look = [0.6, -0.2]; fp.look = [0.2, -0.4]; }
+      else { cam.pos = AP(1.6, 1.6, 3.4); cam.tgt = AP(3.4, 1.0, 0.4); cam.fov = 50; hp.armR = A.point; hp.brow = -0.3; hp.ry = 1.4; }
+    }
     else if (n === 'gas2') { fp = Object.assign(fp, { candle: true, armL: [1.3, 0.1, -0.9], armR: [1.2, -0.2, -1.2], mouth: fm }); hp = Object.assign(hp, { eyesWide: true, brow: 1, armL: A.stop, armR: A.stop, shout: 0.5 }); cam.pos = AP(2.6, 1.5, 3.7); cam.tgt = AP(2.8, 1.15, 1.1); cam.fov = 44; }
     else if (n === 'gas3') {
       const lit = t > FW_T - 0.45, boom = t > FW_T, after = t > FW_T + 0.9;
@@ -1064,10 +1084,11 @@ function direct(t, n, lt, g, q) {
     else if (n === 'crack') { cam.pos = AP(-1.0, 1.2, -1.6); cam.tgt = AP(-1.0, 3.8, -2.3); cam.fov = 60; hp.look = [0, 1]; fp.look = [0, 1]; }
     else if (n === 'ohoh') { hp = Object.assign(hp, { ctrl: true, mouth: Math.max(hm, 0.2), eyesWide: true, brow: 0.6, smile: 0, look: [0, 0] }); fp = Object.assign(fp, { eyesWide: true, brow: 0.8, smile: 0, look: [0, 1] }); cam.pos = AP(-1.4, 1.45, -0.4); cam.tgt = AP(-1.5, 1.2, -2.65); cam.fov = 42; }
     else {
-      const down = t > CRASH_T + 0.45;
+      const down = t > CRASH_T;
+      if (!down) { hp = Object.assign(hp, { eyesWide: true, brow: 1, smile: 0, shout: 0.7, look: [0, 1], armL: A.up, armR: A.up, ctrl: false }); fp = Object.assign(fp, { eyesWide: true, brow: 1, smile: 0, shout: 0.7, look: [0, 1], armL: A.up, armR: A.up, ctrl: false }); }
       if (down) { hp = Object.assign(hp, { dust: 1, ctrl: true, squint: 0.6, smile: 0, brow: 0.4, wob: 0, look: [0, 0] }); fp = Object.assign(fp, { dust: 1, ctrl: true, squint: 0.6, smile: 0, brow: 0.4, wob: 0 }); }
-      cam.pos = AP(-0.6, 1.7, 2.2); cam.tgt = AP(-1.0, 1.0, -2.4); cam.fov = 50;
-      shake = t < CRASH_T + 0.9 ? 0.8 : 0; flash = 0;
+      cam.pos = AP(-0.6, 1.9, 2.4); cam.tgt = AP(-1.0, 1.4, -2.4); cam.fov = 52;
+      shake = Math.abs(t - CRASH_T) < 0.5 && t > CRASH_T - 0.05 ? 0.9 * Math.exp(-(t - CRASH_T) * 3) : 0.15; flash = 0;
     }
     if (n !== 'crash') shake = q * 0.4;
   } else if (n === 'end') {
@@ -1077,6 +1098,7 @@ function direct(t, n, lt, g, q) {
     cam.pos = vl(V(4.2, 1.5, 2.4), V(8, 6, -8), ease(p)); cam.tgt = V(2.0, 1.0, 6.3); cam.fov = 45;
   }
   hero.pose(t, hp); friend.pose(t, fp);
+  if (n === 'crash' && t > CRASH_T) { const sq = 1 - 0.18 * Math.exp(-(t - CRASH_T) * 4); hero.root.scale.set(1 + (1 - sq) * 0.6, sq, 1 + (1 - sq) * 0.6); friend.root.scale.copy(hero.root.scale); }
   if (dg.mode === 'carried') { if (dog.parent !== friend.body) friend.body.add(dog); dog.scale.setScalar(1); dogPose(t, 'carried', 0, -0.28, 0.42, 0); }
   else { if (dog.parent !== scene) scene.add(dog); dogPose(t, dg.mode, dg.x, dg.y, dg.z, dg.ry); }
   const sh = shake * 0.12;
@@ -1353,7 +1375,15 @@ function overlay(t, g) {
     ui.save(); ui.strokeStyle = 'rgba(140,220,90,0.8)'; ui.lineWidth = 6; ui.lineCap = 'round';
     for (let i = 0; i < 4; i++) { const life = (t * 0.5 + i / 4) % 1; ui.globalAlpha = 1 - life; ui.beginPath(); for (let k = 0; k <= 10; k++) { const yy = gy - life * 160 - k * 10; ui.lineTo(gx - 40 + i * 26 + Math.sin(k * 0.9 + t * 4 + i) * 10, yy); } ui.stroke(); }
     ui.restore();
-    if (n === 'gas1') badge('⚠ CHEIRO DE GÁS = NADA DE FOGO', fadeIn, '#c62828');
+    if (n === 'gas1') {
+      const wF = wordAt('faísca', g.start), wC = wordAt('cheiro', g.start), wR = wordAt('feche', g.start);
+      if (t < wF + 0.5 + 0) { ui.save(); ui.globalAlpha = ss(g.start + 0.4, g.start + 0.8, t); ui.textAlign = 'center'; outlined('MANGUEIRA SOLTA!', 330, 560, 48, '#ffd23f', '#c62828', 900, 0.2); ui.restore(); }
+      // tremor -> gas leaks -> spark -> fire
+      const chain = [['TREMOR', wordAt('tremor', g.start), '#c25a12'], ['GÁS VAZA', wordAt('vaza', g.start), '#6aa84f'], ['FAÍSCA', wF, '#e8a33a'], ['INCÊNDIO!', wordAt('incêndio', g.start), '#c62828']];
+      if (t < wC - 0.2) chain.forEach(([txt, at, col], i) => { const a2 = ss(at - 0.1, at + 0.25, t); if (a2 <= 0) return; ui.save(); ui.globalAlpha = a2; const x = 120 + i * 290, y = 90; ui.fillStyle = col; rr(x - 10, y - 34, 240, 68, 18); ui.fill(); ui.textAlign = 'center'; ui.textBaseline = 'middle'; ui.fillStyle = '#fff'; ui.font = '900 34px "Inter Display"'; ui.fillText(txt, x + 110, y + 2); if (i < 3) { ui.fillStyle = '#ffffff'; ui.beginPath(); ui.moveTo(x + 238, y - 14); ui.lineTo(x + 268, y); ui.lineTo(x + 238, y + 14); ui.fill(); } ui.restore(); });
+      if (t >= wC - 0.2) badge('⚠ CHEIRO DE GÁS = NADA DE FOGO', ss(wC - 0.2, wC + 0.1, t), '#c62828');
+      if (t > wR - 0.1) { const items = ['FECHE O REGISTRO', 'ABRA AS JANELAS', 'SAIA DE CASA']; items.forEach((txt, i) => { const at = [wR, wordAt('abra', g.start), wordAt('saia', g.start)][i]; const a2 = ss(at - 0.1, at + 0.2, t); if (a2 <= 0) return; ui.save(); ui.globalAlpha = a2; ui.translate(860, 150 + i * 70); ui.fillStyle = 'rgba(10,20,40,0.8)'; rr(0, 0, 380, 58, 16); ui.fill(); ui.textBaseline = 'middle'; ui.textAlign = 'left'; outlined('✓ ' + txt, 18, 30, 30, '#5ff08a', '#0a1428', 900, 0.12); ui.restore(); }); }
+    }
   }
   if (n === 'gas2' && lt > 0.6) { ui.save(); const [x, y] = headOnScreen(hero, 0.9); ui.textAlign = 'center'; ui.translate(x - 30, y - 120); const s2 = pop(lt - 0.6, 0.25); ui.scale(s2, s2); outlined('NÃÃÃO!', 0, 0, 64, '#ff6b5a', '#0a1428', 900, 0.18); ui.restore(); }
   if (n === 'gas3') {
@@ -1367,9 +1397,14 @@ function overlay(t, g) {
   if (n === 'coast' || n === 'coast2') { ui.save(); ui.textAlign = 'center'; ui.globalAlpha = n === 'coast' ? ss(S.coast.dur - 2.4, S.coast.dur - 2.0, lt) : 1; outlined('LEMBRA DO EP. 1?', 640, 120, 54, '#ffd23f', '#0a1428', 900, 0.18); ui.restore(); }
   if (n === 'q1') { ui.save(); ui.translate(940, 200); const s = pop(lt - 0.2); ui.scale(s, s); ui.rotate(0.05); ui.textAlign = 'center'; outlined('SEGUIR AS DICAS ✓', 0, 0, 50, '#5ff08a', '#0a1428', 900, 0.2); ui.restore(); }
   if (['q2', 'q3', 'q4'].includes(n)) { ui.save(); ui.translate(320, 200); const s = pop(t - T0('q2') - 0.2); ui.scale(s, s); ui.rotate(-0.05); ui.textAlign = 'center'; outlined('JOGAR VIDEOGAME', 0, 0, 50, '#ffd23f', '#0a1428', 900, 0.2); ui.restore(); }
-  if (n === 'crash' && t > CRASH_T + 0.3) {
-    const k = t - CRASH_T - 0.3; ui.save(); ui.fillStyle = `rgba(235,230,220,${Math.max(0, 0.95 - k * 0.55)})`; ui.fillRect(0, 0, W, H); ui.restore();
-    if (k > 1.2) { ui.save(); ui.textAlign = 'center'; for (let i = 0; i < 2; i++) { const a2 = ss(1.2 + i * 0.5, 1.4 + i * 0.5, k); if (a2 <= 0) continue; ui.globalAlpha = a2; outlined('cof', 520 + i * 200, 250 - i * 40, 50, '#ffffff', '#0a1428', 900, 0.2); } ui.restore(); }
+  if (n === 'crash' && t > CRASH_T - 0.6 && t < CRASH_T) { ui.save(); ui.textAlign = 'center'; ui.translate(640, 110); ui.scale(pop(t - CRASH_T + 0.6, 0.2), pop(t - CRASH_T + 0.6, 0.2)); outlined('AAAAH!', 0, 0, 70, '#ffffff', '#c62828', 900, 0.18); ui.restore(); }
+  if (n === 'crash' && t > CRASH_T) {
+    const k = t - CRASH_T, imp = V(AO.x - 1.0, AO.y + 1.8, AO.z - 2.4).project(camera), ix = (imp.x * 0.5 + 0.5) * W, iy = (-imp.y * 0.5 + 0.5) * H;
+    if (k < 0.12) { ui.fillStyle = `rgba(255,255,255,${0.5 * (1 - k / 0.12)})`; ui.fillRect(0, 0, W, H); }
+    if (k < 1.3) { ui.save(); ui.textAlign = 'center'; ui.translate(ix + 180, iy - 170); ui.rotate(-0.1); ui.scale(pop(k, 0.18), pop(k, 0.18)); outlined('CRASH!', 0, 0, 90, '#ffd23f', '#0a1428', 900, 0.17); ui.restore(); }
+    // dust clouds puffing out from under the slab, then settling
+    for (let i = 0; i < 14; i++) { const ang = i / 14 * Math.PI * 2, rad = 80 + k * 260 * (0.6 + (i % 3) * 0.2), al = Math.max(0, 0.7 - k * 0.32); if (al <= 0) continue; ui.fillStyle = `rgba(232,226,214,${al})`; ui.beginPath(); ui.arc(ix + Math.cos(ang) * rad, iy + Math.sin(ang) * rad * 0.45 + k * 20, 50 + k * 60, 0, Math.PI * 2); ui.fill(); }
+    if (k > 1.6) { ui.save(); ui.textAlign = 'center'; for (let i = 0; i < 2; i++) { const a2 = ss(1.2 + i * 0.5, 1.4 + i * 0.5, k); if (a2 <= 0) continue; ui.globalAlpha = a2; outlined('cof', 520 + i * 200, 250 - i * 40, 50, '#ffffff', '#0a1428', 900, 0.2); } ui.restore(); }
   }
   if (n === 'end') {
     const a = ss(0.6, 1.2, lt);

@@ -296,7 +296,7 @@ rumble_bed(T0('q3'), TE('ohoh'), 0.3, 1.2)
 c0 = T0('crack') + 0.2
 for k in range(4): crack(c0 + k * 0.32, 0.25)
 scratch(T0('ohoh') + 0.05); slide(VE('ohoh') + 0.05, 700, 250, 0.7, 0.1)
-x0 = T0('crash') + 0.4; boom(x0, 0.9, 38); n = int(2.0 * SR); x = np.arange(n) / SR
+x0 = T0('crash') + 1.0; crack(x0 - 0.75, 0.45); crack(x0 - 0.55, 0.35); slide(x0 - 0.5, 900, 200, 0.5, 0.1); bonk(x0 + 0.02, 0.4); bonk(x0 + 0.1, 0.35); boom(x0, 0.9, 38); n = int(2.0 * SR); x = np.arange(n) / SR
 put(fx, (lowp(rng.standard_normal(n), 1500) + band(rng.standard_normal(n), 2000, 7000) * 0.3) * np.minimum(1, x * 30) * np.exp(-x * 2.2) * 0.8, x0)
 for k in range(8): thud(x0 + 0.2 + k * 0.17 + rng.random() * 0.1, 0.18)
 for k in range(3): n = int(0.18 * SR); y = np.arange(n) / SR; put(fx, band(rng.standard_normal(n), 400, 3000) * np.exp(-y * 12) * 0.12, x0 + 2.0 + k * 0.4)   # cough cough
