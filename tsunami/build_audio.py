@@ -39,10 +39,33 @@ def tts_eleven(text, out, voice, prev='', nxt=''):
         req = urllib.request.Request(f"https://api.elevenlabs.io/v1/text-to-speech/{v['voice_id']}?output_format=mp3_44100_128", data=body, method='POST',
                                      headers={'Content-Type': 'application/json', 'Accept': 'audio/mpeg', 'xi-api-key': os.environ.get('ELEVEN_KEY', 'proxy-injected')})
         with urllib.request.urlopen(req, timeout=120) as r: open(mp3, 'wb').write(r.read())
-    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', mp3, '-af', 'highpass=f=60,acompressor=threshold=0.12:ratio=2.5,volume=1.15', '-ar', '44100', '-ac', '1', out], check=True)
+    sp = os.environ.get('SPEED', '1.0')   # e.g. SPEED=1.1 speeds the voice up without changing its pitch
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', mp3, '-af', f'highpass=f=60,acompressor=threshold=0.12:ratio=2.5,volume=1.15,atempo={sp}', '-ar', '44100', '-ac', '1', out], check=True)
 
 def tts(text, out, voice, prev='', nxt=''):
     return tts_eleven(text, out, voice, prev, nxt) if os.environ.get('TTS') == 'eleven' else tts_piper(text, out, voice)
+
+def tighten(v, keep=0.16, min_gap=0.22):
+    """shorten long silences inside a spoken line (pauses between sentences)"""
+    hop = int(SR * 0.01); n = len(v) // hop
+    env = np.array([np.sqrt(np.mean(v[k * hop:(k + 1) * hop] ** 2)) for k in range(n)])
+    quiet = env < max(0.01, env.max() * 0.04)
+    out, k = [], 0
+    while k < n:
+        if quiet[k]:
+            j = k
+            while j < n and quiet[j]: j += 1
+            run = j - k
+            if run * 0.01 > min_gap and k > 0 and j < n:
+                keepn = int(keep / 0.01); out.append(v[k * hop:(k + keepn // 2) * hop]); out.append(v[(j - keepn // 2) * hop:j * hop])
+            else: out.append(v[k * hop:j * hop])
+            k = j
+        else:
+            j = k
+            while j < n and not quiet[j]: j += 1
+            out.append(v[k * hop:j * hop]); k = j
+    out.append(v[n * hop:])
+    return np.concatenate(out).astype(np.float32)
 
 def chunks(text, maxc=42):
     parts = [p.strip() for p in re.findall(r'[^,.?!:]+[,.?!:]*', text) if p.strip()]
@@ -65,6 +88,7 @@ for i, s in enumerate(S):
     v = np.zeros(1, np.float32)
     if s['voice'] != 'none':
         f = f'audio/v{i:02d}.wav'; tts(s['text'], f, s['voice'], ctx(i, -1), ctx(i, 1)); v = readwav(f)
+        if os.environ.get('TIGHT'): v = tighten(v); wo_ = wave.open(f, 'wb'); wo_.setnchannels(1); wo_.setsampwidth(2); wo_.setframerate(SR); wo_.writeframes((np.clip(v, -1, 1) * 32767).astype(np.int16).tobytes()); wo_.close()
         nz = np.where(np.abs(v) > 0.01)[0]
         if len(nz): v = v[max(0, nz[0] - 200): nz[-1] + 2000]
     lead = s.get('lead', 0.25); vl = len(v) / SR if s['voice'] != 'none' else 0

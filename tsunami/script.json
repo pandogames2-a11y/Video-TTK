@@ -3,230 +3,230 @@
   "scene": "title",
   "voice": "narr",
   "text": "Você sobreviveria a um tsunami?",
-  "min": 4.6,
-  "lead": 1.0,
-  "tail": 0.8,
+  "min": 3.8,
+  "lead": 0.8,
+  "tail": 0.4,
   "nocap": true
  },
  {
   "scene": "sunny",
   "voice": "narr",
   "text": "É um dia ensolarado. Você está na praia, tomando sol, enquanto o seu amigo pega umas ondas. As gaivotas voando, aquele som gostoso do mar, e um ventinho soprando lá do horizonte.",
-  "tail": 0.6
+  "tail": 0.3
  },
  {
   "scene": "calm",
   "voice": "narr",
   "text": "Tudo tranquilo. Tranquilo até demais.",
-  "tail": 1.2
+  "tail": 0.6
  },
  {
   "scene": "recede",
   "voice": "narr",
   "text": "Até que, de repente, você repara que o mar está voltando. Rápido. Tão rápido, que tem peixe se debatendo na areia.",
-  "tail": 0.5
+  "tail": 0.25
  },
  {
   "scene": "friend1",
   "voice": "friend",
   "text": "Ué... cadê o mar?!",
-  "tail": 0.6
+  "tail": 0.3
  },
  {
   "scene": "fish",
   "voice": "narr",
   "text": "Por um momento, você até acha que isso é uma coisa boa. E ainda diz:",
-  "tail": 0.2
+  "tail": 0.15
  },
  {
   "scene": "dinner",
   "voice": "hero",
   "text": "Opa! A janta de hoje tá garantida!",
-  "tail": 0.6
+  "tail": 0.3
  },
  {
   "scene": "twist",
   "voice": "narr",
   "text": "Mas o que você não esperava, é que estava diante de um tsunami.",
-  "tail": 2.0
+  "tail": 1.0
  },
  {
   "scene": "explain",
   "voice": "narr",
   "text": "E tsunami não é uma onda de surfe gigante. É o oceano sendo empurrado de uma vez só, geralmente por um terremoto no fundo do mar. Em alto-mar, ele viaja na velocidade de um avião, e quase ninguém percebe. Mas, quando chega perto da costa, ele freia, cresce, e vira um paredão de água.",
-  "tail": 0.8
+  "tail": 0.4
  },
  {
   "scene": "retreat",
   "voice": "narr",
   "text": "E aquele mar recuando? Era o tsunami puxando a água antes de chegar. O último aviso que a natureza te dá.",
-  "tail": 0.8
+  "tail": 0.4
  },
  {
   "scene": "horizon",
   "voice": "narr",
   "text": "Então você olha pro horizonte, e vê. Uma onda com mais de dez metros de altura. Densa, forte, e chegando numa velocidade absurda.",
-  "tail": 0.8
+  "tail": 0.4
  },
  {
   "scene": "ficha",
   "voice": "narr",
   "text": "A ficha cai. Seu corpo inteiro arrepia.",
-  "tail": 0.3
+  "tail": 0.15
  },
  {
   "scene": "friend2",
   "voice": "friend",
   "text": "E agora? O que a gente faz?!",
-  "tail": 1.2
+  "tail": 0.6
  },
  {
   "scene": "car1",
   "voice": "friend",
   "text": "Já sei! Bora pegar o carro!",
-  "tail": 0.4
+  "tail": 0.2
  },
  {
   "scene": "car2",
   "voice": "narr",
   "text": "Péssima ideia. Com todo mundo fugindo ao mesmo tempo, o trânsito trava, e a água chega antes.",
-  "tail": 0.4
+  "tail": 0.2
  },
  {
   "scene": "carhit",
   "voice": "none",
   "text": "",
-  "min": 3.2
+  "min": 2.6
  },
  {
   "scene": "replay",
   "voice": "none",
   "text": "",
-  "min": 2.4
+  "min": 2.0
  },
  {
   "scene": "idea",
   "voice": "hero",
   "text": "Tenho uma ideia melhor. Vem comigo!",
   "lead": 0.5,
-  "tail": 0.4
+  "tail": 0.2
  },
  {
   "scene": "answer",
   "voice": "narr",
   "text": "Pra cima, e pra longe do mar. Esquece a toalha, o guarda-sol, a prancha, e principalmente os peixes. Siga as placas de rota de fuga, e suba o morro mais próximo.",
-  "tail": 0.6
+  "tail": 0.3
  },
  {
   "scene": "building",
   "voice": "narr",
   "text": "Sem morro por perto? Entre num prédio alto e resistente.",
-  "tail": 0.3
+  "tail": 0.15
  },
  {
   "scene": "elev",
   "voice": "friend",
   "text": "Bora de elevador!",
-  "tail": 0.3
+  "tail": 0.15
  },
  {
   "scene": "stairs",
   "voice": "hero",
   "text": "Nada disso, vem comigo pela escada!",
-  "tail": 0.3
+  "tail": 0.15
  },
  {
   "scene": "stairs2",
   "voice": "narr",
   "text": "Elevador, nunca: se a energia cair, você fica preso lá dentro. Suba pela escada, pelo menos até o terceiro andar.",
-  "tail": 0.8
+  "tail": 0.4
  },
  {
   "scene": "hit",
   "voice": "narr",
   "text": "E aí, ela chega. Um tsunami não quebra e volta, como uma onda normal. Ele continua avançando por minutos, invadindo ruas, e arrastando carros, árvores, e tudo o que estiver no caminho.",
-  "lead": 1.6,
-  "tail": 0.6
+  "lead": 1.3,
+  "tail": 0.3
  },
  {
   "scene": "backwash",
   "voice": "narr",
   "text": "E quando a água finalmente resolve voltar pro mar, ela volta com a mesma força, puxando tudo junto: entulho, carros, e até pedaços de casas. A água fica cheia de lixo, galhos e fios elétricos. Ou seja: nada de dar aquele mergulhinho pra ver como ficou.",
-  "tail": 0.6
+  "tail": 0.3
  },
  {
   "scene": "zap1",
   "voice": "friend",
   "text": "Desce aqui, mano, agora tá de boa!",
   "lead": 0.4,
-  "tail": 0.3
+  "tail": 0.15
  },
  {
   "scene": "zap2",
   "voice": "none",
   "text": "",
-  "min": 4.2
+  "min": 3.6
  },
  {
   "scene": "friend3",
   "voice": "friend",
   "text": "Tô bem... tô bem!",
-  "tail": 0.5
+  "tail": 0.25
  },
  {
   "scene": "safe",
   "voice": "narr",
   "text": "Viu só? Água de enchente com fio solto dá choque. Fique lá em cima: tsunamis vêm em várias ondas, e a primeira nem sempre é a maior. Só desça quando as autoridades disserem que é seguro.",
-  "tail": 1.0
+  "tail": 0.5
  },
  {
   "scene": "q1",
   "voice": "narr",
   "text": "E você? Tentaria sobreviver ao tsunami...",
-  "tail": 0.9
+  "tail": 0.45
  },
  {
   "scene": "q2",
   "voice": "narr",
   "text": "ou continuaria tomando sol e surfando?",
-  "tail": 0.6
+  "tail": 0.3
  },
  {
   "scene": "q3",
   "voice": "hero",
   "text": "Ahh... que solzinho bom.",
-  "tail": 0.3
+  "tail": 0.15
  },
  {
   "scene": "q4",
   "voice": "friend",
   "text": "Melhor ainda, só essa onda!",
-  "tail": 0.3
+  "tail": 0.15
  },
  {
   "scene": "gulp1",
   "voice": "none",
   "text": "",
-  "min": 1.8
+  "min": 1.5
  },
  {
   "scene": "ohoh",
   "voice": "hero",
   "text": "Oh-oh...",
   "lead": 0.3,
-  "tail": 0.5
+  "tail": 0.25
  },
  {
   "scene": "swallow",
   "voice": "none",
   "text": "",
-  "min": 3.8
+  "min": 3.2
  },
  {
   "scene": "end",
   "voice": "narr",
   "text": "No próximo episódio: como sobreviver a um terremoto.",
-  "min": 5.0,
+  "min": 4.2,
   "lead": 0.8,
   "nocap": true
  }
