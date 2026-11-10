@@ -5,20 +5,20 @@
   "text": "Você sobreviveria a um terremoto?",
   "min": 4.6,
   "lead": 1.0,
-  "tail": 0.8,
+  "tail": 0.56,
   "nocap": true
  },
  {
   "scene": "home",
   "voice": "narr",
-  "text": "É uma tarde tranquila. Você e o seu amigo estão em casa, jogando videogame, enquanto o cachorro que vocês resgataram no último episódio tira um cochilo no tapete.",
-  "tail": 0.6
+  "text": "É uma tarde tranquila. Você e o seu amigo estão jogando videogame, e o cachorro que vocês resgataram no último episódio cochila no tapete.",
+  "tail": 0.42
  },
  {
   "scene": "calm",
   "voice": "narr",
   "text": "Tudo tranquilo. Tranquilo até demais.",
-  "tail": 1.2
+  "tail": 0.84
  },
  {
   "scene": "shake",
@@ -36,19 +36,19 @@
   "scene": "pause",
   "voice": "narr",
   "text": "Calma. Antes, entenda o que está acontecendo.",
-  "tail": 0.6
+  "tail": 0.42
  },
  {
   "scene": "explain",
   "voice": "narr",
-  "text": "A Terra é dividida em placas gigantes, que se encaixam como um quebra-cabeça e se movem bem devagar. Às vezes, elas travam umas nas outras, e a pressão vai acumulando, até que, de uma vez só, elas se soltam. Essa energia viaja em ondas pelo chão, e é isso que faz tudo tremer.",
-  "tail": 0.6
+  "text": "A Terra é dividida em placas gigantes, como um quebra-cabeça, que se movem bem devagar. Às vezes elas travam, e a pressão vai acumulando, até que, de uma vez só, elas se soltam. Essa energia viaja em ondas pelo chão, e faz tudo tremer.",
+  "tail": 0.42
  },
  {
   "scene": "scale",
   "voice": "narr",
-  "text": "A força é medida na escala Richter. Abaixo de quatro, quase ninguém sente. Acima de sete, dá pra derrubar prédios.",
-  "tail": 0.8
+  "text": "Na escala Richter, abaixo de quatro, quase ninguém sente. Acima de sete, dá pra derrubar prédios.",
+  "tail": 0.56
  },
  {
   "scene": "run1",
@@ -59,7 +59,7 @@
  {
   "scene": "run2",
   "voice": "narr",
-  "text": "Péssima ideia. Durante o tremor, o maior perigo é o que cai lá de cima: telhas, vidros, vasos, e pedaços de prédio.",
+  "text": "Péssima ideia. Durante o tremor, o perigo é o que cai lá de cima: telhas, vidros, vasos e pedaços de prédio.",
   "tail": 0.4
  },
  {
@@ -84,14 +84,14 @@
  {
   "scene": "rule",
   "voice": "narr",
-  "text": "Regra de ouro: abaixe, proteja-se e segure. Abaixe no chão, proteja a cabeça debaixo de uma mesa firme, e segure no pé da mesa até o tremor passar. E fique longe de janelas, espelhos e estantes.",
-  "tail": 0.6
+  "text": "Regra de ouro: abaixe, proteja-se e segure. Fique embaixo de uma mesa firme, proteja a cabeça, e segure no pé da mesa até passar. E longe de janelas, espelhos e estantes.",
+  "tail": 0.42
  },
  {
   "scene": "outside",
   "voice": "narr",
-  "text": "Se você estiver na rua, vá para um lugar aberto, longe de prédios, postes e fios. E se estiver dirigindo, pare longe de pontes e viadutos, e fique dentro do carro.",
-  "tail": 0.6
+  "text": "Na rua, vá para um lugar aberto, longe de prédios, postes e fios. Dirigindo? Pare longe de pontes e viadutos, e fique no carro.",
+  "tail": 0.42
  },
  {
   "scene": "stop",
@@ -114,13 +114,13 @@
  {
   "scene": "after2",
   "voice": "narr",
-  "text": "Nem sempre. Depois do terremoto, podem vir réplicas: tremores menores, que derrubam o que já ficou frágil.",
-  "tail": 0.6
+  "text": "Nem sempre. Depois vêm as réplicas: tremores menores, que derrubam o que ficou frágil.",
+  "tail": 0.42
  },
  {
   "scene": "gas1",
   "voice": "narr",
-  "text": "E tem mais: o tremor pode soltar a mangueira do botijão, ou rachar os canos de gás da casa. O gás vaza, fica no ar, e basta uma faísca pra virar um incêndio. Por isso, muitos incêndios começam logo depois de um terremoto. Então, se sentir cheiro de gás: não acenda nada! Nem fósforo, nem isqueiro, nem interruptor. Feche o registro, abra as janelas e saia.",
+  "text": "E tem mais: o tremor pode soltar a mangueira do botijão, ou rachar os canos. O gás vaza, e basta uma faísca pra virar incêndio. Sentiu cheiro de gás? Não acenda nada! Feche o registro, abra as janelas e saia.",
   "tail": 0.3
  },
  {
@@ -134,7 +134,7 @@
   "scene": "gas3",
   "voice": "none",
   "text": "",
-  "min": 4.2
+  "min": 3.9
  },
  {
   "scene": "gas4",
@@ -145,8 +145,8 @@
  {
   "scene": "exit",
   "voice": "narr",
-  "text": "Depois, saia com calma, pela escada, nunca pelo elevador, e vá para uma área aberta, longe de prédios danificados.",
-  "tail": 0.6
+  "text": "Depois, saia com calma, pela escada, nunca de elevador, e vá para uma área aberta.",
+  "tail": 0.42
  },
  {
   "scene": "coast",
@@ -159,19 +159,19 @@
   "voice": "hero",
   "text": "Corre pro alto!",
   "lead": 0.2,
-  "tail": 0.8
+  "tail": 0.56
  },
  {
   "scene": "q1",
   "voice": "narr",
   "text": "E você? Seguiria as dicas pra sobreviver...",
-  "tail": 0.9
+  "tail": 0.63
  },
  {
   "scene": "q2",
   "voice": "narr",
   "text": "ou continuaria jogando videogame?",
-  "tail": 0.6
+  "tail": 0.42
  },
  {
   "scene": "q3",
@@ -202,13 +202,13 @@
   "scene": "crash",
   "voice": "none",
   "text": "",
-  "min": 5.6
+  "min": 5.2
  },
  {
   "scene": "end",
   "voice": "narr",
   "text": "No próximo episódio: como sobreviver a uma enchente.",
-  "min": 5.0,
+  "min": 4.6,
   "lead": 0.8,
   "nocap": true
  }
