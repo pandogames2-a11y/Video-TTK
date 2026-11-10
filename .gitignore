@@ -5,3 +5,5 @@ frames/
 *.tar.bz2
 audio/cache/
 terremoto/audio/align/
+gta6_longo/parts/
+gta6_longo/audio/*.wav
