@@ -5,7 +5,7 @@ Animações 3D com personagens grãos de café explicando como sobreviver a desa
 | Episódio | Pasta | Vídeo |
 |---|---|---|
 | 1 — Tsunami | `tsunami/` | `tsunami/tsunami_episodio1_v8.mp4` (16:9, 3:43) e `tsunami/tsunami_episodio1_tiktok.mp4` (vertical 9:16 para TikTok) |
-| 2 — Terremoto | `terremoto/` | `terremoto/terremoto_episodio2.mp4` (16:9, 3:25) e `terremoto/terremoto_episodio2_tiktok.mp4` (vertical 9:16) |
+| 2 — Terremoto | `terremoto/` | `terremoto/terremoto_episodio2.mp4` (16:9, 2:57) e `terremoto/terremoto_episodio2_tiktok.mp4` (vertical 9:16) |
 | Extra — GTA 6: 10 novidades (longo) | `gta6_longo/` | `gta6_longo/gta6_longo_repo.mp4` (16:9, 12 min, comprimido p/ caber no GitHub) + `.srt` |
 | Extra — GTA 6: 10 novidades (curto) | `gta6/` | `gta6/gta6_10_novidades.mp4` (vertical 9:16, 1:29) + `gta6/gta6_10_novidades.srt` |
 
