@@ -54,3 +54,6 @@ for i in 0 1 2 3; do node render.js video $((i*Q)) $(((i+1)*Q)) parts/p$i.mp4 & 
 printf "file 'p0.mp4'\nfile 'p1.mp4'\nfile 'p2.mp4'\nfile 'p3.mp4'\n" > parts/list.txt
 ffmpeg -f concat -i parts/list.txt -i audio/mix.wav -c:v copy -c:a aac -b:a 192k -shortest -movflags +faststart gta6_10_novidades_longo.mp4
 ```
+**Trechos de gameplay/trailer:** veja `gta6_longo/MAPA_DE_CLIPES.md` (40 espaços, tempo de cada um e diretrizes de direitos autorais).
+Salve cada trecho como `gta6_longo/clips/<id>.mp4`, rode `python3 prep_clips.py` (descarta o áudio, ajusta para 1920x1080) e renderize de novo.
+Espaços sem arquivo continuam com a animação original. A pasta `clips/` não é versionada.

@@ -528,6 +528,15 @@ window.renderFrame = t => {
   X.save(); X.translate(W / 2 + shiftX + (rs() - 0.5) * shake, H / 2 + (rs() - 0.5) * shake + (zBase - 1) * 120); X.scale(zoom, zoom); X.translate(-W / 2, -H / 2);
   SCENES[s.scene](lt, s, { pi, pt, pdur });
   X.restore();
+  const clip = CLIP_NOW; CLIP_NOW = null;
+  if (clip) { // trecho de gameplay/trailer (sem áudio) com fade, zoom lento e leve correção de cor
+    const ct = pt - clip.lead, dur = clip.n / FPS, a = Math.min(seg(ct, 0, 0.2), 1 - seg(ct, dur - 0.25, 0.25));
+    X.save(); X.globalAlpha = a; const z = 1.02 + 0.05 * (ct / dur); X.translate(W / 2, H / 2); X.scale(z, z); X.translate(-W / 2, -H / 2);
+    X.drawImage(clip.img, 0, 0, W, H); X.restore();
+    X.save(); X.globalAlpha = 0.18 * a; X.fillStyle = '#2a0a3a'; X.fillRect(0, 0, W, H); X.restore();
+    X.save(); X.globalAlpha = a; const lab = clip.src === 'gta5' ? '🎮 GTA 5 · gameplay' : '🎬 GTA 6 · imagens: Rockstar Games', w2 = tw(lab, 26, 800) + 40;
+    rr(W - 50 - w2, 80, w2, 46, 23); X.fillStyle = 'rgba(0,0,0,0.6)'; X.fill(); txt(lab, W - 50 - w2 / 2, 104, 26, '#fff', { weight: 800 }); X.restore();
+  }
   // legibilidade
   let g = X.createLinearGradient(0, 820, 0, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.5, 'rgba(0,0,0,0.55)'); g.addColorStop(1, 'rgba(0,0,0,0.75)'); X.fillStyle = g; X.fillRect(0, 820, W, 260);
   g = X.createLinearGradient(0, 0, 0, 230); g.addColorStop(0, 'rgba(0,0,0,0.6)'); g.addColorStop(1, 'rgba(0,0,0,0)'); X.fillStyle = g; X.fillRect(0, 0, W, 230);
@@ -540,10 +549,22 @@ window.renderFrame = t => {
   X.imageSmoothingEnabled = false; X.drawImage(GRAIN, 0, 0, W, H); X.imageSmoothingEnabled = true;
   const fo = seg(t, TL.total - 1.0, 1.0); if (fo > 0) { X.fillStyle = `rgba(0,0,0,${fo})`; X.fillRect(0, 0, W, H); }
 };
-window.frameJPEG = (t, q) => { window.renderFrame(t); return cv.toDataURL('image/jpeg', q); };
+// trechos prontos (clips_ready.json, gerado por prep_clips.py): quadro carregado antes de desenhar
+let CLIPS = [], CLIP_NOW = null; const IMG = new Map();
+async function clipAt(t) {
+  const s = TL.segs.find(x => t >= x.start && t < x.end); if (!s || !CLIPS.length) return null;
+  let pi = 0; for (let i = 0; i < s.parts.length; i++) if (t >= s.parts[i]) pi = i;
+  const c = CLIPS.find(c => c.seg === s.id && c.part === pi); if (!c) return null;
+  const ct = t - (pi === 0 ? s.start : s.parts[pi]) - c.lead, k = Math.floor(ct * FPS); if (k < 0 || k >= c.n) return null;
+  const url = `clips/${c.id}/f${String(k + 1).padStart(4, '0')}.jpg`;
+  let img = IMG.get(url); if (!img) { img = new Image(); img.src = url; await img.decode(); IMG.set(url, img); if (IMG.size > 90) IMG.delete(IMG.keys().next().value); }
+  return { ...c, img };
+}
+window.frameJPEG = async (t, q) => { CLIP_NOW = await clipAt(t); window.renderFrame(t); return cv.toDataURL('image/jpeg', q); };
 
 (async () => {
   TL = await (await fetch('timeline.json')).json(); SC = await (await fetch('script.json')).json(); TOTAL = TL.total;
   await document.fonts.load(`900 80px "Inter Display"`); await document.fonts.load(`80px "Noto Color Emoji"`, '🐊');
+  try { const r = await fetch('clips_ready.json'); if (r.ok) CLIPS = await r.json(); } catch (e) {}
   GRAIN = grainLayer(); buildChunks(); window.FPS = FPS; window.TOTAL = TOTAL; window.READY = true;
 })();
