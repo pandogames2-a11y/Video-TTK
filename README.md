@@ -4,7 +4,7 @@ Animações 3D com personagens grãos de café explicando como sobreviver a desa
 
 | Episódio | Pasta | Vídeo |
 |---|---|---|
-| 1 — Tsunami | `tsunami/` | `tsunami/tsunami_episodio1_v8.mp4` (16:9, 3:43) e `tsunami/tsunami_episodio1_tiktok.mp4` (vertical 9:16 para TikTok) |
+| 1 — Tsunami | `tsunami/` | `tsunami/tsunami_episodio1_curto.mp4` (16:9, 2:58) e `tsunami/tsunami_episodio1_tiktok.mp4` (vertical 9:16, 2:58); versão longa: `tsunami/tsunami_episodio1_v8.mp4` (3:43) |
 | 2 — Terremoto | `terremoto/` | `terremoto/terremoto_episodio2.mp4` (16:9, 2:57) e `terremoto/terremoto_episodio2_tiktok.mp4` (vertical 9:16) |
 
 ## Como cada episódio é feito

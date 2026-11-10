@@ -38,12 +38,14 @@ for w in W:
         chunks.append(cur); cur = []
     cur.append(w)
 if cur: chunks.append(cur)
+prev_end = 0
 for ci, ch in enumerate(chunks):
     nxt = chunks[ci + 1][0]['t0'] if ci + 1 < len(chunks) else T
     end = min(ch[-1]['t1'] + 0.35, nxt)
     quote = ch[0]['who'] != 'narr'
+    end = max(end, ch[0]['t0'] + 0.1)
     for j, w in enumerate(ch):
-        s0 = w['t0'] if j else ch[0]['t0'] - 0.04
+        s0 = w['t0'] if j else max(ch[0]['t0'] - 0.04, prev_end)
         s1 = ch[j + 1]['t0'] if j + 1 < len(ch) else end
         parts = []
         for k, x in enumerate(ch):
@@ -53,7 +55,8 @@ for ci, ch in enumerate(chunks):
             if k == j: parts.append('{\\c&H3FD2FF&\\fscx100\\fscy100\\t(0,90,\\fscx126\\fscy126)\\t(90,210,\\fscx114\\fscy114)}' + t_ + '{\\c&HFFFFFF&\\fscx100\\fscy100}')
             else: parts.append(t_)
         intro = '{\\fscx88\\fscy88\\t(0,90,\\fscx100\\fscy100)}' if j == 0 else ''
-        lines.append(f"Dialogue: 1,{ts(s0)},{ts(s1)},Cap,,0,0,0,,{{\\pos(640,618)}}{intro}{' '.join(parts)}")
+        s0 = min(s0, s1 - 0.01); lines.append(f"Dialogue: 1,{ts(s0)},{ts(s1)},Cap,,0,0,0,,{{\\pos(640,618)}}{intro}{' '.join(parts)}")
+    prev_end = end
 open('audio/wide.ass', 'w').write('\n'.join(lines) + '\n')
 subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-vf', 'ass=audio/wide.ass', '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', out], check=True)
 print('ok', out)
