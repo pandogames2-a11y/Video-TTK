@@ -1,0 +1,172 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "Você acha que GTA 6 é só um GTA 5 mais bonito? Então se prepara! Essas dez novidades vão mudar sua visão sobre o jogo. E a número oito vai te fazer pensar duas vezes antes de fugir da polícia.",
+  "hl": [
+   "GTA 6",
+   "GTA 5",
+   "dez novidades",
+   "oito",
+   "polícia"
+  ]
+ },
+ {
+  "id": "n1",
+  "scene": "n1",
+  "num": 1,
+  "title": "DUPLA JOGÁVEL",
+  "tag": "ok",
+  "text": "Número um: dupla jogável. O GTA 5 tinha três protagonistas. Agora é Jason e Lucia, um casal do crime, com a história girando em torno dos dois.",
+  "hl": [
+   "dupla",
+   "três",
+   "Jason",
+   "Lucia",
+   "casal do crime"
+  ]
+ },
+ {
+  "id": "n2",
+  "scene": "n2",
+  "num": 2,
+  "title": "CLIMA LOCALIZADO",
+  "tag": "ok",
+  "text": "Número dois: clima localizado. Segundo a Rockstar, pode cair um temporal numa parte do mapa enquanto, logo ali, faz sol. E tem furacão!",
+  "hl": [
+   "clima",
+   "temporal",
+   "sol",
+   "furacão"
+  ]
+ },
+ {
+  "id": "n3",
+  "scene": "n3",
+  "num": 3,
+  "title": "+170 ESPÉCIES",
+  "tag": "ok",
+  "text": "Número três: mais de cento e setenta espécies de animais. Jacaré, flamingo e até peixe-boi.",
+  "hl": [
+   "cento e setenta",
+   "Jacaré",
+   "flamingo",
+   "peixe-boi"
+  ]
+ },
+ {
+  "id": "n4",
+  "scene": "n4",
+  "num": 4,
+  "title": "6 REGIÕES",
+  "tag": "ok",
+  "text": "Número quatro: seis regiões em Leonida. De Vice City às praias de Leonida Keys, até o pântano de Grassrivers.",
+  "hl": [
+   "seis regiões",
+   "Vice City",
+   "Leonida Keys",
+   "Grassrivers"
+  ]
+ },
+ {
+  "id": "n5",
+  "scene": "n5",
+  "num": 5,
+  "title": "REDES SOCIAIS",
+  "tag": "trailer",
+  "text": "Número cinco: redes sociais no jogo. Nos trailers, o celular mostra vídeos virais e influenciadores. Fez besteira? Vira meme.",
+  "hl": [
+   "redes sociais",
+   "virais",
+   "influenciadores",
+   "meme"
+  ]
+ },
+ {
+  "id": "n6",
+  "scene": "n6",
+  "num": 6,
+  "title": "NPCs MAIS VIVOS",
+  "tag": "trailer",
+  "text": "Número seis: NPCs mais realistas, com corpos, estilos e animações diferentes. A rua parece viva.",
+  "hl": [
+   "NPCs",
+   "realistas",
+   "viva"
+  ]
+ },
+ {
+  "id": "mid",
+  "scene": "mid",
+  "text": "E se achou pouco, segura, porque agora o bicho pega.",
+  "hl": [
+   "segura",
+   "o bicho pega"
+  ]
+ },
+ {
+  "id": "n7",
+  "scene": "n7",
+  "num": 7,
+  "title": "PERFIL CRIMINAL",
+  "tag": "preview",
+  "text": "Número sete: perfil criminal. Nas prévias, um sistema acompanha o seu jeito de agir no crime. Mas a Rockstar ainda não explicou como ele funciona.",
+  "hl": [
+   "perfil criminal",
+   "prévias",
+   "não explicou"
+  ]
+ },
+ {
+  "id": "n8",
+  "scene": "n8",
+  "num": 8,
+  "title": "POLÍCIA ESPERTA",
+  "tag": "preview",
+  "text": "Número oito, a que eu prometi: a polícia lembra de você. Nas prévias, os policiais registram sua roupa, aparência e carro. Trocou de roupa? Fica mais difícil te achar.",
+  "hl": [
+   "polícia",
+   "roupa",
+   "aparência",
+   "carro",
+   "Trocou de roupa?"
+  ]
+ },
+ {
+  "id": "n9",
+  "scene": "n9",
+  "num": 9,
+  "title": "INVENTÁRIO FÍSICO",
+  "tag": "rumor",
+  "text": "Número nove: inventário físico. Nada de bazuca no bolso. Mas esse vem de vazamentos e prévias, então calma.",
+  "hl": [
+   "inventário físico",
+   "bazuca no bolso",
+   "vazamentos"
+  ]
+ },
+ {
+  "id": "n10",
+  "scene": "n10",
+  "num": 10,
+  "title": "CORPO QUE MUDA",
+  "tag": "ok",
+  "text": "E número dez: o corpo muda. Comer demais engorda, academia dá músculo e noite mal dormida aparece no rosto. Quem jogou San Andreas lembra!",
+  "hl": [
+   "engorda",
+   "músculo",
+   "mal dormida",
+   "San Andreas"
+  ]
+ },
+ {
+  "id": "outro",
+  "scene": "outro",
+  "text": "E essas são apenas dez das novidades que fazem GTA 6 parecer um salto gigantesco em relação ao seu antecessor. Mas agora eu quero saber: qual dessas novidades você mais está ansioso para experimentar? Comenta aí!",
+  "hl": [
+   "salto gigantesco",
+   "qual",
+   "Comenta aí!"
+  ]
+ }
+]
