@@ -1,0 +1,130 @@
+[
+ {
+  "id": "i1",
+  "seg": "intro",
+  "part": 1,
+  "src": "gta6",
+  "n": 63,
+  "lead": 0.15
+ },
+ {
+  "id": "i3",
+  "seg": "intro",
+  "part": 3,
+  "src": "gta6",
+  "n": 75,
+  "lead": 0.15
+ },
+ {
+  "id": "c1",
+  "seg": "ctx",
+  "part": 1,
+  "src": "gta6",
+  "n": 72,
+  "lead": 0.15
+ },
+ {
+  "id": "c2",
+  "seg": "ctx",
+  "part": 2,
+  "src": "gta6",
+  "n": 81,
+  "lead": 0.15
+ },
+ {
+  "id": "a2",
+  "seg": "n1",
+  "part": 2,
+  "src": "gta6",
+  "n": 56,
+  "lead": 0.15
+ },
+ {
+  "id": "a4",
+  "seg": "n1",
+  "part": 4,
+  "src": "gta6",
+  "n": 64,
+  "lead": 0.15
+ },
+ {
+  "id": "a5",
+  "seg": "n1",
+  "part": 5,
+  "src": "gta6",
+  "n": 43,
+  "lead": 0.15
+ },
+ {
+  "id": "d4",
+  "seg": "n3",
+  "part": 4,
+  "src": "gta6",
+  "n": 40,
+  "lead": 0.15
+ },
+ {
+  "id": "e2",
+  "seg": "n4",
+  "part": 2,
+  "src": "gta6",
+  "n": 72,
+  "lead": 0.15
+ },
+ {
+  "id": "e3",
+  "seg": "n4",
+  "part": 3,
+  "src": "gta6",
+  "n": 88,
+  "lead": 0.15
+ },
+ {
+  "id": "e4",
+  "seg": "n4",
+  "part": 4,
+  "src": "gta6",
+  "n": 45,
+  "lead": 0.15
+ },
+ {
+  "id": "g3",
+  "seg": "n6",
+  "part": 3,
+  "src": "gta6",
+  "n": 57,
+  "lead": 0.15
+ },
+ {
+  "id": "j3",
+  "seg": "n8",
+  "part": 3,
+  "src": "gta6",
+  "n": 85,
+  "lead": 0.15
+ },
+ {
+  "id": "l1",
+  "seg": "n10",
+  "part": 1,
+  "src": "gta6",
+  "n": 84,
+  "lead": 0.15
+ },
+ {
+  "id": "m2",
+  "seg": "bonus",
+  "part": 2,
+  "src": "gta6",
+  "n": 75,
+  "lead": 0.15
+ },
+ {
+  "id": "o0",
+  "seg": "outro",
+  "part": 0,
+  "src": "gta6",
+  "n": 88,
+  "lead": 0.15
+ }
+]
