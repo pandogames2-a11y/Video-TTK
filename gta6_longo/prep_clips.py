@@ -34,12 +34,13 @@ for s in SLOTS:
     dur = round(min(s['max'], b - a - LEAD - 0.35), 2)
     rows.append(s | dict(t0=a + LEAD, dur=dur))
     files = [f for e in ('mp4', 'mov', 'mkv', 'webm', 'avi', 'm4v') for f in glob.glob(f'clips/{s["id"]}.{e}')]
+    if s.get('arquivo') and os.path.exists(s['arquivo']): files = [s['arquivo']]   # trecho de um arquivo maior (ex.: o trailer)
     if not files: continue
-    f = files[0]; ini = float(s.get('inicio', 0)); dur = round(min(dur, probe(f) - ini), 2)
+    f = files[0]; ini = float(s.get('inicio', 0)); dur = round(min(dur, s.get('dur', 99), probe(f) - ini), 2)
     if dur < 1.0: print('curto demais, ignorado:', f); continue
     out = f'clips/{s["id"]}'; shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
     subprocess.run(['ffmpeg', '-loglevel', 'error', '-ss', str(ini), '-t', str(dur), '-i', f, '-an',
-                    '-vf', f'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps={FPS}', '-q:v', '3', f'{out}/f%04d.jpg'], check=True)
+                    '-vf', ('crop=iw*0.86:ih*0.86:iw*0.07:0,' if s.get('crop_legenda') else '') + f'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps={FPS}', '-q:v', '3', f'{out}/f%04d.jpg'], check=True)
     n = len(glob.glob(f'{out}/f*.jpg'))
     ready.append(dict(id=s['id'], seg=s['seg'], part=s['part'], src=s['src'], n=n, lead=LEAD))
     print(f'{s["id"]}: {n} quadros ({n / FPS:.1f} s) de {f}')

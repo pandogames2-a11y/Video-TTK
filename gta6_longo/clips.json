@@ -6,7 +6,11 @@
   "src": "gta6",
   "desc": "Trailer 1 ou 2: tomada aérea de Vice City / praia",
   "max": 5,
-  "inicio": 0
+  "inicio": 25.0,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 2.1,
+  "crop_legenda": false,
+  "cena": "skyline de Vice City + Jason e Lucia no conversível"
  },
  {
   "id": "i3",
@@ -15,7 +19,11 @@
   "src": "gta6",
   "desc": "Extended Look: perseguição policial",
   "max": 5,
-  "inicio": 0
+  "inicio": 59.9,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 2.5,
+  "crop_legenda": false,
+  "cena": "tiroteio em perseguição noturna"
  },
  {
   "id": "c0",
@@ -33,7 +41,11 @@
   "src": "gta6",
   "desc": "Trailer 1: qualquer tomada de abertura",
   "max": 5,
-  "inicio": 0
+  "inicio": 18.0,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 2.4,
+  "crop_legenda": false,
+  "cena": "turma no lowrider verde"
  },
  {
   "id": "c2",
@@ -42,7 +54,11 @@
   "src": "gta6",
   "desc": "Trailer 2: qualquer tomada (SEM o áudio do trailer)",
   "max": 4,
-  "inicio": 0
+  "inicio": 33.0,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 2.7,
+  "crop_legenda": false,
+  "cena": "assalto ao cofre"
  },
  {
   "id": "c4",
@@ -69,7 +85,11 @@
   "src": "gta6",
   "desc": "Trailer: Jason e Lucia juntos na mesma cena",
   "max": 5,
-  "inicio": 0
+  "inicio": 39.8,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 1.85,
+  "crop_legenda": false,
+  "cena": "Jason e Lucia encostados no carro vermelho"
  },
  {
   "id": "a3",
@@ -87,7 +107,24 @@
   "src": "gta6",
   "desc": "Extended Look: a troca entre Jason e Lucia",
   "max": 6,
-  "inicio": 0
+  "inicio": 70.95,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 2.1,
+  "crop_legenda": false,
+  "cena": "Jason no rifle e Lucia atirando"
+ },
+ {
+  "id": "a5",
+  "seg": "n1",
+  "part": 5,
+  "src": "gta6",
+  "desc": "Trailer: Jason e Lucia abraçados (casal)",
+  "max": 4,
+  "inicio": 66.45,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 1.4,
+  "crop_legenda": true,
+  "cena": "Jason e Lucia abraçados ao pôr do sol"
  },
  {
   "id": "b1",
@@ -141,7 +178,11 @@
   "src": "gta6",
   "desc": "Trailer/imagens oficiais: outra cena com animais",
   "max": 4,
-  "inicio": 0
+  "inicio": 20.55,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 1.3,
+  "crop_legenda": false,
+  "cena": "iguana verde (espécie invasora)"
  },
  {
   "id": "e1",
@@ -159,7 +200,11 @@
   "src": "gta6",
   "desc": "Trailer: Vice City à noite, neon",
   "max": 5,
-  "inicio": 0
+  "inicio": 52.0,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 2.4,
+  "crop_legenda": false,
+  "cena": "Vice City à noite vista de um terraço"
  },
  {
   "id": "e3",
@@ -168,7 +213,11 @@
   "src": "gta6",
   "desc": "Trailer: ilhas e água azul (Keys)",
   "max": 4,
-  "inicio": 0
+  "inicio": 2.05,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 2.9,
+  "crop_legenda": true,
+  "cena": "placa \"The Keys\" e marina"
  },
  {
   "id": "e4",
@@ -177,7 +226,11 @@
   "src": "gta6",
   "desc": "Trailer: pântano / canais (Grassrivers)",
   "max": 4,
-  "inicio": 0
+  "inicio": 27.2,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 1.5,
+  "crop_legenda": false,
+  "cena": "pântano ao pôr do sol"
  },
  {
   "id": "e5",
@@ -240,7 +293,11 @@
   "src": "gta6",
   "desc": "Trailer: praia, festa ou multidão",
   "max": 6,
-  "inicio": 0
+  "inicio": 54.55,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 1.85,
+  "crop_legenda": false,
+  "cena": "praia lotada com avião de propaganda"
  },
  {
   "id": "g4",
@@ -285,7 +342,11 @@
   "src": "gta6",
   "desc": "Extended Look: polícia procurando/identificando o personagem",
   "max": 6,
-  "inicio": 0
+  "inicio": 46.35,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 2.8,
+  "crop_legenda": false,
+  "cena": "carro vermelho derrapando ao lado da viatura"
  },
  {
   "id": "j6",
@@ -321,7 +382,11 @@
   "src": "gta6",
   "desc": "Extended Look: personagem comendo ou na academia",
   "max": 5,
-  "inicio": 0
+  "inicio": 56.45,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 2.75,
+  "crop_legenda": false,
+  "cena": "academia e personagem comendo no sofá"
  },
  {
   "id": "l2",
@@ -348,7 +413,11 @@
   "src": "gta6",
   "desc": "Extended Look: barco, jet ski, corrida ou basquete",
   "max": 6,
-  "inicio": 0
+  "inicio": 48.0,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 2.5,
+  "crop_legenda": false,
+  "cena": "manobra de moto entre prédios"
  },
  {
   "id": "o0",
@@ -357,6 +426,10 @@
   "src": "gta6",
   "desc": "Trailer: tomada final épica",
   "max": 6,
-  "inicio": 0
+  "inicio": 67.95,
+  "arquivo": "clips/fonte/trailer_lancamento.mp4",
+  "dur": 2.9,
+  "crop_legenda": false,
+  "cena": "queda pela janela e cidade à noite"
  }
 ]

@@ -33,6 +33,7 @@ Nada disso garante que o vídeo não receba reivindicação, mas reduz muito o r
 | `a2` | 02:03.6 | 5.0 s | GTA 6 | Trailer: Jason e Lucia juntos na mesma cena | No GTA 6, a história gira em torno de dois personagens: Jason Duval e Lucia Caminos. E os … |
 | `a3` | 02:10.9 | 5.0 s | GTA 6 | Trailer 1: Lucia na penitenciária (abertura do trailer) | Segundo a Rockstar, o Jason cresceu cercado de golpistas, passou pelo exército e foi parar… |
 | `a4` | 02:23.0 | 6.0 s | GTA 6 | Extended Look: a troca entre Jason e Lucia | E no gameplay mostrado em agosto dá pra trocar entre os dois na hora, no meio da ação. Enq… |
+| `a5` | 02:31.7 | 4.0 s | GTA 6 | Trailer: Jason e Lucia abraçados (casal) | Ou seja, em vez de três histórias paralelas, agora é um casal dividindo cada assalto, bem … |
 | `b1` | 02:46.6 | 5.0 s | GTA 5 | Sua gameplay: chuva em Los Santos | No GTA 5, quando o tempo mudava, ele mudava praticamente para o mapa inteiro de uma vez. |
 | `b2` | 02:52.4 | 5.0 s | GTA 6 | Trailer/gameplay: céu com nuvens carregadas ou chuva, se aparecer | No GTA 6, segundo a Rockstar, o clima é localizado. Você pode estar debaixo de um céu limp… |
 | `b5` | 03:13.9 | 5.0 s | GTA 6 | Trailer/gameplay: tempestade ou vento forte, se aparecer | E tem mais: tempestades tropicais e furacões, com chuva pesada, vento forte, raios e trovõ… |
@@ -64,4 +65,4 @@ Nada disso garante que o vídeo não receba reivindicação, mas reduz muito o r
 | `m2` | 10:21.0 | 6.0 s | GTA 6 | Extended Look: barco, jet ski, corrida ou basquete | E no resumo de atividades apareceram barco, jet ski, corridas, academia e até basquete. |
 | `o0` | 11:44.1 | 6.0 s | GTA 6 | Trailer: tomada final épica | E essas são apenas dez das novidades que fazem GTA 6 parecer um salto gigantesco em relaçã… |
 
-Total: 40 trechos, 200 s de no máximo 721 s de vídeo (28%). O resto continua sendo animação e comentário originais.
+Total: 41 trechos, 204 s de no máximo 721 s de vídeo (28%). O resto continua sendo animação e comentário originais.
