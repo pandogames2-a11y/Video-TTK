@@ -1,0 +1,196 @@
+[
+ {
+  "scene": "title",
+  "voice": "narr",
+  "text": "Você sobreviveria a uma enchente?",
+  "min": 4.6,
+  "lead": 1.0,
+  "tail": 0.56,
+  "nocap": true
+ },
+ {
+  "scene": "home",
+  "voice": "narr",
+  "text": "É uma tarde de chuva. Você e o seu amigo estão vendo um filme com pipoca, e o cachorro cochila no tapete.",
+  "tail": 0.42
+ },
+ {
+  "scene": "calm",
+  "voice": "narr",
+  "text": "Tudo tranquilo. Tranquilo até demais.",
+  "tail": 0.84
+ },
+ {
+  "scene": "rain",
+  "voice": "narr",
+  "text": "Até que, de repente, a chuva aperta. A rua vira um rio, e a água começa a entrar por baixo da porta.",
+  "tail": 0.5
+ },
+ {
+  "scene": "friend1",
+  "voice": "friend",
+  "text": "Mano, a casa tá enchendo! E agora? O que a gente faz?!",
+  "tail": 0.5
+ },
+ {
+  "scene": "pause",
+  "voice": "narr",
+  "text": "Calma. Antes, entenda o que está acontecendo.",
+  "tail": 0.42
+ },
+ {
+  "scene": "explain",
+  "voice": "narr",
+  "text": "Quando chove muito em pouco tempo, o chão não dá conta de absorver tanta água. Na cidade, o asfalto não deixa a água entrar, e o lixo entope os bueiros. Sem ter pra onde ir, os rios transbordam, e a água invade ruas e casas.",
+  "tail": 0.42
+ },
+ {
+  "scene": "depth",
+  "voice": "narr",
+  "text": "E não se engane: só quinze centímetros de água correndo já derrubam uma pessoa.",
+  "tail": 0.5
+ },
+ {
+  "scene": "car1",
+  "voice": "friend",
+  "text": "Já sei! Bora fugir de carro!",
+  "tail": 0.4
+ },
+ {
+  "scene": "car2",
+  "voice": "narr",
+  "text": "Péssima ideia. Meio metro de correnteza já faz um carro boiar, e ser arrastado com você dentro.",
+  "tail": 0.4
+ },
+ {
+  "scene": "carfloat",
+  "voice": "none",
+  "text": "",
+  "min": 3.4
+ },
+ {
+  "scene": "replay",
+  "voice": "none",
+  "text": "",
+  "min": 2.4
+ },
+ {
+  "scene": "idea",
+  "voice": "hero",
+  "text": "Tenho uma ideia melhor. Vem comigo!",
+  "lead": 0.5,
+  "tail": 0.4
+ },
+ {
+  "scene": "rule",
+  "voice": "narr",
+  "text": "Regra de ouro: desligue, suba e não atravesse. Desligue a energia no quadro de luz, porque a água chega nas tomadas. Suba para o lugar mais alto. E nunca atravesse a correnteza.",
+  "tail": 0.42
+ },
+ {
+  "scene": "kit",
+  "voice": "narr",
+  "text": "Se der tempo, leve o kit de emergência: documentos num saco plástico, lanterna, água e remédios.",
+  "tail": 0.42
+ },
+ {
+  "scene": "outside",
+  "voice": "narr",
+  "text": "Na rua, procure um lugar alto, longe de rios e córregos. E nunca entre em túneis ou passagens subterrâneas: eles enchem primeiro.",
+  "tail": 0.42
+ },
+ {
+  "scene": "hidden",
+  "voice": "narr",
+  "text": "E tem um perigo escondido. A força da água pode arrancar a tampa do bueiro, e a água barrenta esconde o buraco.",
+  "tail": 0.3
+ },
+ {
+  "scene": "gag1",
+  "voice": "friend",
+  "text": "Minha prancha! Relaxa, aqui é rasinho!",
+  "lead": 0.3,
+  "tail": 0.3
+ },
+ {
+  "scene": "gag2",
+  "voice": "none",
+  "text": "",
+  "min": 3.9
+ },
+ {
+  "scene": "gag3",
+  "voice": "friend",
+  "text": "Tô bem... tô bem!",
+  "tail": 0.5
+ },
+ {
+  "scene": "germs",
+  "voice": "narr",
+  "text": "E essa água vem cheia de esgoto e xixi de rato, que transmite leptospirose. Encostou nela? Lave bem com água e sabão.",
+  "tail": 0.42
+ },
+ {
+  "scene": "wait",
+  "voice": "narr",
+  "text": "Ficou ilhado? Ligue cento e noventa e três, dos bombeiros, ou cento e noventa e nove, da Defesa Civil. Espere num lugar alto, e só volte pra casa quando as autoridades liberarem.",
+  "tail": 0.3
+ },
+ {
+  "scene": "wire",
+  "voice": "narr",
+  "text": "E lembra do episódio um? Água de enchente com fio solto dá choque.",
+  "tail": 0.5
+ },
+ {
+  "scene": "q1",
+  "voice": "narr",
+  "text": "E você? Seguiria as dicas pra sobreviver...",
+  "tail": 0.63
+ },
+ {
+  "scene": "q2",
+  "voice": "narr",
+  "text": "ou continuaria vendo filme no sofá?",
+  "tail": 0.42
+ },
+ {
+  "scene": "q3",
+  "voice": "friend",
+  "text": "Relaxa, é só uma chuvinha!",
+  "tail": 0.3
+ },
+ {
+  "scene": "q4",
+  "voice": "hero",
+  "text": "Passa a pipoca.",
+  "tail": 0.3
+ },
+ {
+  "scene": "rise",
+  "voice": "none",
+  "text": "",
+  "min": 1.8
+ },
+ {
+  "scene": "ohoh",
+  "voice": "hero",
+  "text": "Oh-oh...",
+  "lead": 0.3,
+  "tail": 0.4
+ },
+ {
+  "scene": "float",
+  "voice": "none",
+  "text": "",
+  "min": 5.4
+ },
+ {
+  "scene": "end",
+  "voice": "narr",
+  "text": "No próximo episódio: como sobreviver a um incêndio.",
+  "min": 4.6,
+  "lead": 0.8,
+  "nocap": true
+ }
+]

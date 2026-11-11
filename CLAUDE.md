@@ -1,13 +1,13 @@
 # Guia de Sobrevivência — série de animação 3D (canal do usuário)
 
 Série de vídeos curtos em 3D, em **português do Brasil**, com personagens grãos de café ensinando a sobreviver a desastres, com humor.
-Episódios prontos: **EP1 Tsunami** (`tsunami/`) e **EP2 Terremoto** (`terremoto/`). O final do EP2 anuncia o **EP3: Enchente**.
+Episódios prontos: **EP1 Tsunami** (`tsunami/`) e **EP2 Terremoto** (`terremoto/`). **EP3 Enchente** (`enchente/`) está em produção: roteiro, cena 3D e storyboard prontos com voz provisória (Piper); falta gerar as vozes do ElevenLabs e renderizar. O final do EP3 anuncia o **EP4: Incêndio**.
 
 ## Como trabalhar com o usuário
 - Fale sempre em português do Brasil, simples e direto: o usuário não é técnico. Explique o que mudou no vídeo, não o código.
 - O usuário autorizou seguir sem pedir confirmação para tudo que faça parte da criação que ele pediu (renderizar, gerar áudio, commit/push no repositório).
 - Entregue os vídeos com a ferramenta de envio de arquivos e sempre faça commit + push no `main` do repositório `pandogames2-a11y/Video-TTK` (um hook bloqueia o fim do turno se houver mudanças sem commit).
-- Para o usuário apontar mudanças, monte um **storyboard** (um quadro por frase, com tempo, fala e campo de anotação) como Artifact. O do EP1 está em https://claude.ai/artifact/86bnEuyQsrzzPWyDPmLcRh
+- Para o usuário apontar mudanças, monte um **storyboard** (um quadro por frase, com tempo, fala e campo de anotação) como Artifact. O do EP1 está em https://claude.ai/artifact/86bnEuyQsrzzPWyDPmLcRh e o do EP3 em https://claude.ai/artifact/S1hkucLQC37kCHcS6UzYkH
 - Renderizações demoram ~30–40 min; avise o progresso de forma curta.
 
 ## O que o usuário gosta (aprendido nas revisões)
@@ -65,6 +65,10 @@ python3 make_vertical.py limpo.mp4 <ep>_tiktok.mp4
 python3 make_wide.py limpo_com_titulo.mp4 <ep>.mp4
 ```
 Quadros: 1280×720, 30 fps. Use o scratchpad para quadros e arquivos temporários.
+
+## EP3 Enchente — notas
+- Cenário: casa térrea (set em `AO`, com sofá que boia, quadro de luz, tomada, janela com a rua desenhada em tempo real), rua alagada (`floodMesh`, nível em `floodD(t)`), bueiro na frente do prédio (`MAN`, tampa que salta + redemoinho), escada do prédio (`IO`) com o térreo alagado, telhado do prédio (`ROOF()`/`bw()` convertem coordenadas locais do prédio), chuva em 3D (`updateRain`) e relâmpagos (`bolt`).
+- Áudio provisório: `python3 build_audio.py` (Piper) + `align_local.py`. Os .wav provisórios não vão para o git. Para a versão final: `TTS=eleven TIGHT=1 python3 build_audio.py` (≈1.950 caracteres de crédito), `align_local.py` ou `align_words.py`, quadros de teste, render.
 
 ## Como funciona o `scene.js` (para criar o próximo episódio)
 - Comece copiando `terremoto/` (mar calmo, sem tsunami; já tem apartamento, escada e praia).
