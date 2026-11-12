@@ -585,7 +585,7 @@ window.renderFrame = t => {
   let g = X.createLinearGradient(0, 860, 0, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,0.65)'); X.fillStyle = g; X.fillRect(0, 860, W, 220);
   if (sc.num) { g = X.createLinearGradient(0, 0, 0, 180); g.addColorStop(0, 'rgba(0,0,0,0.5)'); g.addColorStop(1, 'rgba(0,0,0,0)'); X.fillStyle = g; X.fillRect(0, 0, W, 180); }
   if (bars > 0) { const bh = 96 * eio(bars); X.fillStyle = '#000'; X.fillRect(0, 0, W, bh); X.fillRect(0, H - bh, W, bh);
-    X.save(); X.globalAlpha = bars; const lab = clip.src === 'gta5' ? 'GTA 5 · gameplay' : 'GTA 6 · imagens: Rockstar Games'; txt(lab, W - 40, bh / 2 + 4, 22, 'rgba(255,255,255,0.75)', { weight: 700, align: 'right' }); X.restore(); }
+    X.save(); X.globalAlpha = bars; const lab = clip.src === 'gta5' ? `GTA 5 · gameplay${clip.cred ? ': ' + clip.cred : ''}` : 'GTA 6 · imagens: Rockstar Games'; txt(lab, W - 40, bh / 2 + 4, 22, 'rgba(255,255,255,0.75)', { weight: 700, align: 'right' }); X.restore(); }
   if (c) { if (clip && c.k !== 'cta' && c.k !== 'recap') miniCard(c, pt, pdur); else card(c, pt, pdur, side, s); }
   if (bars < 0.5) header(s, lt); slam(s, lt); captions(t);
   // flash curto só na virada de novidade

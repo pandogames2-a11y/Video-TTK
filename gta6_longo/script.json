@@ -83,7 +83,12 @@
      "a": "TUDO NO BOLSO",
      "b": "a roda mágica do GTA 5"
     },
-    "v": "roda"
+    "v": "roda",
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_nocopyright.mp4",
+     "inicio": 88.8,
+     "dur": 4.5
+    }
    },
    {
     "t": "O Michael saía de terno, sem mochila nenhuma, e tirava uma bazuca do nada. E ninguém nunca questionou.",
@@ -92,7 +97,12 @@
      "a": "🚀 DE ONDE SAIU ISSO?",
      "b": "o mistério que todo mundo aceitou"
     },
-    "v": "bolso"
+    "v": "bolso",
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_freetouse.mp4",
+     "inicio": 404.5,
+     "dur": 5.0
+    }
    },
    {
     "t": "No GTA 6, a ideia é outra. Pelo vazamento de 2022 e pelas prévias, as armas grandes ficam numa bolsa ou no porta-malas do carro.",
@@ -292,7 +302,12 @@
      "as": "força e fôlego",
      "bs": "peso, músculo, cansaço"
     },
-    "v": "parado"
+    "v": "parado",
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_nocopyright.mp4",
+     "inicio": 255.0,
+     "dur": 5.0
+    }
    },
    {
     "t": "No GTA 6, a Rockstar confirmou: comeu demais, o Jason e a Lucia engordam. Foi pra academia, ganham músculo. Passou a noite em claro? Aparece na cara.",
@@ -462,7 +477,12 @@
      "a": "🐕 CHOP E POUCOS AMIGOS",
      "b": "a fauna tímida do GTA 5"
     },
-    "v": "fauna"
+    "v": "fauna",
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_nocopyright.mp4",
+     "inicio": 228.5,
+     "dur": 5.0
+    }
    },
    {
     "t": "No GTA 6 são mais de cento e setenta espécies, entre terra, ar e mar. Dezenas de aves, mamíferos, peixes e répteis.",
@@ -554,7 +574,12 @@
      "as": "Lifeinvader",
      "bs": "feed de vídeos"
     },
-    "v": "gta5"
+    "v": "gta5",
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_nocopyright.mp4",
+     "inicio": 336.3,
+     "dur": 4.5
+    }
    },
    {
     "t": "Nos trailers do GTA 6, o celular é cheio de vídeos verticais: gente fazendo besteira, dancinha, influenciador e briga na rua.",
@@ -627,7 +652,12 @@
      "as": "o mesmo pedestre",
      "bs": "cada um diferente"
     },
-    "v": "iguais"
+    "v": "iguais",
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_nocopyright.mp4",
+     "inicio": 2181.0,
+     "dur": 5.0
+    }
    },
    {
     "t": "No GTA 6, os NPCs variam em altura, corpo, pele, sardas, pintas e até tatuagens.",
@@ -743,7 +773,12 @@
      "a": "😇 CIDADÃO EXEMPLAR",
      "b": "2 minutos depois do caos"
     },
-    "v": ""
+    "v": "",
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_freetouse.mp4",
+     "inicio": 441.0,
+     "dur": 5.0
+    }
    },
    {
     "t": "Nas coberturas do gameplay de agosto, a imprensa notou um indicador que parece acompanhar o seu estilo: se você é discreto ou se sai atirando em tudo.",
@@ -819,9 +854,9 @@
     },
     "v": "",
     "clip": {
-     "arquivo": "clips/fonte/gta5_trevor.mp4",
-     "inicio": 11.5,
-     "dur": 5.5
+     "arquivo": "clips/fonte/drive/gta5_nocopyright.mp4",
+     "inicio": 2636.0,
+     "dur": 5.0
     }
    },
    {
@@ -925,7 +960,12 @@
       "🎨 pinta o carro"
      ]
     },
-    "v": "gta5"
+    "v": "gta5",
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_freetouse.mp4",
+     "inicio": 261.0,
+     "dur": 5.0
+    }
    },
    {
     "t": "No GTA 6, o nível máximo de procurado sobe de cinco para seis estrelas.",
