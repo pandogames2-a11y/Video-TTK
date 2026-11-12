@@ -1817,7 +1817,7 @@ function overlay(t, g) {
     if (t < W_CERTO - 0.2) { const [x, y] = proj(AP(0.9, 0.34, -3.47)); pointer(x - 20, y - 20, -2.4, 'TOMADA', g.start + 0.2, t); const wch = wordAt('tomadas', g.start) - 0.2; if (t > wch) { bolts(x, y, t, 130); if (Math.floor(t * 15) % 3 === 0) { ui.fillStyle = 'rgba(180,220,255,0.18)'; ui.fillRect(0, 0, W, H); } } }
     else if (t < W_ENERGIA + 0.5) { const [x, y] = proj(AP(4.5, 1.35, 1.3)); pointer(x - 10, y, Math.PI * 0.15, 'QUADRO DE LUZ', W_CERTO, t); }
   }
-  if (n === 'car2' && t > W_BOIAR) { const [x, y] = proj(myCar.position.clone().add(V(0, 1.4, 0))); pointer(x, y, Math.PI * 0.7, '50 cm DE CORRENTEZA = CARRO BOIA', W_BOIAR, t); }
+  if (n === 'car2' && t > W_BOIAR) { const [x, y] = proj(myCar.position.clone().add(V(0, 1.4, 0))); pointer(x, y, Math.PI * 0.7, '', W_BOIAR, t); label('50 cm DE CORRENTEZA = CARRO BOIA', 880, 140, 36, ss(W_BOIAR, W_BOIAR + 0.3, t), '#ffd23f'); }
   if (n === 'stayrise') upArrows(lt, 1020, '');
   if (n === 'high' && t < W_TELHADO - 0.2) upArrows(lt, 1020, 'PRO ALTO!');
   if (n === 'gag1b' && t > W_BUEIROS + 1.2) { const [x, y] = proj(V(MAN.x, ROAD.y + 0.5, MAN.z)); pointer(x, y, Math.PI / 2, 'BUEIRO ABERTO!', W_BUEIROS + 1.2, t, '#ff6b5a'); }
@@ -1868,15 +1868,18 @@ function overlay(t, g) {
     if (k > 0.9) { const [x, y] = headOnScreen(friend, 0.1); for (let i = 0; i < 6; i++) { const life = (lt * 0.9 + i / 6) % 1; ui.save(); ui.globalAlpha = 0.85 * (1 - life); ui.strokeStyle = '#fff'; ui.lineWidth = 3; ui.fillStyle = 'rgba(200,230,255,0.45)'; ui.beginPath(); ui.arc(x - 60 + i * 26, y - life * 120, 7 + (i % 3) * 4, 0, Math.PI * 2); ui.fill(); ui.stroke(); ui.restore(); } if (k > 1.6) label('blub... blub...', 760, 170, 48, ss(1.6, 2.0, k), '#ffffff'); }
   }
   if (n === 'end') {
-    const a = ss(0.6, 1.2, lt);
-    ui.save(); ui.globalAlpha = a; ui.textAlign = 'center'; ui.textBaseline = 'middle';
-    ui.fillStyle = 'rgba(10,20,40,0.6)'; rr(340, 50, 600, 210, 30); ui.fill();
-    outlined('PRÓXIMO EPISÓDIO', 640, 100, 34, '#ffffff', '#0a1428', 800, 0.15);
-    ui.translate(640, 185); const s = pop(lt - 1.0, 0.4); ui.scale(s, s); ui.rotate(-0.03 + (lt > 1 ? Math.sin(lt * 20) * 0.01 : 0));
-    outlined('INCÊNDIO', 0, 0, 96, '#ff8a2a', '#0a1428', 900, 0.16); ui.restore();
+    // ask the viewer to comment: "sobrevivi" or "não consegui"
+    const w1 = wordAt('sobrevivi', wordAt('comente', g.start) + 0.1), w2 = wordAt('não', w1 + 0.1);
+    const bubble = (x, y, txt, col, at, ic) => { const a = ss(at - 0.2, at + 0.15, t); if (a <= 0) return; ui.save(); ui.globalAlpha = a; ui.translate(x, y); const s2 = pop(t - at + 0.2, 0.3); ui.scale(s2, s2); ui.rotate(Math.sin((t - at) * 3) * 0.03);
+      ui.font = '900 46px "Inter Display"'; const tw = ui.measureText(txt).width + 130; ui.fillStyle = '#ffffff'; rr(-tw / 2, -50, tw, 100, 30); ui.fill(); ui.beginPath(); ui.moveTo(-tw / 2 + 40, 44); ui.lineTo(-tw / 2 + 30, 82); ui.lineTo(-tw / 2 + 80, 48); ui.fill();
+      ui.lineWidth = 6; ui.strokeStyle = col; rr(-tw / 2, -50, tw, 100, 30); ui.stroke();
+      ui.fillStyle = col; ui.beginPath(); ui.arc(-tw / 2 + 55, 0, 30, 0, Math.PI * 2); ui.fill(); ui.textAlign = 'center'; ui.textBaseline = 'middle'; outlined(ic, -tw / 2 + 55, 3, 36, '#ffffff', col, 900, 0.05);
+      ui.textAlign = 'left'; ui.fillStyle = '#1b1b1b'; ui.fillText(txt, -tw / 2 + 100, 4); ui.restore(); };
+    ui.save(); ui.globalAlpha = ss(0.2, 0.6, lt); ui.textAlign = 'center'; ui.textBaseline = 'middle'; outlined('COMENTE AÍ!', 640, 90, 54, '#ffd23f', '#0a1428', 900, 0.18); ui.restore();
+    bubble(420, 250, 'SOBREVIVI', '#1e9e57', w1, '✓');
+    bubble(860, 400, 'NÃO CONSEGUI', '#c62828', w2, '✗');
   }
-  planCard(t, n); redX(t); stamp(t); confetti(t);
-  if (n !== 'title' && n !== 'end' && !NOCAP) caption(t);
+  if (n !== 'title' && !NOCAP) caption(t);
   const b = bolt(t); if (b > 0 && !['explain', 'depth'].includes(n)) { ui.fillStyle = `rgba(235,240,255,${0.35 * b})`; ui.fillRect(0, 0, W, H); }
   if (flash > 0) { ui.fillStyle = `rgba(255,255,255,${flash})`; ui.fillRect(0, 0, W, H); }
   if (t < 0.5) { ui.fillStyle = `rgba(0,0,0,${1 - t / 0.5})`; ui.fillRect(0, 0, W, H); }

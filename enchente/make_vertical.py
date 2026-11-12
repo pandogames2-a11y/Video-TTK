@@ -33,7 +33,7 @@ end_start = [g for g in d['segs'] if g['scene'] == 'end'][0]['start']
 lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Small,,0,0,0,,{{\\pos(540,200)}}GUIA DE SOBREVIVÊNCIA • EP. 3')
 lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,262)}}VOCÊ SOBREVIVERIA')
 lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,375)\\fs108\\c&H2A8AFF&}}A UMA ENCHENTE?')
-lines.append(f'Dialogue: 0,{ts(end_start)},{ts(T)},Small,,0,0,0,,{{\\pos(540,1540)\\c&H2A8AFF&}}SEGUE PRA VER O EP. 4: INCÊNDIO')
+lines.append(f'Dialogue: 0,{ts(end_start)},{ts(T)},Small,,0,0,0,,{{\\pos(540,1540)\\c&H2A8AFF&}}COMENTE: SOBREVIVI OU NÃO CONSEGUI?')
 # karaoke captions: short chunks; the word being spoken turns yellow and pops
 W = json.load(open('audio/words.json'))
 chunks, cur = [], []
