@@ -501,7 +501,7 @@ function slam(s, lt) {
 }
 // cartão compacto (lower third) para quando há gameplay em tela cheia
 function miniCard(c, pt, dur) {
-  const lab = c.k === 'vs' ? `${c.a}  →  ${c.b}` : c.k === 'stat' ? `${c.n} ${c.l}` : c.k === 'reg' ? REG[c.i][0] : c.k === 'list' ? c.h : c.k === 'im' ? `IMAGINA: ${c.a}` : c.k === 'sub' ? 'DEIXA O LIKE 👍' : c.k === 'cta' ? 'COMENTA AÍ 👇' : c.k === 'recap' ? '' : c.a;
+  const lab = c.k === 'vs' ? `${c.a}  →  ${c.b}` : c.k === 'stat' ? `${c.n} ${c.l}` : c.k === 'reg' ? REG[c.i][0] : c.k === 'list' ? `${c.h}: ${c.i[Math.min(c.i.length - 1, Math.floor(clamp((pt - 0.5) / Math.max(1, dur - 1)) * c.i.length))]}` : c.k === 'im' ? `IMAGINA: ${c.a}` : c.k === 'sub' ? 'DEIXA O LIKE 👍' : c.k === 'cta' ? 'COMENTA AÍ 👇' : c.k === 'recap' ? '' : c.a;
   if (!lab) return;
   const k = Math.min(eo(seg(pt, 0.5, 0.5)), 1 - eio(seg(pt, dur - 0.45, 0.35))); if (k <= 0.01) return;
   const size = fit(lab, 44, 1100), w2 = tw(lab, size) + 60;
@@ -573,8 +573,12 @@ window.renderFrame = t => {
   let bars = 0;
   if (clip) {
     const ct = pt - clip.lead, dur = clip.n / FPS, a = Math.min(seg(ct, 0, 0.35), 1 - seg(ct, dur - 0.4, 0.4)); bars = a;
-    X.save(); X.globalAlpha = a; const zc = 1.03 + 0.06 * (ct / dur); X.translate(W / 2 + 30 * (ct / dur), H / 2); X.scale(zc, zc); X.translate(-W / 2, -H / 2);
-    X.drawImage(clip.img, 0, 0, W, H); X.restore();
+    X.save(); X.globalAlpha = a;
+    if (clip.still) { // imagem oficial: Ken Burns (aproxima e desliza devagar, direção varia por frase)
+      const u = eio(ct / dur), dir = (R(clip.id.length * 97 + clip.part * 31)() < 0.5) ? 1 : -1, zs = lerp(1.0, 1.1, u);
+      X.translate(W / 2 + dir * lerp(-50, 50, u), H / 2 + lerp(20, -20, u)); X.scale(zs, zs); X.drawImage(clip.img, -1056, -594, 2112, 1188);
+    } else { const zc = 1.03 + 0.06 * (ct / dur); X.translate(W / 2 + 30 * (ct / dur), H / 2); X.scale(zc, zc); X.translate(-W / 2, -H / 2); X.drawImage(clip.img, 0, 0, W, H); }
+    X.restore();
     X.save(); X.globalAlpha = 0.15 * a; X.fillStyle = '#2a0a3a'; X.fillRect(0, 0, W, H); X.restore();
   }
   // legibilidade (só onde precisa)
@@ -597,7 +601,7 @@ async function clipAt(t) {
   let pi = 0; for (let i = 0; i < s.parts.length; i++) if (t >= s.parts[i]) pi = i;
   const c = CLIPS.find(c => c.seg === s.id && c.part === pi); if (!c) return null;
   const ct = t - (pi === 0 ? s.start : s.parts[pi]) - c.lead, k = Math.floor(ct * FPS); if (k < 0 || k >= c.n) return null;
-  const url = `clips/${c.id}/f${String(k + 1).padStart(4, '0')}.jpg`;
+  const url = c.still ? `clips/${c.id}/img.jpg` : `clips/${c.id}/f${String(k + 1).padStart(4, '0')}.jpg`;
   let img = IMG.get(url); if (!img) { img = new Image(); img.src = url; await img.decode(); IMG.set(url, img); if (IMG.size > 90) IMG.delete(IMG.keys().next().value); }
   return { ...c, img };
 }

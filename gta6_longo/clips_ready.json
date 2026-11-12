@@ -8,12 +8,48 @@
   "lead": 0.15
  },
  {
+  "id": "intro_2",
+  "seg": "intro",
+  "part": 2,
+  "src": "gta6",
+  "n": 126,
+  "lead": 0.15,
+  "still": true
+ },
+ {
   "id": "intro_3",
   "seg": "intro",
   "part": 3,
   "src": "gta6",
   "n": 150,
   "lead": 0.15
+ },
+ {
+  "id": "n1_3",
+  "seg": "n1",
+  "part": 3,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n1_4",
+  "seg": "n1",
+  "part": 4,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n1_6",
+  "seg": "n1",
+  "part": 6,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
  },
  {
   "id": "n2_1",
@@ -48,6 +84,15 @@
   "lead": 0.15
  },
  {
+  "id": "n2_5",
+  "seg": "n2",
+  "part": 5,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
+ },
+ {
   "id": "n2_6",
   "seg": "n2",
   "part": 6,
@@ -56,12 +101,48 @@
   "lead": 0.15
  },
  {
+  "id": "n3_2",
+  "seg": "n3",
+  "part": 2,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
+ },
+ {
   "id": "n3_3",
   "seg": "n3",
   "part": 3,
   "src": "gta6",
   "n": 100,
   "lead": 0.15
+ },
+ {
+  "id": "n4_2",
+  "seg": "n4",
+  "part": 2,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n4_4",
+  "seg": "n4",
+  "part": 4,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n5_2",
+  "seg": "n5",
+  "part": 2,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
  },
  {
   "id": "n5_3",
@@ -80,12 +161,57 @@
   "lead": 0.15
  },
  {
+  "id": "n5_5",
+  "seg": "n5",
+  "part": 5,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n6_3",
+  "seg": "n6",
+  "part": 3,
+  "src": "gta6",
+  "n": 136,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n7_2",
+  "seg": "n7",
+  "part": 2,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
+ },
+ {
   "id": "n7_3",
   "seg": "n7",
   "part": 3,
   "src": "gta6",
   "n": 113,
   "lead": 0.15
+ },
+ {
+  "id": "n7_4",
+  "seg": "n7",
+  "part": 4,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n8_2",
+  "seg": "n8",
+  "part": 2,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
  },
  {
   "id": "n9_1",
@@ -108,8 +234,45 @@
   "seg": "n9",
   "part": 3,
   "src": "gta6",
-  "n": 45,
-  "lead": 0.15
+  "n": 43,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n9_4",
+  "seg": "n9",
+  "part": 4,
+  "src": "gta6",
+  "n": 44,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n9_5",
+  "seg": "n9",
+  "part": 5,
+  "src": "gta6",
+  "n": 77,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n9_6",
+  "seg": "n9",
+  "part": 6,
+  "src": "gta6",
+  "n": 103,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n9_7",
+  "seg": "n9",
+  "part": 7,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
  },
  {
   "id": "n10_3",
@@ -118,6 +281,24 @@
   "src": "gta6",
   "n": 151,
   "lead": 0.15
+ },
+ {
+  "id": "n10_4",
+  "seg": "n10",
+  "part": 4,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
+ },
+ {
+  "id": "n10_6",
+  "seg": "n10",
+  "part": 6,
+  "src": "gta6",
+  "n": 150,
+  "lead": 0.15,
+  "still": true
  },
  {
   "id": "outro_0",

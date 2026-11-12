@@ -33,7 +33,8 @@
       "💪 o seu corpo"
      ]
     },
-    "v": "sunset"
+    "v": "sunset",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_11.jpg"
    },
    {
     "t": "E a número dez vai mudar pra sempre o jeito que você foge da polícia. Então fica até o final.",
@@ -100,7 +101,8 @@
      "a": "🎒 BOLSA • 🚗 PORTA-MALAS",
      "b": "cada arma no seu lugar"
     },
-    "v": "carro"
+    "v": "carro",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_08.jpg"
    },
    {
     "t": "Imagina: você tá no meio de um tiroteio, a munição acaba, e a arma pesada ficou no carro, do outro lado da rua. Vai buscar ou improvisa?",
@@ -109,7 +111,8 @@
      "a": "A ARMA FICOU NO CARRO",
      "b": "vai buscar ou improvisa?"
     },
-    "v": "carro"
+    "v": "carro",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_17.jpg"
    },
    {
     "t": "Isso transforma cada assalto num plano de verdade: o que levar, onde deixar e quem carrega o quê.",
@@ -131,7 +134,8 @@
      "a": "AINDA NÃO CONFIRMADO",
      "b": "confirmado: dinheiro e armas divididos"
     },
-    "v": "grana"
+    "v": "grana",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_15.jpg"
    }
   ],
   "hl": [
@@ -231,7 +235,8 @@
      "a": "LUCIA NA PORTA, JASON NO COFRE",
      "b": "você decide quem age"
     },
-    "v": "troca"
+    "v": "troca",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_02.jpg"
    },
    {
     "t": "É praticamente um Bonnie e Clyde em Vice City.",
@@ -300,7 +305,8 @@
       "😴 sem dormir → aparece"
      ]
     },
-    "v": "muda"
+    "v": "muda",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_15.jpg"
    },
    {
     "t": "E o gameplay ainda mostrou academia e um medidor de estamina.",
@@ -383,7 +389,8 @@
      "a": "☀️ AQUI  ⛈️ ALI",
      "b": "no mesmo mapa, ao mesmo tempo"
     },
-    "v": "local"
+    "v": "local",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Ambrosia/Ambrosia_02.jpg"
    },
    {
     "t": "E a chuva deixa marca: a rua não seca por mágica quando o sol volta.",
@@ -405,7 +412,8 @@
       "⚡ raios e vento forte"
      ]
     },
-    "v": "furacao"
+    "v": "furacao",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Ambrosia/Ambrosia_04.jpg"
    },
    {
     "t": "Imagina uma fuga de carro na pista encharcada, com o vento empurrando tudo e a polícia colada atrás. Dá até frio na barriga.",
@@ -463,7 +471,8 @@
      "n": "+170",
      "l": "ESPÉCIES"
     },
-    "v": "fauna"
+    "v": "fauna",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Leonida Keys/Leonida_Keys_04.jpg"
    },
    {
     "t": "Nos trailers já apareceram jacarés, flamingos e até iguanas, que são uma praga famosa na Flórida.",
@@ -499,7 +508,8 @@
      "k": "op",
      "a": "NÃO É SÓ ENFEITE"
     },
-    "v": "pantano"
+    "v": "pantano",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Mount Kalaga National Park/Mount_Kalaga_National_Park_05.jpg"
    }
   ],
   "hl": [
@@ -565,7 +575,8 @@
      "k": "op",
      "a": "A CARA DA FLÓRIDA"
     },
-    "v": "feed"
+    "v": "feed",
+    "img": "clips/fonte/rockstar_shots/shots/People/Real Dimez/Real_Dimez_04.jpg"
    },
    {
     "t": "Agora imagina: você faz uma loucura no meio da rua e, minutos depois, o vídeo tá rodando no celular do jogo. A Rockstar ainda não disse se funciona assim, mas seria muito a cara do GTA.",
@@ -629,7 +640,8 @@
       "tatuagens"
      ]
     },
-    "v": "vivos"
+    "v": "vivos",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_13.jpg"
    },
    {
     "t": "Nos trailers tem gente malhando na praia, fazendo festa e filmando tudo com o celular.",
@@ -652,7 +664,8 @@
      "a": "👋 OI  •  😤 QUAL FOI?",
      "b": "cumprimentar ou provocar"
     },
-    "v": "cumprimentar"
+    "v": "cumprimentar",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_18.jpg"
    },
    {
     "t": "Ou seja, cada esquina pode virar uma história. Ou uma confusão.",
@@ -739,7 +752,8 @@
      "a": "📊 SEU ESTILO",
      "b": "um indicador acompanha"
     },
-    "v": ""
+    "v": "",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_12.jpg"
    },
    {
     "t": "Um site chegou a falar em níveis, tipo profissional, agressivo e violento. Mas é uma fonte só, e a Rockstar não confirmou.",
@@ -830,12 +844,7 @@
      "i": 1
     },
     "v": "reg1",
-    "clip": {
-     "arquivo": "clips/fonte/trailer_lancamento.mp4",
-     "inicio": 2.05,
-     "dur": 2.9,
-     "crop": true
-    }
+    "img": "clips/fonte/rockstar_shots/shots/Places/Leonida Keys/Leonida_Keys_01.jpg"
    },
    {
     "t": "O pântano de Grassrivers.",
@@ -843,7 +852,8 @@
      "k": "reg",
      "i": 2
     },
-    "v": "reg2"
+    "v": "reg2",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Grassrivers/Grassrivers_05.jpg"
    },
    {
     "t": "Port Gellhorn, uma cidade litorânea decadente.",
@@ -851,7 +861,8 @@
      "k": "reg",
      "i": 3
     },
-    "v": "reg3"
+    "v": "reg3",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Port Gellhorn/Port_Gellhorn_06.jpg"
    },
    {
     "t": "Ambrosia, a cidade industrial da refinaria de açúcar.",
@@ -859,7 +870,8 @@
      "k": "reg",
      "i": 4
     },
-    "v": "reg4"
+    "v": "reg4",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Ambrosia/Ambrosia_01.jpg"
    },
    {
     "t": "E Mount Kalaga, o parque nacional, com trilhas, caça e pesca. Da praia ao pântano, tudo num mapa só.",
@@ -867,7 +879,8 @@
      "k": "reg",
      "i": 5
     },
-    "v": "reg5"
+    "v": "reg5",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Mount Kalaga National Park/Mount_Kalaga_National_Park_04.jpg"
    }
   ],
   "hl": [
@@ -948,7 +961,8 @@
      "a": "☆ ESTRELA VAZADA",
      "b": "sabem do crime, não sabem quem"
     },
-    "v": "vazada"
+    "v": "vazada",
+    "img": "clips/fonte/rockstar_shots/shots/People/Lucia Caminos/Lucia_Caminos_14.jpg"
    },
    {
     "t": "E no gameplay ainda apareceram cães policiais. Correr a pé ficou bem mais perigoso.",
@@ -966,7 +980,8 @@
      "a": "TROCA DE JAQUETA E PASSA DE BOA",
      "b": "isso é GTA 6"
     },
-    "v": "roupa"
+    "v": "roupa",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_09.jpg"
    }
   ],
   "hl": [

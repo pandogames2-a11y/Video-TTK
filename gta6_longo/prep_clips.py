@@ -34,6 +34,13 @@ ready, rows = [], []
 for sg in SCRIPT:
     for pi, p in enumerate(sg['parts']):
         c = p.get('clip')
+        if p.get('img'):   # screenshot oficial: imagem parada com movimento de câmera
+            cid = f"{sg['id']}_{pi}"; a, b = part_span(sg['id'], pi); tela = round(min(TARGET, b - a - LEAD - 0.4), 2)
+            out = f'clips/{cid}'; shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
+            subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', p['img'], '-vf', 'scale=2112:1188:force_original_aspect_ratio=increase,crop=2112:1188', '-q:v', '3', f'{out}/img.jpg'], check=True)
+            ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta6', n=int(tela * FPS), lead=LEAD, still=True))
+            rows.append(dict(id=cid, t0=a + LEAD, dur=tela, src=0, speed=1, arquivo=p['img'], inicio=0, fala=p['t']))
+            print(f'{cid}: imagem {os.path.basename(p["img"])} por {tela:.1f} s'); continue
         if not c: continue
         cid = f"{sg['id']}_{pi}"; a, b = part_span(sg['id'], pi)
         f = c['arquivo']; ini = float(c.get('inicio', 0))
