@@ -342,8 +342,8 @@ class Bean {
     }
     if (o.goatee) {
       const gm = std(0x1a0d05, { roughness: 0.8 });
-      const g1 = new THREE.Mesh(new THREE.ConeGeometry(0.055, 0.13, 10), gm); g1.rotation.x = Math.PI; g1.position.set(0, -0.22, 0.315); g1.rotation.x = Math.PI - 0.35; this.body.add(g1);
-      const g2 = new THREE.Mesh(new THREE.SphereGeometry(0.05, 10, 8), gm); g2.scale.set(1.3, 0.6, 0.6); g2.position.set(0, -0.165, 0.335); this.body.add(g2);
+      const g1 = new THREE.Mesh(new THREE.ConeGeometry(0.045, 0.12, 10), gm); g1.position.set(0, -0.33, 0.285); g1.rotation.x = Math.PI - 0.45; this.body.add(g1);
+      const g2 = new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 10), gm); g2.scale.set(0.9, 1.0, 0.7); g2.position.set(0, -0.285, 0.305); this.body.add(g2);
     }
     if (o.hair === 'curly') {
       // short dark textured hair with faded sides
@@ -434,7 +434,7 @@ class Bean {
       A.el.rotation.set(elb, 0, A.s * ez);
     });
     // face
-    const blinkT = (t + this.blinkSeed) % 3.7; const bl = blinkT < 0.12 ? 1 : 0;
+    const bl = p.blink ? 1 : 0;
         this.lids.forEach(l => { l.rotation.x = lerp(-1.3 + (p.eyesWide ? -0.3 : 0) + (p.squint || 0), 1.5, bl); });
     const look = p.look || [0, 0];
     this.pupils.forEach(pu => { pu.position.x = look[0] * 0.04; pu.position.y = look[1] * 0.04; const sc = p.eyesWide ? 0.75 : 1; pu.scale.set(sc, sc * 1.2, 0.6); });
@@ -443,8 +443,8 @@ class Bean {
     this.brows.forEach((br, i) => { const s = i ? 1 : -1; br.rotation.z = -s * brow * 0.4; br.position.y = 0.4 + Math.abs(brow) * 0.03 + (p.eyesWide ? 0.05 : 0); if (p.smirk && i === 1) { br.position.y += 0.05; br.rotation.z = -0.25; } });
     const m = clamp(p.mouth || 0);
     this.mouthIn.scale.set(lerp(0.8, 1.0, m), lerp(0.08, 0.75, m) + (p.shout || 0) * 0.6, 0.3);
-    this.mouthIn.visible = m > 0.03 || p.shout;
-    this.smile.visible = (p.smile ?? 1) > 0 && m < 0.15 && !p.shout;
+    this.mouthIn.visible = m > 0.05 || p.shout;
+    this.smile.visible = (p.smile ?? 1) > 0 && m <= 0.05 && !p.shout;
     this.smile.rotation.z = (p.smile ?? 1) > 0 ? Math.PI : 0;
     if (p.smirk) { this.smile.visible = true; this.smile.rotation.z = Math.PI + 0.2; this.smile.scale.set(0.95, 1.05, 1.3); this.smile.position.set(0.025, 0.05, 0.01); } else { this.smile.scale.set(1, 1, 1); this.smile.position.set(0, 0.03, 0); }
     if (this.nut) this.nut.visible = p.nut === true;
@@ -968,11 +968,12 @@ function drawWindow(t, level, storm) {   // street view through the window: rain
   for (const s of [-1, 1]) { const arm = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.75, 1.1), sofaM); arm.position.set(s * 1.6, 0.4, 0); sofa.add(arm); }
   // coffee table with drinks and a popcorn bowl
   const ctM = std(0x6b4a2e, { roughness: 0.6 });
-  const ct = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.08, 0.75), ctM); ct.position.set(-1.0, 0.48, -1.1); apt.add(ct);
-  for (const [x, z] of [[-0.65, -0.3], [0.65, -0.3], [-0.65, 0.3], [0.65, 0.3]]) { const l = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.45, 0.07), ctM); l.position.set(-1.0 + x, 0.22, -1.1 + z); apt.add(l); }
-  for (const [x, c] of [[-1.4, 0xe8443a], [-1.15, 0x2e7dd1]]) { const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.05, 0.14, 12), std(c, { roughness: 0.3 })); cup.position.set(x, 0.59, -1.05); apt.add(cup); }
-  const bowl = new THREE.Mesh(new THREE.SphereGeometry(0.2, 14, 8, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), std(0xe8443a)); bowl.position.set(-0.6, 0.72, -1.1); apt.add(bowl);
-  const pop = new THREE.Mesh(new THREE.SphereGeometry(0.17, 10, 8), std(0xfff3b0, { roughness: 1, flatShading: true })); pop.scale.y = 0.5; pop.position.set(-0.6, 0.66, -1.1); apt.add(pop);
+  const CTZ = -0.6;   // coffee table, with room to stand between it and the sofa
+  const ct = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.08, 0.75), ctM); ct.position.set(-1.0, 0.48, CTZ); apt.add(ct);
+  for (const [x, z] of [[-0.65, -0.3], [0.65, -0.3], [-0.65, 0.3], [0.65, 0.3]]) { const l = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.45, 0.07), ctM); l.position.set(-1.0 + x, 0.22, CTZ + z); apt.add(l); }
+  for (const [x, c] of [[-1.4, 0xe8443a], [-1.15, 0x2e7dd1]]) { const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.05, 0.14, 12), std(c, { roughness: 0.3 })); cup.position.set(x, 0.59, CTZ + 0.05); apt.add(cup); }
+  const bowl = new THREE.Mesh(new THREE.SphereGeometry(0.2, 14, 8, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), std(0xe8443a)); bowl.position.set(-0.6, 0.72, CTZ); apt.add(bowl);
+  const pop = new THREE.Mesh(new THREE.SphereGeometry(0.17, 10, 8), std(0xfff3b0, { roughness: 1, flatShading: true })); pop.scale.y = 0.5; pop.position.set(-0.6, 0.66, CTZ); apt.add(pop);
   // TV showing a movie
   const tvStand = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.5, 0.5), std(0x2e2e33)); tvStand.position.set(-1.0, 0.25, 2.9); apt.add(tvStand);
   const movieTex = canvasTex(512, 288, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#ff9a5a'); gr.addColorStop(1, '#ffd98a'); g.fillStyle = gr; g.fillRect(0, 0, w, h); g.fillStyle = '#fff3c4'; g.beginPath(); g.arc(380, 120, 46, 0, Math.PI * 2); g.fill(); g.fillStyle = '#5a3b6e'; g.beginPath(); g.moveTo(0, 230); g.lineTo(120, 150); g.lineTo(230, 220); g.lineTo(330, 160); g.lineTo(512, 240); g.lineTo(512, 288); g.lineTo(0, 288); g.fill(); g.fillStyle = '#2b2140'; g.fillRect(150, 170, 14, 60); g.beginPath(); g.arc(157, 162, 12, 0, Math.PI * 2); g.fill(); g.fillStyle = 'rgba(0,0,0,0.85)'; g.fillRect(0, 0, w, 26); g.fillRect(0, h - 26, w, 26); });
@@ -1033,8 +1034,12 @@ function drawWindow(t, level, storm) {   // street view through the window: rain
   for (let i = 0; i < 18; i++) { const c = new THREE.Mesh(new THREE.IcosahedronGeometry(0.06, 0), std(0xfff3b0, { flatShading: true, roughness: 1 })); c.userData = { x: -2.4 + pr() * 3.2, z: -2.0 + pr() * 2.6, ph: pr() * 6 }; apt.add(c); pops.push(c); }
   apt.traverse(m => { if (m.isMesh && m !== win) { m.castShadow = true; m.receiveShadow = true; } });
   aw.castShadow = puddle.castShadow = false;
+  ceil.castShadow = back.castShadow = left.castShadow = right.castShadow = false;
 }
 
+// ---------- soft fill light for the house (so faces never go dark) ----------
+const houseFill = new THREE.DirectionalLight(0xfff1e0, 0.9); houseFill.position.copy(AP(1.5, 4.5, 9)); houseFill.target.position.copy(AP(-0.5, 1.0, -1.5)); scene.add(houseFill); scene.add(houseFill.target);
+const windowLight = new THREE.PointLight(0xcfe3ff, 0, 9, 1.4); windowLight.position.copy(AP(2.3, 2.1, -2.6)); scene.add(windowLight);
 // ---------- water levels ----------
 function aptLevel(t, n, lt) {   // water inside the house (the story, and the ending gag)
   if (GAGN.includes(n)) {
@@ -1060,7 +1065,8 @@ function updateHouse(t, n, lt) {
   const news = !gag && t > VS_TV() && !powerOff; aptParts.screen.material.map = news ? newsTex : movieTexRef;
   aptParts.lever.position.y = powerOff ? -0.1 : 0.1;
   aptParts.lamp.intensity = powerOff ? 0 : 2.2; aptParts.bulb.material.color.setScalar(powerOff ? 0.3 : 1); aptParts.shade.material.emissiveIntensity = powerOff ? 0 : 0.35;
-  aptParts.tvLight.intensity = powerOff ? 0 : 1.2; aptParts.screen.material.color.setScalar(powerOff ? 0.06 : 1);
+  aptParts.tvLight.intensity = powerOff ? 0 : 1.2;
+  houseFill.visible = windowLight.visible = apt.visible; houseFill.intensity = powerOff ? 1.0 : 0.75; windowLight.intensity = powerOff ? 2.2 : 1.0; aptParts.screen.material.color.setScalar(powerOff ? 0.06 : 1);
   aptParts.packT.visible = true;
   // ending: the sofa and the TV float up
   const lift = gag ? sofaLift(W) : 0, bob = lift > 0 && lift < SOFA_LIFT_MAX ? 0.05 * Math.sin(t * 3) : 0;
@@ -1094,7 +1100,7 @@ function direct(t, n, lt, g, H) {
   const watching = { legs: 'sit', sitY: 0.6, lean: -0.2, armL: [0.25, -0.5, -1.2], armR: A.rest, look: [0, -0.1] };
   const lift = H.lift + H.bob;
   let hp = Object.assign({ x: SOFA_H.x, y: SOFA_Y + lift, z: SOFA_H.z, ry: 0.15, smile: 1, nut: false }, watching, { armL: [0.9, 0.1, -1.6] });
-  let fp = Object.assign({ x: SOFA_F.x, y: SOFA_Y + lift, z: SOFA_F.z, ry: -0.15, smile: 1 }, watching, { popc: true, armL: [0.55, -0.2, -1.45] });
+  let fp = Object.assign({ x: SOFA_F.x, y: SOFA_Y + lift, z: SOFA_F.z, ry: -0.15, smile: 1 }, watching, { popc: true, armL: [0.35, 0.15, -1.05] });
   let dg = { mode: 'lie', x: AO.x - 0.4, y: AO.y + 0.02, z: AO.z - 0.1, ry: 0.6 };
   board.visible = false;
   setParent(hero, scene); setParent(friend, scene); hero.root.scale.setScalar(1); friend.root.scale.setScalar(1);
@@ -1315,14 +1321,14 @@ function direct(t, n, lt, g, H) {
     dg = { mode: H.W > 0.35 ? 'scared' : 'lie', x: AO.x - 0.4 - 2.0 * ss(0.3, 1.2, H.W), y: AO.y + Math.max(0.02, H.W - 0.38), z: AO.z - 0.6 + 0.2 * ss(0.3, 1.2, H.W), ry: 0.6 + 0.5 * Math.sin(t * 0.8) * ss(0.3, 1.2, H.W) };
     if (n === 'q2') { cam.pos = AP(1.6, 2.1, 4.4); cam.tgt = AP(-1.1, 1.0, -2.3); cam.fov = 50; }
     else if (n === 'q3') { fp.mouth = fm; fp.brow = -0.4; fp.armR = A.wave; cam.pos = AP(-0.1, 1.45, -0.2); cam.tgt = AP(-0.4, 1.15, -2.65); cam.fov = 40; }
-    else if (n === 'q4') { hp.mouth = hm; hp.brow = -0.3; hp.smirk = true; hp.armR = [1.0, -0.6, -0.9]; hp.look = [0.8, -0.2]; cam.pos = AP(-1.0, 1.4, -0.3); cam.tgt = AP(-1.0, 1.1, -2.65); cam.fov = 40; }
+    else if (n === 'q4') { hp.mouth = hm; hp.brow = -0.3; hp.smirk = true; hp.armR = [1.2, 0.55, -0.35]; hp.look = [0.8, -0.2]; cam.pos = AP(-1.0, 1.4, -0.3); cam.tgt = AP(-1.0, 1.1, -2.65); cam.fov = 40; }
     else if (n === 'rise') { const k = ease(p); cam.pos = vl(AP(0.4, 1.0, 1.4), AP(0.2, 1.7, 1.9), k); cam.tgt = vl(AP(-1.0, 0.3, -1.6), AP(-1.0, 1.0, -2.4), k); cam.fov = 52; }
     else if (n === 'ohoh') { hp = Object.assign(hp, { mouth: Math.max(hm, 0.2), eyesWide: true, brow: 0.6, smile: 0, look: [0, -0.8] }); fp = Object.assign(fp, { eyesWide: true, brow: 0.8, smile: 0, look: [0, -0.8] }); cam.pos = AP(-1.0, 1.5 + lift, -0.5); cam.tgt = AP(-1.0, 1.2 + lift, -2.65); cam.fov = 44; }
     else {
       const k = t - T0('float'), top = t > BONK_T;
       hp = Object.assign(hp, { eyesWide: !top, brow: 1, smile: 0, shout: top ? 0 : 0.6, look: [0, 1], armL: A.up, armR: A.up });
       fp = Object.assign(fp, { eyesWide: !top, brow: 1, smile: 0, shout: top ? 0 : 0.6, look: [0, 1], armL: A.up, armR: A.up, popc: true });
-      if (top) { hp = Object.assign(hp, { squint: 0.6, armL: [0.9, 0.1, -1.6], armR: A.rest, look: [0, -0.2], wob: k < 2.3 ? 0.2 : 0 }); fp = Object.assign(fp, { squint: 0.6, armL: [0.55, -0.2, -1.45], armR: A.rest, look: [0, -0.2], wob: k < 2.3 ? 0.2 : 0 }); }
+      if (top) { hp = Object.assign(hp, { squint: 0.6, armL: [0.9, 0.1, -1.6], armR: A.rest, look: [0, -0.2], wob: k < 2.3 ? 0.2 : 0 }); fp = Object.assign(fp, { squint: 0.6, armL: [0.35, 0.15, -1.05], armR: A.rest, look: [0, -0.2], wob: k < 2.3 ? 0.2 : 0 }); }
       cam.pos = AP(-0.9, 2.2 + 1.1 * ss(0, 2.5, k), 1.6); cam.tgt = AP(-1.0, 1.8 + 1.2 * ss(0, 2.5, k), -2.5); cam.fov = 54;
       shake = Math.abs(t - BONK_T) < 0.4 && t > BONK_T ? 0.6 * Math.exp(-(t - BONK_T) * 5) : 0;
     }
@@ -1333,6 +1339,8 @@ function direct(t, n, lt, g, H) {
     dg = { mode: 'sit', x: dR.x, y: dR.y, z: dR.z, ry: FRONT_RY };
     cam.pos = vl(bw(-0.3, 14.5, -6.0), bw(6, 19, -16), ease(p)); cam.tgt = bw(-0.2, 13.8, -3.0); cam.fov = 45;
   }
+  for (const [p, b] of [[hp, hero], [fp, friend]]) if (b.root.parent === scene && p.legs !== 'sit') keepOut(p, 0.46);
+  if (dg.mode !== 'carried' && dg.mode !== 'hide') keepOut(dg, 0.38);
   hero.pose(t, hp); friend.pose(t, fp);
   if (dg.mode === 'carried') { if (dog.parent !== friend.body) friend.body.add(dog); dog.scale.setScalar(1); dogPose(t, 'carried', 0, -0.28, 0.42, 0); }
   else { if (dog.parent !== scene) scene.add(dog); dogPose(t, dg.mode, dg.x, dg.y, dg.z, dg.ry); }
@@ -1342,6 +1350,20 @@ function direct(t, n, lt, g, H) {
   const focus = cam.tgt.clone(); focus.y = 0;
   if (APTN.includes(n) || GAGN.includes(n) || n === 'kit' || n === 'explain' || isIndoorShot(n, lt)) { sun.target.position.copy(focus); sun.position.copy(focus).add(V(10, 30, 40)); }
   else { focus.z = clamp(focus.z, -40, 45); focus.x = clamp(focus.x, -45, 40); sun.target.position.copy(focus); sun.position.copy(focus).add(V(40, 70, -30)); }
+}
+// solid furniture in the house (local x0, x1, z0, z1); characters are pushed out of these and kept inside the walls
+const SOLIDS = [[-1.75, -0.25, -0.975, -0.225], [1.2, 3.8, -1.35, 0.35], [-2.6, 0.6, -3.3, -2.2], [3.65, 4.55, -2.6, -0.6], [-4.6, -4.1, -1.95, -0.05], [-2.0, 0.0, 2.65, 3.15]];
+function keepOut(p, r) {
+  if (p.x === undefined || Math.abs(p.x - AO.x) > 6 || Math.abs(p.z - AO.z) > 5) return;
+  let x = p.x - AO.x, z = p.z - AO.z;
+  for (let it = 0; it < 3; it++) for (const [x0, x1, z0, z1] of SOLIDS) {
+    if (x > x0 - r && x < x1 + r && z > z0 - r && z < z1 + r) {
+      const d = [x - (x0 - r), (x1 + r) - x, z - (z0 - r), (z1 + r) - z], m = Math.min(...d);
+      if (m === d[0]) x = x0 - r; else if (m === d[1]) x = x1 + r; else if (m === d[2]) z = z0 - r; else z = z1 + r;
+    }
+  }
+  x = clamp(x, -4.6 + r, 4.6 - r); z = clamp(z, -3.5 + r, 3.6);
+  p.x = x + AO.x; p.z = z + AO.z;
 }
 // the car in the bad idea: drives in, then the current lifts it and carries it away
 function carState(t) {
@@ -1477,7 +1499,7 @@ function world(t, n, lt) {
   scene.fog.color.copy(skyU.bot.value); scene.fog.near = lerp(110, 35, storm); scene.fog.far = lerp(460, 230, storm);
   const inside = APTN.includes(n) || gag || n === 'kit' || isIndoorShot(n, lt) || (n === 'rule' && lt < W_NUNCA - S.rule.start - 0.3);
   sun.intensity = inside ? (powerOff ? 0.7 : 1.4) : lerp(2.6, 0.8, storm) + b * 2; sun.color.set(0xfff1d6).lerp(new THREE.Color(0xffb070), eve);
-  hemi.intensity = inside ? (powerOff ? 0.95 : 1.0) : lerp(0.9, 1.25, storm);
+  hemi.intensity = inside ? (powerOff ? 1.2 : 1.25) : lerp(0.9, 1.25, storm);
   clouds.position.x = t * 0.6; clouds.children.forEach(c => c.children.forEach(m => m.material.color.setHex(storm > 0.5 ? 0x8a939c : 0xffffff)));
   stormM.opacity = storm * 0.95; stormG.visible = storm > 0;
   sunSprite.visible = sunHalo.visible = !inside && storm < 0.5;
