@@ -134,6 +134,16 @@ def put(buf, x, at):
     if n > 0: buf[i:i + n] += x[:n]
 amb = np.zeros(N, np.float32); mus = np.zeros(N, np.float32); fx = np.zeros(N, np.float32)
 
+# exact word times (from audio/words.json of the previous alignment of this same audio), so effects land on the word
+import unicodedata
+WORDS = json.load(open('audio/words.json')) if os.path.exists('audio/words.json') else []
+def _norm(w): return re.sub(r'[^a-zà-ú]', '', w.lower())
+def wT(prefix, scene):
+    a = T0(scene)
+    for w in WORDS:
+        if w['t0'] >= a - 0.01 and _norm(w['text']).startswith(prefix): return w['t0']
+    return capT(prefix, scene)
+
 allcaps = [c for g in segs for c in g['caps']]
 def capT(word, scene):
     a, b = T0(scene), TE(scene)
@@ -272,47 +282,68 @@ rain_bed(R0 - 0.2, T0('end') + 0.5, 0.06, 0.8)
 thunder(R0, 0.6); thunder(T0('friend1') + 0.2, 0.35); thunder(T0('idea') - 0.6, 0.3); thunder(T0('wait2') + 0.5, 0.3)
 flow_bed(capT('rio', 'rain'), TE('friend1') - 0.3, 0.12)
 n = int(2.0 * SR); x = np.arange(n) / SR; put(fx, band(rng.standard_normal(n), 300, 2500) * np.minimum(1, x * 3) * 0.12, capT('porta', 'rain'))
-def good(at): ding(at, 0.1, (1568, 2093))     # right plan
-def bad(at): buzzer(at, 0.09, 0.4)             # wrong plan
+def correct(at, amp=0.11):   # "correct!" chime: quick rising arpeggio with sparkle
+    for k, f in enumerate([1046, 1318, 1568, 2093]):
+        n = int(0.5 * SR); x = np.arange(n) / SR; put(fx, (np.sin(2 * np.pi * f * x) + 0.35 * np.sin(2 * np.pi * 2 * f * x)) * np.exp(-x * 7) * amp, at + k * 0.075)
+    for k in range(10):
+        n = int(0.06 * SR); x = np.arange(n) / SR; put(fx, np.sin(2 * np.pi * (3000 + rng.random() * 3000) * x) * np.exp(-x * 60) * amp * 0.4, at + 0.3 + k * 0.04 + rng.random() * 0.03)
+def wrong(at, amp=0.12):     # "wrong!": two low descending honks
+    for k, f in enumerate([233, 175]):
+        n = int(0.32 * SR); x = np.arange(n) / SR; sq = np.sign(np.sin(2 * np.pi * f * x)) * 0.6 + np.sign(np.sin(2 * np.pi * f * 1.01 * x)) * 0.4
+        put(fx, lowp(sq, 1400) * np.minimum(1, x * 50) * np.minimum(1, (0.32 - x) * 25) * amp, at + k * 0.3)
+def popin(at, amp=0.08): bloop(at, 300, 900, amp, 0.14)
+def swoosh(at, amp=0.12): whoosh(at, 0.35, 800, 5000, amp)
+def electric(at, dur=1.6, amp=0.2):   # buzzing hum + random sparks crackling
+    n = int(dur * SR); x = np.arange(n) / SR
+    hum = (np.sign(np.sin(2 * np.pi * 120 * x)) * 0.4 + np.sin(2 * np.pi * 240 * x) * 0.3) * (0.6 + 0.4 * np.sin(2 * np.pi * 7 * x))
+    crk = band(rng.standard_normal(n), 2500, 9000) * (rng.random(n) > 0.985) * 3
+    put(fx, (lowp(hum, 2500) * 0.6 + crk) * np.minimum(1, x * 20) * np.minimum(1, (dur - x) * 6) * amp, at)
+    for k in range(6): crack(at + 0.1 + k * dur / 7 + rng.random() * 0.1, amp * 0.8)
 # explanation
 pad(T0('explain'), TE('explain'), [45, 52, 57, 60], 0.022)
 for at in np.arange(T0('explain') + 0.5, TE('explain') - 0.5, 60 / 90): put(mus, pluck(81, 0.15, 0.02, 30), at)
-glubs(capT('lixo', 'explain') + 0.6, 4, 0.14)
-whoosh(capT('rios', 'explain') + 0.4, 1.2, 200, 1500, 0.2); splash(capT('rios', 'explain') + 1.0, 0.25)
+for w_ in ['absorver', 'cidade', 'lixo', 'rios', 'invade']: swoosh(wT(w_, 'explain') - 0.35, 0.07)
+for k in range(6): thud(wT('lixo', 'explain') + 0.15 + k * 0.12, 0.12)
+whoosh(wT('rios', 'explain') + 0.2, 1.2, 200, 1500, 0.2); splash(wT('transbordam', 'explain') + 0.3, 0.3); splash(wT('invade', 'explain') + 0.2, 0.25)
+# --- the plan card: a pop when each idea shows up, "wrong" or "correct" when it is decided
+APPEAR = [T0('tv1') + 0.3, wT('certo', 'tv2'), T0('car1') + 0.3, T0('stay1') + 0.3, wT('alto', 'idea'), T0('gag1') + 0.5, T0('wait') + 0.5]
+for at in APPEAR: popin(at)
+for at in [wT('não', 'tv2'), wT('plano', 'car2'), T0('stayrise') + 1.2, wT('não', 'gag1b')]: wrong(at)
+for sc in ['tv2', 'high', 'wait2']: correct(wT('assim', sc))
 # round 1: the TV vs the breaker
-blip(VE('tv1') - 0.5, 600, 0.06)
-bad(capT('não é', 'tv2') + 0.3); zap(capT('choque', 'tv2'), 0.8, 0.12)
-clack(capT('o certo', 'tv2') + 1.6, 0.35); good(capT('assim', 'tv2'))
+blip(VE('tv1') - 0.5, 600, 0.06); swoosh(T0('tv1') + 0.6)
+electric(wT('tomadas', 'tv2') - 0.2, 2.0, 0.22)
+swoosh(wT('certo', 'tv2') - 0.1)
+clack(wT('energia', 'tv2') + 0.4, 0.4)
 pad(T0('tv2'), TE('tv2'), [50, 57, 62], 0.014)
 # round 2: car (bad), stay (bad), go up (good)
 ding(VE('car1') - 0.2, 0.08, (1046, 1318))
 flow_bed(T0('car2'), TE('carfloat'), 0.14)
 motor(T0('car2') + 1.0, T0('carfloat') + 0.6, 0.04)
+swoosh(wT('boiar', 'car2') - 0.2)
 c0 = T0('carfloat'); slide(c0 + 0.2, 500, 1200, 0.6, 0.08); glubs(c0 + 0.5, 5, 0.14); splash(c0 + 0.3, 0.3)
 for k in range(3): honk(c0 + 1.1 + k * 0.45, 0.1)
-bad(VE('car2') - 0.6)
 def rewind(seg_name):
     r = T0(seg_name); n = int((seg[seg_name]['dur'] - 0.3) * SR); x = np.arange(n) / SR
     put(fx, band(rng.standard_normal(n), 2000, 7000) * (0.5 + 0.5 * np.sign(np.sin(2 * np.pi * 14 * x))) * 0.12 + np.sin(2 * np.pi * np.cumsum(900 + 500 * np.sin(2 * np.pi * 3 * x)) / SR) * 0.05, r + 0.15)
     scratch(r, 0.3); slide(TE(seg_name) - 0.35, 1500, 300, 0.35, 0.08)
 rewind('replay'); rewind('replay2')
 n = int(seg['stayrise']['dur'] * SR); x = np.arange(n) / SR; put(fx, lowp(rng.standard_normal(n), 500) * np.minimum(1, x * 2) * 0.3, T0('stayrise')); glubs(T0('stayrise') + 0.3, 5, 0.12)
-bad(T0('stayrise') + 1.2)
+swoosh(T0('stayrise') + 0.6)
 ding(VS('idea') - 0.15, 0.12, (1568, 2093))
-for k, at in enumerate(np.arange(T0('high') + 0.3, capT('telhado', 'high'), 0.19)): step(at, 0.1 if k % 2 else 0.13)
-good(capT('assim', 'high'))
+swoosh(T0('high') + 0.2)
+for k, at in enumerate(np.arange(T0('high') + 0.3, wT('telhado', 'high'), 0.19)): step(at, 0.1 if k % 2 else 0.13)
 # round 3: the friend's surfboard
 flow_bed(T0('gag1'), TE('germs'), 0.12)
-bad(capT('não é', 'gag1b') + 0.3)
-clank(capT('bueiros', 'gag1b') + 0.3, 0.3); splash(capT('bueiros', 'gag1b') + 0.3, 0.3)
+clank(wT('bueiros', 'gag1b') + 0.3, 0.3); splash(wT('bueiros', 'gag1b') + 0.3, 0.3); swoosh(wT('bueiros', 'gag1b') + 1.1)
 g0 = T0('gag2')
 for k in range(4): splash(g0 + 0.15 + k * 0.35, 0.12, 0.3)
 slide(g0 + 1.45, 1400, 250, 0.5, 0.12); splash(g0 + 1.95, 0.45, 1.0); boom(g0 + 1.95, 0.25, 60); glubs(g0 + 2.1, 4, 0.16)
 splash(g0 + 2.9, 0.35, 0.7); bloop(g0 + 2.95, 200, 700, 0.12)
 trombone(TE('gag2') - 1.0 + 0.2, 0.06)
-bloop(capT('xixi', 'germs') + 0.2, 500, 250, 0.08, 0.4)
-dtmf(capT('noventa', 'wait2'), '193'); dtmf(capT('nove,', 'wait2') + 0.3, '199')
-good(capT('assim', 'wait2'))
+bloop(wT('xixi', 'germs') + 0.2, 500, 250, 0.08, 0.4); swoosh(wT('lave', 'germs') - 0.2)
+for k in range(8): bloop(wT('sabão', 'germs') + 0.2 + k * 0.15, 600 + k * 40, 1200, 0.04, 0.12)   # soap bubbles
+dtmf(wT('cento', 'wait2'), '193'); dtmf(wT('nove', 'wait2') + 0.6, '199'); swoosh(T0('wait2') + 0.2)
 # ending gag
 uke(T0('q1'), T0('q2'), 0.05, 104)
 pad(T0('q2'), T0('rise'), [57, 60, 64], 0.015)
