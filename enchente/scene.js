@@ -23,7 +23,7 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 800);
+const camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 1200);
 
 // sky dome
 const skyU = { top: { value: new THREE.Color(0x2f7fd8) }, bot: { value: new THREE.Color(0xbfe6ff) }, sunDir: { value: V(0.5, 0.45, -0.75).normalize() }, sunCol: { value: new THREE.Color(0xfff2c0) } };
@@ -1121,7 +1121,7 @@ function direct(t, n, lt, g, H) {
     if (n === 'friend1') { cam.pos = AP(-0.6, 1.4, 1.2); cam.tgt = AP(-0.9, 1.1, -1.8); cam.fov = 44; shake = 0.15; }
     else { const k = ease(p); cam.pos = vl(AP(-0.6, 1.4, 1.2), AP(-0.7, 1.35, 0.5), k); cam.tgt = AP(-0.9, 1.1, -1.8); cam.fov = 44; }
   } else if (n === 'explain' || n === 'depth') {
-    hp.visible = fp.visible = false; dg.mode = 'hide'; cam.pos = AP(0, 2, 3); cam.tgt = AP(0, 1, -2);
+    hp.visible = fp.visible = false; dg.mode = 'hide'; const dc = dioCam(t); cam.pos = dc.pos; cam.tgt = dc.tgt; cam.fov = 48;
   } else if (n === 'car1') {
     hp = { x: SOFA_H.x + 0.6, z: SOFA_H.z + 1.4, y: AO.y, ry: 0.5, armR: A.point, armL: A.pointUp, mouth: hm, smile: 1, brow: -0.3, eyesWide: true };
     fp = Object.assign(fp, { legs: undefined, popc: false, y: AO.y, x: SOFA_F.x + 0.3, z: SOFA_F.z + 1.0, ry: -0.5, eyesWide: true, brow: 0.5, smile: 0, armL: A.rest, armR: A.rest, look: [-0.6, 0] });
@@ -1328,7 +1328,7 @@ function direct(t, n, lt, g, H) {
   cam.pos.add(V(Math.sin(t * 47) * sh, Math.sin(t * 61) * sh, Math.sin(t * 53) * sh));
   camera.position.copy(cam.pos); camera.fov = cam.fov; camera.updateProjectionMatrix(); camera.lookAt(cam.tgt);
   const focus = cam.tgt.clone(); focus.y = 0;
-  if (APTN.includes(n) || GAGN.includes(n) || n === 'kit' || isIndoorShot(n, lt)) { sun.target.position.copy(focus); sun.position.copy(focus).add(V(10, 30, 40)); }
+  if (APTN.includes(n) || GAGN.includes(n) || n === 'kit' || n === 'explain' || isIndoorShot(n, lt)) { sun.target.position.copy(focus); sun.position.copy(focus).add(V(10, 30, 40)); }
   else { focus.z = clamp(focus.z, -40, 45); focus.x = clamp(focus.x, -45, 40); sun.target.position.copy(focus); sun.position.copy(focus).add(V(40, 70, -30)); }
 }
 // the car in the bad idea: drives in, then the current lifts it and carries it away
@@ -1350,6 +1350,83 @@ function isIndoorShot(n, lt) {
 
 // ---------- world (outdoors) ----------
 const debrisOn = n => ['high', 'gag1', 'gag1b', 'car2', 'carfloat', 'wait2', 'q1'].includes(n);
+// ---------- 3D explanation: a cutaway model of countryside, river and city ----------
+const DIO = V(0, 0, 205);
+const dio = new THREE.Group(); dio.position.copy(DIO); scene.add(dio);
+const dioP = {};
+const EW = k => wordAt(k, T0('explain'));
+const E = { ch: EW('chove'), ab: EW('absorver'), ci: EW('cidade'), as: EW('asfalto'), li: EW('lixo'), bu: EW('bueiros'), ri: EW('rios'), tr: EW('transbordam'), inv: EW('invade') };
+{
+  const D = 8, layer = (x0, x1, y0, y1, c) => { const m = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, y1 - y0, D), std(c, { roughness: 0.95 })); m.position.set((x0 + x1) / 2, (y0 + y1) / 2, 0); m.receiveShadow = true; m.castShadow = true; dio.add(m); return m; };
+  // countryside (left): grass over soil layers that darken as they soak
+  dioP.soil = [layer(-15, -3.2, -1.2, -0.15, 0xa5794a), layer(-15, -3.2, -2.6, -1.2, 0x8f6a40), layer(-15, -3.2, -4.5, -2.6, 0x7a5835)];
+  layer(-15, -3.2, -0.15, 0, 0x6fae4a);
+  // river bed (middle)
+  layer(-3.2, 3.2, -4.5, -2.4, 0x6e5233); layer(-3.2, -2.4, -2.4, 0, 0x7a5835); layer(2.4, 3.2, -2.4, 0, 0x8c8780);
+  // city (right): base, asphalt, sidewalk
+  layer(3.2, 15, -4.5, -0.25, 0x9b9488); dioP.asph = layer(3.2, 15, -0.25, 0, 0x4a4d52);
+  for (let i = 0; i < 6; i++) { const st = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.012, 0.18), std(0xf4f4f4)); st.position.set(4.5 + i * 1.9, 0.006, 1.4); dio.add(st); }
+  // drain grate with a pipe below, and the trash that clogs it
+  const DX = 7.2; const grate = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.04, 0.8), std(0x222222, { metalness: 0.5 })); grate.position.set(DX, 0.02, 0.9); dio.add(grate);
+  for (let i = 0; i < 5; i++) { const b2 = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.05, 0.8), std(0x666666)); b2.position.set(DX - 0.48 + i * 0.24, 0.035, 0.9); dio.add(b2); }
+  const shaft = new THREE.Mesh(new THREE.BoxGeometry(0.9, 2.0, 0.7), std(0x1b1b1b)); shaft.position.set(DX, -1.25, 0.9); dio.add(shaft);
+  const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 4.4, 14), std(0x3a3a3a)); pipe.rotation.z = Math.PI / 2; pipe.position.set(5.1, -2.1, 0.9); dio.add(pipe);
+  dioP.trash = [];
+  [[0x3fa34d, 'b'], [0xe8e8e8, 's'], [0xd9534f, 'c'], [0xf2c14e, 'x'], [0x2e7dd1, 'c'], [0xe8e8e8, 's']].forEach(([c, k], i) => { let m; if (k === 'b') m = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.4, 10), std(c, { transparent: true, opacity: 0.85 })); else if (k === 's') m = new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 8), std(c, { roughness: 0.9 })); else if (k === 'c') m = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.22, 10), std(c, { metalness: 0.5 })); else m = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.25, 0.3), std(c)); m.castShadow = true; m.userData = { x: DX - 0.4 + (i % 3) * 0.4, z: 0.75 + Math.floor(i / 3) * 0.3, r: i * 1.3 }; dio.add(m); dioP.trash.push(m); });
+  // houses and buildings
+  [[5.0, 2.2, 2.0, '#f6c8a0'], [9.6, 3.6, 2.4, '#a8d8ea'], [12.6, 2.6, 2.0, '#ffe6a7'], [6.2, 5.5, 1.8, '#f7a7a7']].forEach(([x, h, w, c], i) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, 2.2), std(0xffffff, { map: facadeTex(c, '#5f8fb3', Math.max(2, Math.round(h / 1.1)), 2) })); m.position.set(x, h / 2, i === 3 ? -2.6 : -1.6); m.castShadow = m.receiveShadow = true; dio.add(m); if (i < 3) { const roof = new THREE.Mesh(new THREE.ConeGeometry(w * 0.8, 0.9, 4), std(0xb5523b)); roof.rotation.y = Math.PI / 4; roof.position.set(x, h + 0.45, -1.6); roof.castShadow = true; dio.add(roof); } });
+  // countryside trees
+  for (const [x, z] of [[-12, -1.5], [-8.5, -2.5], [-5.5, -1.2], [-10, 1.8]]) { const tr = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.16, 1.2, 8), std(0x6b4a2b)); tr.position.set(x, 0.6, z); dio.add(tr); const c = new THREE.Mesh(new THREE.IcosahedronGeometry(0.75, 1), std(0x3f8f2f, { flatShading: true })); c.position.set(x, 1.6, z); c.castShadow = true; dio.add(c); }
+  // storm clouds
+  for (let i = 0; i < 7; i++) { const c = new THREE.Group(); for (let k = 0; k < 4; k++) { const m = new THREE.Mesh(new THREE.SphereGeometry(1.1 + (k % 2) * 0.4, 12, 8), std(0x5f6b78, { roughness: 1 })); m.position.set(k * 1.2 - 1.8, (k % 2) * 0.35, 0); m.scale.y = 0.7; c.add(m); } c.position.set(-13 + i * 4.4, 8.5 + (i % 2) * 0.6, -1 + (i % 3)); dio.add(c); }
+  // water: in the river, and the flood that spreads over the banks
+  const wMat = new THREE.MeshStandardMaterial({ color: 0x7e6a4e, transparent: true, opacity: 0.88, roughness: 0.15, metalness: 0.2 });
+  dioP.river = new THREE.Mesh(new THREE.BoxGeometry(4.8, 1, D - 0.02), wMat); dio.add(dioP.river);
+  dioP.flood = new THREE.Mesh(new THREE.BoxGeometry(1, 1, D - 0.02), wMat); dio.add(dioP.flood);
+  // arrows: water sinking into the soil / running over the asphalt
+  dioP.arrows = []; const arM = std(0x5fd0ff, { emissive: 0x1d6f8a, emissiveIntensity: 0.6 });
+  for (let i = 0; i < 10; i++) { const g = new THREE.Group(); const sh = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.5, 8), arM); sh.position.y = 0.25; g.add(sh); const hd = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.3, 10), arM); hd.position.y = 0.6; g.add(hd); dio.add(g); dioP.arrows.push(g); }
+  // big rain drops falling on the model
+  dioP.drops = []; const dropM = new THREE.MeshBasicMaterial({ color: 0xbfe3ff });
+  for (let i = 0; i < 80; i++) { const d = new THREE.Mesh(new THREE.CapsuleGeometry(0.035, 0.35, 2, 6), dropM); d.userData = { x: -14.5 + (i * 7.31) % 29, z: -3.5 + (i * 3.17) % 7, o: (i * 0.137) % 1 }; dio.add(d); dioP.drops.push(d); }
+  dio.visible = false;
+}
+const SOIL0 = [0xa5794a, 0x8f6a40, 0x7a5835].map(c => new THREE.Color(c)), SOILW = [0x5d4026, 0x4e3520, 0x3f2c19].map(c => new THREE.Color(c));
+function updateDio(t) {
+  const sat = ss(E.ab + 0.3, E.ab + 2.6, t), rise = ss(E.ri - 0.6, E.tr + 0.6, t), over = ss(E.tr, E.tr + 1.2, t), inv = ss(E.inv - 0.2, E.inv + 1.6, t);
+  dioP.soil.forEach((m, i) => m.material.color.copy(SOIL0[i]).lerp(SOILW[i], sat));
+  const rl = lerp(-1.9, 0.12, rise); dioP.river.scale.y = rl + 2.4; dioP.river.position.set(0, (rl - 2.4) / 2, 0);
+  const fl = over * 0.12 + inv * 0.55, fw = 6.4 + over * 6 + inv * 17;
+  dioP.flood.visible = fl > 0.01; dioP.flood.scale.set(Math.min(fw, 29.8), Math.max(fl, 0.01), 1); dioP.flood.position.set(lerp(0, 0.2, inv), fl / 2, 0);
+  dioP.trash.forEach((m, i) => { const k = clamp((t - E.li - 0.1 - i * 0.12) / 0.5); m.visible = k > 0; m.position.set(m.userData.x, lerp(3, 0.15, k * k) + fl * (k >= 1 ? 1 : 0), m.userData.z); m.rotation.set(m.userData.r + k * 2, m.userData.r, k); });
+  const raining = ss(E.ch - 0.6, E.ch, t) * 0.8 + 0.2;
+  dioP.drops.forEach(d => { const u = d.userData, life = (t * 0.9 + u.o) % 1; d.visible = life < raining + 0.05; d.position.set(u.x, 8 - life * 8.2, u.z); });
+  dioP.arrows.forEach((a, i) => {
+    const country = i < 5, life = (t * 0.7 + i * 0.21) % 1;
+    if (country) { const sink = sat < 0.7; a.visible = t > E.ch && t < E.ci + 0.5; a.position.set(-13 + i * 2.2 + (sink ? 0 : life * 1.5), sink ? -0.3 - life * 2.2 : 0.3, 2.5); a.rotation.set(0, 0, sink ? Math.PI : -Math.PI / 2); }
+    else { a.visible = t > E.as - 0.2 && t < E.inv; a.position.set(14 - life * 6, 0.15, 1.8 + (i % 2) * 0.6); a.rotation.set(0, 0, Math.PI / 2); }
+    a.scale.setScalar(1 - Math.abs(life - 0.5) * 0.6);
+  });
+}
+function dioCam(t) {   // a camera move that visits each part as the narrator names it
+  const keys = [[T0('explain') + 0.3, V(0, 6, 22), V(0, 1.5, 0)], [E.ab - 0.6, V(-8, 3.2, 12), V(-9, -0.8, 0)], [E.ci - 0.2, V(7, 3.6, 12), V(8, 0.8, 0)], [E.li - 0.2, V(9.8, 3.2, 7.8), V(7.0, 0.2, 0.9)], [E.ri - 0.4, V(0, 3.0, 11), V(0, -0.6, 0)], [E.inv, V(1, 7, 20), V(1, 0.8, 0)]];
+  let i = 0; while (i < keys.length - 1 && t > keys[i + 1][0]) i++;
+  const a = keys[i], b = keys[Math.min(i + 1, keys.length - 1)], k = b === a ? 1 : ease(clamp((t - a[0]) / Math.max(0.8, Math.min(1.4, b[0] - a[0]))));
+  const pos = i === keys.length - 1 ? a[1].clone() : vl(a[1], b[1], k), tgt = i === keys.length - 1 ? a[2].clone() : vl(a[2], b[2], k);
+  if (t > E.inv) { const d = t - E.inv; pos.add(V(Math.sin(d * 0.3) * 2, 0, 0)); }
+  return { pos: pos.add(DIO), tgt: tgt.add(DIO) };
+}
+function explain3D(t, g) {
+  const lt = t - g.start, a = ss(0, 0.35, lt) * (1 - ss(g.dur - 0.35, g.dur, lt));
+  const at = (v) => proj(v.clone().add(DIO)), sat = ss(E.ab + 0.3, E.ab + 2.6, t);
+  if (t > E.ch - 0.2 && t < E.ci - 0.2) { const [x, y] = at(V(-9, -2.2, 4)); label(sat < 0.5 ? 'O SOLO ABSORVE' : 'ENCHARCADO: NÃO ABSORVE MAIS', clamp(x, 260, 1020), clamp(y, 120, 560), 34, a * ss(E.ch - 0.2, E.ch + 0.2, t), sat < 0.5 ? '#ffffff' : '#ffd23f'); }
+  if (t > E.as - 0.2 && t < E.li - 0.2) { const [x, y] = at(V(9, 1.6, 2)); label('ASFALTO NÃO ABSORVE', clamp(x, 260, 1020), clamp(y, 120, 560), 34, a * ss(E.as - 0.2, E.as + 0.2, t)); }
+  if (t > E.li - 0.2 && t < E.ri - 0.4) { const [x, y] = at(V(7.2, 1.0, 0.9)); label('LIXO ENTOPE O BUEIRO', clamp(x, 260, 1020), clamp(y - 140, 100, 560), 38, a * ss(E.li, E.li + 0.3, t), '#ffd23f'); }
+  if (t > E.ri - 0.4 && t < E.inv - 0.2) { const [x, y] = at(V(0, 1.8, 0)); label(t > E.tr ? 'O RIO TRANSBORDA' : 'O RIO SOBE', clamp(x, 260, 1020), clamp(y, 100, 560), 40, a, '#ffd23f'); }
+  if (t > E.inv - 0.2) { const [x, y] = at(V(8, 4.2, 0)); label('A ÁGUA INVADE RUAS E CASAS', clamp(x, 300, 980), clamp(y, 100, 560), 38, a * ss(E.inv - 0.2, E.inv + 0.3, t)); }
+  chip('COMO ACONTECE UMA ENCHENTE');
+}
+
 function world(t, n, lt) {
   const gag = GAGN.includes(n), Lraw = floodD(t), L = ROAD.y + Lraw;
   const storm = n === 'end' ? 0 : (t < R0 && !gag ? 0.92 : 1);
@@ -1396,6 +1473,7 @@ function world(t, n, lt) {
   lobbyW.visible = interior.visible;
   building.userData.hinge.rotation.y = ['gag1', 'gag2', 'gag3', 'germs'].includes(n) ? -1.7 : 0;
   water.visible = false; spray.visible = false;
+  dio.visible = n === 'explain'; if (dio.visible) updateDio(t);
   return { storm, inside };
 }
 // water in the building lobby
@@ -1671,7 +1749,7 @@ function proj(v) { const s = v.clone().project(camera); return [(s.x * 0.5 + 0.5
 function overlay(t, g) {
   ui.clearRect(0, 0, W, H);
   const lt = t - g.start, n = g.scene, fadeIn = ss(0, 0.3, lt);
-  if (n === 'explain') floodDiagram(t, g);
+  if (n === 'explain') explain3D(t, g);
   if (n === 'depth') depthGauge(t, g);
   if (n === 'title' && !NOTITLE) {
     if (lt > 0.6) { const s = pop(lt - 0.6, 0.5); ui.save(); ui.translate(640, 300); ui.scale(s, s); ui.rotate(-0.02); ui.textAlign = 'center'; ui.textBaseline = 'middle'; ui.globalAlpha = 1 - ss(g.dur - 0.6, g.dur, lt); outlined('Você sobreviveria', 0, -55, 72, '#ffffff', '#0a2a4a', 900, 0.18); outlined('a uma ENCHENTE?', 0, 45, 100, '#5fd0ff', '#0a2a4a', 900, 0.18); ui.restore(); }
