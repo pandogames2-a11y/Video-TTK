@@ -104,6 +104,16 @@ function phone(x, y, s, t, rot = 0) {
     emoji(['🛥️', '🌴', '🚗', '🐊', '💸', '🕺', '🏝️'][((i + base) % 7 + 7) % 7], 0, y + 170, 110); }
   X.restore(); X.restore();
 }
+function weaponWheel(cx, cy, lt, pt) {
+  const k = eb(seg(pt, 0.1, 0.4)), items = ['🔫', '🔪', '💣', '🚀', '🏏', '🧨', '🪓', '🔦'], sel = Math.floor(pt * 2.5) % 8;
+  X.save(); X.translate(cx, cy); X.scale(k, k);
+  for (let i = 0; i < 8; i++) { const a0 = -Math.PI / 2 + i * Math.PI / 4 - Math.PI / 8, a1 = a0 + Math.PI / 4;
+    X.beginPath(); X.arc(0, 0, 330, a0 + 0.02, a1 - 0.02); X.arc(0, 0, 130, a1 - 0.05, a0 + 0.05, true); X.closePath();
+    X.fillStyle = i === sel ? 'rgba(255,212,0,0.85)' : 'rgba(10,10,20,0.75)'; X.fill(); X.strokeStyle = 'rgba(255,255,255,0.35)'; X.lineWidth = 3; X.stroke();
+    const am = (a0 + a1) / 2; emoji(items[i], Math.cos(am) * 230, Math.sin(am) * 230, 84); }
+  X.beginPath(); X.arc(0, 0, 120, 0, Math.PI * 2); X.fillStyle = 'rgba(0,0,0,0.8)'; X.fill(); txt('∞', 0, 4, 90, '#ffd400');
+  X.restore();
+}
 let GRAIN;
 function grainLayer() { const c = document.createElement('canvas'); c.width = 480; c.height = 270; const g = c.getContext('2d'); const d = g.createImageData(480, 270); for (let i = 0; i < d.data.length; i += 4) { const v = Math.random() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 14; } g.putImageData(d, 0, 0); return c; }
 
@@ -127,7 +137,7 @@ const REG = [
 const SCENES = {};
 
 SCENES.hook = (lt, s, P) => {
-  if (P.pi === 0) {
+  if (P.v === 'split') {
     const sp = eo(seg(lt, 0, 0.6));
     X.save(); X.beginPath(); X.rect(-500, -300, W / 2 + 500, H + 600); X.clip();
     X.fillStyle = '#2b2f36'; X.fillRect(-500, -300, W, H + 600); skyline(3, 900, '#1b1e23', '#555', 200, 600, 0, -500, W / 2 + 50);
@@ -137,7 +147,7 @@ SCENES.hook = (lt, s, P) => {
     txt('GTA 6', W * 0.75, 330 + (1 - sp) * 300, 190, '#fff', { stroke: 14, glow: '#ff2e88' }); X.restore();
     X.fillStyle = '#fff'; X.fillRect(W / 2 - 5, -300, 10, H + 600);
     const q = 1 + 0.12 * Math.sin(lt * 9); X.save(); X.translate(W / 2, 560); X.scale(q, q); rr(-90, -90, 180, 180, 90); X.fillStyle = '#ffd400'; X.fill(); txt('=?', 0, 6, 100, '#111'); X.restore();
-  } else if (P.pi < 3) {
+  } else if (P.v === 'sunset') {
     sunset(); synthSun(W / 2, 640, 330, lt); grid(lt, 760, 'rgba(255,60,200,0.6)');
     skyline(19, 770, '#22052f', '#ffcf6e', 120, 420, lt); palm(150, 900, 1.1, '#100018', Math.sin(lt * 1.7)); palm(1780, 920, 1.0, '#100018', Math.sin(lt * 1.5 + 1));
     X.save(); X.translate(W / 2, 540); X.rotate(lt * 0.3); for (let i = 0; i < 16; i++) { X.rotate(Math.PI / 8); X.fillStyle = i % 2 ? 'rgba(255,46,136,0.07)' : 'rgba(255,212,0,0.05)'; X.beginPath(); X.moveTo(0, 0); X.lineTo(-160, -1500); X.lineTo(160, -1500); X.fill(); } X.restore();
@@ -164,19 +174,19 @@ SCENES.ctx = (lt, s, P) => {
 SCENES.n1 = (lt, s, P) => {
   sunset(); synthSun(W / 2, 680, 360, lt); grid(lt, 800, 'rgba(255,60,200,0.5)'); skyline(21, 810, '#22052f', '#ffcf6e', 120, 380, lt);
   palm(140, 940, 1.15, '#100018', Math.sin(lt * 1.7)); palm(1800, 960, 1.0, '#100018', Math.sin(lt * 1.5 + 1));
-  if (P.pi === 1) {
+  if (P.v === 'tres') {
     for (let i = 0; i < 3; i++) { const x = W / 2 + (i - 1) * 300, k = eb(seg(P.pt, 0.1 + i * 0.25, 0.4)); X.save(); X.globalAlpha = k; person(x, 1000, 1.05, '#8a8f9a', { b: [1, 1.05, 0.95][i] }); X.restore(); }
     // linhas tracejadas entre eles = histórias separadas
     X.save(); X.setLineDash([18, 16]); X.strokeStyle = 'rgba(255,255,255,0.6)'; X.lineWidth = 5; for (let i = 0; i < 2; i++) { X.beginPath(); X.moveTo(W / 2 + (i - 1) * 300 + 70, 700); X.lineTo(W / 2 + i * 300 - 70, 700); X.stroke(); } X.restore();
   } else {
-    const k = eb(seg(lt, 0.2, 0.5)), sw = P.pi === 4 ? (Math.floor(P.pt / 0.8) % 2) : -1;
+    const k = eb(seg(lt, 0.2, 0.5)), sw = P.v === 'troca' ? (Math.floor(P.pt / 0.8) % 2) : -1;
     X.save(); X.translate(W / 2, 1010); X.scale(k, k);
     person(-150, 0, 1.6, '#0c0014', { glow: sw === 1 ? 'rgba(47,243,255,0.2)' : '#2ff3ff', b: 1.08 });
     person(150, 0, 1.55, '#0c0014', { glow: sw === 0 ? 'rgba(255,46,136,0.2)' : '#ff2e88', b: 0.86, f: true });
     X.restore();
-    if (P.pi >= 2) { txt('JASON', W / 2 - 160, 1040, 56, '#2ff3ff', { stroke: 10 }); txt('LUCIA', W / 2 + 160, 1040, 56, '#ff7ab8', { stroke: 10 }); }
-    if (P.pi === 4) { txt('⇄', W / 2, 430, 160, '#ffd400', { stroke: 12, font: F }); }
-    if (P.pi === 2 || P.pi === 5) emoji('❤️‍🔥', W / 2, 180, 130 * eb(seg(P.pt, 0.3, 0.4)));
+    if (P.v !== 'dupla' || lt > 2) { txt('JASON', W / 2 - 160, 1040, 56, '#2ff3ff', { stroke: 10 }); txt('LUCIA', W / 2 + 160, 1040, 56, '#ff7ab8', { stroke: 10 }); }
+    if (P.v === 'troca') { txt('⇄', W / 2, 430, 160, '#ffd400', { stroke: 12, font: F }); }
+    if (P.v === 'casal' || P.v === 'dupla') emoji('❤️‍🔥', W / 2, 180, 130 * eb(seg(P.pt, 0.3, 0.4)));
   }
 };
 
@@ -191,17 +201,17 @@ SCENES.n2 = (lt, s, P) => {
   const fl = Math.sin(lt * 23) > 0.94 ? 1 : 0;
   grad([[0, fl ? '#9aa6d6' : '#141a2b'], [1, fl ? '#6f7aa8' : '#38425c']], 0, 900);
   X.fillStyle = '#1c2535'; X.fillRect(-500, 800, W + 1000, 600); skyline(31, 810, '#0e1420', '#334', 100, 340);
-  X.fillStyle = P.pi === 3 ? '#2f3a4a' : '#4c4a44'; X.fillRect(-500, 900, W + 1000, 500);
-  if (P.pi === 3) { X.fillStyle = 'rgba(150,190,255,0.25)'; for (let i = 0; i < 8; i++) { X.beginPath(); X.ellipse(100 + i * 160, 980 + (i % 3) * 30, 90, 14, 0, 0, Math.PI * 2); X.fill(); } }
+  X.fillStyle = P.v === 'molhado' ? '#2f3a4a' : '#4c4a44'; X.fillRect(-500, 900, W + 1000, 500);
+  if (P.v === 'molhado') { X.fillStyle = 'rgba(150,190,255,0.25)'; for (let i = 0; i < 8; i++) { X.beginPath(); X.ellipse(100 + i * 160, 980 + (i % 3) * 30, 90, 14, 0, 0, Math.PI * 2); X.fill(); } }
   const rnd = R(5); X.strokeStyle = 'rgba(190,210,255,0.55)'; X.lineWidth = 3;
   for (let i = 0; i < 300; i++) { const x0 = rnd() * (W + 800) - 400, sp = 1400 + rnd() * 900, y0 = (rnd() * (H + 300) + lt * sp) % (H + 300) - 150; X.beginPath(); X.moveTo(x0, y0); X.lineTo(x0 - 16, y0 + 48); X.stroke(); }
   for (let i = 0; i < 8; i++) { X.fillStyle = 'rgba(40,46,64,0.95)'; X.beginPath(); X.ellipse(-200 + i * 170 + Math.sin(lt + i) * 25, 120 + (i % 2) * 70, 200, 90, 0, 0, Math.PI * 2); X.fill(); }
   if (fl) { X.strokeStyle = '#fff'; X.lineWidth = 8; X.shadowColor = '#bcd'; X.shadowBlur = 30; X.beginPath(); X.moveTo(500, 180); X.lineTo(450, 420); X.lineTo(520, 440); X.lineTo(440, 760); X.stroke(); X.shadowBlur = 0; }
-  if (P.pi >= 5) { const k = eb(seg(P.pt, 0.3, 0.6)); X.save(); X.translate(480, 470); X.rotate(-lt * 4); X.scale(k, k);
+  if (P.v === 'furacao') { const k = eb(seg(P.pt, 0.3, 0.6)); X.save(); X.translate(480, 470); X.rotate(-lt * 4); X.scale(k, k);
     for (let i = 0; i < 5; i++) { X.strokeStyle = `rgba(230,235,255,${0.8 - i * 0.12})`; X.lineWidth = 26 - i * 3; X.beginPath(); X.arc(0, 0, 40 + i * 55, i, i + 4.2); X.stroke(); } X.restore(); }
   X.restore();
   X.strokeStyle = '#fff'; X.lineWidth = 8; X.beginPath(); X.moveTo(split + 160, -300); X.lineTo(split - 160, H + 300); X.stroke();
-  if (P.pi === 2) { txt('⛈️ AQUI', 500, 640, 70, '#fff', { stroke: 12 }); txt('☀️ ALI', 1420, 640, 70, '#fff', { stroke: 12 }); }
+  if (P.v === 'local') { txt('⛈️ AQUI', 500, 640, 70, '#fff', { stroke: 12 }); txt('☀️ ALI', 1420, 640, 70, '#fff', { stroke: 12 }); }
 };
 
 SCENES.n3 = (lt, s, P) => {
@@ -212,17 +222,16 @@ SCENES.n3 = (lt, s, P) => {
   X.fillStyle = '#1a3a3a'; X.fillRect(-500, 640, W + 1000, 700);
   X.strokeStyle = 'rgba(255,200,150,0.18)'; X.lineWidth = 3; for (let y = 660; y < H + 200; y += 34) { X.beginPath(); for (let x = -500; x <= W + 500; x += 30) X.lineTo(x, y + Math.sin(x / 70 + lt * 2 + y) * 5); X.stroke(); }
   for (let i = 0; i < 30; i++) { const x = -300 + i * 90 + r() * 40; X.strokeStyle = '#2d4a24'; X.lineWidth = 6; X.beginPath(); X.moveTo(x, 700); X.quadraticCurveTo(x + 10, 640, x + 4 + Math.sin(lt + i) * 6, 600); X.stroke(); }
-  const show = (k0, f) => { const k = P.pi >= k0 ? eb(seg(P.pi === k0 ? P.pt : 9, 0.2, 0.5)) : 0.0; if (k > 0) f(k); };
+  const show = (v0, f) => { const k = P.v === v0 ? eb(seg(P.pt, 0.2, 0.5)) : 0.0; if (k > 0) f(k); };
   emoji('🐊', 500 + Math.sin(lt * 0.7) * 60, 800, 170);
-  emoji('🦩', 1400, 640, 190 * (P.pi >= 3 ? 1 : 0.6));
-  emoji('🦩', 1560, 660, 160 * (P.pi >= 3 ? 1 : 0.6));
+  emoji('🦩', 1400, 640, 190 * (P.v === 'fauna' ? 0.6 : 1));
+  emoji('🦩', 1560, 660, 160 * (P.v === 'fauna' ? 0.6 : 1));
   for (let i = 0; i < 5; i++) { const x = ((lt * 140 + i * 420) % (W + 600)) - 300; emoji('🐦', x, 160 + i * 50 + Math.sin(lt * 3 + i) * 20, 60); }
-  show(3, k => { X.save(); X.translate(1000, 900); X.scale(k, k); // peixe-boi desenhado
+  show('pantano', k => { X.save(); X.translate(1000, 900); X.scale(k, k); // peixe-boi desenhado
     X.fillStyle = '#8f9aa3'; X.beginPath(); X.ellipse(0, 0, 150, 60, 0, 0, Math.PI * 2); X.fill(); X.beginPath(); X.ellipse(150, 0, 45, 55, 0, 0, Math.PI * 2); X.fill();
     X.beginPath(); X.ellipse(-40, 50, 40, 15, 0.6, 0, Math.PI * 2); X.fill(); X.fillStyle = '#222'; X.beginPath(); X.arc(-110, -15, 8, 0, Math.PI * 2); X.fill();
     X.fillStyle = '#b9c2ca'; X.beginPath(); X.ellipse(-145, 8, 25, 20, 0, 0, Math.PI * 2); X.fill(); X.restore(); });
-  show(4, k => { emoji('🦎', 250, 600, 120 * k); emoji('🐒', 1750, 420, 130 * k, Math.sin(lt * 3) * 0.2); });
-  if (P.pi === 3) { arrow(820, 260, 560, 720, '#ffd400'); arrow(1100, 260, 1360, 560, '#ffd400'); }
+  show('invasoras', k => { emoji('🦎', 250, 600, 120 * k); emoji('🐒', 1750, 420, 130 * k, Math.sin(lt * 3) * 0.2); });
 };
 
 SCENES.n4 = (lt, s, P) => {
@@ -237,10 +246,10 @@ SCENES.n4 = (lt, s, P) => {
     { i: 0, p: [[1040, 540], [1220, 540], [1230, 820], [1080, 820]], l: [1150, 680] },
     { i: 1, p: [[1080, 860], [1150, 880], [1020, 990], [860, 1040], [830, 1000]], l: [990, 960] },
   ];
-  const cur = P.pi >= 2 && P.pi <= 7 ? P.pi - 2 : -1;
+  const cur = P.v.startsWith('reg') ? +P.v.slice(3) : -1;
   X.save(); X.translate(960, 470); X.scale(0.8, 0.8); X.translate(-960, -540);
   regs.forEach(g => {
-    const [name, , col] = REG[g.i], hot = g.i === cur, seen = P.pi > 7 || (cur >= 0 && g.i <= cur);
+    const [name, , col] = REG[g.i], hot = g.i === cur, seen = cur >= 0 && g.i <= cur;
     X.beginPath(); g.p.forEach(([x, y], j) => j ? X.lineTo(x, y) : X.moveTo(x, y)); X.closePath();
     X.fillStyle = col; X.globalAlpha = hot ? 1 : seen ? 0.75 : 0.35; if (hot) { X.shadowColor = '#fff'; X.shadowBlur = 50 + 20 * Math.sin(lt * 8); } X.fill(); X.shadowBlur = 0;
     X.strokeStyle = '#fff'; X.lineWidth = hot ? 10 : 4; X.stroke(); X.globalAlpha = 1;
@@ -253,16 +262,16 @@ SCENES.n5 = (lt, s, P) => {
   const g = X.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#3a0ca3'); g.addColorStop(1, '#f72585'); X.fillStyle = g; X.fillRect(-500, -300, W + 1000, H + 600);
   for (let i = 0; i < 14; i++) { const r = R(i + 9), y = ((r() * H - lt * (90 + r() * 120)) % (H + 200) + H + 200) % (H + 200) - 100; emoji(['❤️', '👍', '😂', '🔥'][i % 4], r() * W, y, 50 + r() * 40, 0, 0.7); }
   phone(W / 2, 560, 0.92, lt, Math.sin(lt * 1.3) * 0.04);
-  if (P.pi === 1) { rr(W / 2 - 300, 60, 600, 90, 20); X.fillStyle = '#3b5998'; X.fill(); txt('Lifeinvader (GTA 5)', W / 2, 106, 44, '#fff'); }
-  if (P.pi >= 2) { const likes = (P.pt * 0.6 * Math.max(1, P.pt)).toFixed(1).replace('.', ','); rr(W / 2 + 230, 820, 340, 100, 50); X.fillStyle = '#fff'; X.fill(); txt(`❤️ ${likes}M`, W / 2 + 400, 872, 50, '#e0245e'); }
-  if (P.pi === 5) { const km = eb(seg(P.pt, 0.8, 0.35)); X.save(); X.translate(W / 2, 540); X.rotate(0.1); X.scale(km, km); rr(-420, -100, 840, 200, 30); X.fillStyle = '#ffd400'; X.fill(); X.lineWidth = 10; X.strokeStyle = '#111'; X.stroke(); txt('VIROU MEME 😂', 0, 6, 92, '#111'); X.restore(); }
+  if (P.v === 'gta5') { rr(W / 2 - 300, 60, 600, 90, 20); X.fillStyle = '#3b5998'; X.fill(); txt('Lifeinvader (GTA 5)', W / 2, 106, 44, '#fff'); }
+  if (P.v !== 'gta5') { const likes = (P.pt * 0.6 * Math.max(1, P.pt)).toFixed(1).replace('.', ','); rr(W / 2 + 230, 820, 340, 100, 50); X.fillStyle = '#fff'; X.fill(); txt(`❤️ ${likes}M`, W / 2 + 400, 872, 50, '#e0245e'); }
+  if (P.v === 'meme') { const km = eb(seg(P.pt, 0.8, 0.35)); X.save(); X.translate(W / 2, 540); X.rotate(0.1); X.scale(km, km); rr(-420, -100, 840, 200, 30); X.fillStyle = '#ffd400'; X.fill(); X.lineWidth = 10; X.strokeStyle = '#111'; X.stroke(); txt('VIROU MEME 😂', 0, 6, 92, '#111'); X.restore(); }
 };
 
 SCENES.n6 = (lt, s, P) => {
   grad([[0, '#ff9e6d'], [0.5, '#ff5e8a'], [1, '#2b1036']]);
   skyline(61, 700, '#5a1d4a', '#ffd36e', 250, 600, lt);
   X.fillStyle = '#3b2a3f'; X.fillRect(-500, 700, W + 1000, 600); X.fillStyle = '#5c4660'; X.fillRect(-500, 700, W + 1000, 26);
-  const r = R(77), same = P.pi === 1; const cols = ['#111', '#1d1d2b', '#2a1530', '#101820'];
+  const r = R(77), same = P.v === 'iguais'; const cols = ['#111', '#1d1d2b', '#2a1530', '#101820'];
   for (let i = 0; i < 16; i++) {
     const dir = r() < 0.5 ? 1 : -1, sp = 70 + r() * 90, sc = 0.5 + r() * 0.35, ph = r() * (W + 1000);
     const x = ((ph + dir * lt * sp) % (W + 1000) + W + 1000) % (W + 1000) - 500, y = 790 + sc * 260;
@@ -270,13 +279,13 @@ SCENES.n6 = (lt, s, P) => {
     person(x, y, same ? 0.7 : sc, same ? '#333' : cols[i % 4], { b, m, f, step: Math.sin(lt * 7 + i) });
     if (!same && i % 3 === 0) emoji(['☕', '📱', '🐕', '🛹', '🎧', '🏋️'][i % 6], x + 50, y - 520 * sc, 56);
   }
-  if (P.pi === 4) { emoji('👋', 560, 300, 140, Math.sin(lt * 8) * 0.3); emoji('😤', 1360, 300, 140); }
+  if (P.v === 'cumprimentar') { emoji('👋', 560, 300, 140, Math.sin(lt * 8) * 0.3); emoji('😤', 1360, 300, 140); }
 };
 
 SCENES.mid = (lt, s, P) => {
   X.fillStyle = '#070008'; X.fillRect(-500, -300, W + 1000, H + 600);
   const g = X.createRadialGradient(W / 2, 540, 100, W / 2, 540, 1100); g.addColorStop(0, P.pi === 0 ? 'rgba(255,0,60,0.45)' : 'rgba(200,0,40,0.6)'); g.addColorStop(1, 'rgba(0,0,0,0)'); X.fillStyle = g; X.fillRect(-500, -300, W + 1000, H + 600);
-  if (P.pi === 1) { const sh = 10 * Math.sin(lt * 60); ['rgba(0,255,255,0.7)', 'rgba(255,0,80,0.7)', '#fff'].forEach((c, i) => txt('SEGURA', W / 2 + sh + (i - 1) * 10, 300, 200, c)); }
+  if (P.v === 'segura') { const sh = 10 * Math.sin(lt * 60); ['rgba(0,255,255,0.7)', 'rgba(255,0,80,0.7)', '#fff'].forEach((c, i) => txt('SEGURA', W / 2 + sh + (i - 1) * 10, 300, 200, c)); }
   else { for (let i = 0; i < 8; i++) emoji(['👍', '🔔'][i % 2], 200 + i * 220, 900 + Math.sin(lt * 3 + i) * 30, 80, 0, 0.6); }
 };
 
@@ -289,9 +298,9 @@ SCENES.n7 = (lt, s, P) => {
   X.fillStyle = '#c94b3a'; X.fillRect(-480, -470, 960, 110); txt('PERFIL CRIMINAL', 0, -415, 66, '#fff');
   rr(-430, -320, 280, 340, 10); X.fillStyle = '#b9ab90'; X.fill(); person(-290, 0, 0.66, '#4a3f30');
   ['NOME', 'ESTILO', 'NÍVEL'].forEach((l, i) => { txt(l, -100, -290 + i * 105, 36, '#5a4a35', { align: 'left' }); X.fillStyle = '#222'; X.fillRect(-100, -258 + i * 105, 480 * eo(seg(lt, 0.6 + i * 0.3, 0.5)), 34); });
-  const labels = P.pi === 3 ? ['PROFISSIONAL', 'AGRESSIVO', 'VIOLENTO'] : ['AGIR NO CRIME', 'PADRÕES', '???'];
+  const labels = P.v === 'niveis' ? ['PROFISSIONAL', 'AGRESSIVO', 'VIOLENTO'] : ['AGIR NO CRIME', 'PADRÕES', '???'];
   labels.forEach((l, i) => { txt(l, -430, 100 + i * 115, 46, '#3b2f20', { align: 'left' }); rr(60, 78 + i * 115, 360, 42, 21); X.fillStyle = '#cbbd9f'; X.fill(); rr(60, 78 + i * 115, 360 * (0.3 + 0.6 * (0.5 + 0.5 * Math.sin(lt * 3 + i * 2))), 42, 21); X.fillStyle = '#c94b3a'; X.fill(); });
-  if (P.pi >= 3) { const k = eb(seg(P.pi === 3 ? P.pt : 9, 1.2, 0.35)); X.save(); X.translate(0, 210); X.rotate(-0.16); X.scale(k, k); X.strokeStyle = '#d0021b'; X.lineWidth = 14; rr(-460, -80, 920, 160, 20); X.stroke(); txt('NÃO CONFIRMADO', 0, 6, 80, '#d0021b'); X.restore(); }
+  if (P.v === 'niveis') { const k = eb(seg(P.pt, 1.2, 0.35)); X.save(); X.translate(0, 210); X.rotate(-0.16); X.scale(k, k); X.strokeStyle = '#d0021b'; X.lineWidth = 14; rr(-460, -80, 920, 160, 20); X.stroke(); txt('NÃO CONFIRMADO', 0, 6, 80, '#d0021b'); X.restore(); }
   X.restore();
   emoji('🔍', 1550 + Math.sin(lt * 2) * 40, 330 + Math.cos(lt * 2) * 30, 190);
 };
@@ -301,15 +310,15 @@ SCENES.n8 = (lt, s, P) => {
   X.fillStyle = '#05060d'; X.fillRect(-500, -300, W + 1000, H + 600); skyline(81, 860, '#0b0d18', '#334', 200, 600, lt);
   X.fillStyle = '#111421'; X.fillRect(-500, 860, W + 1000, 600);
   const g = X.createRadialGradient(blink ? 200 : 1720, 300, 50, blink ? 200 : 1720, 300, 1300); g.addColorStop(0, blink ? 'rgba(255,20,40,0.55)' : 'rgba(30,80,255,0.55)'); g.addColorStop(1, 'rgba(0,0,0,0)'); X.fillStyle = g; X.fillRect(-500, -300, W + 1000, H + 600);
-  const nstars = P.pi <= 1 ? 5 : 6, lit = P.pi === 0 ? Math.min(5, Math.floor(lt * 2)) : P.pi === 1 ? (P.pt % 3 < 2 ? 5 : 0) : 6;
-  for (let i = 0; i < nstars; i++) { const on = i < lit, hollow = P.pi === 4 && i === 0; X.save(); X.translate(W / 2 + (i - (nstars - 1) / 2) * 150, 310); const sc = (P.pi === 2 && i === 5) ? eb(seg(P.pt, 0.8, 0.4)) * 1.2 : 1; X.scale(sc, sc);
+  const nstars = P.v === 'gta5' ? 5 : 6, lit = P.v === 'gta5' ? (P.pt % 3 < 2 ? Math.min(5, 1 + Math.floor(P.pt * 3)) : 0) : 6;
+  for (let i = 0; i < nstars; i++) { const on = i < lit, hollow = P.v === 'vazada' && i === 0; X.save(); X.translate(W / 2 + (i - (nstars - 1) / 2) * 150, 310); const sc = (P.v === 'seis' && i === 5) ? eb(seg(P.pt, 0.8, 0.4)) * 1.2 : 1; X.scale(sc, sc);
     X.beginPath(); for (let j = 0; j < 10; j++) { const a = -Math.PI / 2 + j * Math.PI / 5, r = j % 2 ? 26 : 62; X.lineTo(Math.cos(a) * r, Math.sin(a) * r); } X.closePath();
     X.fillStyle = hollow ? 'rgba(0,0,0,0)' : on ? '#fff' : 'rgba(255,255,255,0.15)'; X.fill(); X.lineWidth = hollow ? 8 : 6; X.strokeStyle = hollow ? '#fff' : '#000'; X.stroke(); X.restore(); }
-  if (P.pi === 4) { arrow(W / 2 - 560, 480, W / 2 - 430, 370, '#ffd400'); }
-  car(P.pi === 5 ? 700 + Math.sin(lt) * 40 : W / 2, 1010, 1.3, '#0d0f1a', { police: true, blink });
-  if (P.pi === 5) { txt('📡', 700, 700, 110, '#fff', { font: EM }); X.save(); X.strokeStyle = 'rgba(80,160,255,0.7)'; X.lineWidth = 6; for (let k = 0; k < 3; k++) { const rr2 = ((P.pt * 160 + k * 120) % 360); X.globalAlpha = 1 - rr2 / 360; X.beginPath(); X.arc(700, 700, rr2, 0, Math.PI * 2); X.stroke(); } X.restore(); }
-  if (P.pi === 3) { const sw = P.pt > 3.2; emoji(sw ? '👔' : '👕', 1500, 560, 150); if (sw) txt('?', 1610, 470, 120, '#ffd400', { stroke: 10 }); }
-  if (P.pi === 6) { const x = 300 + ((P.pt * 500) % 1500); emoji('🐕', x, 900, 150); emoji('🏃', x + 300, 870, 150); }
+  if (P.v === 'vazada') { arrow(W / 2 - 560, 480, W / 2 - 430, 370, '#ffd400'); }
+  car(P.v === 'rastreador' ? 700 + Math.sin(lt) * 40 : W / 2, 1010, 1.3, '#0d0f1a', { police: true, blink });
+  if (P.v === 'rastreador') { txt('📡', 700, 700, 110, '#fff', { font: EM }); X.save(); X.strokeStyle = 'rgba(80,160,255,0.7)'; X.lineWidth = 6; for (let k = 0; k < 3; k++) { const rr2 = ((P.pt * 160 + k * 120) % 360); X.globalAlpha = 1 - rr2 / 360; X.beginPath(); X.arc(700, 700, rr2, 0, Math.PI * 2); X.stroke(); } X.restore(); }
+  if (P.v === 'roupa') { const sw = P.pt > 3.2; emoji(sw ? '👔' : '👕', 1500, 560, 150); if (sw) txt('?', 1610, 470, 120, '#ffd400', { stroke: 10 }); }
+  if (P.v === 'caes') { const x = 300 + ((P.pt * 500) % 1500); emoji('🐕', x, 900, 150); emoji('🏃', x + 300, 870, 150); }
 };
 
 SCENES.n9 = (lt, s, P) => {
@@ -317,15 +326,16 @@ SCENES.n9 = (lt, s, P) => {
   X.fillStyle = '#152033'; X.fillRect(-500, 860, W + 1000, 400);
   emoji('🎒', 700, 560, 380, Math.sin(lt * 2) * 0.05);
   ['💵', '📱', '🔦', '🔧', '🍔'].forEach((e, i) => { const k = eb(seg(lt, 0.4 + i * 0.18, 0.35)); const a = -1.4 + i * 0.7; emoji(e, 700 + Math.cos(a) * 330, 560 + Math.sin(a) * 300, 90 * k); });
-  if (P.pi === 1) { const k = eb(seg(P.pt, 0.4, 0.35)); X.save(); X.translate(1350, 560); X.scale(k, k);
+  if (P.v === 'roda') { weaponWheel(1350, 540, lt, P.pt); }
+  if (P.v === 'bolso') { const k = eb(seg(P.pt, 0.4, 0.35)); X.save(); X.translate(1350, 560); X.scale(k, k);
     rr(-170, -190, 340, 380, 40); X.fillStyle = '#2c4a7a'; X.fill(); txt('BOLSO', 0, -140, 44, '#cfe'); emoji('🚀', 0, 20, 180, -0.6);
-    if (P.pt > 3) { X.strokeStyle = '#ff2b2b'; X.lineWidth = 24; X.beginPath(); X.moveTo(-150, -150); X.lineTo(150, 170); X.moveTo(150, -150); X.lineTo(-150, 170); X.stroke(); } X.restore(); }
-  if (P.pi === 2) { car(1400, 920, 1.2, '#2a2f3a'); arrow(1000, 520, 1300, 760, '#ffd400'); }
-  if (P.pi === 4) { emoji('💵', 1350, 520, 150); emoji('🤝', 1350, 720, 150); }
+    if (P.pt > 2.5) { X.strokeStyle = '#ff2b2b'; X.lineWidth = 24; X.beginPath(); X.moveTo(-150, -150); X.lineTo(150, 170); X.moveTo(150, -150); X.lineTo(-150, 170); X.stroke(); } X.restore(); }
+  if (P.v === 'carro') { car(1400, 920, 1.2, '#2a2f3a'); arrow(1000, 520, 1300, 760, '#ffd400'); }
+  if (P.v === 'grana') { emoji('💵', 1350, 520, 150); emoji('🤝', 1350, 720, 150); }
 };
 
 SCENES.n10 = (lt, s, P) => {
-  if (P.pi === 3) {
+  if (P.v === 'sa') {
     X.fillStyle = '#d4a35a'; X.fillRect(-500, -300, W + 1000, H + 600);
     for (let i = 0; i < 24; i++) { X.fillStyle = `rgba(120,70,20,${0.06 + (i % 3) * 0.03})`; X.fillRect(-500, i * 60 + ((lt * 30) % 60), W + 1000, 26); }
     const bb = 1 + 0.5 * (0.5 + 0.5 * Math.sin(lt * 2));
@@ -336,11 +346,11 @@ SCENES.n10 = (lt, s, P) => {
   grad([[0, '#2a0845'], [1, '#6441a5']]);
   X.fillStyle = '#1d0b30'; X.fillRect(-500, 860, W + 1000, 400);
   for (let i = 0; i < 5; i++) emoji('🏋️', 150 + i * 400, 940, 70, 0, 0.35);
-  const b = P.pi === 1 ? 1 + 0.6 * eo(seg(P.pt, 1.0, 1.0)) - 0.5 * eo(seg(P.pt, 3.2, 1.0)) : 1, m = P.pi === 1 ? eo(seg(P.pt, 3.2, 1.0)) : P.pi >= 2 ? 1 : 0;
+  const b = P.v === 'muda' ? 1 + 0.6 * eo(seg(P.pt, 1.0, 1.0)) - 0.5 * eo(seg(P.pt, 3.6, 1.0)) : 1, m = P.v === 'muda' ? eo(seg(P.pt, 3.6, 1.0)) : (P.v === 'academia' || P.v === 'duvida') ? 1 : 0;
   person(W / 2, 1000, 1.6, '#0d0418', { b, m, glow: '#c77dff' });
-  if (P.pi === 1 && P.pt > 5) emoji('😴', W / 2, 160, 120 * eb(seg(P.pt, 5, 0.3)));
-  if (P.pi === 2) { emoji('💪', W / 2 - 330, 450, 150, Math.sin(lt * 6) * 0.2); emoji('💪', W / 2 + 330, 450, 150, -Math.sin(lt * 6) * 0.2); }
-  if (P.pi === 4) { txt('?', W / 2 + 300, 300, 240, '#ffd400', { stroke: 14 }); }
+  if (P.v === 'muda' && P.pt > 6) emoji('😴', W / 2, 160, 120 * eb(seg(P.pt, 5, 0.3)));
+  if (P.v === 'academia') { emoji('💪', W / 2 - 330, 450, 150, Math.sin(lt * 6) * 0.2); emoji('💪', W / 2 + 330, 450, 150, -Math.sin(lt * 6) * 0.2); }
+  if (P.v === 'duvida') { txt('?', W / 2 + 300, 300, 240, '#ffd400', { stroke: 14 }); }
 };
 
 SCENES.bonus = (lt, s, P) => {
@@ -403,6 +413,7 @@ function card(c, pt, dur, side, segObj) {
       c.i.forEach((it, j) => { const kk = eb(seg(pt, 0.5 + j * Math.min(1.4, dur / (n + 1.5)), 0.35)); if (kk <= 0) return; X.save(); X.globalAlpha = clamp(kk); const y = 470 - h / 2 + 160 + j * 100;
         rr(L, y - 38, inner, 76, 20); X.fillStyle = 'rgba(255,255,255,0.1)'; X.fill(); txt(it, L + 24 - (1 - kk) * 60, y + 2, fit(it, 44, inner - 50, 800), '#fff', { align: 'left', weight: 800 }); X.restore(); });
       break; }
+    case 'im': { panel(cx, 290, cw, 340, 'rgba(0,30,40,0.88)', '#2ff3ff'); txt('🤔 IMAGINA…', C, 360, 42, '#9ff3ff', { weight: 800 }); txt(c.a, C, 465, fit(c.a, 70, inner), '#fff', { stroke: 8 }); txt(c.b, C, 560, fit(c.b, 42, inner, 800), '#ffe9a8', { weight: 800 }); break; }
     case 'op': { panel(cx, 300, cw, 320, 'rgba(30,6,40,0.88)', '#c77dff'); txt('💭 NA MINHA OPINIÃO', C, 380, 42, '#e0b3ff', { weight: 800 }); txt(c.a, C, 510, fit(c.a, 78, inner), '#fff', { stroke: 8 }); break; }
     case 'q': { panel(cx, 290, cw, 340, 'rgba(40,10,0,0.88)', '#ff9a1f'); txt('❓ ' + c.a, C, 410, fit('❓ ' + c.a, 80, inner), '#ffb347', { stroke: 8 }); txt(c.b, C, 530, fit(c.b, 46, inner, 800), '#fff', { weight: 800 }); break; }
     case 'legend': {
@@ -526,7 +537,7 @@ window.renderFrame = t => {
   const shake = 16 * Math.max(0, 1 - lt / 0.35) * (sc.num ? 1 : 0.5), rs = R(Math.floor(t * 60));
   X.setTransform(1, 0, 0, 1, 0, 0);
   X.save(); X.translate(W / 2 + shiftX + (rs() - 0.5) * shake, H / 2 + (rs() - 0.5) * shake + (zBase - 1) * 120); X.scale(zoom, zoom); X.translate(-W / 2, -H / 2);
-  SCENES[s.scene](lt, s, { pi, pt, pdur });
+  SCENES[s.scene](lt, s, { pi, pt, pdur, v: sc.parts[pi].v || '' });
   X.restore();
   const clip = CLIP_NOW; CLIP_NOW = null;
   if (clip) { // trecho de gameplay/trailer (sem áudio) com fade, zoom lento e leve correção de cor

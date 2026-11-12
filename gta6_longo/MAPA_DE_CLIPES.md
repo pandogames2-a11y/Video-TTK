@@ -1,10 +1,6 @@
-# Mapa de clipes — GTA 6: 10 novidades (versão longa)
+# Trechos usados — GTA 6: 10 novidades (versão longa)
 
-Salve cada trecho como `clips/<id>.mp4` e rode `python3 prep_clips.py`. O tempo é a posição no vídeo final;
-a duração é o máximo usado (pode mandar o arquivo mais longo). O áudio dos trechos é sempre descartado.
-
-**Origem:** `GTA 6` = trailers e o Extended Look do canal/site oficial da Rockstar. `GTA 5` = gameplay gravada por você (rádio do carro e música desligados).
-
+Os trechos ficam definidos no próprio `script.json` (campo `clip` de cada frase). O áudio dos trechos é sempre descartado.
 
 ## Diretrizes para evitar problemas de direitos autorais no YouTube
 
@@ -21,48 +17,24 @@ Nada disso garante que o vídeo não receba reivindicação, mas reduz muito o r
 
 ## Trechos
 
-| id | tempo | duração | origem | o que mostrar | narração nesse momento |
+| frase | tempo no vídeo | duração | arquivo | a partir de | narração |
 |---|---|---|---|---|---|
-| `i1` | 00:05.1 | 5.0 s | GTA 6 | Trailer 1 ou 2: tomada aérea de Vice City / praia | Então se prepara, porque essas dez novidades vão mudar completamente a sua visão sobre o j… |
-| `i3` | 00:19.8 | 5.0 s | GTA 6 | Extended Look: perseguição policial | Fica até o final, porque a número oito muda completamente o jeito de fugir da polícia. E n… |
-| `c0` | 00:30.2 | 5.0 s | GTA 5 | Sua gameplay: panorâmica de Los Santos | Antes de tudo, um pouco de contexto. O GTA 5 saiu em 2013 e vendeu mais de duzentos milhõe… |
-| `c1` | 00:41.2 | 5.0 s | GTA 6 | Trailer 1: qualquer tomada de abertura | O primeiro trailer de GTA 6 saiu em dezembro de 2023 e bateu recorde de visualizações em v… |
-| `c2` | 00:52.5 | 4.0 s | GTA 6 | Trailer 2: qualquer tomada (SEM o áudio do trailer) | E os trailers viraram assunto até pela música. O primeiro usou Love Is a Long Road, do Tom… |
-| `c4` | 01:15.9 | 6.0 s | GTA 6 | Extended Look: cena de gameplay com HUD na tela | Em agosto de 2026, a Rockstar finalmente mostrou gameplay de verdade, num vídeo de quase m… |
-| `a1` | 01:52.1 | 6.0 s | GTA 5 | Sua gameplay: roda de troca entre Michael, Franklin e Trevor | Tá, eu sei o que você vai falar: o GTA 5 tinha três protagonistas. Michael, Franklin e Tre… |
-| `a2` | 02:03.6 | 5.0 s | GTA 6 | Trailer: Jason e Lucia juntos na mesma cena | No GTA 6, a história gira em torno de dois personagens: Jason Duval e Lucia Caminos. E os … |
-| `a3` | 02:10.9 | 5.0 s | GTA 6 | Trailer 1: Lucia na penitenciária (abertura do trailer) | Segundo a Rockstar, o Jason cresceu cercado de golpistas, passou pelo exército e foi parar… |
-| `a4` | 02:23.0 | 6.0 s | GTA 6 | Extended Look: a troca entre Jason e Lucia | E no gameplay mostrado em agosto dá pra trocar entre os dois na hora, no meio da ação. Enq… |
-| `a5` | 02:31.7 | 4.0 s | GTA 6 | Trailer: Jason e Lucia abraçados (casal) | Ou seja, em vez de três histórias paralelas, agora é um casal dividindo cada assalto, bem … |
-| `b1` | 02:46.6 | 5.0 s | GTA 5 | Sua gameplay: chuva em Los Santos | No GTA 5, quando o tempo mudava, ele mudava praticamente para o mapa inteiro de uma vez. |
-| `b2` | 02:52.4 | 5.0 s | GTA 6 | Trailer/gameplay: céu com nuvens carregadas ou chuva, se aparecer | No GTA 6, segundo a Rockstar, o clima é localizado. Você pode estar debaixo de um céu limp… |
-| `b5` | 03:13.9 | 5.0 s | GTA 6 | Trailer/gameplay: tempestade ou vento forte, se aparecer | E tem mais: tempestades tropicais e furacões, com chuva pesada, vento forte, raios e trovõ… |
-| `d1` | 03:38.0 | 4.0 s | GTA 5 | Sua gameplay: algum animal (cachorro, gaivota, peixe) | No GTA 5 a fauna existia, mas era bem tímida. Alguns cachorros, aves, peixes e uns bichos … |
-| `d3` | 03:55.3 | 5.0 s | GTA 6 | Trailer: jacaré ou flamingos | Nos trailers e nas imagens oficiais já apareceram jacarés, flamingos, pelicanos e até peix… |
-| `d4` | 04:01.7 | 4.0 s | GTA 6 | Trailer/imagens oficiais: outra cena com animais | E também espécies invasoras famosas na Flórida, como iguanas verdes e macacos. |
-| `e1` | 04:30.3 | 6.0 s | GTA 5 | Sua gameplay: voo de helicóptero sobre Los Santos e Blaine County | O GTA 5 tinha basicamente Los Santos, a versão do jogo para Los Angeles, e o interior de B… |
-| `e2` | 04:45.6 | 4.7 s | GTA 6 | Trailer: Vice City à noite, neon | Começando por Vice City: a cidade grande, cheia de neon, praia e vida noturna. |
-| `e3` | 04:50.8 | 3.9 s | GTA 6 | Trailer: ilhas e água azul (Keys) | Depois, Leonida Keys, aquele arquipélago de ilhas cercado de água azul. |
-| `e4` | 04:55.3 | 4.0 s | GTA 6 | Trailer: pântano / canais (Grassrivers) | Grassrivers, uma região de pântano, com canais, brejos e muito bicho. |
-| `e5` | 05:00.1 | 4.0 s | GTA 6 | Opcional: Port Gellhorn, só se aparecer em material oficial | Port Gellhorn, uma cidade litorânea decadente, mais pesada e desgastada que Vice City. |
-| `e6` | 05:05.7 | 4.0 s | GTA 6 | Opcional: Ambrosia, só se aparecer em material oficial | Ambrosia, uma cidade industrial que gira em torno de uma refinaria de açúcar, com presença… |
-| `e7` | 05:12.2 | 4.0 s | GTA 6 | Opcional: Mount Kalaga, só se aparecer em material oficial | E Mount Kalaga, um parque nacional no norte do mapa, com caça, pesca e trilhas. |
-| `f1` | 05:28.5 | 5.0 s | GTA 5 | Sua gameplay: celular/navegador do jogo aberto no Lifeinvader | O GTA sempre zoou a cultura americana. No GTA 5, a internet do jogo tinha o Lifeinvader, a… |
-| `f2` | 05:37.4 | 6.0 s | GTA 6 | Trailer 1: os vídeos verticais de rede social | Agora, os trailers do GTA 6 estão cheios de vídeos verticais, no estilo das redes de vídeo… |
-| `g1` | 06:10.9 | 5.0 s | GTA 5 | Sua gameplay: pedestres andando numa calçada | Os pedestres do GTA 5 eram ótimos para 2013, mas muitos se repetiam e reagiam sempre do me… |
-| `g3` | 06:28.9 | 6.0 s | GTA 6 | Trailer: praia, festa ou multidão | E nos trailers dá pra ver gente fazendo de tudo: malhando na praia, festa, confusão e muit… |
-| `g4` | 06:36.8 | 5.0 s | GTA 6 | Extended Look: personagem cumprimentando ou provocando um NPC | No gameplay de agosto também apareceu um sistema parecido com o do Red Dead Redemption 2, … |
-| `h2` | 07:10.3 | 5.0 s | GTA 6 | Extended Look: HUD com o indicador citado pela imprensa | Nas coberturas do gameplay de agosto, a imprensa notou um indicador que parece acompanhar … |
-| `j1` | 07:50.9 | 6.0 s | GTA 5 | Sua gameplay: perseguição com estrelas e fuga | No GTA 5, a lógica era simples. Cometeu crime, ganhou estrela. Saiu da área marcada, esper… |
-| `j2` | 07:58.3 | 4.9 s | GTA 6 | Extended Look: medidor com 6 estrelas | No gameplay de agosto, o nível máximo de procurado subiu de cinco para seis estrelas. |
-| `j3` | 08:03.7 | 6.0 s | GTA 6 | Extended Look: polícia procurando/identificando o personagem | E a polícia identifica você pela roupa, pelo rosto e pelo veículo. Trocou de roupa ou de c… |
-| `j6` | 08:32.8 | 5.0 s | GTA 6 | Extended Look: cães policiais | E no gameplay oficial ainda apareceram cães policiais perseguindo e derrubando um personag… |
-| `k1` | 08:50.0 | 5.0 s | GTA 5 | Sua gameplay: roda de armas cheia (arsenal) | No GTA 5, o Michael podia andar com um arsenal inteiro: pistola, metralhadora, lança-míssi… |
-| `k4` | 09:15.2 | 5.0 s | GTA 6 | Extended Look: cena com dinheiro ou armas da dupla | A Rockstar não explicou oficialmente como o inventário funciona. O que o gameplay de agost… |
-| `l1` | 09:32.0 | 5.0 s | GTA 6 | Extended Look: personagem comendo ou na academia | Em agosto, a Rockstar North confirmou numa entrevista que a comida afeta o peso do Jason e… |
-| `l2` | 09:42.7 | 3.0 s | GTA 6 | Extended Look: academia / medidor de estamina | E o gameplay mostrou academia e um medidor de estamina. |
-| `m1` | 10:15.3 | 5.0 s | GTA 6 | Extended Look: medidor de combustível ou posto | Os carros têm medidor de combustível. Então, sim, pode ser que você precise parar no posto… |
-| `m2` | 10:21.0 | 6.0 s | GTA 6 | Extended Look: barco, jet ski, corrida ou basquete | E no resumo de atividades apareceram barco, jet ski, corridas, academia e até basquete. |
-| `o0` | 11:44.1 | 6.0 s | GTA 6 | Trailer: tomada final épica | E essas são apenas dez das novidades que fazem GTA 6 parecer um salto gigantesco em relaçã… |
+| `intro_1` | 00:04.5 | 2.1 s | trailer_lancamento.mp4 | 25.0 s | Então se prepara, porque essas dez novidades vão mudar completamente a sua visão… |
+| `intro_3` | 00:14.9 | 2.5 s | trailer_lancamento.mp4 | 59.9 s | E a número dez vai mudar pra sempre o jeito que você foge da polícia. Então fica… |
+| `n2_1` | 01:20.1 | 4.0 s | gta5_trevor.mp4 | 0.0 s | No GTA 5 você trocava entre Michael, Franklin e Trevor. Era genial, mas cada um … |
+| `n2_2` | 01:28.0 | 4.0 s | gta5_trevor.mp4 | 6.0 s | Você tava de boa com o Michael e, do nada, trocava pro Trevor fazendo alguma lou… |
+| `n2_3` | 01:34.0 | 1.9 s | trailer_lancamento.mp4 | 39.8 s | No GTA 6 é diferente: Jason e Lucia são um casal, e a história inteira gira em t… |
+| `n2_4` | 01:40.1 | 2.1 s | trailer_lancamento.mp4 | 70.95 s | No gameplay que a Rockstar mostrou, dá pra trocar entre eles no meio da ação, e … |
+| `n2_6` | 01:55.0 | 1.4 s | trailer_lancamento.mp4 | 66.45 s | É praticamente um Bonnie e Clyde em Vice City. |
+| `n3_3` | 02:21.8 | 2.8 s | trailer_lancamento.mp4 | 56.45 s | E o gameplay ainda mostrou academia e um medidor de estamina. |
+| `n5_3` | 03:41.9 | 1.3 s | trailer_lancamento.mp4 | 20.55 s | Nos trailers já apareceram jacarés, flamingos e até iguanas, que são uma praga f… |
+| `n5_4` | 03:48.1 | 1.5 s | trailer_lancamento.mp4 | 27.2 s | Agora imagina fugir pelo pântano de Grassrivers e dar de cara com um jacaré. Sin… |
+| `n7_3` | 05:03.0 | 1.9 s | trailer_lancamento.mp4 | 54.55 s | Nos trailers tem gente malhando na praia, fazendo festa e filmando tudo com o ce… |
+| `n8_1` | 05:35.6 | 3.5 s | gta5_trevor.mp4 | 8.5 s | No GTA 5, assim que as estrelas sumiam, a cidade esquecia tudo. Você roubava, ex… |
+| `n9_1` | 06:14.3 | 5.5 s | gta5_trevor.mp4 | 12.0 s | O GTA 5 tinha Los Santos e o interior de Blaine County, com o Monte Chiliad lá n… |
+| `n9_2` | 06:24.3 | 2.4 s | trailer_lancamento.mp4 | 52.0 s | São seis regiões. Vice City, a cidade do neon e da praia. |
+| `n9_3` | 06:28.6 | 1.5 s | trailer_lancamento.mp4 | 2.05 s | As ilhas de Leonida Keys. |
+| `n10_3` | 07:08.0 | 2.8 s | trailer_lancamento.mp4 | 46.35 s | E a polícia identifica você pela roupa, pelo rosto e pelo carro. Trocar de roupa… |
+| `outro_0` | 07:41.2 | 2.9 s | trailer_lancamento.mp4 | 67.95 s | E essas são apenas dez das novidades que fazem GTA 6 parecer um salto gigantesco… |
 
-Total: 41 trechos, 204 s de no máximo 721 s de vídeo (28%). O resto continua sendo animação e comentário originais.
+Total: 17 trechos, 44 s em 478 s de vídeo (9%).

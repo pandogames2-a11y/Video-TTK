@@ -1,6 +1,6 @@
 [
  {
-  "id": "i1",
+  "id": "intro_1",
   "seg": "intro",
   "part": 1,
   "src": "gta6",
@@ -8,7 +8,7 @@
   "lead": 0.15
  },
  {
-  "id": "i3",
+  "id": "intro_3",
   "seg": "intro",
   "part": 3,
   "src": "gta6",
@@ -16,135 +16,119 @@
   "lead": 0.15
  },
  {
-  "id": "c1",
-  "seg": "ctx",
-  "part": 1,
-  "src": "gta6",
-  "n": 72,
-  "lead": 0.15
- },
- {
-  "id": "c2",
-  "seg": "ctx",
-  "part": 2,
-  "src": "gta6",
-  "n": 81,
-  "lead": 0.15
- },
- {
-  "id": "a1",
-  "seg": "n1",
+  "id": "n2_1",
+  "seg": "n2",
   "part": 1,
   "src": "gta5",
   "n": 120,
   "lead": 0.15
  },
  {
-  "id": "a2",
-  "seg": "n1",
+  "id": "n2_2",
+  "seg": "n2",
   "part": 2,
+  "src": "gta5",
+  "n": 120,
+  "lead": 0.15
+ },
+ {
+  "id": "n2_3",
+  "seg": "n2",
+  "part": 3,
   "src": "gta6",
   "n": 56,
   "lead": 0.15
  },
  {
-  "id": "a4",
-  "seg": "n1",
+  "id": "n2_4",
+  "seg": "n2",
   "part": 4,
   "src": "gta6",
   "n": 64,
   "lead": 0.15
  },
  {
-  "id": "a5",
-  "seg": "n1",
-  "part": 5,
+  "id": "n2_6",
+  "seg": "n2",
+  "part": 6,
   "src": "gta6",
   "n": 43,
   "lead": 0.15
  },
  {
-  "id": "d4",
+  "id": "n3_3",
   "seg": "n3",
-  "part": 4,
+  "part": 3,
+  "src": "gta6",
+  "n": 84,
+  "lead": 0.15
+ },
+ {
+  "id": "n5_3",
+  "seg": "n5",
+  "part": 3,
   "src": "gta6",
   "n": 40,
   "lead": 0.15
  },
  {
-  "id": "e1",
-  "seg": "n4",
-  "part": 1,
-  "src": "gta5",
-  "n": 165,
-  "lead": 0.15
- },
- {
-  "id": "e2",
-  "seg": "n4",
-  "part": 2,
-  "src": "gta6",
-  "n": 72,
-  "lead": 0.15
- },
- {
-  "id": "e3",
-  "seg": "n4",
-  "part": 3,
-  "src": "gta6",
-  "n": 88,
-  "lead": 0.15
- },
- {
-  "id": "e4",
-  "seg": "n4",
+  "id": "n5_4",
+  "seg": "n5",
   "part": 4,
   "src": "gta6",
   "n": 45,
   "lead": 0.15
  },
  {
-  "id": "g3",
-  "seg": "n6",
+  "id": "n7_3",
+  "seg": "n7",
   "part": 3,
   "src": "gta6",
   "n": 57,
   "lead": 0.15
  },
  {
-  "id": "j1",
+  "id": "n8_1",
   "seg": "n8",
   "part": 1,
   "src": "gta5",
-  "n": 120,
+  "n": 105,
   "lead": 0.15
  },
  {
-  "id": "j3",
-  "seg": "n8",
+  "id": "n9_1",
+  "seg": "n9",
+  "part": 1,
+  "src": "gta5",
+  "n": 165,
+  "lead": 0.15
+ },
+ {
+  "id": "n9_2",
+  "seg": "n9",
+  "part": 2,
+  "src": "gta6",
+  "n": 72,
+  "lead": 0.15
+ },
+ {
+  "id": "n9_3",
+  "seg": "n9",
+  "part": 3,
+  "src": "gta6",
+  "n": 46,
+  "lead": 0.15
+ },
+ {
+  "id": "n10_3",
+  "seg": "n10",
   "part": 3,
   "src": "gta6",
   "n": 85,
   "lead": 0.15
  },
  {
-  "id": "l1",
-  "seg": "n10",
-  "part": 1,
-  "src": "gta6",
-  "n": 84,
-  "lead": 0.15
- },
- {
-  "id": "m2",
-  "seg": "bonus",
-  "part": 2,
-  "src": "gta6",
-  "n": 75,
-  "lead": 0.15
- },
- {
-  "id": "o0",
+  "id": "outro_0",
   "seg": "outro",
   "part": 0,
   "src": "gta6",

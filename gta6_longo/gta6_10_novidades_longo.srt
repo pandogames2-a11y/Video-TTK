@@ -1,1672 +1,1148 @@
 1
-00:00:00,400 --> 00:00:02,672
-Você acha que GTA 6 é apenas uma
+00:00:00,400 --> 00:00:02,486
+Você acha que GTA 6 é só um
 
 2
-00:00:02,522 --> 00:00:04,552
-versão mais bonita do GTA 5?
+00:00:02,336 --> 00:00:03,876
+GTA 5 mais bonito?
 
 3
-00:00:05,102 --> 00:00:06,192
+00:00:04,426 --> 00:00:05,436
 Então se prepara,
 
 4
-00:00:06,152 --> 00:00:09,021
+00:00:05,406 --> 00:00:08,320
 porque essas dez novidades vão mudar completamente a
 
 5
-00:00:08,871 --> 00:00:10,237
+00:00:08,170 --> 00:00:09,557
 sua visão sobre o jogo.
 
 6
-00:00:10,787 --> 00:00:12,357
-E não é papo de fã empolgado,
+00:00:10,107 --> 00:00:11,777
+Tem coisa que muda o jeito de atirar,
 
 7
-00:00:12,397 --> 00:00:12,940
-não.
+00:00:11,767 --> 00:00:12,347
+de fugir,
 
 8
-00:00:12,990 --> 00:00:15,110
-Eu vou separar direitinho o que a Rockstar
+00:00:12,387 --> 00:00:14,336
+e até o corpo do seu personagem.
 
 9
-00:00:14,960 --> 00:00:15,550
-confirmou,
+00:00:14,886 --> 00:00:16,790
+E a número dez vai mudar pra sempre
 
 10
-00:00:15,550 --> 00:00:17,750
-o que apareceu nos trailers e no gameplay,
+00:00:16,640 --> 00:00:18,391
+o jeito que você foge da polícia.
 
 11
-00:00:17,770 --> 00:00:19,209
-e o que ainda é boato.
+00:00:18,441 --> 00:00:19,885
+Então fica até o final.
 
 12
-00:00:19,759 --> 00:00:20,789
-Fica até o final,
+00:00:22,635 --> 00:00:23,777
+Novidade número um:
 
 13
-00:00:20,759 --> 00:00:23,294
-porque a número oito muda completamente o jeito
+00:00:23,627 --> 00:00:25,809
+a roda de armas que você conhece pode
 
 14
-00:00:23,144 --> 00:00:24,303
-de fugir da polícia.
+00:00:25,659 --> 00:00:27,237
+estar com os dias contados.
 
 15
-00:00:24,353 --> 00:00:26,064
-E no fim do vídeo eu ainda vou
+00:00:27,787 --> 00:00:29,219
+Lembra no GTA 5?
 
 16
-00:00:25,914 --> 00:00:28,339
-te contar o que a Rockstar continua escondendo.
+00:00:29,269 --> 00:00:30,559
+Você segurava um botão,
 
 17
-00:00:30,189 --> 00:00:30,729
-Antes de tudo,
+00:00:30,579 --> 00:00:31,379
+a roda abria,
 
 18
-00:00:30,669 --> 00:00:32,484
-um pouco de contexto.
+00:00:31,379 --> 00:00:32,449
+e lá estava tudo:
 
 19
-00:00:32,534 --> 00:00:35,068
-O GTA 5 saiu em 2013 e vendeu
-
-20
-00:00:34,918 --> 00:00:37,224
-mais de duzentos milhões de cópias.
-
-21
-00:00:37,274 --> 00:00:38,013
-Isso mesmo:
-
-22
-00:00:37,863 --> 00:00:40,023
-são mais de treze anos de espera por
-
-23
-00:00:39,873 --> 00:00:40,660
-um sucessor.
-
-24
-00:00:41,210 --> 00:00:43,998
-O primeiro trailer de GTA 6 saiu em
-
-25
-00:00:43,848 --> 00:00:47,029
-dezembro de 2023 e bateu recorde de visualizações
-
-26
-00:00:46,879 --> 00:00:49,134
-em vinte e quatro horas no YouTube.
-
-27
-00:00:49,184 --> 00:00:51,959
-O segundo veio em maio de 2025.
-
-28
-00:00:52,509 --> 00:00:54,992
-E os trailers viraram assunto até pela música.
-
-29
-00:00:55,042 --> 00:00:56,812
-O primeiro usou Love Is a Long Road,
-
-30
-00:00:56,792 --> 00:00:57,713
-do Tom Petty.
-
-31
-00:00:57,763 --> 00:00:58,541
-O segundo,
-
-32
-00:00:58,391 --> 00:00:59,340
-Hot Together,
-
-33
-00:00:59,190 --> 00:01:00,567
-das Pointer Sisters.
-
-34
-00:01:01,117 --> 00:01:03,429
-O lançamento foi adiado duas vezes.
-
-35
-00:01:03,479 --> 00:01:04,558
-Primeiro,
-
-36
-00:01:04,408 --> 00:01:07,395
-de 2025 para maio de 2026.
-
-37
-00:01:07,445 --> 00:01:08,114
-Depois,
-
-38
-00:01:07,964 --> 00:01:10,259
-para 19 de novembro de 2026,
-
-39
-00:01:10,109 --> 00:01:13,201
-no PlayStation 5 e no Xbox Series.
-
-40
-00:01:13,251 --> 00:01:15,368
-A versão de PC ainda não tem data.
-
-41
-00:01:15,918 --> 00:01:18,148
-Em agosto de 2026,
-
-42
-00:01:18,258 --> 00:01:20,838
-a Rockstar finalmente mostrou gameplay de verdade,
-
-43
-00:01:20,898 --> 00:01:23,219
-num vídeo de quase meia hora chamado Extended
-
-44
-00:01:23,069 --> 00:01:23,458
-Look,
-
-45
-00:01:23,468 --> 00:01:24,773
-que estreou na Netflix.
-
-46
-00:01:24,823 --> 00:01:27,288
-E em setembro a revista Game Informer publicou
-
-47
-00:01:27,138 --> 00:01:29,467
-uma matéria de capa cheia de detalhes novos.
-
-48
-00:01:30,017 --> 00:01:32,045
-É desse material que vem quase tudo o
-
-49
-00:01:31,895 --> 00:01:33,141
-que você vai ver aqui.
-
-50
-00:01:33,191 --> 00:01:35,021
-E repara no selo no canto da tela:
-
-51
-00:01:35,081 --> 00:01:36,801
-verde é confirmado pela Rockstar,
-
-52
-00:01:36,871 --> 00:01:38,822
-azul é o que apareceu nos trailers e
-
-53
-00:01:38,672 --> 00:01:39,811
-no gameplay oficial,
-
-54
-00:01:39,911 --> 00:01:41,831
-laranja é coisa de prévia da imprensa,
-
-55
-00:01:41,901 --> 00:01:43,251
-e vermelho é vazamento.
-
-56
-00:01:43,301 --> 00:01:44,066
-Combinado?
-
-57
-00:01:44,116 --> 00:01:45,330
-Então bora pra lista.
-
-58
-00:01:48,080 --> 00:01:48,800
-Número um:
-
-59
-00:01:48,800 --> 00:01:51,517
-dois protagonistas que formam uma dupla de verdade.
-
-60
-00:01:52,067 --> 00:01:52,427
-Tá,
-
-61
-00:01:52,467 --> 00:01:53,897
-eu sei o que você vai falar:
-
-62
-00:01:53,917 --> 00:01:56,340
-o GTA 5 tinha três protagonistas.
-
-63
-00:01:56,390 --> 00:01:56,900
-Michael,
-
-64
-00:01:56,980 --> 00:01:57,910
-Franklin e Trevor.
-
-65
-00:01:57,960 --> 00:01:59,757
-Só que cada um tinha a sua própria
-
-66
-00:01:59,607 --> 00:01:59,990
-vida,
-
-67
-00:01:59,960 --> 00:02:02,513
-e muitas vezes eles só se cruzavam nas
-
-68
-00:02:02,363 --> 00:02:02,989
-missões.
-
-69
-00:02:03,539 --> 00:02:04,574
-No GTA 6,
-
-70
-00:02:04,424 --> 00:02:07,055
-a história gira em torno de dois personagens:
-
-71
-00:02:06,905 --> 00:02:08,750
-Jason Duval e Lucia Caminos.
-
-72
-00:02:08,800 --> 00:02:10,365
-E os dois formam um casal.
-
-73
-00:02:10,915 --> 00:02:11,995
-Segundo a Rockstar,
-
-74
-00:02:11,975 --> 00:02:14,155
-o Jason cresceu cercado de golpistas,
-
-75
-00:02:14,205 --> 00:02:16,460
-passou pelo exército e foi parar nas Keys
-
-76
-00:02:16,310 --> 00:02:18,360
-trabalhando para traficantes da região.
-
-77
-00:02:18,410 --> 00:02:20,614
-Já a Lucia aparece logo no primeiro trailer
-
-78
-00:02:20,464 --> 00:02:22,411
-dentro de uma penitenciária de Leonida.
-
-79
-00:02:22,961 --> 00:02:25,045
-E no gameplay mostrado em agosto dá pra
-
-80
-00:02:24,895 --> 00:02:26,421
-trocar entre os dois na hora,
-
-81
-00:02:26,371 --> 00:02:27,512
-no meio da ação.
-
-82
-00:02:27,562 --> 00:02:29,112
-Enquanto você controla um,
-
-83
-00:02:29,152 --> 00:02:31,169
-o outro continua lutando do seu lado.
-
-84
-00:02:31,719 --> 00:02:32,329
-Ou seja,
-
-85
-00:02:32,329 --> 00:02:34,289
-em vez de três histórias paralelas,
-
-86
-00:02:34,269 --> 00:02:36,539
-agora é um casal dividindo cada assalto,
-
-87
-00:02:36,579 --> 00:02:38,414
-bem no estilo Bonnie e Clyde.
-
-88
-00:02:38,464 --> 00:02:38,999
-E isso,
-
-89
-00:02:38,849 --> 00:02:39,889
-na minha opinião,
-
-90
-00:02:39,739 --> 00:02:41,333
-muda o tom do jogo inteiro.
-
-91
-00:02:44,083 --> 00:02:44,863
-Número dois:
-
-92
-00:02:44,853 --> 00:02:45,976
-clima localizado.
-
-93
-00:02:46,526 --> 00:02:47,556
-No GTA 5,
-
-94
-00:02:47,576 --> 00:02:48,796
-quando o tempo mudava,
-
-95
-00:02:48,826 --> 00:02:51,370
-ele mudava praticamente para o mapa inteiro de
-
-96
-00:02:51,220 --> 00:02:51,792
-uma vez.
-
-97
-00:02:52,342 --> 00:02:53,443
-No GTA 6,
-
-98
-00:02:53,293 --> 00:02:54,557
-segundo a Rockstar,
-
-99
-00:02:54,407 --> 00:02:55,807
-o clima é localizado.
-
-100
-00:02:55,857 --> 00:02:58,121
-Você pode estar debaixo de um céu limpo
-
-101
-00:02:57,971 --> 00:03:00,236
-e ver uma tempestade caindo logo ali do
-
-102
-00:03:00,086 --> 00:03:00,500
-lado.
-
-103
-00:03:01,050 --> 00:03:02,378
-E ele é persistente.
-
-104
-00:03:02,428 --> 00:03:03,818
-Se choveu numa região,
-
-105
-00:03:03,818 --> 00:03:06,397
-ela não seca magicamente quando o sol aparece.
-
-106
-00:03:06,947 --> 00:03:09,326
-A Rockstar disse que reconstruiu o sistema de
-
-107
-00:03:09,176 --> 00:03:10,597
-clima para o GTA 6,
-
-108
-00:03:10,607 --> 00:03:13,283
-partindo da base do Red Dead Redemption 2.
-
-109
-00:03:13,833 --> 00:03:14,543
-E tem mais:
-
-110
-00:03:14,563 --> 00:03:16,583
-tempestades tropicais e furacões,
-
-111
-00:03:16,603 --> 00:03:17,633
-com chuva pesada,
-
-112
-00:03:17,633 --> 00:03:18,563
-vento forte,
-
-113
-00:03:18,633 --> 00:03:19,948
-raios e trovões.
-
-114
-00:03:19,998 --> 00:03:20,898
-Faz sentido,
-
-115
-00:03:20,868 --> 00:03:23,137
-já que Leonida é inspirada na Flórida.
-
-116
-00:03:23,687 --> 00:03:25,856
-O que a Rockstar ainda não explicou é
-
-117
-00:03:25,706 --> 00:03:28,356
-com que frequência esses furacões aparecem e se
-
-118
-00:03:28,206 --> 00:03:29,558
-eles mexem nas missões.
-
-119
-00:03:29,608 --> 00:03:31,345
-Então segura a expectativa.
-
-120
-00:03:34,095 --> 00:03:34,935
-Número três:
-
-121
-00:03:34,915 --> 00:03:37,440
-mais de cento e setenta espécies de animais.
-
-122
-00:03:37,990 --> 00:03:39,990
-No GTA 5 a fauna existia,
-
-123
-00:03:39,960 --> 00:03:41,219
-mas era bem tímida.
-
-124
-00:03:41,269 --> 00:03:42,419
-Alguns cachorros,
-
-125
-00:03:42,369 --> 00:03:42,869
-aves,
-
-126
-00:03:42,809 --> 00:03:44,653
-peixes e uns bichos no interior.
-
-127
-00:03:45,203 --> 00:03:46,933
-Agora,
-
-128
-00:03:46,963 --> 00:03:49,043
-segundo a Game Informer,
-
-129
-00:03:49,013 --> 00:03:49,723
-são mais de cento e setenta espécies,
-
-130
-00:03:49,683 --> 00:03:50,003
-entre terra,
-
-131
-00:03:49,953 --> 00:03:50,564
-ar e mar.
-
-132
-00:03:50,614 --> 00:03:52,981
-Cerca de sessenta tipos de aves e mais
-
-133
-00:03:52,831 --> 00:03:54,682
-de trinta mamíferos terrestres.
-
-134
-00:03:55,232 --> 00:03:58,429
-Nos trailers e nas imagens oficiais já apareceram
-
-135
-00:03:58,279 --> 00:03:58,908
-jacarés,
-
-136
-00:03:58,758 --> 00:03:59,501
-flamingos,
-
-137
-00:03:59,351 --> 00:04:01,137
-pelicanos e até peixes-boi.
-
-138
-00:04:01,687 --> 00:04:04,247
-E também espécies invasoras famosas na Flórida,
-
-139
-00:04:04,267 --> 00:04:06,279
-como iguanas verdes e macacos.
-
-140
-00:04:06,829 --> 00:04:07,879
-E olha esse detalhe:
-
-141
-00:04:07,909 --> 00:04:10,490
-o site oficial descreve Mount Kalaga como um
-
-142
-00:04:10,340 --> 00:04:11,259
-lugar de caça,
-
-143
-00:04:11,279 --> 00:04:12,920
-pesca e trilhas off-road.
-
-144
-00:04:12,970 --> 00:04:14,784
-O que dá a entender que esses bichos
-
-145
-00:04:14,634 --> 00:04:16,042
-não estão ali só de enfeite.
-
-146
-00:04:16,592 --> 00:04:18,783
-Mas a Rockstar não divulgou a lista completa.
-
-147
-00:04:18,833 --> 00:04:20,842
-Então se você vir por aí alguém com
-
-148
-00:04:20,692 --> 00:04:23,073
-a lista oficial dos cento e setenta animais,
-
-149
-00:04:23,043 --> 00:04:23,972
-desconfia.
-
-150
-00:04:26,722 --> 00:04:27,632
-Número quatro:
-
-151
-00:04:27,572 --> 00:04:29,743
-o mapa de Leonida tem seis regiões.
-
-152
-00:04:30,293 --> 00:04:32,783
-O GTA 5 tinha basicamente Los Santos,
-
-153
-00:04:32,793 --> 00:04:34,713
-a versão do jogo para Los Angeles,
-
-154
-00:04:34,693 --> 00:04:36,363
-e o interior de Blaine County.
-
-155
-00:04:36,413 --> 00:04:38,572
-Leonida é a versão do GTA para a
-
-156
-00:04:38,422 --> 00:04:38,988
-Flórida.
-
-157
-00:04:39,038 --> 00:04:39,308
-E,
-
-158
-00:04:39,248 --> 00:04:40,598
-de acordo com a Rockstar,
-
-159
-00:04:40,668 --> 00:04:42,581
-o mapa do GTA 6 tem mais ou
-
-160
-00:04:42,431 --> 00:04:44,388
-menos o dobro do tamanho do mapa do
-
-161
-00:04:44,238 --> 00:04:45,066
-GTA 5.
-
-162
-00:04:45,616 --> 00:04:47,026
-Começando por Vice City:
-
-163
-00:04:47,046 --> 00:04:48,056
-a cidade grande,
-
-164
-00:04:47,996 --> 00:04:48,846
-cheia de neon,
-
-165
-00:04:48,806 --> 00:04:50,269
-praia e vida noturna.
-
-166
-00:04:50,819 --> 00:04:51,059
-Depois,
-
-167
-00:04:50,999 --> 00:04:51,469
-Leonida Keys,
-
-168
-00:04:51,409 --> 00:04:54,683
-aquele arquipélago de ilhas cercado de água azul.
-
-169
-00:04:55,233 --> 00:04:56,195
-Grassrivers,
-
-170
-00:04:56,045 --> 00:04:57,541
-uma região de pântano,
-
-171
-00:04:57,391 --> 00:04:58,213
-com canais,
-
-172
-00:04:58,063 --> 00:04:59,502
-brejos e muito bicho.
-
-173
-00:05:00,052 --> 00:05:00,862
-Port Gellhorn,
-
-174
-00:05:00,802 --> 00:05:02,552
-uma cidade litorânea decadente,
-
-175
-00:05:02,562 --> 00:05:05,079
-mais pesada e desgastada que Vice City.
-
-176
-00:05:05,629 --> 00:05:06,419
-Ambrosia,
-
-177
-00:05:06,369 --> 00:05:08,663
-uma cidade industrial que gira em torno de
-
-178
-00:05:08,513 --> 00:05:09,849
-uma refinaria de açúcar,
-
-179
-00:05:09,949 --> 00:05:11,595
-com presença de motoqueiros.
-
-180
-00:05:12,145 --> 00:05:13,125
-E Mount Kalaga,
-
-181
-00:05:13,105 --> 00:05:14,985
-um parque nacional no norte do mapa,
-
-182
-00:05:14,965 --> 00:05:15,655
-com caça,
-
-183
-00:05:15,635 --> 00:05:16,912
-pesca e trilhas.
-
-184
-00:05:17,462 --> 00:05:19,242
-Então dá pra ir da praia para a
-
-185
-00:05:19,092 --> 00:05:19,582
-cidade,
-
-186
-00:05:19,562 --> 00:05:21,062
-e do interior para o pântano,
-
-187
-00:05:21,042 --> 00:05:22,261
-tudo no mesmo mapa.
-
-188
-00:05:25,011 --> 00:05:25,971
-Número cinco:
-
-189
-00:05:26,071 --> 00:05:27,940
-redes sociais dentro do jogo.
-
-190
-00:05:28,490 --> 00:05:30,829
-O GTA sempre zoou a cultura americana.
-
-191
-00:05:30,879 --> 00:05:31,929
-No GTA 5,
-
-192
-00:05:32,059 --> 00:05:34,149
-a internet do jogo tinha o Lifeinvader,
-
-193
-00:05:34,119 --> 00:05:35,919
-a paródia de rede social da época,
-
-194
-00:05:35,949 --> 00:05:36,810
-e o Bleeter.
-
-195
-00:05:37,360 --> 00:05:37,930
-Agora,
-
-196
-00:05:37,870 --> 00:05:40,340
-os trailers do GTA 6 estão cheios de
-
-197
-00:05:40,190 --> 00:05:41,210
-vídeos verticais,
-
-198
-00:05:41,170 --> 00:05:42,720
-no estilo das redes de vídeo curto,
-
-199
-00:05:42,660 --> 00:05:43,090
-com gente fazendo besteira,
-
-200
-00:05:43,140 --> 00:05:46,859
-influenciadores e conteúdo viral.
-
-201
-00:05:47,409 --> 00:05:48,619
-E faz todo sentido,
-
-202
-00:05:48,629 --> 00:05:51,404
-porque a Flórida é famosa na internet justamente
-
-203
-00:05:51,254 --> 00:05:53,311
-pelos vídeos absurdos que viralizam.
-
-204
-00:05:53,861 --> 00:05:54,421
-Agora,
-
-205
-00:05:54,401 --> 00:05:56,011
-até que ponto isso é jogável,
-
-206
-00:05:56,111 --> 00:05:58,035
-tipo se o que você faz aparece nas
-
-207
-00:05:57,885 --> 00:05:58,331
-redes,
-
-208
-00:05:58,301 --> 00:06:00,019
-a Rockstar ainda não detalhou.
-
-209
-00:06:00,569 --> 00:06:01,579
-Mas imagina só:
-
-210
-00:06:01,619 --> 00:06:03,718
-fez besteira na rua e virou meme no
-
-211
-00:06:03,568 --> 00:06:04,571
-celular do jogo.
-
-212
-00:06:07,321 --> 00:06:08,231
-Número seis:
-
-213
-00:06:08,221 --> 00:06:10,323
-NPCs muito mais realistas.
-
-214
-00:06:10,873 --> 00:06:14,317
-Os pedestres do GTA 5 eram ótimos para
-
-215
-00:06:14,167 --> 00:06:14,673
-2013,
-
-216
-00:06:14,683 --> 00:06:17,427
-mas muitos se repetiam e reagiam sempre do
-
-217
-00:06:17,277 --> 00:06:18,145
-mesmo jeito.
-
-218
-00:06:18,695 --> 00:06:19,975
-Segundo a Game Informer,
-
-219
-00:06:20,065 --> 00:06:22,605
-no GTA 6 os NPCs variam em altura,
-
-220
-00:06:22,665 --> 00:06:23,545
-tipo de corpo,
-
-221
-00:06:23,685 --> 00:06:24,495
-musculatura,
-
-222
-00:06:24,585 --> 00:06:25,465
-tipo de pele,
-
-223
-00:06:25,505 --> 00:06:26,165
-sardas,
-
-224
-00:06:26,195 --> 00:06:28,271
-pintas e até estilo de tatuagem.
-
-225
-00:06:28,821 --> 00:06:31,005
-E nos trailers dá pra ver gente fazendo
-
-226
-00:06:30,855 --> 00:06:31,421
-de tudo:
-
-227
-00:06:31,411 --> 00:06:32,581
-malhando na praia,
-
-228
-00:06:32,681 --> 00:06:33,201
-festa,
-
-229
-00:06:33,201 --> 00:06:35,789
-confusão e muita gente filmando tudo com o
-
-230
-00:06:35,639 --> 00:06:36,229
-celular.
-
-231
-00:06:36,779 --> 00:06:39,426
-No gameplay de agosto também apareceu um sistema
-
-232
-00:06:39,276 --> 00:06:41,459
-parecido com o do Red Dead Redemption 2,
-
-233
-00:06:41,459 --> 00:06:43,563
-em que dá pra cumprimentar ou provocar as
-
-234
-00:06:43,413 --> 00:06:44,263
-pessoas na rua.
-
-235
-00:06:44,813 --> 00:06:46,855
-E quem jogou Red Dead sabe o quanto
-
-236
-00:06:46,705 --> 00:06:48,108
-isso deixa o mundo vivo.
-
-237
-00:06:49,958 --> 00:06:51,078
-Antes de continuar,
-
-238
-00:06:51,128 --> 00:06:51,828
-rapidinho:
-
-239
-00:06:51,788 --> 00:06:53,128
-se você tá curtindo,
-
-240
-00:06:53,108 --> 00:06:55,203
-deixa o like e se inscreve no canal.
-
-241
-00:06:55,753 --> 00:06:57,814
-Porque daqui pra frente a coisa fica séria.
-
-242
-00:06:57,864 --> 00:07:00,338
-Os próximos quatro mexem direto no jeito de
-
-243
-00:07:00,188 --> 00:07:00,653
-jogar.
-
-244
-00:07:03,403 --> 00:07:04,343
-Número sete:
-
-245
-00:07:04,303 --> 00:07:05,408
-o perfil criminal.
-
-246
-00:07:05,958 --> 00:07:07,808
-Esse é o mais nebuloso da lista,
-
-247
-00:07:07,768 --> 00:07:09,696
-então presta atenção no selo.
-
-248
-00:07:10,246 --> 00:07:12,146
-Nas coberturas do gameplay de agosto,
-
-249
-00:07:12,086 --> 00:07:14,902
-a imprensa notou um indicador que parece acompanhar
-
-250
-00:07:14,752 --> 00:07:15,926
-o seu comportamento,
-
-251
-00:07:15,956 --> 00:07:17,827
-o jeito como você age no crime.
-
-252
-00:07:18,377 --> 00:07:20,648
-Alguns sites dizem que existem níveis,
-
-253
-00:07:20,498 --> 00:07:21,631
-tipo profissional,
-
-254
-00:07:21,481 --> 00:07:22,795
-agressivo e violento.
-
-255
-00:07:22,845 --> 00:07:24,365
-Mas isso vem de uma fonte só,
-
-256
-00:07:24,395 --> 00:07:25,884
-e a Rockstar não confirmou.
-
-257
-00:07:26,434 --> 00:07:27,424
-Se for verdade,
-
-258
-00:07:27,384 --> 00:07:29,900
-o jogo poderia reagir diferente se você é
-
-259
-00:07:29,750 --> 00:07:32,266
-um ladrão calculista ou um maluco que sai
-
-260
-00:07:32,116 --> 00:07:33,217
-atirando em tudo.
-
-261
-00:07:33,767 --> 00:07:34,887
-No GTA 5,
-
-262
-00:07:34,837 --> 00:07:37,489
-a cidade basicamente esquecia o que você fazia
-
-263
-00:07:37,339 --> 00:07:39,034
-assim que as estrelas sumiam.
-
-264
-00:07:39,084 --> 00:07:39,664
-Então,
-
-265
-00:07:39,614 --> 00:07:41,094
-se esse sistema funcionar,
-
-266
-00:07:41,104 --> 00:07:42,402
-é uma mudança grande.
-
-267
-00:07:42,452 --> 00:07:42,872
-Mas,
-
-268
-00:07:42,722 --> 00:07:43,712
-por enquanto:
-
-269
-00:07:43,562 --> 00:07:44,222
-aguarde.
-
-270
-00:07:46,972 --> 00:07:47,802
-Número oito,
-
-271
-00:07:47,752 --> 00:07:48,732
-a que eu prometi:
-
-272
-00:07:48,722 --> 00:07:50,351
-a polícia mais inteligente.
-
-273
-00:07:50,901 --> 00:07:52,011
-No GTA 5,
-
-274
-00:07:51,991 --> 00:07:53,399
-a lógica era simples.
-
-275
-00:07:53,449 --> 00:07:54,339
-Cometeu crime,
-
-276
-00:07:54,319 --> 00:07:55,321
-ganhou estrela.
-
-277
-00:07:55,371 --> 00:07:56,803
-Saiu da área marcada,
-
-278
-00:07:56,653 --> 00:07:57,276
-esperou,
-
-279
-00:07:57,126 --> 00:07:57,694
-pronto.
-
-280
-00:07:58,244 --> 00:07:59,671
-No gameplay de agosto,
-
-281
-00:07:59,521 --> 00:08:02,072
-o nível máximo de procurado subiu de cinco
-
-282
-00:08:01,922 --> 00:08:03,119
-para seis estrelas.
-
-283
-00:08:03,669 --> 00:08:05,829
-E a polícia identifica você pela roupa,
-
-284
-00:08:05,789 --> 00:08:07,461
-pelo rosto e pelo veículo.
-
-285
-00:08:07,511 --> 00:08:09,063
-Trocou de roupa ou de carro?
-
-286
-00:08:09,113 --> 00:08:10,948
-Fica mais difícil te reconhecer.
-
-287
-00:08:11,498 --> 00:08:13,153
-Segundo as prévias da imprensa,
-
-288
-00:08:13,003 --> 00:08:15,624
-a polícia só recebe denúncia se alguém testemunhar
-
-289
-00:08:15,474 --> 00:08:17,265
-o crime ou se um alarme disparar.
-
-290
-00:08:17,315 --> 00:08:18,665
-E tem a estrela vazada:
-
-291
-00:08:18,755 --> 00:08:20,755
-quando a polícia sabe que rolou um crime,
-
-292
-00:08:20,735 --> 00:08:22,497
-mas ainda não sabe quem foi.
-
-293
-00:08:23,047 --> 00:08:25,246
-As prévias também dizem que as viaturas têm
-
-294
-00:08:25,096 --> 00:08:25,737
-rastreador,
-
-295
-00:08:25,747 --> 00:08:27,878
-então roubar carro de polícia pra fugir não
-
-296
-00:08:27,728 --> 00:08:28,435
-é boa ideia.
-
-297
-00:08:28,485 --> 00:08:30,592
-E que separar Jason e Lucia durante a
-
-298
-00:08:30,442 --> 00:08:32,201
-fuga pode ajudar a perder estrela.
-
-299
-00:08:32,751 --> 00:08:35,715
-E no gameplay oficial ainda apareceram cães policiais
-
-300
-00:08:35,565 --> 00:08:38,123
-perseguindo e derrubando um personagem em fuga.
-
-301
-00:08:38,173 --> 00:08:40,266
-Correr a pé da polícia ficou bem mais
-
-302
-00:08:40,116 --> 00:08:40,752
-arriscado.
-
-303
-00:08:41,302 --> 00:08:41,942
-Ou seja:
-
-304
-00:08:42,042 --> 00:08:43,372
-fugir vai exigir cabeça,
-
-305
-00:08:43,372 --> 00:08:44,670
-e não só acelerador.
-
-306
-00:08:47,420 --> 00:08:48,180
-Número nove:
-
-307
-00:08:48,190 --> 00:08:49,393
-inventário físico.
-
-308
-00:08:49,943 --> 00:08:51,083
-No GTA 5,
-
-309
-00:08:51,073 --> 00:08:53,343
-o Michael podia andar com um arsenal inteiro:
-
-310
-00:08:53,353 --> 00:08:53,933
+00:00:32,479 --> 00:00:33,019
 pistola,
 
-311
-00:08:53,973 --> 00:08:54,783
-metralhadora,
+20
+00:00:33,109 --> 00:00:33,639
+fuzil,
 
-312
-00:08:54,813 --> 00:08:55,703
-lança-míssil,
+21
+00:00:33,639 --> 00:00:34,699
+lança-granadas,
 
-313
-00:08:55,743 --> 00:08:57,611
-tudo escondido sabe-se lá onde.
+22
+00:00:34,679 --> 00:00:35,754
+lança-míssil.
 
-314
-00:08:58,161 --> 00:09:02,061
+23
+00:00:36,304 --> 00:00:37,699
+O Michael saía de terno,
+
+24
+00:00:37,549 --> 00:00:38,749
+sem mochila nenhuma,
+
+25
+00:00:38,599 --> 00:00:40,262
+e tirava uma bazuca do nada.
+
+26
+00:00:40,312 --> 00:00:41,870
+E ninguém nunca questionou.
+
+27
+00:00:42,420 --> 00:00:43,637
 No GTA 6,
 
-315
-00:09:02,001 --> 00:09:02,588
-a ideia é que o que você carrega
-
-316
-00:09:02,438 --> 00:09:02,971
-seja mais físico e contextual,
-
-317
-00:09:03,021 --> 00:09:05,557
-com armas maiores guardadas numa bolsa ou no
-
-318
-00:09:05,407 --> 00:09:05,874
-carro.
-
-319
-00:09:06,424 --> 00:09:10,574
-Essa informação vem principalmente do vazamento de 2022,
-
-320
-00:09:10,674 --> 00:09:13,235
-quando vídeos de uma versão em desenvolvimento do
-
-321
-00:09:13,085 --> 00:09:14,641
-jogo foram parar na internet.
-
-322
-00:09:15,191 --> 00:09:18,071
-A Rockstar não explicou oficialmente como o inventário
-
-323
-00:09:17,921 --> 00:09:18,510
-funciona.
-
-324
-00:09:18,560 --> 00:09:20,502
-O que o gameplay de agosto mostrou é
-
-325
-00:09:20,352 --> 00:09:22,401
-que a dupla compartilha dinheiro e armas.
-
-326
-00:09:22,951 --> 00:09:24,881
-Então trata esse item como provável,
-
-327
-00:09:24,871 --> 00:09:26,126
-mas não confirmado.
-
-328
-00:09:28,876 --> 00:09:29,716
-E número dez:
-
-329
-00:09:29,696 --> 00:09:31,428
-o corpo dos personagens muda.
-
-330
-00:09:31,978 --> 00:09:33,508
-Em agosto,
-
-331
-00:09:33,508 --> 00:09:35,636
-a Rockstar North confirmou numa entrevista que a
-
-332
-00:09:35,486 --> 00:09:37,166
-comida afeta o peso do Jason e da
-
-333
-00:09:37,016 --> 00:09:37,408
-Lucia,
-
-334
-00:09:37,368 --> 00:09:39,118
-o exercício constrói músculo,
-
-335
-00:09:39,208 --> 00:09:41,444
-e a falta de sono aparece no rosto
-
-336
-00:09:41,294 --> 00:09:42,112
-e no corpo.
-
-337
-00:09:42,662 --> 00:09:45,015
-E o gameplay mostrou academia e um medidor
-
-338
-00:09:44,865 --> 00:09:45,612
-de estamina.
-
-339
-00:09:46,162 --> 00:09:48,192
-Quem jogou San Andreas,
-
-340
-00:09:48,182 --> 00:09:48,672
-de 2004,
-
-341
-00:09:48,812 --> 00:09:49,662
-já conhece:
-
-342
-00:09:49,642 --> 00:09:50,732
-o CJ engordava,
-
-343
-00:09:50,732 --> 00:09:52,466
-malhava e ficava forte.
-
-344
-00:09:52,516 --> 00:09:54,662
-O GTA 5 não tinha nada disso.
-
-345
-00:09:54,712 --> 00:09:55,218
-Então,
-
-346
-00:09:55,068 --> 00:09:56,120
-de certa forma,
-
-347
-00:09:55,970 --> 00:09:57,952
-é um sistema clássico voltando.
-
-348
-00:09:58,502 --> 00:10:00,284
-O que a Rockstar ainda não falou é
-
-349
-00:10:00,134 --> 00:10:02,062
-se isso muda alguma coisa no gameplay,
-
-350
-00:10:02,082 --> 00:10:03,942
-tipo correr menos se estiver acima do peso,
-
-351
-00:10:03,942 --> 00:10:05,631
-ou se é só visual.
-
-352
-00:10:07,481 --> 00:10:08,581
-E antes de terminar,
-
-353
-00:10:08,761 --> 00:10:09,791
-um bônus rápido:
-
-354
-00:10:09,791 --> 00:10:12,730
-outras coisas que apareceram no gameplay oficial e
-
-355
-00:10:12,580 --> 00:10:14,747
-que o GTA 5 também não tinha.
-
-356
-00:10:15,297 --> 00:10:17,329
-Os carros têm medidor de combustível.
-
-357
-00:10:17,379 --> 00:10:17,919
-Então,
-
-358
-00:10:17,869 --> 00:10:20,149
-sim,
-
-359
-00:10:20,119 --> 00:10:20,372
-pode ser que você precise parar no posto.
-
-360
-00:10:20,922 --> 00:10:23,142
-E no resumo de atividades apareceram barco,
-
-361
-00:10:23,122 --> 00:10:23,822
-jet ski,
-
-362
-00:10:23,972 --> 00:10:24,562
-corridas,
-
-363
-00:10:24,532 --> 00:10:26,382
-academia e até basquete.
-
-364
-00:10:28,232 --> 00:10:28,792
-Agora,
-
-365
-00:10:28,822 --> 00:10:29,732
-como eu prometi:
-
-366
-00:10:29,752 --> 00:10:31,752
-o que a Rockstar continua escondendo.
-
-367
-00:10:32,302 --> 00:10:32,862
-Primeiro:
-
-368
-00:10:32,902 --> 00:10:34,080
-a versão de PC.
-
-369
-00:10:34,130 --> 00:10:36,290
-Até agora,
-
-370
-00:10:36,230 --> 00:10:38,719
-só PlayStation 5 e Xbox Series foram anunciados.
-
-371
-00:10:39,269 --> 00:10:39,889
-Segundo:
-
-372
-00:10:39,859 --> 00:10:40,902
-o mapa completo.
-
-373
-00:10:40,952 --> 00:10:43,592
-Até agora não existe um mapa oficial inteiro
-
-374
-00:10:43,442 --> 00:10:44,126
-divulgado.
-
-375
-00:10:44,676 --> 00:10:45,496
-E terceiro:
-
-376
-00:10:45,526 --> 00:10:48,046
-como vários desses sistemas funcionam de verdade,
-
-377
-00:10:48,086 --> 00:10:49,406
-tipo o perfil criminal,
-
-378
-00:10:49,466 --> 00:10:51,358
-o inventário e se o corpo afeta o
-
-379
-00:10:51,208 --> 00:10:51,840
-gameplay.
-
-380
-00:10:52,390 --> 00:10:53,100
-Ou seja:
-
-381
-00:10:53,120 --> 00:10:55,664
-ainda tem muita surpresa guardada para o dia
-
-382
-00:10:55,514 --> 00:10:56,397
-do lançamento.
-
-383
-00:10:58,247 --> 00:10:59,707
-E pra fechar a comparação,
-
-384
-00:10:59,677 --> 00:11:02,054
-olha o GTA 5 contra o GTA 6
-
-385
-00:11:01,904 --> 00:11:02,622
-em números.
-
-386
-00:11:03,172 --> 00:11:04,085
-Protagonistas:
-
-387
-00:11:03,935 --> 00:11:04,664
-eram três,
-
-388
-00:11:04,514 --> 00:11:05,717
-agora é uma dupla,
-
-389
-00:11:05,567 --> 00:11:06,770
-com troca na hora.
-
-390
-00:11:07,320 --> 00:11:08,850
-Nível máximo de procurado:
-
-391
-00:11:08,900 --> 00:11:10,080
-eram cinco estrelas,
-
-392
-00:11:10,040 --> 00:11:11,213
-agora são seis.
-
-393
-00:11:11,763 --> 00:11:12,693
-Tamanho do mapa:
-
-394
-00:11:12,663 --> 00:11:13,743
+28
+00:00:43,487 --> 00:00:44,735
+a ideia é outra.
+
+29
+00:00:44,785 --> 00:00:47,360
+Pelo vazamento de 2022 e pelas prévias,
+
+30
+00:00:47,210 --> 00:00:49,871
+as armas grandes ficam numa bolsa ou no
+
+31
+00:00:49,721 --> 00:00:51,155
+porta-malas do carro.
+
+32
+00:00:51,705 --> 00:00:52,335
+Imagina:
+
+33
+00:00:52,345 --> 00:00:53,785
+você tá no meio de um tiroteio,
+
+34
+00:00:53,735 --> 00:00:55,455
+a munição acaba,
+
+35
+00:00:55,405 --> 00:00:57,275
+e a arma pesada ficou no carro,
+
+36
+00:00:57,295 --> 00:00:58,615
+do outro lado da rua.
+
+37
+00:00:58,665 --> 00:00:59,944
+Vai buscar ou improvisa?
+
+38
+00:01:00,494 --> 00:01:03,124
+Isso transforma cada assalto num plano de verdade:
+
+39
+00:01:03,124 --> 00:01:03,824
+o que levar,
+
+40
+00:01:03,864 --> 00:01:05,786
+onde deixar e quem carrega o quê.
+
+41
+00:01:06,336 --> 00:01:07,126
+Só um aviso:
+
+42
+00:01:07,096 --> 00:01:09,307
+a Rockstar ainda não confirmou esse sistema.
+
+43
+00:01:09,357 --> 00:01:11,507
+O que o gameplay oficial mostrou é que
+
+44
+00:01:11,357 --> 00:01:13,099
+a dupla divide dinheiro e armas.
+
+45
+00:01:15,849 --> 00:01:17,219
+Novidade número dois:
+
+46
+00:01:17,069 --> 00:01:18,929
+em vez de três protagonistas,
+
+47
+00:01:18,779 --> 00:01:19,526
+uma dupla.
+
+48
+00:01:20,076 --> 00:01:22,436
+No GTA 5 você trocava entre Michael,
+
+49
+00:01:22,506 --> 00:01:23,515
+Franklin e Trevor.
+
+50
+00:01:23,565 --> 00:01:24,355
+Era genial,
+
+51
+00:01:24,365 --> 00:01:26,335
+mas cada um vivia num canto do mapa,
+
+52
+00:01:26,335 --> 00:01:27,418
+com a própria vida.
+
+53
+00:01:27,968 --> 00:01:29,628
+Você tava de boa com o Michael e,
+
+54
+00:01:29,638 --> 00:01:30,248
+do nada,
+
+55
+00:01:30,258 --> 00:01:32,834
+trocava pro Trevor fazendo alguma loucura no meio
+
+56
+00:01:32,684 --> 00:01:33,373
+do deserto.
+
+57
+00:01:33,923 --> 00:01:35,543
+No GTA 6 é diferente:
+
+58
+00:01:35,543 --> 00:01:37,213
+Jason e Lucia são um casal,
+
+59
+00:01:37,253 --> 00:01:39,258
+e a história inteira gira em torno dos
+
+60
+00:01:39,108 --> 00:01:39,495
+dois.
+
+61
+00:01:40,045 --> 00:01:41,705
+No gameplay que a Rockstar mostrou,
+
+62
+00:01:41,825 --> 00:01:43,847
+dá pra trocar entre eles no meio da
+
+63
+00:01:43,697 --> 00:01:44,105
+ação,
+
+64
+00:01:44,075 --> 00:01:46,806
+e quem você não está controlando continua lutando
+
+65
+00:01:46,656 --> 00:01:47,452
+do seu lado.
+
+66
+00:01:48,002 --> 00:01:49,162
+Imagina um assalto:
+
+67
+00:01:49,132 --> 00:01:51,249
+a Lucia segura a entrada enquanto o Jason
+
+68
+00:01:51,099 --> 00:01:51,952
+pega o dinheiro.
+
+69
+00:01:52,002 --> 00:01:54,070
+Você troca na hora certa e salva o
+
+70
+00:01:53,920 --> 00:01:54,390
+plano.
+
+71
+00:01:54,940 --> 00:01:57,216
+É praticamente um Bonnie e Clyde em Vice
+
+72
+00:01:57,066 --> 00:01:57,476
+City.
+
+73
+00:02:00,226 --> 00:02:01,596
+Novidade número três:
+
+74
+00:02:01,576 --> 00:02:03,279
+o corpo do seu personagem muda.
+
+75
+00:02:03,829 --> 00:02:06,410
+No GTA 5 até existiam atributos,
+
+76
+00:02:06,260 --> 00:02:07,654
+tipo força e fôlego,
+
+77
+00:02:07,504 --> 00:02:09,604
+que subiam conforme você jogava.
+
+78
+00:02:09,654 --> 00:02:11,515
+Mas o corpo continuava igualzinho.
+
+79
+00:02:12,065 --> 00:02:13,114
+No GTA 6,
+
+80
+00:02:12,964 --> 00:02:14,269
+a Rockstar confirmou:
+
+81
+00:02:14,119 --> 00:02:14,988
+comeu demais,
+
+82
+00:02:14,838 --> 00:02:16,682
+o Jason e a Lucia engordam.
+
+83
+00:02:16,732 --> 00:02:17,732
+Foi pra academia,
+
+84
+00:02:17,742 --> 00:02:18,784
+ganham músculo.
+
+85
+00:02:18,834 --> 00:02:20,074
+Passou a noite em claro?
+
+86
+00:02:20,124 --> 00:02:21,176
+Aparece na cara.
+
+87
+00:02:21,726 --> 00:02:24,005
+E o gameplay ainda mostrou academia e um
+
+88
+00:02:23,855 --> 00:02:25,000
+medidor de estamina.
+
+89
+00:02:25,550 --> 00:02:28,020
+Quem jogou San Andreas lembra do CJ comendo
+
+90
+00:02:27,870 --> 00:02:29,378
+hambúrguer até ficar redondo.
+
+91
+00:02:29,428 --> 00:02:30,858
+É esse espírito voltando,
+
+92
+00:02:30,838 --> 00:02:32,580
+mais de vinte anos depois.
+
+93
+00:02:33,130 --> 00:02:33,960
+A dúvida é:
+
+94
+00:02:34,040 --> 00:02:36,070
+isso muda a gameplay ou é só visual?
+
+95
+00:02:36,120 --> 00:02:38,545
+Você correria menos com o Jason acima do
+
+96
+00:02:38,395 --> 00:02:38,806
+peso?
+
+97
+00:02:38,856 --> 00:02:40,355
+A Rockstar ainda não disse.
+
+98
+00:02:43,105 --> 00:02:44,455
+Novidade número quatro:
+
+99
+00:02:44,405 --> 00:02:46,342
+o clima deixa de ser cenário e vira
+
+100
+00:02:46,192 --> 00:02:46,990
+acontecimento.
+
+101
+00:02:47,540 --> 00:02:48,645
+No GTA 5,
+
+102
+00:02:48,495 --> 00:02:51,329
+começava a chover e chovia praticamente no mapa
+
+103
+00:02:51,179 --> 00:02:51,768
+inteiro,
+
+104
+00:02:51,618 --> 00:02:52,620
+ao mesmo tempo.
+
+105
+00:02:53,170 --> 00:02:55,220
+No GTA 6,
+
+106
+00:02:55,190 --> 00:02:55,410
 segundo a Rockstar,
 
-395
-00:11:13,773 --> 00:11:15,156
-mais ou menos o dobro.
+107
+00:02:55,350 --> 00:02:56,801
+o clima é localizado.
 
-396
-00:11:15,706 --> 00:11:16,376
-Animais:
+108
+00:02:56,851 --> 00:02:58,161
+Você pode estar no sol,
 
-397
-00:11:16,326 --> 00:11:18,458
-de uma fauna tímida para mais de cento
+109
+00:02:58,161 --> 00:03:01,075
+olhando uma tempestade desabar a poucos quarteirões.
 
-398
-00:11:18,308 --> 00:11:19,402
-e setenta espécies.
+110
+00:03:01,625 --> 00:03:02,815
+E a chuva deixa marca:
 
-399
-00:11:19,952 --> 00:11:22,262
-E a distância entre os dois lançamentos:
+111
+00:03:02,835 --> 00:03:04,684
+a rua não seca por mágica quando o
 
-400
-00:11:22,302 --> 00:11:23,290
-treze anos.
+112
+00:03:04,534 --> 00:03:05,164
+sol volta.
 
-401
-00:11:23,340 --> 00:11:27,044
-De setembro de 2013 a novembro de 2026.
+113
+00:03:05,714 --> 00:03:06,683
+E tem furacão.
 
-402
-00:11:28,894 --> 00:11:30,264
-Recapitulando rapidinho:
+114
+00:03:06,733 --> 00:03:07,993
+Tempestade tropical,
 
-403
-00:11:30,264 --> 00:11:31,224
-dupla jogável,
+115
+00:03:07,953 --> 00:03:08,793
+vento forte,
 
-404
-00:11:31,374 --> 00:11:32,504
-clima localizado,
+116
+00:03:08,733 --> 00:03:09,691
+raio caindo.
 
-405
-00:11:32,674 --> 00:11:34,504
-mais de cento e setenta animais,
+117
+00:03:09,741 --> 00:03:11,561
+Leonida é inspirada na Flórida,
 
-406
-00:11:34,484 --> 00:11:35,444
-seis regiões,
+118
+00:03:11,581 --> 00:03:13,104
+então faz todo sentido.
 
-407
-00:11:35,564 --> 00:11:36,544
-redes sociais,
+119
+00:03:13,654 --> 00:03:16,084
+Imagina uma fuga de carro na pista encharcada,
 
-408
-00:11:36,534 --> 00:11:38,734
-NPCs mais vivos,
+120
+00:03:16,074 --> 00:03:18,376
+com o vento empurrando tudo e a polícia
 
-409
-00:11:38,844 --> 00:11:39,814
-perfil criminal,
+121
+00:03:18,226 --> 00:03:19,061
+colada atrás.
 
-410
-00:11:39,764 --> 00:11:41,264
-polícia esperta,
+122
+00:03:19,111 --> 00:03:20,640
+Dá até frio na barriga.
 
-411
-00:11:41,204 --> 00:11:42,253
-inventário físico e o corpo que muda.
+123
+00:03:23,390 --> 00:03:24,780
+Novidade número cinco:
 
-412
-00:11:44,103 --> 00:11:46,791
+124
+00:03:24,760 --> 00:03:26,344
+Leonida está cheia de bicho.
+
+125
+00:03:26,894 --> 00:03:28,735
+O GTA 5 tinha o Chop,
+
+126
+00:03:28,585 --> 00:03:30,016
+o cachorro do Franklin,
+
+127
+00:03:29,866 --> 00:03:30,784
+alguns cervos,
+
+128
+00:03:30,634 --> 00:03:32,552
+pumas no mato e tubarão no mar.
+
+129
+00:03:32,602 --> 00:03:33,490
+Mas era pouco.
+
+130
+00:03:34,040 --> 00:03:36,245
+No GTA 6 são mais de cento e
+
+131
+00:03:36,095 --> 00:03:37,170
+setenta espécies,
+
+132
+00:03:37,020 --> 00:03:37,838
+entre terra,
+
+133
+00:03:37,688 --> 00:03:38,378
+ar e mar.
+
+134
+00:03:38,428 --> 00:03:39,601
+Dezenas de aves,
+
+135
+00:03:39,451 --> 00:03:40,215
+mamíferos,
+
+136
+00:03:40,065 --> 00:03:41,297
+peixes e répteis.
+
+137
+00:03:41,847 --> 00:03:43,887
+Nos trailers já apareceram jacarés,
+
+138
+00:03:43,857 --> 00:03:44,727
+flamingos e até iguanas,
+
+139
+00:03:44,667 --> 00:03:47,516
+que são uma praga famosa na Flórida.
+
+140
+00:03:48,066 --> 00:03:50,732
+Agora imagina fugir pelo pântano de Grassrivers e
+
+141
+00:03:50,582 --> 00:03:52,035
+dar de cara com um jacaré.
+
+142
+00:03:52,085 --> 00:03:52,915
+Sinceramente,
+
+143
+00:03:52,955 --> 00:03:54,095
+eu prefiro a polícia.
+
+144
+00:03:54,645 --> 00:03:56,872
+E o site oficial fala em caça e
+
+145
+00:03:56,722 --> 00:03:58,257
+pesca em Mount Kalaga.
+
+146
+00:03:58,307 --> 00:04:00,482
+Então tudo indica que esses bichos não estão
+
+147
+00:04:00,332 --> 00:04:01,308
+ali só de enfeite.
+
+148
+00:04:04,058 --> 00:04:05,398
+Novidade número seis:
+
+149
+00:04:05,398 --> 00:04:07,540
+as redes sociais chegaram a Leonida.
+
+150
+00:04:08,090 --> 00:04:09,170
+No GTA 5,
+
+151
+00:04:09,150 --> 00:04:11,280
+a internet do jogo tinha o Lifeinvader,
+
+152
+00:04:11,280 --> 00:04:12,730
+a paródia de rede social,
+
+153
+00:04:12,700 --> 00:04:13,590
+e o Bleeter.
+
+154
+00:04:13,640 --> 00:04:14,540
+Era engraçado,
+
+155
+00:04:14,520 --> 00:04:16,558
+mas era tudo texto e foto parada.
+
+156
+00:04:17,108 --> 00:04:18,976
+Nos trailers do GTA 6,
+
+157
+00:04:18,826 --> 00:04:21,240
+o celular é cheio de vídeos verticais:
+
+158
+00:04:21,090 --> 00:04:22,577
+gente fazendo besteira,
+
+159
+00:04:22,427 --> 00:04:23,095
+dancinha,
+
+160
+00:04:22,945 --> 00:04:24,814
+influenciador e briga na rua.
+
+161
+00:04:25,364 --> 00:04:26,794
+É a Flórida da internet,
+
+162
+00:04:26,764 --> 00:04:29,698
+aquela dos vídeos absurdos que viralizam todo santo
+
+163
+00:04:29,548 --> 00:04:29,922
+dia.
+
+164
+00:04:30,472 --> 00:04:31,472
+Agora imagina:
+
+165
+00:04:31,492 --> 00:04:33,515
+você faz uma loucura no meio da rua
+
+166
+00:04:33,365 --> 00:04:33,632
+e,
+
+167
+00:04:33,622 --> 00:04:34,252
+minutos depois,
+
+168
+00:04:34,212 --> 00:04:36,869
+o vídeo tá rodando no celular do jogo.
+
+169
+00:04:36,919 --> 00:04:39,139
+A Rockstar ainda não disse se funciona assim,
+
+170
+00:04:39,169 --> 00:04:41,143
+mas seria muito a cara do GTA.
+
+171
+00:04:43,893 --> 00:04:45,303
+Novidade número sete:
+
+172
+00:04:45,283 --> 00:04:47,559
+as pessoas na rua parecem gente de verdade.
+
+173
+00:04:48,109 --> 00:04:49,164
+No GTA 5,
+
+174
+00:04:49,014 --> 00:04:51,316
+você via o mesmo pedestre três vezes no
+
+175
+00:04:51,166 --> 00:04:52,196
+mesmo quarteirão.
+
+176
+00:04:52,246 --> 00:04:53,706
+E todo mundo reagia igual:
+
+177
+00:04:53,696 --> 00:04:54,186
+corria,
+
+178
+00:04:54,176 --> 00:04:54,836
+gritava,
+
+179
+00:04:54,826 --> 00:04:56,139
+ou ligava pra polícia.
+
+180
+00:04:56,689 --> 00:04:57,858
+No GTA 6,
+
+181
+00:04:57,708 --> 00:04:59,809
+os NPCs variam em altura,
+
+182
+00:04:59,659 --> 00:05:00,187
+corpo,
+
+183
+00:05:00,037 --> 00:05:00,507
+pele,
+
+184
+00:05:00,357 --> 00:05:00,944
+sardas,
+
+185
+00:05:00,794 --> 00:05:02,400
+pintas e até tatuagens.
+
+186
+00:05:02,950 --> 00:05:05,270
+Nos trailers tem gente malhando na praia,
+
+187
+00:05:05,240 --> 00:05:07,972
+fazendo festa e filmando tudo com o celular.
+
+188
+00:05:08,522 --> 00:05:11,069
+E no gameplay apareceu um sistema parecido com
+
+189
+00:05:10,919 --> 00:05:11,922
+o do Red Dead 2:
+
+190
+00:05:11,992 --> 00:05:14,435
+dá pra cumprimentar ou provocar quem passa.
+
+191
+00:05:14,985 --> 00:05:15,635
+Ou seja,
+
+192
+00:05:15,595 --> 00:05:17,405
+cada esquina pode virar uma história.
+
+193
+00:05:17,455 --> 00:05:18,502
+Ou uma confusão.
+
+194
+00:05:20,352 --> 00:05:21,722
+Se você chegou até aqui,
+
+195
+00:05:21,742 --> 00:05:22,612
+deixa o like,
+
+196
+00:05:22,602 --> 00:05:24,542
+porque as três últimas são as que mais
+
+197
+00:05:24,392 --> 00:05:25,604
+mudam o jeito de jogar.
+
+198
+00:05:26,154 --> 00:05:28,082
+E a número dez é a minha favorita.
+
+199
+00:05:30,832 --> 00:05:32,152
+Novidade número oito:
+
+200
+00:05:32,132 --> 00:05:34,380
+o jogo pode começar a lembrar quem você
+
+201
+00:05:34,230 --> 00:05:34,977
+é no crime.
+
+202
+00:05:35,527 --> 00:05:36,656
+No GTA 5,
+
+203
+00:05:36,506 --> 00:05:38,324
+assim que as estrelas sumiam,
+
+204
+00:05:38,174 --> 00:05:39,648
+a cidade esquecia tudo.
+
+205
+00:05:39,698 --> 00:05:40,585
+Você roubava,
+
+206
+00:05:40,435 --> 00:05:41,085
+explodia,
+
+207
+00:05:40,935 --> 00:05:42,032
+saía atropelando,
+
+208
+00:05:41,882 --> 00:05:44,662
+e dois minutos depois era um cidadão exemplar.
+
+209
+00:05:45,212 --> 00:05:47,112
+Nas coberturas do gameplay de agosto,
+
+210
+00:05:47,142 --> 00:05:49,898
+a imprensa notou um indicador que parece acompanhar
+
+211
+00:05:49,748 --> 00:05:50,572
+o seu estilo:
+
+212
+00:05:50,562 --> 00:05:53,050
+se você é discreto ou se sai atirando
+
+213
+00:05:52,900 --> 00:05:53,551
+em tudo.
+
+214
+00:05:54,101 --> 00:05:56,142
+Um site chegou a falar em níveis,
+
+215
+00:05:55,992 --> 00:05:57,126
+tipo profissional,
+
+216
+00:05:56,976 --> 00:05:58,291
+agressivo e violento.
+
+217
+00:05:58,341 --> 00:05:59,441
+Mas é uma fonte só,
+
+218
+00:05:59,431 --> 00:06:00,865
+e a Rockstar não confirmou.
+
+219
+00:06:01,415 --> 00:06:02,260
+Se for real,
+
+220
+00:06:02,110 --> 00:06:03,933
+o jogo vai saber quem você é.
+
+221
+00:06:03,983 --> 00:06:04,493
+E aí,
+
+222
+00:06:04,533 --> 00:06:06,997
+você seria o ladrão calculista ou o maluco
+
+223
+00:06:06,847 --> 00:06:07,908
+que explode tudo?
+
+224
+00:06:10,658 --> 00:06:11,928
+Novidade número nove:
+
+225
+00:06:11,918 --> 00:06:13,686
+um mapa que parece outro mundo.
+
+226
+00:06:14,236 --> 00:06:16,335
+O GTA 5 tinha Los Santos e o
+
+227
+00:06:16,185 --> 00:06:17,666
+interior de Blaine County,
+
+228
+00:06:17,676 --> 00:06:19,440
+com o Monte Chiliad lá no alto.
+
+229
+00:06:19,490 --> 00:06:20,590
+Segundo a Rockstar,
+
+230
+00:06:20,560 --> 00:06:22,486
+o mapa do GTA 6 tem mais ou
+
+231
+00:06:22,336 --> 00:06:23,738
+menos o dobro do tamanho.
+
+232
+00:06:24,288 --> 00:06:25,438
+São seis regiões.
+
+233
+00:06:25,488 --> 00:06:26,248
+Vice City,
+
+234
+00:06:26,248 --> 00:06:28,069
+a cidade do neon e da praia.
+
+235
+00:06:28,619 --> 00:06:30,074
+As ilhas de Leonida Keys.
+
+236
+00:06:30,624 --> 00:06:32,111
+O pântano de Grassrivers.
+
+237
+00:06:32,661 --> 00:06:33,461
+Port Gellhorn,
+
+238
+00:06:33,441 --> 00:06:35,250
+uma cidade litorânea decadente.
+
+239
+00:06:35,800 --> 00:06:36,610
+Ambrosia,
+
+240
+00:06:36,580 --> 00:06:39,265
+a cidade industrial da refinaria de açúcar.
+
+241
+00:06:39,815 --> 00:06:40,755
+E Mount Kalaga,
+
+242
+00:06:40,715 --> 00:06:41,705
+o parque nacional,
+
+243
+00:06:41,795 --> 00:06:42,495
+com trilhas,
+
+244
+00:06:42,435 --> 00:06:43,598
+caça e pesca.
+
+245
+00:06:43,648 --> 00:06:44,698
+Da praia ao pântano,
+
+246
+00:06:44,728 --> 00:06:45,861
+tudo num mapa só.
+
+247
+00:06:48,611 --> 00:06:50,001
+E a novidade número dez,
+
+248
+00:06:49,991 --> 00:06:51,021
+a minha favorita:
+
+249
+00:06:50,991 --> 00:06:52,774
+a polícia aprendeu a te procurar.
+
+250
+00:06:53,324 --> 00:06:54,494
+No GTA 5,
+
+251
+00:06:54,484 --> 00:06:56,264
+a fuga era sempre a mesma:
+
+252
+00:06:56,334 --> 00:06:57,494
+quebra a linha de visão,
+
+253
+00:06:57,434 --> 00:06:58,614
+se esconde num beco,
+
+254
+00:06:58,584 --> 00:07:00,921
+ou passa na Los Santos Customs e pinta
+
+255
+00:07:00,771 --> 00:07:01,379
+o carro.
+
+256
+00:07:01,429 --> 00:07:01,975
+Pronto,
+
+257
+00:07:01,825 --> 00:07:02,318
+sumiu.
+
+258
+00:07:02,868 --> 00:07:03,926
+No GTA 6,
+
+259
+00:07:03,776 --> 00:07:06,312
+o nível máximo de procurado sobe de cinco
+
+260
+00:07:06,162 --> 00:07:07,375
+para seis estrelas.
+
+261
+00:07:07,925 --> 00:07:10,135
+E a polícia identifica você pela roupa,
+
+262
+00:07:10,115 --> 00:07:11,756
+pelo rosto e pelo carro.
+
+263
+00:07:11,806 --> 00:07:13,764
+Trocar de roupa e de carro passa a
+
+264
+00:07:13,614 --> 00:07:14,783
+fazer parte da fuga.
+
+265
+00:07:15,333 --> 00:07:16,744
+Pelas prévias da imprensa,
+
+266
+00:07:16,594 --> 00:07:19,084
+a polícia só fica sabendo se alguém testemunhar
+
+267
+00:07:18,934 --> 00:07:20,321
+ou se um alarme disparar.
+
+268
+00:07:20,371 --> 00:07:21,831
+E existe a estrela vazada:
+
+269
+00:07:21,831 --> 00:07:23,431
+eles sabem que rolou um crime,
+
+270
+00:07:23,421 --> 00:07:24,861
+mas não sabem quem foi.
+
+271
+00:07:25,411 --> 00:07:28,117
+E no gameplay ainda apareceram cães policiais.
+
+272
+00:07:28,167 --> 00:07:30,063
+Correr a pé ficou bem mais perigoso.
+
+273
+00:07:30,613 --> 00:07:31,323
+Imagina:
+
+274
+00:07:31,293 --> 00:07:32,563
+você assalta uma loja,
+
+275
+00:07:32,573 --> 00:07:33,713
+sai pelos fundos,
+
+276
+00:07:33,713 --> 00:07:34,723
+troca de jaqueta,
+
+277
+00:07:34,753 --> 00:07:36,701
+pega outro carro e passa do lado da
+
+278
+00:07:36,551 --> 00:07:37,083
+viatura,
+
+279
+00:07:37,073 --> 00:07:37,703
+de boa.
+
+280
+00:07:37,753 --> 00:07:39,341
+Isso é GTA 6.
+
+281
+00:07:41,191 --> 00:07:43,885
 E essas são apenas dez das novidades que
 
-413
-00:11:46,641 --> 00:11:49,837
+282
+00:07:43,735 --> 00:07:46,938
 fazem GTA 6 parecer um salto gigantesco em
 
-414
-00:11:49,687 --> 00:11:51,416
+283
+00:07:46,788 --> 00:07:48,521
 relação ao seu antecessor.
 
-415
-00:11:51,966 --> 00:11:53,296
+284
+00:07:49,071 --> 00:07:50,401
 Mas agora eu quero saber:
 
-416
-00:11:53,406 --> 00:11:56,149
+285
+00:07:50,521 --> 00:07:53,141
 qual dessas novidades você mais está ansioso para
 
-417
-00:11:55,999 --> 00:11:56,798
+286
+00:07:52,991 --> 00:07:53,758
 experimentar?
 
-418
-00:11:56,848 --> 00:11:57,733
+287
+00:07:53,808 --> 00:07:54,641
 Comenta aí!
 

@@ -4,8 +4,9 @@
   "scene": "hook",
   "parts": [
    {
-    "t": "Você acha que GTA 6 é apenas uma versão mais bonita do GTA 5?",
-    "c": null
+    "t": "Você acha que GTA 6 é só um GTA 5 mais bonito?",
+    "c": null,
+    "v": "split"
    },
    {
     "t": "Então se prepara, porque essas dez novidades vão mudar completamente a sua visão sobre o jogo.",
@@ -13,20 +14,39 @@
      "k": "stat",
      "n": "10",
      "l": "NOVIDADES"
+    },
+    "v": "sunset",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 25.0,
+     "dur": 2.1
     }
    },
    {
-    "t": "E não é papo de fã empolgado, não. Eu vou separar direitinho o que a Rockstar confirmou, o que apareceu nos trailers e no gameplay, e o que ainda é boato.",
+    "t": "Tem coisa que muda o jeito de atirar, de fugir, e até o corpo do seu personagem.",
     "c": {
-     "k": "legend"
-    }
+     "k": "list",
+     "h": "VEM AÍ",
+     "i": [
+      "🔫 armas",
+      "🚨 fugas",
+      "💪 o seu corpo"
+     ]
+    },
+    "v": "sunset"
    },
    {
-    "t": "Fica até o final, porque a número oito muda completamente o jeito de fugir da polícia. E no fim do vídeo eu ainda vou te contar o que a Rockstar continua escondendo.",
+    "t": "E a número dez vai mudar pra sempre o jeito que você foge da polícia. Então fica até o final.",
     "c": {
      "k": "big",
-     "a": "#8 🚨",
-     "b": "FICA ATÉ LÁ"
+     "a": "#10 🚨",
+     "b": "fica até o final"
+    },
+    "v": "police",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 59.9,
+     "dur": 2.5
     }
    }
   ],
@@ -34,138 +54,197 @@
    "GTA 6",
    "GTA 5",
    "dez novidades",
-   "confirmou",
-   "boato",
-   "número oito",
-   "escondendo"
-  ]
- },
- {
-  "id": "ctx",
-  "scene": "ctx",
-  "title": "CONTEXTO",
-  "parts": [
-   {
-    "t": "Antes de tudo, um pouco de contexto. O GTA 5 saiu em 2013 e vendeu mais de duzentos milhões de cópias. Isso mesmo: são mais de treze anos de espera por um sucessor.",
-    "c": {
-     "k": "stat",
-     "n": "13 ANOS",
-     "l": "DE ESPERA"
-    }
-   },
-   {
-    "t": "O primeiro trailer de GTA 6 saiu em dezembro de 2023 e bateu recorde de visualizações em vinte e quatro horas no YouTube. O segundo veio em maio de 2025.",
-    "c": {
-     "k": "time",
-     "i": 1
-    }
-   },
-   {
-    "t": "E os trailers viraram assunto até pela música. O primeiro usou Love Is a Long Road, do Tom Petty. O segundo, Hot Together, das Pointer Sisters.",
-    "c": {
-     "k": "list",
-     "h": "TRILHA DOS TRAILERS",
-     "i": [
-      "🎵 Trailer 1: Tom Petty",
-      "🎵 Trailer 2: The Pointer Sisters"
-     ]
-    }
-   },
-   {
-    "t": "O lançamento foi adiado duas vezes. Primeiro, de 2025 para maio de 2026. Depois, para 19 de novembro de 2026, no PlayStation 5 e no Xbox Series. A versão de PC ainda não tem data.",
-    "c": {
-     "k": "time",
-     "i": 2
-    }
-   },
-   {
-    "t": "Em agosto de 2026, a Rockstar finalmente mostrou gameplay de verdade, num vídeo de quase meia hora chamado Extended Look, que estreou na Netflix. E em setembro a revista Game Informer publicou uma matéria de capa cheia de detalhes novos.",
-    "c": {
-     "k": "time",
-     "i": 3
-    }
-   },
-   {
-    "t": "É desse material que vem quase tudo o que você vai ver aqui. E repara no selo no canto da tela: verde é confirmado pela Rockstar, azul é o que apareceu nos trailers e no gameplay oficial, laranja é coisa de prévia da imprensa, e vermelho é vazamento. Combinado? Então bora pra lista.",
-    "c": {
-     "k": "legend"
-    }
-   }
-  ],
-  "hl": [
-   "2013",
-   "treze anos",
-   "recorde",
-   "adiado",
-   "19 de novembro",
-   "PC",
-   "gameplay",
-   "Extended Look",
-   "Game Informer",
-   "verde",
-   "azul",
-   "laranja",
-   "vermelho",
-   "duzentos milhões",
-   "Tom Petty",
-   "Pointer Sisters",
-   "Netflix"
+   "atirar",
+   "fugir",
+   "corpo",
+   "número dez",
+   "polícia",
+   "final"
   ]
  },
  {
   "id": "n1",
-  "scene": "n1",
+  "scene": "n9",
   "num": 1,
-  "title": "DUPLA JOGÁVEL",
-  "tag": "ok",
-  "src": "Fonte: trailers, site oficial e gameplay da Rockstar",
+  "title": "ADEUS, RODA DE ARMAS?",
+  "tag": "rumor",
+  "src": "Fonte: vazamento de 2022 e prévias · não confirmado",
   "parts": [
    {
-    "t": "Número um: dois protagonistas que formam uma dupla de verdade.",
-    "c": null
+    "t": "Novidade número um: a roda de armas que você conhece pode estar com os dias contados.",
+    "c": null,
+    "v": "roda"
    },
    {
-    "t": "Tá, eu sei o que você vai falar: o GTA 5 tinha três protagonistas. Michael, Franklin e Trevor. Só que cada um tinha a sua própria vida, e muitas vezes eles só se cruzavam nas missões.",
+    "t": "Lembra no GTA 5? Você segurava um botão, a roda abria, e lá estava tudo: pistola, fuzil, lança-granadas, lança-míssil.",
+    "c": {
+     "k": "big",
+     "a": "TUDO NO BOLSO",
+     "b": "a roda mágica do GTA 5"
+    },
+    "v": "roda"
+   },
+   {
+    "t": "O Michael saía de terno, sem mochila nenhuma, e tirava uma bazuca do nada. E ninguém nunca questionou.",
+    "c": {
+     "k": "big",
+     "a": "🚀 DE ONDE SAIU ISSO?",
+     "b": "o mistério que todo mundo aceitou"
+    },
+    "v": "bolso"
+   },
+   {
+    "t": "No GTA 6, a ideia é outra. Pelo vazamento de 2022 e pelas prévias, as armas grandes ficam numa bolsa ou no porta-malas do carro.",
+    "c": {
+     "k": "big",
+     "a": "🎒 BOLSA • 🚗 PORTA-MALAS",
+     "b": "cada arma no seu lugar"
+    },
+    "v": "carro"
+   },
+   {
+    "t": "Imagina: você tá no meio de um tiroteio, a munição acaba, e a arma pesada ficou no carro, do outro lado da rua. Vai buscar ou improvisa?",
+    "c": {
+     "k": "im",
+     "a": "A ARMA FICOU NO CARRO",
+     "b": "vai buscar ou improvisa?"
+    },
+    "v": "carro"
+   },
+   {
+    "t": "Isso transforma cada assalto num plano de verdade: o que levar, onde deixar e quem carrega o quê.",
+    "c": {
+     "k": "list",
+     "h": "ANTES DO ASSALTO",
+     "i": [
+      "o que levar?",
+      "onde deixar?",
+      "quem carrega?"
+     ]
+    },
+    "v": "roda"
+   },
+   {
+    "t": "Só um aviso: a Rockstar ainda não confirmou esse sistema. O que o gameplay oficial mostrou é que a dupla divide dinheiro e armas.",
+    "c": {
+     "k": "q",
+     "a": "AINDA NÃO CONFIRMADO",
+     "b": "confirmado: dinheiro e armas divididos"
+    },
+    "v": "grana"
+   }
+  ],
+  "hl": [
+   "roda de armas",
+   "dias contados",
+   "GTA 5",
+   "pistola",
+   "fuzil",
+   "lança-míssil",
+   "terno",
+   "bazuca",
+   "GTA 6",
+   "bolsa",
+   "porta-malas",
+   "Imagina",
+   "arma pesada",
+   "plano",
+   "não confirmou",
+   "dinheiro e armas"
+  ]
+ },
+ {
+  "id": "n2",
+  "scene": "n1",
+  "num": 2,
+  "title": "UMA DUPLA, NÃO UM TRIO",
+  "tag": "ok",
+  "src": "Fonte: trailers e gameplay oficial da Rockstar",
+  "parts": [
+   {
+    "t": "Novidade número dois: em vez de três protagonistas, uma dupla.",
+    "c": null,
+    "v": "dupla"
+   },
+   {
+    "t": "No GTA 5 você trocava entre Michael, Franklin e Trevor. Era genial, mas cada um vivia num canto do mapa, com a própria vida.",
     "c": {
      "k": "vs",
-     "a": "3 PROTAGONISTAS",
-     "b": "1 DUPLA",
-     "as": "histórias paralelas",
-     "bs": "uma história a dois"
+     "a": "3 VIDAS",
+     "b": "1 HISTÓRIA",
+     "as": "cada um no seu canto",
+     "bs": "os dois juntos"
+    },
+    "v": "tres",
+    "clip": {
+     "arquivo": "clips/fonte/gta5_trevor.mp4",
+     "inicio": 0.0,
+     "dur": 4.0
     }
    },
    {
-    "t": "No GTA 6, a história gira em torno de dois personagens: Jason Duval e Lucia Caminos. E os dois formam um casal.",
+    "t": "Você tava de boa com o Michael e, do nada, trocava pro Trevor fazendo alguma loucura no meio do deserto.",
+    "c": {
+     "k": "big",
+     "a": "🤪 TREVOR",
+     "b": "sempre aprontando no deserto"
+    },
+    "v": "tres",
+    "clip": {
+     "arquivo": "clips/fonte/gta5_trevor.mp4",
+     "inicio": 6.0,
+     "dur": 4.0
+    }
+   },
+   {
+    "t": "No GTA 6 é diferente: Jason e Lucia são um casal, e a história inteira gira em torno dos dois.",
     "c": {
      "k": "big",
      "a": "JASON + LUCIA",
      "b": "um casal do crime"
+    },
+    "v": "dupla",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 39.8,
+     "dur": 1.85
     }
    },
    {
-    "t": "Segundo a Rockstar, o Jason cresceu cercado de golpistas, passou pelo exército e foi parar nas Keys trabalhando para traficantes da região. Já a Lucia aparece logo no primeiro trailer dentro de uma penitenciária de Leonida.",
-    "c": {
-     "k": "list",
-     "h": "QUEM SÃO",
-     "i": [
-      "JASON: ex-militar, trabalha nas Keys",
-      "LUCIA: começa o trailer presa"
-     ]
-    }
-   },
-   {
-    "t": "E no gameplay mostrado em agosto dá pra trocar entre os dois na hora, no meio da ação. Enquanto você controla um, o outro continua lutando do seu lado.",
+    "t": "No gameplay que a Rockstar mostrou, dá pra trocar entre eles no meio da ação, e quem você não está controlando continua lutando do seu lado.",
     "c": {
      "k": "big",
-     "a": "TROCA NA HORA",
+     "a": "⇄ TROCA NA HORA",
      "b": "o parceiro continua lutando"
+    },
+    "v": "troca",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 70.95,
+     "dur": 2.1
     }
    },
    {
-    "t": "Ou seja, em vez de três histórias paralelas, agora é um casal dividindo cada assalto, bem no estilo Bonnie e Clyde. E isso, na minha opinião, muda o tom do jogo inteiro.",
+    "t": "Imagina um assalto: a Lucia segura a entrada enquanto o Jason pega o dinheiro. Você troca na hora certa e salva o plano.",
+    "c": {
+     "k": "im",
+     "a": "LUCIA NA PORTA, JASON NO COFRE",
+     "b": "você decide quem age"
+    },
+    "v": "troca"
+   },
+   {
+    "t": "É praticamente um Bonnie e Clyde em Vice City.",
     "c": {
      "k": "op",
-     "a": "MUDA O TOM DO JOGO"
+     "a": "BONNIE E CLYDE 2.0"
+    },
+    "v": "casal",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 66.45,
+     "dur": 1.4,
+     "crop": true
     }
    }
   ],
@@ -175,417 +254,431 @@
    "Michael",
    "Franklin",
    "Trevor",
+   "deserto",
    "Jason",
    "Lucia",
    "casal",
-   "exército",
-   "penitenciária",
    "trocar",
-   "na hora",
+   "lutando",
+   "Imagina",
+   "assalto",
    "Bonnie e Clyde"
   ]
  },
  {
-  "id": "n2",
-  "scene": "n2",
-  "num": 2,
-  "title": "CLIMA LOCALIZADO",
+  "id": "n3",
+  "scene": "n10",
+  "num": 3,
+  "title": "SEU CORPO MUDA",
   "tag": "ok",
-  "src": "Fonte: Rockstar à Game Informer (set/2026)",
+  "src": "Fonte: Rockstar North em entrevista (ago/2026)",
   "parts": [
    {
-    "t": "Número dois: clima localizado.",
-    "c": null
+    "t": "Novidade número três: o corpo do seu personagem muda.",
+    "c": null,
+    "v": "muda"
    },
    {
-    "t": "No GTA 5, quando o tempo mudava, ele mudava praticamente para o mapa inteiro de uma vez.",
+    "t": "No GTA 5 até existiam atributos, tipo força e fôlego, que subiam conforme você jogava. Mas o corpo continuava igualzinho.",
     "c": {
      "k": "vs",
-     "a": "CLIMA GLOBAL",
-     "b": "CLIMA LOCAL",
-     "as": "chove em tudo",
-     "bs": "chove só ali"
-    }
+     "a": "SÓ NÚMEROS",
+     "b": "CORPO MUDA",
+     "as": "força e fôlego",
+     "bs": "peso, músculo, cansaço"
+    },
+    "v": "parado"
    },
    {
-    "t": "No GTA 6, segundo a Rockstar, o clima é localizado. Você pode estar debaixo de um céu limpo e ver uma tempestade caindo logo ali do lado.",
-    "c": {
-     "k": "big",
-     "a": "☀️ AQUI  ⛈️ ALI",
-     "b": "no mesmo mapa, ao mesmo tempo"
-    }
-   },
-   {
-    "t": "E ele é persistente. Se choveu numa região, ela não seca magicamente quando o sol aparece.",
-    "c": {
-     "k": "big",
-     "a": "PERSISTENTE",
-     "b": "a chuva deixa marca"
-    }
-   },
-   {
-    "t": "A Rockstar disse que reconstruiu o sistema de clima para o GTA 6, partindo da base do Red Dead Redemption 2.",
-    "c": {
-     "k": "big",
-     "a": "BASE: RED DEAD 2",
-     "b": "sistema reconstruído"
-    }
-   },
-   {
-    "t": "E tem mais: tempestades tropicais e furacões, com chuva pesada, vento forte, raios e trovões. Faz sentido, já que Leonida é inspirada na Flórida.",
+    "t": "No GTA 6, a Rockstar confirmou: comeu demais, o Jason e a Lucia engordam. Foi pra academia, ganham músculo. Passou a noite em claro? Aparece na cara.",
     "c": {
      "k": "list",
      "h": "CONFIRMADO",
      "i": [
-      "🌧️ tempestades tropicais",
-      "🌀 furacões",
-      "⚡ raios e vento forte"
+      "🍔 comeu demais → engorda",
+      "💪 academia → músculo",
+      "😴 sem dormir → aparece"
      ]
+    },
+    "v": "muda"
+   },
+   {
+    "t": "E o gameplay ainda mostrou academia e um medidor de estamina.",
+    "c": {
+     "k": "big",
+     "a": "🏋️ ACADEMIA",
+     "b": "e medidor de estamina"
+    },
+    "v": "academia",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 56.45,
+     "dur": 2.75
     }
    },
    {
-    "t": "O que a Rockstar ainda não explicou é com que frequência esses furacões aparecem e se eles mexem nas missões. Então segura a expectativa.",
+    "t": "Quem jogou San Andreas lembra do CJ comendo hambúrguer até ficar redondo. É esse espírito voltando, mais de vinte anos depois.",
+    "c": {
+     "k": "big",
+     "a": "🍔 O ESPÍRITO DO CJ",
+     "b": "San Andreas, 2004"
+    },
+    "v": "sa"
+   },
+   {
+    "t": "A dúvida é: isso muda a gameplay ou é só visual? Você correria menos com o Jason acima do peso? A Rockstar ainda não disse.",
     "c": {
      "k": "q",
-     "a": "FREQUÊNCIA? MISSÕES?",
-     "b": "ainda sem resposta"
-    }
+     "a": "SÓ VISUAL?",
+     "b": "a Rockstar ainda não disse"
+    },
+    "v": "duvida"
    }
   ],
   "hl": [
-   "clima localizado",
-   "mapa inteiro",
-   "céu limpo",
-   "tempestade",
-   "persistente",
-   "seca",
-   "Red Dead Redemption 2",
-   "furacões",
-   "Flórida",
-   "segura"
-  ]
- },
- {
-  "id": "n3",
-  "scene": "n3",
-  "num": 3,
-  "title": "+170 ESPÉCIES",
-  "tag": "ok",
-  "src": "Fonte: Rockstar à Game Informer (set/2026) e trailers",
-  "parts": [
-   {
-    "t": "Número três: mais de cento e setenta espécies de animais.",
-    "c": null
-   },
-   {
-    "t": "No GTA 5 a fauna existia, mas era bem tímida. Alguns cachorros, aves, peixes e uns bichos no interior.",
-    "c": {
-     "k": "vs",
-     "a": "FAUNA TÍMIDA",
-     "b": "+170 ESPÉCIES",
-     "as": "GTA 5",
-     "bs": "GTA 6"
-    }
-   },
-   {
-    "t": "Agora, segundo a Game Informer, são mais de cento e setenta espécies, entre terra, ar e mar. Cerca de sessenta tipos de aves e mais de trinta mamíferos terrestres.",
-    "c": {
-     "k": "list",
-     "h": "OS NÚMEROS",
-     "i": [
-      "🐦 cerca de 60 aves",
-      "🦌 30+ mamíferos terrestres",
-      "🐟 peixes e répteis"
-     ]
-    }
-   },
-   {
-    "t": "Nos trailers e nas imagens oficiais já apareceram jacarés, flamingos, pelicanos e até peixes-boi.",
-    "c": {
-     "k": "big",
-     "a": "🐊 🦩 🐦",
-     "b": "jacaré, flamingo, pelicano, peixe-boi"
-    }
-   },
-   {
-    "t": "E também espécies invasoras famosas na Flórida, como iguanas verdes e macacos.",
-    "c": {
-     "k": "big",
-     "a": "🦎 🐒",
-     "b": "até as espécies invasoras"
-    }
-   },
-   {
-    "t": "E olha esse detalhe: o site oficial descreve Mount Kalaga como um lugar de caça, pesca e trilhas off-road. O que dá a entender que esses bichos não estão ali só de enfeite.",
-    "c": {
-     "k": "op",
-     "a": "CAÇA E PESCA?"
-    }
-   },
-   {
-    "t": "Mas a Rockstar não divulgou a lista completa. Então se você vir por aí alguém com a lista oficial dos cento e setenta animais, desconfia.",
-    "c": {
-     "k": "q",
-     "a": "LISTA COMPLETA?",
-     "b": "não foi divulgada"
-    }
-   }
-  ],
-  "hl": [
-   "cento e setenta",
-   "tímida",
-   "terra, ar e mar",
-   "sessenta",
-   "trinta",
-   "jacarés",
-   "flamingos",
-   "pelicanos",
-   "peixes-boi",
-   "invasoras",
-   "iguanas",
-   "macacos",
-   "caça",
-   "pesca",
-   "desconfia"
+   "corpo",
+   "força",
+   "fôlego",
+   "igualzinho",
+   "engordam",
+   "academia",
+   "músculo",
+   "noite em claro",
+   "estamina",
+   "San Andreas",
+   "CJ",
+   "hambúrguer",
+   "só visual",
+   "acima do peso"
   ]
  },
  {
   "id": "n4",
-  "scene": "n4",
+  "scene": "n2",
   "num": 4,
-  "title": "6 REGIÕES",
+  "title": "CLIMA DE VERDADE",
   "tag": "ok",
-  "src": "Fonte: site oficial da Rockstar · tamanho: Game Informer",
+  "src": "Fonte: Rockstar à Game Informer (set/2026)",
   "parts": [
    {
-    "t": "Número quatro: o mapa de Leonida tem seis regiões.",
-    "c": null
+    "t": "Novidade número quatro: o clima deixa de ser cenário e vira acontecimento.",
+    "c": null,
+    "v": ""
    },
    {
-    "t": "O GTA 5 tinha basicamente Los Santos, a versão do jogo para Los Angeles, e o interior de Blaine County. Leonida é a versão do GTA para a Flórida. E, de acordo com a Rockstar, o mapa do GTA 6 tem mais ou menos o dobro do tamanho do mapa do GTA 5.",
+    "t": "No GTA 5, começava a chover e chovia praticamente no mapa inteiro, ao mesmo tempo.",
     "c": {
-     "k": "stat",
-     "n": "≈ 2×",
-     "l": "O MAPA DO GTA 5"
-    }
+     "k": "vs",
+     "a": "CHOVE EM TUDO",
+     "b": "CHOVE ALI",
+     "as": "clima global",
+     "bs": "clima localizado"
+    },
+    "v": ""
    },
    {
-    "t": "Começando por Vice City: a cidade grande, cheia de neon, praia e vida noturna.",
-    "c": {
-     "k": "reg",
-     "i": 0
-    }
-   },
-   {
-    "t": "Depois, Leonida Keys, aquele arquipélago de ilhas cercado de água azul.",
-    "c": {
-     "k": "reg",
-     "i": 1
-    }
-   },
-   {
-    "t": "Grassrivers, uma região de pântano, com canais, brejos e muito bicho.",
-    "c": {
-     "k": "reg",
-     "i": 2
-    }
-   },
-   {
-    "t": "Port Gellhorn, uma cidade litorânea decadente, mais pesada e desgastada que Vice City.",
-    "c": {
-     "k": "reg",
-     "i": 3
-    }
-   },
-   {
-    "t": "Ambrosia, uma cidade industrial que gira em torno de uma refinaria de açúcar, com presença de motoqueiros.",
-    "c": {
-     "k": "reg",
-     "i": 4
-    }
-   },
-   {
-    "t": "E Mount Kalaga, um parque nacional no norte do mapa, com caça, pesca e trilhas.",
-    "c": {
-     "k": "reg",
-     "i": 5
-    }
-   },
-   {
-    "t": "Então dá pra ir da praia para a cidade, e do interior para o pântano, tudo no mesmo mapa.",
+    "t": "No GTA 6, segundo a Rockstar, o clima é localizado. Você pode estar no sol, olhando uma tempestade desabar a poucos quarteirões.",
     "c": {
      "k": "big",
-     "a": "PRAIA • CIDADE • INTERIOR • PÂNTANO",
-     "b": "tudo em Leonida"
-    }
+     "a": "☀️ AQUI  ⛈️ ALI",
+     "b": "no mesmo mapa, ao mesmo tempo"
+    },
+    "v": "local"
+   },
+   {
+    "t": "E a chuva deixa marca: a rua não seca por mágica quando o sol volta.",
+    "c": {
+     "k": "big",
+     "a": "💧 A RUA CONTINUA MOLHADA",
+     "b": "o clima é persistente"
+    },
+    "v": "molhado"
+   },
+   {
+    "t": "E tem furacão. Tempestade tropical, vento forte, raio caindo. Leonida é inspirada na Flórida, então faz todo sentido.",
+    "c": {
+     "k": "list",
+     "h": "CONFIRMADO",
+     "i": [
+      "🌀 furacões",
+      "🌧️ tempestades tropicais",
+      "⚡ raios e vento forte"
+     ]
+    },
+    "v": "furacao"
+   },
+   {
+    "t": "Imagina uma fuga de carro na pista encharcada, com o vento empurrando tudo e a polícia colada atrás. Dá até frio na barriga.",
+    "c": {
+     "k": "im",
+     "a": "FUGA NO MEIO DO FURACÃO",
+     "b": "pista molhada e vento forte"
+    },
+    "v": "furacao"
    }
   ],
   "hl": [
-   "seis regiões",
-   "Los Santos",
-   "Blaine County",
-   "dobro",
-   "Vice City",
-   "neon",
-   "Leonida Keys",
-   "ilhas",
-   "Grassrivers",
-   "pântano",
-   "Port Gellhorn",
-   "decadente",
-   "Ambrosia",
-   "açúcar",
-   "motoqueiros",
-   "Mount Kalaga",
-   "parque nacional",
-   "Los Angeles",
-   "Flórida"
+   "clima",
+   "acontecimento",
+   "mapa inteiro",
+   "localizado",
+   "sol",
+   "tempestade",
+   "marca",
+   "seca",
+   "furacão",
+   "raio",
+   "Flórida",
+   "Imagina",
+   "encharcada",
+   "polícia"
   ]
  },
  {
   "id": "n5",
-  "scene": "n5",
+  "scene": "n3",
   "num": 5,
-  "title": "REDES SOCIAIS",
+  "title": "+170 ANIMAIS",
+  "tag": "ok",
+  "src": "Fonte: Rockstar à Game Informer (set/2026) e trailers",
+  "parts": [
+   {
+    "t": "Novidade número cinco: Leonida está cheia de bicho.",
+    "c": null,
+    "v": "fauna"
+   },
+   {
+    "t": "O GTA 5 tinha o Chop, o cachorro do Franklin, alguns cervos, pumas no mato e tubarão no mar. Mas era pouco.",
+    "c": {
+     "k": "big",
+     "a": "🐕 CHOP E POUCOS AMIGOS",
+     "b": "a fauna tímida do GTA 5"
+    },
+    "v": "fauna"
+   },
+   {
+    "t": "No GTA 6 são mais de cento e setenta espécies, entre terra, ar e mar. Dezenas de aves, mamíferos, peixes e répteis.",
+    "c": {
+     "k": "stat",
+     "n": "+170",
+     "l": "ESPÉCIES"
+    },
+    "v": "fauna"
+   },
+   {
+    "t": "Nos trailers já apareceram jacarés, flamingos e até iguanas, que são uma praga famosa na Flórida.",
+    "c": {
+     "k": "big",
+     "a": "🐊 🦩 🦎",
+     "b": "jacaré, flamingo e iguana"
+    },
+    "v": "invasoras",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 20.55,
+     "dur": 1.3
+    }
+   },
+   {
+    "t": "Agora imagina fugir pelo pântano de Grassrivers e dar de cara com um jacaré. Sinceramente, eu prefiro a polícia.",
+    "c": {
+     "k": "im",
+     "a": "VOCÊ VS JACARÉ",
+     "b": "eu prefiro a polícia"
+    },
+    "v": "pantano",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 27.2,
+     "dur": 1.5
+    }
+   },
+   {
+    "t": "E o site oficial fala em caça e pesca em Mount Kalaga. Então tudo indica que esses bichos não estão ali só de enfeite.",
+    "c": {
+     "k": "op",
+     "a": "NÃO É SÓ ENFEITE"
+    },
+    "v": "pantano"
+   }
+  ],
+  "hl": [
+   "bicho",
+   "Chop",
+   "Franklin",
+   "cervos",
+   "pumas",
+   "tubarão",
+   "cento e setenta",
+   "jacarés",
+   "flamingos",
+   "iguanas",
+   "praga",
+   "Grassrivers",
+   "jacaré",
+   "polícia",
+   "caça",
+   "pesca",
+   "enfeite"
+  ]
+ },
+ {
+  "id": "n6",
+  "scene": "n5",
+  "num": 6,
+  "title": "LEONIDA VIRALIZA",
   "tag": "trailer",
   "src": "Fonte: trailers oficiais",
   "parts": [
    {
-    "t": "Número cinco: redes sociais dentro do jogo.",
-    "c": null
+    "t": "Novidade número seis: as redes sociais chegaram a Leonida.",
+    "c": null,
+    "v": "feed"
    },
    {
-    "t": "O GTA sempre zoou a cultura americana. No GTA 5, a internet do jogo tinha o Lifeinvader, a paródia de rede social da época, e o Bleeter.",
+    "t": "No GTA 5, a internet do jogo tinha o Lifeinvader, a paródia de rede social, e o Bleeter. Era engraçado, mas era tudo texto e foto parada.",
     "c": {
      "k": "vs",
-     "a": "LIFEINVADER",
-     "b": "VÍDEOS VIRAIS",
-     "as": "GTA 5",
-     "bs": "GTA 6"
-    }
+     "a": "TEXTO E FOTO",
+     "b": "VÍDEO VIRAL",
+     "as": "Lifeinvader",
+     "bs": "feed de vídeos"
+    },
+    "v": "gta5"
    },
    {
-    "t": "Agora, os trailers do GTA 6 estão cheios de vídeos verticais, no estilo das redes de vídeo curto, com gente fazendo besteira, influenciadores e conteúdo viral.",
+    "t": "Nos trailers do GTA 6, o celular é cheio de vídeos verticais: gente fazendo besteira, dancinha, influenciador e briga na rua.",
     "c": {
      "k": "list",
-     "h": "NOS TRAILERS",
+     "h": "NO CELULAR DO JOGO",
      "i": [
       "📱 vídeos verticais",
       "🤳 influenciadores",
       "🔥 conteúdo viral"
      ]
-    }
+    },
+    "v": "feed"
    },
    {
-    "t": "E faz todo sentido, porque a Flórida é famosa na internet justamente pelos vídeos absurdos que viralizam.",
+    "t": "É a Flórida da internet, aquela dos vídeos absurdos que viralizam todo santo dia.",
     "c": {
      "k": "op",
      "a": "A CARA DA FLÓRIDA"
-    }
+    },
+    "v": "feed"
    },
    {
-    "t": "Agora, até que ponto isso é jogável, tipo se o que você faz aparece nas redes, a Rockstar ainda não detalhou.",
+    "t": "Agora imagina: você faz uma loucura no meio da rua e, minutos depois, o vídeo tá rodando no celular do jogo. A Rockstar ainda não disse se funciona assim, mas seria muito a cara do GTA.",
     "c": {
-     "k": "q",
-     "a": "É JOGÁVEL?",
-     "b": "a Rockstar não detalhou"
-    }
-   },
-   {
-    "t": "Mas imagina só: fez besteira na rua e virou meme no celular do jogo.",
-    "c": {
-     "k": "big",
-     "a": "VIROU MEME 😂",
-     "b": "imaginação nossa, não confirmado"
-    }
+     "k": "im",
+     "a": "VOCÊ VIROU MEME 😂",
+     "b": "ideia nossa, ainda não confirmada"
+    },
+    "v": "meme"
    }
   ],
   "hl": [
    "redes sociais",
    "Lifeinvader",
    "Bleeter",
+   "texto",
+   "foto parada",
    "vídeos verticais",
-   "influenciadores",
-   "viral",
+   "besteira",
+   "influenciador",
    "Flórida",
    "viralizam",
-   "não detalhou",
-   "meme"
+   "imagina",
+   "loucura",
+   "celular",
+   "cara do GTA"
   ]
  },
  {
-  "id": "n6",
+  "id": "n7",
   "scene": "n6",
-  "num": 6,
-  "title": "NPCs MAIS VIVOS",
+  "num": 7,
+  "title": "GENTE DE VERDADE",
   "tag": "trailer",
   "src": "Fonte: Game Informer (set/2026) e gameplay oficial",
   "parts": [
    {
-    "t": "Número seis: NPCs muito mais realistas.",
-    "c": null
+    "t": "Novidade número sete: as pessoas na rua parecem gente de verdade.",
+    "c": null,
+    "v": "vivos"
    },
    {
-    "t": "Os pedestres do GTA 5 eram ótimos para 2013, mas muitos se repetiam e reagiam sempre do mesmo jeito.",
+    "t": "No GTA 5, você via o mesmo pedestre três vezes no mesmo quarteirão. E todo mundo reagia igual: corria, gritava, ou ligava pra polícia.",
     "c": {
      "k": "vs",
-     "a": "REPETIDOS",
+     "a": "CLONES",
      "b": "ÚNICOS",
-     "as": "GTA 5",
-     "bs": "GTA 6"
-    }
+     "as": "o mesmo pedestre",
+     "bs": "cada um diferente"
+    },
+    "v": "iguais"
    },
    {
-    "t": "Segundo a Game Informer, no GTA 6 os NPCs variam em altura, tipo de corpo, musculatura, tipo de pele, sardas, pintas e até estilo de tatuagem.",
+    "t": "No GTA 6, os NPCs variam em altura, corpo, pele, sardas, pintas e até tatuagens.",
     "c": {
      "k": "list",
-     "h": "VARIEDADE",
+     "h": "CADA UM É ÚNICO",
      "i": [
       "altura e corpo",
       "pele, sardas e pintas",
       "tatuagens"
      ]
-    }
+    },
+    "v": "vivos"
    },
    {
-    "t": "E nos trailers dá pra ver gente fazendo de tudo: malhando na praia, festa, confusão e muita gente filmando tudo com o celular.",
+    "t": "Nos trailers tem gente malhando na praia, fazendo festa e filmando tudo com o celular.",
     "c": {
      "k": "big",
-     "a": "🏋️ 🎉 📱",
-     "b": "a rua parece viva"
+     "a": "🏖️ 🎉 📱",
+     "b": "a rua tem vida própria"
+    },
+    "v": "vivos",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 54.55,
+     "dur": 1.85
     }
    },
    {
-    "t": "No gameplay de agosto também apareceu um sistema parecido com o do Red Dead Redemption 2, em que dá pra cumprimentar ou provocar as pessoas na rua.",
+    "t": "E no gameplay apareceu um sistema parecido com o do Red Dead 2: dá pra cumprimentar ou provocar quem passa.",
     "c": {
      "k": "big",
-     "a": "CUMPRIMENTAR 👋 PROVOCAR 😤",
-     "b": "igual no Red Dead 2"
-    }
+     "a": "👋 OI  •  😤 QUAL FOI?",
+     "b": "cumprimentar ou provocar"
+    },
+    "v": "cumprimentar"
    },
    {
-    "t": "E quem jogou Red Dead sabe o quanto isso deixa o mundo vivo.",
+    "t": "Ou seja, cada esquina pode virar uma história. Ou uma confusão.",
     "c": {
      "k": "op",
-     "a": "MUNDO MAIS VIVO"
-    }
+     "a": "CADA ESQUINA, UMA HISTÓRIA"
+    },
+    "v": "vivos"
    }
   ],
   "hl": [
-   "NPCs",
-   "realistas",
-   "repetiam",
+   "gente de verdade",
+   "mesmo pedestre",
+   "igual",
+   "polícia",
    "altura",
    "corpo",
-   "musculatura",
-   "pele",
-   "sardas",
-   "pintas",
-   "tatuagem",
+   "tatuagens",
+   "malhando",
+   "festa",
    "celular",
+   "Red Dead 2",
    "cumprimentar",
    "provocar",
-   "vivo"
+   "história",
+   "confusão"
   ]
  },
  {
@@ -593,57 +686,68 @@
   "scene": "mid",
   "parts": [
    {
-    "t": "Antes de continuar, rapidinho: se você tá curtindo, deixa o like e se inscreve no canal.",
+    "t": "Se você chegou até aqui, deixa o like, porque as três últimas são as que mais mudam o jeito de jogar.",
     "c": {
      "k": "sub"
-    }
+    },
+    "v": "sub"
    },
    {
-    "t": "Porque daqui pra frente a coisa fica séria. Os próximos quatro mexem direto no jeito de jogar.",
+    "t": "E a número dez é a minha favorita.",
     "c": {
      "k": "big",
-     "a": "#7  #8  #9  #10",
-     "b": "o jeito de jogar muda"
-    }
+     "a": "#8  #9  #10",
+     "b": "as que mais mudam o jogo"
+    },
+    "v": "segura"
    }
   ],
   "hl": [
    "like",
-   "se inscreve",
-   "séria",
-   "jeito de jogar"
+   "três últimas",
+   "jeito de jogar",
+   "número dez",
+   "favorita"
   ]
  },
  {
-  "id": "n7",
+  "id": "n8",
   "scene": "n7",
-  "num": 7,
-  "title": "PERFIL CRIMINAL",
+  "num": 8,
+  "title": "SEU ESTILO NO CRIME",
   "tag": "preview",
   "src": "Fonte: prévias da imprensa · Rockstar não detalhou",
   "parts": [
    {
-    "t": "Número sete: o perfil criminal.",
-    "c": null
+    "t": "Novidade número oito: o jogo pode começar a lembrar quem você é no crime.",
+    "c": null,
+    "v": ""
    },
    {
-    "t": "Esse é o mais nebuloso da lista, então presta atenção no selo.",
+    "t": "No GTA 5, assim que as estrelas sumiam, a cidade esquecia tudo. Você roubava, explodia, saía atropelando, e dois minutos depois era um cidadão exemplar.",
     "c": {
      "k": "big",
-     "a": "👀 PRÉVIAS",
-     "b": "não é confirmação oficial"
+     "a": "😇 CIDADÃO EXEMPLAR",
+     "b": "2 minutos depois do caos"
+    },
+    "v": "",
+    "clip": {
+     "arquivo": "clips/fonte/gta5_trevor.mp4",
+     "inicio": 8.5,
+     "dur": 3.5
     }
    },
    {
-    "t": "Nas coberturas do gameplay de agosto, a imprensa notou um indicador que parece acompanhar o seu comportamento, o jeito como você age no crime.",
+    "t": "Nas coberturas do gameplay de agosto, a imprensa notou um indicador que parece acompanhar o seu estilo: se você é discreto ou se sai atirando em tudo.",
     "c": {
      "k": "big",
-     "a": "SEU ESTILO NO CRIME",
+     "a": "📊 SEU ESTILO",
      "b": "um indicador acompanha"
-    }
+    },
+    "v": ""
    },
    {
-    "t": "Alguns sites dizem que existem níveis, tipo profissional, agressivo e violento. Mas isso vem de uma fonte só, e a Rockstar não confirmou.",
+    "t": "Um site chegou a falar em níveis, tipo profissional, agressivo e violento. Mas é uma fonte só, e a Rockstar não confirmou.",
     "c": {
      "k": "list",
      "h": "SEGUNDO UMA FONTE",
@@ -652,472 +756,246 @@
       "agressivo",
       "violento"
      ]
-    }
+    },
+    "v": "niveis"
    },
    {
-    "t": "Se for verdade, o jogo poderia reagir diferente se você é um ladrão calculista ou um maluco que sai atirando em tudo.",
+    "t": "Se for real, o jogo vai saber quem você é. E aí, você seria o ladrão calculista ou o maluco que explode tudo?",
     "c": {
      "k": "vs",
      "a": "CALCULISTA",
      "b": "MALUCO",
      "as": "sem alarde",
-     "bs": "atira em tudo"
-    }
-   },
-   {
-    "t": "No GTA 5, a cidade basicamente esquecia o que você fazia assim que as estrelas sumiam. Então, se esse sistema funcionar, é uma mudança grande. Mas, por enquanto: aguarde.",
-    "c": {
-     "k": "q",
-     "a": "AGUARDE",
-     "b": "detalhes no lançamento"
-    }
+     "bs": "explode tudo"
+    },
+    "v": "niveis"
    }
   ],
   "hl": [
-   "perfil criminal",
-   "nebuloso",
-   "selo",
+   "lembrar",
+   "estrelas",
+   "esquecia",
+   "cidadão exemplar",
    "indicador",
-   "comportamento",
+   "estilo",
+   "discreto",
+   "atirando",
    "profissional",
    "agressivo",
    "violento",
-   "uma fonte só",
    "não confirmou",
    "calculista",
-   "esquecia",
-   "aguarde"
+   "maluco"
   ]
  },
  {
-  "id": "n8",
+  "id": "n9",
+  "scene": "n4",
+  "num": 9,
+  "title": "UM MAPA GIGANTE",
+  "tag": "ok",
+  "src": "Fonte: site oficial da Rockstar · tamanho: Game Informer",
+  "parts": [
+   {
+    "t": "Novidade número nove: um mapa que parece outro mundo.",
+    "c": null,
+    "v": ""
+   },
+   {
+    "t": "O GTA 5 tinha Los Santos e o interior de Blaine County, com o Monte Chiliad lá no alto. Segundo a Rockstar, o mapa do GTA 6 tem mais ou menos o dobro do tamanho.",
+    "c": {
+     "k": "stat",
+     "n": "≈ 2×",
+     "l": "O MAPA DO GTA 5"
+    },
+    "v": "",
+    "clip": {
+     "arquivo": "clips/fonte/gta5_trevor.mp4",
+     "inicio": 12.0,
+     "dur": 5.5
+    }
+   },
+   {
+    "t": "São seis regiões. Vice City, a cidade do neon e da praia.",
+    "c": {
+     "k": "reg",
+     "i": 0
+    },
+    "v": "reg0",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 52.0,
+     "dur": 2.4
+    }
+   },
+   {
+    "t": "As ilhas de Leonida Keys.",
+    "c": {
+     "k": "reg",
+     "i": 1
+    },
+    "v": "reg1",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 2.05,
+     "dur": 2.9,
+     "crop": true
+    }
+   },
+   {
+    "t": "O pântano de Grassrivers.",
+    "c": {
+     "k": "reg",
+     "i": 2
+    },
+    "v": "reg2"
+   },
+   {
+    "t": "Port Gellhorn, uma cidade litorânea decadente.",
+    "c": {
+     "k": "reg",
+     "i": 3
+    },
+    "v": "reg3"
+   },
+   {
+    "t": "Ambrosia, a cidade industrial da refinaria de açúcar.",
+    "c": {
+     "k": "reg",
+     "i": 4
+    },
+    "v": "reg4"
+   },
+   {
+    "t": "E Mount Kalaga, o parque nacional, com trilhas, caça e pesca. Da praia ao pântano, tudo num mapa só.",
+    "c": {
+     "k": "reg",
+     "i": 5
+    },
+    "v": "reg5"
+   }
+  ],
+  "hl": [
+   "outro mundo",
+   "Los Santos",
+   "Blaine County",
+   "Monte Chiliad",
+   "dobro",
+   "seis regiões",
+   "Vice City",
+   "neon",
+   "Leonida Keys",
+   "Grassrivers",
+   "Port Gellhorn",
+   "Ambrosia",
+   "Mount Kalaga",
+   "praia",
+   "pântano"
+  ]
+ },
+ {
+  "id": "n10",
   "scene": "n8",
-  "num": 8,
-  "title": "POLÍCIA ESPERTA",
+  "num": 10,
+  "title": "A POLÍCIA TE PROCURA",
   "tag": "trailer",
   "src": "Fonte: gameplay oficial (ago/2026) e prévias da imprensa",
   "parts": [
    {
-    "t": "Número oito, a que eu prometi: a polícia mais inteligente.",
-    "c": null
+    "t": "E a novidade número dez, a minha favorita: a polícia aprendeu a te procurar.",
+    "c": null,
+    "v": "gta5"
    },
    {
-    "t": "No GTA 5, a lógica era simples. Cometeu crime, ganhou estrela. Saiu da área marcada, esperou, pronto.",
+    "t": "No GTA 5, a fuga era sempre a mesma: quebra a linha de visão, se esconde num beco, ou passa na Los Santos Customs e pinta o carro. Pronto, sumiu.",
     "c": {
-     "k": "vs",
-     "a": "FUGIU, SUMIU",
-     "b": "ELES LEMBRAM",
-     "as": "GTA 5",
-     "bs": "GTA 6"
-    }
+     "k": "list",
+     "h": "A FUGA DO GTA 5",
+     "i": [
+      "👀 sai da visão",
+      "🧱 se esconde no beco",
+      "🎨 pinta o carro"
+     ]
+    },
+    "v": "gta5"
    },
    {
-    "t": "No gameplay de agosto, o nível máximo de procurado subiu de cinco para seis estrelas.",
+    "t": "No GTA 6, o nível máximo de procurado sobe de cinco para seis estrelas.",
     "c": {
      "k": "stat",
      "n": "★★★★★★",
      "l": "SEIS ESTRELAS"
-    }
+    },
+    "v": "seis"
    },
    {
-    "t": "E a polícia identifica você pela roupa, pelo rosto e pelo veículo. Trocou de roupa ou de carro? Fica mais difícil te reconhecer.",
+    "t": "E a polícia identifica você pela roupa, pelo rosto e pelo carro. Trocar de roupa e de carro passa a fazer parte da fuga.",
     "c": {
      "k": "list",
      "h": "A POLÍCIA REGISTRA",
      "i": [
       "👕 roupa",
       "🧑 rosto",
-      "🚗 veículo"
+      "🚗 carro"
      ]
+    },
+    "v": "roupa",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 46.35,
+     "dur": 2.8
     }
    },
    {
-    "t": "Segundo as prévias da imprensa, a polícia só recebe denúncia se alguém testemunhar o crime ou se um alarme disparar. E tem a estrela vazada: quando a polícia sabe que rolou um crime, mas ainda não sabe quem foi.",
+    "t": "Pelas prévias da imprensa, a polícia só fica sabendo se alguém testemunhar ou se um alarme disparar. E existe a estrela vazada: eles sabem que rolou um crime, mas não sabem quem foi.",
     "c": {
      "k": "big",
      "a": "☆ ESTRELA VAZADA",
      "b": "sabem do crime, não sabem quem"
-    }
+    },
+    "v": "vazada"
    },
    {
-    "t": "As prévias também dizem que as viaturas têm rastreador, então roubar carro de polícia pra fugir não é boa ideia. E que separar Jason e Lucia durante a fuga pode ajudar a perder estrela.",
-    "c": {
-     "k": "list",
-     "h": "SEGUNDO AS PRÉVIAS",
-     "i": [
-      "📡 viaturas com rastreador",
-      "↔️ separar a dupla ajuda",
-      "👁️ denúncia precisa de testemunha"
-     ]
-    }
-   },
-   {
-    "t": "E no gameplay oficial ainda apareceram cães policiais perseguindo e derrubando um personagem em fuga. Correr a pé da polícia ficou bem mais arriscado.",
+    "t": "E no gameplay ainda apareceram cães policiais. Correr a pé ficou bem mais perigoso.",
     "c": {
      "k": "big",
      "a": "🐕 CÃES POLICIAIS",
-     "b": "mostrados no gameplay oficial"
-    }
+     "b": "correr a pé ficou perigoso"
+    },
+    "v": "caes"
    },
    {
-    "t": "Ou seja: fugir vai exigir cabeça, e não só acelerador.",
+    "t": "Imagina: você assalta uma loja, sai pelos fundos, troca de jaqueta, pega outro carro e passa do lado da viatura, de boa. Isso é GTA 6.",
     "c": {
-     "k": "op",
-     "a": "CABEÇA > ACELERADOR"
-    }
+     "k": "im",
+     "a": "TROCA DE JAQUETA E PASSA DE BOA",
+     "b": "isso é GTA 6"
+    },
+    "v": "roupa"
    }
   ],
   "hl": [
+   "número dez",
+   "favorita",
    "polícia",
-   "inteligente",
-   "estrela",
+   "te procurar",
+   "linha de visão",
+   "beco",
+   "Los Santos Customs",
+   "pinta o carro",
    "seis estrelas",
    "roupa",
    "rosto",
-   "veículo",
-   "Trocou",
+   "carro",
    "testemunhar",
    "alarme",
    "estrela vazada",
-   "rastreador",
-   "separar",
-   "cabeça",
-   "acelerador",
    "cães policiais",
-   "arriscado"
+   "Imagina",
+   "jaqueta",
+   "viatura",
+   "GTA 6"
   ]
- },
- {
-  "id": "n9",
-  "scene": "n9",
-  "num": 9,
-  "title": "INVENTÁRIO FÍSICO",
-  "tag": "rumor",
-  "src": "Fonte: vazamento de 2022 e prévias · não confirmado",
-  "parts": [
-   {
-    "t": "Número nove: inventário físico.",
-    "c": null
-   },
-   {
-    "t": "No GTA 5, o Michael podia andar com um arsenal inteiro: pistola, metralhadora, lança-míssil, tudo escondido sabe-se lá onde.",
-    "c": {
-     "k": "big",
-     "a": "🚀 NO BOLSO?",
-     "b": "o arsenal invisível do GTA 5"
-    }
-   },
-   {
-    "t": "No GTA 6, a ideia é que o que você carrega seja mais físico e contextual, com armas maiores guardadas numa bolsa ou no carro.",
-    "c": {
-     "k": "big",
-     "a": "🎒 BOLSA • 🚗 CARRO",
-     "b": "itens com lugar de verdade"
-    }
-   },
-   {
-    "t": "Essa informação vem principalmente do vazamento de 2022, quando vídeos de uma versão em desenvolvimento do jogo foram parar na internet.",
-    "c": {
-     "k": "big",
-     "a": "⚠️ VAZAMENTO 2022",
-     "b": "versão em desenvolvimento"
-    }
-   },
-   {
-    "t": "A Rockstar não explicou oficialmente como o inventário funciona. O que o gameplay de agosto mostrou é que a dupla compartilha dinheiro e armas.",
-    "c": {
-     "k": "list",
-     "h": "O QUE SE VIU",
-     "i": [
-      "💵 dinheiro compartilhado",
-      "🔫 armas compartilhadas"
-     ]
-    }
-   },
-   {
-    "t": "Então trata esse item como provável, mas não confirmado.",
-    "c": {
-     "k": "q",
-     "a": "PROVÁVEL",
-     "b": "mas não confirmado"
-    }
-   }
-  ],
-  "hl": [
-   "inventário físico",
-   "arsenal",
-   "lança-míssil",
-   "físico",
-   "bolsa",
-   "carro",
-   "vazamento",
-   "2022",
-   "não explicou",
-   "compartilha",
-   "provável",
-   "não confirmado"
-  ]
- },
- {
-  "id": "n10",
-  "scene": "n10",
-  "num": 10,
-  "title": "CORPO QUE MUDA",
-  "tag": "ok",
-  "src": "Fonte: Rockstar North em entrevista (ago/2026)",
-  "parts": [
-   {
-    "t": "E número dez: o corpo dos personagens muda.",
-    "c": null
-   },
-   {
-    "t": "Em agosto, a Rockstar North confirmou numa entrevista que a comida afeta o peso do Jason e da Lucia, o exercício constrói músculo, e a falta de sono aparece no rosto e no corpo.",
-    "c": {
-     "k": "list",
-     "h": "CONFIRMADO",
-     "i": [
-      "🍔 comida → peso",
-      "💪 exercício → músculo",
-      "😴 sono → aparência"
-     ]
-    }
-   },
-   {
-    "t": "E o gameplay mostrou academia e um medidor de estamina.",
-    "c": {
-     "k": "big",
-     "a": "🏋️ ACADEMIA",
-     "b": "e medidor de estamina"
-    }
-   },
-   {
-    "t": "Quem jogou San Andreas, de 2004, já conhece: o CJ engordava, malhava e ficava forte. O GTA 5 não tinha nada disso. Então, de certa forma, é um sistema clássico voltando.",
-    "c": {
-     "k": "vs",
-     "a": "SAN ANDREAS",
-     "b": "GTA 5",
-     "as": "tinha ✔",
-     "bs": "não tinha ✘"
-    }
-   },
-   {
-    "t": "O que a Rockstar ainda não falou é se isso muda alguma coisa no gameplay, tipo correr menos se estiver acima do peso, ou se é só visual.",
-    "c": {
-     "k": "q",
-     "a": "SÓ VISUAL?",
-     "b": "a Rockstar não disse"
-    }
-   }
-  ],
-  "hl": [
-   "corpo",
-   "comida",
-   "peso",
-   "músculo",
-   "sono",
-   "academia",
-   "estamina",
-   "San Andreas",
-   "2004",
-   "engordava",
-   "malhava",
-   "clássico voltando",
-   "só visual"
-  ]
- },
- {
-  "id": "bonus",
-  "scene": "bonus",
-  "title": "BÔNUS",
-  "parts": [
-   {
-    "t": "E antes de terminar, um bônus rápido: outras coisas que apareceram no gameplay oficial e que o GTA 5 também não tinha.",
-    "c": {
-     "k": "big",
-     "a": "BÔNUS",
-     "b": "o que mais apareceu no gameplay"
-    }
-   },
-   {
-    "t": "Os carros têm medidor de combustível. Então, sim, pode ser que você precise parar no posto.",
-    "c": {
-     "k": "big",
-     "a": "⛽ COMBUSTÍVEL",
-     "b": "medidor nos carros"
-    }
-   },
-   {
-    "t": "E no resumo de atividades apareceram barco, jet ski, corridas, academia e até basquete.",
-    "c": {
-     "k": "list",
-     "h": "ATIVIDADES",
-     "i": [
-      "🚤 barco e jet ski",
-      "🏁 corridas",
-      "🏀 basquete"
-     ]
-    }
-   }
-  ],
-  "hl": [
-   "bônus",
-   "combustível",
-   "posto",
-   "barco",
-   "jet ski",
-   "corridas",
-   "basquete"
-  ]
- },
- {
-  "id": "hidden",
-  "scene": "hidden",
-  "title": "O QUE AINDA NÃO SABEMOS",
-  "parts": [
-   {
-    "t": "Agora, como eu prometi: o que a Rockstar continua escondendo.",
-    "c": {
-     "k": "big",
-     "a": "🤫 ESCONDIDO",
-     "b": "o que a Rockstar não mostrou"
-    }
-   },
-   {
-    "t": "Primeiro: a versão de PC. Até agora, só PlayStation 5 e Xbox Series foram anunciados.",
-    "c": {
-     "k": "big",
-     "a": "💻 PC?",
-     "b": "sem data anunciada"
-    }
-   },
-   {
-    "t": "Segundo: o mapa completo. Até agora não existe um mapa oficial inteiro divulgado.",
-    "c": {
-     "k": "big",
-     "a": "🗺️ MAPA COMPLETO?",
-     "b": "ainda não divulgado"
-    }
-   },
-   {
-    "t": "E terceiro: como vários desses sistemas funcionam de verdade, tipo o perfil criminal, o inventário e se o corpo afeta o gameplay.",
-    "c": {
-     "k": "list",
-     "h": "SEM DETALHES",
-     "i": [
-      "perfil criminal",
-      "inventário",
-      "efeito do corpo"
-     ]
-    }
-   },
-   {
-    "t": "Ou seja: ainda tem muita surpresa guardada para o dia do lançamento.",
-    "c": {
-     "k": "stat",
-     "n": "19/11/2026",
-     "l": "LANÇAMENTO PREVISTO"
-    }
-   }
-  ],
-  "hl": [
-   "escondendo",
-   "PC",
-   "PlayStation 5",
-   "Xbox Series",
-   "mapa completo",
-   "perfil criminal",
-   "inventário",
-   "surpresa",
-   "lançamento"
-  ]
- },
- {
-  "id": "nums",
-  "scene": "nums",
-  "title": "GTA 5 x GTA 6",
-  "parts": [
-   {
-    "t": "E pra fechar a comparação, olha o GTA 5 contra o GTA 6 em números.",
-    "c": {
-     "k": "big",
-     "a": "GTA 5 x GTA 6",
-     "b": "em números"
-    }
-   },
-   {
-    "t": "Protagonistas: eram três, agora é uma dupla, com troca na hora.",
-    "c": {
-     "k": "vs",
-     "a": "3",
-     "b": "2",
-     "as": "protagonistas",
-     "bs": "uma dupla"
-    }
-   },
-   {
-    "t": "Nível máximo de procurado: eram cinco estrelas, agora são seis.",
-    "c": {
-     "k": "vs",
-     "a": "5 ★",
-     "b": "6 ★",
-     "as": "estrelas",
-     "bs": "estrelas"
-    }
-   },
-   {
-    "t": "Tamanho do mapa: segundo a Rockstar, mais ou menos o dobro.",
-    "c": {
-     "k": "vs",
-     "a": "1×",
-     "b": "≈ 2×",
-     "as": "mapa",
-     "bs": "mapa"
-    }
-   },
-   {
-    "t": "Animais: de uma fauna tímida para mais de cento e setenta espécies.",
-    "c": {
-     "k": "vs",
-     "a": "TÍMIDA",
-     "b": "170+",
-     "as": "fauna",
-     "bs": "espécies"
-    }
-   },
-   {
-    "t": "E a distância entre os dois lançamentos: treze anos. De setembro de 2013 a novembro de 2026.",
-    "c": {
-     "k": "vs",
-     "a": "2013",
-     "b": "2026",
-     "as": "setembro",
-     "bs": "novembro"
-    }
-   }
-  ],
-  "hl": [
-   "três",
-   "dupla",
-   "cinco",
-   "seis",
-   "dobro",
-   "cento e setenta",
-   "treze anos"
-  ]
- },
- {
-  "id": "recap",
-  "scene": "recap",
-  "title": "RECAPITULANDO",
-  "parts": [
-   {
-    "t": "Recapitulando rapidinho: dupla jogável, clima localizado, mais de cento e setenta animais, seis regiões, redes sociais, NPCs mais vivos, perfil criminal, polícia esperta, inventário físico e o corpo que muda.",
-    "c": {
-     "k": "recap"
-    }
-   }
-  ],
-  "hl": []
  },
  {
   "id": "outro",
@@ -1129,13 +1007,20 @@
      "k": "big",
      "a": "SALTO GIGANTESCO",
      "b": "GTA 5 → GTA 6"
+    },
+    "v": "",
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 67.95,
+     "dur": 2.9
     }
    },
    {
     "t": "Mas agora eu quero saber: qual dessas novidades você mais está ansioso para experimentar? Comenta aí!",
     "c": {
      "k": "cta"
-    }
+    },
+    "v": ""
    }
   ],
   "hl": [

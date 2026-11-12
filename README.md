@@ -6,7 +6,7 @@ Animações 3D com personagens grãos de café explicando como sobreviver a desa
 |---|---|---|
 | 1 — Tsunami | `tsunami/` | `tsunami/tsunami_episodio1_v8.mp4` (16:9, 3:43) e `tsunami/tsunami_episodio1_tiktok.mp4` (vertical 9:16 para TikTok) |
 | 2 — Terremoto | `terremoto/` | `terremoto/terremoto_episodio2.mp4` (16:9, 2:57) e `terremoto/terremoto_episodio2_tiktok.mp4` (vertical 9:16) |
-| Extra — GTA 6: 10 novidades (longo) | `gta6_longo/` | `gta6_longo/gta6_longo_repo.mp4` (16:9, 12 min, comprimido p/ caber no GitHub) + `.srt` |
+| Extra — GTA 6: 10 novidades (longo) | `gta6_longo/` | `gta6_longo/gta6_longo_repo.mp4` (16:9, ~8 min, comprimido p/ caber no GitHub) + `.srt` |
 | Extra — GTA 6: 10 novidades (curto) | `gta6/` | `gta6/gta6_10_novidades.mp4` (vertical 9:16, 1:29) + `gta6/gta6_10_novidades.srt` |
 
 ## Como cada episódio é feito
@@ -54,6 +54,6 @@ for i in 0 1 2 3; do node render.js video $((i*Q)) $(((i+1)*Q)) parts/p$i.mp4 & 
 printf "file 'p0.mp4'\nfile 'p1.mp4'\nfile 'p2.mp4'\nfile 'p3.mp4'\n" > parts/list.txt
 ffmpeg -f concat -i parts/list.txt -i audio/mix.wav -c:v copy -c:a aac -b:a 192k -shortest -movflags +faststart gta6_10_novidades_longo.mp4
 ```
-**Trechos de gameplay/trailer:** veja `gta6_longo/MAPA_DE_CLIPES.md` (40 espaços, tempo de cada um e diretrizes de direitos autorais).
-Salve cada trecho como `gta6_longo/clips/<id>.mp4`, rode `python3 prep_clips.py` (descarta o áudio, ajusta para 1920x1080) e renderize de novo.
-Espaços sem arquivo continuam com a animação original. A pasta `clips/` não é versionada.
+**Trechos de gameplay/trailer:** cada frase do `script.json` pode ter um campo `clip` (`arquivo`, `inicio`, `dur`, `crop`).
+Coloque os vídeos de origem em `gta6_longo/clips/fonte/`, rode `python3 prep_clips.py` (descarta o áudio, ajusta para 1920x1080) e renderize de novo.
+`MAPA_DE_CLIPES.md` lista os trechos usados e as diretrizes de direitos autorais. A pasta `clips/` não é versionada.

@@ -13,7 +13,7 @@ rng = np.random.default_rng(7)
 PRON = [(r'\bGTA\b', 'gê tê á'), (r'\bNPCs\b', 'ene pê cês'), ('Vice City', 'Váice Ciri'), 
         ('Grassrivers', 'Grass Ríverss'), ('Port Gellhorn', 'Pórt Guél-horn'), ('Mount Kalaga', 'Maunt Kalága'),
         ('Rockstar', 'Róckstar'), ('San Andreas', 'San Andréas'), ('Jason', 'Djêisson'), ('Lucia', 'Lúcia'),
-        ('gameplay', 'gueimplêi'), ('Michael', 'Máicol'), ('Trevor', 'Tréver'), ('Duval', 'Duvál'), ('Bonnie e Clyde', 'Bóni e Cláide'),
+        ('gameplay', 'gueimplêi'), ('Michael', 'Máicol'), ('Chiliad', 'Tchíliad'), ('Los Santos Customs', 'Los Santos Câstoms'), (r'\bChop\b', 'Tchóp'), ('dancinha', 'dancinha'), ('Trevor', 'Tréver'), ('Duval', 'Duvál'), ('Bonnie e Clyde', 'Bóni e Cláide'),
         ('Red Dead Redemption', 'Réd Déd Redêmpchion'), ('Red Dead', 'Réd Déd'), ('Game Informer', 'Gueim Informer'), ('Extended Look', 'Ekstênded Lúk'),
         ('YouTube', 'Iutúbi'), ('PlayStation', 'Plêistêichon'), ('Xbox Series', 'Ékis bóx Síriz'), ('Lifeinvader', 'Laif-invêider'), ('Bleeter', 'Blíter'),
         ('Blaine County', 'Blêin Cáunti'), ('Rockstar North', 'Róckstar Nórth'), (r'\bCJ\b', 'Ci Djêi'), ('jet ski', 'djét ski'), (r'\bKeys\b', 'Quíz'),
@@ -180,15 +180,14 @@ for s in segs:
     add(sfx, (s['start'] + 0.05) * SR, B, 0.55 if s['id'].startswith('n') else 0.35)
     for p in s['parts'][1:]: add(sfx, (p - 0.25) * SR, W, 0.22)
 # riser antes da virada do meio e do número 10
-for sid in ('mid', 'n8', 'n10', 'hidden', 'outro'):
+for sid in ('mid', 'n10', 'outro'):
     s0 = next(s for s in segs if s['id'] == sid)['start']; add(sfx, (s0 - 2.0) * SR, R, 0.35)
 add(sfx, 0.0, B, 0.6)
 # toque de "notificação" no item 5 e sirene curta no 8
-s5 = next(s for s in segs if s['id'] == 'n5')['start']
-s5p = next(s for s in segs if s['id'] == 'n5')['parts']
+s5p = next(s for s in segs if s['scene'] == 'n5')['parts']
 for pt in s5p[2:4]:
     for k in range(2): add(sfx, (pt + 0.3 + k * 0.12) * SR, T, 0.4)
-s8 = next(s for s in segs if s['id'] == 'n8')
+s8 = next(s for s in segs if s['scene'] == 'n8')
 n = int(1.6 * SR); tl = np.arange(n) / SR; fs = 700 + 250 * np.sign(np.sin(2 * np.pi * 2.2 * tl))
 add(sfx, (s8['parts'][2] - 0.2) * SR, (0.18 * np.sin(2 * np.pi * np.cumsum(fs) / SR) * np.minimum(1, tl / 0.1) * np.minimum(1, (1.6 - tl) / 0.3)).astype(np.float32), 0.5)
 
