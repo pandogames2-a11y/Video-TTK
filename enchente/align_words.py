@@ -9,8 +9,11 @@ for i, (s, g) in enumerate(zip(S, TL['segs'])):
     if s['voice'] == 'none' or s.get('nocap'): continue
     f = f'audio/v{i:02d}.wav'; cache = f'audio/align/v{i:02d}.json'
     if not os.path.exists(cache):
-        r = subprocess.run(['curl', '-sS', '-X', 'POST', 'https://api.elevenlabs.io/v1/forced-alignment', '-H', 'xi-api-key: proxy-injected',
-                            '-F', f'file=@{f}', '-F', f"text={s['text']}"], capture_output=True, text=True, check=True)
+        for host in os.environ.get('ELEVEN_HOSTS', 'api.elevenlabs.io,api.us.elevenlabs.io').split(','):   # account 1, then account 2
+            r = subprocess.run(['curl', '-sS', '-X', 'POST', f'https://{host}/v1/forced-alignment', '-H', 'xi-api-key: proxy-injected',
+                                '-F', f'file=@{f}', '-F', f"text={s['text']}"], capture_output=True, text=True, check=True)
+            if 'words' in json.loads(r.stdout): break
+            print(host, r.stdout[:200])
         json.loads(r.stdout)['words']; open(cache, 'w').write(r.stdout)
     al = json.load(open(cache))
     w = wave.open(f); x = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768; sr = w.getframerate()

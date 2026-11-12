@@ -27,8 +27,10 @@ def tts_piper(text, out, voice):
 
 # ElevenLabs: TTS=eleven python3 build_audio.py  (the API key is injected by the session's network proxy)
 VOICES = json.load(open('voices.json')) if os.path.exists('voices.json') else {}
+# two ElevenLabs accounts: each key is a network secret of the cloud environment, one per host (same API, same voices)
+ELEVEN_HOSTS = os.environ.get('ELEVEN_HOSTS', 'api.elevenlabs.io,api.us.elevenlabs.io').split(',')
 def tts_eleven(text, out, voice, prev='', nxt=''):
-    import hashlib, urllib.request
+    import hashlib, urllib.request, urllib.error
     v = VOICES[voice]; os.makedirs('audio/cache', exist_ok=True)
     key = hashlib.sha1(json.dumps([text, v, VOICES.get('model_id'), VOICES.get('seed'), prev, nxt], sort_keys=True).encode()).hexdigest()[:16]
     mp3 = f'audio/cache/{voice}_{key}.mp3'
@@ -36,9 +38,16 @@ def tts_eleven(text, out, voice, prev='', nxt=''):
         body = json.dumps({'text': text, 'model_id': VOICES.get('model_id', 'eleven_multilingual_v2'), 'seed': VOICES.get('seed', 4242),
                            'previous_text': prev, 'next_text': nxt,
                            'voice_settings': {'stability': v['stability'], 'similarity_boost': v['similarity_boost'], 'style': v.get('style', 0), 'use_speaker_boost': True}}).encode()
-        req = urllib.request.Request(f"https://api.elevenlabs.io/v1/text-to-speech/{v['voice_id']}?output_format=mp3_44100_128", data=body, method='POST',
-                                     headers={'Content-Type': 'application/json', 'Accept': 'audio/mpeg', 'xi-api-key': os.environ.get('ELEVEN_KEY', 'proxy-injected')})
-        with urllib.request.urlopen(req, timeout=120) as r: open(mp3, 'wb').write(r.read())
+        last = None
+        for host in ELEVEN_HOSTS:   # account 1, then account 2 when the first one is out of credits
+            req = urllib.request.Request(f"https://{host}/v1/text-to-speech/{v['voice_id']}?output_format=mp3_44100_128", data=body, method='POST',
+                                         headers={'Content-Type': 'application/json', 'Accept': 'audio/mpeg', 'xi-api-key': os.environ.get('ELEVEN_KEY', 'proxy-injected')})
+            try:
+                with urllib.request.urlopen(req, timeout=120) as r: open(mp3, 'wb').write(r.read())
+                break
+            except urllib.error.HTTPError as e:
+                last = f"{host}: {e.code} {e.read()[:200]!r}"; print('ElevenLabs', last)
+        else: raise SystemExit('ElevenLabs sem créditos nas duas contas: ' + str(last))
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', mp3, '-af', f"highpass=f=60,acompressor=threshold=0.12:ratio=2.5,volume=1.15,atempo={os.environ.get('SPEED', '1.0')}", '-ar', '44100', '-ac', '1', out], check=True)
 
 def tighten(v, keep=0.16, min_gap=0.22):
