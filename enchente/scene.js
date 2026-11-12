@@ -753,22 +753,22 @@ const EDGE = (() => { const dir = V(-6 - TOP.x, 0, 12 - TOP.z).normalize(); let 
 const WORDS = await (await fetch('/audio/words.json')).json().catch(() => []);
 const wordAt = (w, after) => { const x = WORDS.find(k => k.t0 >= after - 0.01 && k.text.toLowerCase().replace(/[^a-zà-ú]/g, '').startsWith(w)); return x ? x.t0 : after; };
 const GAGN = ['q2', 'q3', 'q4', 'rise', 'ohoh', 'float'];
-const APTN = ['home', 'calm', 'friend1', 'pause', 'car1', 'idea'];
+const APTN = ['home', 'calm', 'friend1', 'tv1', 'tv2', 'car1', 'stay1', 'stay2', 'stayrise', 'idea'];
 function seg(t) { for (let i = TL.segs.length - 1; i >= 0; i--) if (t >= TL.segs[i].start) return TL.segs[i]; return TL.segs[0]; }
 
 // ---------- key times ----------
 const R0 = T0('rain') + 0.9;                                   // the downpour starts (thunder)
 const W_RUA = wordAt('rua', T0('rain')), W_PORTA = wordAt('porta', T0('rain'));
 const W_BOIAR = wordAt('boiar', T0('car2'));
-const W_ENERGIA = wordAt('energia', T0('rule')), W_TOMADAS = wordAt('tomadas', T0('rule'));
-const W_SUBA = wordAt('suba', W_TOMADAS), W_NUNCA = wordAt('nunca', T0('rule'));
-const W_TUNEIS = wordAt('túneis', T0('outside'));
-const W_ARRANCAR = wordAt('arrancar', T0('hidden')), W_BARRENTA = wordAt('barrenta', T0('hidden'));
+const W_CERTO = wordAt('certo', T0('tv2')), W_ENERGIA = wordAt('energia', T0('tv2')), W_TOMADAS = wordAt('tomadas', T0('tv2'));
+const W_SUBA = 1e9, W_NUNCA = 1e9, W_TUNEIS = 1e9, W_ARRANCAR = 1e9, W_BARRENTA = 1e9;
+const W_TELHADO = wordAt('telhado', T0('high')), W_BUEIROS = wordAt('bueiros', T0('gag1b'));
+const ASSIMS = ['tv2', 'high', 'wait2'].map(n => ({ n, t: wordAt('assim', T0(n)), txt: n === 'tv2' ? 'ASSIM, O CHOQUE NÃO CHEGA' : 'ASSIM, A ENCHENTE NÃO CHEGA' }));
 const PLOFT = T0('gag2') + 1.95, POPUP = T0('gag2') + 2.9;
 const W_SABAO = wordAt('sabão', T0('germs')), W_LAVE = wordAt('lave', T0('germs'));
-const W_FIO = wordAt('fio', T0('wire'));
+const W_FIO = 1e9;
 const BONK_T = T0('float') + 1.6;
-const BOLTS = [R0, T0('friend1') + 0.2, T0('idea') - 0.6, T0('wait') + 0.5];
+const BOLTS = [R0, T0('friend1') + 0.2, T0('idea') - 0.6, T0('wait2') + 0.5];
 const bolt = t => BOLTS.reduce((m, b) => Math.max(m, t > b && t < b + 0.5 ? (Math.floor((t - b) * 20) % 3 === 0 ? 1 : 0.35) * (1 - (t - b) / 0.5) : 0), 0);
 
 // ---------- the flood out in the street ----------
@@ -839,6 +839,11 @@ const rainbow = new THREE.Group();
 ['#ff5a5a', '#ffa23a', '#ffe14d', '#5fd16b', '#4aa8ff', '#8e6bff'].forEach((c, i) => { const m = new THREE.Mesh(new THREE.TorusGeometry(120 - i * 3.2, 1.6, 6, 80, Math.PI), new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.5, fog: false, depthWrite: false })); rainbow.add(m); });
 rainbow.position.set(-40, -20, -200); scene.add(rainbow);
 
+// ---------- TV news (round 1) ----------
+let movieTexRef = null;
+const VS_TV = () => S.tv1.vstart + S.tv1.vdur - 0.3;
+const newsTex = canvasTex(512, 288, (g, w, h) => { g.fillStyle = '#123a6b'; g.fillRect(0, 0, w, h); g.fillStyle = '#c62828'; g.fillRect(0, 200, w, 60); g.fillStyle = '#fff'; g.font = '900 34px "Inter Display"'; g.fillText('PLANTÃO: ENCHENTE', 20, 242); g.fillStyle = '#8a6a44'; g.fillRect(250, 40, 230, 140); g.fillStyle = '#d9b89a'; g.fillRect(270, 60, 50, 80); g.fillRect(400, 50, 60, 90); g.fillStyle = '#e8e2d6'; g.beginPath(); g.ellipse(80, 110, 40, 60, 0, 0, Math.PI * 2); g.fill(); g.fillStyle = '#2b2b2b'; g.fillRect(40, 160, 80, 40); });
+
 // ---------- the house (a cutaway set, open toward the camera) ----------
 const AO = V(-150, 0, 150);
 const apt = new THREE.Group(); apt.position.copy(AO); scene.add(apt);
@@ -885,6 +890,7 @@ function drawWindow(t, level, storm) {   // street view through the window: rain
   // TV showing a movie
   const tvStand = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.5, 0.5), std(0x2e2e33)); tvStand.position.set(-1.0, 0.25, 2.9); apt.add(tvStand);
   const movieTex = canvasTex(512, 288, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#ff9a5a'); gr.addColorStop(1, '#ffd98a'); g.fillStyle = gr; g.fillRect(0, 0, w, h); g.fillStyle = '#fff3c4'; g.beginPath(); g.arc(380, 120, 46, 0, Math.PI * 2); g.fill(); g.fillStyle = '#5a3b6e'; g.beginPath(); g.moveTo(0, 230); g.lineTo(120, 150); g.lineTo(230, 220); g.lineTo(330, 160); g.lineTo(512, 240); g.lineTo(512, 288); g.lineTo(0, 288); g.fill(); g.fillStyle = '#2b2140'; g.fillRect(150, 170, 14, 60); g.beginPath(); g.arc(157, 162, 12, 0, Math.PI * 2); g.fill(); g.fillStyle = 'rgba(0,0,0,0.85)'; g.fillRect(0, 0, w, 26); g.fillRect(0, h - 26, w, 26); });
+  movieTexRef = movieTex;
   const tv = new THREE.Group(); tv.position.set(-1.0, 1.2, 2.95); apt.add(tv); aptParts.tv = tv;
   const tvBody = new THREE.Mesh(new THREE.BoxGeometry(2.0, 1.15, 0.1), std(0x16161a, { roughness: 0.4 })); tv.add(tvBody);
   const screen = new THREE.Mesh(new THREE.PlaneGeometry(1.86, 1.02), new THREE.MeshBasicMaterial({ map: movieTex })); screen.position.z = -0.056; screen.rotation.y = Math.PI; tv.add(screen); aptParts.screen = screen;
@@ -944,7 +950,8 @@ function aptLevel(t, n, lt) {   // water inside the house (the story, and the en
     if (n === 'ohoh') return 0.72;
     const k = t - T0('float'); return k < 1.6 ? lerp(0.72, 1.75, ss(0, 1.6, k)) : lerp(1.75, 2.5, ss(1.6, 3.4, k));
   }
-  return 0.1 * ss(W_PORTA + 1.2, T0('friend1') + 1.2, t) + 0.1 * ss(T0('car1'), T0('rule'), t);
+  if (n === 'stayrise') return lerp(0.2, 0.95, ease(clamp(lt / S.stayrise.dur)));
+  return 0.1 * ss(W_PORTA + 1.2, T0('friend1') + 1.2, t) + 0.1 * ss(T0('car1'), T0('stay2'), t);
 }
 function puddleR(t, n) { return GAGN.includes(n) ? 0 : 5 * ss(W_PORTA - 0.1, W_PORTA + 2.0, t); }
 const SOFA_LIFT_MAX = 1.28;
@@ -957,10 +964,11 @@ function updateHouse(t, n, lt) {
   const pr = puddleR(t, n); aptParts.puddle.visible = pr > 0.01 && W < 0.05; aptParts.puddle.scale.setScalar(Math.max(pr, 0.01)); aptParts.puddle.position.set(4.4 - Math.min(pr, 3) * 0.3, 0.008, 2.9 - Math.min(pr, 3) * 0.2);
   // the power switched off at the breaker (story only)
   powerOff = !gag && t > W_ENERGIA + 0.4;
+  const news = !gag && t > VS_TV() && !powerOff; aptParts.screen.material.map = news ? newsTex : movieTexRef;
   aptParts.lever.position.y = powerOff ? -0.1 : 0.1;
   aptParts.lamp.intensity = powerOff ? 0 : 2.2; aptParts.bulb.material.color.setScalar(powerOff ? 0.3 : 1); aptParts.shade.material.emissiveIntensity = powerOff ? 0 : 0.35;
   aptParts.tvLight.intensity = powerOff ? 0 : 1.2; aptParts.screen.material.color.setScalar(powerOff ? 0.06 : 1);
-  aptParts.packT.visible = !(t > T0('rule') && !gag);
+  aptParts.packT.visible = true;
   // ending: the sofa and the TV float up
   const lift = gag ? sofaLift(W) : 0, bob = lift > 0 && lift < SOFA_LIFT_MAX ? 0.05 * Math.sin(t * 3) : 0;
   aptParts.sofa.position.set(-1.0, lift + bob, -2.75); aptParts.sofa.rotation.set(0, 0, lift > 0 ? 0.03 * Math.sin(t * 2.2) : 0);
@@ -977,7 +985,7 @@ function updateHouse(t, n, lt) {
 let shake = 0, flash = 0;
 function setParent(bean, parent) { if (bean.root.parent !== parent) parent.add(bean.root); }
 const SOFA_H = { x: AO.x - 1.65, z: AO.z - 2.65 }, SOFA_F = { x: AO.x - 0.35, z: AO.z - 2.65 }, SOFA_Y = AO.y + 0.55;
-const BREAKER = { x: AO.x + 3.95, z: AO.z + 0.95 };
+const BREAKER = { x: AO.x + 3.95, z: AO.z + 0.75 };
 const BY = bp.y, STOOP_Y = BY + 0.545, STEP2_Y = BY + 0.22;
 const bw = (lx, ly, lz) => { const v = V(lx, ly, lz); return v.applyAxisAngle(V(0, 1, 0), 0.15).add(bp); };   // building local -> world
 const ROOF = (lx, lz) => bw(lx, 13, lz);
@@ -1034,18 +1042,19 @@ function direct(t, n, lt, g, H) {
   } else if (n === 'explain' || n === 'depth') {
     hp.visible = fp.visible = false; dg.mode = 'hide'; cam.pos = AP(0, 2, 3); cam.tgt = AP(0, 1, -2);
   } else if (n === 'car1') {
-    hp = Object.assign(hp, { legs: undefined, y: AO.y, x: SOFA_H.x + 0.2, z: SOFA_H.z + 0.9, eyesWide: true, brow: 0.9, smile: 0, armL: A.rest, armR: A.rest, look: [0.6, 0] });
-    fp = { x: SOFA_F.x + 0.6, z: SOFA_F.z + 1.2, y: AO.y, ry: -0.6, armR: A.point, armL: [0.9, 0.2, -1.2], mouth: fm, smile: 1, brow: -0.3, eyesWide: true };
+    hp = { x: SOFA_H.x + 0.6, z: SOFA_H.z + 1.4, y: AO.y, ry: 0.5, armR: A.point, armL: A.pointUp, mouth: hm, smile: 1, brow: -0.3, eyesWide: true };
+    fp = Object.assign(fp, { legs: undefined, popc: false, y: AO.y, x: SOFA_F.x + 0.3, z: SOFA_F.z + 1.0, ry: -0.5, eyesWide: true, brow: 0.5, smile: 0, armL: A.rest, armR: A.rest, look: [-0.6, 0] });
     dg = { mode: 'scared', x: AO.x - 2.9, y: AO.y + 0.1, z: AO.z - 1.4, ry: 0.5 };
     cam.pos = AP(-0.4, 1.4, 1.6); cam.tgt = AP(-0.6, 1.1, -2.0); cam.fov = 46;
   } else if (n === 'car2' || n === 'carfloat') {
     // the bad idea: driving through the flooded street
     const cs = carState(t);
     myCar.position.set(cs.x, cs.y, cs.z); myCar.rotation.set(cs.rx, cs.ry, cs.rz);
-    setParent(friend, myCar); friend.root.scale.setScalar(1 / CAR_S);
-    fp = { x: -0.15, y: 0.46, z: 0.24, ry: -Math.PI / 2, legs: 'sit', sitY: 0.6, armL: A.drive, armR: A.drive, eyesWide: cs.float > 0.2, brow: cs.float > 0.2 ? 1 : -0.2, smile: cs.float > 0.2 ? 0 : 1, shout: cs.float > 0.5 ? 0.5 : 0 };
-    if (n === 'carfloat') { fp.armL = A.up; fp.armR = (Math.floor(lt * 2.2) % 2) ? [1.3, -0.1, -0.9] : A.drive; }
-    hp.visible = false; dg.mode = 'hide';
+    setParent(friend, myCar); friend.root.scale.setScalar(1 / CAR_S); setParent(hero, myCar); hero.root.scale.setScalar(1 / CAR_S);
+    hp = { x: -0.15, y: 0.46, z: 0.24, ry: -Math.PI / 2, legs: 'sit', sitY: 0.6, armL: A.drive, armR: A.drive, hat: false, eyesWide: cs.float > 0.2, brow: cs.float > 0.2 ? 1 : -0.2, smile: cs.float > 0.2 ? 0 : 1, shout: cs.float > 0.5 ? 0.5 : 0 };
+    fp = { x: -0.15, y: 0.46, z: -0.24, ry: -Math.PI / 2, legs: 'sit', sitY: 0.6, armL: A.up, armR: A.up, eyesWide: cs.float > 0.2, brow: cs.float > 0.2 ? 1 : -0.2, smile: cs.float > 0.2 ? 0 : 1, shout: cs.float > 0.5 ? 0.5 : 0 };
+    if (n === 'carfloat') { hp.armR = (Math.floor(lt * 2.2) % 2) ? [1.3, -0.1, -0.9] : A.drive; }
+    dg.mode = 'hide';
     if (n === 'car2' && lt < 2.2) { cam.pos = V(cs.x - 4.5, L + 1.6, cs.z - 6.5); cam.tgt = V(cs.x, L + 0.8, cs.z); cam.fov = 46; }
     else { cam.pos = V(cs.x + 5.5, L + 3.2, cs.z - 8.5); cam.tgt = V(cs.x - 1, L + 0.6, cs.z); cam.fov = 50; }
   } else if (n === 'idea') {
@@ -1053,6 +1062,66 @@ function direct(t, n, lt, g, H) {
     fp = { x: SOFA_F.x + 0.9, z: SOFA_F.z + 1.0, y: AO.y, ry: -0.4, armL: A.rest, armR: A.rest, eyesWide: true, brow: 0.5, look: [-0.5, 0] };
     dg = { mode: 'scared', x: AO.x - 0.1, y: AO.y + 0.12, z: AO.z - 0.9, ry: 0.3 };
     cam.pos = AP(-0.3, 1.5, 2.6); cam.tgt = AP(-0.3, 1.2, -1.4); cam.fov = 44;
+  } else if (n === 'tv1' || n === 'tv2') {
+    // round 1: turn on the TV (bad) vs switch the power off at the breaker (good)
+    const H0 = { x: SOFA_H.x + 0.6, z: SOFA_H.z + 1.6 };
+    fp = Object.assign(fp, { legs: undefined, y: AO.y, x: SOFA_F.x + 0.1, z: SOFA_F.z + 1.0, popc: false, eyesWide: true, brow: 0.5, smile: 0, armL: A.rest, armR: A.rest, look: [-0.4, 0] });
+    dg = { mode: 'scared', x: AO.x - 2.9, y: AO.y + 0.1, z: AO.z - 1.4, ry: 0.5 };
+    if (n === 'tv1') {
+      hp = { x: H0.x, y: AO.y, z: H0.z, ry: -0.1, armL: A.rest, armR: [1.45, 0.1, -0.3], phone: true, mouth: hm, smile: 1, brow: -0.3 };
+      cam.pos = AP(-3.3, 2.3, -2.5); cam.tgt = AP(-0.6, 1.0, 1.4); cam.fov = 54; dg = { mode: 'scared', x: AO.x - 2.2, y: AO.y + 0.1, z: AO.z - 2.1, ry: 0.5 };
+    } else {
+      const wc = W_CERTO - g.start, we = W_ENERGIA - g.start;
+      if (lt < wc - 0.2) {   // why not: water + outlets = shock
+        hp = { x: H0.x, y: AO.y, z: H0.z, ry: -0.1, armL: A.rest, armR: A.rest, eyesWide: true, brow: 0.6, smile: 0 };
+        cam.pos = AP(0.9, 0.55, -2.4); cam.tgt = AP(0.9, 0.3, -3.5); cam.fov = 42;
+      } else {   // the right plan: switch the power off
+        const go = ss(wc - 0.2, Math.max(wc + 0.6, we - 0.1), lt), flip = lt > we + 0.1 && lt < we + 0.7;
+        const g1 = ss(0, 0.45, go), g2 = ss(0.45, 1, go), wpx = AO.x + 0.6, wpz = AO.z + 1.3;
+        hp = { x: go < 0.45 ? lerp(H0.x, wpx, g1) : lerp(wpx, BREAKER.x, g2), z: go < 0.45 ? lerp(H0.z, wpz, g1) : lerp(wpz, BREAKER.z, g2), y: AO.y, ry: go < 0.45 ? Math.atan2(wpx - H0.x, wpz - H0.z) : go < 1 ? Math.atan2(BREAKER.x - wpx, BREAKER.z - wpz) : Math.PI / 2, run: go > 0 && go < 1 ? 1 : 0, phase: lt * 13, armR: go >= 1 ? (flip ? [2.0, 0.1, -0.9] : [1.7, 0.1, -0.5]) : undefined, armL: go >= 1 ? A.rest : undefined, brow: -0.2, smile: lt > we + 0.8 ? 1 : 0 };
+        fp = Object.assign(fp, { x: AO.x - 1.7, z: AO.z + 0.9, ry: 1.1, look: [0.6, 0.2] }); dg = { mode: 'scared', x: AO.x - 2.4, y: AO.y + 0.12, z: AO.z + 1.4, ry: 1.2 };
+        if (go < 0.9) { cam.pos = AP(0.7, 2.6, 3.3); cam.tgt = AP(1.6, 0.9, -0.3); cam.fov = 62; }
+        else { cam.pos = AP(1.6, 1.75, 2.7); cam.tgt = AP(4.2, 1.3, 1.1); cam.fov = 44; }
+      }
+    }
+  } else if (n === 'stay1' || n === 'stay2' || n === 'stayrise') {
+    // round 2b: just stay put (bad) -> the water keeps rising
+    hp = Object.assign(hp, { armL: [0.5, 0.9, -2.1], armR: [0.5, 0.9, -2.1], mouth: n === 'stay1' ? hm : 0, smile: 1, brow: -0.2, lean: -0.3 });
+    fp = Object.assign(fp, { popc: false, armL: A.rest, armR: A.rest, look: [-0.6, 0], brow: 0.4, smile: 0 });
+    dg = { mode: 'scared', x: AO.x - 2.6, y: AO.y + Math.max(0.1, H.W - 0.38), z: AO.z - 1.2, ry: 0.5 };
+    if (n === 'stayrise') { const up = lt > 0.6; hp = Object.assign(hp, { eyesWide: up, brow: up ? 1 : -0.2, smile: up ? 0 : 1, look: [0, -0.8], armL: up ? A.up : hp.armL, armR: up ? A.up : hp.armR, shout: up ? 0.5 : 0 }); fp = Object.assign(fp, { eyesWide: up, brow: 1, look: [0, -0.8], armL: up ? A.up : A.rest, armR: up ? A.up : A.rest, shout: up ? 0.5 : 0 }); }
+    if (n === 'stay1') { cam.pos = AP(-1.0, 1.45, 0.2); cam.tgt = AP(-1.0, 1.15, -2.65); cam.fov = 44; }
+    else { const k = n === 'stayrise' ? 1 : ease(p); cam.pos = vl(AP(0.6, 1.5, 1.8), AP(0.2, 1.2, 1.3), k); cam.tgt = AP(-1.0, 0.6, -2.2); cam.fov = 52; }
+  } else if (n === 'high') {
+    // the right plan: up the stairs to the roof
+    const wt = W_TELHADO - g.start;
+    if (lt < wt - 0.2) {
+      const d = 0.4 + STAIR_TOTAL * 0.8 * ss(0.2, wt - 0.2, lt);
+      const h0 = onStairs(d), f0 = onStairs(Math.max(0, d - 1.1));
+      hp = { x: h0.x, y: h0.y, z: h0.z, ry: h0.ry, run: 0.8, phase: lt * 12, brow: 0.3, smile: 0 };
+      fp = { x: f0.x, y: f0.y, z: f0.z, ry: f0.ry, run: 0.8, phase: lt * 12 + 1.3, armL: [0.95, -0.15, -1.5], armR: [0.95, -0.15, -1.5], brow: 0.3, smile: 0 };
+      dg = { mode: 'carried' };
+      cam.pos = V(h0.x - 0.5, h0.y + 2.0, IO.z + 8.5); cam.tgt = V(h0.x, h0.y + 1.0, IO.z + 1.0); cam.fov = 50;
+    } else {
+      const hR = ROOF(-0.9, -3.0), fR = ROOF(0.6, -3.1), dR = ROOF(-0.1, -2.6);
+      hp = { x: hR.x, y: hR.y, z: hR.z, ry: FRONT_RY, armL: A.hips, armR: A.thumb, brow: -0.2, smile: 1 };
+      fp = { x: fR.x, y: fR.y, z: fR.z, ry: FRONT_RY, armL: A.rest, armR: A.rest, brow: 0.1, smile: 1 };
+      dg = { mode: 'sit', x: dR.x, y: dR.y, z: dR.z, ry: FRONT_RY };
+      const k = ease(clamp((lt - wt + 0.2) / 2.5)); cam.pos = vl(bw(-0.4, 14.6, -6.6), bw(-0.3, 14.8, -7.6), k); cam.tgt = bw(-0.2, 14.0, -3.0); cam.fov = 44;
+    }
+  } else if (n === 'gag1') {
+    const hR = ROOF(-0.9, -3.0), fR = ROOF(0.6, -3.1), dR = ROOF(-0.1, -2.6);
+    hp = { x: hR.x, y: hR.y, z: hR.z, ry: FRONT_RY + 0.4, armL: A.rest, armR: A.rest, brow: 0.4, smile: 0, look: [0.6, 0] };
+    fp = { x: fR.x, y: fR.y, z: fR.z, ry: FRONT_RY - 0.2, armL: A.rest, armR: [1.4, 0.1, -0.1], mouth: fm, smile: 1, brow: -0.3, look: [0, -0.6] };
+    dg = { mode: 'sit', x: dR.x, y: dR.y, z: dR.z, ry: FRONT_RY };
+    board.visible = true; board.position.set(MAN.x - 1.4, L + 0.02 + 0.03 * Math.sin(t * 2.5), MAN.z - 0.6); board.rotation.set(0.05 * Math.sin(t * 2), 0.6, 0);
+    cam.pos = bw(-0.4, 14.6, -6.6); cam.tgt = bw(-0.2, 14.0, -3.0); cam.fov = 44;
+  } else if (n === 'wait') {
+    const HD = bw(0.62, 0, -4.6), FD = bw(-0.4, 0, -4.6), DD = bw(-1.0, 0, -4.45);
+    hp = { x: HD.x, y: STOOP_Y, z: HD.z, ry: FRONT_RY - 0.5, armL: A.hips, armR: A.pointUp, mouth: hm, brow: -0.5, smile: 0 };
+    fp = { x: FD.x, y: STOOP_Y, z: FD.z, ry: FRONT_RY + 0.4, armL: A.rest, armR: A.rest, squint: 0.4, smile: 0, brow: 0.3, board: true };
+    dg = { mode: 'sit', x: DD.x, y: STOOP_Y, z: DD.z, ry: FRONT_RY };
+    cam.pos = bw(0.1, 0, -8.6); cam.pos.y = STOOP_Y + 1.5; cam.tgt = bw(0.1, 0, -4.6); cam.tgt.y = STOOP_Y + 1.0; cam.fov = 40;
   } else if (n === 'rule') {
     const we = W_ENERGIA - g.start, wt = W_TOMADAS - g.start, ws = W_SUBA - g.start, wn = W_NUNCA - g.start;
     if (lt < wt - 0.3) {   // switch the power off at the breaker
@@ -1093,18 +1162,18 @@ function direct(t, n, lt, g, H) {
     const wb = W_BARRENTA - g.start;
     if (lt < wb - 0.2) { cam.pos = V(MAN.x + 3.2, L + 1.6, MAN.z - 3.8); cam.tgt = V(MAN.x, L + 0.3, MAN.z); cam.fov = 44; }
     else { const k = ease(clamp((lt - wb + 0.2) / 3)); cam.pos = vl(V(MAN.x + 2.2, L + 3.4, MAN.z - 2.4), V(MAN.x + 1.6, L + 4.0, MAN.z - 1.6), k); cam.tgt = V(MAN.x, L, MAN.z); cam.fov = 44; }
-  } else if (n === 'gag1' || n === 'gag2' || n === 'gag3') {
+  } else if (n === 'gag1b' || n === 'gag2' || n === 'gag3') {
     // the friend wades out for his surfboard and finds the open manhole
     board.visible = true;
-    const bx = MAN.x - 1.4 - (n === 'gag1' ? 0 : 0.25 * (t - T0('gag2'))), bz = MAN.z - 0.6;
+    const bx = MAN.x - 1.4 - (n === 'gag1b' ? 0 : 0.25 * (t - T0('gag2'))), bz = MAN.z - 0.6;
     board.position.set(bx, L + 0.02 + 0.03 * Math.sin(t * 2.5), bz); board.rotation.set(0.05 * Math.sin(t * 2), 0.6 + 0.08 * Math.sin(t * 0.9), 0);
     const HD = bw(0.62, 0, -4.6), FD = bw(-0.4, 0, -4.6), DD = bw(-1.0, 0, -4.45);
     const hpDoor = { x: HD.x, y: STOOP_Y, z: HD.z, ry: FRONT_RY, brow: 0.5, smile: 0, eyesWide: true, look: [0, -0.2] };
     dg = { mode: 'scared', x: DD.x, y: STOOP_Y, z: DD.z, ry: FRONT_RY };
-    if (n === 'gag1') {
+    if (n === 'gag1b') {
       hp = Object.assign(hpDoor, { armL: A.rest, armR: A.stop, look: [-0.5, 0] });
-      fp = { x: FD.x, y: STOOP_Y, z: FD.z, ry: FRONT_RY - 0.4, armR: A.point, armL: A.rest, mouth: fm, smile: 1, brow: -0.3 };
-      cam.pos = V(STOOP_FRONT.x - 2.6, STOOP_Y + 1.5, STOOP_FRONT.z - 4.4); cam.tgt = V(STOOP_FRONT.x - 0.3, STOOP_Y + 0.9, STOOP_FRONT.z); cam.fov = 44;
+      fp = { x: FD.x, y: STOOP_Y, z: FD.z, ry: FRONT_RY - 0.4, armR: A.point, armL: A.rest, smile: 1, brow: -0.3, look: [0, -0.5] };
+      cam.pos = V(MAN.x - 5.2, L + 2.0, MAN.z - 2.6); cam.tgt = V((MAN.x + FD.x) / 2, L + 0.7, (MAN.z + FD.z) / 2); cam.fov = 46;
     } else if (n === 'gag2') {
       const k = clamp((t - T0('gag2')) / (PLOFT - 0.05 - T0('gag2'))), down = t > PLOFT, up = t > POPUP;
       const from = V(FD.x, 0, FD.z), to = V(MAN.x, 0, MAN.z);
@@ -1126,13 +1195,13 @@ function direct(t, n, lt, g, H) {
     fp = { x: FD.x, y: STOOP_Y, z: FD.z, ry: FRONT_RY + 0.4, armL: A.rest, armR: A.rest, mud: 1 - clean, peel: clean < 0.5, squint: 0.4, smile: clean > 0.5 ? 1 : 0, brow: 0.3 };
     dg = { mode: 'sit', x: DD.x, y: STOOP_Y, z: DD.z, ry: FRONT_RY };
     cam.pos = bw(0.1, 0, -8.6); cam.pos.y = STOOP_Y + 1.5; cam.tgt = bw(0.1, 0, -4.6); cam.tgt.y = STOOP_Y + 1.0; cam.fov = 40;
-  } else if (n === 'wait' || n === 'wire' || n === 'q1') {
+  } else if (n === 'wait2' || n === 'wire' || n === 'q1') {
     // waiting up on the roof
     const hR = ROOF(-0.9, -3.0), fR = ROOF(0.6, -3.1), dR = ROOF(-0.1, -2.6);
     hp = { x: hR.x, y: hR.y, z: hR.z, ry: FRONT_RY, armL: A.rest, armR: A.rest, brow: 0.1, smile: 1 };
     fp = { x: fR.x, y: fR.y, z: fR.z, ry: FRONT_RY, armL: A.rest, armR: A.rest, brow: 0.1, smile: 1 };
     dg = { mode: 'sit', x: dR.x, y: dR.y, z: dR.z, ry: FRONT_RY };
-    if (n === 'wait') {
+    if (n === 'wait2') {
       const w199 = wordAt('defesa', g.start) - g.start;
       hp = Object.assign(hp, { phone: lt < w199 + 1.5, armR: lt < w199 + 1.5 ? [2.1, -0.35, -2.4] : A.wave, mouth: 0 });
       fp = Object.assign(fp, { armL: lt > w199 + 0.5 ? A.wave : A.rest, armR: lt > w199 + 0.5 ? A.wave : A.rest, mouth: 0 });
@@ -1194,11 +1263,12 @@ function isIndoorShot(n, lt) {
   if (n === 'rain') { const g = S.rain; return lt < W_RUA - g.start - 0.3 || lt >= W_PORTA - g.start - 0.2; }
   if (n === 'rule') { const g = S.rule; return lt < W_NUNCA - g.start - 0.3; }
   if (n === 'home') return lt >= wordAt('você', S.home.start) - S.home.start + 0.4;
+  if (n === 'high') return lt < W_TELHADO - S.high.start - 0.2;
   return false;
 }
 
 // ---------- world (outdoors) ----------
-const debrisOn = n => ['rule', 'outside', 'hidden', 'car2', 'carfloat', 'wait', 'wire'].includes(n);
+const debrisOn = n => ['high', 'gag1', 'gag1b', 'car2', 'carfloat', 'wait2', 'q1'].includes(n);
 function world(t, n, lt) {
   const gag = GAGN.includes(n), Lraw = floodD(t), L = ROAD.y + Lraw;
   const storm = n === 'end' ? 0 : (t < R0 && !gag ? 0.92 : 1);
@@ -1209,7 +1279,7 @@ function world(t, n, lt) {
   updateFlood(t, Lraw > 0 ? L : -1);
   debris.forEach((d, i) => { const u = d.userData; d.visible = debrisOn(n) && Lraw > 0.2; if (!d.visible) return; const span = 60, x = ((u.x + 30 - t * u.sp * 1.4) % span + span) % span - 22; d.position.set(x, L + 0.05 + 0.05 * Math.sin(t * 2 + u.ph), 14.1 + (i % 3) * 0.7); d.rotation.set(0.1 * Math.sin(t + u.ph), u.ph + t * 0.2 * (i % 2 ? 1 : -1), 0); });
   // manhole: the cover pops off (hidden), then a whirlpool hides the open hole
-  const popT = W_ARRANCAR + 0.6, popped = t > popT && !gag && n !== 'end';
+  const popT = W_BUEIROS + 0.3, popped = t > popT && !gag && n !== 'end';
   manCover.visible = n !== 'end' || true;
   if (!popped) { manCover.position.set(MAN.x, ROAD.y + 0.1, MAN.z); manCover.rotation.set(0, 0, 0); }
   else { const k = clamp((t - popT) / 0.9); manCover.position.set(MAN.x + 1.3 * k, ROAD.y + 0.1 + 1.6 * Math.sin(k * Math.PI) + (L - ROAD.y - 0.05) * 0 , MAN.z + 1.0 * k); manCover.rotation.set(k * 5, 0, k * 2); if (k >= 1) { manCover.position.set(MAN.x + 1.3, ROAD.y + 0.1, MAN.z + 1.0); manCover.rotation.set(0, 0, 0.0); } }
@@ -1233,13 +1303,13 @@ function world(t, n, lt) {
   scene.fog.color.copy(skyU.bot.value); scene.fog.near = lerp(110, 35, storm); scene.fog.far = lerp(460, 230, storm);
   const inside = APTN.includes(n) || gag || n === 'kit' || isIndoorShot(n, lt) || (n === 'rule' && lt < W_NUNCA - S.rule.start - 0.3);
   sun.intensity = inside ? (powerOff ? 0.7 : 1.4) : lerp(2.6, 0.8, storm) + b * 2; sun.color.set(0xfff1d6).lerp(new THREE.Color(0xffb070), eve);
-  hemi.intensity = inside ? (powerOff ? 0.75 : 1.0) : lerp(0.9, 1.25, storm);
+  hemi.intensity = inside ? (powerOff ? 0.95 : 1.0) : lerp(0.9, 1.25, storm);
   clouds.position.x = t * 0.6; clouds.children.forEach(c => c.children.forEach(m => m.material.color.setHex(storm > 0.5 ? 0x8a939c : 0xffffff)));
   stormM.opacity = storm * 0.95; stormG.visible = storm > 0;
   sunSprite.visible = sunHalo.visible = !inside && storm < 0.5;
   rainbow.visible = n === 'end'; rainbow.children.forEach(m => m.material.opacity = 0.45 * ss(T0('end') + 0.3, T0('end') + 2, t));
   apt.visible = APTN.includes(n) || gag || (n === 'rain' && isIndoorShot(n, lt)) || (n === 'rule' && lt < W_SUBA - S.rule.start - 0.2) || (n === 'home' && isIndoorShot(n, lt));
-  interior.visible = n === 'kit' || (n === 'rule' && lt >= W_SUBA - S.rule.start - 0.2 && lt < W_NUNCA - S.rule.start - 0.3);
+  interior.visible = (n === 'high' && isIndoorShot(n, lt)) || n === 'kit' || (n === 'rule' && lt >= W_SUBA - S.rule.start - 0.2 && lt < W_NUNCA - S.rule.start - 0.3);
   lobbyW.visible = interior.visible;
   building.userData.hinge.rotation.y = ['gag1', 'gag2', 'gag3', 'germs'].includes(n) ? -1.7 : 0;
   updateWater(t); spray.visible = false;
@@ -1468,8 +1538,8 @@ function manholeInset(t, a) {
   outlined('você não vê o buraco', 200, 330, 22, '#ffffff', '#0a1428', 800, 0.2);
   ui.restore();
 }
-function phoneDial(t, g) {
-  const w199 = wordAt('defesa', g.start), w193 = wordAt('bombeiros', g.start), wE = wordAt('espere', g.start);
+function phoneDial(t, g, wE) {
+  const w193 = wordAt('ou', g.start) - 0.4;
   const a = ss(g.start + 0.3, g.start + 0.7, t) * (1 - ss(wE - 0.3, wE, t)); if (a <= 0) return;
   const two = t > w193 + 0.4;
   ui.save(); ui.globalAlpha = a; ui.translate(1010, 330); const s = pop(t - g.start - 0.3, 0.35); ui.scale(s, s);
@@ -1479,6 +1549,39 @@ function phoneDial(t, g) {
   outlined(two ? 'DEFESA CIVIL' : 'BOMBEIROS', 0, -10, 28, '#ffffff', '#0a1428', 900, 0.15);
   ui.fillStyle = '#2ecc71'; ui.beginPath(); ui.arc(0, 100, 40, 0, Math.PI * 2); ui.fill();
   ui.save(); ui.translate(0, 100); ui.rotate(-0.6 + 0.15 * Math.sin(t * 20)); ui.fillStyle = '#fff'; rr(-24, -8, 48, 16, 8); ui.fill(); ui.restore();
+  ui.restore();
+}
+function stamp(t) {
+  const a = ASSIMS.find(x => t > x.t - 0.05 && t < x.t + 2.6); if (!a) return;
+  const k = t - a.t; ui.save(); ui.globalAlpha = 1 - ss(2.2, 2.6, k); ui.translate(640, 300); const s2 = pop(k, 0.3); ui.scale(s2, s2); ui.rotate(-0.05);
+  ui.font = '900 50px "Inter Display"'; const tw2 = ui.measureText(a.txt + ' ✓').width + 70;
+  ui.fillStyle = 'rgba(30,158,87,0.92)'; rr(-tw2 / 2, -50, tw2, 100, 22); ui.fill(); ui.lineWidth = 7; ui.strokeStyle = '#fff'; ui.stroke();
+  ui.textAlign = 'center'; ui.textBaseline = 'middle'; outlined(a.txt + ' ✓', 0, 4, 50, '#ffffff', '#0e5a32', 900, 0.14); ui.restore();
+}
+const PLANS = () => [
+  { from: T0('tv1'), to: TE('tv2'), title: 'ENERGIA', items: [['LIGAR A TV', T0('tv1') + 0.3, wordAt('não', T0('tv2')), false], ['DESLIGAR A ENERGIA', W_CERTO, wordAt('assim', T0('tv2')), true]] },
+  { from: T0('car1'), to: TE('high'), title: 'FUGIR DA ÁGUA', items: [['PEGAR O CARRO', T0('car1') + 0.3, wordAt('plano', T0('car2')), false], ['FICAR EM CASA', T0('stay1') + 0.3, T0('stayrise') + 1.2, false], ['LUGAR MAIS ALTO', wordAt('alto', T0('idea')), wordAt('assim', T0('high')), true]] },
+  { from: T0('gag1'), to: TE('wait2'), title: 'A PRANCHA', items: [['IR ANDANDO NA ÁGUA', T0('gag1') + 0.5, wordAt('não', T0('gag1b')), false], ['FICAR NO ALTO E LIGAR 193', T0('wait') + 0.5, wordAt('assim', T0('wait2')), true]] },
+];
+function planCard(t, n) {
+  if (['replay', 'replay2'].includes(n)) return;
+  const P = PLANS().find(p => t >= p.from && t < p.to); if (!P) return;
+  if (n === 'gag1b' && t < W_BUEIROS - 0.3) return;
+  if (n === 'wait2' && t < wordAt('desça', T0('wait2')) - 0.3) return;
+  const vis = P.items.filter(it => t > it[1]); if (!vis.length) return;
+  ui.save(); ui.globalAlpha = ss(P.from, P.from + 0.4, t) * (1 - ss(P.to - 0.3, P.to, t));
+  const x0 = 40, y0 = 118, rowH = 52, w2 = 410;
+  ui.fillStyle = 'rgba(10,20,40,0.82)'; rr(x0, y0, w2, 46 + vis.length * rowH, 18); ui.fill();
+  ui.textBaseline = 'middle'; ui.textAlign = 'left'; outlined('PLANO: ' + P.title, x0 + 18, y0 + 26, 22, '#ffd23f', '#0a1428', 900, 0.15);
+  vis.forEach(([txt, at, res, ok], i) => {
+    const y = y0 + 46 + i * rowH + rowH / 2 - 4, done = t > res, a2 = ss(at, at + 0.3, t);
+    ui.save(); ui.globalAlpha *= a2;
+    ui.fillStyle = !done ? '#55606e' : ok ? '#1e9e57' : '#c62828'; ui.beginPath(); ui.arc(x0 + 34, y, 17, 0, Math.PI * 2); ui.fill();
+    ui.textAlign = 'center'; outlined(!done ? '?' : ok ? '✓' : '✗', x0 + 34, y + 2, 22, '#fff', '#0a1428', 900, 0.05);
+    ui.textAlign = 'left'; outlined(txt, x0 + 62, y + 2, 26, done && !ok ? '#ff9a8a' : '#ffffff', '#0a1428', 900, 0.14);
+    if (done && !ok) { const tw3 = ui.measureText(txt).width; ui.strokeStyle = '#ff6b5a'; ui.lineWidth = 4; ui.beginPath(); ui.moveTo(x0 + 60, y + 2); ui.lineTo(x0 + 62 + tw3 * ss(res, res + 0.3, t), y + 2); ui.stroke(); }
+    ui.restore();
+  });
   ui.restore();
 }
 function proj(v) { const s = v.clone().project(camera); return [(s.x * 0.5 + 0.5) * W, (-s.y * 0.5 + 0.5) * H]; }
@@ -1497,10 +1600,17 @@ function overlay(t, g) {
   if (n === 'pause') { ui.save(); ui.fillStyle = 'rgba(20,30,50,0.35)'; ui.fillRect(0, 0, W, H); ui.globalAlpha = ss(0.1, 0.4, lt); ui.fillStyle = '#ffffff'; ui.fillRect(1120, 50, 26, 80); ui.fillRect(1166, 50, 26, 80); ui.textAlign = 'center'; outlined('PAUSA', 1156, 160, 26, '#ffffff', '#0a1428', 900, 0.2); ui.restore(); }
   if (n === 'car2' || n === 'carfloat') {
     badge('✗ PÉSSIMA IDEIA', n === 'car2' ? ss(0, 0.3, lt) : 1, '#c62828');
-    if (t > W_BOIAR) label('50 cm DE CORRENTEZA = CARRO BOIA', 640, 150, 40, ss(W_BOIAR, W_BOIAR + 0.3, t), '#ffd23f');
+    if (t > W_BOIAR) label('50 cm DE CORRENTEZA = CARRO BOIA', 820, 150, 36, ss(W_BOIAR, W_BOIAR + 0.3, t), '#ffd23f');
     if (n === 'carfloat') { const [x, y] = headOnScreen(friend, 0.6); for (let k = 0; k < 3; k++) { const at = 1.2 + k * 0.45; if (lt > at && lt < at + 0.4) { ui.save(); ui.textAlign = 'center'; ui.translate(x + 150, y - 30 - k * 30); const s2 = pop(lt - at, 0.15); ui.scale(s2, s2); ui.rotate(-0.1); outlined('BI-BI!', 0, 0, 52, '#ffd23f', '#0a1428', 900, 0.18); ui.restore(); } } if (lt > 0.5 && lt < 2.2) { ui.save(); ui.textAlign = 'center'; ui.globalAlpha = 1 - ss(1.6, 2.2, lt); ui.translate(x - 160, y - 40); ui.rotate(0.08); outlined('BLUB!', 0, 0, 60, '#5fd0ff', '#0a1428', 900, 0.18); ui.restore(); } }
   }
-  if (n === 'replay') vhs(t, lt);
+  if (n === 'replay' || n === 'replay2') vhs(t, lt);
+  if (n === 'tv2') {
+    if (t < W_CERTO - 0.2) { const [x, y] = proj(AP(0.9, 0.36, -3.47)); const wch = wordAt('choque', g.start); ui.save(); ui.globalAlpha = ss(wch - 0.4, wch, t); ui.strokeStyle = '#ffe14d'; ui.lineWidth = 6; ui.lineCap = 'round'; for (let i = 0; i < 6; i++) { const an = i / 6 * Math.PI * 2 + t * 3, r1 = 70, r2 = 110 + 15 * Math.sin(t * 20 + i); ui.beginPath(); ui.moveTo(x + Math.cos(an) * r1, y + Math.sin(an) * r1); ui.lineTo(x + Math.cos(an + 0.2) * (r1 + r2) / 2, y + Math.sin(an + 0.2) * (r1 + r2) / 2); ui.lineTo(x + Math.cos(an) * r2, y + Math.sin(an) * r2); ui.stroke(); } ui.restore(); label('ÁGUA + TOMADA = CHOQUE', 760, 560, 44, ss(W_TOMADAS - 0.3, W_TOMADAS, t), '#ffd23f'); }
+    if (t > W_ENERGIA + 0.4 && t < W_ENERGIA + 1.8) { const [x, y] = proj(AP(4.5, 1.6, 1.3)); ui.save(); ui.textAlign = 'center'; ui.translate(x - 120, y - 60); const s2 = pop(t - W_ENERGIA - 0.4, 0.2); ui.scale(s2, s2); ui.rotate(-0.1); outlined('CLACK!', 0, 0, 60, '#ffd23f', '#0a1428', 900, 0.18); ui.restore(); }
+  }
+  if (n === 'stayrise' && lt > 0.8) label('✗ A ÁGUA CONTINUA SUBINDO', 860, 250, 42, ss(0.8, 1.1, lt), '#ffffff', '#c62828');
+  if (n === 'gag1b') { if (t < W_BUEIROS - 0.3) depthGauge(t, g); else { const popT = W_BUEIROS + 0.3; if (t > popT && t < popT + 1.4) { const [x, y] = proj(V(MAN.x, ROAD.y + 2, MAN.z)); ui.save(); ui.textAlign = 'center'; ui.translate(x + 60, y - 60); const s2 = pop(t - popT, 0.2); ui.scale(s2, s2); ui.rotate(-0.1); outlined('PLOC!', 0, 0, 70, '#ffd23f', '#0a1428', 900, 0.18); ui.restore(); } manholeInset(t, ss(popT + 0.9, popT + 1.3, t)); } }
+  if (n === 'wait2') { const wD = wordAt('desça', g.start); phoneDial(t, g, wD); if (t > wD - 0.2) label('SÓ DESÇA QUANDO LIBERAREM', 860, 120, 40, ss(wD - 0.2, wD + 0.2, t), '#5ff08a'); }
   if (n === 'idea') { const [x, y] = headOnScreen(hero, 1.0); lightbulb(x, y - 70, lt); }
   if (n === 'rule') {
     badge('★ REGRA DE OURO', fadeIn, '#1e9e57'); steps3(t, g);
@@ -1530,7 +1640,6 @@ function overlay(t, g) {
     if (t < wl - 0.2) { const k = ss(g.start + 0.3, g.start + 0.7, t); ui.save(); ui.globalAlpha = k; ui.fillStyle = 'rgba(10,20,40,0.82)'; rr(820, 70, 420, 260, 22); ui.fill(); ui.restore(); if (k > 0) { ui.save(); ui.globalAlpha = k; icon('germ', 900, 150, 1); icon('germ', 1000, 120, 0.7); if (t > wx - 0.2) icon('rat', 1130, 160, 0.9 * pop(t - wx + 0.2, 0.3)); ui.restore(); label('ESGOTO + XIXI DE RATO', 1030, 250, 30, k, '#ffffff'); label('= LEPTOSPIROSE', 1030, 295, 34, ss(wle - 0.2, wle + 0.2, t), '#ff6b5a'); } }
     else { const k = ss(wl - 0.2, wl + 0.2, t); ui.save(); ui.globalAlpha = k; ui.fillStyle = 'rgba(10,20,40,0.82)'; rr(860, 90, 360, 200, 22); ui.fill(); icon('soap', 1040, 165, 1.2); ui.restore(); label('✓ ÁGUA E SABÃO', 1040, 250, 34, k, '#5ff08a'); const [x, y] = headOnScreen(friend, 0.4); if (t > W_SABAO) for (let i = 0; i < 10; i++) { const life = (lt * 0.8 + i / 10) % 1; ui.save(); ui.globalAlpha = 0.8 * (1 - life); ui.strokeStyle = '#fff'; ui.lineWidth = 3; ui.fillStyle = 'rgba(220,240,255,0.5)'; ui.beginPath(); ui.arc(x + Math.sin(i * 2.1 + lt * 2) * 90, y - life * 160 + 40, 10 + (i % 3) * 6, 0, Math.PI * 2); ui.fill(); ui.stroke(); ui.restore(); } }
   }
-  if (n === 'wait') { const wE = wordAt('espere', g.start), wA = wordAt('autoridades', g.start); phoneDial(t, g); if (t > wE - 0.2) badge('ILHADO? ESPERE NUM LUGAR ALTO', ss(wE - 0.2, wE + 0.1, t), '#1557b0'); if (t > wA - 0.2) label('SÓ VOLTE QUANDO LIBERAREM ✓', 640, 150, 44, ss(wA - 0.2, wA + 0.2, t), '#5ff08a'); }
   if (n === 'wire') { label('LEMBRA DO EP. 1?', 640, 110, 54, ss(0.1, 0.4, lt), '#ffd23f'); if (t > W_FIO) { const k = t - W_FIO; if (k < 0.15) { ui.fillStyle = `rgba(200,230,255,${0.6 * (1 - k / 0.15)})`; ui.fillRect(0, 0, W, H); } label('⚡ FIO SOLTO NA ÁGUA = CHOQUE', 640, 180, 40, ss(W_FIO + 0.2, W_FIO + 0.5, t), '#ffffff', '#c62828'); } }
   if (n === 'q1') { ui.save(); ui.translate(940, 200); const s = pop(lt - 0.2); ui.scale(s, s); ui.rotate(0.05); ui.textAlign = 'center'; outlined('SEGUIR AS DICAS ✓', 0, 0, 50, '#5ff08a', '#0a1428', 900, 0.2); ui.restore(); }
   if (['q2', 'q3', 'q4'].includes(n)) { ui.save(); ui.translate(320, 200); const s = pop(t - T0('q2') - 0.2); ui.scale(s, s); ui.rotate(-0.05); ui.textAlign = 'center'; outlined('VER FILME NO SOFÁ', 0, 0, 50, '#ffd23f', '#0a1428', 900, 0.2); ui.restore(); }
@@ -1547,6 +1656,7 @@ function overlay(t, g) {
     ui.translate(640, 185); const s = pop(lt - 1.0, 0.4); ui.scale(s, s); ui.rotate(-0.03 + (lt > 1 ? Math.sin(lt * 20) * 0.01 : 0));
     outlined('INCÊNDIO', 0, 0, 96, '#ff8a2a', '#0a1428', 900, 0.16); ui.restore();
   }
+  planCard(t, n); stamp(t);
   if (n !== 'title' && n !== 'end' && !NOCAP) caption(t);
   const b = bolt(t); if (b > 0 && !['explain', 'depth'].includes(n)) { ui.fillStyle = `rgba(235,240,255,${0.35 * b})`; ui.fillRect(0, 0, W, H); }
   if (flash > 0) { ui.fillStyle = `rgba(255,255,255,${flash})`; ui.fillRect(0, 0, W, H); }
@@ -1558,6 +1668,7 @@ window.renderFrame = (t) => {
   REAL_T = t;
   let g = seg(t), tt = t;
   if (g.scene === 'pause') tt = g.start;                         // freeze frame
+  if (g.scene === 'replay2') { const k = ease(clamp((t - g.start) / (g.dur - 0.2))); tt = lerp(TE('stayrise') - 0.05, T0('stay1') + 0.3, k); }
   if (g.scene === 'replay') { const k = ease(clamp((t - g.start) / (g.dur - 0.2))); tt = lerp(TE('carfloat') - 0.05, T0('car2') + 0.3, k); }   // rewind the bad idea
   const gs = seg(tt), lt = tt - gs.start;
   const H2 = updateHouse(tt, gs.scene, lt);

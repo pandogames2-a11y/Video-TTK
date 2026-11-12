@@ -265,54 +265,57 @@ def trombone(at, amp=0.07):
 # ---------------- story ----------------
 R0 = T0('rain') + 0.9                                     # the downpour starts
 room = lowp(noise, 120) * 0.03
-amb += room * (1 - gate(T0('explain'), TE('depth'), 0.5))
+amb += room * (1 - gate(T0('explain'), TE('explain'), 0.5))
 uke(0.3, R0 + 0.3, 0.04)
-rain_bed(0, R0, 0.025, 1.0)                               # gentle rain on the window
-rain_bed(R0 - 0.2, T0('end') + 0.5, 0.06, 0.8)            # heavy rain for the rest
-thunder(R0, 0.6); thunder(T0('friend1') + 0.2, 0.35); thunder(T0('idea') - 0.6, 0.3); thunder(T0('wait') + 0.5, 0.3)
-flow_bed(capT('rio', 'rain'), TE('pause') - 0.3, 0.12)
-n = int(2.0 * SR); x = np.arange(n) / SR; put(fx, band(rng.standard_normal(n), 300, 2500) * np.minimum(1, x * 3) * 0.12, capT('porta', 'rain'))   # water seeping in
+rain_bed(0, R0, 0.025, 1.0)
+rain_bed(R0 - 0.2, T0('end') + 0.5, 0.06, 0.8)
+thunder(R0, 0.6); thunder(T0('friend1') + 0.2, 0.35); thunder(T0('idea') - 0.6, 0.3); thunder(T0('wait2') + 0.5, 0.3)
+flow_bed(capT('rio', 'rain'), TE('friend1') - 0.3, 0.12)
+n = int(2.0 * SR); x = np.arange(n) / SR; put(fx, band(rng.standard_normal(n), 300, 2500) * np.minimum(1, x * 3) * 0.12, capT('porta', 'rain'))
+def good(at): ding(at, 0.1, (1568, 2093))     # right plan
+def bad(at): buzzer(at, 0.09, 0.4)             # wrong plan
 # explanation
-pad(T0('explain'), TE('depth'), [45, 52, 57, 60], 0.022)
-for at in np.arange(T0('explain') + 0.5, TE('depth') - 0.5, 60 / 90): put(mus, pluck(81, 0.15, 0.02, 30), at)
+pad(T0('explain'), TE('explain'), [45, 52, 57, 60], 0.022)
+for at in np.arange(T0('explain') + 0.5, TE('explain') - 0.5, 60 / 90): put(mus, pluck(81, 0.15, 0.02, 30), at)
 glubs(capT('lixo', 'explain') + 0.6, 4, 0.14)
-whoosh(capT('rios', 'explain') + 0.6, 1.2, 200, 1500, 0.2); splash(capT('rios', 'explain') + 1.2, 0.25)
-blip(capT('quinze', 'depth') + 0.2, 900, 0.08); slide(capT('derrubam', 'depth') + 0.1, 900, 300, 0.5, 0.08); splash(capT('derrubam', 'depth') + 0.55, 0.25)
-# bad idea: drive away -> the car floats off -> replay
+whoosh(capT('rios', 'explain') + 0.4, 1.2, 200, 1500, 0.2); splash(capT('rios', 'explain') + 1.0, 0.25)
+# round 1: the TV vs the breaker
+blip(VE('tv1') - 0.5, 600, 0.06)
+bad(capT('não é', 'tv2') + 0.3); zap(capT('choque', 'tv2'), 0.8, 0.12)
+clack(capT('o certo', 'tv2') + 1.6, 0.35); good(capT('assim', 'tv2'))
+pad(T0('tv2'), TE('tv2'), [50, 57, 62], 0.014)
+# round 2: car (bad), stay (bad), go up (good)
 ding(VE('car1') - 0.2, 0.08, (1046, 1318))
-flow_bed(T0('car1'), TE('carfloat'), 0.14)
-motor(T0('car2') + 1.5, T0('carfloat') + 0.6, 0.04)
-c0 = T0('carfloat'); slide(c0 + 0.2, 500, 1200, 0.6, 0.08); glubs(c0 + 0.5, 5, 0.14)
-for k in range(3): honk(c0 + 1.2 + k * 0.45, 0.1)
-splash(c0 + 0.3, 0.3)
-r = T0('replay'); n = int((seg['replay']['dur'] - 0.3) * SR); x = np.arange(n) / SR
-put(fx, band(rng.standard_normal(n), 2000, 7000) * (0.5 + 0.5 * np.sign(np.sin(2 * np.pi * 14 * x))) * 0.12 + np.sin(2 * np.pi * np.cumsum(900 + 500 * np.sin(2 * np.pi * 3 * x)) / SR) * 0.05, r + 0.15)
-scratch(r, 0.3); slide(TE('replay') - 0.35, 1500, 300, 0.35, 0.08)
-# the right move
+flow_bed(T0('car2'), TE('carfloat'), 0.14)
+motor(T0('car2') + 1.0, T0('carfloat') + 0.6, 0.04)
+c0 = T0('carfloat'); slide(c0 + 0.2, 500, 1200, 0.6, 0.08); glubs(c0 + 0.5, 5, 0.14); splash(c0 + 0.3, 0.3)
+for k in range(3): honk(c0 + 1.1 + k * 0.45, 0.1)
+bad(VE('car2') - 0.6)
+def rewind(seg_name):
+    r = T0(seg_name); n = int((seg[seg_name]['dur'] - 0.3) * SR); x = np.arange(n) / SR
+    put(fx, band(rng.standard_normal(n), 2000, 7000) * (0.5 + 0.5 * np.sign(np.sin(2 * np.pi * 14 * x))) * 0.12 + np.sin(2 * np.pi * np.cumsum(900 + 500 * np.sin(2 * np.pi * 3 * x)) / SR) * 0.05, r + 0.15)
+    scratch(r, 0.3); slide(TE(seg_name) - 0.35, 1500, 300, 0.35, 0.08)
+rewind('replay'); rewind('replay2')
+n = int(seg['stayrise']['dur'] * SR); x = np.arange(n) / SR; put(fx, lowp(rng.standard_normal(n), 500) * np.minimum(1, x * 2) * 0.3, T0('stayrise')); glubs(T0('stayrise') + 0.3, 5, 0.12)
+bad(T0('stayrise') + 1.2)
 ding(VS('idea') - 0.15, 0.12, (1568, 2093))
-pad(T0('rule'), TE('kit'), [50, 57, 62], 0.016)
-clack(capT('energia', 'rule') + 0.5, 0.35)
-for k, at in enumerate(np.arange(capT('suba para', 'rule'), capT('nunca', 'rule'), 0.19)): step(at, 0.1 if k % 2 else 0.13)
-flow_bed(capT('nunca', 'rule') - 0.2, TE('rule'), 0.18)
-for k, w_ in enumerate(['documentos', 'lanterna', 'água e', 'remédios']): blip(capT(w_, 'kit') + 0.2, 800 + k * 150, 0.07)
-flow_bed(T0('outside'), TE('hidden'), 0.16)
-glubs(capT('túneis', 'outside') + 0.5, 6, 0.12)
-clank(capT('arrancar', 'hidden') + 0.6, 0.35); splash(capT('arrancar', 'hidden') + 0.6, 0.3)
-n = int(2.4 * SR); x = np.arange(n) / SR; put(fx, band(rng.standard_normal(n), 200, 1200) * (0.6 + 0.4 * np.sin(2 * np.pi * 4 * x)) * np.sin(np.pi * x / 2.4) * 0.14, capT('esconde', 'hidden'))   # whirlpool
-# gag: the friend steps into the hidden manhole
-flow_bed(T0('gag1'), TE('gag3'), 0.12)
+for k, at in enumerate(np.arange(T0('high') + 0.3, capT('telhado', 'high'), 0.19)): step(at, 0.1 if k % 2 else 0.13)
+good(capT('assim', 'high'))
+# round 3: the friend's surfboard
+flow_bed(T0('gag1'), TE('germs'), 0.12)
+bad(capT('não é', 'gag1b') + 0.3)
+clank(capT('bueiros', 'gag1b') + 0.3, 0.3); splash(capT('bueiros', 'gag1b') + 0.3, 0.3)
 g0 = T0('gag2')
 for k in range(4): splash(g0 + 0.15 + k * 0.35, 0.12, 0.3)
 slide(g0 + 1.45, 1400, 250, 0.5, 0.12); splash(g0 + 1.95, 0.45, 1.0); boom(g0 + 1.95, 0.25, 60); glubs(g0 + 2.1, 4, 0.16)
 splash(g0 + 2.9, 0.35, 0.7); bloop(g0 + 2.95, 200, 700, 0.12)
 trombone(TE('gag2') - 1.0 + 0.2, 0.06)
 bloop(capT('xixi', 'germs') + 0.2, 500, 250, 0.08, 0.4)
-dtmf(capT('noventa', 'wait'), '193'); dtmf(capT('nove,', 'wait') + 0.3, '199')
-motor(T0('wait') + 2.0, TE('wait'), 0.03)
-zap(capT('fio', 'wire') + 0.2, 1.4, 0.15); crack(capT('fio', 'wire') + 0.2, 0.3)
+dtmf(capT('noventa', 'wait2'), '193'); dtmf(capT('nove,', 'wait2') + 0.3, '199')
+good(capT('assim', 'wait2'))
 # ending gag
 uke(T0('q1'), T0('q2'), 0.05, 104)
-pad(T0('q2'), T0('rise'), [57, 60, 64], 0.015)   # the movie on TV
+pad(T0('q2'), T0('rise'), [57, 60, 64], 0.015)
 flow_bed(T0('q3'), TE('ohoh'), 0.1)
 n = int(seg['rise']['dur'] * SR); x = np.arange(n) / SR; put(fx, lowp(rng.standard_normal(n), 500) * np.minimum(1, x) * 0.3, T0('rise')); glubs(T0('rise') + 0.4, 5, 0.1)
 scratch(T0('ohoh') + 0.05); slide(VE('ohoh') + 0.05, 700, 250, 0.7, 0.1)
