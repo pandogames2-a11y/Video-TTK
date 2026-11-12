@@ -74,6 +74,43 @@ def word_times(text, x):
             d = (b - a) * k / tot; out.append((w, t, t + d)); t += d
     return out
 
+
+# ---------- ElevenLabs (TTS=eleven): voz "Will", entonação por tipo de frase, tempos de palavra exatos ----------
+import base64, hashlib, urllib.request
+EL_HOST = os.environ.get('EL_HOST', 'api.us.elevenlabs.io'); EL_VOICE = os.environ.get('EL_VOICE', 'bIHbv24MWmeRgasZH58o')
+def mood(si, pi, text):
+    """entonação: anúncio/imagina/gancho = expressivo; lembra = médio; aviso = calmo"""
+    t = text.lower()
+    if pi == 0 or t.startswith(('imagina', 'agora imagina', 'e a novidade', 'então se prepara', 'e a número')): return dict(stability=0.32, similarity_boost=0.75, style=0.6)
+    if any(k in t for k in ('ainda não confirmou', 'ainda não disse', 'só um aviso', 'mas é uma fonte só', 'a rockstar ainda não')): return dict(stability=0.68, similarity_boost=0.75, style=0.15)
+    if t.startswith(('lembra', 'no gta 5', 'o gta 5', 'você tava')): return dict(stability=0.5, similarity_boost=0.75, style=0.4)
+    return dict(stability=0.48, similarity_boost=0.75, style=0.38)
+def el_text(w): return 'Gê-Tê-Á' if re.sub(r'[^\w]', '', w) == 'GTA' else w   # troca palavra por palavra (mantém a contagem)
+def tts_eleven_part(text, prev, nxt, vs):
+    send = ' '.join(el_text(w) for w in text.split())
+    body = dict(text=send, model_id='eleven_multilingual_v2', previous_text=prev, next_text=nxt, voice_settings=dict(vs, use_speaker_boost=True), seed=4242)
+    key = hashlib.sha1(json.dumps([body, EL_VOICE], sort_keys=True).encode()).hexdigest()[:16]
+    os.makedirs('audio/cache11', exist_ok=True); cj = f'audio/cache11/{key}.json'
+    if not os.path.exists(cj):   # cache: rodar de novo não gasta crédito
+        req = urllib.request.Request(f'https://{EL_HOST}/v1/text-to-speech/{EL_VOICE}/with-timestamps?output_format=mp3_44100_128', data=json.dumps(body).encode(), method='POST',
+                                     headers={'Content-Type': 'application/json', 'xi-api-key': 'proxy-injected'})
+        with urllib.request.urlopen(req, timeout=180) as r: open(cj, 'w').write(r.read().decode())
+    d = json.load(open(cj)); mp3 = cj[:-5] + '.mp3'; open(mp3, 'wb').write(base64.b64decode(d['audio_base64']))
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', mp3, '-af', 'highpass=f=70,acompressor=threshold=0.12:ratio=2.5:attack=5:release=80,volume=1.2', '-ar', str(SR), '-ac', '1', 'audio/tmp.wav'], check=True)
+    x = readwav('audio/tmp.wav'); al = d['alignment']; chars, st, en = al['characters'], al['character_start_times_seconds'], al['character_end_times_seconds']
+    # tempos por palavra (separadas por espaço), mapeadas de volta para o texto original
+    spans, cur = [], None
+    for c, a, b in zip(chars, st, en):
+        if c.isspace():
+            if cur: spans.append(cur); cur = None
+        else: cur = [a, b] if cur is None else [cur[0], b]
+    if cur: spans.append(cur)
+    ws = text.split()
+    if len(spans) != len(ws): raise SystemExit(f'alinhamento diferente: {len(spans)} x {len(ws)} em: {text}')
+    trim = 0.0; nz = np.where(np.abs(x) > 0.01)[0]
+    if len(nz): trim = max(0, nz[0] - 200) / SR; x = x[int(trim * SR): nz[-1] + 1500]
+    return x, [(w, a - trim, b - trim) for w, (a, b) in zip(ws, spans)]
+
 # ---------- narração ----------
 LS = float(os.environ.get('LS', '0.86'))
 segs = []; voice = []; words = []; t = 0.4
@@ -82,6 +119,12 @@ for si, s in enumerate(S):
     if s.get('num'): t += 0.9   # espaço para o número "bater" na tela antes da fala
     for pi, p in enumerate(s['parts']):
         seg['parts'].append(round(t - 0.12, 3))
+        if os.environ.get('TTS') == 'eleven':
+            prev = s['parts'][pi - 1]['t'] if pi > 0 else ''; nxt = s['parts'][pi + 1]['t'] if pi + 1 < len(s['parts']) else ''
+            x, wt = tts_eleven_part(p['t'], prev, nxt, mood(si, pi, p['t']))
+            for w, a, b in wt: words.append(dict(seg=s['id'], part=pi, text=w, t0=round(t + a, 3), t1=round(t + b, 3)))
+            voice.append((t, x)); t += len(x) / SR + 0.55
+            continue
         sents = [x.strip() for x in re.findall(r'[^.?!]+[.?!]*', p['t']) if x.strip()]
         for k, sent in enumerate(sents):
             x = tts(sent, 'audio/tmp.wav', LS)
@@ -91,7 +134,7 @@ for si, s in enumerate(S):
     t += 1.3
     seg['end'] = round(t - 0.35, 3); segs.append(seg)
     print(s['id'], round(seg['start'], 1), round(seg['end'], 1), flush=True)
-os.remove('audio/tmp.wav')
+if os.path.exists('audio/tmp.wav'): os.remove('audio/tmp.wav')
 TOTAL = t + 1.2
 N = int(TOTAL * SR)
 vtrack = np.zeros(N, np.float32)

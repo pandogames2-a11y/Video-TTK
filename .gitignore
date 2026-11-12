@@ -12,3 +12,4 @@ ffmpeg2pass*
 gta6_longo/clips/*
 !gta6_longo/clips/.gitkeep
 gta6_longo/audio/test11/
+gta6_longo/audio/cache11/*.mp3
