@@ -179,7 +179,7 @@
     "clip": {
      "arquivo": "clips/fonte/gta5_trevor.mp4",
      "inicio": 0.0,
-     "dur": 4.0
+     "dur": 5.0
     }
    },
    {
@@ -192,8 +192,8 @@
     "v": "tres",
     "clip": {
      "arquivo": "clips/fonte/gta5_trevor.mp4",
-     "inicio": 6.0,
-     "dur": 4.0
+     "inicio": 5.5,
+     "dur": 5.0
     }
    },
    {
@@ -730,12 +730,7 @@
      "a": "😇 CIDADÃO EXEMPLAR",
      "b": "2 minutos depois do caos"
     },
-    "v": "",
-    "clip": {
-     "arquivo": "clips/fonte/gta5_trevor.mp4",
-     "inicio": 8.5,
-     "dur": 3.5
-    }
+    "v": ""
    },
    {
     "t": "Nas coberturas do gameplay de agosto, a imprensa notou um indicador que parece acompanhar o seu estilo: se você é discreto ou se sai atirando em tudo.",
@@ -811,7 +806,7 @@
     "v": "",
     "clip": {
      "arquivo": "clips/fonte/gta5_trevor.mp4",
-     "inicio": 12.0,
+     "inicio": 11.5,
      "dur": 5.5
     }
    },

@@ -15,6 +15,8 @@ GUIDE = '\n## Diretrizes para evitar problemas de direitos autorais no YouTube\n
 TL = json.load(open('timeline.json')); SCRIPT = json.load(open('script.json')); S = {s['id']: s for s in SCRIPT}
 segs = {g['id']: g for g in TL['segs']}
 LEAD = 0.15   # o clipe entra 0,15 s depois do começo da frase
+TARGET = 5.0  # tempo na tela de cada trecho
+MIN_SPEED = 0.5  # câmera lenta máxima (trechos curtos do trailer)
 
 def part_span(seg, part):
     g = segs[seg]; ps = g['parts'] + [g['end']]
@@ -35,15 +37,19 @@ for sg in SCRIPT:
         if not c: continue
         cid = f"{sg['id']}_{pi}"; a, b = part_span(sg['id'], pi)
         f = c['arquivo']; ini = float(c.get('inicio', 0))
-        dur = round(min(c.get('dur', 6), b - a - LEAD - 0.35, probe(f) - ini if os.path.exists(f) else 0), 2)
-        rows.append(dict(id=cid, t0=a + LEAD, dur=dur, arquivo=f, inicio=ini, fala=p['t']))
+        src = round(min(c.get('dur', 5), probe(f) - ini if os.path.exists(f) else 0), 2)   # segundos tirados do arquivo
+        tela = round(min(TARGET, b - a - LEAD - 0.4), 2)                                    # segundos na tela
+        speed = max(MIN_SPEED, min(1.0, src / tela)) if tela > 0 else 1.0                  # < 1 = câmera lenta
+        src = round(min(src, tela * speed), 2); dur = round(src / speed, 2)
+        rows.append(dict(id=cid, t0=a + LEAD, dur=dur, src=src, speed=round(speed, 2), arquivo=f, inicio=ini, fala=p['t']))
         if not os.path.exists(f) or dur < 1.0: print('pulado:', cid, f); continue
         out = f'clips/{cid}'; shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
-        vf = ('crop=iw*0.86:ih*0.86:iw*0.07:0,' if c.get('crop') else '') + f'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps={FPS}'
-        subprocess.run(['ffmpeg', '-loglevel', 'error', '-ss', str(ini), '-t', str(dur), '-i', f, '-an', '-vf', vf, '-q:v', '3', f'{out}/f%04d.jpg'], check=True)
+        vf = ('crop=iw*0.86:ih*0.86:iw*0.07:0,' if c.get('crop') else '') + 'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,'
+        vf += (f'setpts=PTS/{speed:.4f},framerate=fps={FPS}' if speed < 0.99 else f'fps={FPS}')
+        subprocess.run(['ffmpeg', '-loglevel', 'error', '-ss', str(ini), '-t', str(src), '-i', f, '-an', '-vf', vf, '-q:v', '3', f'{out}/f%04d.jpg'], check=True)
         n = len(glob.glob(f'{out}/f*.jpg'))
         ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta5' if 'gta5' in f else 'gta6', n=n, lead=LEAD))
-        print(f'{cid}: {n} quadros ({n / FPS:.1f} s) de {f} a partir de {ini}s')
+        print(f'{cid}: {n / FPS:.1f} s na tela ({src:.1f} s de {os.path.basename(f)} a partir de {ini}s, velocidade {speed:.2f})')
 json.dump(ready, open('clips_ready.json', 'w'), ensure_ascii=False, indent=1)
 print(len(ready), 'trechos prontos')
 
@@ -51,9 +57,10 @@ with open('MAPA_DE_CLIPES.md', 'w') as m:
     m.write('# Trechos usados — GTA 6: 10 novidades (versão longa)\n\n')
     m.write('Os trechos ficam definidos no próprio `script.json` (campo `clip` de cada frase). O áudio dos trechos é sempre descartado.\n')
     m.write(GUIDE)
-    m.write('\n## Trechos\n\n| frase | tempo no vídeo | duração | arquivo | a partir de | narração |\n|---|---|---|---|---|---|\n')
+    m.write('\n## Trechos\n\n| frase | tempo no vídeo | na tela | do original | arquivo | a partir de | narração |\n|---|---|---|---|---|---|---|\n')
     for r in rows:
         fala = r['fala'].replace('|', '/')
-        m.write(f"| `{r['id']}` | {tc(r['t0'])} | {r['dur']:.1f} s | {os.path.basename(r['arquivo'])} | {r['inicio']} s | {fala[:80]}{'…' if len(fala) > 80 else ''} |\n")
+        m.write(f"| `{r['id']}` | {tc(r['t0'])} | {r['dur']:.1f} s | {r['src']:.1f} s | {os.path.basename(r['arquivo'])} | {r['inicio']} s | {fala[:80]}{'…' if len(fala) > 80 else ''} |\n")
     tot = sum(r['dur'] for r in rows)
-    m.write(f'\nTotal: {len(rows)} trechos, {tot:.0f} s em {TL["total"]:.0f} s de vídeo ({100 * tot / TL["total"]:.0f}%).\n')
+    tr = sum(r['src'] for r in rows if 'trailer' in r['arquivo'])
+    m.write(f'\nTotal: {len(rows)} trechos, {tot:.0f} s na tela em {TL["total"]:.0f} s de vídeo ({100 * tot / TL["total"]:.0f}%). Do trailer de lançamento são usados só {tr:.0f} s (câmera lenta).\n')

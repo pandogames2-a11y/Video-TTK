@@ -1,7 +1,8 @@
 // Vídeo horizontal 1920x1080 — "10 coisas do GTA 6 que não existiam no GTA 5" (versão longa)
 // Arte 100% original em canvas: sem logos, personagens ou imagens da Rockstar.
 const W = 1920, H = 1080, FPS = 30;
-const cv = document.getElementById('c'), X = cv.getContext('2d');
+const cv = document.getElementById('c'); let X = cv.getContext('2d'); const MAIN = X;
+const BUF = document.createElement('canvas'); BUF.width = W; BUF.height = H; const BX = BUF.getContext('2d');
 let TL, SC, TOTAL;
 const F = '"Inter Display", Inter, "Noto Color Emoji", sans-serif';
 const EM = '"Noto Color Emoji", sans-serif';
@@ -324,9 +325,9 @@ SCENES.n8 = (lt, s, P) => {
 SCENES.n9 = (lt, s, P) => {
   grad([[0, '#1b2a41'], [1, '#0c1321']]);
   X.fillStyle = '#152033'; X.fillRect(-500, 860, W + 1000, 400);
-  emoji('🎒', 700, 560, 380, Math.sin(lt * 2) * 0.05);
-  ['💵', '📱', '🔦', '🔧', '🍔'].forEach((e, i) => { const k = eb(seg(lt, 0.4 + i * 0.18, 0.35)); const a = -1.4 + i * 0.7; emoji(e, 700 + Math.cos(a) * 330, 560 + Math.sin(a) * 300, 90 * k); });
-  if (P.v === 'roda') { weaponWheel(1350, 540, lt, P.pt); }
+  if (P.v === 'roda') { X.save(); X.translate(960, 540); X.scale(0.92, 0.92); weaponWheel(0, 0, lt, P.pt); X.restore(); }
+  else { emoji('🎒', 700, 560, 380, Math.sin(lt * 2) * 0.05);
+    ['💵', '📱', '🔦', '🔧', '🍔'].forEach((e, i) => { const k = eb(seg(P.pt, 0.3 + i * 0.12, 0.35)); const a = -1.4 + i * 0.7; emoji(e, 700 + Math.cos(a) * 330, 560 + Math.sin(a) * 300, 90 * k); }); }
   if (P.v === 'bolso') { const k = eb(seg(P.pt, 0.4, 0.35)); X.save(); X.translate(1350, 560); X.scale(k, k);
     rr(-170, -190, 340, 380, 40); X.fillStyle = '#2c4a7a'; X.fill(); txt('BOLSO', 0, -140, 44, '#cfe'); emoji('🚀', 0, 20, 180, -0.6);
     if (P.pt > 2.5) { X.strokeStyle = '#ff2b2b'; X.lineWidth = 24; X.beginPath(); X.moveTo(-150, -150); X.lineTo(150, 170); X.moveTo(150, -150); X.lineTo(-150, 170); X.stroke(); } X.restore(); }
@@ -391,9 +392,9 @@ SCENES.outro = (lt, s, P) => {
 function panel(x, y, w, h, col = 'rgba(8,4,20,0.82)', edge = '#ffd400') { X.save(); X.shadowColor = 'rgba(0,0,0,0.6)'; X.shadowBlur = 40; rr(x, y, w, h, 34); X.fillStyle = col; X.fill(); X.restore(); rr(x, y, w, h, 34); X.lineWidth = 5; X.strokeStyle = edge; X.stroke(); }
 const TIMEL = [['2013', 'GTA 5'], ['DEZ 2023', 'TRAILER 1'], ['MAI 2025', 'TRAILER 2'], ['AGO 2026', 'GAMEPLAY'], ['SET 2026', 'GAME INFORMER'], ['19 NOV 2026', 'LANÇAMENTO']];
 function card(c, pt, dur, side, segObj) {
-  const k = eb(seg(pt, 0.05, 0.4)); if (k <= 0) return;
+  const kin = eo(seg(pt, 0.25, 0.5)), kout = 1 - eio(seg(pt, dur - 0.4, 0.35)), k = Math.min(kin, kout); if (k <= 0.01) return;
   const cw = 800, cx = side === 'l' ? 70 : side === 'r' ? W - 70 - cw : (W - cw) / 2;
-  X.save(); const ox = cx + cw / 2, oy = 470; X.translate(ox, oy); X.scale(k, k); X.translate(-ox, -oy);
+  X.save(); X.globalAlpha = k; X.translate((side === 'r' ? 1 : side === 'l' ? -1 : 0) * (1 - k) * 160, side === 'c' ? (1 - k) * 60 : 0);
   const L = cx + 50, C = cx + cw / 2, inner = cw - 100;
   switch (c.k) {
     case 'big': { panel(cx, 290, cw, 340); txt(c.a, C, 410, fit(c.a, 92, inner), '#ffd400', { stroke: 10 }); if (c.b) txt(c.b, C, 530, fit(c.b, 46, inner, 800), '#fff', { weight: 800 }); break; }
@@ -465,26 +466,48 @@ function cardSide(c, segObj, pi) {
 }
 
 // ---------- cabeçalho ----------
+function seal(tag, x, y, size, align = 'left') {
+  const tg = TAGS[tag], w2 = tw(tg.t, size) + size * 1.6, x0 = align === 'center' ? x - w2 / 2 : x;
+  rr(x0, y - size * 0.9, w2, size * 1.8, size * 0.9); X.fillStyle = tg.c; X.fill(); txt(tg.t, x0 + w2 / 2, y + 1, size, '#fff');
+}
 function header(s, lt) {
   const sc = SC.find(x => x.id === s.id);
   if (sc.num) {
-    for (let i = 0; i < 10; i++) { const on = i < sc.num, cur = i === sc.num - 1; rr(W - 70 - (10 - i) * 62, 46, 52, 14, 7); X.fillStyle = cur ? '#ffd400' : on ? '#fff' : 'rgba(255,255,255,0.25)'; X.fill(); }
-    const k = eb(seg(lt, 0.7, 0.35));
-    X.save(); X.translate(120, 115); X.scale(k, k); rr(-70, -70, 140, 140, 30); X.fillStyle = '#ffd400'; X.fill(); X.lineWidth = 7; X.strokeStyle = '#000'; X.stroke(); txt(String(sc.num), 0, 5, sc.num === 10 ? 82 : 96, '#111'); X.restore();
-    const kt = eo(seg(lt, 0.75, 0.35)); X.save(); X.globalAlpha = kt; X.translate((1 - kt) * -120, 0);
-    txt(sc.title, 215, 88, 58, '#fff', { stroke: 12, align: 'left' });
-    const tg = TAGS[sc.tag], w2 = tw(tg.t, 28) + 44; rr(215, 128, w2, 50, 25); X.fillStyle = tg.c; X.fill(); txt(tg.t, 215 + w2 / 2, 154, 28, '#fff');
-    X.restore();
-    if (sc.src) txt(sc.src, W - 40, 1056, 22, 'rgba(255,255,255,0.8)', { weight: 700, align: 'right', stroke: 5 });
-  } else if (sc.title) {
-    const kt = eo(seg(lt, 0.2, 0.35)); X.save(); X.globalAlpha = kt; const w2 = tw(sc.title, 44) + 60; rr(50, 50, w2, 76, 38); X.fillStyle = '#ffd400'; X.fill(); txt(sc.title, 50 + w2 / 2, 90, 44, '#111'); X.restore();
+    for (let i = 0; i < 10; i++) { const cur = i === sc.num - 1; rr(W - 60 - (10 - i) * 46, 40, 38, 8, 4); X.fillStyle = cur ? '#ffd400' : i < sc.num ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.2)'; X.fill(); }
+    // abertura do item: título grande no centro, depois vira um selo compacto no canto
+    const big = Math.min(eo(seg(lt, 0.55, 0.45)), 1 - eio(seg(lt, 2.9, 0.5)));
+    if (big > 0.01) {
+      X.save(); X.globalAlpha = big * 0.55; X.fillStyle = '#000'; X.fillRect(0, 0, W, H); X.restore();
+      X.save(); X.globalAlpha = big; X.translate(0, (1 - big) * 30);
+      txt(`NOVIDADE #${sc.num}`, W / 2, 400, 46, '#ffd400', { weight: 900 });
+      txt(sc.title, W / 2, 500, fit(sc.title, 120, 1600), '#fff', { stroke: 14, glow: 'rgba(255,46,136,0.6)', blur: 40 });
+      seal(sc.tag, W / 2, 610, 32, 'center');
+      // brilho atravessando o título
+      const sx = lerp(-400, W + 400, seg(lt, 0.9, 1.1)); const g = X.createLinearGradient(sx - 200, 0, sx + 200, 0); g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.5, 'rgba(255,255,255,0.25)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+      X.fillStyle = g; X.fillRect(0, 430, W, 140); X.restore();
+    }
+    const k = eo(seg(lt, 3.1, 0.5));
+    if (k > 0.01) { X.save(); X.globalAlpha = k; X.translate((1 - k) * -80, 0);
+      rr(50, 50, 84, 84, 20); X.fillStyle = '#ffd400'; X.fill(); txt(String(sc.num), 92, 94, sc.num === 10 ? 52 : 60, '#111');
+      txt(sc.title, 152, 78, 38, '#fff', { stroke: 9, align: 'left' }); seal(sc.tag, 152, 116, 20); X.restore(); }
+    if (sc.src && lt < 7) { X.save(); X.globalAlpha = Math.min(eo(seg(lt, 3.2, 0.5)), 1 - seg(lt, 6.3, 0.7)); txt(sc.src, W - 40, 1060, 20, 'rgba(255,255,255,0.8)', { weight: 700, align: 'right', stroke: 5 }); X.restore(); }
   }
 }
 function slam(s, lt) {
-  const sc = SC.find(x => x.id === s.id); if (!sc.num || lt > 0.9) return;
-  const k = seg(lt, 0, 0.9), z = lerp(2.8, 1, eo(k / 0.45)), a = k < 0.7 ? 1 : 1 - (k - 0.7) / 0.3;
+  const sc = SC.find(x => x.id === s.id); if (!sc.num || lt > 0.75) return;
+  const k = seg(lt, 0, 0.75), z = lerp(3.2, 1, eo(k / 0.5)), a = k < 0.6 ? 1 : 1 - (k - 0.6) / 0.4;
   X.save(); X.globalAlpha = a; X.fillStyle = 'rgba(0,0,0,0.6)'; X.fillRect(0, 0, W, H);
-  X.translate(W / 2, 500); X.scale(z, z); txt('#' + sc.num, 0, 0, 340, '#ffd400', { stroke: 22, glow: '#ff2e88', blur: 50 }); X.restore();
+  X.translate(W / 2, 520); X.scale(z, z); txt('#' + sc.num, 0, 0, 340, '#ffd400', { stroke: 22, glow: '#ff2e88', blur: 50 }); X.restore();
+}
+// cartão compacto (lower third) para quando há gameplay em tela cheia
+function miniCard(c, pt, dur) {
+  const lab = c.k === 'vs' ? `${c.a}  →  ${c.b}` : c.k === 'stat' ? `${c.n} ${c.l}` : c.k === 'reg' ? REG[c.i][0] : c.k === 'list' ? c.h : c.k === 'im' ? `IMAGINA: ${c.a}` : c.k === 'sub' ? 'DEIXA O LIKE 👍' : c.k === 'cta' ? 'COMENTA AÍ 👇' : c.k === 'recap' ? '' : c.a;
+  if (!lab) return;
+  const k = Math.min(eo(seg(pt, 0.5, 0.5)), 1 - eio(seg(pt, dur - 0.45, 0.35))); if (k <= 0.01) return;
+  const size = fit(lab, 44, 1100), w2 = tw(lab, size) + 60;
+  X.save(); X.globalAlpha = k; X.translate((1 - k) * -120, 0);
+  rr(80, 780, w2, 80, 12); X.fillStyle = 'rgba(8,4,20,0.78)'; X.fill(); X.fillStyle = '#ffd400'; X.fillRect(80, 780, 8, 80);
+  txt(lab, 80 + 34, 821, size, '#fff', { align: 'left' }); X.restore();
 }
 
 // ---------- legendas ----------
@@ -509,7 +532,7 @@ function captions(t) {
   while (CI > 0 && CHUNKS[CI].t0 - 0.03 > t) CI--;
   while (CI + 1 < CHUNKS.length && CHUNKS[CI + 1].t0 - 0.03 <= t) CI++;
   const c = CHUNKS[CI]; if (!c || t < c.t0 - 0.03 || t >= c.tEnd) return;
-  const pop = eb(seg(t, c.t0 - 0.03, 0.12)), y = 950, size = 72, sp = 30;
+  const pop = eo(seg(t, c.t0 - 0.03, 0.12)), y = 1000, size = 62, sp = 26;
   const words = c.words.map(w => w.text.toUpperCase()), widths = words.map(w => tw(w, size)), tot = widths.reduce((a, b) => a + b, 0) + sp * (words.length - 1);
   X.save(); const s2 = Math.min(1, 1700 / tot); X.translate(W / 2, y); X.scale(pop * s2, pop * s2);
   let x = -tot / 2;
@@ -520,45 +543,52 @@ function captions(t) {
 
 // ---------- quadro ----------
 let P_T = 0;
+function framing(segIdx, pi, side) { // enquadramento de cada frase
+  const r0 = R((segIdx * 31 + pi * 7 + 5) * 2654435761)(), r1 = R((segIdx * 17 + pi * 13 + 3) * 2246822519)();
+  const z = side === 'c' ? 1.02 : !side ? 1.04 + 0.08 * r0 : 1.08 + 0.12 * r0;
+  const x = side === 'l' ? 330 : side === 'r' ? -330 : (r0 - 0.5) * 140, y = (r1 - 0.5) * 60 + (z - 1) * 100;
+  return { z, x, y, rot: (r1 - 0.5) * 0.02 };
+}
 window.renderFrame = t => {
   P_T = t;
-  const s = TL.segs.find(x => t >= x.start && t < x.end) || TL.segs[TL.segs.length - 1];
+  const si = Math.max(0, TL.segs.findIndex(x => t >= x.start && t < x.end)), s = TL.segs[si];
   const sc = SC.find(x => x.id === s.id);
   const lt = t - s.start;
   let pi = 0; for (let i = 0; i < s.parts.length; i++) if (t >= s.parts[i]) pi = i;
   const pStart = pi === 0 ? s.start : s.parts[pi], pt = t - pStart, pEnd = pi + 1 < s.parts.length ? s.parts[pi + 1] : s.end, pdur = pEnd - pStart;
-  const c = sc.parts[pi].c, side = cardSide(c, s, pi);
-  // câmera: cada frase é um "corte" com enquadramento diferente + Ken Burns + punch-in
-  const r0 = R((TL.segs.indexOf(s) * 31 + pi * 7 + 5) * 2654435761)();
-  const zBase = side === 'c' ? 1.0 : !side ? 1.0 + 0.07 * r0 : 1.0 + 0.16 * r0, shiftX = side === 'l' ? 330 : side === 'r' ? -330 : (r0 - 0.5) * 90;
-  const punch = 1 + 0.08 * (1 - eo(seg(pt, 0, 0.3)));
-  const beat = 60 / TL.bpm, bp = Math.pow(1 - ((t % beat) / beat), 4);
-  const zoom = zBase * punch * (1 + 0.04 * (pt / Math.max(1, pdur))) * (1 + 0.006 * bp);
-  const shake = 16 * Math.max(0, 1 - lt / 0.35) * (sc.num ? 1 : 0.5), rs = R(Math.floor(t * 60));
-  X.setTransform(1, 0, 0, 1, 0, 0);
-  X.save(); X.translate(W / 2 + shiftX + (rs() - 0.5) * shake, H / 2 + (rs() - 0.5) * shake + (zBase - 1) * 120); X.scale(zoom, zoom); X.translate(-W / 2, -H / 2);
+  const c = sc.parts[pi].c, side = cardSide(c, s, pi), clip = CLIP_NOW; CLIP_NOW = null;
+  // câmera: voa suavemente do enquadramento anterior para o novo (com rastro), depois segue num movimento lento
+  const fNew = framing(si, pi, side);
+  const fOld = pi > 0 ? framing(si, pi - 1, cardSide(sc.parts[pi - 1].c, s, pi - 1)) : { z: fNew.z * 1.25, x: fNew.x + 700, y: fNew.y, rot: 0.03 };
+  const m = eio(seg(pt, 0, pi > 0 ? 0.7 : 0.6)), vel = Math.sin(Math.PI * clamp(pt / (pi > 0 ? 0.7 : 0.6)));
+  const drift = pt / Math.max(1, pdur);
+  const z = lerp(fOld.z, fNew.z, m) * (1 + 0.05 * drift), x = lerp(fOld.x, fNew.x, m) - 40 * drift, y = lerp(fOld.y, fNew.y, m), rot = lerp(fOld.rot, fNew.rot, m);
+  X = BX; X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = '#000'; X.fillRect(0, 0, W, H);
+  X.save(); X.translate(W / 2 + x, H / 2 + y); X.rotate(rot); X.scale(z, z); X.translate(-W / 2, -H / 2);
   SCENES[s.scene](lt, s, { pi, pt, pdur, v: sc.parts[pi].v || '' });
-  X.restore();
-  const clip = CLIP_NOW; CLIP_NOW = null;
-  if (clip) { // trecho de gameplay/trailer (sem áudio) com fade, zoom lento e leve correção de cor
-    const ct = pt - clip.lead, dur = clip.n / FPS, a = Math.min(seg(ct, 0, 0.2), 1 - seg(ct, dur - 0.25, 0.25));
-    X.save(); X.globalAlpha = a; const z = 1.02 + 0.05 * (ct / dur); X.translate(W / 2, H / 2); X.scale(z, z); X.translate(-W / 2, -H / 2);
+  X.restore(); X = MAIN;
+  X.setTransform(1, 0, 0, 1, 0, 0); X.drawImage(BUF, 0, 0);
+  if (vel > 0.15) { const dx = (fNew.x - fOld.x) * 0.06 * vel + (pi === 0 ? -60 * vel : 0); for (let k = 1; k <= 3; k++) { X.globalAlpha = 0.22 * vel; X.drawImage(BUF, -dx * k, 0); } X.globalAlpha = 1; }
+  // trecho de gameplay/trailer: tela cheia, câmera lenta (já vem do prep), faixas de cinema
+  let bars = 0;
+  if (clip) {
+    const ct = pt - clip.lead, dur = clip.n / FPS, a = Math.min(seg(ct, 0, 0.35), 1 - seg(ct, dur - 0.4, 0.4)); bars = a;
+    X.save(); X.globalAlpha = a; const zc = 1.03 + 0.06 * (ct / dur); X.translate(W / 2 + 30 * (ct / dur), H / 2); X.scale(zc, zc); X.translate(-W / 2, -H / 2);
     X.drawImage(clip.img, 0, 0, W, H); X.restore();
-    X.save(); X.globalAlpha = 0.18 * a; X.fillStyle = '#2a0a3a'; X.fillRect(0, 0, W, H); X.restore();
-    X.save(); X.globalAlpha = a; const lab = clip.src === 'gta5' ? '🎮 GTA 5 · gameplay' : '🎬 GTA 6 · imagens: Rockstar Games', w2 = tw(lab, 26, 800) + 40;
-    rr(W - 50 - w2, 80, w2, 46, 23); X.fillStyle = 'rgba(0,0,0,0.6)'; X.fill(); txt(lab, W - 50 - w2 / 2, 104, 26, '#fff', { weight: 800 }); X.restore();
+    X.save(); X.globalAlpha = 0.15 * a; X.fillStyle = '#2a0a3a'; X.fillRect(0, 0, W, H); X.restore();
   }
-  // legibilidade
-  let g = X.createLinearGradient(0, 820, 0, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.5, 'rgba(0,0,0,0.55)'); g.addColorStop(1, 'rgba(0,0,0,0.75)'); X.fillStyle = g; X.fillRect(0, 820, W, 260);
-  g = X.createLinearGradient(0, 0, 0, 230); g.addColorStop(0, 'rgba(0,0,0,0.6)'); g.addColorStop(1, 'rgba(0,0,0,0)'); X.fillStyle = g; X.fillRect(0, 0, W, 230);
-  if (c) card(c, pt, pdur, side, s);
-  header(s, lt); slam(s, lt); captions(t);
-  // flash de corte entre blocos e leve flash entre frases
-  const fl = s === TL.segs[0] ? 0 : 0.7 * (1 - seg(lt, 0, 0.18)); const fl2 = pi > 0 ? 0.18 * (1 - seg(pt, 0, 0.1)) : 0;
-  if (fl + fl2 > 0) { X.fillStyle = `rgba(255,255,255,${fl + fl2})`; X.fillRect(0, 0, W, H); }
-  const v = X.createRadialGradient(W / 2, H / 2, 600, W / 2, H / 2, 1150); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.5)'); X.fillStyle = v; X.fillRect(0, 0, W, H);
+  // legibilidade (só onde precisa)
+  let g = X.createLinearGradient(0, 860, 0, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,0.65)'); X.fillStyle = g; X.fillRect(0, 860, W, 220);
+  if (sc.num) { g = X.createLinearGradient(0, 0, 0, 180); g.addColorStop(0, 'rgba(0,0,0,0.5)'); g.addColorStop(1, 'rgba(0,0,0,0)'); X.fillStyle = g; X.fillRect(0, 0, W, 180); }
+  if (bars > 0) { const bh = 96 * eio(bars); X.fillStyle = '#000'; X.fillRect(0, 0, W, bh); X.fillRect(0, H - bh, W, bh);
+    X.save(); X.globalAlpha = bars; const lab = clip.src === 'gta5' ? 'GTA 5 · gameplay' : 'GTA 6 · imagens: Rockstar Games'; txt(lab, W - 40, bh / 2 + 4, 22, 'rgba(255,255,255,0.75)', { weight: 700, align: 'right' }); X.restore(); }
+  if (c) { if (clip && c.k !== 'cta' && c.k !== 'recap') miniCard(c, pt, pdur); else card(c, pt, pdur, side, s); }
+  if (bars < 0.5) header(s, lt); slam(s, lt); captions(t);
+  // flash curto só na virada de novidade
+  const fl = si === 0 ? 0 : 0.6 * (1 - seg(lt, 0, 0.16)); if (fl > 0) { X.fillStyle = `rgba(255,255,255,${fl})`; X.fillRect(0, 0, W, H); }
+  const v = X.createRadialGradient(W / 2, H / 2, 650, W / 2, H / 2, 1200); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.45)'); X.fillStyle = v; X.fillRect(0, 0, W, H);
   X.imageSmoothingEnabled = false; X.drawImage(GRAIN, 0, 0, W, H); X.imageSmoothingEnabled = true;
-  const fo = seg(t, TL.total - 1.0, 1.0); if (fo > 0) { X.fillStyle = `rgba(0,0,0,${fo})`; X.fillRect(0, 0, W, H); }
+  const fi = 1 - seg(t, 0, 0.6), fo = seg(t, TL.total - 1.2, 1.2), f = Math.max(fi, fo); if (f > 0) { X.fillStyle = `rgba(0,0,0,${f})`; X.fillRect(0, 0, W, H); }
 };
 // trechos prontos (clips_ready.json, gerado por prep_clips.py): quadro carregado antes de desenhar
 let CLIPS = [], CLIP_NOW = null; const IMG = new Map();
