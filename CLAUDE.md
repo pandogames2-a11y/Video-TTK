@@ -1,7 +1,7 @@
 # Guia de Sobrevivência — série de animação 3D (canal do usuário)
 
 Série de vídeos curtos em 3D, em **português do Brasil**, com personagens grãos de café ensinando a sobreviver a desastres, com humor.
-Episódios prontos: **EP1 Tsunami** (`tsunami/`) e **EP2 Terremoto** (`terremoto/`). **EP3 Enchente** (`enchente/`) pronto (2:33, cidade, formato de "planos" certos e errados com o bordão "Assim, a enchente não chega"). O final do EP3 pede comentário ("sobrevivi" / "não consegui") em vez de anunciar o próximo episódio; o próximo tema planejado era **Incêndio**.
+Episódios prontos: **EP1 Tsunami** (`tsunami/`) e **EP2 Terremoto** (`terremoto/`). **EP3 Enchente** (`enchente/`) pronto (2:33, cidade, formato de "planos" certos e errados com o bordão "Assim, a enchente não chega"). O final do EP3 pede comentário ("sobrevivi" / "não consegui") em vez de anunciar o próximo episódio; **EP4 Incêndio** (`incendio/`) em produção: roteiro, cena 3D e storyboard (https://claude.ai/artifact/Le5ve7Aw9Zc5RYAbBzgxmk) prontos com voz provisória; falta gerar as vozes do ElevenLabs (≈1.800 créditos) e renderizar.
 
 ## Como trabalhar com o usuário
 - Fale sempre em português do Brasil, simples e direto: o usuário não é técnico. Explique o que mudou no vídeo, não o código.
@@ -69,6 +69,11 @@ Quadros: 1280×720, 30 fps. Use o scratchpad para quadros e arquivos temporário
 ## EP3 Enchente — notas
 - Cenário: casa térrea (set em `AO`, com sofá que boia, quadro de luz, tomada, janela com a rua desenhada em tempo real), rua alagada (`floodMesh`, nível em `floodD(t)`), bueiro na frente do prédio (`MAN`, tampa que salta + redemoinho), escada do prédio (`IO`) com o térreo alagado, telhado do prédio (`ROOF()`/`bw()` convertem coordenadas locais do prédio), chuva em 3D (`updateRain`) e relâmpagos (`bolt`).
 - Áudio provisório: `python3 build_audio.py` (Piper) + `align_local.py`. Os .wav provisórios não vão para o git. Para a versão final: `TTS=eleven TIGHT=1 python3 build_audio.py` (≈1.950 caracteres de crédito), `align_local.py` ou `align_words.py`, quadros de teste, render.
+
+## EP4 Incêndio — notas
+- Mesmo formato de "planos" do EP3 (`PLANS`, `ASSIMS`, `WRONGS`), na mesma cidade. Apartamento agora no 3º andar (a janela mostra a rua desse andar).
+- Fogo/fumaça: `makeFlame`/`updateFlame` (sprites com luz), `makeSmokeColumn`; cozinha com panela, tampa, botão do fogão, cortina (`fireState`); fumaça no teto (`aptParts.smoke`) e nos andares do prédio (`ioSmoke`); fogo na janela da fachada e na porta (`facadeFire`, `doorFire`); caminhão de bombeiros com escada e jato d'água (`truck`, `hose`); maquete do triângulo do fogo (`dio`, `dioCam`).
+- Áudio final: `TTS=eleven TIGHT=1 python3 build_audio.py`, `align_words.py`, `TTS=eleven TIGHT=1 python3 build_audio.py` de novo (efeitos usam os tempos das palavras), quadros de teste, render.
 
 ## Como funciona o `scene.js` (para criar o próximo episódio)
 - Comece copiando `terremoto/` (mar calmo, sem tsunami; já tem apartamento, escada e praia).

@@ -6,3 +6,4 @@ frames/
 audio/cache/
 terremoto/audio/align/
 enchente/audio/*.wav
+incendio/audio/*.wav
