@@ -425,6 +425,18 @@ class Bean {
       c.position.set(0.05, 0.62, 0); c.rotation.z = -0.3; this.body.add(c); this.peel = c; c.visible = false; }
     { const c = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.16, 0.06), std(0xf4f4f4, { roughness: 0.9 })); c.position.set(0, -0.08, 0.36); c.rotation.x = -0.15; this.body.add(c); this.cloth = c; c.visible = false; }
     { const j = new THREE.Group(); const b = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.08, 0.24, 14), std(0x5fb0e8, { transparent: true, opacity: 0.7, roughness: 0.1 })); j.add(b); const w = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.075, 0.16, 14), std(0x2e7dd1, { roughness: 0.1 })); w.position.y = -0.03; j.add(w); j.position.set(0, -0.4, 0.06); this.arms[1].el.add(j); this.jug = j; j.visible = false; }
+    { const suit = new THREE.Group(); this.body.add(suit); this.suit = suit; suit.visible = false;
+      const coatM = std(0xc9a646, { roughness: 0.8 }), refl = std(0xe9ff6a, { emissive: 0x9aa040, emissiveIntensity: 0.6, roughness: 0.3 }), redM = std(0xc62828, { roughness: 0.35 });
+      const coat = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 20, 0, Math.PI * 2, Math.PI * 0.52, Math.PI * 0.48), coatM); coat.scale.set(0.455, 0.63, 0.4); suit.add(coat);
+      for (const y of [-0.12, -0.36]) { const b = new THREE.Mesh(new THREE.TorusGeometry(1, 0.06, 8, 40), refl); b.rotation.x = Math.PI / 2; const k = Math.sqrt(1 - (y / 0.63) ** 2); b.scale.set(0.46 * k, 0.4 * k, 0.6); b.position.y = y; suit.add(b); }
+      const helm = new THREE.Group(); helm.position.y = 0.43; suit.add(helm);
+      const dome = new THREE.Mesh(new THREE.SphereGeometry(0.4, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), redM); dome.scale.set(1.05, 0.8, 1.1); helm.add(dome);
+      const brim = new THREE.Mesh(new THREE.CylinderGeometry(0.52, 0.55, 0.04, 28), redM); brim.scale.set(1, 1, 1.15); brim.position.set(0, 0.0, -0.06); helm.add(brim);
+      const badgeH = new THREE.Mesh(new THREE.CircleGeometry(0.09, 16), std(0xffd23f, { metalness: 0.6, roughness: 0.3 })); badgeH.position.set(0, 0.17, 0.4); badgeH.rotation.x = -0.4; helm.add(badgeH);
+      const tank = new THREE.Mesh(new THREE.CapsuleGeometry(0.12, 0.45, 6, 12), std(0xdadada, { metalness: 0.6, roughness: 0.3 })); tank.position.set(0, -0.05, -0.47); suit.add(tank);
+      const ext = new THREE.Group(); const cyl = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.11, 0.5, 14), redM); ext.add(cyl); const capE = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.07, 0.1, 10), std(0x1b1b1b)); capE.position.y = 0.3; ext.add(capE);
+      const hoseE = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.35, 6), std(0x1b1b1b)); hoseE.position.set(0, 0.3, 0.18); hoseE.rotation.x = Math.PI / 2; ext.add(hoseE); const nz = new THREE.Object3D(); nz.position.set(0, 0.3, 0.38); ext.add(nz); this.nozzle = nz;
+      ext.position.set(0, -0.42, 0.1); ext.rotation.x = 1.1; this.arms[1].el.add(ext); this.ext = ext; ext.visible = false; }
     { this.backFire = makeFlame(6, 0.2); this.backFire.remove(this.backFire.userData.light); this.backFire.userData.light = { intensity: 0, position: { y: 0 } }; this.backFire.position.set(0.1, 0.3, -0.25); this.backFire.scale.setScalar(2.4); this.body.add(this.backFire); }
     if (this.hatG) this.hatG.traverse(m => { if (m.isMesh) m.userData.c0 = m.material.color.clone(); });
     shadowAll(this.root);
@@ -481,7 +493,7 @@ class Bean {
     const soot = p.soot || 0, zap = p.zap || 0, dust = p.dust || 0, mud = p.mud || 0;
     this.skinM.color.copy(this.baseColor).lerp(new THREE.Color(0x231a14), soot * 0.85).lerp(new THREE.Color(0xe9e4da), dust * 0.85).lerp(new THREE.Color(0x8a6a3a), mud * 0.8);
     this.skinM.roughness = 0.35 + mud * 0.5; this.skinM.clearcoat = 0.8 * (1 - mud);
-    this.popc.visible = !!p.popc; this.phone.visible = !!p.phone; this.cloth.visible = !!p.cloth; this.jug.visible = !!p.jug; updateFlame(this.backFire, t, p.backFire || 0);
+    this.popc.visible = !!p.popc; this.phone.visible = !!p.phone; this.cloth.visible = !!p.cloth; this.suit.visible = !!p.suit; this.ext.visible = !!p.ext; if (this.hairG) this.hairG.visible = !p.suit; if (this.hatG && p.suit) this.hatG.visible = false; this.jug.visible = !!p.jug; updateFlame(this.backFire, t, p.backFire || 0);
     if (this.hatG) this.hatG.traverse(m => { if (m.isMesh && m.userData.c0) m.material.color.copy(m.userData.c0).lerp(new THREE.Color(0x221a14), (p.soot || 0) * 0.85); }); this.soap.visible = !!p.soap; this.pack.visible = !!p.pack; this.peel.visible = !!p.peel;
     if (this.ctrl) this.ctrl.visible = !!p.ctrl;
     if (this.candle) { this.candle.visible = !!p.candle; this.flame.visible = !!p.flame; if (p.flame) this.flame.scale.set(1, 1 + 0.25 * Math.sin(t * 30), 1); }
@@ -555,6 +567,7 @@ const dogParts = {};
   for (const [lx, lz] of [[-0.11, 0.2], [0.11, 0.2], [-0.11, -0.2], [0.11, -0.2]]) { const lg = new THREE.Group(); lg.position.set(lx, 0.3, lz); const m = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.3, 6), fur); m.position.y = -0.15; lg.add(m); const paw = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 6), light); paw.position.y = -0.3; lg.add(paw); dog.add(lg); dogParts.legs.push(lg); }
   shadowAll(dog);
 }
+const dogHelmet = new THREE.Mesh(new THREE.SphereGeometry(0.15, 14, 8, 0, Math.PI * 2, 0, Math.PI / 2), std(0xc62828, { roughness: 0.35 })); dogHelmet.position.set(0, 0.08, -0.02); dogParts.head.add(dogHelmet); dogHelmet.visible = false;
 function dogPose(t, mode, x, y, z, ry) {
   dog.visible = mode !== 'hide'; if (mode === 'hide') return;
   dog.position.set(x, y, z); dog.rotation.set(0, ry, 0);
@@ -888,22 +901,25 @@ const EDGE = (() => { const dir = V(-6 - TOP.x, 0, 12 - TOP.z).normalize(); let 
 // =====================================================================
 const WORDS = await (await fetch('/audio/words.json')).json().catch(() => []);
 const wordAt = (w, after) => { const x = WORDS.find(k => k.t0 >= after - 0.01 && k.text.toLowerCase().replace(/[^a-zà-ú]/g, '').startsWith(w)); return x ? x.t0 : after; };
-const GAGN = ['q2', 'q3', 'q4', 'rise', 'ohoh', 'boom'];
-const APTN = ['calm', 'fire', 'friend1', 'pan1', 'pan2', 'panboom', 'pan3', 'pan4'];
-const IOSC = ['exit1', 'exit2', 'exit3', 'exit4', 'idea', 'crawl'];
+const GAGN = ['q1', 'q3', 'ohoh'];                    // the ending, in the flat
+const APTN = ['calm', 'friend1'];
+const IOSC = ['exit1', 'exit2', 'idea', 'crawl'];
 function seg(t) { for (let i = TL.segs.length - 1; i >= 0; i--) if (t >= TL.segs[i].start) return TL.segs[i]; return TL.segs[0]; }
 
-// ---------- key times (EP4) ----------
-const W_CEL = wordAt('celular', T0('fire')), W_OLEO = wordAt('óleo', T0('fire')), F0 = wordAt('pega', T0('fire')) + 0.3;
-const W_TAMPO = wordAt('tampo', T0('pan3')), W_DESLIGO = wordAt('desligo', T0('pan3')), W_APAGA = wordAt('apaga', T0('pan4'));
-const W_CORTINA = wordAt('cortina', T0('pan4')), W_SAIR = wordAt('sair', T0('pan4'));
-const W_ENERGIA = wordAt('energia', T0('exit2')), W_RESPIRA = wordAt('respira', T0('exit4'));
+// ---------- key times (EP4 v2: the whole building burns) ----------
+const W_CURTO = wordAt('curto', T0('fire')), F0 = wordAt('incêndio', T0('fire')), W_MINUTOS = wordAt('minutos', T0('fire')), W_FOGO = wordAt('fogo', W_MINUTOS);
+const W_ENERGIA = wordAt('energia', T0('exit2')), W_RESPIRA = 1e9;
 const W_PANO = wordAt('pano', T0('crawl')), W_ESCADA = wordAt('escada', T0('crawl'));
-const W_CORRER = wordAt('correr', T0('roll')), W_PARE = wordAt('pare', T0('roll')), W_DEITE = wordAt('deite', T0('roll')), W_ROLE = wordAt('role', T0('roll')), W_APAGAR = wordAt('apagar', T0('roll'));
-const W_LIBERAREM = wordAt('liberarem', T0('wait2'));
-const ASSIMS = [['pan4', 'ASSIM, O FOGO NÃO SE ESPALHA'], ['crawl', 'ASSIM, A FUMAÇA NÃO TE PEGA'], ['wait2', 'ASSIM, O FOGO NÃO TE PEGA']].map(([n, txt]) => ({ n, t: wordAt('assim', T0(n)), txt }));
-const BOOM_T = T0('boom') + 0.5, BLAST = T0('gag2') + 1.4, BACK_IN = T0('gag2') + 0.8;
-const WRONGS = () => [wordAt('não', T0('pan2')), wordAt('não', T0('exit2')), W_RESPIRA, wordAt('não', T0('gag1b'))];
+const EMBER_T = T0('roll') + 0.7;
+const W_CORRER = wordAt('correr', T0('roll')), W_PARE = wordAt('pare', T0('roll')), W_DEITE = wordAt('deite', T0('roll')), W_ROLE = wordAt('role', T0('roll')), W_APAGAR = TE('roll') - 0.1;
+const W_VESTIR = wordAt('vestir', T0('suit')), W_EXT = wordAt('extintores', T0('suit')), W_APAGAR_P = wordAt('apagar', T0('suit'));
+const W_TREINOU = wordAt('treinou', T0('real')), W_VIDA = wordAt('vida', T0('real')), W_LONGE = wordAt('fique', T0('real')), W_193 = wordAt('cento', T0('real'));
+const W_LIBERAREM = 1e9;
+const ASSIMS = [['crawl', 'ASSIM, A FUMAÇA NÃO TE PEGA'], ['real', 'ASSIM, O FOGO NÃO TE PEGA']].map(([n, txt]) => ({ n, t: wordAt('assim', T0(n)), txt }));
+const CRASH = T0('jump') + 0.75, LAND = T0('jump') + 2.35;
+const WRONGS = () => [wordAt('não', T0('exit2'))];
+// names from the first version of this episode (no longer reached)
+const W_CEL = 1e9, W_OLEO = 1e9, W_TAMPO = 1e9, W_DESLIGO = 1e9, W_APAGA = 1e9, W_CORTINA = 1e9, W_SAIR = 1e9, BOOM_T = 1e9, BLAST = 1e9, BACK_IN = 1e9;
 // EP3 names still referenced by shared code paths (never reached in this episode)
 const R0 = 1e9, W_RUA = 1e9, W_PORTA = 1e9, W_BOIAR = 1e9, W_CERTO = 1e9, W_TOMADAS = 1e9, W_SUBA = 1e9, W_NUNCA = 1e9, W_TUNEIS = 1e9, W_ARRANCAR = 1e9, W_BARRENTA = 1e9, W_TELHADO = 1e9, W_BUEIROS = 1e9;
 const PLOFT = 1e9, POPUP = 1e9, W_SABAO = 1e9, W_LAVE = 1e9, W_FIO = 1e9, BONK_T = 1e9;
@@ -1115,6 +1131,8 @@ function drawWindow(t, level, storm) {   // street view through the window: rain
     const sm = new THREE.Mesh(new THREE.BoxGeometry(9.15, 1, 7.15), new THREE.MeshBasicMaterial({ color: 0x3c3e42, transparent: true, opacity: 0.62, depthWrite: false })); apt.add(sm); aptParts.smoke = sm;
     const det = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.05, 16), std(0xf4f4f4)); det.position.set(1.2, 3.77, -1.0); apt.add(det);
     const led = new THREE.Mesh(new THREE.SphereGeometry(0.025, 8, 6), new THREE.MeshBasicMaterial({ color: 0xff2020 })); led.position.set(1.25, 3.74, -0.92); apt.add(led); aptParts.led = led;
+    aptParts.doorSmoke = makeSmokeColumn(12); aptParts.doorSmoke.position.set(4.3, 0.1, 2.9); aptParts.doorSmoke.scale.setScalar(0.45); apt.add(aptParts.doorSmoke);
+    aptParts.doorGlow = new THREE.PointLight(0xff7a2a, 0, 6, 1.5); aptParts.doorGlow.position.set(4.2, 0.3, 2.9); apt.add(aptParts.doorGlow);
     aptParts.wisps = makeSmokeColumn(10); aptParts.wisps.position.set(PX - 0.15, 1.2, PZ + 0.17); aptParts.wisps.scale.setScalar(0.25); apt.add(aptParts.wisps);
   }
   apt.traverse(m => { if (m.isMesh && m !== win) { m.castShadow = true; m.receiveShadow = true; } });
@@ -1126,27 +1144,43 @@ function drawWindow(t, level, storm) {   // street view through the window: rain
 const facadeFire = makeFlame(12, 0.9); facadeFire.scale.setScalar(1.6); scene.add(facadeFire);
 const facadeSmoke = makeSmokeColumn(30); scene.add(facadeSmoke);
 const doorFire = makeFlame(12, 0.7); doorFire.scale.setScalar(1.7); scene.add(doorFire);
+// the whole building on fire: one flame per front window, smoke from the roof
+const BFIRE = []; const noLight = f => { f.remove(f.userData.light); f.userData.light = { intensity: 0, position: { y: 0 } }; return f; };
+{ const cols = [-3.375, -1.125, 1.125, 3.375], floors = [4.85, 8.1, 11.35, 1.75];
+  floors.forEach((y, fi) => cols.forEach((x, ci) => { if (fi === 3 && Math.abs(x) < 1.2) return;   // not over the front door
+    const f = noLight(makeFlame(9, 0.85)); f.scale.setScalar(2.1); scene.add(f);
+    const d = Math.abs(fi === 3 ? -1 : fi) + Math.abs(ci - 1) * 0.6;   // starts on the 2nd floor, left of their window column
+    BFIRE.push({ f, lx: x, ly: y - 0.9, d, out: (fi + 0.2 * ci) / 4 }); })); }
+const roofSmoke = [0, 1, 2].map(i => { const c = makeSmokeColumn(24); scene.add(c); return c; });
+const fireGlow = [new THREE.PointLight(0xff7a2a, 0, 40, 1.2), new THREE.PointLight(0xff9a3a, 0, 40, 1.2)]; fireGlow.forEach(l => scene.add(l));
+// glass shards bursting out of their window
+const SHARDS = [];
+{ const gm = new THREE.MeshStandardMaterial({ color: 0xcfe8ff, transparent: true, opacity: 0.75, roughness: 0.05, metalness: 0.3, side: THREE.DoubleSide });
+  const r = rnd(99); for (let i = 0; i < 46; i++) { const g = new THREE.BufferGeometry(); const a = 0.08 + r() * 0.18; g.setAttribute('position', new THREE.Float32BufferAttribute([0, a, 0, -a * 0.7, -a * 0.6, 0, a * 0.8, -a * 0.4, 0], 3)); g.computeVertexNormals();
+    const m = new THREE.Mesh(g, gm); m.userData = { vx: (r() - 0.5) * 3.2, vy: 0.5 + r() * 2.2, vz: -(1.5 + r() * 3.0), sp: (r() - 0.5) * 14, ox: (r() - 0.5) * 1.6, oy: (r() - 0.5) * 1.0 }; m.visible = false; scene.add(m); SHARDS.push(m); } }
+// extinguisher spray (one cloud per bean)
+function makeSpray() { const n = 160, g = new THREE.BufferGeometry(), p = new Float32Array(n * 3); g.setAttribute('position', new THREE.BufferAttribute(p, 3)); const pts = new THREE.Points(g, new THREE.PointsMaterial({ color: 0xf4f7fb, size: 0.75, transparent: true, opacity: 0.85, depthWrite: false, map: canvasTex(64, 64, (c, w) => { const gr = c.createRadialGradient(32, 32, 0, 32, 32, 32); gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); c.fillStyle = gr; c.fillRect(0, 0, 64, 64); }) })); pts.frustumCulled = false; pts.visible = false; scene.add(pts); return pts; }
+const sprays = [makeSpray(), makeSpray()];
+function updateExtSpray(pts, from, to, t, on) {
+  pts.visible = on; if (!on) return; const P = pts.geometry.attributes.position, n = P.count;
+  for (let i = 0; i < n; i++) { const u = ((i / n) + t * 1.6) % 1, q = from.clone().lerp(to, u); q.y += Math.sin(u * Math.PI) * 0.8; const sp = 0.15 + u * 1.4; P.setXYZ(i, q.x + Math.sin(i * 7.3) * sp, q.y + Math.cos(i * 3.1) * sp, q.z + Math.sin(i * 1.7) * sp); }
+  P.needsUpdate = true;
+}
+// a falling ember
+const ember = makeFlame(5, 0.15); ember.remove(ember.userData.light); ember.userData.light = { intensity: 0, position: { y: 0 } }; scene.add(ember);
 // ---------- soft fill light for the house (so faces never go dark) ----------
 const houseFill = new THREE.DirectionalLight(0xfff1e0, 0.9); houseFill.position.copy(AP(1.5, 4.5, 9)); houseFill.target.position.copy(AP(-0.5, 1.0, -1.5)); scene.add(houseFill); scene.add(houseFill.target);
 const windowLight = new THREE.PointLight(0xcfe3ff, 0, 9, 1.4); windowLight.position.copy(AP(2.3, 2.1, -2.6)); scene.add(windowLight);
 // ---------- the kitchen fire (and the smoke) ----------
 function aptLevel() { return 0; }
 let powerOff = false;
-function fireState(t, n, lt) {
-  const gag = GAGN.includes(n); let pan = 0, curt = 0, smoke = 0, lidOn = false, knobOff = false, soot = 0;
-  if (!gag) {
-    if (t > F0) pan = ss(F0, F0 + 0.5, t) * (1 + 0.15 * ss(F0, T0('pan3'), t));
-    if (n === 'panboom') { const k = lt - 0.45; if (k > 0) pan = 1 + 3.2 * Math.exp(-Math.pow((k - 0.35) / 0.45, 2)); }
-    lidOn = t > W_TAMPO + 0.2 && n !== 'panboom'; if (lidOn) pan = pan * (1 - ss(W_TAMPO + 0.2, W_TAMPO + 0.6, t));
-    knobOff = t > W_DESLIGO + 0.3 && n !== 'panboom';
-    curt = ss(W_CORTINA - 1.2, W_CORTINA + 0.3, t);
-    smoke = clamp(ss(F0, T0('explain'), t) * 0.3 + ss(T0('pan1'), TE('pan4'), t) * 0.55, 0, 0.9);
-  } else {
-    if (n === 'rise') pan = lerp(0.15, 1.1, ease(clamp(lt / S.rise.dur))); else if (n === 'ohoh') pan = 1.2;
-    else if (n === 'boom') { pan = t < BOOM_T ? 1.3 : 1.2 + 3.4 * Math.exp(-Math.pow((t - BOOM_T - 0.35) / 0.5, 2)); soot = ss(BOOM_T + 0.2, BOOM_T + 0.5, t); }
-    smoke = n === 'q2' ? 0.04 : n === 'q3' ? 0.08 : n === 'q4' ? 0.12 : n === 'rise' ? 0.25 : n === 'ohoh' ? 0.35 : 0.35 + 0.5 * soot;
-  }
-  return { pan, curt, smoke, lidOn, knobOff, soot, gag };
+function fireState(t, n, lt) {   // this time the fire comes from the building: smoke under the door, glow outside
+  const gag = GAGN.includes(n) || (n === 'jump' && lt < 0.85);
+  let smoke = 0, door = 0;
+  if (n === 'explain') { smoke = ss(E.fum, E.teto + 0.4, t) * 0.3 + ss(E.desce - 0.1, E.desce + 1.3, t) * 0.55; door = 1; }
+  else if (!gag) { smoke = clamp(ss(F0, W_FOGO + 1.5, t) * 0.35 + ss(T0('friend1'), TE('friend1'), t) * 0.2, 0, 0.6); door = ss(F0 + 0.5, W_FOGO, t); }
+  else { smoke = 0.5; door = 1; }
+  return { pan: 0, curt: 0, smoke, lidOn: false, knobOff: false, soot: 0, gag, door };
 }
 function updateHouse(t, n, lt) {
   const F = fireState(t, n, lt);
@@ -1157,7 +1191,9 @@ function updateHouse(t, n, lt) {
   aptParts.knob.rotation.x = F.knobOff ? Math.PI / 2 : 0;
   const sh = F.smoke * 2.3; aptParts.smoke.visible = sh > 0.02; aptParts.smoke.scale.y = Math.max(sh, 0.01); aptParts.smoke.position.set(0, 3.8 - sh / 2, 0);
   aptParts.led.material.color.setHex(F.smoke > 0.06 && Math.floor(t * 3) % 2 ? 0xff2020 : 0x330000);
-  updateSmokeColumn(aptParts.wisps, t, F.gag && F.pan < 0.05 ? 0.6 : (F.pan > 0 ? 0 : 0), 3, 0.3);
+  updateSmokeColumn(aptParts.wisps, t, 0, 3, 0.3);
+  updateSmokeColumn(aptParts.doorSmoke, t, F.door, 2.6, -0.6); aptParts.doorGlow.intensity = F.door * (2.2 + 0.6 * Math.sin(t * 13));
+  aptParts.glass.visible = !(n === 'jump' || n === 'gag3');
   powerOff = false;
   aptParts.lamp.intensity = 2.2; aptParts.tvLight.intensity = 1.0; aptParts.screen.material.map = movieTexRef;
   houseFill.visible = windowLight.visible = apt.visible; houseFill.intensity = 0.8; windowLight.intensity = 1.0;
@@ -1178,24 +1214,23 @@ const FRONT_RY = Math.PI + BROT;     // facing out of the building's front
 const DOORWAY = bw(0, 0, -4.15), STOOP_FRONT = bw(0, 0, -4.75), STEP2 = bw(0, 0, -5.25);
 const stairsDist = (y) => { let best = 0; for (let d = 0; d < STAIR_TOTAL; d += 0.05) { if (onStairs(d).y - IO.y <= y + 1e-3) best = d; } return best; };
 const D_FLOOR2 = stairsDist(6.0);
+const WINPOS = () => bw(1.0, 7.3, -4.15), LANDPOS = () => bw(1.0, 0, -6.9);
 function direct(t, n, lt, g, H) {
   const p = clamp(lt / g.dur);
   const hm = clamp(mouthOf(TL.heroMouth, REAL_T) * 1.4), fm = clamp(mouthOf(TL.friendMouth, REAL_T) * 1.4);
   let cam = { pos: V(0, 5, -10), tgt: V(0, 1, 5), fov: 45 };
-  shake = 0; flash = 0;
-  const F = H.F;
-  const gaming = { legs: 'sit', sitY: 0.6, lean: -0.15, ctrl: true, armL: [0.25, -0.5, -1.2], armR: [0.25, -0.5, -1.2], look: [0, -0.2] };
-  const STOVE = { x: AO.x + 3.19, z: AO.z - 2.0 };
-  const stir = { x: STOVE.x, y: AO.y, z: STOVE.z, ry: Math.PI / 2 - 0.35, armL: A.rest, armR: [1.3, 0.15, -1.0 + 0.25 * Math.sin(t * 6)], look: [0, -0.5], smile: 1 };
-  let hp = Object.assign({}, stir);
+  shake = 0; flash = 0; dogHelmet.visible = false; sprays.forEach(sp => sp.visible = false);
+  const gaming = { legs: 'sit', sitY: 0.6, lean: -0.15, ctrl: true, look: [0, -0.2] };
+  let hp = Object.assign({ x: SOFA_H.x, y: SOFA_Y, z: SOFA_H.z, ry: 0.15, smile: 1 }, gaming, { armL: [0.25, -0.5, -1.2 + 0.1 * Math.sin(t * 12)], armR: [0.25, -0.5, -1.2 + 0.1 * Math.sin(t * 10 + 2)] });
   let fp = Object.assign({ x: SOFA_F.x, y: SOFA_Y, z: SOFA_F.z, ry: -0.15, smile: 1 }, gaming, { armL: [0.25, -0.5, -1.2 + 0.1 * Math.sin(t * 11)], armR: [0.25, -0.5, -1.2 + 0.1 * Math.sin(t * 13 + 1)] });
   let dg = { mode: 'lie', x: AO.x - 2.6, y: AO.y + 0.02, z: AO.z + 0.2, ry: 0.6 };
   board.visible = false;
   setParent(hero, scene); setParent(friend, scene); hero.root.scale.setScalar(1); friend.root.scale.setScalar(1);
-  const PH = { x: AO.x + 0.45, z: AO.z - 1.6 }, PF = { x: AO.x - 0.6, z: AO.z - 1.6 };   // standing spots between the sofa and the coffee table
-  const HD = bw(0.62, 0, -4.6), FD = bw(-0.4, 0, -4.6), DD = bw(-1.0, 0, -4.45);
+  const PH = { x: AO.x + 0.45, z: AO.z - 1.6 }, PF = { x: AO.x - 0.6, z: AO.z - 1.6 }, WIN_F = { x: AO.x + 1.3, z: AO.z - 1.95 };
+  const HD = bw(0.62, 0, -4.6), DD = bw(-1.0, 0, -4.45);
   const park = { h: V(16.4, ROAD.y, 13.0), f: V(17.9, ROAD.y, 13.1), d: V(17.2, ROAD.y, 12.4) };
   const stand = (o, ex) => Object.assign({ x: o.x, z: o.z, y: AO.y }, ex);
+  const alarmed = { eyesWide: true, brow: 0.9, smile: 0 };
 
   if (n === 'title') {
     const u = ease(p); cam.pos = vl(V(-4, 26, 3), V(9, 6.5, 9), u); cam.tgt = vl(V(14, 4, 22), V(bp.x, 7, bp.z), u); cam.fov = 52;
@@ -1203,136 +1238,108 @@ function direct(t, n, lt, g, H) {
   } else if (n === 'home') {
     const c1 = wordAt('você', g.start) - g.start + 0.4, c2 = wordAt('cachorro', g.start) - g.start;
     if (lt < c1) { const k = ease(clamp(lt / c1)); cam.pos = vl(V(bp.x - 6, 3.5, bp.z - 19), V(bp.x - 3, 4.5, bp.z - 13), k); cam.tgt = V(bp.x, 7.5, bp.z); cam.fov = 56; hp.visible = fp.visible = false; dg.mode = 'hide'; }
-    else if (lt < c2) { cam.pos = AP(0.2, 2.4, 3.6); cam.tgt = AP(1.2, 1.0, -1.6); cam.fov = 56; }
+    else if (lt < c2) { cam.pos = AP(1.6, 2.1, 4.4); cam.tgt = AP(-1.1, 1.0, -2.3); cam.fov = 50; }
     else { cam.pos = AP(-2.0, 0.9, 1.7); cam.tgt = AP(-2.6, 0.3, 0.2); cam.fov = 42; }
   } else if (n === 'calm') {
-    if (lt < 1.4) { cam.pos = AP(3.0, 1.8, 0.4); cam.tgt = AP(3.4, 1.3, -2.0); cam.fov = 46; }
-    else { cam.pos = AP(3.0, 1.65, -0.6); cam.tgt = AP(3.2, 1.45, -2.0); cam.fov = 38; hp = Object.assign(hp, { ry: Math.PI / 2 - 0.9, look: [Math.sin(lt * 2.5) * 0.9, 0.2], brow: -0.4, smile: 0, armR: A.rest }); }
+    if (lt < 1.4) { cam.pos = vl(AP(-0.9, 1.5, 1.6), AP(-0.9, 1.45, 1.1), p); cam.tgt = AP(-1.0, 1.25, -2.6); cam.fov = 44; }
+    else { cam.pos = AP(-1.4, 1.45, -0.3); cam.tgt = AP(-1.6, 1.3, -2.6); cam.fov = 36; hp.look = [Math.sin(lt * 2.5) * 0.9, 0.2]; hp.brow = -0.4; hp.smile = 0; }
   } else if (n === 'fire') {
-    const wc = W_CEL - g.start, wo = W_OLEO - g.start, f0 = F0 - g.start;
-    if (lt < wc - 0.1) { cam.pos = AP(3.0, 1.8, 0.4); cam.tgt = AP(3.4, 1.3, -2.0); cam.fov = 46; }
-    else if (lt < wo - 0.2) {   // the phone rings: you walk away from the stove
-      const k = ss(wc, wc + 1.2, lt); hp = { x: lerp(STOVE.x, AO.x + PH.x - AO.x, k), z: lerp(STOVE.z, PH.z, k), y: AO.y, ry: k < 1 ? -2.2 : 0.3, run: k > 0 && k < 1 ? 0.6 : 0, phase: lt * 10, armR: [2.1, -0.35, -2.4], armL: A.rest, phone: true, smile: 1, look: [0.3, -0.4] };
-      cam.pos = AP(1.6, 2.0, 2.8); cam.tgt = AP(1.8, 1.2, -1.8); cam.fov = 54;
-    } else if (lt < f0 + 0.8) {   // the oil gets too hot... and catches fire
-      hp = stand(PH, { ry: 0.3, armR: [2.1, -0.35, -2.4], armL: A.rest, phone: true, smile: 1, look: [0.3, -0.4] });
-      cam.pos = AP(3.25, 1.75, -1.0); cam.tgt = AP(4.0, 1.15, -2.13); cam.fov = 48;
-    } else {
-      hp = stand(PH, { ry: 1.2, armR: A.up, armL: A.up, phone: true, eyesWide: true, brow: 1, smile: 0, shout: 0.5 });
-      fp = stand(PF, { ry: 0.9, armL: A.up, armR: A.up, eyesWide: true, brow: 1, smile: 0 });
-      dg.mode = 'scared'; cam.pos = AP(0.9, 2.2, 2.8); cam.tgt = AP(2.6, 1.4, -1.9); cam.fov = 56; shake = lt < f0 + 1.3 ? 0.3 : 0;
-    }
+    const wm = W_MINUTOS - g.start, wf = W_FOGO - g.start;
+    if (lt < wm - 0.3) { hp.visible = fp.visible = false; dg.mode = 'hide'; const k = ease(clamp(lt / (wm - 0.3))); cam.pos = vl(V(12.5, 3.2, 12.5), V(13.5, 4.0, 13.5), k); cam.tgt = bw(-1.1, 4.4, -4.1); cam.fov = 44; }
+    else if (lt < wf - 0.6) { hp.visible = fp.visible = false; dg.mode = 'hide'; const k = ease(clamp((lt - wm + 0.3) / (wf - wm))); cam.pos = vl(V(19, 3, 7), V(25, 6.5, 4), k); cam.tgt = V(17, 7, 22); cam.fov = 54; }
+    else { hp = stand(PH, Object.assign({ ry: 1.4, armL: A.up, armR: A.up, shout: 0.4 }, alarmed)); fp = stand(PF, Object.assign({ ry: 1.2, armL: A.up, armR: A.up }, alarmed)); dg.mode = 'scared'; cam.pos = AP(-1.8, 1.9, 2.3); cam.tgt = AP(2.4, 1.0, 0.8); cam.fov = 58; }
   } else if (n === 'friend1') {
-    hp = stand(PH, { ry: 0, armL: A.rest, armR: A.rest, eyesWide: true, brow: 0.9, smile: 0, look: [-0.5, 0] });
-    fp = stand(PF, { ry: 0.1, armL: A.up, armR: A.up, mouth: fm, eyesWide: true, brow: 1, smile: 0 });
+    hp = stand(PH, Object.assign({ ry: 0, armL: A.rest, armR: A.rest, look: [-0.5, 0] }, alarmed));
+    fp = stand(PF, Object.assign({ ry: 0.1, armL: A.up, armR: A.up, mouth: fm }, alarmed));
     dg.mode = 'scared'; cam.pos = AP(-0.1, 1.55, 0.9); cam.tgt = AP(-0.1, 1.2, -1.8); cam.fov = 48; shake = 0.1;
   } else if (n === 'explain') {
-    hp.visible = fp.visible = false; dg.mode = 'hide'; const dc = dioCam(t); cam.pos = dc.pos; cam.tgt = dc.tgt; cam.fov = 48;
-  } else if (['pan1', 'pan2', 'panboom', 'pan3', 'pan4'].includes(n)) {
-    // round 1: the burning pan
-    fp = stand({ x: AO.x + 1.0, z: AO.z + 1.2 }, { ry: 2.6, armL: A.rest, armR: A.rest, eyesWide: true, brow: 0.6, smile: 0, look: [0.5, 0] });
-    dg = { mode: 'scared', x: AO.x - 0.6, y: AO.y, z: AO.z + 1.6, ry: 2.4 };
-    hp = Object.assign({}, stir, { ry: Math.PI / 2 - 0.5, armR: A.rest, look: [0.4, -0.3], smile: 0, brow: 0.4 });
-    if (n === 'pan1') { hp = Object.assign(hp, { jug: true, armR: [1.0, 0.2, -1.2], mouth: hm, smile: 1, brow: -0.3, ry: Math.PI / 2 - 1.0 }); cam.pos = AP(2.8, 1.8, 0.6); cam.tgt = AP(3.4, 1.3, -1.9); cam.fov = 50; }
-    else if (n === 'pan2') { const k = ss(0.5, 2.0, lt); hp = Object.assign(hp, { jug: true, armR: [1.0 + 0.8 * k, 0.2, -1.2 + 0.9 * k], ry: Math.PI / 2 - 0.4 * k, smile: 1 }); cam.pos = AP(3.0, 1.8, 0.3); cam.tgt = AP(3.6, 1.25, -2.05); cam.fov = 50; }
-    else if (n === 'panboom') {
-      const k = lt - 0.45, burnt = k > 0.4;
-      hp = Object.assign(hp, { jug: k < 0.6, armR: k < 0 ? [1.9, 0.3, -0.3] : A.up, armL: k < 0 ? A.rest : A.up, ry: Math.PI / 2, eyesWide: k > 0, shout: k > 0 ? 0.7 : 0, soot: burnt ? 1 : 0, wob: k > 0 && k < 1.2 ? 0.4 : 0, smile: 0 });
-      cam.pos = AP(2.9, 1.9, 0.8); cam.tgt = AP(3.5, 1.45, -2.0); cam.fov = 54; shake = k > 0 && k < 0.9 ? 0.6 : 0; flash = k > 0 && k < 0.5 ? 0.5 * (1 - k / 0.5) : 0;
-    }
-    else if (n === 'pan3') { const wt = W_TAMPO - g.start, wd = W_DESLIGO - g.start; hp = Object.assign(hp, { ry: Math.PI / 2, mouth: hm, brow: -0.3, armR: lt > wt - 0.3 && lt < wt + 0.6 ? [1.6, 0.0, -0.4] : A.rest, armL: lt > wd - 0.2 && lt < wd + 0.7 ? [1.0, -0.2, -0.3] : A.rest }); cam.pos = AP(3.1, 1.85, 0.2); cam.tgt = AP(3.7, 1.15, -2.1); cam.fov = 48; }
-    else {
-      const wc = W_CORTINA - g.start, wsr = W_SAIR - g.start;
-      if (lt < wc - 1.3) { hp = Object.assign(hp, { ry: Math.PI / 2 - 0.9, armR: A.thumb, smile: 1, brow: -0.2 }); cam.pos = AP(3.0, 1.85, 0.3); cam.tgt = AP(3.5, 1.3, -2.1); cam.fov = 48; }
-      else if (lt < wsr - 0.2) { hp = Object.assign(hp, { ry: Math.PI / 2 + 0.9, eyesWide: true, brow: 1, smile: 0, armL: A.up, armR: A.up, look: [0, 0.3] }); cam.pos = AP(2.0, 1.8, -0.5); cam.tgt = AP(3.8, 1.8, -3.2); cam.fov = 50; }
-      else { const k = ss(wsr - 0.2, g.dur, lt);
-        hp = stand({ x: lerp(AO.x + 0.4, AO.x + 4.0, k), z: lerp(AO.z + 1.6, AO.z + 2.3, k) }, { ry: 1.35, run: 1, phase: lt * 13, eyesWide: true, brow: 0.9, smile: 0 });
-        fp = stand({ x: lerp(AO.x - 0.6, AO.x + 3.0, k), z: lerp(AO.z + 1.4, AO.z + 2.6, k) }, { ry: 1.3, run: 1, phase: lt * 13 + 1, eyesWide: true, brow: 0.9, smile: 0, armL: [0.95, -0.15, -1.5], armR: [0.95, -0.15, -1.5] });
-        dg = { mode: 'carried' }; cam.pos = AP(0.3, 2.1, 0.4); cam.tgt = AP(4.0, 1.2, 2.5); cam.fov = 56; }
-    }
+    hp.visible = fp.visible = false; dg.mode = 'hide';
+    if (t > E.fum - 0.4) { const k = ease(clamp((t - E.fum + 0.4) / 5)); cam.pos = vl(AP(0.3, 1.5, 3.2), AP(0.6, 1.3, 2.8), k); cam.tgt = vl(AP(1.6, 2.4, -1.0), AP(1.6, 1.8, -1.0), k); cam.fov = 58; }
+    else { const dc = dioCam(t); cam.pos = dc.pos; cam.tgt = dc.tgt; cam.fov = 48; }
   } else if (IOSC.includes(n)) {
-    // inside the building: the top-floor hallway and the stairs, with smoke filling the upper part
     if (n === 'exit1' || n === 'exit2') {
       hp = { x: IO.x - 3.4, y: IO.y + 9, z: IO.z + 1.8, ry: -0.5, armL: A.rest, armR: A.rest, eyesWide: true, brow: 0.6, smile: 0, look: [-0.5, 0] };
-      fp = { x: IO.x - 5.0, y: IO.y + 9, z: IO.z + 1.6, ry: -2.6, armL: A.rest, armR: A.point, mouth: n === 'exit1' ? fm : 0, smile: 1, brow: -0.3, armLdog: true };
+      fp = { x: IO.x - 5.0, y: IO.y + 9, z: IO.z + 1.6, ry: -2.6, armL: A.rest, armR: A.point, mouth: n === 'exit1' ? fm : 0, smile: 1, brow: -0.3 };
       dg = { mode: 'carried' };
       if (n === 'exit1') { cam.pos = V(IO.x - 4.0, IO.y + 10.4, IO.z + 7.0); cam.tgt = V(IO.x - 5.0, IO.y + 10.0, IO.z); cam.fov = 50; }
       else { fp.armR = A.rest; fp.eyesWide = true; fp.smile = 0; cam.pos = V(IO.x - 7.6, IO.y + 10.4, IO.z + 4.6); cam.tgt = V(IO.x - 6.0, IO.y + 10.0, IO.z - 1); cam.fov = 46; }
     } else {
-      const span = { exit3: [0, 0.18], exit4: [0.18, 0.4], idea: [0.4, 0.45], crawl: [0.45, 1.0] }[n];
-      const prog = lerp(span[0], span[1], n === 'idea' ? 0 : p), d = STAIR_TOTAL * (1 - prog) - 0.05;
-      const h0 = onStairs(d), f0 = onStairs(Math.min(STAIR_TOTAL - 0.01, d + 1.2)), low = n === 'idea' || n === 'crawl';
-      const cough = n === 'exit4' && t > W_RESPIRA - 0.3;
-      hp = { x: h0.x, y: h0.y, z: h0.z, ry: h0.ry + Math.PI, run: low ? 0 : (n === 'idea' ? 0 : 0.8), phase: lt * 12, brow: 0.4, smile: 0, mouth: n === 'exit3' || n === 'idea' ? hm : 0, squint: cough ? 0.8 : 0, wob: cough ? 0.15 : 0, cloth: n === 'crawl' && t > W_PANO - 0.2 };
-      fp = { x: f0.x, y: f0.y, z: f0.z, ry: f0.ry + Math.PI, run: low ? 0 : 0.8, phase: lt * 12 + 1.3, armL: [0.95, -0.15, -1.5], armR: [0.95, -0.15, -1.5], brow: 0.4, smile: 0, squint: cough ? 0.8 : 0, wob: cough ? 0.15 : 0, cloth: n === 'crawl' && t > W_PANO - 0.2 };
-      if (low) { Object.assign(hp, { legs: 'crouch', lean: 0.5, bob: 0.03 * Math.sin(t * 10) }); Object.assign(fp, { legs: 'crouch', lean: 0.5, bob: 0.03 * Math.sin(t * 10 + 1) }); if (n === 'idea') { hp.armL = A.pointUp; hp.armR = A.rest; hp.smile = 1; hp.brow = -0.3; } else { hp.armL = [2.3, -0.3, -2.4]; hp.armR = A.rest; } }
+      const prog = n === 'idea' ? 0.02 : lerp(0.02, 1.0, p), d = STAIR_TOTAL * (1 - prog) - 0.05;
+      const h0 = onStairs(d), f0 = onStairs(Math.min(STAIR_TOTAL - 0.01, d + 1.2));
+      const cl = n === 'crawl' && t > W_PANO - 0.2;
+      hp = { x: h0.x, y: h0.y, z: h0.z, ry: h0.ry + Math.PI, legs: 'crouch', lean: 0.5, bob: 0.03 * Math.sin(t * 10), brow: 0.4, smile: 0, mouth: n === 'idea' ? hm : 0, cloth: cl };
+      fp = { x: f0.x, y: f0.y, z: f0.z, ry: f0.ry + Math.PI, legs: 'crouch', lean: 0.5, bob: 0.03 * Math.sin(t * 10 + 1), armL: [0.95, -0.15, -1.5], armR: [0.95, -0.15, -1.5], brow: 0.4, smile: 0, cloth: cl };
+      if (n === 'idea') { hp.armL = A.pointUp; hp.armR = A.rest; hp.smile = 1; hp.brow = -0.3; } else { hp.armL = [2.3, -0.3, -2.4]; hp.armR = A.rest; }
       dg = { mode: 'carried' };
-      cam.pos = V(h0.x - 0.5, h0.y + (low ? 1.5 : 2.0), IO.z + 8.0); cam.tgt = V(h0.x, h0.y + (low ? 0.8 : 1.1), IO.z + 1.0); cam.fov = 50;
+      cam.pos = V(h0.x - 0.5, h0.y + 1.5, IO.z + 8.0); cam.tgt = V(h0.x, h0.y + 0.8, IO.z + 1.0); cam.fov = 50;
     }
-  } else if (['gag1', 'gag1b', 'gag2', 'gag3', 'roll'].includes(n)) {
-    // round 3: back outside, the friend wants his video game
-    const hpDoor = { x: HD.x, y: STOOP_Y, z: HD.z, ry: FRONT_RY, brow: 0.5, smile: 0, eyesWide: true, look: [-0.4, 0] };
-    hp = Object.assign({}, hpDoor, { armL: A.rest, armR: A.rest });
+  } else if (n === 'roll') {
+    // outside: an ember falls on the friend's back; stop, drop and roll
+    const C = bw(-0.6, 0, -7.0), wc = W_CORRER - g.start, wp = W_PARE - g.start, wd = W_DEITE - g.start, wr = W_ROLE - g.start, wa = W_APAGAR - g.start, we = EMBER_T - g.start;
+    hp = { x: HD.x, y: STOOP_Y, z: HD.z, ry: FRONT_RY, armL: A.rest, armR: A.rest, eyesWide: true, brow: 0.6, smile: 0, look: [-0.4, -0.3] };
     dg = { mode: 'scared', x: DD.x, y: STOOP_Y, z: DD.z, ry: FRONT_RY };
-    const stoopCam = () => { cam.pos = bw(0.1, 0, -8.6); cam.pos.y = STOOP_Y + 1.5; cam.tgt = bw(0.1, 0, -4.6); cam.tgt.y = STOOP_Y + 1.0; cam.fov = 42; };
-    if (n === 'gag1') { fp = { x: FD.x, y: STOOP_Y, z: FD.z, ry: FRONT_RY + 0.6, armR: [1.5, 0.3, -0.2], armL: A.rest, mouth: fm, smile: 1, brow: -0.3 }; hp.armR = A.rest; stoopCam(); }
-    else if (n === 'gag1b') {
-      const k = ss(0.6, 1.4, lt), lz = lerp(-4.6, -3.4, k); const pos = bw(-0.4, 0, lz);
-      fp = { x: pos.x, y: STOOP_Y, z: pos.z, ry: FRONT_RY + Math.PI, run: k > 0 && k < 1 ? 1 : 0, phase: lt * 13, smile: 1, visible: lz < -3.95 };
-      hp = Object.assign(hp, { armL: A.stop, armR: A.stop, shout: k > 0.2 ? 0.5 : 0, brow: 1 }); stoopCam();
-    } else if (n === 'gag2') {
-      const k = clamp((t - BLAST) / 0.6), out = t > BLAST;
-      if (!out) { fp = { x: 0, y: 0, z: 0, visible: false }; hp = Object.assign(hp, { armL: A.stop, armR: A.stop, brow: 1 }); }
-      else { const a0 = bw(-0.3, 0, -4.0), a1 = bw(-0.7, 0, -6.6); fp = { x: lerp(a0.x, a1.x, k), z: lerp(a0.z, a1.z, k), y: lerp(STOOP_Y + 0.6, ROAD.y, k) + Math.sin(k * Math.PI) * 1.2 - (k >= 1 ? 0.35 : 0), ry: FRONT_RY, soot: 1, ctrl: true, armL: [0.7, 0.4, -1.0], armR: [0.7, 0.4, -1.0], legs: k >= 1 ? 'sit' : undefined, sitY: 0.6, eyesWide: k < 1, squint: k >= 1 ? 0.6 : 0, smile: 0, wob: k >= 1 && t < BLAST + 1.6 ? 0.25 : 0 };
-        if (t > BLAST + 1.0) hp = Object.assign(hp, { armL: A.hips, armR: A.facepalm, lean: 0.12, squint: 0.9, brow: -0.6, smile: 0, tilt: -0.12, eyesWide: false }); else hp = Object.assign(hp, { armL: A.up, armR: A.up, shout: 0.5 }); }
-      cam.pos = bw(1.8, 0, -10.2); cam.pos.y = STOOP_Y + 1.4; cam.tgt = bw(-0.3, 0, -5.4); cam.tgt.y = STOOP_Y + 0.6; cam.fov = 46;
-    } else if (n === 'gag3') {
-      const a1 = bw(-0.7, 0, -6.6); fp = { x: a1.x, z: a1.z, y: ROAD.y - 0.35, ry: FRONT_RY + 0.3, legs: 'sit', sitY: 0.6, soot: 1, ctrl: true, armR: A.thumb, armL: [0.7, 0.4, -1.0], mouth: fm, smile: 1, squint: 0.5, wob: 0.12, brow: 0.3, backFire: ss(0.8, 1.4, lt) * 0.6 };
-      hp = Object.assign(hp, { armL: A.hips, armR: A.facepalm, lean: 0.12, squint: 0.9, brow: -0.6, smile: 0, tilt: -0.12, eyesWide: false });
-      cam.pos = bw(0.6, 0, -10.8); cam.pos.y = ROAD.y + 1.6; cam.tgt = bw(-0.3, 0, -6.2); cam.tgt.y = ROAD.y + 0.9; cam.fov = 42;
-    } else {
-      // stop, drop and roll
-      const C = bw(-0.6, 0, -7.0), wc = W_CORRER - g.start, wp = W_PARE - g.start, wd = W_DEITE - g.start, wr = W_ROLE - g.start, wa = W_APAGAR - g.start;
-      let fx = C.x, fz = C.z, fy = ROAD.y, extra = {}; let fire = 0.6;
-      if (lt < wc) { extra = { armL: A.up, armR: A.up, shout: 0.5, eyesWide: true, wob: 0.3 }; fire = 0.7; }
-      else if (lt < wp) { const an = (lt - wc) * 4.5; fx = C.x + Math.cos(an) * 1.1; fz = C.z + Math.sin(an) * 1.1; extra = { ry: -an, run: 1, phase: lt * 15, armL: A.up, armR: A.up, shout: 0.6, eyesWide: true }; fire = lerp(0.7, 1.6, ss(wc, wp, lt)); }
-      else if (lt < wd) { extra = { armL: A.rest, armR: A.rest, eyesWide: true }; fire = 1.6; }
-      else { extra = { lie: true, armL: A.up, armR: A.up, smile: lt > wa + 0.3 ? 1 : 0, eyesWide: lt < wa }; fire = lt < wr ? 1.6 : lerp(1.6, 0, ss(wr, wa + 0.2, lt)); if (lt > wr) { fx = C.x + 0.9 * Math.sin((lt - wr) * 2.4); } }
-      fp = Object.assign({ x: fx, z: fz, y: fy, ry: FRONT_RY + 0.4, soot: 1, smile: 0, brow: 0.6, backFire: fire }, extra);
-      hp = Object.assign(hp, { armR: A.point, armL: A.rest, mouth: 0, brow: 0.6, look: [-0.4, -0.4] });
-      cam.pos = bw(2.6, 0, -11.2); cam.pos.y = STOOP_Y + 1.9; cam.tgt = bw(-0.6, 0, -6.8); cam.tgt.y = ROAD.y + 0.5; cam.fov = 48;
-    }
-  } else if (n === 'wait' || n === 'wait2' || n === 'q1') {
+    let fx = C.x, fz = C.z, extra = {}, fire = 0;
+    if (lt < we) { extra = { armL: A.rest, armR: A.rest, look: [0, 0.6], brow: 0.3 }; }
+    else if (lt < wc) { extra = { armL: A.up, armR: A.up, shout: 0.5, eyesWide: true, wob: 0.3 }; fire = ss(we, we + 0.3, lt) * 0.7; }
+    else if (lt < wp) { const an = (lt - wc) * 4.5; fx = C.x + Math.cos(an) * 1.1; fz = C.z + Math.sin(an) * 1.1; extra = { ry: -an, run: 1, phase: lt * 15, armL: A.up, armR: A.up, shout: 0.6, eyesWide: true }; fire = lerp(0.7, 1.6, ss(wc, wp, lt)); }
+    else if (lt < wd) { extra = { armL: A.rest, armR: A.rest, eyesWide: true }; fire = 1.6; }
+    else { extra = { lie: true, armL: A.up, armR: A.up, smile: lt > wa ? 1 : 0, eyesWide: lt < wa }; fire = lt < wr ? 1.6 : lerp(1.6, 0, ss(wr, wa, lt)); if (lt > wr) fx = C.x + 0.9 * Math.sin((lt - wr) * 2.4); }
+    fp = Object.assign({ x: fx, z: fz, y: ROAD.y, ry: FRONT_RY + 0.4, smile: 0, brow: 0.6, backFire: fire }, extra);
+    cam.pos = bw(2.6, 0, -11.2); cam.pos.y = STOOP_Y + 1.9; cam.tgt = bw(-0.6, 0, -6.6); cam.tgt.y = ROAD.y + 0.9; cam.fov = 50;
+  } else if (n === 'suit' || n === 'blast') {
+    // option 1 (the cool one): suit up, grab extinguishers and put the whole building out
+    const suited = t > W_VESTIR + 0.2, armed = t > W_EXT + 0.2, spraying = t > W_APAGAR_P - 0.1;
+    const H0 = bw(0.9, 0, -9.6), F1 = bw(-0.9, 0, -9.6), D0 = bw(0, 0, -10.2);
+    const face = spraying ? FRONT_RY + Math.PI : FRONT_RY;
+    const aim = [2.2, 0.0, -0.4];
+    hp = { x: H0.x, y: ROAD.y, z: H0.z, ry: face, suit: suited, ext: armed, armR: armed ? (spraying ? aim : [1.0, 0.2, -1.3]) : A.hips, armL: suited && !spraying ? A.thumb : A.rest, smile: 1, brow: -0.4, smirk: suited && !spraying };
+    fp = { x: F1.x, y: ROAD.y, z: F1.z, ry: face, suit: suited, ext: armed, armR: armed ? (spraying ? aim : [1.0, 0.2, -1.3]) : A.rest, armL: suited && !spraying ? A.cheer : A.rest, smile: 1, brow: -0.3 };
+    dg = { mode: 'sit', x: D0.x, y: ROAD.y, z: D0.z, ry: face }; dogHelmet.visible = suited;
+    if (!spraying) { const k = ease(clamp(lt / 2.5)); cam.pos = vl(bw(0, 0, -12.2), bw(0, 0, -12.8), k); cam.pos.y = ROAD.y + 0.7; cam.tgt = bw(0, 0, -9.6); cam.tgt.y = ROAD.y + 1.3; cam.fov = 48; if (Math.abs(t - W_VESTIR - 0.2) < 0.12) flash = 0.6; }
+    else { const k = ease(clamp((t - W_APAGAR_P) / 6)); cam.pos = vl(bw(3.4, 0, -15.6), bw(2.4, 0, -17.0), k); cam.pos.y = ROAD.y + lerp(2.0, 2.8, k); cam.tgt = bw(0, 0, -6); cam.tgt.y = ROAD.y + lerp(3.4, 4.6, k); cam.fov = 60; }
+  } else if (n === 'real' || n === 'q0') {
     hp = { x: park.h.x, y: ROAD.y, z: park.h.z, ry: Math.PI, armL: A.rest, armR: A.rest, smile: 1, brow: 0 };
-    fp = { x: park.f.x, y: ROAD.y, z: park.f.z, ry: Math.PI, armL: A.rest, armR: A.rest, soot: 1, smile: 1 };
+    fp = { x: park.f.x, y: ROAD.y, z: park.f.z, ry: Math.PI, armL: A.rest, armR: A.rest, smile: 1, soot: 0.6 };
     dg = { mode: 'sit', x: park.d.x, y: ROAD.y, z: park.d.z, ry: Math.PI };
-    if (n === 'wait') { hp = Object.assign(hp, { phone: true, armR: [2.1, -0.35, -2.4], mouth: hm, brow: -0.5 }); cam.pos = V(17.0, 2.0, 9.3); cam.tgt = V(17.0, 1.6, 13); cam.fov = 44; }
-    else if (n === 'wait2') { const w193 = wordAt('três', g.start) - g.start; hp = Object.assign(hp, { phone: lt < w193 + 1.2, armR: lt < w193 + 1.2 ? [2.1, -0.35, -2.4] : A.rest, ry: lt < w193 + 1.2 ? Math.PI : 0.2 }); fp.ry = lt < w193 + 1.2 ? Math.PI : -0.2; dg.ry = 0;
-      if (lt < w193 + 1.2) { cam.pos = V(17.0, 2.0, 9.3); cam.tgt = V(17.0, 1.6, 13); cam.fov = 44; } else { cam.pos = V(25, 4.6, 7.5); cam.tgt = V(14, 6.0, 20); cam.fov = 52; } }
-    else { hp = Object.assign(hp, { armR: A.thumb, armL: A.hips, shades: true, brow: -0.2 }); fp = Object.assign(fp, { armR: A.thumb, armL: A.hips, shades: true, brow: -0.2 }); cam.pos = vl(V(17.2, 2.2, 9.2), V(17.2, 2.1, 9.8), p); cam.tgt = V(17.2, 1.5, 13); cam.fov = 44; }
-  } else if (GAGN.includes(n)) {
-    // the ending: frying with an eye on the phone
-    hp = Object.assign({}, stir, { phone: true, armR: [2.1, -0.35, -2.4], armL: [1.3, -0.15, -1.0 + 0.25 * Math.sin(t * 6)], ry: 0.7, look: [0.2, -0.5], smile: 1 });
-    if (n === 'q2') { cam.pos = AP(0.2, 2.4, 3.6); cam.tgt = AP(1.2, 1.0, -1.6); cam.fov = 56; }
-    else if (n === 'q3') { fp = Object.assign(fp, { mouth: fm, brow: -0.4, armR: A.wave, ctrl: true }); cam.pos = AP(-0.3, 1.45, -0.6); cam.tgt = AP(-0.4, 1.15, -2.65); cam.fov = 40; }
-    else if (n === 'q4') { hp = Object.assign(hp, { mouth: hm, smirk: true, brow: -0.3 }); cam.pos = AP(3.0, 1.7, -0.5); cam.tgt = AP(3.2, 1.45, -2.0); cam.fov = 40; }
-    else if (n === 'rise') { cam.pos = AP(3.0, 1.85, 0.4); cam.tgt = AP(3.5, 1.4, -2.1); cam.fov = 50; }
-    else if (n === 'ohoh') { hp = Object.assign(hp, { mouth: Math.max(hm, 0.2), eyesWide: true, brow: 0.6, smile: 0, look: [0.8, -0.2], ry: Math.PI / 2 - 0.2 }); cam.pos = AP(3.0, 1.7, -0.5); cam.tgt = AP(3.2, 1.45, -2.0); cam.fov = 40; }
-    else { const k = t - BOOM_T; hp = Object.assign(hp, { phone: k < 0.6, eyesWide: k < 1.6, shout: k > 0 && k < 1.2 ? 0.7 : 0, armL: k > 0 ? A.up : hp.armL, armR: k > 0 ? A.up : hp.armR, soot: F.soot, squint: k > 1.6 ? 0.6 : 0, smile: 0, wob: k > 0 && k < 1.2 ? 0.4 : 0 }); fp = Object.assign(fp, { soot: F.soot * 0.8, eyesWide: k > 0, ctrl: k < 0.2, armL: k > 0 ? A.up : fp.armL, armR: k > 0 ? A.up : fp.armR }); dg.mode = k > 0 ? 'scared' : 'lie';
-      cam.pos = AP(0.6, 2.2, 2.6); cam.tgt = AP(1.8, 1.3, -2.0); cam.fov = 56; shake = k > 0 && k < 1 ? 0.6 * (1 - k) : 0; flash = k > 0 && k < 0.4 ? 0.5 * (1 - k / 0.4) : 0; }
+    if (lt < W_LONGE - g.start - 0.2) { hp = Object.assign(hp, { armL: A.shrug, armR: A.shrug, brow: 0.4, smile: 0 }); cam.pos = V(17.0, 2.0, 9.6); cam.tgt = V(17.0, 1.6, 13); cam.fov = 46; }
+    else if (lt < W_193 - g.start + 1.4) { hp = Object.assign(hp, { phone: true, armR: [2.1, -0.35, -2.4], brow: -0.4 }); cam.pos = V(17.0, 2.0, 9.6); cam.tgt = V(17.0, 1.6, 13); cam.fov = 44; }
+    else { hp.ry = 0.2; fp.ry = -0.2; dg.ry = 0; cam.pos = V(25, 4.6, 7.5); cam.tgt = V(14, 6.0, 20); cam.fov = 52; }
+  } else if (GAGN.includes(n) || (n === 'jump' && lt < 0.85)) {
+    // the ending: smoke in the flat, and the friend eyeing the window
+    hp = stand(PH, Object.assign({ ry: 0.4, armL: A.rest, armR: A.rest, look: [0.6, 0] }, alarmed));
+    fp = stand(WIN_F, { ry: 2.4, armL: A.rest, armR: A.rest, smile: 1, brow: -0.3, look: [0.3, 0] });
+    dg = { mode: 'scared', x: AO.x - 1.6, y: AO.y, z: AO.z - 1.4, ry: 0.4 };
+    if (n === 'q1') { cam.pos = AP(-1.0, 1.9, 1.8); cam.tgt = AP(1.2, 1.3, -2.4); cam.fov = 52; }
+    else if (n === 'q3') { fp = Object.assign(fp, { mouth: fm, armR: [1.5, 0.3, -0.1], ry: 0.6, smirk: true }); cam.pos = AP(0.9, 1.5, 0.4); cam.tgt = AP(1.3, 1.2, -1.9); cam.fov = 44; }
+    else if (n === 'ohoh') { hp = Object.assign(hp, { mouth: Math.max(hm, 0.2), ry: 0.2 }); cam.pos = AP(-0.4, 1.6, 0.7); cam.tgt = AP(0.7, 1.3, -1.8); cam.fov = 46; }
+    else { const k = clamp(lt / 0.75); fp = stand({ x: lerp(WIN_F.x, AO.x + 2.3, k), z: lerp(WIN_F.z, AO.z - 3.0, k) }, { ry: Math.PI - 0.6, run: 1, phase: lt * 16, armL: A.up, armR: A.up, shout: 0.6, smile: 1, brow: -0.5 }); fp.y = AO.y + 0.4 * Math.sin(k * Math.PI); hp = Object.assign(hp, { armL: A.stop, armR: A.stop, shout: 0.5 }); cam.pos = AP(0.6, 1.9, 1.2); cam.tgt = AP(2.2, 1.6, -3.0); cam.fov = 54; flash = lt > 0.72 ? 0.5 : 0; }
+  } else if (n === 'jump' || n === 'gag3') {
+    // out of the window, glass everywhere, face first onto the sidewalk, on fire
+    hp.visible = false; dg.mode = 'hide';
+    const A0 = WINPOS(), B0 = LANDPOS();
+    if (n === 'jump') {
+      const k = clamp((t - CRASH) / (LAND - CRASH)), down = t > LAND;
+      const pos = A0.clone().lerp(B0, k); pos.y = lerp(A0.y - 0.9, ROAD.y, k * k) + Math.sin(k * Math.PI) * 0.6;
+      fp = { x: pos.x, y: down ? ROAD.y : pos.y, z: pos.z, ry: FRONT_RY, armL: A.up, armR: A.up, shout: down ? 0 : 0.7, eyesWide: !down, smile: 0, backFire: down ? ss(LAND, LAND + 0.3, t) * 0.55 : 0, faceDown: down, tumble: down ? 0 : k * 1.4, soot: down ? 0.7 : 0 };
+      cam.pos = bw(5.5, 0, -14.0); cam.pos.y = ROAD.y + 4.2; cam.tgt = V(pos.x, Math.max(ROAD.y + 0.8, (down ? ROAD.y : pos.y) + 0.6), pos.z); cam.fov = 56; shake = Math.abs(t - LAND) < 0.4 && t > LAND ? 0.6 : 0;
+    } else {
+      fp = { x: B0.x, y: ROAD.y, z: B0.z, ry: FRONT_RY, armL: A.thumb, armR: A.rest, mouth: fm, smile: 1, squint: 0.6, backFire: 0.45, faceDown: true, soot: 0.7 };
+      cam.pos = bw(3.0, 0, -10.2); cam.pos.y = ROAD.y + 1.6; cam.tgt = B0.clone(); cam.tgt.y = ROAD.y + 0.4; cam.fov = 44;
+    }
   } else if (n === 'end') {
     hp = { x: park.h.x, y: ROAD.y, z: park.h.z, ry: Math.PI, armL: A.wave, armR: A.hips, shades: true, smile: 1 };
-    fp = { x: park.f.x, y: ROAD.y, z: park.f.z, ry: Math.PI, armL: A.rest, armR: A.thumb, shades: true, smile: 1, soot: 1 };
+    fp = { x: park.f.x, y: ROAD.y, z: park.f.z, ry: Math.PI, armL: A.rest, armR: A.thumb, shades: true, smile: 1, soot: 0.7 };
     dg = { mode: 'sit', x: park.d.x, y: ROAD.y, z: park.d.z, ry: Math.PI };
     cam.pos = vl(V(17.2, 2.4, 10.0), V(17.2, 6.5, 4.0), ease(p)); cam.tgt = V(17.2, 2.4, 14); cam.fov = 48;
   }
   for (const [pp, b] of [[hp, hero], [fp, friend]]) if (b.root.parent === scene && pp.legs !== 'sit') keepOut(pp, 0.46);
   if (dg.mode !== 'carried' && dg.mode !== 'hide') keepOut(dg, 0.38);
   hero.pose(t, hp); friend.pose(t, fp);
-  if (fp.lie) {   // lying on the ground; while rolling, spin around the body's long axis
-    const rollA = n === 'roll' && t > W_ROLE ? (t - W_ROLE) * 7 : 0;
-    friend.body.rotation.set(-Math.PI / 2, rollA, 0, 'XYZ'); friend.body.position.y = 0.42;
-  }
+  if (fp.lie) { const rollA = n === 'roll' && t > W_ROLE ? (t - W_ROLE) * 7 : 0; friend.body.rotation.set(-Math.PI / 2, rollA, 0, 'XYZ'); friend.body.position.y = 0.42; }
+  if (fp.faceDown) { friend.body.rotation.set(Math.PI / 2, 0, 0, 'XYZ'); friend.body.position.y = 0.4; }
+  if (fp.tumble) friend.body.rotation.set(fp.tumble, 0, Math.sin(t * 9) * 0.2, 'XYZ');
+  // extinguisher spray
+  if ((n === 'suit' || n === 'blast') && t > W_APAGAR_P - 0.1) { [hero, friend].forEach((b, i) => { const from = new THREE.Vector3(); b.nozzle.getWorldPosition(from); const tg = BFIRE[(Math.max(0, Math.floor((t - W_APAGAR_P) * 0.9)) * 2 + i * 5) % BFIRE.length]; const to = bw(tg.lx, tg.ly + 0.8, -4.2); updateExtSpray(sprays[i], from, to, t, true); }); }
   if (dg.mode === 'carried') { if (dog.parent !== friend.body) friend.body.add(dog); dog.scale.setScalar(1); dogPose(t, 'carried', 0, -0.28, 0.42, 0); }
   else { if (dog.parent !== scene) scene.add(dog); dogPose(t, dg.mode, dg.x, dg.y, dg.z, dg.ry); }
   const sh = shake * 0.12;
@@ -1367,79 +1374,92 @@ function carState(t) {
 }
 function isIndoorShot(n, lt) {
   if (n === 'home') return lt >= wordAt('você', S.home.start) - S.home.start + 0.4;
+  if (n === 'fire') return lt >= W_FOGO - S.fire.start - 0.6;
+  if (n === 'jump') return lt < 0.85;
   return false;
 }
 
 // ---------- world (outdoors) ----------
 const debrisOn = n => ['high', 'gag1', 'gag1b', 'car2', 'carfloat', 'wait2', 'q1'].includes(n);
-// ---------- 3D explanation: the fire triangle, and how smoke fills a room ----------
+// ---------- 3D explanation: a stove flame, then the oxygen molecules feeding it ----------
 const DIO = V(0, 0, 205);
 const dio = new THREE.Group(); dio.position.copy(DIO); scene.add(dio);
 const dioP = {};
-const EW = k => wordAt(k, T0('explain'));
-const E = { calor: EW('calor'), comb: EW('combustível'), oxi: EW('oxigênio'), tire: EW('tire'), apaga: EW('apaga'), fum: EW('fumaça'), teto: EW('teto'), desce: EW('desce') };
+const EW = (k, after) => wordAt(k, after ?? T0('explain'));
+const E = { calor: EW('calor'), comb: EW('combustível'), oxi: EW('oxigênio') }; E.ar = EW('sem', E.oxi + 0.1); E.apaga = EW('apaga', E.ar); E.fum = EW('fumaça', E.apaga); E.teto = EW('teto', E.fum); E.desce = EW('desce', E.teto);
+const MZ = V(60, 0, 0);   // the molecule zone
 {
-  const fl = new THREE.Mesh(new THREE.PlaneGeometry(110, 60), std(0xc9cdd2, { roughness: 0.9 })); fl.rotation.x = -Math.PI / 2; fl.position.set(4, 0, -10); fl.receiveShadow = true; dio.add(fl);
-  const wall = new THREE.Mesh(new THREE.PlaneGeometry(110, 45), std(0xffffff, { roughness: 1, map: canvasTex(256, 128, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, '#3a2f3f'); gr.addColorStop(1, '#8a6a6a'); g.fillStyle = gr; g.fillRect(0, 0, w, h); }) })); wall.position.set(4, 22, -9); wall.receiveShadow = true; dio.add(wall);
-  // the triangle: three thick bars, each one a thing the fire needs
-  const A = V(-4.2, 0.6, 0), B = V(4.2, 0.6, 0), C = V(0, 7.6, 0);
-  const bar = (p, q, col) => { const g = new THREE.Group(); const len = p.distanceTo(q); const m = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, len, 20), std(col, { roughness: 0.4, emissive: col, emissiveIntensity: 0.15 })); g.add(m); g.position.copy(p).lerp(q, 0.5); g.quaternion.setFromUnitVectors(V(0, 1, 0), q.clone().sub(p).normalize()); m.castShadow = true; dio.add(g); return g; };
-  dioP.heat = bar(A, C, 0xe8443a); dioP.fuel = bar(A, B, 0x8a5a2b); dioP.oxy = bar(B, C, 0x2e9bd6);
-  dioP.oxyHome = dioP.oxy.position.clone();
-  for (const p of [A, B, C]) { const k = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 12), std(0x2b2b2e, { metalness: 0.4 })); k.position.copy(p); dio.add(k); }
-  // a campfire in the middle
-  const logM = std(0x6b4a2b, { roughness: 0.9 });
-  for (let i = 0; i < 4; i++) { const l = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.15, 1.6, 10), logM); l.rotation.set(Math.PI / 2 - 0.25, i * Math.PI / 4, 0); l.position.set(0, 1.25, 0.2); l.castShadow = true; dio.add(l); }
-  for (let i = 0; i < 9; i++) { const st = new THREE.Mesh(new THREE.DodecahedronGeometry(0.18, 0), std(0x8c8780, { flatShading: true })); st.position.set(Math.cos(i / 9 * 6.28) * 0.85, 0.75, 0.2 + Math.sin(i / 9 * 6.28) * 0.85); dio.add(st); }
-  const plat = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.2, 0.6, 20), std(0x9a958c)); plat.position.set(0, 0.3, 0.2); dio.add(plat);
-  dioP.fire = makeFlame(10, 0.5); dioP.fire.position.set(0, 1.3, 0.2); dioP.fire.scale.setScalar(1.8); dio.add(dioP.fire);
-  // a little cutaway room on the right, to show the smoke
-  const R = new THREE.Group(); R.position.set(14, 0, 0); dio.add(R); dioP.room = R;
-  const wallM2 = std(0xf1e6d2, { side: THREE.DoubleSide }), floorM = std(0xb07a48);
-  const f2 = new THREE.Mesh(new THREE.BoxGeometry(7, 0.25, 4), floorM); f2.position.y = 0.12; R.add(f2);
-  const bk = new THREE.Mesh(new THREE.PlaneGeometry(7, 4.2), wallM2); bk.position.set(0, 2.2, -2); R.add(bk);
-  const lw = new THREE.Mesh(new THREE.PlaneGeometry(4, 4.2), wallM2); lw.rotation.y = Math.PI / 2; lw.position.set(-3.5, 2.2, 0); R.add(lw);
-  const rw = lw.clone(); rw.position.x = 3.5; R.add(rw);
-  const cl = new THREE.Mesh(new THREE.PlaneGeometry(7, 4), wallM2); cl.rotation.x = Math.PI / 2; cl.position.y = 4.3; R.add(cl);
-  const stove = new THREE.Mesh(new THREE.BoxGeometry(1.0, 1.0, 0.9), std(0xf4f4f4)); stove.position.set(-2.4, 0.75, -1.4); R.add(stove);
-  dioP.roomFire = makeFlame(6, 0.25); dioP.roomFire.position.set(-2.4, 1.3, -1.4); R.add(dioP.roomFire);
-  const door = new THREE.Mesh(new THREE.BoxGeometry(1.1, 2.3, 0.08), std(0x8a5a32)); door.position.set(2.2, 1.4, -1.96); R.add(door);
-  dioP.roomSmoke = new THREE.Mesh(new THREE.BoxGeometry(6.95, 1, 3.95), new THREE.MeshStandardMaterial({ color: 0x3e4044, transparent: true, opacity: 0.75, depthWrite: false })); R.add(dioP.roomSmoke);
-  // a little bean crawling under the smoke
-  const kid = new THREE.Mesh(new THREE.SphereGeometry(0.35, 14, 10), std(0x7a4421, { roughness: 0.4 })); kid.scale.set(1, 0.75, 1.3); kid.position.set(1.0, 0.55, 0.6); R.add(kid); dioP.kid = kid;
-  dioP.puff = makeSmokeColumn(14); dioP.puff.position.set(0, 1.8, 0.2); dio.add(dioP.puff);
-  dio.traverse(m => { if (m.isMesh) m.receiveShadow = true; }); dio.visible = false;
+  // a kitchen corner with a gas stove
+  const tiles = canvasTex(256, 256, (g, w) => { g.fillStyle = '#e9eef0'; g.fillRect(0, 0, w, w); g.strokeStyle = '#c3ccd1'; g.lineWidth = 4; for (let i = 0; i <= 8; i++) { g.beginPath(); g.moveTo(i * 32, 0); g.lineTo(i * 32, w); g.stroke(); g.beginPath(); g.moveTo(0, i * 32); g.lineTo(w, i * 32); g.stroke(); } }); tiles.wrapS = tiles.wrapT = THREE.RepeatWrapping; tiles.repeat.set(3, 2);
+  const wall = new THREE.Mesh(new THREE.PlaneGeometry(8, 5), std(0xffffff, { map: tiles })); wall.position.set(0, 2.5, -0.6); dio.add(wall);
+  const fl = new THREE.Mesh(new THREE.PlaneGeometry(8, 6), std(0xb07a48)); fl.rotation.x = -Math.PI / 2; fl.position.set(0, 0, 2); dio.add(fl);
+  const stove = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.9, 1.0), std(0xf4f4f4, { roughness: 0.35 })); stove.position.set(0, 0.45, 0); dio.add(stove);
+  const top = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.03, 1.0), std(0x2b2b2e, { roughness: 0.3 })); top.position.set(0, 0.915, 0); dio.add(top);
+  const oven = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 0.5), std(0x1b1b1f, { roughness: 0.1, metalness: 0.4 })); oven.position.set(0, 0.42, 0.502); dio.add(oven);
+  for (const [x, z] of [[-0.4, -0.2], [0.4, -0.2], [-0.4, 0.22], [0.4, 0.22]]) { const b = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.04, 18), std(0x111111)); b.position.set(x, 0.95, z); dio.add(b); }
+  for (let i = 0; i < 4; i++) { const k = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.05, 12), std(0x333333)); k.rotation.x = Math.PI / 2; k.position.set(-0.6 + i * 0.4, 0.78, 0.52); dio.add(k); }
+  const hose = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([V(1.4, 0.05, -0.3), V(1.1, 0.3, -0.5), V(0.9, 0.6, -0.5)]), 20, 0.03, 8), std(0xd9a441)); dio.add(hose);
+  const gas = new THREE.Group(); gas.position.set(1.4, 0, -0.25); dio.add(gas); const gb = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.55, 18), std(0x5b8fd6, { metalness: 0.2 })); gb.position.y = 0.3; gas.add(gb); const gt = new THREE.Mesh(new THREE.SphereGeometry(0.22, 18, 8, 0, Math.PI * 2, 0, Math.PI / 2), gb.material); gt.position.y = 0.57; gas.add(gt);
+  dioP.flame = makeFlame(9, 0.1); dioP.flame.position.set(0.4, 0.97, 0.22); dioP.flame.scale.setScalar(0.32); dio.add(dioP.flame);
+  dioP.flame.children.forEach((c, i) => { if (c.isSprite && i % 2 === 0) c.material.color.set(0x7fb8ff); });
+  // the molecule zone: a big flame, oxygen molecules flowing in, and a glass dome that cuts the air
+  const bg = new THREE.Mesh(new THREE.PlaneGeometry(30, 18), new THREE.MeshBasicMaterial({ map: canvasTex(256, 160, (g, w, h) => { const gr = g.createRadialGradient(w / 2, h * 0.6, 10, w / 2, h * 0.6, w * 0.7); gr.addColorStop(0, '#2b2f5a'); gr.addColorStop(1, '#0b0d1f'); g.fillStyle = gr; g.fillRect(0, 0, w, h); }) })); bg.position.copy(MZ).add(V(0, 3, -4)); dio.add(bg);
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(1.0, 1.1, 0.3, 24), std(0x2b2b2e, { metalness: 0.5 })); base.position.copy(MZ).add(V(0, 0.15, 0)); dio.add(base);
+  const flo = new THREE.Mesh(new THREE.PlaneGeometry(30, 14), std(0x14162e)); flo.rotation.x = -Math.PI / 2; flo.position.copy(MZ).add(V(0, 0, 2)); dio.add(flo);
+  dioP.big = makeFlame(12, 0.45); dioP.big.position.copy(MZ).add(V(0, 0.3, 0)); dioP.big.scale.setScalar(2.4); dio.add(dioP.big);
+  dioP.mols = [];
+  const oM = std(0xe8443a, { roughness: 0.3, emissive: 0x551010, emissiveIntensity: 0.4 }), r = rnd(55);
+  for (let i = 0; i < 34; i++) { const m = new THREE.Group(); for (const sx of [-1, 1]) { const at = new THREE.Mesh(new THREE.SphereGeometry(0.16, 14, 10), oM); at.position.x = sx * 0.13; m.add(at); }
+    m.userData = { a: r() * Math.PI * 2, r0: 3.2 + r() * 2.5, y0: 0.3 + r() * 3.2, o: r(), sp: 0.18 + r() * 0.12, rot: r() * 6 }; dio.add(m); dioP.mols.push(m); }
+  dioP.dome = new THREE.Mesh(new THREE.SphereGeometry(1.7, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0xcfe8ff, transparent: true, opacity: 0.28, roughness: 0.05, metalness: 0.2, side: THREE.DoubleSide, depthWrite: false })); dio.add(dioP.dome);
+  dioP.puff = makeSmokeColumn(14); dioP.puff.position.copy(MZ).add(V(0, 0.8, 0)); dio.add(dioP.puff);
+  dio.visible = false;
 }
 function updateDio(t) {
-  const out = ss(E.tire + 0.2, E.apaga + 0.2, t);
-  dioP.oxy.position.copy(dioP.oxyHome).add(V(4 * out, 1.5 * out, 2 * out));
-  updateFlame(dioP.fire, t, (1 - out) * (1 + 0.1 * Math.sin(t * 3)) * ss(T0('explain'), T0('explain') + 0.6, t));
-  updateSmokeColumn(dioP.puff, t, t > E.apaga - 0.3 && t < E.apaga + 2.5 ? 1 : 0, 4, 0.5);
-  [['heat', E.calor], ['fuel', E.comb], ['oxy', E.oxi]].forEach(([k, at]) => { const m = dioP[k].children[0]; m.material.emissiveIntensity = 0.15 + 0.8 * Math.exp(-Math.pow((t - at - 0.3) / 0.5, 2)); });
-  updateFlame(dioP.roomFire, t, 1);
-  const sm = ss(E.fum, E.teto + 0.5, t) * 0.9 + ss(E.desce - 0.2, E.desce + 1.5, t) * 1.6;
-  dioP.roomSmoke.visible = sm > 0.02; dioP.roomSmoke.scale.y = Math.max(0.01, sm); dioP.roomSmoke.position.y = 4.28 - sm / 2;
+  updateFlame(dioP.flame, t, 1);
+  const cover = ss(E.ar - 0.3, E.ar + 0.5, t), out = ss(E.ar + 0.4, E.apaga + 0.6, t);
+  dioP.dome.position.copy(MZ).add(V(0, lerp(7, 0.3, cover), 0));
+  updateFlame(dioP.big, t, 1 - out);
+  updateSmokeColumn(dioP.puff, t, out > 0.3 && t < E.apaga + 3 ? 1 : 0, 4, 0.4);
+  dioP.mols.forEach(m => { const u = m.userData, life = (t * u.sp + u.o) % 1; let rr = lerp(u.r0, 0.5, life); if (cover > 0.95) rr = Math.max(rr, 1.95 + 0.1 * Math.sin(t * 3 + u.a));
+    m.position.copy(MZ).add(V(Math.cos(u.a + life * 1.2) * rr, lerp(u.y0, 0.9, life * (cover > 0.95 ? 0.2 : 1)), Math.sin(u.a + life * 1.2) * rr * 0.6));
+    m.rotation.set(t * 1.3 + u.rot, t + u.rot, 0); m.scale.setScalar(cover > 0.95 ? 1 : (life > 0.9 ? (1 - life) * 10 : 1)); });
 }
 function dioCam(t) {
-  const keys = [[T0('explain') + 0.2, V(0, 4.5, 17), V(0, 3.6, 0)], [E.calor - 0.3, V(-5.2, 4.8, 8.5), V(-2.3, 4.0, 0)], [E.comb - 0.3, V(0, 1.8, 8.5), V(0, 1.0, 0)], [E.oxi - 0.3, V(5.2, 4.8, 8.5), V(2.3, 4.0, 0)], [E.tire - 0.2, V(1.5, 4.2, 14), V(1.5, 3.5, 0)], [E.fum - 0.4, V(14, 2.8, 10.5), V(14, 2.2, 0)]];
+  const keys = [[T0('explain') + 0.2, V(1.7, 1.9, 3.4), V(0.2, 0.9, 0)], [E.calor - 0.2, V(1.0, 1.35, 1.5), V(0.4, 1.05, 0.2)], [E.comb - 0.2, V(1.9, 1.1, 1.6), V(0.9, 0.6, -0.3)]];
+  if (t > E.oxi - 0.25) { const k = ease(clamp((t - E.oxi + 0.25) / 4)); return { pos: vl(V(0, 2.2, 8.5), V(0, 2.0, 6.8), k).add(MZ).add(DIO), tgt: V(0, 1.5, 0).add(MZ).add(DIO) }; }
   let i = 0; while (i < keys.length - 1 && t > keys[i + 1][0]) i++;
-  const a = keys[i], b = keys[Math.min(i + 1, keys.length - 1)], k = b === a ? 1 : ease(clamp((t - a[0]) / Math.max(0.8, Math.min(1.3, b[0] - a[0]))));
+  const a = keys[i], b = keys[Math.min(i + 1, keys.length - 1)], k = b === a ? 1 : ease(clamp((t - a[0]) / Math.max(0.6, Math.min(1.0, b[0] - a[0]))));
   const pos = i === keys.length - 1 ? a[1].clone() : vl(a[1], b[1], k), tgt = i === keys.length - 1 ? a[2].clone() : vl(a[2], b[2], k);
   return { pos: pos.add(DIO), tgt: tgt.add(DIO) };
 }
 function explain3D(t, g) {
   const lt = t - g.start, a = ss(0, 0.35, lt) * (1 - ss(g.dur - 0.35, g.dur, lt));
   const at = (v) => proj(v.clone().add(DIO));
-  const lab = (txt, v, w0, w1, col) => { if (t < w0 - 0.2 || t > w1) return; const [x, y] = at(v); label(txt, clamp(x, 220, 1060), clamp(y, 90, 560), 40, a * ss(w0 - 0.2, w0 + 0.2, t), col); };
-  const out = ss(E.tire + 0.2, E.apaga + 0.2, t);
-  lab('CALOR', V(-3.4, 4.6, 0.6), E.calor, E.fum - 0.4, '#ff6b5a'); lab('COMBUSTÍVEL', V(0, -0.2, 1.4), E.comb, E.fum - 0.4, '#ffd23f'); lab('OXIGÊNIO', V(3.6 + 4 * out, 4.8 + 1.5 * out, 0.6), E.oxi, E.fum - 0.4, '#5fd0ff');
-  if (t > E.tire - 0.2 && t < E.fum - 0.4) label(t > E.apaga ? 'SEM OXIGÊNIO, O FOGO APAGA' : 'TIRE UMA DELAS...', 640, 120, 44, a * ss(E.tire - 0.2, E.tire + 0.2, t), t > E.apaga ? '#5ff08a' : '#ffffff');
-  if (t > E.fum - 0.2) { const [x, y] = at(V(14, 4.6, 0)); label('A FUMAÇA SOBE...', clamp(x, 260, 1020), 110, 44, a * ss(E.fum - 0.2, E.fum + 0.2, t), '#ffffff'); if (t > E.desce - 0.2) label('...E DESCE RAPIDINHO!', 640, 170, 44, a * ss(E.desce - 0.2, E.desce + 0.2, t), '#ff6b5a'); }
-  chip('O TRIÂNGULO DO FOGO');
+  if (t < E.oxi - 0.25) {
+    if (t > E.calor - 0.2) { const [x, y] = at(V(0.4, 1.25, 0.22)); pointer(x - 20, y - 10, -Math.PI * 0.2, 'CALOR', E.calor - 0.2, t, '#ff6b5a'); }
+    if (t > E.comb - 0.2) { const [x, y] = at(V(1.4, 0.55, -0.25)); pointer(x, y, -Math.PI * 0.75, 'COMBUSTÍVEL: O GÁS', E.comb - 0.2, t); }
+  } else if (t < E.fum - 0.4) {
+    if (t < E.ar + 0.2) { label('OXIGÊNIO DO AR', 640, 110, 48, ss(E.oxi - 0.2, E.oxi + 0.2, t), '#ff6b5a'); label('cada bolinha dupla é uma molécula de O₂', 640, 160, 26, ss(E.oxi, E.oxi + 0.4, t), '#ffffff'); }
+    else label(t > E.apaga ? 'SEM AR, O FOGO APAGA!' : 'TAMPA O AR...', 640, 120, 50, ss(E.ar - 0.1, E.ar + 0.2, t), t > E.apaga ? '#5ff08a' : '#ffffff');
+  } else {
+    if (t < E.teto) { upArrows(t - E.fum, 1000, 'A FUMAÇA SOBE'); }
+    else if (t < E.desce - 0.1) label('TOMA O TETO', 640, 120, 50, ss(E.teto - 0.1, E.teto + 0.2, t), '#ffffff');
+    else { for (let i = 0; i < 3; i++) { const life = ((t - E.desce) * 0.9 + i / 3) % 1; ui.save(); ui.globalAlpha = Math.sin(life * Math.PI); arrowShape(1020 + i * 46, 160 + life * 260, Math.PI / 2, 90, 30, '#ff6b5a'); ui.restore(); } label('E DESCE RAPIDINHO!', 640, 120, 50, ss(E.desce - 0.1, E.desce + 0.2, t), '#ff6b5a'); }
+  }
+  chip('COMO O FOGO FUNCIONA');
 }
 
+function fireLevel(t, n, i) {   // how much each front window burns
+  if (['title', 'home', 'calm'].includes(n) || t < F0) return 0;
+  if (n === 'end') return 0;
+  const B = BFIRE[i];
+  if (n === 'fire') return ss(F0 + B.d * 0.55, F0 + B.d * 0.55 + 0.6, t);
+  if (n === 'suit' || n === 'blast') { const off = W_APAGAR_P + 0.6 + B.out * (TE('blast') - W_APAGAR_P - 1.6); return 1 - ss(off, off + 0.6, t); }
+  return 1;
+}
 function world(t, n, lt) {
-  const gag = GAGN.includes(n), storm = 0, L = ROAD.y;
+  const gag = GAGN.includes(n), storm = 0;
   trees.forEach(tr => { tr.rotation.z = 0.01 * Math.sin(t * 1.3 + tr.userData.ph); tr.rotation.x = 0; });
   canalWater.position.y = 0.2; canalWater.visible = true;
   palms.forEach(pl => pl.visible = false);
@@ -1447,42 +1467,53 @@ function world(t, n, lt) {
   cars.forEach(c => { c.position.copy(c.userData.home); c.position.z = 18.45; c.rotation.set(0, 0.04, 0); });
   updateFlood(t, -1); debris.forEach(d => d.visible = false);
   manCover.position.set(MAN.x, ROAD.y + 0.1, MAN.z); manCover.rotation.set(0, 0, 0); manHole.visible = geyser.visible = swirl.visible = false; boat.visible = false;
-  wireHalves.forEach(w => w.visible = false); wires.children[2].visible = true; sparks.visible = false;
-  updateGulls(t, t, 0); gulls.forEach(g => g.visible = n === 'end' || n === 'q1');
-  // the fire seen from the street: their window, the door blast, then the firefighters
-  const winPos = bw(1.0, 6.9, -4.3);
-  const fStart = W_CORTINA, wTruck = T0('wait2') + 3.5, wWater = wTruck + 1.8;
-  let fac = !gag && t > fStart ? ss(fStart, fStart + 2, t) : 0; if (t > wWater) fac *= 1 - ss(wWater, W_LIBERAREM, t);
-  facadeFire.position.copy(winPos); updateFlame(facadeFire, t, fac * 1.3);
-  facadeSmoke.position.copy(winPos).add(V(0, 0.8, 0)); updateSmokeColumn(facadeSmoke, t, !gag && t > fStart && n !== 'end' ? Math.max(0.35, fac) : 0, 14, 3);
-  doorFire.position.copy(bw(-0.3, 0, -4.15)); doorFire.position.y = STOOP_Y; updateFlame(doorFire, t, n === 'gag2' ? 1.6 * Math.exp(-Math.pow((t - BLAST - 0.15) / 0.35, 2)) : 0);
-  truck.visible = t > T0('wait2') + 0.5 && n !== 'end' && !gag || n === 'end';
-  if (truck.visible) { const k = ss(T0('wait2') + 0.5, wTruck, t); truck.position.set(n === 'end' ? 10.5 : lerp(-26, 10.5, 1 - Math.pow(1 - k, 2)), ROAD.y, 16.6); truck.rotation.set(0, Math.PI, 0);
-    const up = n === 'end' ? 1 : ss(wTruck, wTruck + 1.6, t); truck.userData.ladder.rotation.y = -0.49 * up; truck.userData.arm.rotation.z = -0.62 * up;
-    truck.userData.lights.forEach((l, i) => l.visible = (Math.floor(t * 4) + i) % 2 === 0); }
-  hose.visible = truck.visible && t > wWater && t < W_LIBERAREM + 1.5 && n !== 'end';
-  if (hose.visible) { const a0 = new THREE.Vector3(); truck.userData.nozzle.getWorldPosition(a0); const a1 = winPos.clone();
+  wireHalves.forEach(w => w.visible = false); wires.children[2].visible = true;
+  updateGulls(t, t, 0); gulls.forEach(g => g.visible = n === 'end');
+  // the burning building
+  let total = 0;
+  BFIRE.forEach((B, i) => { const lv = fireLevel(t, n, i); total += lv; const pp = bw(B.lx, B.ly, -4.25); B.f.position.copy(pp); updateFlame(B.f, t + i * 0.37, lv * 1.15); });
+  total /= BFIRE.length;
+  const sm = n === 'end' ? 0.35 : (['suit', 'blast'].includes(n) ? Math.max(0.4, total) : total);
+  roofSmoke.forEach((c, i) => { c.position.copy(bw(-3 + i * 3, 13.2, -1 + i)); updateSmokeColumn(c, t + i, sm * 1.4, 22, 5); });
+  facadeFire.visible = false; updateSmokeColumn(facadeSmoke, t, 0);
+  fireGlow[0].position.copy(bw(-2, 5, -7)); fireGlow[1].position.copy(bw(2, 10, -7)); fireGlow.forEach((l, i) => l.intensity = total * (14 + 3 * Math.sin(t * 9 + i)));
+  // early sparks at the 2nd-floor window (the short circuit)
+  sparks.visible = n === 'fire' && t > W_CURTO - 0.2 && t < F0 + 0.6;
+  if (sparks.visible) { const c0 = bw(-1.125, 4.6, -4.3); for (let i = 0; i < 60; i++) { const a = i * 2.4 + t * 13, r = ((t * 3 + i * 0.37) % 1) * 0.8; sparkP[i * 3] = c0.x + Math.cos(a) * r; sparkP[i * 3 + 1] = c0.y + Math.abs(Math.sin(a * 1.3)) * r; sparkP[i * 3 + 2] = c0.z - Math.abs(Math.sin(a)) * r; } sparkG.attributes.position.needsUpdate = true; }
+  doorFire.position.copy(bw(0, 0, -4.15)); doorFire.position.y = STOOP_Y; updateFlame(doorFire, t, n === 'roll' ? 0.9 : 0);
+  // ember falling on the friend
+  const ef = n === 'roll' && t > EMBER_T - 0.9 && t < EMBER_T; if (ef) { const k = clamp((t - EMBER_T + 0.9) / 0.9); const a0 = bw(-0.6, 7.5, -4.3), a1 = bw(-0.6, 1.6, -7.2); ember.position.copy(a0.lerp(a1, k)); ember.position.x += Math.sin(k * 9) * 0.3; } updateFlame(ember, t, ef ? 0.6 : 0);
+  // glass shards out of their window
+  const sk = n === 'jump' ? t - CRASH - 0.1 : -1;
+  SHARDS.forEach(m => { m.visible = sk > 0 && sk < 2.5 && !isIndoorShot(n, lt); if (!m.visible) return; const u = m.userData, w0 = WINPOS(); const y = w0.y + u.oy + u.vy * sk - 4.9 * sk * sk; m.position.set(w0.x + u.ox + u.vx * sk * 0.6, Math.max(ROAD.y + 0.03, y), w0.z + u.vz * sk * 0.6); m.rotation.set(u.sp * sk, u.sp * 0.7 * sk, 0); });
+  // the fire truck (option 2)
+  const wTruck = W_193 + 2.2; truck.visible = n === 'real' && t > W_193 + 0.5;
+  if (truck.visible) { const k = ss(W_193 + 0.5, wTruck, t); truck.position.set(lerp(-26, 10.5, 1 - Math.pow(1 - k, 2)), ROAD.y, 16.6); truck.rotation.set(0, Math.PI, 0);
+    const up = ss(wTruck, wTruck + 1.4, t); truck.userData.ladder.rotation.y = -0.49 * up; truck.userData.arm.rotation.z = -0.62 * up; truck.userData.lights.forEach((l, i) => l.visible = (Math.floor(t * 4) + i) % 2 === 0); }
+  hose.visible = truck.visible && t > wTruck + 1.4;
+  if (hose.visible) { const a0 = new THREE.Vector3(); truck.userData.nozzle.getWorldPosition(a0); const a1 = WINPOS();
     for (let i = 0; i < hoseN; i++) { const u = ((i / hoseN) + t * 1.4) % 1; const pnt = a0.clone().lerp(a1, u); pnt.y += Math.sin(u * Math.PI) * 1.6; hoseP[i * 3] = pnt.x + Math.sin(i * 7.1) * 0.08; hoseP[i * 3 + 1] = pnt.y + Math.cos(i * 3.3) * 0.08; hoseP[i * 3 + 2] = pnt.z; } hoseG.attributes.position.needsUpdate = true; }
   // sky: late afternoon, sunset at the end
-  const eve = n === 'end' ? 1 : 0.55;
+  const eve = n === 'end' ? 1 : 0.6;
   skyU.top.value.set(0x2f7fd8).lerp(new THREE.Color(0x3b5aa8), eve * 0.8); skyU.bot.value.set(0xbfe6ff).lerp(new THREE.Color(0xffc48a), eve * 0.9);
   skyU.sunCol.value.set(0xfff2c0);
   scene.fog.color.copy(skyU.bot.value); scene.fog.near = 110; scene.fog.far = 460;
-  const inside = APTN.includes(n) || gag || IOSC.includes(n) || isIndoorShot(n, lt);
+  const expApt = n === 'explain' && t > E.fum - 0.4;
+  const inside = APTN.includes(n) || gag || IOSC.includes(n) || isIndoorShot(n, lt) || expApt;
   sun.intensity = inside ? 1.4 : 2.3; sun.color.set(0xfff1d6).lerp(new THREE.Color(0xffb070), eve);
   hemi.intensity = inside ? 1.25 : 0.95;
   clouds.position.x = t * 0.6; clouds.children.forEach(c => c.children.forEach(m => m.material.color.setHex(0xffffff)));
   stormM.opacity = 0; stormG.visible = false;
-  sunSprite.visible = sunHalo.visible = !inside;
+  sunSprite.visible = sunHalo.visible = !inside && n !== 'explain';
   rainbow.visible = false;
-  apt.visible = APTN.includes(n) || gag || (n === 'home' && isIndoorShot(n, lt));
+  apt.visible = APTN.includes(n) || gag || isIndoorShot(n, lt) || expApt;
   interior.visible = IOSC.includes(n); lobbyW.visible = false;
   ioSmoke.forEach(b => b.visible = interior.visible);
   const ed = interior.userData.elevDoors; const shut = n === 'exit2' ? ss(0.2, 1.0, lt) : 1; ed[0].position.x = -0.39 - 0.35 * (1 - shut); ed[1].position.x = 0.39 + 0.35 * (1 - shut);
   interior.userData.elevBtn.material.color.setHex(n === 'exit2' && t > W_ENERGIA ? 0x222222 : 0xffcf33);
-  building.userData.hinge.rotation.y = ['gag1', 'gag1b', 'gag2', 'gag3', 'roll'].includes(n) ? -1.7 : 0;
+  building.userData.hinge.rotation.y = ['roll'].includes(n) ? -1.7 : 0;
   water.visible = false; spray.visible = false;
-  dio.visible = n === 'explain'; if (dio.visible) updateDio(t);
+  dio.visible = n === 'explain' && !expApt; if (dio.visible) updateDio(t);
   return { storm, inside };
 }
 // water in the building lobby
@@ -1763,9 +1794,8 @@ function stamp(t) {
   ui.textAlign = 'center'; ui.textBaseline = 'middle'; outlined(a.txt + ' ✓', 0, 4, 50, '#ffffff', '#0e5a32', 900, 0.14); ui.restore();
 }
 const PLANS = () => [
-  { from: T0('pan1'), to: TE('pan4'), title: 'A PANELA', items: [['JOGAR ÁGUA', T0('pan1') + 0.3, wordAt('não', T0('pan2')), false], ['TAMPAR E DESLIGAR', T0('pan3') + 0.3, wordAt('assim', T0('pan4')), true]] },
-  { from: T0('exit1'), to: TE('crawl'), title: 'SAIR DO PRÉDIO', items: [['ELEVADOR', T0('exit1') + 0.3, wordAt('não', T0('exit2')), false], ['DESCER EM PÉ', T0('exit3') + 0.3, W_RESPIRA, false], ['ABAIXADO, PELA ESCADA', wordAt('abaixa', T0('idea')), wordAt('assim', T0('crawl')), true]] },
-  { from: T0('gag1'), to: TE('wait2'), title: 'O VIDEOGAME', items: [['VOLTAR PRA BUSCAR', T0('gag1') + 0.5, wordAt('não', T0('gag1b')), false], ['LIGAR 193 E ESPERAR LONGE', T0('wait') + 0.5, wordAt('assim', T0('wait2')), true]] },
+  { from: T0('exit1'), to: TE('crawl'), title: 'SAIR DO PRÉDIO', items: [['ELEVADOR', T0('exit1') + 0.3, wordAt('não', T0('exit2')), false], ['ABAIXADO, PELA ESCADA', wordAt('abaixa', T0('idea')), wordAt('assim', T0('crawl')), true]] },
+  { from: T0('suit'), to: TE('real'), title: 'APAGAR O INCÊNDIO', items: [['OPÇÃO 1: VIRAR BOMBEIRO', T0('suit') + 0.6, W_TREINOU, false], ['OPÇÃO 2: LIGAR 193', wordAt('opção', T0('real')), wordAt('assim', T0('real')), true]] },
 ];
 function planCard(t, n) {
   if (['replay', 'replay2'].includes(n)) return;
@@ -1798,43 +1828,44 @@ function overlay(t, g) {
   }
   if (n === 'home') { const c2 = wordAt('cachorro', g.start) - g.start; if (lt > c2) { ui.save(); ui.textAlign = 'center'; const [x, y] = [760, 300]; for (let i = 0; i < 3; i++) { const life = (lt * 0.6 + i / 3) % 1; ui.globalAlpha = 1 - life; outlined('z', x + i * 26 + life * 30, y - life * 110, 30 + i * 8, '#ffffff', '#0a1428', 900, 0.2); } ui.restore(); } }
   if (n === 'fire') {
-    if (t > W_CEL - 0.1 && t < W_OLEO - 0.2) { const [x, y] = headOnScreen(hero, 0.2); pointer(x + 40, y, Math.PI * 0.85, 'CELULAR', W_CEL, t); for (let i = 0; i < 3; i++) { const k = (lt * 3 + i / 3) % 1; ui.save(); ui.globalAlpha = 1 - k; ui.strokeStyle = '#ffd23f'; ui.lineWidth = 5; ui.beginPath(); ui.arc(x + 70, y - 40, 20 + k * 40, -0.8, 0.8); ui.stroke(); ui.restore(); } }
-    if (t > W_OLEO - 0.2 && t < F0) { const [x, y] = proj(AP(3.95, 1.25, -2.13)); pointer(x, y, -Math.PI * 0.75, 'ÓLEO MUITO QUENTE', W_OLEO, t, '#ff6b5a'); }
-    if (t > F0) { badge('⚠ INCÊNDIO!', ss(F0, F0 + 0.3, t), '#c62828'); if (t < F0 + 1.0) { const [x, y] = proj(AP(3.95, 1.6, -2.13)); ui.save(); ui.textAlign = 'center'; ui.translate(x - 60, Math.max(120, y - 80)); const s2 = pop(t - F0, 0.2); ui.scale(s2, s2); outlined('FWOOSH!', 0, 0, 70, '#ffd23f', '#c62828', 900, 0.18); ui.restore(); } }
+    if (t > W_CURTO - 0.2 && t < W_MINUTOS - 0.3) { const [x, y] = proj(bw(-1.125, 4.6, -4.3)); pointer(x, y, -Math.PI * 0.8, 'CURTO-CIRCUITO', W_CURTO - 0.2, t, '#ffd23f'); }
+    if (t > F0) badge('⚠ INCÊNDIO NO PRÉDIO!', ss(F0, F0 + 0.3, t), '#c62828');
+    if (t > W_MINUTOS - 0.3 && t < W_FOGO - 0.6) label('O PRÉDIO INTEIRO!', 760, 150, 54, ss(W_MINUTOS - 0.3, W_MINUTOS + 0.1, t), '#ff8a2a');
+    if (t > W_FOGO - 0.6) { const [x, y] = proj(AP(4.4, 0.3, 2.9)); pointer(x - 20, y - 20, -Math.PI * 0.2, 'FUMAÇA!', W_FOGO - 0.6, t, '#ff6b5a'); }
   }
-  if (n === 'friend1') { badge('⚠ INCÊNDIO!', 1, '#c62828'); const k = lt - 0.2; if (k > 0) { const [hx, hy] = headOnScreen(friend); questionMarks(k, clamp(hx, 300, 980), clamp(hy, 300, 420)); } }
-  if (n === 'pan1') { const [x, y] = proj(AP(3.95, 1.3, -2.13)); pointer(x, y, -Math.PI * 0.8, 'PANELA', g.start + 0.4, t, '#ff6b5a'); }
-  if (n === 'pan2' || n === 'panboom') { badge('✗ PÉSSIMA IDEIA', n === 'pan2' ? ss(0, 0.3, lt) : 1, '#c62828'); const wv = wordAt('vapor', T0('pan2')); if (t > wv - 0.2) label('ÁGUA + ÓLEO QUENTE = BOLA DE FOGO', 700, 150, 40, ss(wv - 0.2, wv + 0.2, t), '#ffd23f');
-    if (n === 'panboom' && lt > 0.45 && lt < 1.6) { ui.save(); ui.textAlign = 'center'; ui.translate(700, 330); const s2 = pop(lt - 0.45, 0.2); ui.scale(s2, s2); ui.rotate(-0.08); outlined('FWOOOM!', 0, 0, 96, '#ffd23f', '#c62828', 900, 0.17); ui.restore(); } }
-  if (n === 'replay') vhs(t, lt);
-  if (n === 'pan3') { if (t > W_TAMPO - 0.6 && t < W_DESLIGO - 0.2) { const [x, y] = proj(AP(4.05, 1.15, -1.2)); pointer(x, y, -Math.PI * 0.75, 'TAMPA', W_TAMPO - 0.6, t); } if (t > W_DESLIGO - 0.2) { const [x, y] = proj(AP(3.62, 0.9, -2.13)); pointer(x, y, Math.PI * 0.9, 'DESLIGA O GÁS', W_DESLIGO - 0.2, t); } }
-  if (n === 'pan4') { if (t > W_APAGA && t < W_APAGA + 1.5) label('SEM OXIGÊNIO, O FOGO APAGA', 700, 160, 40, ss(W_APAGA, W_APAGA + 0.3, t), '#5ff08a');
-    if (t > W_CORTINA - 0.3 && t < W_SAIR) { const [x, y] = proj(AP(3.95, 1.8, -3.3)); pointer(x, y, -Math.PI * 0.85, 'A CORTINA!', W_CORTINA - 0.3, t, '#ff6b5a'); }
-    if (t > W_SAIR - 0.2) label('HORA DE SAIR!', 640, 150, 54, ss(W_SAIR - 0.2, W_SAIR + 0.2, t), '#ffd23f'); }
-  if (n === 'exit1') { const [x, y] = proj(V(IO.x - 6, IO.y + 10.4, IO.z - 0.9)); pointer(x, y, Math.PI * 0.8, 'ELEVADOR', g.start + 0.4, t); }
+  if (n === 'friend1') { badge('⚠ INCÊNDIO NO PRÉDIO!', 1, '#c62828'); const k = lt - 0.2; if (k > 0) { const [hx, hy] = headOnScreen(friend); questionMarks(k, clamp(hx, 300, 980), clamp(hy, 300, 420)); } }
+  if (n === 'exit1') { const [x, y] = proj(V(IO.x - 6, IO.y + 10.4, IO.z - 0.9)); pointer(x, y, Math.PI * 0.8, 'ELEVADOR', g.start + 0.3, t); }
   if (n === 'exit2') { badge('✗ PÉSSIMA IDEIA', ss(0, 0.3, lt), '#c62828'); if (t > W_ENERGIA) { const k = t - W_ENERGIA; if (k < 0.8 && Math.floor(k * 12) % 2 === 0) { ui.fillStyle = 'rgba(0,0,0,0.6)'; ui.fillRect(0, 0, W, H); } label('SEM ENERGIA = PRESO NA FUMAÇA', 640, 160, 42, ss(W_ENERGIA, W_ENERGIA + 0.3, t), '#ff6b5a'); smoke(640, 420, ((t - W_ENERGIA) * 0.5) % 0.9, 12); } }
-  if (n === 'exit3' || n === 'exit4') { if (n === 'exit4') { upArrows(lt, 1020, 'FUMAÇA SOBE'); if (t > W_RESPIRA - 0.3) { const [x, y] = headOnScreen(hero, 1.0); ui.save(); ui.textAlign = 'center'; for (let i = 0; i < 2; i++) { const a2 = ss(0.2 + i * 0.5, 0.4 + i * 0.5, t - W_RESPIRA + 0.3); if (a2 <= 0) continue; ui.globalAlpha = a2; outlined('COF!', x + 80 + i * 90, y - 40 - i * 30, 46, '#ffffff', '#0a1428', 900, 0.2); } ui.restore(); } } }
   if (n === 'idea') { const [x, y] = headOnScreen(hero, 1.0); lightbulb(x, y - 70, lt); }
   if (n === 'crawl') {
     const items = [['1', 'PANO NO NARIZ', W_PANO], ['2', 'ABAIXADO', wordAt('abaixado', g.start)], ['3', 'PELA ESCADA', W_ESCADA]];
     items.forEach(([k, txt, at], i) => { const a = ss(at - 0.1, at + 0.2, t); if (a <= 0) return; ui.save(); ui.globalAlpha = a; ui.translate(860 + (1 - a) * 80, 120 + i * 82); ui.fillStyle = 'rgba(10,20,40,0.8)'; rr(0, 0, 370, 68, 18); ui.fill(); ui.fillStyle = '#1e9e57'; ui.beginPath(); ui.arc(38, 34, 25, 0, Math.PI * 2); ui.fill(); ui.textBaseline = 'middle'; ui.textAlign = 'center'; outlined(k, 38, 36, 28, '#fff', '#1e9e57', 900, 0.05); ui.textAlign = 'left'; outlined(txt, 76, 36, 30, '#ffd23f', '#0a1428', 900, 0.12); ui.restore(); });
   }
-  if (n === 'gag1b') { const k = ss(0.6, 1.4, lt); if (k > 0.2) { const [x, y] = headOnScreen(hero, 0.9); ui.save(); ui.textAlign = 'center'; ui.translate(x, Math.max(90, y - 110)); const s2 = pop(lt - 0.8, 0.25); ui.scale(s2, s2); outlined('NÃÃÃO!', 0, 0, 60, '#ff6b5a', '#0a1428', 900, 0.18); ui.restore(); } }
-  if (n === 'gag2' && t > BLAST) { const k = t - BLAST; if (k < 0.15) { ui.fillStyle = `rgba(255,190,90,${0.6 * (1 - k / 0.15)})`; ui.fillRect(0, 0, W, H); } if (k < 1.4) { ui.save(); ui.textAlign = 'center'; ui.translate(640, 160); const s2 = pop(k, 0.2); ui.scale(s2, s2); ui.rotate(-0.08); outlined('FWOOMP!', 0, 0, 90, '#ffd23f', '#c62828', 900, 0.17); ui.restore(); } if (k > 0.6) { const [x, y] = headOnScreen(friend, 0.4); smoke(x, y, Math.min(0.85, (k - 0.6) * 0.5), 8); } }
-  if (n === 'gag3') { const [x, y] = headOnScreen(friend, 1.0); for (let i = 0; i < 4; i++) { const life = (lt * 0.7 + i / 4) % 1; ui.fillStyle = `rgba(90,90,90,${0.5 * (1 - life)})`; ui.beginPath(); ui.arc(x + Math.sin(lt * 3 + i) * 12, y - life * 120, 10 + life * 18, 0, Math.PI * 2); ui.fill(); } }
   if (n === 'roll') {
+    if (t > EMBER_T - 0.9 && t < EMBER_T + 0.6) { const [x, y] = headOnScreen(friend, 0.6); pointer(x, y - 20, Math.PI * 0.5, 'BRASA!', EMBER_T - 0.9, t, '#ff6b5a'); }
     if (t > W_CORRER - 0.1 && t < W_PARE) label('✗ CORRER ALIMENTA O FOGO', 640, 150, 42, ss(W_CORRER - 0.1, W_CORRER + 0.2, t), '#ffffff', '#c62828');
-    const items = [['PARE', W_PARE], ['DEITE', W_DEITE], ['ROLE', W_ROLE]];
-    items.forEach(([txt, at], i) => { const a = ss(at - 0.1, at + 0.2, t); if (a <= 0) return; ui.save(); ui.globalAlpha = a; ui.translate(700 + i * 210, 130); const s2 = pop(t - at + 0.1, 0.25); ui.scale(s2, s2); ui.fillStyle = '#1e9e57'; rr(-95, -38, 190, 76, 20); ui.fill(); ui.lineWidth = 5; ui.strokeStyle = '#fff'; ui.stroke(); ui.textAlign = 'center'; ui.textBaseline = 'middle'; outlined(txt + (i < 2 ? '' : '!'), 0, 3, 42, '#ffffff', '#0e5a32', 900, 0.12); ui.restore(); });
+    [['PARE', W_PARE], ['DEITE', W_DEITE], ['ROLE', W_ROLE]].forEach(([txt, at], i) => { const a = ss(at - 0.1, at + 0.2, t); if (a <= 0) return; ui.save(); ui.globalAlpha = a; ui.translate(700 + i * 210, 130); const s2 = pop(t - at + 0.1, 0.25); ui.scale(s2, s2); ui.fillStyle = '#1e9e57'; rr(-95, -38, 190, 76, 20); ui.fill(); ui.lineWidth = 5; ui.strokeStyle = '#fff'; ui.stroke(); ui.textAlign = 'center'; ui.textBaseline = 'middle'; outlined(txt + (i < 2 ? '' : '!'), 0, 3, 42, '#ffffff', '#0e5a32', 900, 0.12); ui.restore(); });
   }
-  if (n === 'wait2') { const w193 = wordAt('três', g.start), wD = wordAt('volte', g.start);
-    const a = ss(g.start + 0.2, g.start + 0.6, t) * (1 - ss(w193 + 1.0, w193 + 1.4, t)); if (a > 0) { ui.save(); ui.globalAlpha = a; ui.translate(1010, 330); const s = pop(t - g.start - 0.2, 0.35); ui.scale(s, s); ui.fillStyle = '#1b1b1f'; rr(-120, -230, 240, 440, 34); ui.fill(); ui.fillStyle = '#c62828'; rr(-104, -200, 208, 360, 18); ui.fill(); ui.textAlign = 'center'; ui.textBaseline = 'middle'; outlined('193', 0, -90, 92, '#ffffff', '#0a1428', 900, 0.12); outlined('BOMBEIROS', 0, -10, 28, '#ffffff', '#0a1428', 900, 0.15); ui.fillStyle = '#2ecc71'; ui.beginPath(); ui.arc(0, 100, 40, 0, Math.PI * 2); ui.fill(); ui.restore(); }
-    if (t > w193 + 1.2) badge('ESPERE LONGE DO PRÉDIO', ss(w193 + 1.2, w193 + 1.5, t), '#1557b0');
-    if (t > wD - 0.2) label('SÓ VOLTE QUANDO LIBERAREM', 860, 120, 40, ss(wD - 0.2, wD + 0.2, t), '#5ff08a'); }
-  if (n === 'q1') { ui.save(); ui.translate(940, 200); const s = pop(lt - 0.2); ui.scale(s, s); ui.rotate(0.05); ui.textAlign = 'center'; outlined('SEGUIR AS DICAS ✓', 0, 0, 50, '#5ff08a', '#0a1428', 900, 0.2); ui.restore(); }
-  if (['q2', 'q3', 'q4'].includes(n)) { ui.save(); ui.translate(330, 200); const s = pop(t - T0('q2') - 0.2); ui.scale(s, s); ui.rotate(-0.05); ui.textAlign = 'center'; outlined('FRITAR OLHANDO O CELULAR', 0, 0, 44, '#ffd23f', '#0a1428', 900, 0.2); ui.restore(); }
-  if (n === 'rise') upArrows(lt, 1020, '');
-  if (n === 'boom' && t > BOOM_T) { const k = t - BOOM_T; if (k < 1.3) { ui.save(); ui.textAlign = 'center'; ui.translate(640, 170); const s2 = pop(k, 0.18); ui.scale(s2, s2); ui.rotate(-0.08); outlined('FWOOOM!', 0, 0, 100, '#ffd23f', '#c62828', 900, 0.17); ui.restore(); } if (k > 1.6) { ui.save(); ui.textAlign = 'center'; for (let i = 0; i < 2; i++) { const a2 = ss(1.6 + i * 0.5, 1.8 + i * 0.5, k); if (a2 <= 0) continue; ui.globalAlpha = a2; outlined('cof', 520 + i * 200, 250 - i * 40, 50, '#ffffff', '#0a1428', 900, 0.2); } ui.restore(); } }
+  if (n === 'suit' || n === 'blast') {
+    if (n === 'suit') badge('★ OPÇÃO 1: A MAIS LEGAL', fadeIn, '#c25a12');
+    if (t > W_VESTIR + 0.15 && t < W_VESTIR + 1.4) { ui.save(); ui.textAlign = 'center'; ui.translate(640, 140); const s2 = pop(t - W_VESTIR - 0.15, 0.25); ui.scale(s2, s2); ui.rotate(-0.05); outlined('TCHARAM!', 0, 0, 84, '#ffd23f', '#c62828', 900, 0.17); ui.restore(); for (let i = 0; i < 12; i++) { const an = i / 12 * Math.PI * 2 + t * 2, k = t - W_VESTIR; ui.save(); ui.globalAlpha = Math.max(0, 1 - k); ui.fillStyle = '#ffe14d'; ui.translate(640 + Math.cos(an) * (120 + k * 260), 360 + Math.sin(an) * (80 + k * 160)); ui.rotate(an); ui.fillRect(-3, -14, 6, 28); ui.restore(); } }
+    if (t > W_EXT && t < W_APAGAR_P - 0.1) { const [x, y] = headOnScreen(hero, -0.3); pointer(x + 30, y, Math.PI * 0.85, 'EXTINTOR', W_EXT, t, '#ff6b5a'); }
+    if (n === 'blast' && lt > g.dur - 1.6) label('PRÉDIO APAGADO!', 820, 150, 60, ss(g.dur - 1.6, g.dur - 1.3, lt), '#5ff08a');
+  }
+  if (n === 'real') {
+    badge('★ OPÇÃO 2: A DA VIDA REAL', fadeIn, '#1557b0');
+    if (t > W_TREINOU - 0.2 && t < W_LONGE - 0.2) label('SÓ BOMBEIRO TREINADO FAZ ISSO!', 830, 165, 40, ss(W_TREINOU - 0.2, W_TREINOU + 0.2, t), '#ffffff', '#c62828');
+    if (t > W_LONGE - 0.2 && t < W_193) label('FIQUE LONGE DO PRÉDIO', 830, 165, 44, ss(W_LONGE - 0.2, W_LONGE + 0.2, t), '#ffd23f');
+    const a = ss(W_193 - 0.2, W_193 + 0.2, t) * (1 - ss(W_193 + 1.2, W_193 + 1.6, t)); if (a > 0) { ui.save(); ui.globalAlpha = a; ui.translate(1010, 330); const s = pop(t - W_193 + 0.2, 0.35); ui.scale(s, s); ui.fillStyle = '#1b1b1f'; rr(-120, -230, 240, 440, 34); ui.fill(); ui.fillStyle = '#c62828'; rr(-104, -200, 208, 360, 18); ui.fill(); ui.textAlign = 'center'; ui.textBaseline = 'middle'; outlined('193', 0, -90, 92, '#ffffff', '#0a1428', 900, 0.12); outlined('BOMBEIROS', 0, -10, 28, '#ffffff', '#0a1428', 900, 0.15); ui.fillStyle = '#2ecc71'; ui.beginPath(); ui.arc(0, 100, 40, 0, Math.PI * 2); ui.fill(); ui.restore(); }
+  }
+  if (n === 'q1') { ui.save(); ui.translate(940, 200); const s = pop(lt - 0.2); ui.scale(s, s); ui.rotate(0.05); ui.textAlign = 'center'; outlined('SEGUIR AS DICAS ✓', 0, 0, 46, '#5ff08a', '#0a1428', 900, 0.2); ui.restore(); const w2 = wordAt('ou', g.start); if (t > w2) { ui.save(); ui.translate(330, 280); const s = pop(t - w2); ui.scale(s, s); ui.rotate(-0.05); ui.textAlign = 'center'; outlined('O CAMINHO MAIS RÁPIDO?', 0, 0, 40, '#ffd23f', '#0a1428', 900, 0.2); ui.restore(); } }
+  if (n === 'q3') { const [x, y] = proj(AP(2.3, 2.1, -3.45)); pointer(x, y, -Math.PI * 0.2, 'JANELA', g.start + 0.4, t); }
+  if (n === 'jump') {
+    if (t > CRASH - 0.05 && t < CRASH + 0.9) { const k = t - CRASH; if (k < 0.12 && k > 0) { ui.fillStyle = `rgba(255,255,255,${0.7 * (1 - k / 0.12)})`; ui.fillRect(0, 0, W, H); } ui.save(); ui.textAlign = 'center'; ui.translate(640, 150); const s2 = pop(Math.max(0, k), 0.18); ui.scale(s2, s2); ui.rotate(-0.08); outlined('CRASH!', 0, 0, 96, '#bfe6ff', '#0a1428', 900, 0.17); ui.restore(); }
+    if (t > CRASH + 0.4 && t < LAND) { ui.save(); ui.textAlign = 'center'; ui.globalAlpha = 0.95; outlined('AAAAAH!', 760 + Math.sin(t * 30) * 6, 200, 64, '#ffffff', '#c62828', 900, 0.18); ui.restore(); }
+    if (t > LAND && t < LAND + 1.2) { ui.save(); ui.textAlign = 'center'; ui.translate(640, 200); const s2 = pop(t - LAND, 0.18); ui.scale(s2, s2); ui.rotate(-0.1); outlined('SPLAT!', 0, 0, 100, '#ffd23f', '#0a1428', 900, 0.17); ui.restore(); }
+  }
+  if (n === 'gag3') { const [x, y] = headOnScreen(friend, 0.2); for (let i = 0; i < 4; i++) { const life = (lt * 0.7 + i / 4) % 1; ui.fillStyle = `rgba(90,90,90,${0.5 * (1 - life)})`; ui.beginPath(); ui.arc(x + Math.sin(lt * 3 + i) * 12, y - 60 - life * 120, 10 + life * 18, 0, Math.PI * 2); ui.fill(); } }
   if (n === 'end') {
     const w1 = wordAt('sobrevivi', wordAt('comente', g.start) + 0.1), w2 = wordAt('não', w1 + 0.1);
     const bubble = (x, y, txt, col, at, ic) => { const a = ss(at - 0.2, at + 0.15, t); if (a <= 0) return; ui.save(); ui.globalAlpha = a; ui.translate(x, y); const s2 = pop(t - at + 0.2, 0.3); ui.scale(s2, s2); ui.rotate(Math.sin((t - at) * 3) * 0.03);
@@ -1848,7 +1879,7 @@ function overlay(t, g) {
   }
   planCard(t, n); redX(t); stamp(t); confetti(t);
   if (n !== 'title' && !NOCAP) caption(t);
-  if (flash > 0) { ui.fillStyle = `rgba(255,200,120,${flash})`; ui.fillRect(0, 0, W, H); }
+  if (flash > 0) { ui.fillStyle = `rgba(255,240,210,${flash})`; ui.fillRect(0, 0, W, H); }
   if (t < 0.5) { ui.fillStyle = `rgba(0,0,0,${1 - t / 0.5})`; ui.fillRect(0, 0, W, H); }
   const fo = ss(TL.total - 1.0, TL.total, t); if (fo > 0) { ui.fillStyle = `rgba(0,0,0,${fo})`; ui.fillRect(0, 0, W, H); }
 }

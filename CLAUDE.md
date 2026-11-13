@@ -1,7 +1,7 @@
 # Guia de Sobrevivência — série de animação 3D (canal do usuário)
 
 Série de vídeos curtos em 3D, em **português do Brasil**, com personagens grãos de café ensinando a sobreviver a desastres, com humor.
-Episódios prontos: **EP1 Tsunami** (`tsunami/`) e **EP2 Terremoto** (`terremoto/`). **EP3 Enchente** (`enchente/`) pronto (2:33, cidade, formato de "planos" certos e errados com o bordão "Assim, a enchente não chega"). O final do EP3 pede comentário ("sobrevivi" / "não consegui") em vez de anunciar o próximo episódio; **EP4 Incêndio** (`incendio/`) em produção: roteiro, cena 3D e storyboard (https://claude.ai/artifact/Le5ve7Aw9Zc5RYAbBzgxmk) prontos com voz provisória; falta gerar as vozes do ElevenLabs (≈1.800 créditos) e renderizar.
+Episódios prontos: **EP1 Tsunami** (`tsunami/`) e **EP2 Terremoto** (`terremoto/`). **EP3 Enchente** (`enchente/`) pronto (2:33, cidade, formato de "planos" certos e errados com o bordão "Assim, a enchente não chega"). O final do EP3 pede comentário ("sobrevivi" / "não consegui") em vez de anunciar o próximo episódio; **EP4 Incêndio** (`incendio/`) em produção (versão 2: o prédio inteiro pega fogo por um curto-circuito; opção 1 "a mais legal" = vestir roupa de bombeiro e apagar com extintores, opção 2 "a da vida real" = ligar 193; final com o amigo pulando da janela; **no máximo 2 minutos**). Roteiro, cena 3D e storyboard (https://claude.ai/artifact/Le5ve7Aw9Zc5RYAbBzgxmk) prontos com voz provisória; falta gerar as vozes do ElevenLabs (≈1.200 créditos) e renderizar.
 
 ## Como trabalhar com o usuário
 - Fale sempre em português do Brasil, simples e direto: o usuário não é técnico. Explique o que mudou no vídeo, não o código.
@@ -72,6 +72,8 @@ Quadros: 1280×720, 30 fps. Use o scratchpad para quadros e arquivos temporário
 
 ## EP4 Incêndio — notas
 - Mesmo formato de "planos" do EP3 (`PLANS`, `ASSIMS`, `WRONGS`), na mesma cidade. Apartamento agora no 3º andar (a janela mostra a rua desse andar).
+- O usuário pediu: incêndio grande vindo do prédio (não de frigideira), explicação com fogão + tela de moléculas de oxigênio (sem "caixas"), roupa de bombeiro com extintores como opção 1 e 193 como opção 2, e episódios mais curtos (até 2 min).
+- Prédio em chamas: `BFIRE` (uma chama por janela, `fireLevel`), `roofSmoke`, `fireGlow`; estilhaços `SHARDS`; roupa de bombeiro `suit`/`ext` no `Bean`; jato dos extintores `sprays`; explicação `dio` (fogão + zona das moléculas `MZ` + fumaça no apartamento).
 - Fogo/fumaça: `makeFlame`/`updateFlame` (sprites com luz), `makeSmokeColumn`; cozinha com panela, tampa, botão do fogão, cortina (`fireState`); fumaça no teto (`aptParts.smoke`) e nos andares do prédio (`ioSmoke`); fogo na janela da fachada e na porta (`facadeFire`, `doorFire`); caminhão de bombeiros com escada e jato d'água (`truck`, `hose`); maquete do triângulo do fogo (`dio`, `dioCam`).
 - Áudio final: `TTS=eleven TIGHT=1 python3 build_audio.py`, `align_words.py`, `TTS=eleven TIGHT=1 python3 build_audio.py` de novo (efeitos usam os tempos das palavras), quadros de teste, render.
 

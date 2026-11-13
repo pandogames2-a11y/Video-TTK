@@ -337,59 +337,75 @@ def rewind(seg_name):
     put(fx, band(rng.standard_normal(n), 2000, 7000) * (0.5 + 0.5 * np.sign(np.sin(2 * np.pi * 14 * x))) * 0.12 + np.sin(2 * np.pi * np.cumsum(900 + 500 * np.sin(2 * np.pi * 3 * x)) / SR) * 0.05, r + 0.15)
     scratch(r, 0.3); slide(TE(seg_name) - 0.35, 1500, 300, 0.35, 0.08)
 
-F0 = wT('pega', 'fire') + 0.3                 # the pan catches fire
+def glassbreak(at, amp=0.3):
+    n = int(0.9 * SR); x = np.arange(n) / SR
+    put(fx, band(rng.standard_normal(n), 3000, 12000) * np.exp(-x * 6) * amp, at)
+    for i in range(14):
+        m = int(0.06 * SR); y = np.arange(m) / SR; put(fx, np.sin(2 * np.pi * (3000 + rng.random() * 4000) * y) * np.exp(-y * 50) * amp * 0.5, at + rng.random() * 0.6)
+def zap(at, dur=0.6, amp=0.14):
+    n = int(dur * SR); x = np.arange(n) / SR
+    s = np.sign(np.sin(2 * np.pi * 120 * x)) * (0.5 + 0.5 * (rng.random(n) > 0.6))
+    put(fx, (lowp(s, 3000) * 0.7 + band(rng.standard_normal(n), 2000, 8000) * 0.5) * (0.4 + 0.6 * (np.sin(2 * np.pi * 17 * x) > 0)) * np.minimum(1, (dur - x) * 10) * amp, at)
+def spray(a, b, amp=0.07):
+    e = gate(a, b, 0.15); fx[:] += band(noise, 2500, 9000) * e * amp
+def brass(at, notes, amp=0.06, d=0.9):
+    for m in notes:
+        f = 440 * 2 ** ((m - 69) / 12); n = int(d * SR); x = np.arange(n) / SR
+        put(mus, (np.sign(np.sin(2 * np.pi * f * x)) * 0.3 + np.sin(2 * np.pi * f * x) * 0.7) * np.minimum(1, x * 15) * np.exp(-x * 1.5) * amp, at)
+
+F0 = wT('incêndio', 'fire')               # the fire breaks out downstairs
 room = lowp(noise, 120) * 0.03 + band(noise, 2000, 6000) * 0.003
 amb += room * (1 - gate(T0('explain'), TE('explain'), 0.5))
-uke(0.3, F0, 0.04)
-for at in [3.0, 9.5]: put(fx, np.sin(2 * np.pi * np.cumsum(np.linspace(2600, 2100, int(0.25 * SR))) / SR) * np.sin(np.pi * np.arange(int(0.25 * SR)) / (0.25 * SR)) * 0.02, at)
-sizzle(T0('home') + 0.5, F0, 0.03)
-ringtone(wT('celular', 'fire'))
-sizzle(F0 - 1.2, F0, 0.08); fwoosh(F0, 0.55)
-fire_bed(F0, T0('explain'), 0.22); fire_bed(T0('pan1'), TE('pan4') - 2, 0.22)
-alarm(F0 + 0.8, T0('explain') - 0.2); alarm(T0('pan1'), T0('crawl') + 3)
+uke(0.3, F0 - 0.5, 0.04)
+chip(0.3, F0 - 0.5, 0.018)
+for k in range(3): zap(wT('curto', 'fire') + k * 0.25, 0.3, 0.12)
+fwoosh(F0, 0.55); glassbreak(wT('minutos', 'fire'), 0.18); fwoosh(wT('prédio', 'fire'), 0.5, 1.6)
+fire_bed(F0, T0('explain'), 0.25); fire_bed(T0('exit1'), TE('blast') - 1.0, 0.22); fire_bed(T0('real'), TE('gag3'), 0.12)
+alarm(F0 + 0.8, T0('explain') - 0.2); alarm(T0('exit1'), TE('crawl'))
 drums(T0('friend1'), TE('friend1'), 150, 0.12)
 # explanation
 pad(T0('explain'), TE('explain'), [45, 52, 57, 60], 0.022)
 for at in np.arange(T0('explain') + 0.5, TE('explain') - 0.5, 60 / 90): put(mus, pluck(81, 0.15, 0.02, 30), at)
-for w_ in ['calor', 'combustível', 'oxigênio', 'tire', 'fumaça']: swoosh(wT(w_, 'explain') - 0.3, 0.07)
-fwoosh(wT('calor', 'explain'), 0.25)
-put(fx, lowp(rng.standard_normal(int(0.8 * SR)), 500) * np.exp(-np.arange(int(0.8 * SR)) / SR * 5) * 0.2, wT('apaga', 'explain'))
-# plans
-APPEAR = [T0('pan1') + 0.3, T0('pan3') + 0.3, T0('exit1') + 0.3, T0('exit3') + 0.3, wT('abaixa', 'idea'), T0('gag1') + 0.5, T0('wait') + 0.5]
+for w_ in ['calor', 'combustível', 'oxigênio', 'fumaça']: swoosh(wT(w_, 'explain') - 0.3, 0.07)
+clank(wT('sem', 'explain') + 0.1, 0.18); put(fx, lowp(rng.standard_normal(int(0.8 * SR)), 500) * np.exp(-np.arange(int(0.8 * SR)) / SR * 5) * 0.2, wT('apaga', 'explain'))
+for k in range(12): bloop(wT('oxigênio', 'explain') + 0.2 + k * 0.2, 400 + 30 * k, 700, 0.025, 0.1)
+fwoosh(wT('calor', 'explain'), 0.2)
+# round 1: getting out
+APPEAR = [T0('exit1') + 0.3, wT('abaixa', 'idea'), T0('suit') + 0.6, wT('opção', 'real')]
 for at in APPEAR: popin(at)
-for at in [wT('não', 'pan2'), wT('não', 'exit2'), wT('respira', 'exit4'), wT('não', 'gag1b')]: wrong(at)
-for sc in ['pan4', 'crawl', 'wait2']: correct(wT('assim', sc))
-# round 1: water on the pan (bad) -> fireball -> replay; lid + gas off (good)
-splash(T0('panboom') + 0.3, 0.3); sizzle(T0('panboom') + 0.35, T0('panboom') + 1.0, 0.18); fwoosh(T0('panboom') + 0.45, 0.8, 1.6)
-rewind('replay')
-clank(wT('tampo', 'pan3') + 0.2, 0.3); clack(wT('desligo', 'pan3') + 0.3, 0.3)
-put(fx, lowp(rng.standard_normal(int(0.6 * SR)), 400) * np.exp(-np.arange(int(0.6 * SR)) / SR * 6) * 0.15, wT('apaga', 'pan4'))
-fwoosh(wT('cortina', 'pan4'), 0.35)
-# round 2: elevator (bad), running upright (bad), crawl (good)
+wrong(wT('não', 'exit2'))
+for sc in ['crawl', 'real']: correct(wT('assim', sc))
 ding(T0('exit1') + 0.3, 0.06, (1046, 1318))
 slide(wT('energia', 'exit2'), 900, 200, 0.8, 0.1)
-cough(wT('respira', 'exit4'), 0.16, 4)
+cough(wT('caixa', 'exit2'), 0.12, 3)
 ding(VS('idea') - 0.15, 0.12, (1568, 2093))
-for k, at in enumerate(np.arange(T0('crawl') + 0.4, TE('crawl') - 1.0, 0.28)): step(at, 0.06)
-# round 3: the friend goes back for his video game
-fire_bed(T0('gag1'), TE('gag3'), 0.15)
-g0 = T0('gag2')
-for k, at in enumerate(np.arange(g0 + 0.1, g0 + 0.9, 0.12)): step(at, 0.1)
-fwoosh(g0 + 1.4, 0.6); slide(g0 + 2.0, 1200, 300, 0.5, 0.1); thud(g0 + 2.5, 0.25)
-trombone(TE('gag2') - 0.9, 0.06)
-cough(T0('gag3') + 0.1, 0.12, 2)
-for k in range(4): thud(wT('role', 'roll') + 0.2 + k * 0.3, 0.12)
-fwoosh(wT('correr', 'roll'), 0.2)
-dtmf(wT('cento', 'wait2'), '193')
-siren(T0('wait2') + 2.0, TE('q1'), 0.05)
-# ending
-uke(T0('q1'), T0('q2'), 0.05, 104)
-sizzle(T0('q2'), T0('boom'), 0.04)
-alarm(T0('rise'), T0('boom') + 0.3, 0.04)
+for k, at in enumerate(np.arange(T0('crawl') + 0.4, TE('crawl') - 0.8, 0.28)): step(at, 0.06)
+# clothes on fire: an ember falls on the friend's back
+slide(T0('roll') + 0.1, 1500, 500, 0.6, 0.08); fwoosh(T0('roll') + 0.7, 0.2)
+for k, at in enumerate(np.arange(wT('correr', 'roll'), wT('pare', 'roll'), 0.16)): step(at, 0.1)
+for k in range(4): thud(wT('role', 'roll') + 0.1 + k * 0.28, 0.12)
+# option 1: suit up, grab the extinguishers, put the whole building out
+s0 = T0('suit')
+drums(s0, TE('suit'), 120, 0.14)
+for k, m in enumerate([[50, 57, 62], [53, 60, 65], [55, 62, 67], [57, 64, 69], [58, 65, 70], [60, 67, 72]]): brass(s0 + 0.3 + k * 1.0, m, 0.045)
+drums(T0('blast'), TE('blast'), 120, 0.14)
+n = int(0.25 * SR); x = np.arange(n) / SR; put(fx, band(rng.standard_normal(n), 2000, 6000) * (np.sin(2 * np.pi * 30 * x) > 0) * 0.12, wT('vestir', 'suit') + 0.3)   # zip
+clank(wT('extintores', 'suit') + 0.3, 0.3)
+spray(wT('apagar', 'suit') - 0.2, TE('blast') - 0.4, 0.08)
+correct(wT('inteiro', 'suit') + 0.4, 0.09)
+# option 2: the real one
+dtmf(wT('cento', 'real'), '193')
+siren(wT('cento', 'real') + 0.8, TE('real') + 0.5, 0.05)
+# ending: out the window
+uke(T0('q1'), T0('q3'), 0.05, 104)
 scratch(T0('ohoh') + 0.05); slide(VE('ohoh') + 0.05, 700, 250, 0.7, 0.1)
-x0 = T0('boom'); fwoosh(x0 + 0.5, 0.9, 1.8); boom(x0 + 0.5, 0.6, 45); cough(x0 + 2.4, 0.14, 3)
-for k, m in enumerate([60, 64, 67, 72]): put(mus, pluck(m, 1.5, 0.06, 2.5), T0('end') + 0.6 + k * 0.12)
-uke(T0('end') + 1.4, T, 0.04, 104)
+j0 = T0('jump')
+for k, at in enumerate(np.arange(j0 + 0.05, j0 + 0.65, 0.12)): step(at, 0.12)
+glassbreak(j0 + 0.75, 0.4); whoosh(j0 + 0.9, 1.4, 1500, 300, 0.2); slide(j0 + 0.9, 1400, 250, 1.3, 0.1)
+boom(j0 + 2.35, 0.35, 60); thud(j0 + 2.35, 0.4); fwoosh(j0 + 2.45, 0.25)
+trombone(j0 + 2.9, 0.06)
+for k, m in enumerate([60, 64, 67, 72]): put(mus, pluck(m, 1.5, 0.06, 2.5), T0('end') + 0.5 + k * 0.12)
+uke(T0('end') + 1.2, T, 0.04, 104)
 
 # ---------------- mix ----------------
 venv = np.convolve(np.abs(voice), np.ones(int(0.2 * SR)) / int(0.2 * SR), 'same'); duck = 1 - np.clip(venv * 5, 0, 0.55)
