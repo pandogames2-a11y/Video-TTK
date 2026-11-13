@@ -459,14 +459,14 @@ class Bean {
     // legs
     this.legs.forEach((L, i) => {
       const sgn = i ? 1 : -1;
-      if (p.legs === 'crouch') { L.hip.rotation.set(-0.55, 0, sgn * 0.38); L.kn.rotation.set(1.0, 0, -sgn * 0.2); return; }
+      if (p.legs === 'crouch') { const cs = Math.sin(ph + (i ? Math.PI : 0)), cc = Math.max(0, Math.cos(ph + (i ? Math.PI : 0))); L.hip.rotation.set(-0.55 - cs * 0.55 * run, 0, sgn * 0.3); L.kn.rotation.set(1.0 + cc * 0.7 * run, 0, -sgn * 0.15); return; }
       if (p.legs === 'sit') { L.hip.rotation.set(-1.45 - (p.lean || 0), 0, sgn * 0.12); L.kn.rotation.set(0.25, 0, 0); return; }
       const sw = Math.sin(ph + (i ? Math.PI : 0));
       L.hip.rotation.set(-sw * 0.9 * run, 0, 0);
       L.kn.rotation.set(Math.max(0, Math.cos(ph + (i ? Math.PI : 0))) * 1.4 * run, 0, 0);
     });
     if (p.legs === 'sit') b.position.y = p.sitY ?? 0.6;
-    if (p.legs === 'crouch') b.position.y = 0.83;
+    if (p.legs === 'crouch') b.position.y = 0.83 + Math.abs(Math.sin(ph)) * 0.05 * run;
     // arms
     const swing = (i) => { const sw = Math.sin(ph + (i ? 0 : Math.PI)); return [sw * 1.0 * run, 0.15, -1.2 * run - 0.25]; };
     this.arms.forEach((A, i) => {
@@ -876,18 +876,53 @@ const ioSmoke = [];
   const frame = new THREE.Mesh(new THREE.BoxGeometry(1.8, 2.6, 0.06), std(0x6d7378, { metalness: 0.5 })); frame.position.set(0, 1.3, -0.04); elev.add(frame);
   const doors = []; for (const sx of [-1, 1]) { const d = new THREE.Mesh(new THREE.BoxGeometry(0.75, 2.3, 0.08), steel); d.position.set(sx * 0.39, 1.15, 0); elev.add(d); doors.push(d); } interior.userData.elevDoors = doors;
   const btn = new THREE.Mesh(new THREE.PlaneGeometry(0.16, 0.28), new THREE.MeshBasicMaterial({ color: 0xffcf33 })); btn.position.set(1.25, 1.4, 0.02); elev.add(btn); interior.userData.elevBtn = btn;
-  const fl = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 1.1), std(0xffffff, { map: canvasTex(512, 256, (g, w, h) => { g.fillStyle = '#c62828'; g.fillRect(0, 0, w, h); g.fillStyle = '#fff'; g.textAlign = 'center'; g.font = '900 120px "Inter Display"'; g.fillText('3º', w / 2 - 110, 170); g.font = '900 70px "Inter Display"'; g.fillText('ANDAR', w / 2 + 110, 160); }) })); fl.position.set(-3.0, 10.5, -0.95); interior.add(fl);
-  { const cab = new THREE.Group(); cab.position.set(-6, 9, -2.0); interior.add(cab); const stM = std(0xaeb6bc, { metalness: 0.6, roughness: 0.35, side: THREE.DoubleSide });
-    const fl = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.08, 2.0), std(0x55595e)); fl.position.y = 0.04; cab.add(fl);
-    const bk = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 2.6), stM); bk.position.set(0, 1.3, -1.0); cab.add(bk);
-    for (const sx of [-1, 1]) { const w = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 2.6), stM); w.rotation.y = Math.PI / 2; w.position.set(sx * 0.9, 1.3, 0); cab.add(w); const rail = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 1.6, 8), std(0xdadada, { metalness: 0.8 })); rail.rotation.x = Math.PI / 2; rail.position.set(sx * 0.86, 0.95, -0.1); cab.add(rail); }
-    const ce = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 2.0), stM); ce.rotation.x = Math.PI / 2; ce.position.y = 2.6; cab.add(ce);
-    const panel = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 1.0), new THREE.MeshBasicMaterial({ color: 0xfff3d0 })); panel.rotation.x = Math.PI / 2; panel.position.y = 2.59; cab.add(panel);
-    const lt0 = new THREE.PointLight(0xfff1d6, 2.2, 5, 1.5); lt0.position.y = 2.3; cab.add(lt0); const red = new THREE.PointLight(0xff2020, 0, 5, 1.5); red.position.set(0, 2.2, -0.8); cab.add(red);
-    const redB = new THREE.Mesh(new THREE.SphereGeometry(0.06, 10, 8), new THREE.MeshBasicMaterial({ color: 0x441010 })); redB.position.set(0, 2.45, -0.95); cab.add(redB);
-    const sm = new THREE.Mesh(new THREE.BoxGeometry(1.78, 1, 1.98), new THREE.MeshBasicMaterial({ color: 0x3c3e42, transparent: true, opacity: 0.6, depthWrite: false })); cab.add(sm);
+  const fl = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 1.1), std(0xffffff, { map: canvasTex(512, 256, (g, w, h) => { g.fillStyle = '#c62828'; g.fillRect(0, 0, w, h); g.fillStyle = '#fff'; g.textAlign = 'center'; g.font = '900 120px "Inter Display"'; g.fillText('3º', w / 2 - 110, 170); g.font = '900 70px "Inter Display"'; g.fillText('ANDAR', w / 2 + 110, 160); }) })); fl.position.set(-3.0, 10.5, -0.95);
+  { const CW = 2.4, CD = 2.4, CH = 2.8;   // a roomy cab so the camera fits inside with both beans
+    const cab = new THREE.Group(); cab.position.set(-6, 9, -1.0 - CD / 2); interior.add(cab); const stM = std(0xb7bec4, { metalness: 0.55, roughness: 0.35, side: THREE.DoubleSide });
+    const fl = new THREE.Mesh(new THREE.BoxGeometry(CW, 0.08, CD), std(0x4a4e53, { roughness: 0.8 })); fl.position.y = 0.04; cab.add(fl);
+    const bk = new THREE.Mesh(new THREE.PlaneGeometry(CW, CH), stM); bk.position.set(0, CH / 2, -CD / 2); cab.add(bk);
+    const mir = new THREE.Mesh(new THREE.PlaneGeometry(CW - 0.5, 1.3), std(0xdfe8ee, { metalness: 0.9, roughness: 0.08 })); mir.position.set(0, 1.55, -CD / 2 + 0.01); cab.add(mir);
+    for (const sx of [-1, 1]) { const w = new THREE.Mesh(new THREE.PlaneGeometry(CD, CH), stM); w.rotation.y = Math.PI / 2; w.position.set(sx * CW / 2, CH / 2, 0); cab.add(w);
+      for (let k = 0; k < 3; k++) { const pnl = new THREE.Mesh(new THREE.PlaneGeometry(CD / 3 - 0.08, CH - 0.5), std(0xa5adb4, { metalness: 0.6, roughness: 0.3 })); pnl.rotation.y = -sx * Math.PI / 2; pnl.position.set(sx * (CW / 2 - 0.01), CH / 2 + 0.1, -CD / 2 + CD / 6 + k * CD / 3); cab.add(pnl); }
+      const rail = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, CD - 0.3, 8), std(0xdadada, { metalness: 0.8 })); rail.rotation.x = Math.PI / 2; rail.position.set(sx * (CW / 2 - 0.06), 0.95, 0); cab.add(rail); }
+    const bp = new THREE.Mesh(new THREE.PlaneGeometry(0.28, 0.7), std(0x2a2d31, { metalness: 0.5 })); bp.rotation.y = -Math.PI / 2; bp.position.set(CW / 2 - 0.02, 1.25, CD / 2 - 0.3); cab.add(bp);
+    for (let k = 0; k < 6; k++) { const bt = new THREE.Mesh(new THREE.CircleGeometry(0.035, 12), new THREE.MeshBasicMaterial({ color: k === 3 ? 0xffcf33 : 0xd8d8d8 })); bt.rotation.y = -Math.PI / 2; bt.position.set(CW / 2 - 0.03, 1.0 + k * 0.09, CD / 2 - 0.3); cab.add(bt); }
+    const ce = new THREE.Mesh(new THREE.PlaneGeometry(CW, CD), stM); ce.rotation.x = Math.PI / 2; ce.position.y = CH; cab.add(ce);
+    const panel = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 1.2), new THREE.MeshBasicMaterial({ color: 0xfff3d0 })); panel.rotation.x = Math.PI / 2; panel.position.y = CH - 0.01; cab.add(panel);
+    const lt0 = new THREE.PointLight(0xfff1d6, 2.2, 6, 1.5); lt0.position.y = CH - 0.3; cab.add(lt0); const red = new THREE.PointLight(0xff2020, 0, 6, 1.5); red.position.set(0, CH - 0.4, -CD / 2 + 0.3); cab.add(red);
+    const redB = new THREE.Mesh(new THREE.SphereGeometry(0.07, 10, 8), new THREE.MeshBasicMaterial({ color: 0x441010 })); redB.position.set(0, CH - 0.2, -CD / 2 + 0.06); cab.add(redB);
+    const sm = new THREE.Mesh(new THREE.BoxGeometry(CW - 0.02, 1, CD - 0.02), new THREE.MeshBasicMaterial({ color: 0x3c3e42, transparent: true, opacity: 0.6, depthWrite: false })); cab.add(sm);
     interior.userData.cab = { cab, panel, lt0, red, redB, sm }; }
   for (let n = 0; n <= 3; n++) { const b = new THREE.Mesh(new THREE.BoxGeometry(16, 1.3, 5.2), new THREE.MeshBasicMaterial({ color: 0x3c3e42, transparent: true, opacity: 0.6, depthWrite: false })); b.position.set(-1.5, n * FLOOR_H + 2.3, 1.6); b.renderOrder = 2; interior.add(b); ioSmoke.push(b); } }
+// 3rd-floor hallway: a ceiling, a front wall with flat doors, lights, exit sign and a railing round the stairwell
+{ const Y = 9, HY = 12, wallM = std(0xe9e1d2, { roughness: 0.95, side: THREE.DoubleSide });
+  const tile = canvasTex(256, 256, (g) => { for (let i = 0; i < 8; i++) for (let j = 0; j < 8; j++) { g.fillStyle = (i + j) % 2 ? '#c9b89c' : '#ddd0b8'; g.fillRect(i * 32, j * 32, 32, 32); } }); tile.wrapS = tile.wrapT = THREE.RepeatWrapping; tile.repeat.set(8, 2);
+  const fr = new THREE.Mesh(new THREE.BoxGeometry(16, 0.3, 4.3), std(0xffffff, { map: tile, roughness: 0.6 })); fr.position.set(-1.5, Y - 0.15, 6.35); interior.add(fr);
+  const ceil = new THREE.Mesh(new THREE.PlaneGeometry(16, 9.5), std(0xf4efe6, { roughness: 1, side: THREE.DoubleSide })); ceil.rotation.x = Math.PI / 2; ceil.position.set(-1.5, HY, 3.75); interior.add(ceil);
+  const front = new THREE.Mesh(new THREE.PlaneGeometry(16, 3.2), wallM); front.position.set(-1.5, Y + 1.5, 8.5); interior.add(front);
+  const skirt = new THREE.Mesh(new THREE.BoxGeometry(16, 0.18, 0.05), std(0x8c7a64)); skirt.position.set(-1.5, Y + 0.09, 8.47); interior.add(skirt);
+  const doorM = std(0x7a4a2a, { roughness: 0.7 }), knobM = std(0xd9b44a, { metalness: 0.8, roughness: 0.3 });
+  [[-7.5, '301'], [-3.5, '302'], [1.5, '303'], [5.0, '304']].forEach(([x, num]) => {
+    const d = new THREE.Mesh(new THREE.BoxGeometry(1.0, 2.2, 0.08), doorM); d.position.set(x, Y + 1.1, 8.44); interior.add(d);
+    const fm = new THREE.Mesh(new THREE.BoxGeometry(1.16, 2.3, 0.04), std(0xd8ccb8)); fm.position.set(x, Y + 1.15, 8.47); interior.add(fm);
+    const kb = new THREE.Mesh(new THREE.SphereGeometry(0.05, 10, 8), knobM); kb.position.set(x + 0.36, Y + 1.05, 8.38); interior.add(kb);
+    const pl = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.2), std(0xffffff, { map: canvasTex(128, 64, (g, w, h) => { g.fillStyle = '#d9b44a'; g.fillRect(0, 0, w, h); g.fillStyle = '#3a2a10'; g.textAlign = 'center'; g.font = '900 44px "Inter Display"'; g.fillText(num, w / 2, 48); }) })); pl.rotation.y = Math.PI; pl.position.set(x, Y + 1.9, 8.39); interior.add(pl);
+    const mat = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.02, 0.5), std(0x8a3a2a)); mat.position.set(x, Y + 0.01, 8.0); interior.add(mat); });
+  for (const x of [-7.5, -4.0, -0.5, 3.5]) { const lp = new THREE.Mesh(new THREE.CircleGeometry(0.28, 20), new THREE.MeshBasicMaterial({ color: 0xfff6e0 })); lp.rotation.x = Math.PI / 2; lp.position.set(x, HY - 0.01, 5.6); interior.add(lp); }
+  const hl1 = new THREE.PointLight(0xffeccc, 1.6, 9, 1.2); hl1.position.set(-6.5, HY - 0.4, 5.0); interior.add(hl1);
+  const hl2 = new THREE.PointLight(0xffeccc, 1.6, 9, 1.2); hl2.position.set(-1.5, HY - 0.4, 5.0); interior.add(hl2);
+  const exitS = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 0.45), new THREE.MeshBasicMaterial({ map: canvasTex(256, 90, (g, w, h) => { g.fillStyle = '#12a150'; g.fillRect(0, 0, w, h); g.fillStyle = '#fff'; g.textAlign = 'center'; g.font = '900 52px "Inter Display"'; g.fillText('SAÍDA ➜', w / 2, 66); }) }));
+  exitS.position.set(-1.2, HY - 0.45, 2.15); exitS.rotation.y = -Math.PI / 2; interior.add(exitS);
+  const alarm = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.3, 0.1), new THREE.MeshBasicMaterial({ color: 0xc62828 })); alarm.position.set(-8.0, Y + 1.5, 8.43); interior.add(alarm); interior.userData.alarm = alarm;
+  const ext = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.55, 12), std(0xc62828, { roughness: 0.4 })); ext.position.set(-9.3, Y + 0.6, 6.5); interior.add(ext);
+  const railM = std(0x5d6368, { metalness: 0.6, roughness: 0.4 });
+  const bar = (x0, z0, x1, z1) => { const L = Math.hypot(x1 - x0, z1 - z0), ang = Math.atan2(z1 - z0, x1 - x0);
+    const top = new THREE.Mesh(new THREE.BoxGeometry(L, 0.06, 0.06), railM); top.position.set((x0 + x1) / 2, Y + 1.0, (z0 + z1) / 2); top.rotation.y = -ang; interior.add(top);
+    const mid = top.clone(); mid.position.y = Y + 0.5; interior.add(mid);
+    const n = Math.max(2, Math.round(L / 1.0) + 1); for (let i = 0; i < n; i++) { const k = i / (n - 1); const po = new THREE.Mesh(new THREE.BoxGeometry(0.05, 1.0, 0.05), railM); po.position.set(lerp(x0, x1, k), Y + 0.5, lerp(z0, z1, k)); interior.add(po); } };
+  bar(-1.0, 4.2, 5.0, 4.2); bar(5.0, -0.1, 5.0, 4.2); bar(-1.0, 2.95, -1.0, 4.2); bar(-1.0, -0.1, -1.0, 1.4);
+  ioSmoke[3].geometry.dispose(); ioSmoke[3].geometry = new THREE.BoxGeometry(16, 1.3, 9.5); ioSmoke[3].position.z = 3.75; ioSmoke[3].position.y = HY - 0.6;
+}
 // ---------- fire truck ----------
 const truck = new THREE.Group();
 { const red = std(0xd62f2f, { roughness: 0.4, metalness: 0.2 }), chrome = std(0xdadada, { metalness: 0.7, roughness: 0.3 });
@@ -1273,46 +1308,49 @@ function direct(t, n, lt, g, H) {
     if (t > E.fum - 0.4) { const k = ease(clamp((t - E.fum + 0.4) / 9)); cam.pos = vl(AP(0.3, 1.5, 3.2), AP(0.6, 1.3, 2.8), k); cam.tgt = vl(AP(1.6, 2.4, -1.0), AP(1.6, 1.8, -1.0), k); cam.fov = 58; }
     else { const dc = dioCam(t); cam.pos = dc.pos; cam.tgt = dc.tgt; cam.fov = 48; }
   } else if (IOSC.includes(n)) {
-    const ELH = { x: IO.x - 6.38, z: IO.z - 2.0 }, ELF = { x: IO.x - 5.62, z: IO.z - 1.95 };
+    const ELH = { x: IO.x - 6.45, z: IO.z - 2.5 }, ELF = { x: IO.x - 5.55, z: IO.z - 2.45 };
     const inCab = n === 'elevgag' || (n === 'exit2' && t > W_ENERGIA - 0.5);
+    const H1 = { x: IO.x - 3.4, z: IO.z + 1.8 }, F1 = { x: IO.x - 5.0, z: IO.z + 1.6 };
     if (n === 'exit1' || (n === 'exit2' && !inCab)) {
       // the bad idea, for real: into the elevator
       const k = n === 'exit2' ? ss(0.1, 1.3, lt) : 0;
-      const H1 = { x: IO.x - 3.4, z: IO.z + 1.8 }, F1 = { x: IO.x - 5.0, z: IO.z + 1.6 };
       hp = { x: lerp(H1.x, ELH.x, k), y: IO.y + 9, z: lerp(H1.z, ELH.z, k), ry: k > 0 ? Math.atan2(ELH.x - H1.x, ELH.z - H1.z) : -0.5, run: k > 0 && k < 1 ? 0.7 : 0, phase: lt * 11, armL: A.rest, armR: A.rest, eyesWide: true, brow: 0.6, smile: 0, look: [-0.5, 0] };
       fp = { x: lerp(F1.x, ELF.x, k), y: IO.y + 9, z: lerp(F1.z, ELF.z, k), ry: k > 0 ? Math.atan2(ELF.x - F1.x, ELF.z - F1.z) : -2.6, run: k > 0 && k < 1 ? 0.7 : 0, phase: lt * 11 + 1, armL: A.rest, armR: n === 'exit1' ? A.point : A.rest, mouth: n === 'exit1' ? fm : 0, smile: 1, brow: -0.3 };
       if (k >= 1) { hp.ry = fp.ry = 0; }
       dg = { mode: 'carried' };
-      if (n === 'exit1') { cam.pos = V(IO.x - 4.0, IO.y + 10.4, IO.z + 7.0); cam.tgt = V(IO.x - 5.0, IO.y + 10.0, IO.z); cam.fov = 50; }
-      else { cam.pos = V(IO.x - 5.2, IO.y + 10.6, IO.z + 6.5); cam.tgt = V(IO.x - 6.0, IO.y + 10.0, IO.z - 1); cam.fov = 48; }
+      if (n === 'exit1') { cam.pos = V(IO.x - 4.0, IO.y + 11.0, IO.z + 5.8); cam.tgt = V(IO.x - 4.6, IO.y + 9.6, IO.z + 0.8); cam.fov = 50; }
+      else { cam.pos = V(IO.x - 4.4, IO.y + 11.0, IO.z + 5.8); cam.tgt = V(IO.x - 5.6, IO.y + 9.6, IO.z - 0.6); cam.fov = 48; }
     } else if (inCab) {
-      // inside the elevator: the power goes, the smoke comes in
+      // inside the elevator, filmed from the top corner like a security camera: the power goes, the smoke comes in
       const k = n === 'elevgag' ? lt : t - W_ENERGIA, bad = n === 'elevgag';
-      hp = { x: ELH.x, y: IO.y + 9, z: ELH.z, ry: 0.15, armL: bad ? [2.2, -0.4, -2.3] : A.rest, armR: bad ? A.up : A.rest, eyesWide: !bad || k < 1.0, squint: bad && k > 1.0 ? 0.8 : 0, brow: 1, smile: 0, shout: bad && k < 1.0 ? 0.6 : 0, wob: bad ? 0.2 : 0.05, soot: bad ? ss(0, 2, k) * 0.6 : 0, look: [0, 0.6] };
-      fp = { x: ELF.x, y: IO.y + 9, z: ELF.z, ry: -0.15, armL: A.up, armR: bad ? [2.2, -0.4, -2.3] : A.up, eyesWide: true, brow: 1, smile: 0, shout: 0.6, wob: bad ? 0.3 : 0.1, soot: bad ? ss(0, 2, k) * 0.6 : 0, look: [0, 0.6] };
-      dg = { mode: VERT ? 'hide' : 'carried' };
-      cam.pos = V(IO.x - 6.0, IO.y + 10.35, IO.z - (VERT ? 1.05 : 1.15)); cam.tgt = V(IO.x - 6.0, IO.y + 10.0, IO.z - 2.6); cam.fov = VERT ? 76 : 62; shake = bad ? 0.08 : 0;
-    } else if (n === 'idea') {
-      const d = STAIR_TOTAL - 0.1, h0 = onStairs(d), f0 = onStairs(d - 1.0);
-      hp = { x: h0.x, y: h0.y, z: h0.z, ry: h0.ry + Math.PI, legs: 'crouch', lean: 0.5, brow: -0.3, smile: 1, mouth: hm, armL: A.pointUp, armR: A.rest };
-      fp = { x: f0.x, y: f0.y, z: f0.z, ry: f0.ry + Math.PI, legs: 'crouch', lean: 0.5, armL: [0.95, -0.15, -1.5], armR: [0.95, -0.15, -1.5], brow: 0.4, smile: 0 };
+      hp = { x: ELH.x, y: IO.y + 9, z: ELH.z, ry: 0.5, armL: bad ? [2.2, -0.4, -2.3] : A.rest, armR: bad ? A.up : A.rest, eyesWide: true, brow: 1, smile: 0, mouth: bad && k > 0.9 ? 0.5 + 0.3 * Math.abs(Math.sin(k * 9)) : 0, shout: bad && k < 0.9 ? 0.6 : 0, wob: bad ? 0.2 : 0.05, soot: bad ? ss(0, 2, k) * 0.6 : 0, look: [0.3, 0.2] };
+      fp = { x: ELF.x, y: IO.y + 9, z: ELF.z, ry: 0.25, armL: A.up, armR: bad ? [2.2, -0.4, -2.3] : A.up, eyesWide: true, brow: 1, smile: 0, shout: 0.6, wob: bad ? 0.3 : 0.1, soot: bad ? ss(0, 2, k) * 0.6 : 0, look: [0.3, 0.2] };
       dg = { mode: 'carried' };
-      cam.pos = V(h0.x - 0.5, h0.y + 1.5, IO.z + 8.0); cam.tgt = V(h0.x, h0.y + 0.8, IO.z + 1.0); cam.fov = 50;
+      cam.pos = V(IO.x - 5.05, IO.y + 11.45, IO.z - 1.2); cam.tgt = V(IO.x - 6.05, IO.y + 10.0, IO.z - 2.6); cam.fov = VERT ? 66 : 60; shake = bad ? 0.08 : 0;
     } else {
-      // a few steps down the stairs... then straight out of the front door
-      const cl = t > W_PANO - 0.2, cut = W_ESCADA + 0.5 - g.start;
-      if (lt < cut) {
-        const d = lerp(4.0, 1.2, ss(0, cut, lt)), h0 = onStairs(d), f0 = onStairs(d + 1.1);
-        hp = { x: h0.x, y: h0.y, z: h0.z, ry: h0.ry + Math.PI, legs: 'crouch', lean: 0.5, bob: 0.03 * Math.sin(t * 10), brow: 0.4, smile: 0, cloth: cl, armL: [2.3, -0.3, -2.4], armR: A.rest };
-        fp = { x: f0.x, y: f0.y, z: f0.z, ry: f0.ry + Math.PI, legs: 'crouch', lean: 0.5, bob: 0.03 * Math.sin(t * 10 + 1), armL: [0.95, -0.15, -1.5], armR: [0.95, -0.15, -1.5], brow: 0.4, smile: 0, cloth: cl };
+      // idea + crawl: same hallway, the camera follows them crouching to the stairs and down a few steps... then out of the front door
+      const P = (x, y, z) => V(IO.x + x, IO.y + y, IO.z + z);
+      const pathH = [P(-3.4, 9, 1.8), P(-1.4, 9, 2.15), P(0, 9, 2.15), P(4, 7.5, 2.15)], pathF = [P(-5.0, 9, 1.6), P(-2.2, 9, 2.15), P(-1.4, 9, 2.15), P(0, 9, 2.15), P(4, 7.5, 2.15)];
+      const along = (pts, d) => { d = Math.max(0, d); for (let i = 1; i < pts.length; i++) { const L = pts[i].distanceTo(pts[i - 1]); if (d <= L || i === pts.length - 1) { const k = Math.min(1, d / L), q = pts[i - 1].clone().lerp(pts[i], k); return { x: q.x, y: q.y, z: q.z, ry: Math.atan2(pts[i].x - pts[i - 1].x, pts[i].z - pts[i - 1].z) }; } d -= L; } };
+      const tGo = wordAt('vem', T0('idea')), cutT = W_ESCADA + 0.5, Ltot = 5.6, sp = Ltot / (cutT - tGo);
+      const dH = clamp((t - tGo) * sp, 0, Ltot), walking = t > tGo && dH < Ltot;
+      const h0 = along(pathH, dH), f0 = along(pathF, dH - 0.2);
+      const cl = t > W_PANO - 0.2;
+      if (t < cutT) {
+        const still = !walking;
+        hp = { x: h0.x, y: h0.y, z: h0.z, ry: still ? -0.4 : h0.ry, legs: 'crouch', lean: 0.45, run: walking ? 0.8 : 0, phase: t * 9, brow: n === 'idea' ? -0.3 : 0.4, smile: n === 'idea' ? 1 : 0, mouth: n === 'idea' ? hm : 0, cloth: cl,
+          armL: n === 'idea' && !walking ? A.pointUp : cl ? [2.3, -0.3, -2.4] : [0.95, -0.15, -1.5], armR: A.rest };
+        fp = { x: f0.x, y: f0.y, z: f0.z, ry: still ? 0.5 : f0.ry, legs: 'crouch', lean: 0.45, run: walking ? 0.8 : 0, phase: t * 9 + 1.3, armL: [0.95, -0.15, -1.5], armR: cl ? [2.3, -0.3, -2.4] : [0.95, -0.15, -1.5], brow: 0.4, smile: 0, cloth: cl };
         dg = { mode: 'carried' };
-        cam.pos = V(h0.x - 0.5, h0.y + 1.5, IO.z + 8.0); cam.tgt = V(h0.x, h0.y + 0.8, IO.z + 1.0); cam.fov = 50;
+        const cx = Math.min(h0.x, IO.x + 3.0);
+        const kB = ease(ss(2.2, 3.8, dH));   // crane over the stairwell to face them as they come down the flight
+        cam.pos = vl(V(cx - 0.5, IO.y + 11.3, IO.z + 6.0), V(IO.x + 4.4, IO.y + 10.0, IO.z + 3.3), kB); cam.tgt = vl(V(cx + 0.3, h0.y + 0.4, IO.z + 2.0), V(h0.x - 0.6, h0.y + 0.6, IO.z + 2.1), kB); cam.fov = VERT ? 52 : 48;
       } else {
-        const k = ss(cut, cut + 1.2, lt), up = lt > cut + 1.3;
-        const hz = lerp(-3.9, -4.6, k), fz = lerp(-3.6, -4.55, ss(cut + 0.2, cut + 1.4, lt));
-        const HP = bw(0.6, 0, hz), FP = bw(-0.5, 0, fz);
-        hp = { x: HP.x, y: STOOP_Y, z: HP.z, ry: FRONT_RY, legs: up ? undefined : 'crouch', lean: up ? -0.1 : 0.5, brow: up ? -0.3 : 0.4, smile: up ? 1 : 0, cloth: !up, armL: up ? A.cheer : [2.3, -0.3, -2.4], armR: up ? A.thumb : A.rest, visible: hz < -3.95 };
-        fp = { x: FP.x, y: STOOP_Y, z: FP.z, ry: FRONT_RY, legs: up ? undefined : 'crouch', lean: up ? -0.1 : 0.5, brow: 0.2, smile: up ? 1 : 0, cloth: !up, armL: up ? A.up : [0.95, -0.15, -1.5], armR: up ? A.up : [0.95, -0.15, -1.5], visible: fz < -3.95, mouth: up ? 0.6 : 0 };
+        const lt2 = t - cutT, k = ss(0.1, 1.3, lt2), up = lt2 > 1.4;
+        const hz = lerp(-3.9, -4.6, k), fz = lerp(-3.6, -4.55, ss(0.3, 1.5, lt2));
+        const HP = bw(0.6, 0, hz), FP = bw(-0.5, 0, fz), wk = lt2 < 1.4;
+        hp = { x: HP.x, y: STOOP_Y, z: HP.z, ry: FRONT_RY, legs: up ? undefined : 'crouch', run: wk ? 0.8 : 0, phase: t * 9, lean: up ? -0.1 : 0.5, brow: up ? -0.3 : 0.4, smile: up ? 1 : 0, cloth: !up, armL: up ? A.cheer : [2.3, -0.3, -2.4], armR: up ? A.thumb : A.rest, visible: hz < -3.95 };
+        fp = { x: FP.x, y: STOOP_Y, z: FP.z, ry: FRONT_RY, legs: up ? undefined : 'crouch', run: wk ? 0.8 : 0, phase: t * 9 + 1.3, lean: up ? -0.1 : 0.5, brow: 0.2, smile: up ? 1 : 0, cloth: !up, armL: up ? A.up : [0.95, -0.15, -1.5], armR: up ? A.up : [2.3, -0.3, -2.4], visible: fz < -3.95, mouth: up ? 0.6 : 0 };
         dg = { mode: 'carried' };
         cam.pos = bw(0.1, 0, -9.0); cam.pos.y = STOOP_Y + 1.5; cam.tgt = bw(0.1, 0, -4.6); cam.tgt.y = STOOP_Y + 1.1; cam.fov = 44;
       }
@@ -1564,11 +1602,11 @@ function world(t, n, lt) {
   rainbow.visible = false;
   apt.visible = APTN.includes(n) || gag || isIndoorShot(n, lt) || expApt;
   interior.visible = IOSC.includes(n) && !crawlOut; lobbyW.visible = false;
-  ioSmoke.forEach(b => b.visible = interior.visible);
+  ioSmoke.forEach((b, i) => b.visible = interior.visible && (i === 3 || !['idea', 'crawl'].includes(n)));
   const ed = interior.userData.elevDoors; const shut = n === 'exit1' ? 0 : n === 'exit2' ? ss(1.3, 1.9, lt) : 1; ed[0].position.x = -0.39 - 0.75 * (1 - shut); ed[1].position.x = 0.39 + 0.75 * (1 - shut);
   { const C = interior.userData.cab, dark = (n === 'exit2' && t > W_ENERGIA) || n === 'elevgag'; C.lt0.intensity = dark ? 0 : 2.2; C.panel.material.color.setHex(dark ? 0x202020 : 0xfff3d0);
     C.red.intensity = dark ? 1.6 + 0.8 * Math.sin(t * 6) : 0; C.redB.material.color.setHex(dark ? 0xff2020 : 0x441010);
-    const sh = n === 'elevgag' ? 0.5 + 0.9 * ss(0, S.elevgag.dur, lt) : (n === 'exit2' && t > W_ENERGIA ? 0.5 * ss(W_ENERGIA, W_ENERGIA + 1.5, t) : 0); C.sm.visible = sh > 0.02; C.sm.scale.y = Math.max(0.01, sh); C.sm.position.y = 2.6 - sh / 2; }
+    const sh = n === 'elevgag' ? 0.5 + 0.9 * ss(0, S.elevgag.dur, lt) : (n === 'exit2' && t > W_ENERGIA ? 0.5 * ss(W_ENERGIA, W_ENERGIA + 1.5, t) : 0); C.sm.visible = sh > 0.02; C.sm.scale.y = Math.max(0.01, sh); C.sm.position.y = 2.78 - sh / 2; }
   interior.userData.elevBtn.material.color.setHex(n === 'exit2' && t > W_ENERGIA ? 0x222222 : 0xffcf33);
   building.userData.hinge.rotation.y = n === 'roll' || crawlOut ? -1.7 : 0;
   { const dp = bw(0, 1.4, -4.3); facadeSmoke.position.copy(dp); updateSmokeColumn(facadeSmoke, t, crawlOut ? 1 : (n === 'roll' ? 0.6 : 0), 6, -1.5); }
@@ -1903,6 +1941,7 @@ function overlay(t, g) {
     ui.save(); ui.textAlign = 'center'; for (let i = 0; i < 3; i++) { const a2 = ss(0.5 + i * 0.4, 0.7 + i * 0.4, lt); if (a2 <= 0) continue; ui.globalAlpha = a2; outlined('COF!', (i % 2 ? x2 : x1) + (i % 2 ? 80 : -80), (i % 2 ? y2 : y1) - 20 - i * 25, 46, '#ffffff', '#0a1428', 900, 0.2); } ui.restore();
     if (lt > 1.0) { stars(x1, y1 - 30, lt); stars(x2, y2 - 30, lt + 1); } }
   if (n === 'idea') { const [x, y] = headOnScreen(hero, 1.0); lightbulb(x, y - 70, lt); }
+  if (n === 'crawl' || n === 'idea') { const dc = Math.abs(t - (W_ESCADA + 0.5)); if (dc < 0.3) { ui.fillStyle = `rgba(0,0,0,${1 - dc / 0.3})`; fullRect(); } }
   if (n === 'crawl' && t > W_ESCADA + 1.8) label('AR LIVRE!', 640, 150, 54, ss(W_ESCADA + 1.8, W_ESCADA + 2.1, t), '#5ff08a');
   if (n === 'crawl') {
     const items = [['1', 'PANO NO NARIZ', W_PANO], ['2', 'ABAIXADO', wordAt('abaixado', g.start)], ['3', 'PELA ESCADA', W_ESCADA]];
