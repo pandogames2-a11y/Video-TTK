@@ -30,9 +30,9 @@ lines = ['[Script Info]', 'ScriptType: v4.00+', 'PlayResX: 1080', 'PlayResY: 192
          'Style: Small,Inter Display Black,38,&H00FFFFFF,&H00FFFFFF,&H004A2A0A,&H00000000,0,0,0,0,100,100,2,0,1,5,0,8,40,40,0,1', '',
          '[Events]', 'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text']
 end_start = [g for g in d['segs'] if g['scene'] == 'end'][0]['start']
-lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Small,,0,0,0,,{{\\pos(540,200)}}GUIA DE SOBREVIVÊNCIA • EP. 3')
+lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Small,,0,0,0,,{{\\pos(540,200)}}GUIA DE SOBREVIVÊNCIA • EP. 4')
 lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,262)}}VOCÊ SOBREVIVERIA')
-lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,375)\\fs108\\c&H2A8AFF&}}A UMA ENCHENTE?')
+lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,375)\\fs108\\c&H2A8AFF&}}A UM INCÊNDIO?')
 lines.append(f'Dialogue: 0,{ts(end_start)},{ts(T)},Small,,0,0,0,,{{\\pos(540,1540)\\c&H2A8AFF&}}COMENTE: SOBREVIVI OU NÃO CONSEGUI?')
 # karaoke captions: short chunks; the word being spoken turns yellow and pops
 W = json.load(open('audio/words.json'))

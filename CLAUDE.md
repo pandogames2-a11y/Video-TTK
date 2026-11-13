@@ -87,7 +87,7 @@ Quadros: 1280×720, 30 fps. Use o scratchpad para quadros e arquivos temporário
 
 ## Ambiente e serviços
 - **ElevenLabs — duas contas** (mesmas vozes; Liam/Charlie/Brian são vozes padrão de qualquer conta). As chaves são *network secrets* do ambiente de nuvem **video-ttk-elevenlabs**, uma por endereço (header `xi-api-key`, **sem prefixo**):
-  - conta 1 → `api.elevenlabs.io` (a chave não tem permissão de ler a assinatura);
+  - conta 1 → `api.elevenlabs.io` (desde 13/11/2026 é a conta "Nicolas", plano grátis, 10.000/mês; o EP4 usou ~1.020);
   - conta 2 ("Brasil", plano grátis) → `api.us.elevenlabs.io` (mesma API, servidores nos EUA).
   - `build_audio.py` e `align_words.py` (do EP3) tentam a conta 1 e, se der erro de crédito, a conta 2 (`ELEVEN_HOSTS` muda a ordem). Em código use o valor fictício `proxy-injected` — o proxy injeta a chave real.
 - Créditos: cada conta tem **10.000/mês**. A conta 2 hoje é a "Maratonando" (plano grátis); em 12/11/2026, depois do EP3, as **duas ficaram zeradas** (a conta 2 renova por volta de 13/12/2026). Sem créditos: use `align_local.py` e reaproveite falas do cache; para falas novas é preciso renovar/plano maior (ou usar `TTS=piper`, qualidade inferior).
