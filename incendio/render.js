@@ -5,9 +5,9 @@ let [,,mode,a,b,outDir]=process.argv; if(mode==='stills') outDir=b;
 srv.listen(0,async()=>{
   const port=srv.address().port;
   const br=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist']});
-  const pg=await br.newPage({viewport:{width:1280,height:720}});
+  const VERT=!!process.env.VERT; const pg=await br.newPage({viewport:VERT?{width:720,height:1280}:{width:1280,height:720}});
   pg.on('console',m=>console.log('PAGE',m.text())); pg.on('pageerror',e=>console.log('ERR',e.message));
-  await pg.goto(`http://localhost:${port}/index.html?${process.env.NOCAP ? 'nocap=1&' : ''}${process.env.NOTITLE ? 'notitle=1' : ''}`); await pg.waitForFunction(()=>window.READY,null,{timeout:60000});
+  await pg.goto(`http://localhost:${port}/index.html?${VERT ? 'vertical=1&' : ''}${process.env.NOCAP ? 'nocap=1&' : ''}${process.env.NOTITLE ? 'notitle=1' : ''}`); await pg.waitForFunction(()=>window.READY,null,{timeout:60000});
   const fps=await pg.evaluate(()=>window.FPS), total=await pg.evaluate(()=>window.TOTAL);
   fs.mkdirSync(outDir,{recursive:true});
   if(mode==='stills'){ for(const t of a.split(',').map(Number)){ await pg.evaluate(t=>window.renderFrame(t),t); await pg.screenshot({path:`${outDir}/t${t.toFixed(1)}.jpg`,quality:85}); console.log('still',t);} }

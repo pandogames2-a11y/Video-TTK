@@ -1,11 +1,13 @@
 """Builds the 9:16 (1080x1920) TikTok version: blurred background, video in the middle,
-title on top and large captions underneath. Usage: python3 make_vertical.py <video_sem_legenda.mp4> <saida.mp4>"""
+title on top and large captions underneath. Usage: python3 make_vertical.py <video_sem_legenda.mp4> <saida.mp4> [--native]
+--native: the input is already vertical (render with VERT=1): it fills the whole screen, no borders."""
 import json, sys, subprocess
 src, out = sys.argv[1], sys.argv[2]
+NATIVE = '--native' in sys.argv
 d = json.load(open('timeline.json'))
 HL = ['tsunami', 'dez metros', 'correr', 'pra cima', 'longe do mar', 'rota de fuga', 'terceiro andar', 'várias ondas', 'autoridades', 'avião',
       'paredão de água', 'de repente', 'peixe', 'terremoto', 'péssima ideia', 'carros', 'árvores', 'último aviso', 'freia', 'cresce', 'tomando sol',
-      'morro', 'prédio alto', 'resistente', 'densa', 'forte', 'elevador', 'escada', 'mesma força', 'fios elétricos', 'trânsito trava', 'ainda não', 'choque']
+      'morro', 'prédio alto', 'resistente', 'densa', 'forte', 'elevador', 'escada', 'mesma força', 'fios elétricos', 'trânsito trava', 'ainda não', 'choque', 'fumaça', 'oxigênio', 'bombeiros', '193', 'abaixado', 'tóxica']
 def ts(t):
     t = max(0, t); h = int(t // 3600); m = int(t % 3600 // 60); s = t % 60
     return f'{h}:{m:02d}:{s:05.2f}'
@@ -30,9 +32,10 @@ lines = ['[Script Info]', 'ScriptType: v4.00+', 'PlayResX: 1080', 'PlayResY: 192
          'Style: Small,Inter Display Black,38,&H00FFFFFF,&H00FFFFFF,&H004A2A0A,&H00000000,0,0,0,0,100,100,2,0,1,5,0,8,40,40,0,1', '',
          '[Events]', 'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text']
 end_start = [g for g in d['segs'] if g['scene'] == 'end'][0]['start']
-lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Small,,0,0,0,,{{\\pos(540,200)}}GUIA DE SOBREVIVÊNCIA • EP. 4')
-lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,262)}}VOCÊ SOBREVIVERIA')
-lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,375)\\fs108\\c&H2A8AFF&}}A UM INCÊNDIO?')
+TY = [56, 104, 196] if NATIVE else [200, 262, 375]
+lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Small,,0,0,0,,{{\\pos(540,{TY[0]})}}GUIA DE SOBREVIVÊNCIA • EP. 4')
+lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,{TY[1]})}}VOCÊ SOBREVIVERIA')
+lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,{TY[2]})\\fs108\\c&H2A8AFF&}}A UM INCÊNDIO?')
 lines.append(f'Dialogue: 0,{ts(end_start)},{ts(T)},Small,,0,0,0,,{{\\pos(540,1540)\\c&H2A8AFF&}}COMENTE: SOBREVIVI OU NÃO CONSEGUI?')
 # karaoke captions: short chunks; the word being spoken turns yellow and pops
 W = json.load(open('audio/words.json'))
@@ -67,6 +70,9 @@ flt = ('[0:v]split=2[a][b];'
        '[a]scale=-2:1920,crop=1080:1920,gblur=sigma=28,eq=brightness=-0.18:saturation=1.1[bg];'
        '[b]scale=1080:-2[fg];'
        '[bg][fg]overlay=0:(H-h)/2-80,ass=audio/tiktok.ass[v]')
+if NATIVE:   # full-screen vertical video, a soft dark band behind the title for legibility
+    flt = ('[0:v]scale=1080:1920:flags=lanczos,drawbox=x=0:y=0:w=1080:h=330:color=black@0.28:t=fill,'
+           'ass=audio/tiktok.ass[v]')
 subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-filter_complex', flt, '-map', '[v]', '-map', '0:a',
                 '-c:v', 'libx264', '-preset', 'slow', '-crf', '20', '-pix_fmt', 'yuv420p', '-r', '30', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', out], check=True)
 print('ok', out)

@@ -35,7 +35,7 @@
  {
   "scene": "explain",
   "voice": "narr",
-  "text": "O fogo precisa de calor, combustível, e o oxigênio do ar. Sem ar, ele apaga. E o mais perigoso é a fumaça: ela sobe, toma o teto, e desce rapidinho.",
+  "text": "O fogo precisa de calor, combustível, e o oxigênio do ar. Sem ar, ele apaga. E o mais perigoso é a fumaça: ela é quente e tóxica, e faz você desmaiar em poucos minutos. Ela sobe, toma o teto, e desce rapidinho.",
   "tail": 0.35
  },
  {
@@ -49,6 +49,18 @@
   "voice": "narr",
   "text": "Não é um bom plano: a energia cai, e você fica preso numa caixa cheia de fumaça.",
   "tail": 0.25
+ },
+ {
+  "scene": "elevgag",
+  "voice": "none",
+  "text": "",
+  "min": 2.2
+ },
+ {
+  "scene": "replay",
+  "voice": "none",
+  "text": "",
+  "min": 1.8
  },
  {
   "scene": "idea",

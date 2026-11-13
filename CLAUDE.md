@@ -18,7 +18,7 @@ Episódios prontos: **EP1 Tsunami** (`tsunami/`) e **EP2 Terremoto** (`terremoto
 - **Explique a ligação**: toda dica precisa deixar claro por que tem a ver com o desastre (ex.: gás → o tremor solta a mangueira/racha os canos).
 - **Uma voz fixa por personagem**, sem variar entre falas.
 - **Legendas**: palavra por palavra — a palavra dita fica amarela e dá um pulinho; falas de personagem entre aspas.
-- **TikTok**: vertical 1080×1920, título fixo em cima (sem repetir o título no meio do vídeo), vídeo no centro com fundo desfocado, legendas grandes embaixo.
+- **TikTok**: vertical 1080×1920, título fixo em cima (sem repetir o título no meio do vídeo), legendas grandes embaixo. Desde o EP4 o usuário quer **TikTok nativo, sem bordas** (nada de vídeo 16:9 com fundo desfocado): renderize na vertical (`VERT=1`) e monte com `make_vertical.py ... --native`.
 
 ## Fórmula do episódio (siga a mesma estrutura)
 1. Título: "Você sobreviveria a um(a) X?" (GUIA DE SOBREVIVÊNCIA • EPISÓDIO N).
@@ -76,6 +76,8 @@ Quadros: 1280×720, 30 fps. Use o scratchpad para quadros e arquivos temporário
 - Prédio em chamas: `BFIRE` (uma chama por janela, `fireLevel`), `roofSmoke`, `fireGlow`; estilhaços `SHARDS`; roupa de bombeiro `suit`/`ext` no `Bean`; jato dos extintores `sprays`; explicação `dio` (fogão + zona das moléculas `MZ` + fumaça no apartamento).
 - Fogo/fumaça: `makeFlame`/`updateFlame` (sprites com luz), `makeSmokeColumn`; cozinha com panela, tampa, botão do fogão, cortina (`fireState`); fumaça no teto (`aptParts.smoke`) e nos andares do prédio (`ioSmoke`); fogo na janela da fachada e na porta (`facadeFire`, `doorFire`); caminhão de bombeiros com escada e jato d'água (`truck`, `hose`); maquete do triângulo do fogo (`dio`, `dioCam`).
 - Áudio final: `TTS=eleven TIGHT=1 python3 build_audio.py`, `align_words.py`, `TTS=eleven TIGHT=1 python3 build_audio.py` de novo (efeitos usam os tempos das palavras), quadros de teste, render.
+- v3 (pedido do usuário): a explicação diz o que a fumaça causa (quente e tóxica, desmaio em poucos minutos, sobe/toma o teto/desce; cartões com termômetro/caveira e grão tonto); a ideia errada do elevador agora é **mostrada** (cena `elevgag`: luz apaga, luz vermelha, fumaça entra na cabine, "SOCORRO!", "COF!") antes do REPLAY; a escada é curta (`crawl`: poucos degraus e corte para eles saindo pela porta do prédio, "AR LIVRE!"). Duração 1:46.
+- **Modo vertical nativo** (`?vertical=1` / `VERT=1 node render.js ...`): tela 720×1280; os overlays 2D são desenhados no espaço 1280×720 e mapeados com `UIK=0.75`, `UIOX`, `UIOY` (faixa visível do desenho em x = `UIL`…`UIR`); use `proj()` para projetar pontos 3D e `fullRect()` para pintar a tela toda; o `label()` se limita à faixa visível; o cartão do plano fica embaixo; `direct()` converte o fov (mantém 80% da largura do 16:9) e tem ajustes `if (VERT)` em algumas câmeras (elevador, janela, final).
 
 ## Como funciona o `scene.js` (para criar o próximo episódio)
 - Comece copiando `terremoto/` (mar calmo, sem tsunami; já tem apartamento, escada e praia).
@@ -87,7 +89,7 @@ Quadros: 1280×720, 30 fps. Use o scratchpad para quadros e arquivos temporário
 
 ## Ambiente e serviços
 - **ElevenLabs — duas contas** (mesmas vozes; Liam/Charlie/Brian são vozes padrão de qualquer conta). As chaves são *network secrets* do ambiente de nuvem **video-ttk-elevenlabs**, uma por endereço (header `xi-api-key`, **sem prefixo**):
-  - conta 1 → `api.elevenlabs.io` (desde 13/11/2026 é a conta "Nicolas", plano grátis, 10.000/mês; o EP4 usou ~1.020);
+  - conta 1 → `api.elevenlabs.io` (desde 13/11/2026 é a conta "Nicolas", plano grátis, 10.000/mês; usados ~1.400 até o EP4 v3);
   - conta 2 ("Brasil", plano grátis) → `api.us.elevenlabs.io` (mesma API, servidores nos EUA).
   - `build_audio.py` e `align_words.py` (do EP3) tentam a conta 1 e, se der erro de crédito, a conta 2 (`ELEVEN_HOSTS` muda a ordem). Em código use o valor fictício `proxy-injected` — o proxy injeta a chave real.
 - Créditos: cada conta tem **10.000/mês**. A conta 2 hoje é a "Maratonando" (plano grátis); em 12/11/2026, depois do EP3, as **duas ficaram zeradas** (a conta 2 renova por volta de 13/12/2026). Sem créditos: use `align_local.py` e reaproveite falas do cache; para falas novas é preciso renovar/plano maior (ou usar `TTS=piper`, qualidade inferior).
