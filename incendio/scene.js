@@ -1324,8 +1324,8 @@ function direct(t, n, lt, g, H) {
       // inside the elevator, filmed from the top corner like a security camera: the power goes, the smoke comes in
       const k = n === 'elevgag' ? lt : t - W_ENERGIA, bad = n === 'elevgag';
       hp = { x: ELH.x, y: IO.y + 9, z: ELH.z, ry: 0.5, armL: bad ? [2.2, -0.4, -2.3] : A.rest, armR: bad ? A.up : A.rest, eyesWide: true, brow: 1, smile: 0, mouth: bad && k > 0.9 ? 0.5 + 0.3 * Math.abs(Math.sin(k * 9)) : 0, shout: bad && k < 0.9 ? 0.6 : 0, wob: bad ? 0.2 : 0.05, soot: bad ? ss(0, 2, k) * 0.6 : 0, look: [0.3, 0.2] };
-      fp = { x: ELF.x, y: IO.y + 9, z: ELF.z, ry: 0.25, armL: A.up, armR: bad ? [2.2, -0.4, -2.3] : A.up, eyesWide: true, brow: 1, smile: 0, shout: 0.6, wob: bad ? 0.3 : 0.1, soot: bad ? ss(0, 2, k) * 0.6 : 0, look: [0.3, 0.2] };
-      dg = { mode: 'carried' };
+      fp = { x: ELF.x, y: IO.y + 9, z: ELF.z, ry: 0.25, armL: bad && fm > 0.05 ? [2.2, -0.4, -2.3] : A.up, armR: bad ? [2.2, -0.4, -2.3] : A.up, eyesWide: true, brow: 1, smile: 0, shout: bad && fm > 0.05 ? 0 : 0.6, mouth: bad ? fm : 0, wob: bad ? 0.3 : 0.1, soot: bad ? ss(0, 2, k) * 0.6 : 0, look: [0.3, 0.2] };
+      dg = { mode: 'scared', x: IO.x - 6.0, y: IO.y + 9, z: IO.z - 1.75, ry: 0.5 };
       cam.pos = V(IO.x - 5.05, IO.y + 11.45, IO.z - 1.2); cam.tgt = V(IO.x - 6.05, IO.y + 10.0, IO.z - 2.6); cam.fov = VERT ? 66 : 60; shake = bad ? 0.08 : 0;
     } else {
       // idea + crawl: same hallway, the camera follows them crouching to the stairs and down a few steps... then out of the front door
@@ -1676,11 +1676,12 @@ function questionMarks(k, hx, hy) {
   ui.restore();
 }
 function vhs(t, k) {
-  ui.save();
-  ui.fillStyle = 'rgba(40,30,80,0.25)'; fullRect();
-  for (let y = 0; y < H; y += 4) { ui.fillStyle = `rgba(0,0,0,${0.18 + 0.05 * Math.sin(y * 0.3 + t * 40)})`; ui.fillRect(0, y, W, 2); }
-  const band = (t * 900) % (H + 120) - 60; ui.fillStyle = 'rgba(255,255,255,0.18)'; ui.fillRect(0, band, W, 24);
-  for (let i = 0; i < 40; i++) { const r = Math.sin(i * 91.7 + Math.floor(t * 30) * 13.1) * 1e4; const f = r - Math.floor(r); ui.fillStyle = `rgba(255,255,255,${0.15 + f * 0.25})`; ui.fillRect(f * W, ((f * 7.3) % 1) * H, 30 + f * 120, 2); }
+  ui.save(); ui.setTransform(1, 0, 0, 1, 0, 0);
+  ui.fillStyle = 'rgba(40,30,80,0.25)'; ui.fillRect(0, 0, SW, SH);
+  for (let y = 0; y < SH; y += 4) { ui.fillStyle = `rgba(0,0,0,${0.18 + 0.05 * Math.sin(y * 0.3 + t * 40)})`; ui.fillRect(0, y, SW, 2); }
+  const band = (t * 900) % (SH + 120) - 60; ui.fillStyle = 'rgba(255,255,255,0.18)'; ui.fillRect(0, band, SW, 24);
+  for (let i = 0; i < 60; i++) { const r = Math.sin(i * 91.7 + Math.floor(t * 30) * 13.1) * 1e4; const f = r - Math.floor(r); ui.fillStyle = `rgba(255,255,255,${0.15 + f * 0.25})`; ui.fillRect(f * SW, ((f * 7.3) % 1) * SH, 20 + f * 90, 2); }
+  ui.setTransform(UIK, 0, 0, UIK, UIOX, UIOY); ui.translate(UIL, VERT ? 120 : 0); if (VERT) ui.scale(1.4, 1.4);
   ui.textBaseline = 'middle'; ui.font = '700 44px "JetBrains Mono", monospace'; ui.fillStyle = '#ffffff'; ui.shadowColor = '#ff2bd6'; ui.shadowOffsetX = 3;
   if (Math.floor(t * 3) % 2 === 0) ui.fillText('◀◀ REPLAY', 60, 80);
   ui.font = '700 28px "JetBrains Mono", monospace'; ui.fillText('VOLTANDO NO TEMPO...', 60, 130);
@@ -1937,9 +1938,10 @@ function overlay(t, g) {
   if (n === 'exit1') { const [x, y] = proj(V(IO.x - 6, IO.y + 10.4, IO.z - 0.9)); pointer(x, y, Math.PI * 0.8, 'ELEVADOR', g.start + 0.3, t); }
   if (n === 'exit2') { badge('✗ PÉSSIMA IDEIA', ss(0, 0.3, lt), '#c62828'); if (t > W_ENERGIA) { const k = t - W_ENERGIA; if (k < 0.6 && Math.floor(k * 12) % 2 === 0) { ui.fillStyle = 'rgba(0,0,0,0.5)'; fullRect(); } label('SEM ENERGIA = PRESO NA FUMAÇA', 640, 160, 42, ss(W_ENERGIA, W_ENERGIA + 0.3, t), '#ff6b5a'); } }
   if (n === 'elevgag') { badge('✗ PÉSSIMA IDEIA', 1, '#c62828'); const [x1, y1] = headOnScreen(hero, 0.9), [x2, y2] = headOnScreen(friend, 0.9);
-    ui.save(); ui.textAlign = 'center'; if (lt < 1.2) { ui.translate(640, 170); const s2 = pop(lt, 0.2); ui.scale(s2, s2); outlined('SOCORRO!', 0, 0, 72, '#ffffff', '#c62828', 900, 0.18); } ui.restore();
+    ui.save(); ui.textAlign = 'center'; if (lt < 0.85) { ui.translate(640, 170); const s2 = pop(lt, 0.2); ui.scale(s2, s2); outlined('SOCORRO!', 0, 0, 72, '#ffffff', '#c62828', 900, 0.18); } ui.restore();
     ui.save(); ui.textAlign = 'center'; for (let i = 0; i < 3; i++) { const a2 = ss(0.5 + i * 0.4, 0.7 + i * 0.4, lt); if (a2 <= 0) continue; ui.globalAlpha = a2; outlined('COF!', (i % 2 ? x2 : x1) + (i % 2 ? 80 : -80), (i % 2 ? y2 : y1) - 20 - i * 25, 46, '#ffffff', '#0a1428', 900, 0.2); } ui.restore();
     if (lt > 1.0) { stars(x1, y1 - 30, lt); stars(x2, y2 - 30, lt + 1); } }
+  if (n === 'replay') vhs(t, lt);
   if (n === 'idea') { const [x, y] = headOnScreen(hero, 1.0); lightbulb(x, y - 70, lt); }
   if (n === 'crawl' || n === 'idea') { const dc = Math.abs(t - (W_ESCADA + 0.5)); if (dc < 0.3) { ui.fillStyle = `rgba(0,0,0,${1 - dc / 0.3})`; fullRect(); } }
   if (n === 'crawl' && t > W_ESCADA + 1.8) label('AR LIVRE!', 640, 150, 54, ss(W_ESCADA + 1.8, W_ESCADA + 2.1, t), '#5ff08a');

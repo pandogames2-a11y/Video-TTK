@@ -378,6 +378,8 @@ for sc in ['crawl', 'real']: correct(wT('assim', sc))
 ding(T0('exit1') + 0.3, 0.06, (1046, 1318))
 slide(wT('energia', 'exit2'), 900, 200, 0.8, 0.1)
 cough(wT('caixa', 'exit2'), 0.12, 3)
+rewind('replay')   # VHS rewind noise
+E0 = T0('elevgag'); cough(E0 + 0.5, 0.12, 2); cough(TE('elevgag') - 0.6, 0.12, 2)
 ding(VS('idea') - 0.15, 0.12, (1568, 2093))
 for k, at in enumerate(np.arange(T0('crawl') + 0.4, TE('crawl') - 0.8, 0.28)): step(at, 0.06)
 # clothes on fire: an ember falls on the friend's back
