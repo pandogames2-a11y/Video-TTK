@@ -9,6 +9,7 @@ Separamos o que é confirmado pela Rockstar, o que apareceu em trailers/gameplay
 Créditos:
 - Imagens, trailer e screenshots de GTA 6 e GTA 5: Rockstar Games
 - Gameplay de GTA 5: @NoCopyrightGameplays e @onboxgaming4741 (gameplay livre para uso)
+- Imagens ilustrativas do mundo real: Mixkit (licença gratuita)
 - Fontes: Rockstar Games, Game Informer (set/2026), gameplay oficial "Extended Look" (ago/2026) e prévias da imprensa
 
 Vídeo de comentário e análise. Este canal não tem ligação com a Rockstar Games.

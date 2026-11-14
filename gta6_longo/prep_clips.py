@@ -57,7 +57,7 @@ for sg in SCRIPT:
         vf += (f'setpts=PTS/{speed:.4f},framerate=fps={FPS}' if speed < 0.99 else f'fps={FPS}')
         subprocess.run(['ffmpeg', '-loglevel', 'error', '-ss', str(ini), '-t', str(src), '-i', f, '-an', '-vf', vf, '-q:v', '3', f'{out}/f%04d.jpg'], check=True)
         n = len(glob.glob(f'{out}/f*.jpg'))
-        ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta5' if 'gta5' in f else 'gta6', n=n, lead=LEAD, cred=CRED.get(os.path.basename(f), '')))
+        ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta5' if 'gta5' in f else 'stock' if 'mixkit' in f else 'gta6', n=n, lead=LEAD, cred=CRED.get(os.path.basename(f), '')))
         print(f'{cid}: {n / FPS:.1f} s na tela ({src:.1f} s de {os.path.basename(f)} a partir de {ini}s, velocidade {speed:.2f})')
 json.dump(ready, open('clips_ready.json', 'w'), ensure_ascii=False, indent=1)
 print(len(ready), 'trechos prontos')

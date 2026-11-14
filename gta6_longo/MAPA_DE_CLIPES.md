@@ -36,21 +36,29 @@ Nada disso garante que o vídeo não receba reivindicação, mas reduz muito o r
 | `n3_1` | 02:27.1 | 5.0 s | 5.0 s | gta5_nocopyright.mp4 | 255.0 s | No GTA 5 até existiam atributos, tipo força e fôlego, que subiam conforme você j… |
 | `n3_2` | 02:38.1 | 5.0 s | 0.0 s | Jason_Duval_15.jpg | 0 s | No GTA 6, a Rockstar confirmou: comeu demais, o Jason e a Lucia engordam. Foi pr… |
 | `n3_3` | 02:50.4 | 3.3 s | 2.8 s | trailer_lancamento.mp4 | 56.45 s | E o gameplay ainda mostrou academia e um medidor de estamina. |
+| `n3_5` | 03:02.4 | 5.0 s | 5.0 s | mixkit_32809.mp4 | 1.0 s | A dúvida é: isso muda a gameplay ou é só visual? Você correria menos com o Jason… |
+| `n4_1` | 03:20.9 | 5.0 s | 5.0 s | mixkit_16515.mp4 | 2.0 s | No GTA 5, começava a chover e chovia praticamente no mapa inteiro, ao mesmo temp… |
 | `n4_2` | 03:26.7 | 5.0 s | 0.0 s | Ambrosia_02.jpg | 0 s | No GTA 6, segundo a Rockstar, o clima é localizado. Você pode estar no sol, olha… |
-| `n4_4` | 03:42.1 | 5.0 s | 0.0 s | Ambrosia_04.jpg | 0 s | E tem furacão. Tempestade tropical, vento forte, raio caindo. Leonida é inspirad… |
+| `n4_3` | 03:36.7 | 4.8 s | 4.8 s | mixkit_22646.mp4 | 0.5 s | E a chuva deixa marca: a rua não seca por mágica quando o sol volta. |
+| `n4_4` | 03:42.1 | 5.0 s | 5.0 s | mixkit_44981.mp4 | 1.0 s | E tem furacão. Tempestade tropical, vento forte, raio caindo. Leonida é inspirad… |
+| `n4_5` | 03:51.9 | 5.0 s | 5.0 s | mixkit_9405.mp4 | 3.0 s | Imagina uma fuga de carro na pista encharcada, com o vento empurrando tudo e a p… |
 | `n5_1` | 04:07.1 | 5.0 s | 5.0 s | gta5_nocopyright.mp4 | 228.5 s | O GTA 5 tinha o Chop, o cachorro do Franklin, alguns cervos, pumas no mato e tub… |
 | `n5_2` | 04:16.0 | 5.0 s | 0.0 s | Leonida_Keys_04.jpg | 0 s | No GTA 6 são mais de cento e setenta espécies, entre terra, ar e mar. Dezenas de… |
 | `n5_3` | 04:27.7 | 2.6 s | 1.3 s | trailer_lancamento.mp4 | 20.55 s | Nos trailers já apareceram jacarés, flamingos e até iguanas, que são uma praga f… |
 | `n5_4` | 04:34.6 | 3.0 s | 1.5 s | trailer_lancamento.mp4 | 27.2 s | Agora imagina fugir pelo pântano de Grassrivers e dar de cara com um jacaré. Sin… |
 | `n5_5` | 04:41.6 | 5.0 s | 0.0 s | Mount_Kalaga_National_Park_05.jpg | 0 s | E o site oficial fala em caça e pesca em Mount Kalaga. Então tudo indica que ess… |
 | `n6_1` | 04:55.6 | 5.0 s | 4.5 s | gta5_nocopyright.mp4 | 336.3 s | No GTA 5, a internet do jogo tinha o Lifeinvader, a paródia de rede social, e o … |
+| `n6_2` | 05:07.2 | 5.0 s | 5.0 s | mixkit_21364.mp4 | 2.0 s | Nos trailers do GTA 6, o celular é cheio de vídeos verticais: gente fazendo best… |
 | `n6_3` | 05:17.0 | 5.0 s | 0.0 s | Real_Dimez_04.jpg | 0 s | É a Flórida da internet, aquela dos vídeos absurdos que viralizam todo santo dia… |
+| `n6_4` | 05:23.2 | 5.0 s | 5.0 s | mixkit_34484.mp4 | 2.0 s | Agora imagina: você faz uma loucura no meio da rua e, minutos depois, o vídeo tá… |
 | `n7_1` | 05:44.5 | 5.0 s | 5.0 s | gta5_nocopyright.mp4 | 2181.0 s | No GTA 5, você via o mesmo pedestre três vezes no mesmo quarteirão. E todo mundo… |
 | `n7_2` | 05:55.6 | 5.0 s | 0.0 s | Vice_City_13.jpg | 0 s | No GTA 6, os NPCs variam em altura, corpo, pele, sardas, pintas e até tatuagens. |
 | `n7_3` | 06:03.4 | 3.7 s | 1.9 s | trailer_lancamento.mp4 | 54.55 s | Nos trailers tem gente malhando na praia, fazendo festa e filmando tudo com o ce… |
 | `n7_4` | 06:09.2 | 5.0 s | 0.0 s | Jason_and_Lucia_18.jpg | 0 s | E no gameplay apareceu um sistema parecido com o do Red Dead 2: dá pra cumprimen… |
+| `n7_5` | 06:17.0 | 5.0 s | 5.0 s | mixkit_4401.mp4 | 3.0 s | Ou seja, cada esquina pode virar uma história. Ou uma confusão. |
 | `n8_1` | 06:38.7 | 5.0 s | 5.0 s | gta5_freetouse.mp4 | 441.0 s | No GTA 5, assim que as estrelas sumiam, a cidade esquecia tudo. Você roubava, ex… |
 | `n8_2` | 06:50.8 | 5.0 s | 0.0 s | Jason_Duval_12.jpg | 0 s | Nas coberturas do gameplay de agosto, a imprensa notou um indicador que parece a… |
+| `n8_4` | 07:10.4 | 5.0 s | 5.0 s | mixkit_31376.mp4 | 2.0 s | Se for real, o jogo vai saber quem você é. E aí, você seria o ladrão calculista … |
 | `n9_1` | 07:25.8 | 5.0 s | 5.0 s | gta5_nocopyright.mp4 | 2636.0 s | O GTA 5 tinha Los Santos e o interior de Blaine County, com o Monte Chiliad lá n… |
 | `n9_2` | 07:39.4 | 4.8 s | 2.4 s | trailer_lancamento.mp4 | 52.0 s | São seis regiões. Vice City, a cidade do neon e da praia. |
 | `n9_3` | 07:44.8 | 1.7 s | 0.0 s | Leonida_Keys_01.jpg | 0 s | As ilhas de Leonida Keys. |
@@ -61,7 +69,8 @@ Nada disso garante que o vídeo não receba reivindicação, mas reduz muito o r
 | `n10_1` | 08:13.9 | 5.0 s | 5.0 s | gta5_freetouse.mp4 | 261.0 s | No GTA 5, a fuga era sempre a mesma: quebra a linha de visão, se esconde num bec… |
 | `n10_3` | 08:31.2 | 5.0 s | 2.8 s | trailer_lancamento.mp4 | 46.35 s | E a polícia identifica você pela roupa, pelo rosto e pelo carro. Trocar de roupa… |
 | `n10_4` | 08:38.7 | 5.0 s | 0.0 s | Lucia_Caminos_14.jpg | 0 s | Pelas prévias da imprensa, a polícia só fica sabendo se alguém testemunhar ou se… |
+| `n10_5` | 08:51.6 | 5.0 s | 5.0 s | mixkit_17376.mp4 | 1.0 s | E no gameplay ainda apareceram cães policiais. Correr a pé ficou bem mais perigo… |
 | `n10_6` | 08:57.8 | 5.0 s | 0.0 s | Jason_and_Lucia_09.jpg | 0 s | Imagina: você assalta uma loja, sai pelos fundos, troca de jaqueta, pega outro c… |
 | `outro_0` | 09:08.5 | 5.0 s | 2.9 s | trailer_lancamento.mp4 | 67.95 s | E essas são apenas dez das novidades que fazem GTA 6 parecer um salto gigantesco… |
 
-Total: 44 trechos, 197 s na tela em 566 s de vídeo (35%). Do trailer de lançamento são usados só 25 s (câmera lenta).
+Total: 53 trechos, 242 s na tela em 566 s de vídeo (43%). Do trailer de lançamento são usados só 25 s (câmera lenta).

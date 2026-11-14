@@ -353,7 +353,12 @@
      "a": "SÓ VISUAL?",
      "b": "a Rockstar ainda não disse"
     },
-    "v": "duvida"
+    "v": "duvida",
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_32809.mp4",
+     "inicio": 1.0,
+     "dur": 5.0
+    }
    }
   ],
   "hl": [
@@ -395,7 +400,12 @@
      "as": "clima global",
      "bs": "clima localizado"
     },
-    "v": ""
+    "v": "",
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_16515.mp4",
+     "inicio": 2.0,
+     "dur": 5.0
+    }
    },
    {
     "t": "No GTA 6, segundo a Rockstar, o clima é localizado. Você pode estar no sol, olhando uma tempestade desabar a poucos quarteirões.",
@@ -414,7 +424,12 @@
      "a": "A RUA CONTINUA MOLHADA",
      "b": "o clima é persistente"
     },
-    "v": "molhado"
+    "v": "molhado",
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_22646.mp4",
+     "inicio": 0.5,
+     "dur": 5.0
+    }
    },
    {
     "t": "E tem furacão. Tempestade tropical, vento forte, raio caindo. Leonida é inspirada na Flórida, então faz todo sentido.",
@@ -428,7 +443,11 @@
      ]
     },
     "v": "furacao",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Ambrosia/Ambrosia_04.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_44981.mp4",
+     "inicio": 1.0,
+     "dur": 5.0
+    }
    },
    {
     "t": "Imagina uma fuga de carro na pista encharcada, com o vento empurrando tudo e a polícia colada atrás. Dá até frio na barriga.",
@@ -437,7 +456,12 @@
      "a": "FUGA NO MEIO DO FURACÃO",
      "b": "pista molhada e vento forte"
     },
-    "v": "furacao"
+    "v": "furacao",
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_9405.mp4",
+     "inicio": 3.0,
+     "dur": 5.0
+    }
    }
   ],
   "hl": [
@@ -592,7 +616,12 @@
       "conteúdo viral"
      ]
     },
-    "v": "feed"
+    "v": "feed",
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_21364.mp4",
+     "inicio": 2.0,
+     "dur": 5.0
+    }
    },
    {
     "t": "É a Flórida da internet, aquela dos vídeos absurdos que viralizam todo santo dia.",
@@ -610,7 +639,12 @@
      "a": "VOCÊ VIROU MEME",
      "b": "ideia nossa, ainda não confirmada"
     },
-    "v": "meme"
+    "v": "meme",
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_34484.mp4",
+     "inicio": 2.0,
+     "dur": 5.0
+    }
    }
   ],
   "hl": [
@@ -703,7 +737,12 @@
      "k": "op",
      "a": "CADA ESQUINA, UMA HISTÓRIA"
     },
-    "v": "vivos"
+    "v": "vivos",
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_4401.mp4",
+     "inicio": 3.0,
+     "dur": 5.0
+    }
    }
   ],
   "hl": [
@@ -812,7 +851,12 @@
      "as": "sem alarde",
      "bs": "explode tudo"
     },
-    "v": "niveis"
+    "v": "niveis",
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_31376.mp4",
+     "inicio": 2.0,
+     "dur": 5.0
+    }
    }
   ],
   "hl": [
@@ -1011,7 +1055,12 @@
      "a": "CÃES POLICIAIS",
      "b": "correr a pé ficou perigoso"
     },
-    "v": "caes"
+    "v": "caes",
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_17376.mp4",
+     "inicio": 1.0,
+     "dur": 5.0
+    }
    },
    {
     "t": "Imagina: você assalta uma loja, sai pelos fundos, troca de jaqueta, pega outro carro e passa do lado da viatura, de boa. Isso é GTA 6.",
