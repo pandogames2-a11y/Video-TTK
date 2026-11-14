@@ -151,10 +151,10 @@ function hook(t) {   // the question is on screen while the narrator asks it, an
   const kin = clamp((t - a) / 0.3), sIn = kin < 1 ? kin + Math.sin(kin * Math.PI) * 0.18 : 1;
   const kout = ss(out, gone, t), s = sIn * (1 - kout);
   if (s <= 0.001) return;
-  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(540, 760); main.scale(s, s); main.rotate(-0.03 + kout * 0.25);
+  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(540, 760); main.scale(s, s); 
   main.textAlign = 'center'; main.lineJoin = 'round';
   const tx = (str, y, size, fill) => { main.font = `900 ${size}px "Inter Display", Inter`; main.lineWidth = size * 0.18; main.strokeStyle = '#08061a'; main.strokeText(str, 0, y); main.fillStyle = fill; main.fillText(str, 0, y); };
-  tx('GUIA DE SOBREVIVÊNCIA • EP. 5', -150, 40, '#ffffff'); tx('VOCÊ SOBREVIVERIA', -45, 96, '#ffffff'); tx('AO BONECO', 70, 104, '#ff5a4a'); tx('ASSASSINO?', 182, 112, '#ff5a4a');
+  tx('VOCÊ SOBREVIVERIA', -95, 96, '#ffffff'); tx('AO BONECO', 20, 104, '#ff5a4a'); tx('ASSASSINO?', 132, 112, '#ff5a4a');
   main.restore();
 }
 window.renderFrame = t => { frame(t); return true; };

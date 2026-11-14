@@ -38,7 +38,7 @@ for i, w in enumerate(W):
     s0 = max(w['t0'] - 0.03, prev_t); s1 = min(max(w['t1'] + 0.25, w['t0'] + 0.3), nxt - 0.02)
     if s1 <= s0 + 0.05: s1 = s0 + 0.12
     txt = w['text'].upper()
-    lines.append(f"Dialogue: 1,{ts(s0)},{ts(s1)},Cap,,0,0,0,,{{\\pos(540,1520)\\fscx80\\fscy80\\t(0,80,\\fscx112\\fscy112)\\t(80,160,\\fscx100\\fscy100)}}{txt}")
+    lines.append(f"Dialogue: 1,{ts(s0)},{ts(s1)},Cap,,0,0,0,,{{\\pos(540,1520)\\fad(120,110)\\blur6\\fscx90\\fscy90\\t(0,140,\\blur0.6\\fscx104\\fscy104)\\t(140,240,\\fscx100\\fscy100)}}{txt}")
     prev_t = s1
 open('audio/tiktok.ass', 'w').write('\n'.join(lines) + '\n')
 flt = ('[0:v]split=2[a][b];'
@@ -46,7 +46,7 @@ flt = ('[0:v]split=2[a][b];'
        '[b]scale=1080:-2[fg];'
        '[bg][fg]overlay=0:(H-h)/2-80,ass=audio/tiktok.ass[v]')
 if NATIVE:   # full-screen vertical video, a soft dark band behind the title for legibility
-    flt = ('[0:v]scale=1080:1920:flags=lanczos,drawbox=x=0:y=0:w=1080:h=330:color=black@0.28:t=fill,'
+    flt = ('[0:v]scale=1080:1920:flags=lanczos,'
            'ass=audio/tiktok.ass[v]')
 subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', src, '-filter_complex', flt, '-map', '[v]', '-map', '0:a',
                 '-c:v', 'libx264', '-preset', 'slow', '-crf', '20', '-pix_fmt', 'yuv420p', '-r', '30', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', out], check=True)
