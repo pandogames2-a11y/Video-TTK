@@ -1,0 +1,164 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap">
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head><body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// EP5 style test: flat 2D cartoon, thick outlines, an American living room at night
+const c = document.getElementById('c'), g = c.getContext('2d');
+const OUT = '#2b1d17', LW = 7;
+const P = new URLSearchParams(location.search), SHOT = P.get('shot') || 'a';
+function shape(fill, path, lw = LW) { g.beginPath(); path(); g.fillStyle = fill; g.fill(); g.lineWidth = lw; g.strokeStyle = OUT; g.lineJoin = 'round'; g.lineCap = 'round'; g.stroke(); }
+function rect(x, y, w, h, fill, r = 0, lw = LW) { shape(fill, () => g.roundRect(x, y, w, h, r), lw); }
+function ell(x, y, rx, ry, fill, rot = 0, lw = LW) { shape(fill, () => g.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2), lw); }
+function line(pts, w = LW, col = OUT) { g.beginPath(); g.moveTo(pts[0], pts[1]); for (let i = 2; i < pts.length; i += 2) g.lineTo(pts[i], pts[i + 1]); g.lineWidth = w; g.strokeStyle = col; g.lineCap = 'round'; g.lineJoin = 'round'; g.stroke(); }
+function curve(x0, y0, cx, cy, x1, y1, w = LW, col = OUT) { g.beginPath(); g.moveTo(x0, y0); g.quadraticCurveTo(cx, cy, x1, y1); g.lineWidth = w; g.strokeStyle = col; g.lineCap = 'round'; g.stroke(); }
+
+function room() {
+  const FY = 1360;   // floor line
+  // wallpaper: warm stripes
+  g.fillStyle = '#e7c99a'; g.fillRect(0, 0, 1080, FY);
+  for (let x = 0; x < 1080; x += 60) { g.fillStyle = '#dcb984'; g.fillRect(x, 0, 26, FY); }
+  // crown molding + wainscoting
+  g.fillStyle = '#f6ead4'; g.fillRect(0, 0, 1080, 70); line([0, 70, 1080, 70], 5);
+  g.fillStyle = '#7d4e35'; g.fillRect(0, 1010, 1080, FY - 1010); line([0, 1010, 1080, 1010], 6);
+  for (let x = 30; x < 1080; x += 175) rect(x, 1045, 140, 270, '#875840', 6, 4);
+  // floor: wood planks
+  g.fillStyle = '#a8693f'; g.fillRect(0, FY, 1080, 1920 - FY); line([0, FY, 1080, FY], 7);
+  for (let y = FY + 60, k = 0; y < 1920; y += 70 + k * 6, k++) { line([0, y, 1080, y], 3, '#7f4a2a'); for (let x = (k % 2) * 120; x < 1080; x += 260) line([x, y - 70 - k * 6 + 6, x, y], 3, '#7f4a2a'); }
+  // window with the night outside
+  rect(120, 240, 330, 420, '#f6ead4', 10);
+  const sky = g.createLinearGradient(0, 270, 0, 630); sky.addColorStop(0, '#1d2350'); sky.addColorStop(1, '#3b3f7a');
+  rect(145, 265, 280, 370, sky, 4, 5);
+  ell(360, 340, 34, 34, '#fff3c4', 0, 4); ell(372, 332, 30, 30, '#252b5c', 0, 0);   // moon
+  g.fillStyle = '#fff3c4'; [[190, 320], [240, 400], [300, 300], [210, 470], [390, 450]].forEach(([x, y]) => g.fillRect(x, y, 5, 5));
+  g.fillStyle = '#141838'; g.beginPath(); g.moveTo(145, 635); g.lineTo(145, 560); g.lineTo(210, 520); g.lineTo(270, 560); g.lineTo(270, 600); g.lineTo(330, 580); g.lineTo(425, 590); g.lineTo(425, 635); g.fill();   // neighbour's roof
+  line([285, 265, 285, 635], 6); line([145, 450, 425, 450], 6);
+  rect(100, 230, 370, 26, '#9b3b33', 8, 5);   // curtain rod + curtains
+  shape('#c2473d', () => { g.moveTo(108, 250); g.lineTo(175, 250); g.quadraticCurveTo(150, 460, 190, 700); g.lineTo(100, 700); g.closePath(); });
+  shape('#c2473d', () => { g.moveTo(462, 250); g.lineTo(395, 250); g.quadraticCurveTo(420, 460, 380, 700); g.lineTo(470, 700); g.closePath(); });
+  // framed family photo + clock
+  rect(560, 300, 150, 120, '#c99a4b', 6); rect(575, 315, 120, 90, '#f2dcb3', 2, 4); ell(615, 365, 16, 22, '#8a5a3c', 0, 3); ell(655, 368, 14, 19, '#6e4428', 0, 3);
+  ell(800, 360, 55, 55, '#f6ead4'); line([800, 360, 800, 325], 5); line([800, 360, 825, 372], 5);
+  // stairs going up on the right with banister (typical American house)
+  g.fillStyle = '#c38b5b'; g.beginPath(); g.moveTo(1080, 560); g.lineTo(1080, 1360); g.lineTo(880, 1360); g.closePath(); g.fill();
+  for (let i = 0; i < 8; i++) { const x = 880 + i * 25, y = 1360 - i * 100; rect(x, y - 30, 1080 - x, 30, '#9c6a40', 2, 4); }
+  line([860, 1330, 1080, 760], 9); for (let i = 0; i < 8; i++) { const x = 880 + i * 27; line([x, 1330 - (x - 860) * 2.6, x, 1360 - i * 100], 5); }
+  ell(860, 1325, 16, 16, '#7d4e35');
+  // floor lamp
+  line([600, 1360, 600, 830], 7); ell(600, 1360, 50, 10, '#3b2a22');
+  shape('#f3d38a', () => { g.moveTo(545, 830); g.lineTo(655, 830); g.lineTo(625, 740); g.lineTo(575, 740); g.closePath(); });
+  const glow = g.createRadialGradient(600, 820, 10, 600, 820, 380); glow.addColorStop(0, 'rgba(255,220,140,0.35)'); glow.addColorStop(1, 'rgba(255,220,140,0)'); g.fillStyle = glow; g.fillRect(200, 440, 800, 800);
+  return FY;
+}
+function rug(FY) { shape('#4f6d8f', () => g.ellipse(470, FY + 230, 430, 120, 0, 0, Math.PI * 2)); shape('#6b8bb0', () => g.ellipse(470, FY + 230, 350, 90, 0, 0, Math.PI * 2), 4); }
+function sofa(x, y) {   // y = floor line under the sofa
+  rect(x, y - 330, 560, 190, '#6e8f6a', 40);           // back
+  rect(x - 30, y - 200, 620, 130, '#7fa27a', 30);       // seat
+  rect(x - 50, y - 250, 90, 190, '#6e8f6a', 30); rect(x + 520, y - 250, 90, 190, '#6e8f6a', 30);   // arms
+  line([x + 280, y - 190, x + 280, y - 80], 4);
+  rect(x + 10, y - 70, 24, 70, '#4a2f22', 6, 4); rect(x + 526, y - 70, 24, 70, '#4a2f22', 6, 4);
+  rect(x + 40, y - 300, 120, 100, '#e0b04a', 24, 5);   // cushion
+}
+function tv(x, y, on = true) {
+  rect(x - 150, y - 140, 300, 140, '#5a3a2a', 8);   // stand
+  rect(x - 120, y - 120, 110, 90, '#6b4532', 6, 4); rect(x + 10, y - 120, 110, 90, '#6b4532', 6, 4);
+  rect(x - 170, y - 370, 340, 220, '#22201f', 18);
+  rect(x - 150, y - 352, 300, 184, on ? '#7fd3ff' : '#1a1a1a', 10, 4);
+  if (on) { g.save(); g.beginPath(); g.roundRect(x - 150, y - 352, 300, 184, 10); g.clip(); g.fillStyle = '#ffd36b'; g.beginPath(); g.arc(x + 70, y - 300, 30, 0, 7); g.fill(); g.fillStyle = '#3f9a5a'; g.fillRect(x - 150, y - 230, 300, 70); g.restore(); }
+}
+// the new bean: light-brown, big startled eyes
+function bean(x, y, o = {}) {   // x,y = feet centre on the floor
+  const s = o.s || 1; g.save(); g.translate(x, y); g.scale(s, s);
+  const sit = o.sit;
+  // legs + sneakers
+  if (sit) { line([-40, -150, -60, -40], 12); line([40, -150, 60, -40], 12); ell(-70, -30, 40, 22, '#e6e6e6'); ell(70, -30, 40, 22, '#e6e6e6'); }
+  else { line([-35, -120, -45, -25], 12); line([35, -120, 45, -25], 12); ell(-58, -18, 42, 22, '#e6e6e6'); ell(58, -18, 42, 22, '#e6e6e6'); line([-80, -20, -40, -20], 4, '#d14a3a'); line([36, -20, 76, -20], 4, '#d14a3a'); }
+  const by = sit ? -230 : -250;
+  // arms behind
+  const aL = o.armL || [-110, by + 20, -150, by + 110], aR = o.armR || [110, by + 20, 150, by + 110];
+  // body
+  ell(0, by, 120, 155, '#c8874d', -0.08);
+  curve(-10, by - 140, 30, by, -5, by + 145, 6, '#8e5426');   // the coffee-bean crease
+  // arms
+  line([-95, by + 10, aL[0], aL[1], aL[2], aL[3]], 11); ell(aL[2], aL[3], 20, 20, '#ffffff', 0, 5);
+  line([95, by + 10, aR[0], aR[1], aR[2], aR[3]], 11); ell(aR[2], aR[3], 20, 20, '#ffffff', 0, 5);
+  // face: always a bit startled
+  const ey = by - 50, look = o.look || [0, 0];
+  ell(-40, ey, 38, 46, '#ffffff', 0, 5); ell(40, ey, 38, 46, '#ffffff', 0, 5);
+  ell(-40 + look[0] * 14, ey + look[1] * 14, o.tiny ? 7 : 10, o.tiny ? 7 : 12, OUT, 0, 0); ell(40 + look[0] * 14, ey + look[1] * 14, o.tiny ? 7 : 10, o.tiny ? 7 : 12, OUT, 0, 0);
+  curve(-72, ey - 62, -42, ey - 82, -12, ey - 66, 7); curve(12, ey - 66, 42, ey - 82, 72, ey - 62, 7);   // raised brows
+  if (o.mouth === 'o') ell(0, ey + 78, 18, 24, '#5a1f1f', 0, 5); else curve(-24, ey + 70, 0, ey + 84, 24, ey + 70, 6);
+  g.restore();
+}
+// our killer doll (not Chucky): porcelain-face toy with a black bowl cut and a sailor suit
+function doll(x, y, o = {}) {
+  const s = o.s || 1; g.save(); g.translate(x, y); g.scale(s, s);
+  line([-22, -70, -26, -12], 10); line([22, -70, 26, -12], 10); ell(-30, -8, 22, 12, '#2a3f7a'); ell(30, -8, 22, 12, '#2a3f7a');
+  rect(-48, -150, 96, 92, '#ffffff', 16);   // sailor shirt
+  shape('#2a3f7a', () => { g.moveTo(-48, -150); g.lineTo(48, -150); g.lineTo(0, -105); g.closePath(); }, 5);
+  shape('#d9443a', () => { g.moveTo(-10, -112); g.lineTo(10, -112); g.lineTo(0, -88); g.closePath(); }, 4);
+  rect(-48, -70, 96, 28, '#2a3f7a', 8, 5);
+  line([-46, -140, -70, -90], 10); line([46, -140, 70, -90], 10); ell(-72, -86, 13, 13, '#f3dcc6', 0, 4); ell(72, -86, 13, 13, '#f3dcc6', 0, 4);
+  g.save(); g.translate(0, -220); g.rotate(o.tilt || 0);
+  ell(0, 0, 78, 72, '#f3dcc6');
+  shape('#1f1a1a', () => { g.moveTo(-82, 10); g.quadraticCurveTo(-90, -80, 0, -82); g.quadraticCurveTo(90, -80, 82, 10); g.lineTo(60, -18); g.lineTo(-60, -18); g.closePath(); }, 5);   // bowl cut
+  const red = o.evil;
+  ell(-28, 10, 15, 17, red ? '#ffefe0' : '#ffffff', 0, 4); ell(28, 10, 15, 17, red ? '#ffefe0' : '#ffffff', 0, 4);
+  ell(-26, 12, 7, 9, red ? '#e0261c' : '#3b6fd1', 0, 0); ell(30, 12, 7, 9, red ? '#e0261c' : '#3b6fd1', 0, 0);
+  if (red) { line([-46, -10, -14, 2], 6); line([46, -10, 14, 2], 6); }   // angry brows
+  ell(-48, 34, 12, 7, 'rgba(230,110,120,0.6)', 0, 0); ell(48, 34, 12, 7, 'rgba(230,110,120,0.6)', 0, 0);
+  if (red) { shape('#5a1f1f', () => { g.moveTo(-32, 36); g.quadraticCurveTo(0, 66, 32, 36); g.closePath(); }, 4); g.fillStyle = '#fff'; for (let i = -2; i <= 2; i++) g.fillRect(i * 11 - 4, 37 + Math.abs(i) * -1, 8, 8); }
+  else curve(-20, 38, 0, 50, 20, 38, 5);
+  g.restore(); g.restore();
+}
+function box(x, y) {   // the gift box left at the door
+  rect(x - 90, y - 120, 180, 120, '#3f8a5a', 6); rect(x - 15, y - 120, 30, 120, '#e8c24a', 0, 4);
+  rect(x - 100, y - 145, 200, 32, '#4c9d68', 6); rect(x - 15, y - 145, 30, 32, '#e8c24a', 0, 4);
+  ell(x - 28, y - 160, 28, 16, '#e8c24a', -0.4, 5); ell(x + 28, y - 160, 28, 16, '#e8c24a', 0.4, 5);
+}
+function popcorn(x, y) { shape('#e94f4f', () => { g.moveTo(x - 50, y - 70); g.lineTo(x + 50, y - 70); g.lineTo(x + 36, y); g.lineTo(x - 36, y); g.closePath(); }, 5); for (let i = 0; i < 6; i++) ell(x - 38 + i * 15, y - 78 - (i % 2) * 12, 15, 13, '#fff6d8', 0, 4); line([x - 22, y - 66, x - 18, y - 4], 6, '#ffffff'); line([x + 14, y - 66, x + 12, y - 4], 6, '#ffffff'); }
+function vignette(a = 0.45) { const v = g.createRadialGradient(540, 1000, 300, 540, 1000, 1150); v.addColorStop(0, 'rgba(10,6,20,0)'); v.addColorStop(1, `rgba(10,6,20,${a})`); g.fillStyle = v; g.fillRect(0, 0, 1080, 1920); }
+function title() {
+  g.fillStyle = 'rgba(0,0,0,0.30)'; g.fillRect(0, 0, 1080, 330);
+  g.textAlign = 'center'; g.lineJoin = 'round';
+  const t = (s, y, size, fill) => { g.font = `900 ${size}px "Inter Display", Inter`; g.lineWidth = size * 0.17; g.strokeStyle = '#120a1e'; g.strokeText(s, 540, y); g.fillStyle = fill; g.fillText(s, 540, y); };
+  t('GUIA DE SOBREVIVÊNCIA • EP. 5', 92, 38, '#ffffff'); t('VOCÊ SOBREVIVERIA', 185, 80, '#ffffff'); t('AO BONECO ASSASSINO?', 280, 72, '#ff5a4a');
+}
+function caption(words, hi) { g.textAlign = 'left'; g.font = '900 76px "Inter Display", Inter'; const sp = g.measureText(' ').width; const tw = words.reduce((a, w, i) => a + g.measureText(w).width * (i === hi ? 1.12 : 1), 0) + sp * (words.length - 1); let x = 540 - tw / 2;
+  words.forEach((w, i) => { const s = i === hi ? 1.12 : 1; g.save(); g.translate(x, 1560); g.scale(s, s); g.lineWidth = 13; g.strokeStyle = '#120a1e'; g.strokeText(w, 0, 0); g.fillStyle = i === hi ? '#ffd23f' : '#ffffff'; g.fillText(w, 0, 0); g.restore(); x += g.measureText(w).width * s + sp; }); }
+
+document.fonts.ready.then(() => {
+  if (SHOT === 'a') {   // relaxing on a Friday night
+    const FY = room(); rug(FY); tv(830, FY + 40); sofa(140, FY + 120);
+    bean(420, FY + 120, { sit: true, s: 1.05, look: [0.6, -0.1], armL: [-130, -150, -140, -120], armR: [140, -170, 110, -210] });
+    popcorn(300, FY - 15);
+    vignette(0.35); title(); caption(['É', 'uma', 'sexta-feira', 'qualquer,'], 2);
+  } else if (SHOT === 'b') {   // ding-dong: nobody at the door, just a box... with a doll inside
+    g.fillStyle = '#e7c99a'; g.fillRect(0, 0, 1080, 1920);
+    for (let x = 0; x < 1080; x += 60) { g.fillStyle = '#dcb984'; g.fillRect(x, 0, 26, 1920); }
+    // the front door, wide open on a dark porch
+    rect(250, 380, 580, 1020, '#f6ead4', 14);
+    const night = g.createLinearGradient(0, 410, 0, 1380); night.addColorStop(0, '#141938'); night.addColorStop(1, '#2b2f5e'); rect(285, 410, 510, 990, night, 6, 5);
+    g.fillStyle = '#fff3c4'; [[340, 470], [460, 520], [700, 480], [600, 600], [380, 650]].forEach(([x, y]) => g.fillRect(x, y, 5, 5));
+    g.fillStyle = '#0c0f26'; g.fillRect(285, 1040, 510, 360); line([285, 1040, 795, 1040], 4, '#3a3f78');   // porch + street
+    shape('#9a5a3a', () => { g.moveTo(795, 410); g.lineTo(940, 360); g.lineTo(940, 1450); g.lineTo(795, 1400); g.closePath(); });   // door swung open
+    ell(915, 900, 12, 12, '#e8c24a', 0, 4);
+    g.fillStyle = '#a8693f'; g.fillRect(0, 1400, 1080, 520); line([0, 1400, 1080, 1400], 7);
+    shape('#c94a3a', () => g.ellipse(540, 1470, 300, 55, 0, 0, Math.PI * 2)); g.textAlign = 'center'; g.font = '900 34px "Inter Display", Inter'; g.fillStyle = '#f6ead4'; g.fillText('WELCOME', 540, 1482);
+    box(540, 1300); doll(540, 1180, { s: 0.75 });   // the doll peeking out of the box
+    bean(200, 1500, { s: 0.95, look: [1, 0.3], mouth: 'o', tiny: true, armL: [-140, -320, -150, -280], armR: [150, -330, 150, -380] });
+    // "DING-DONG!"
+    g.save(); g.translate(560, 450); g.rotate(-0.08); g.textAlign = 'center'; g.font = '900 92px "Inter Display", Inter'; g.lineWidth = 16; g.strokeStyle = '#120a1e'; g.strokeText('DING-DONG!', 0, 0); g.fillStyle = '#ffd23f'; g.fillText('DING-DONG!', 0, 0); g.restore();
+    vignette(0.5); title(); caption(['a', 'campainha', 'toca.'], 1);
+  } else {   // the doll wakes up: lights low, red eyes, the bean frozen
+    const FY = room(); rug(FY); sofa(140, FY + 120);
+    g.fillStyle = 'rgba(20,10,40,0.55)'; g.fillRect(0, 0, 1080, 1920);   // lights off
+    const gl = g.createRadialGradient(330, 1100, 20, 330, 1100, 260); gl.addColorStop(0, 'rgba(255,40,30,0.35)'); gl.addColorStop(1, 'rgba(255,40,30,0)'); g.fillStyle = gl; g.fillRect(0, 700, 800, 800);
+    doll(330, FY - 20, { s: 1.25, evil: true, tilt: -0.35 });
+    bean(800, FY + 260, { s: 1.0, look: [-1, -0.2], mouth: 'o', tiny: true, armL: [-120, -240, -60, -330], armR: [120, -240, 60, -330] });
+    g.save(); g.translate(330, 640); g.font = '900 70px "Inter Display", Inter'; g.textAlign = 'center'; g.lineWidth = 12; g.strokeStyle = '#120a1e'; g.strokeText('hi-hi-hi…', 0, 0); g.fillStyle = '#ffffff'; g.fillText('hi-hi-hi…', 0, 0); g.restore();
+    vignette(0.6); title(); caption(['pois', 'o', 'boneco', 'escuta.'], 3);
+  }
+  window.READY = true;
+});
+</script></body></html>
