@@ -97,8 +97,8 @@ for j, f in enumerate(notes):
 tv_a, tv_b = T0('calm'), T0('bell') + 1.2
 n = int((tv_b - tv_a) * SR); put(fx, (band(rng.standard_normal(n), 300, 2500) * 0.012 * (0.6 + 0.4 * np.sin(np.arange(n) / SR * 9))).astype(np.float32), tv_a)
 crunch(T0('calm') + 1.0); crunch(T0('calm') + 2.6)
-RING = wT('toca', 'bell') + 0.5
-dingdong(RING); sting(RING + 0.05, 0.2); popspill(RING); whoosh(RING + 1.3, 0.5, 0.12)
+RING = wT('toca', 'bell') + 0.4
+dingdong(RING)   # just a normal doorbell (no scare yet)
 whoosh(T0('calm') - 0.35, 0.6, 0.1)   # dissolve into the house
 # ---- mix (narration ducks the bed) ----
 duck = np.ones(N, np.float32); env = np.convolve(np.abs(voc), np.ones(4410) / 4410, 'same'); duck -= np.clip(env * 6, 0, 0.5)

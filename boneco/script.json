@@ -1,5 +1,24 @@
 [
-  {"scene": "title", "voice": "narr", "text": "Você sobreviveria ao boneco assassino?", "lead": 0.9, "tail": 0.5},
-  {"scene": "calm", "voice": "narr", "text": "É uma sexta-feira qualquer, você está na sua casa.", "lead": 0.5, "tail": 0.6},
-  {"scene": "bell", "voice": "narr", "text": "Até que, de repente, a campainha toca.", "lead": 0.3, "tail": 0.2, "min": 6.2}
+  {
+    "scene": "title",
+    "voice": "narr",
+    "text": "Você sobreviveria ao boneco assassino?",
+    "lead": 0.9,
+    "tail": 1.9
+  },
+  {
+    "scene": "calm",
+    "voice": "narr",
+    "text": "É uma sexta-feira qualquer, você está na sua casa.",
+    "lead": 0.5,
+    "tail": 0.6
+  },
+  {
+    "scene": "bell",
+    "voice": "narr",
+    "text": "Até que, de repente, a campainha toca.",
+    "lead": 0.3,
+    "tail": 0.2,
+    "min": 6.2
+  }
 ]

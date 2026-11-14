@@ -1,31 +1,31 @@
 {
- "total": 13.517,
+ "total": 15.044,
  "fps": 30,
  "segs": [
   {
    "scene": "title",
    "voice": "narr",
    "start": 0.0,
-   "dur": 3.338,
+   "dur": 4.799,
    "vstart": 0.9,
-   "vdur": 1.938
+   "vdur": 1.999
   },
   {
    "scene": "calm",
    "voice": "narr",
-   "start": 3.338,
-   "dur": 3.979,
-   "vstart": 3.838,
-   "vdur": 2.879
+   "start": 4.799,
+   "dur": 4.045,
+   "vstart": 5.299,
+   "vdur": 2.945
   },
   {
    "scene": "bell",
    "voice": "narr",
-   "start": 7.317,
+   "start": 8.844,
    "dur": 6.2,
-   "vstart": 7.617,
-   "vdur": 2.528
+   "vstart": 9.144,
+   "vdur": 2.559
   }
  ],
- "ring": 10.166
+ "ring": 11.616
 }

@@ -88,7 +88,7 @@ function frame(t) {
   if (t > RING - 0.05 && t < RING + 1.6) { const k = t - RING, s = k < 0.25 ? 0.4 + 2.4 * k + Math.sin(k / 0.25 * Math.PI) * 0.3 : 1; main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = 1 - ss(1.3, 1.6, k); main.translate(540, 660); main.scale(s, s); main.rotate(-0.08 + Math.sin(k * 40) * 0.02 * (1 - clamp(k))); main.textAlign = 'center'; main.font = '900 120px "Inter Display", Inter'; main.lineJoin = 'round'; main.lineWidth = 22; main.strokeStyle = '#08061a'; main.strokeText('DING-DONG!', 0, 0); main.fillStyle = '#ffd23f'; main.fillText('DING-DONG!', 0, 0); main.restore(); }
   const fin = ss(TL.total - 0.8, TL.total, t); if (fin > 0) { main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = `rgba(0,0,0,${fin})`; main.fillRect(0, 0, SW, SH); main.restore(); }
   const fi = 1 - ss(0, 0.6, t); if (fi > 0) { main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = `rgba(0,0,0,${fi})`; main.fillRect(0, 0, SW, SH); main.restore(); }
-  if (!NOTITLE) title();
+  hook(t);
 }
 function drawExterior(t, t1) {
   // slow push from the street into the lit living-room window
@@ -109,26 +109,24 @@ function drawInterior(t, ctx) {
   let cam;
   const whip = RING + 1.25;
   if (t < tb) cam = camL({ x: 1010, y: 1020, z: 1.2 }, { x: 1000, y: 1060, z: 1.3 }, ss(t1, tb, t));
-  else if (t < whip) { cam = camL({ x: 1000, y: 1060, z: 1.3 }, { x: 990, y: 1090, z: 1.7 }, ease(clamp((t - tb) / (RING - tb)))); if (t > RING) { const k = t - RING; cam = { x: cam.x + Math.sin(k * 60) * 12 * (1 - clamp(k / 0.5)), y: cam.y + Math.cos(k * 53) * 10 * (1 - clamp(k / 0.5)), z: cam.z }; } }
-  else { const k = ease(clamp((t - whip) / 0.55)); cam = camL({ x: 990, y: 1090, z: 1.7 }, { x: 330, y: 960, z: 1.25 }, k); cam.z = cam.z - Math.sin(k * Math.PI) * 0.25; }
+  else if (t < whip) cam = camL({ x: 1000, y: 1060, z: 1.3 }, { x: 990, y: 1090, z: 1.55 }, ease(clamp((t - tb) / (RING - tb))));
+  else { const k = ease(clamp((t - whip) / 1.1)); cam = camL({ x: 990, y: 1090, z: 1.55 }, { x: 330, y: 960, z: 1.25 }, k); }
   swap(M); M.setTransform(1, 0, 0, 1, 0, 0); M.fillStyle = '#05040c'; M.fillRect(0, 0, SW, SH);
   camera(cam); house();
   // the light strip under the front door + a shadow passing behind it (someone is out there...)
-  const sh = t > whip + 0.4 ? ss(whip + 0.4, whip + 0.7, t) : 0;
-  g.fillStyle = '#ffd77a'; g.fillRect(152, FY - 34, 276, 8);
-  if (sh > 0) { const sx = lerp(150, 330, ss(whip + 0.8, TL.total - 0.6, t)); g.fillStyle = '#1a1020'; g.fillRect(sx, FY - 34, 60, 8); g.fillRect(sx + 80, FY - 34, 50, 8); }
+  g.fillStyle = '#ffd77a'; g.fillRect(154, FY - 5, 272, 5);   // porch light shows through the gap under the door
   nightGrade(M, 1);
   const tvk = 0.7 + 0.3 * noise(t * 1.3);
   lightPool(M, cam, 1330, 840, 520, 'rgba(255,190,110,A)', 0.5);
   lightPool(M, cam, 1010, 1380, 700, 'rgba(90,170,255,A)', 0.3 * tvk);
   lightPool(M, cam, 290, FY - 20, 220, 'rgba(255,210,140,A)', 0.25);
   // the bean: chewing popcorn... until the bell
-  const rk = t - RING, jump = rk > 0 ? Math.max(0, Math.sin(clamp(rk / 0.5) * Math.PI)) : 0;
+  const rk = t - RING, jump = rk > 0 ? Math.max(0, Math.sin(clamp(rk / 0.3) * Math.PI)) : 0;
   const hand = Math.max(0, Math.sin((t - t1) * 3.2));   // hand goes to the mouth and back
   const blink = (((t + 0.3) % 2.7) < 0.12) && rk < 0 ? 1 : 0;
   const scared = rk > 0;
   const o = scared
-    ? { sit: true, s: 1.05, jy: jump * 170, sq: 1 + jump * 0.08, look: rk > 0.5 ? [-1, -0.1] : [0, -0.4], mouth: 'o', tiny: true, sweat: rk > 0.8, armL: [-150, -330, -110, -400], armR: [150, -330, 110, -400] }
+    ? { sit: true, s: 1.05, jy: jump * 35, look: rk > 0.25 ? [-1, -0.1] : [0, -0.3], mouth: 'o', armL: [-140, -170, -120, -130], armR: [140, -170, 120, -210] }
     : { sit: true, s: 1.05, look: [0, 0.35], blink, chew: hand > 0.7 ? 0 : 0.4 + 0.4 * Math.abs(Math.sin(t * 14)),
         armL: [-140, -170, -120, -130], armR: [140, -170, lerp(120, 40, hand), lerp(-210, -290, hand)] };
   const tilt = scared ? 0 : Math.sin(t * 1.4) * 0.015;
@@ -136,8 +134,7 @@ function drawInterior(t, ctx) {
   // characters (with rim) — paint them on this ctx
   const lay = mk(), sil = mk(); g = lay.getContext('2d'); camera(cam);
   bean(1010, FY + 20, o);
-  if (!scared) popcorn(895, FY - 92);
-  else { kernels(t); g.save(); const fall = clamp(rk / 0.9); g.translate(895 - fall * 420, FY - 92 - Math.sin(fall * Math.PI) * 360 + fall * 180); g.rotate(-fall * 5); popcorn(0, 0); g.restore(); }
+  popcorn(895, FY - 92 - jump * 35);
   { const tmp = mk(), tc = tmp.getContext('2d'); tc.drawImage(lay, 0, 0); nightGrade(tc, 0.25); tc.globalCompositeOperation = 'destination-in'; tc.drawImage(lay, 0, 0); const lc = lay.getContext('2d'); lc.setTransform(1, 0, 0, 1, 0, 0); lc.clearRect(0, 0, SW, SH); lc.drawImage(tmp, 0, 0); }
   const rim = 'rgba(160,215,255,0.95)';
   const sc = sil.getContext('2d'); sc.drawImage(lay, 0, 0); sc.globalCompositeOperation = 'source-in'; sc.fillStyle = rim; sc.fillRect(0, 0, SW, SH);
@@ -148,6 +145,18 @@ function drawInterior(t, ctx) {
   g = main;
 }
 
+function hook(t) {   // the question pops in when the narrator finishes it, then shrinks away
+  const tw = WORDS.filter(w => w.seg === 'title'); const a = tw[tw.length - 1].t1 + 0.05, out = a + 1.3, gone = out + 0.45;
+  if (t < a || t > gone) return;
+  const kin = clamp((t - a) / 0.3), sIn = kin < 1 ? kin + Math.sin(kin * Math.PI) * 0.18 : 1;
+  const kout = ss(out, gone, t), s = sIn * (1 - kout);
+  if (s <= 0.001) return;
+  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(540, 760); main.scale(s, s); main.rotate(-0.03 + kout * 0.25);
+  main.textAlign = 'center'; main.lineJoin = 'round';
+  const tx = (str, y, size, fill) => { main.font = `900 ${size}px "Inter Display", Inter`; main.lineWidth = size * 0.18; main.strokeStyle = '#08061a'; main.strokeText(str, 0, y); main.fillStyle = fill; main.fillText(str, 0, y); };
+  tx('GUIA DE SOBREVIVÊNCIA • EP. 5', -150, 40, '#ffffff'); tx('VOCÊ SOBREVIVERIA', -45, 96, '#ffffff'); tx('AO BONECO', 70, 104, '#ff5a4a'); tx('ASSASSINO?', 182, 112, '#ff5a4a');
+  main.restore();
+}
 window.renderFrame = t => { frame(t); return true; };
 window.TOTAL = TL.total; window.FPS = TL.fps;
 await document.fonts.load('900 40px "Inter Display"');

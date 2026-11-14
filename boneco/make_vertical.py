@@ -30,9 +30,6 @@ lines = ['[Script Info]', 'ScriptType: v4.00+', 'PlayResX: 1080', 'PlayResY: 192
          'Style: Small,Inter Display Black,38,&H00FFFFFF,&H00FFFFFF,&H004A2A0A,&H00000000,0,0,0,0,100,100,2,0,1,5,0,8,40,40,0,1', '',
          '[Events]', 'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text']
 TY = [56, 104, 196] if NATIVE else [200, 262, 375]
-lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Small,,0,0,0,,{{\\pos(540,{TY[0]})}}GUIA DE SOBREVIVÊNCIA • EP. 5')
-lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,{TY[1]})}}VOCÊ SOBREVIVERIA')
-lines.append(f'Dialogue: 0,{ts(0.4)},{ts(T)},Head,,0,0,0,,{{\\pos(540,{TY[2]})\\fs84\\c&H4A5AFF&}}AO BONECO ASSASSINO?')
 # karaoke captions: short chunks; the word being spoken turns yellow and pops
 W = json.load(open('audio/words.json'))
 chunks, cur = [], []
