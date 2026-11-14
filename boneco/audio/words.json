@@ -1,0 +1,149 @@
+[
+{
+"seg": "title",
+"who": "narr",
+"text": "Você",
+"t0": 0.906,
+"t1": 1.099
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "sobreviveria",
+"t0": 1.147,
+"t1": 1.597
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "ao",
+"t0": 1.71,
+"t1": 1.839
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "boneco",
+"t0": 1.871,
+"t1": 2.128
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "assassino?",
+"t0": 2.192,
+"t1": 2.642
+},
+{
+"seg": "calm",
+"who": "narr",
+"text": "É",
+"t0": 3.844,
+"t1": 3.951
+},
+{
+"seg": "calm",
+"who": "narr",
+"text": "uma",
+"t0": 3.978,
+"t1": 4.157
+},
+{
+"seg": "calm",
+"who": "narr",
+"text": "sexta-feira",
+"t0": 4.202,
+"t1": 4.631
+},
+{
+"seg": "calm",
+"who": "narr",
+"text": "qualquer,",
+"t0": 4.738,
+"t1": 5.202
+},
+{
+"seg": "calm",
+"who": "narr",
+"text": "você",
+"t0": 5.319,
+"t1": 5.533
+},
+{
+"seg": "calm",
+"who": "narr",
+"text": "está",
+"t0": 5.587,
+"t1": 5.801
+},
+{
+"seg": "calm",
+"who": "narr",
+"text": "na",
+"t0": 5.855,
+"t1": 5.998
+},
+{
+"seg": "calm",
+"who": "narr",
+"text": "sua",
+"t0": 6.033,
+"t1": 6.212
+},
+{
+"seg": "calm",
+"who": "narr",
+"text": "casa.",
+"t0": 6.257,
+"t1": 6.578
+},
+{
+"seg": "bell",
+"who": "narr",
+"text": "Até",
+"t0": 7.625,
+"t1": 7.815
+},
+{
+"seg": "bell",
+"who": "narr",
+"text": "que,",
+"t0": 7.862,
+"t1": 8.166
+},
+{
+"seg": "bell",
+"who": "narr",
+"text": "de",
+"t0": 8.242,
+"t1": 8.394
+},
+{
+"seg": "bell",
+"who": "narr",
+"text": "repente,",
+"t0": 8.432,
+"t1": 8.887
+},
+{
+"seg": "bell",
+"who": "narr",
+"text": "a",
+"t0": 9.001,
+"t1": 9.115
+},
+{
+"seg": "bell",
+"who": "narr",
+"text": "campainha",
+"t0": 9.144,
+"t1": 9.561
+},
+{
+"seg": "bell",
+"who": "narr",
+"text": "toca.",
+"t0": 9.666,
+"t1": 10.007
+}
+]
