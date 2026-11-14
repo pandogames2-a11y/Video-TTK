@@ -68,7 +68,7 @@ textarea:focus-visible,input:focus-visible{outline:3px solid var(--amber);outlin
 
 <div class="wrap">
 <header>
-  <div class="tape">Guia de Sobrevivência · Temporada dos filmes · Episódio 5</div>
+  <div class="tape">Guia de Sobrevivência · Temporada dos filmes · Episódio 5 · Boneco assassino</div>
   <h1>Monte o seu episódio</h1>
   <p class="lede">Escolha uma opção em cada ficha (algumas aceitam várias). Já deixei marcadas as que eu recomendo, mas pode trocar tudo. Se nenhuma servir, escreva do seu jeito no campo <b>Outro</b>. No fim, toque em <b>Copiar escolhas</b> e cole no chat.</p>
   <ul class="steps" aria-label="Etapas">
@@ -76,7 +76,12 @@ textarea:focus-visible,input:focus-visible{outline:3px solid var(--amber);outlin
   </ul>
 </header>
 
-<div class="note" role="note">
+<div class="note" role="note" style="border-left-color:var(--ok)">
+  <h2 style="color:var(--ok)">Já decidido</h2>
+  <p><b>Tema:</b> boneco assassino (inspirado no Chucky). <b>Título:</b> "Você sobreviveria ao boneco assassino?". <b>Vilão:</b> um boneco nosso, sem o nome, a roupa ou o visual do Chucky, para não ter problema de direitos autorais.</p>
+</div>
+
+<div class="note" role="note" hidden>
   <h2>Sobre usar personagens de filmes</h2>
   <p>Jason, Freddy, Chucky e outros vilões são de estúdios de cinema. Se o vídeo copiar o personagem (nome, máscara, roupa, música), ele pode ser <b>derrubado ou desmonetizado</b>. O jeito mais seguro é fazer uma <b>paródia em grão de café</b>, com nome e visual próprios. É o mesmo que fizemos com o "Killer Bean" e o estilo do Medina: todo mundo reconhece a inspiração, mas o personagem é nosso. A decisão final é sua, na ficha 2.</p>
 </div>
@@ -84,19 +89,19 @@ textarea:focus-visible,input:focus-visible{outline:3px solid var(--amber);outlin
 <main id="board" style="display:grid;gap:30px"></main>
 
 <section class="q">
-  <div class="qhead"><span class="n">FICHA 12</span><h2>Suas especificações</h2><span class="hint">Qualquer coisa que você queira: piadas, falas, cenas, coisas que não pode ter.</span></div>
+  <div class="qhead"><span class="n">FICHA 10</span><h2>Suas especificações</h2><span class="hint">Qualquer coisa que você queira: piadas, falas, cenas, coisas que não pode ter.</span></div>
   <textarea id="free" placeholder="Ex.: quero que o cachorro salve todo mundo no final; nada de sangue; o vilão tropeça na barraca…"></textarea>
 </section>
 </div>
 
 <div class="tray"><div class="in">
-  <p><b id="count">0</b> de 11 fichas escolhidas</p>
+  <p><b id="count">0</b> de 9 fichas escolhidas</p>
   <div class="btns"><button class="ghost" id="show" type="button">Ver texto</button><button id="copy" type="button">Copiar escolhas</button></div>
   <textarea id="out" hidden readonly aria-label="Texto das escolhas para colar no chat"></textarea>
 </div></div>
 
 <script>
-const Q = [
+const DONE = [
  { id:'tema', title:'O tema', hint:'De qual filme ou série vem a situação?', opts:[
    ['acamp','O mascarado do acampamento','Inspirado em Sexta-Feira 13. Acampamento à beira do lago, à noite. Clássico: "vamos nos separar".',['rec','novo cenário']],
    ['sonho','O homem dos pesadelos','Inspirado em A Hora do Pesadelo. Ele ataca nos sonhos… e eles são grãos de café, que nunca dormem.',['rec','novo cenário']],
@@ -108,7 +113,7 @@ const Q = [
    ['invertido','O monstro do Mundo Invertido','Inspirado em Stranger Things. Luzinhas de Natal piscando e um portal na parede.',['novo cenário']],
    ['round6','O jogo do "batatinha frita 1, 2, 3"','Inspirado em Round 6. Boneca gigante, todos congelam… menos o amigo.',['novo cenário']],
    ['et','Invasão alienígena','Disco voador sobre a cidade. Gag: o amigo tentando fazer amizade com o ET.',['reuse']],
-   ['casa','A casa mal-assombrada','Inspirado em Invocação do Mal e Atividade Paranormal. Portas batendo, a boneca na cadeira.',['novo cenário']],
+   ['casa2','(reservado)','Inspirado em Invocação do Mal e Atividade Paranormal. Portas batendo, a boneca na cadeira.',['novo cenário']],
    ['kaiju','Monstro gigante na cidade','Inspirado em Godzilla. Um lagarto do tamanho de um prédio pisando nos carros.',['reuse']],
  ]},
  { id:'vilao', title:'Como mostrar o vilão', hint:'Tem a ver com o risco de direitos autorais.', opts:[
@@ -116,6 +121,8 @@ const Q = [
    ['meio','Paródia + o filme citado no título','Visual nosso, mas o título diz "estilo Sexta-Feira 13". Atrai mais cliques, com um pouco mais de risco.',[]],
    ['igual','Bem parecido com o original','Nome e visual do filme. Mais chance de derrubarem ou tirarem o dinheiro do vídeo.',['risk']],
  ]},
+];
+const Q = [
  { id:'formato', title:'O formato', hint:'Como o episódio é contado.', opts:[
    ['regras','"As regras para sobreviver"','"Regra nº 1: nunca se separe." Cada regra aparece num cartão, o amigo quebra uma de cada vez e paga o preço.',['rec']],
    ['planos','Planos certos e errados (como no EP3 e EP4)','Ideias erradas com ✗ e a certa com ✓, mais o bordão "Assim, o vilão não te pega".',[]],
@@ -168,7 +175,7 @@ const Q = [
    ['gancho','Gancho de continuação','O vilão aparece atrás deles no último segundo.',[]],
  ]},
 ];
-const KEY='ep5-menu-v1';
+const KEY='ep5-menu-v2';
 let st={}; try{st=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){st={}}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
 Q.forEach(q=>{ if(!st[q.id]){ const recs=q.opts.filter(o=>o[3].includes('rec')).map(o=>o[0]); st[q.id]={sel: q.multi?recs:recs.slice(0,1), other:''}; } });
@@ -194,10 +201,10 @@ const free=document.getElementById('free'); try{free.value=localStorage.getItem(
 free.addEventListener('input',()=>{try{localStorage.setItem(KEY+'-free',free.value)}catch(e){} refresh();});
 const out=document.getElementById('out'), copy=document.getElementById('copy');
 function text(){
-  const lines=['Escolhas para o EP5:'];
+  const lines=['Escolhas para o EP5 (boneco assassino):'];
   Q.forEach((q,i)=>{ const names=st[q.id].sel.map(v=>q.opts.find(o=>o[0]===v)[1]); const o=(st[q.id].other||'').trim();
     if(o) names.push('Outro: '+o); lines.push(`${i+1}. ${q.title}: ${names.length?names.join('; '):'(não escolhi)'}`); });
-  const f=free.value.trim(); if(f) lines.push('12. Minhas especificações: '+f);
+  const f=free.value.trim(); if(f) lines.push('10. Minhas especificações: '+f);
   return lines.join('\n');
 }
 function refresh(){

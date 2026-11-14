@@ -3,6 +3,10 @@
 Série de vídeos curtos em 3D, em **português do Brasil**, com personagens grãos de café ensinando a sobreviver a desastres, com humor.
 Episódios prontos: **EP1 Tsunami** (`tsunami/`) e **EP2 Terremoto** (`terremoto/`). **EP3 Enchente** (`enchente/`) pronto (2:33, cidade, formato de "planos" certos e errados com o bordão "Assim, a enchente não chega"). O final do EP3 pede comentário ("sobrevivi" / "não consegui") em vez de anunciar o próximo episódio; **EP4 Incêndio** (`incendio/`) pronto (1:38; o prédio inteiro pega fogo por um curto-circuito; opção 1 "a mais legal" = roupa de bombeiro + extintores, opção 2 "a da vida real" = ligar 193; final com o amigo pulando da janela). O usuário agora prefere episódios de **até 2 minutos**. Storyboard: https://claude.ai/artifact/Le5ve7Aw9Zc5RYAbBzgxmk
 
+## Temporada dos filmes (a partir do EP5)
+- O usuário quer expandir para "sobreviver" a vilões e situações de filmes e séries, **por etapas** (escolhas → roteiro → storyboard → vídeo) e com tudo nas especificações dele. Menu de escolhas: https://claude.ai/artifact/1Ke6fkm8S5Dg6rx9K1su46 (`temporada2/menu_episodio.html`).
+- **EP5: boneco assassino** (inspirado no Chucky). Título: "Você sobreviveria ao boneco assassino?". **Não usar o Chucky** (nome, roupa, visual): o boneco é nosso, para não ter problema de direitos autorais.
+
 ## Como trabalhar com o usuário
 - Fale sempre em português do Brasil, simples e direto: o usuário não é técnico. Explique o que mudou no vídeo, não o código.
 - O usuário autorizou seguir sem pedir confirmação para tudo que faça parte da criação que ele pediu (renderizar, gerar áudio, commit/push no repositório).
