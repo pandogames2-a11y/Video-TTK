@@ -1,0 +1,214 @@
+<title>Menu do EP5</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a single column of "fichas" (one per decision), like a VHS rental sheet; a fixed tray copies the choices */
+:root{
+  --bg:#15131d; --panel:#1f1c2a; --panel2:#282436; --ink:#f1edf7; --muted:#a69fb8; --line:#3a3450;
+  --amber:#f5b83d; --amber-ink:#2a1c00; --risk:#ff7a6b; --ok:#5fd08a;
+  --display:Anton, Impact, "Arial Narrow", sans-serif;
+  --body:Inter, "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme:dark;
+}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 140px}
+.wrap{max-width:860px;margin:0 auto;display:grid;gap:28px}
+header{padding-block:36px 8px;display:grid;gap:12px}
+.tape{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+h1{font:400 clamp(38px,8vw,64px)/.95 var(--display);margin:0;letter-spacing:.01em;text-transform:uppercase;text-wrap:balance}
+.lede{color:var(--muted);margin:0;max-width:62ch}
+.lede b{color:var(--ink)}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 0;padding:0;list-style:none}
+.steps li{font:600 13px var(--body);padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);color:var(--muted)}
+.steps li.now{border-color:var(--amber);color:var(--amber)}
+.note{background:var(--panel);border:1.5px solid var(--line);border-left:4px solid var(--risk);border-radius:6px;padding:14px 16px;display:grid;gap:6px}
+.note h2{font:800 15px var(--body);margin:0;color:var(--risk)}
+.note p{margin:0;color:var(--muted);font-size:15px}
+.note p b{color:var(--ink)}
+section.q{display:grid;gap:12px}
+.qhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.qhead .n{font:500 12px var(--mono);color:var(--amber);letter-spacing:.08em}
+.qhead h2{font:400 28px/1.05 var(--display);margin:0;text-transform:uppercase;letter-spacing:.02em}
+.qhead .hint{font-size:14px;color:var(--muted);flex-basis:100%}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.opt{all:unset;box-sizing:border-box;cursor:pointer;background:var(--panel);border:1.5px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:4px;align-content:start;min-width:0}
+.opt:hover{border-color:var(--muted)}
+.opt:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.opt[aria-pressed="true"]{border-color:var(--amber);background:var(--panel2);box-shadow:inset 0 0 0 1px var(--amber)}
+.opt .t{font:800 15px/1.3 var(--body);display:flex;gap:8px;align-items:flex-start}
+.opt .box{flex:none;width:18px;height:18px;margin-top:1px;border:2px solid var(--muted);border-radius:50%;display:grid;place-items:center}
+.opt.multi .box{border-radius:4px}
+.opt[aria-pressed="true"] .box{border-color:var(--amber);background:var(--amber)}
+.opt[aria-pressed="true"] .box::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber-ink)}
+.opt.multi[aria-pressed="true"] .box::after{width:8px;height:4px;border-radius:0;background:none;border:solid var(--amber-ink);border-width:0 0 2.5px 2.5px;transform:rotate(-45deg) translate(1px,-1px)}
+.opt .d{font-size:14px;color:var(--muted)}
+.opt .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.tag{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 6px;border-radius:3px;background:var(--panel2);color:var(--muted)}
+.tag.rec{background:var(--amber);color:var(--amber-ink)}
+.tag.risk{background:transparent;border:1px solid var(--risk);color:var(--risk)}
+.tag.reuse{background:transparent;border:1px solid var(--ok);color:var(--ok)}
+label.other{display:grid;gap:6px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+textarea,input[type=text]{width:100%;box-sizing:border-box;font:15px/1.4 var(--body);color:var(--ink);background:var(--panel);border:1.5px solid var(--line);border-radius:6px;padding:9px 11px}
+textarea{min-height:64px;resize:vertical}
+textarea:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-offset:1px}
+.tray{position:fixed;left:0;right:0;bottom:0;background:var(--panel2);border-top:2px solid var(--amber);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px calc(12px + env(safe-area-inset-bottom,0px));z-index:5}
+.tray .in{max-width:860px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
+.tray p{margin:0;font-size:15px;color:var(--muted)}
+.tray p b{color:var(--ink);font:400 22px var(--display)}
+.tray .btns{display:flex;gap:10px;flex-wrap:wrap}
+.tray button{font:800 15px var(--body);border:0;border-radius:6px;padding:10px 18px;background:var(--amber);color:var(--amber-ink);cursor:pointer}
+.tray button.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.tray button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+#out{flex-basis:100%;min-height:140px}
+@media (prefers-reduced-motion:no-preference){.opt{transition:border-color .12s,background .12s}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="tape">Guia de Sobrevivência · Temporada dos filmes · Episódio 5</div>
+  <h1>Monte o seu episódio</h1>
+  <p class="lede">Escolha uma opção em cada ficha (algumas aceitam várias). Já deixei marcadas as que eu recomendo, mas pode trocar tudo. Se nenhuma servir, escreva do seu jeito no campo <b>Outro</b>. No fim, toque em <b>Copiar escolhas</b> e cole no chat.</p>
+  <ul class="steps" aria-label="Etapas">
+    <li class="now">1. Escolhas (agora)</li><li>2. Roteiro para aprovar</li><li>3. Storyboard</li><li>4. Vídeo</li>
+  </ul>
+</header>
+
+<div class="note" role="note">
+  <h2>Sobre usar personagens de filmes</h2>
+  <p>Jason, Freddy, Chucky e outros vilões são de estúdios de cinema. Se o vídeo copiar o personagem (nome, máscara, roupa, música), ele pode ser <b>derrubado ou desmonetizado</b>. O jeito mais seguro é fazer uma <b>paródia em grão de café</b>, com nome e visual próprios. É o mesmo que fizemos com o "Killer Bean" e o estilo do Medina: todo mundo reconhece a inspiração, mas o personagem é nosso. A decisão final é sua, na ficha 2.</p>
+</div>
+
+<main id="board" style="display:grid;gap:30px"></main>
+
+<section class="q">
+  <div class="qhead"><span class="n">FICHA 12</span><h2>Suas especificações</h2><span class="hint">Qualquer coisa que você queira: piadas, falas, cenas, coisas que não pode ter.</span></div>
+  <textarea id="free" placeholder="Ex.: quero que o cachorro salve todo mundo no final; nada de sangue; o vilão tropeça na barraca…"></textarea>
+</section>
+</div>
+
+<div class="tray"><div class="in">
+  <p><b id="count">0</b> de 11 fichas escolhidas</p>
+  <div class="btns"><button class="ghost" id="show" type="button">Ver texto</button><button id="copy" type="button">Copiar escolhas</button></div>
+  <textarea id="out" hidden readonly aria-label="Texto das escolhas para colar no chat"></textarea>
+</div></div>
+
+<script>
+const Q = [
+ { id:'tema', title:'O tema', hint:'De qual filme ou série vem a situação?', opts:[
+   ['acamp','O mascarado do acampamento','Inspirado em Sexta-Feira 13. Acampamento à beira do lago, à noite. Clássico: "vamos nos separar".',['rec','novo cenário']],
+   ['sonho','O homem dos pesadelos','Inspirado em A Hora do Pesadelo. Ele ataca nos sonhos… e eles são grãos de café, que nunca dormem.',['rec','novo cenário']],
+   ['palhaco','O palhaço do bueiro','Inspirado em It: A Coisa. O bueiro da cidade (do EP3) vira a casa dele. Gag: pegar o balão.',['reuse']],
+   ['zumbi','Apocalipse zumbi','Inspirado em The Walking Dead. Zumbis tomam a cidade. Dá para usar o carro, o prédio e o telhado.',['reuse']],
+   ['tubarao','Tubarão na praia','Inspirado em Tubarão. Volta a praia do EP1, com a musiquinha do "tã-nã".',['reuse']],
+   ['boneco','O boneco assassino','Inspirado em Chucky. Um brinquedo novo no apartamento começa a se mexer.',['reuse']],
+   ['dino','Dinossauros soltos','Inspirado em Jurassic Park. Parque de dinossauros; o mito do "fique parado que ele não te vê".',['novo cenário']],
+   ['invertido','O monstro do Mundo Invertido','Inspirado em Stranger Things. Luzinhas de Natal piscando e um portal na parede.',['novo cenário']],
+   ['round6','O jogo do "batatinha frita 1, 2, 3"','Inspirado em Round 6. Boneca gigante, todos congelam… menos o amigo.',['novo cenário']],
+   ['et','Invasão alienígena','Disco voador sobre a cidade. Gag: o amigo tentando fazer amizade com o ET.',['reuse']],
+   ['casa','A casa mal-assombrada','Inspirado em Invocação do Mal e Atividade Paranormal. Portas batendo, a boneca na cadeira.',['novo cenário']],
+   ['kaiju','Monstro gigante na cidade','Inspirado em Godzilla. Um lagarto do tamanho de um prédio pisando nos carros.',['reuse']],
+ ]},
+ { id:'vilao', title:'Como mostrar o vilão', hint:'Tem a ver com o risco de direitos autorais.', opts:[
+   ['parodia','Paródia em grão de café','Nome inventado e visual nosso, mas dá pra reconhecer a inspiração. Ex.: "Jasão", o grão da máscara de goleiro.',['rec']],
+   ['meio','Paródia + o filme citado no título','Visual nosso, mas o título diz "estilo Sexta-Feira 13". Atrai mais cliques, com um pouco mais de risco.',[]],
+   ['igual','Bem parecido com o original','Nome e visual do filme. Mais chance de derrubarem ou tirarem o dinheiro do vídeo.',['risk']],
+ ]},
+ { id:'formato', title:'O formato', hint:'Como o episódio é contado.', opts:[
+   ['regras','"As regras para sobreviver"','"Regra nº 1: nunca se separe." Cada regra aparece num cartão, o amigo quebra uma de cada vez e paga o preço.',['rec']],
+   ['planos','Planos certos e errados (como no EP3 e EP4)','Ideias erradas com ✗ e a certa com ✓, mais o bordão "Assim, o vilão não te pega".',[]],
+   ['erros','"3 erros que todo personagem de filme comete"','Contagem regressiva do 3 ao 1, com os clichês de filme de terror.',[]],
+   ['escolha','Você escolhe','O vídeo para e pergunta: "porta da esquerda ou da direita?". A resposta aparece depois, e o público comenta o que escolheria.',[]],
+ ]},
+ { id:'duracao', title:'Duração', opts:[
+   ['1min','Até 1 minuto','Mais rápido de fazer e bom para viralizar.',[]],
+   ['2min','Até 2 minutos','Como o EP4.',['rec']],
+   ['3min','Até 3 minutos','Cabe mais piada e mais regra.',[]],
+ ]},
+ { id:'tom', title:'O tom', opts:[
+   ['comedia','Só comédia','Vilão meio atrapalhado, nada assusta.',[]],
+   ['susto','Comédia com um pouco de suspense','Música tensa, luz piscando, um "susto" que vira piada.',['rec']],
+   ['sombrio','Mais sombrio, com piadas','Clima de filme de terror de verdade, sem sangue.',[]],
+ ]},
+ { id:'burro', title:'Quem faz as burradas', opts:[
+   ['amigo','O amigo surfista','Como sempre: ele leva as gags.',['rec']],
+   ['revez','Os dois revezando','O protagonista também erra uma vez.',[]],
+   ['novo','Um personagem novo','Entra um grão "vítima" que faz tudo errado (o clássico primeiro a morrer).',[]],
+ ]},
+ { id:'gags', title:'Clichês de filme de terror', hint:'Escolha quantos quiser: viram piadas ou regras.', multi:true, opts:[
+   ['separar','"Vamos nos separar!"','',['rec']],
+   ['javolto','"Eu já volto…"','',[]],
+   ['armario','Esconder no armário que não fecha','',[]],
+   ['tropeca','Tropeçar correndo do nada','',['rec']],
+   ['sinal','Celular sem sinal','',[]],
+   ['porao','Ir ver o barulho no porão','',['rec']],
+   ['carro','O carro que não liga','',[]],
+   ['morreu','"Acho que ele morreu"… não morreu','',[]],
+   ['escada','Subir a escada em vez de sair pela porta','',[]],
+ ]},
+ { id:'cenario', title:'O cenário', opts:[
+   ['novo','Cenário novo do filme','Acampamento, casa, parque… O vídeo fica com cara própria, mas leva mais tempo para fazer.',['rec']],
+   ['cidade','A nossa cidade','Reaproveita a cidade dos EP3 e EP4. É mais rápido.',[]],
+   ['mix','Começa na cidade e vai para o cenário novo','Ex.: eles viajam para acampar.',[]],
+ ]},
+ { id:'fala', title:'O vilão fala?', opts:[
+   ['mudo','Não, só faz sons','Respiração, passos, o "chi-chi-chi… ha-ha-ha". Mais assustador e não gasta crédito de voz.',['rec']],
+   ['voz','Sim, com uma voz própria','Uma voz nova do ElevenLabs, que gasta um pouco mais de crédito.',[]],
+ ]},
+ { id:'cao', title:'O cachorro', opts:[
+   ['gag','Tem uma gag dele','Ex.: ele late e entrega o esconderijo.',['rec']],
+   ['heroi','Ele salva o dia','O vilão foge do cachorro no final.',[]],
+   ['so','Só aparece','Fica no colo, como no EP4.',[]],
+ ]},
+ { id:'final', title:'O final', opts:[
+   ['proximo','O público escolhe o próximo vilão','"Comenta qual vilão a gente enfrenta no próximo episódio!" Gera muito comentário.',['rec']],
+   ['sobrevivi','"Comente: sobrevivi / não consegui"','Como nos EP3 e EP4.',[]],
+   ['gancho','Gancho de continuação','O vilão aparece atrás deles no último segundo.',[]],
+ ]},
+];
+const KEY='ep5-menu-v1';
+let st={}; try{st=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){st={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+Q.forEach(q=>{ if(!st[q.id]){ const recs=q.opts.filter(o=>o[3].includes('rec')).map(o=>o[0]); st[q.id]={sel: q.multi?recs:recs.slice(0,1), other:''}; } });
+const board=document.getElementById('board');
+const tagHtml=t=>t==='rec'?'<span class="tag rec">Recomendado</span>':t==='risk'?'<span class="tag risk">Risco</span>':t==='reuse'?'<span class="tag reuse">Reaproveita cenário</span>':`<span class="tag">${t}</span>`;
+Q.forEach((q,i)=>{
+  const sec=document.createElement('section'); sec.className='q';
+  sec.innerHTML=`<div class="qhead"><span class="n">FICHA ${i+1}${q.multi?' · VÁRIAS':''}</span><h2></h2>${q.hint?'<span class="hint"></span>':''}</div><div class="opts" role="group"></div><label class="other" for="o-${q.id}">Outro / do meu jeito<input type="text" id="o-${q.id}" placeholder="Escreva aqui se nenhuma opção servir ou quiser misturar"></label>`;
+  sec.querySelector('h2').textContent=q.title; if(q.hint) sec.querySelector('.hint').textContent=q.hint;
+  sec.querySelector('.opts').setAttribute('aria-label',q.title);
+  const box=sec.querySelector('.opts');
+  q.opts.forEach(([v,t,d,tags])=>{
+    const b=document.createElement('button'); b.type='button'; b.className='opt'+(q.multi?' multi':''); b.dataset.v=v;
+    b.innerHTML=`<span class="t"><span class="box" aria-hidden="true"></span><span class="tt"></span></span>${d?'<span class="d"></span>':''}${tags.length?'<span class="tags">'+tags.map(tagHtml).join('')+'</span>':''}`;
+    b.querySelector('.tt').textContent=t; if(d) b.querySelector('.d').textContent=d;
+    b.onclick=()=>{ const s=st[q.id].sel; if(q.multi){ const k=s.indexOf(v); k>=0?s.splice(k,1):s.push(v); } else st[q.id].sel = s[0]===v?[]:[v]; save(); refresh(); };
+    box.appendChild(b);
+  });
+  const inp=sec.querySelector('input'); inp.value=st[q.id].other||''; inp.addEventListener('input',()=>{st[q.id].other=inp.value; save(); refresh();});
+  board.appendChild(sec);
+});
+const free=document.getElementById('free'); try{free.value=localStorage.getItem(KEY+'-free')||''}catch(e){}
+free.addEventListener('input',()=>{try{localStorage.setItem(KEY+'-free',free.value)}catch(e){} refresh();});
+const out=document.getElementById('out'), copy=document.getElementById('copy');
+function text(){
+  const lines=['Escolhas para o EP5:'];
+  Q.forEach((q,i)=>{ const names=st[q.id].sel.map(v=>q.opts.find(o=>o[0]===v)[1]); const o=(st[q.id].other||'').trim();
+    if(o) names.push('Outro: '+o); lines.push(`${i+1}. ${q.title}: ${names.length?names.join('; '):'(não escolhi)'}`); });
+  const f=free.value.trim(); if(f) lines.push('12. Minhas especificações: '+f);
+  return lines.join('\n');
+}
+function refresh(){
+  let n=0; Q.forEach(q=>{ if(st[q.id].sel.length||(st[q.id].other||'').trim()) n++; });
+  document.getElementById('count').textContent=n;
+  document.querySelectorAll('section.q').forEach((sec,i)=>{ const q=Q[i]; if(!q) return; sec.querySelectorAll('.opt').forEach(b=>b.setAttribute('aria-pressed',st[q.id].sel.includes(b.dataset.v)?'true':'false')); });
+  out.value=text();
+}
+document.getElementById('show').onclick=()=>{out.hidden=!out.hidden; document.getElementById('show').textContent=out.hidden?'Ver texto':'Esconder texto';};
+copy.onclick=()=>{const t=text(); const done=()=>{copy.textContent='Copiado!'; setTimeout(()=>copy.textContent='Copiar escolhas',1800)};
+  const fallback=()=>{out.hidden=false; out.focus(); out.select(); copy.textContent='Selecionado: copie'};
+  try{navigator.clipboard.writeText(t).then(done,fallback)}catch(e){fallback()}};
+refresh();
+</script>
