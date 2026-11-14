@@ -7,30 +7,25 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Cap,Inter Display Black,76,&H00FFFFFF,&H00FFFFFF,&H00281410,&H00000000,0,0,0,0,100,100,0,0,1,7,0,8,70,70,0,1
+Style: Cap,Inter Display Black,110,&H00FFFFFF,&H00FFFFFF,&H00100A08,&H96000000,0,0,0,0,100,100,2,0,1,11,4,5,70,70,0,1
 Style: Head,Inter Display Black,96,&H00FFFFFF,&H00FFFFFF,&H004A2A0A,&H00000000,0,0,0,0,100,100,0,0,1,8,0,8,40,40,0,1
 Style: Small,Inter Display Black,38,&H00FFFFFF,&H00FFFFFF,&H004A2A0A,&H00000000,0,0,0,0,100,100,2,0,1,5,0,8,40,40,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 1,0:00:00.86,0:00:01.16,Cap,,0,0,0,,{\pos(540,1520)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Você{\c&HFFFFFF&\fscx100\fscy100} sobreviveria ao
-Dialogue: 1,0:00:01.16,0:00:01.74,Cap,,0,0,0,,{\pos(540,1520)}Você {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}sobreviveria{\c&HFFFFFF&\fscx100\fscy100} ao
-Dialogue: 1,0:00:01.74,0:00:01.91,Cap,,0,0,0,,{\pos(540,1520)}Você sobreviveria {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}ao{\c&HFFFFFF&\fscx100\fscy100}
-Dialogue: 1,0:00:01.91,0:00:02.25,Cap,,0,0,0,,{\pos(540,1520)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}boneco{\c&HFFFFFF&\fscx100\fscy100} assassino?
-Dialogue: 1,0:00:02.25,0:00:03.07,Cap,,0,0,0,,{\pos(540,1520)}boneco {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}assassino?{\c&HFFFFFF&\fscx100\fscy100}
-Dialogue: 1,0:00:05.27,0:00:05.44,Cap,,0,0,0,,{\pos(540,1520)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}É{\c&HFFFFFF&\fscx100\fscy100} uma sexta-feira
-Dialogue: 1,0:00:05.44,0:00:05.67,Cap,,0,0,0,,{\pos(540,1520)}É {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}uma{\c&HFFFFFF&\fscx100\fscy100} sexta-feira
-Dialogue: 1,0:00:05.67,0:00:06.22,Cap,,0,0,0,,{\pos(540,1520)}É uma {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}sexta-feira{\c&HFFFFFF&\fscx100\fscy100}
-Dialogue: 1,0:00:06.22,0:00:06.82,Cap,,0,0,0,,{\pos(540,1520)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}qualquer,{\c&HFFFFFF&\fscx100\fscy100} você está na sua
-Dialogue: 1,0:00:06.82,0:00:07.09,Cap,,0,0,0,,{\pos(540,1520)}qualquer, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}você{\c&HFFFFFF&\fscx100\fscy100} está na sua
-Dialogue: 1,0:00:07.09,0:00:07.37,Cap,,0,0,0,,{\pos(540,1520)}qualquer, você {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}está{\c&HFFFFFF&\fscx100\fscy100} na sua
-Dialogue: 1,0:00:07.37,0:00:07.55,Cap,,0,0,0,,{\pos(540,1520)}qualquer, você está {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}na{\c&HFFFFFF&\fscx100\fscy100} sua
-Dialogue: 1,0:00:07.55,0:00:07.78,Cap,,0,0,0,,{\pos(540,1520)}qualquer, você está na {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}sua{\c&HFFFFFF&\fscx100\fscy100}
-Dialogue: 1,0:00:07.78,0:00:08.46,Cap,,0,0,0,,{\pos(540,1520)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}casa.{\c&HFFFFFF&\fscx100\fscy100}
-Dialogue: 1,0:00:09.11,0:00:09.39,Cap,,0,0,0,,{\pos(540,1520)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}Até{\c&HFFFFFF&\fscx100\fscy100} que, de repente,
-Dialogue: 1,0:00:09.39,0:00:09.78,Cap,,0,0,0,,{\pos(540,1520)}Até {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}que,{\c&HFFFFFF&\fscx100\fscy100} de repente,
-Dialogue: 1,0:00:09.78,0:00:09.97,Cap,,0,0,0,,{\pos(540,1520)}Até que, {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}de{\c&HFFFFFF&\fscx100\fscy100} repente,
-Dialogue: 1,0:00:09.97,0:00:10.54,Cap,,0,0,0,,{\pos(540,1520)}Até que, de {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}repente,{\c&HFFFFFF&\fscx100\fscy100}
-Dialogue: 1,0:00:10.54,0:00:10.69,Cap,,0,0,0,,{\pos(540,1520)}{\fscx88\fscy88\t(0,90,\fscx100\fscy100)}{\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}a{\c&HFFFFFF&\fscx100\fscy100} campainha toca.
-Dialogue: 1,0:00:10.69,0:00:11.22,Cap,,0,0,0,,{\pos(540,1520)}a {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}campainha{\c&HFFFFFF&\fscx100\fscy100} toca.
-Dialogue: 1,0:00:11.22,0:00:11.91,Cap,,0,0,0,,{\pos(540,1520)}a campainha {\c&H3FD2FF&\fscx100\fscy100\t(0,90,\fscx126\fscy126)\t(90,210,\fscx114\fscy114)}toca.{\c&HFFFFFF&\fscx100\fscy100}
+Dialogue: 1,0:00:04.21,0:00:04.35,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}É
+Dialogue: 1,0:00:04.35,0:00:04.58,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}UMA
+Dialogue: 1,0:00:04.58,0:00:05.12,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}SEXTA-FEIRA
+Dialogue: 1,0:00:05.12,0:00:05.70,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}QUALQUER,
+Dialogue: 1,0:00:05.70,0:00:05.97,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}VOCÊ
+Dialogue: 1,0:00:05.97,0:00:06.24,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}ESTÁ
+Dialogue: 1,0:00:06.24,0:00:06.42,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}NA
+Dialogue: 1,0:00:06.42,0:00:06.65,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}SUA
+Dialogue: 1,0:00:06.65,0:00:07.24,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}CASA.
+Dialogue: 1,0:00:08.00,0:00:08.24,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}ATÉ
+Dialogue: 1,0:00:08.24,0:00:08.62,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}QUE,
+Dialogue: 1,0:00:08.62,0:00:08.80,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}DE
+Dialogue: 1,0:00:08.80,0:00:09.37,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}REPENTE,
+Dialogue: 1,0:00:09.37,0:00:09.51,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}A
+Dialogue: 1,0:00:09.51,0:00:10.03,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}CAMPAINHA
+Dialogue: 1,0:00:10.03,0:00:10.63,Cap,,0,0,0,,{\pos(540,1520)\fscx80\fscy80\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}TOCA.

@@ -25,39 +25,21 @@ T = d['total']
 lines = ['[Script Info]', 'ScriptType: v4.00+', 'PlayResX: 1080', 'PlayResY: 1920', 'WrapStyle: 0', 'ScaledBorderAndShadow: yes', '',
          '[V4+ Styles]',
          'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding',
-         'Style: Cap,Inter Display Black,76,&H00FFFFFF,&H00FFFFFF,&H00281410,&H00000000,0,0,0,0,100,100,0,0,1,7,0,8,70,70,0,1',
+         'Style: Cap,Inter Display Black,110,&H00FFFFFF,&H00FFFFFF,&H00100A08,&H96000000,0,0,0,0,100,100,2,0,1,11,4,5,70,70,0,1',
          'Style: Head,Inter Display Black,96,&H00FFFFFF,&H00FFFFFF,&H004A2A0A,&H00000000,0,0,0,0,100,100,0,0,1,8,0,8,40,40,0,1',
          'Style: Small,Inter Display Black,38,&H00FFFFFF,&H00FFFFFF,&H004A2A0A,&H00000000,0,0,0,0,100,100,2,0,1,5,0,8,40,40,0,1', '',
          '[Events]', 'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text']
 TY = [56, 104, 196] if NATIVE else [200, 262, 375]
-# karaoke captions: short chunks; the word being spoken turns yellow and pops
-W = json.load(open('audio/words.json'))
-chunks, cur = [], []
-for w in W:
-    txt = ' '.join(x['text'] for x in cur)
-    if cur and (w['seg'] != cur[-1]['seg'] or len(txt) + len(w['text']) + 1 > 26 or (len(txt) >= 10 and cur[-1]['text'][-1] in '.?!:,') or w['t0'] - cur[-1]['t1'] > 0.6):
-        chunks.append(cur); cur = []
-    cur.append(w)
-if cur: chunks.append(cur)
-prev_end = 0
-for ci, ch in enumerate(chunks):
-    nxt = chunks[ci + 1][0]['t0'] if ci + 1 < len(chunks) else T
-    end = min(ch[-1]['t1'] + 0.35, nxt)
-    quote = ch[0]['who'] != 'narr'
-    end = max(end, ch[0]['t0'] + 0.1)
-    for j, w in enumerate(ch):
-        s0 = w['t0'] if j else max(ch[0]['t0'] - 0.04, prev_end)
-        s1 = ch[j + 1]['t0'] if j + 1 < len(ch) else end
-        parts = []
-        for k, x in enumerate(ch):
-            t_ = x['text']
-            if quote and k == 0: t_ = '“' + t_
-            if quote and k == len(ch) - 1: t_ = t_ + '”'
-            if k == j: parts.append('{\\c&H3FD2FF&\\fscx100\\fscy100\\t(0,90,\\fscx126\\fscy126)\\t(90,210,\\fscx114\\fscy114)}' + t_ + '{\\c&HFFFFFF&\\fscx100\\fscy100}')
-            else: parts.append(t_)
-        intro = '{\\fscx88\\fscy88\\t(0,90,\\fscx100\\fscy100)}' if j == 0 else ''
-        s0 = min(s0, s1 - 0.01); lines.append(f"Dialogue: 1,{ts(s0)},{ts(s1)},Cap,,0,0,0,,{{\\pos(540,1520)}}{intro}{' '.join(parts)}")
-    prev_end = end
+W = [w for w in json.load(open('audio/words.json')) if w['seg'] != 'title']   # the title line has the animated hook instead of captions
+# captions: ONE word at a time (user's request), white with a thick dark outline, a small pop when it appears
+prev_t = -1
+for i, w in enumerate(W):
+    nxt = W[i + 1]['t0'] if i + 1 < len(W) else T
+    s0 = max(w['t0'] - 0.03, prev_t); s1 = min(max(w['t1'] + 0.25, w['t0'] + 0.3), nxt - 0.02)
+    if s1 <= s0 + 0.05: s1 = s0 + 0.12
+    txt = w['text'].upper()
+    lines.append(f"Dialogue: 1,{ts(s0)},{ts(s1)},Cap,,0,0,0,,{{\\pos(540,1520)\\fscx80\\fscy80\\t(0,80,\\fscx112\\fscy112)\\t(80,160,\\fscx100\\fscy100)}}{txt}")
+    prev_t = s1
 open('audio/tiktok.ass', 'w').write('\n'.join(lines) + '\n')
 flt = ('[0:v]split=2[a][b];'
        '[a]scale=-2:1920,crop=1080:1920,gblur=sigma=28,eq=brightness=-0.18:saturation=1.1[bg];'

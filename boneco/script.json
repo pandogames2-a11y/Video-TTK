@@ -4,7 +4,7 @@
     "voice": "narr",
     "text": "Você sobreviveria ao boneco assassino?",
     "lead": 0.9,
-    "tail": 1.9
+    "tail": 0.8
   },
   {
     "scene": "calm",

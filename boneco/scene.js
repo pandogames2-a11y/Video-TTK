@@ -145,8 +145,8 @@ function drawInterior(t, ctx) {
   g = main;
 }
 
-function hook(t) {   // the question pops in when the narrator finishes it, then shrinks away
-  const tw = WORDS.filter(w => w.seg === 'title'); const a = tw[tw.length - 1].t1 + 0.05, out = a + 1.3, gone = out + 0.45;
+function hook(t) {   // the question is on screen while the narrator asks it, and shrinks away as the sentence ends
+  const tw = WORDS.filter(w => w.seg === 'title'); const a = tw[0].t0 - 0.35, out = tw[tw.length - 1].t1 - 0.05, gone = out + 0.45;
   if (t < a || t > gone) return;
   const kin = clamp((t - a) / 0.3), sIn = kin < 1 ? kin + Math.sin(kin * Math.PI) * 0.18 : 1;
   const kout = ss(out, gone, t), s = sIn * (1 - kout);

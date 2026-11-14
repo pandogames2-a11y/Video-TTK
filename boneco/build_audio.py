@@ -83,8 +83,12 @@ def popspill(at, amp=0.1):
         n = int(0.04 * SR); put(fx, (band(rng.standard_normal(n), 2000, 7000) * np.exp(-np.arange(n) / SR * 80) * amp).astype(np.float32), at + 0.25 + rng.random() * 0.6)
 # night ambience: crickets + soft wind, the whole episode
 k = np.arange(N) / SR
-crick = np.sin(2 * np.pi * 4300 * k) * (np.sin(2 * np.pi * 22 * k) > 0.6) * (np.sin(2 * np.pi * 0.7 * k) > 0) * 0.012
-mus += (crick + lowp(rng.standard_normal(N), 300) * 0.02).astype(np.float32)
+# soft crickets: short smooth chirps (3 pulses each) instead of a harsh gated tone, and a quieter, darker wind
+crick = np.zeros(N, np.float32)
+pulse = np.arange(int(0.035 * SR)) / SR; pw = (np.sin(np.pi * pulse / 0.035) ** 2 * np.sin(2 * np.pi * 3600 * pulse)).astype(np.float32)
+for c in np.arange(0.3, N / SR - 1, 0.9):
+    for j in range(3): put(crick, pw * 0.006 * (0.7 + 0.3 * rng.random()), c + j * 0.06 + rng.random() * 0.05)
+mus += crick + (lowp(rng.standard_normal(N), 180) * 0.012).astype(np.float32)
 # suspense pad: a slow low drone that swells
 drone = (np.sin(2 * np.pi * 55 * k) + 0.5 * np.sin(2 * np.pi * 82.4 * k + np.sin(2 * np.pi * 0.2 * k))) * 0.035 * (0.6 + 0.4 * np.sin(2 * np.pi * 0.1 * k))
 mus += drone.astype(np.float32)
@@ -95,7 +99,7 @@ for j, f in enumerate(notes):
     if f: put(mus, tone(f * 2, 0.6, 0.035, 5), c0 + 0.2 + j * 0.42)
 # TV murmur under the calm scene
 tv_a, tv_b = T0('calm'), T0('bell') + 1.2
-n = int((tv_b - tv_a) * SR); put(fx, (band(rng.standard_normal(n), 300, 2500) * 0.012 * (0.6 + 0.4 * np.sin(np.arange(n) / SR * 9))).astype(np.float32), tv_a)
+n = int((tv_b - tv_a) * SR); put(fx, (band(rng.standard_normal(n), 250, 900) * 0.006 * (0.6 + 0.4 * np.sin(np.arange(n) / SR * 9))).astype(np.float32), tv_a)   # muffled TV, no hiss
 crunch(T0('calm') + 1.0); crunch(T0('calm') + 2.6)
 RING = wT('toca', 'bell') + 0.4
 dingdong(RING)   # just a normal doorbell (no scare yet)
