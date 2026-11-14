@@ -16,15 +16,19 @@ const eb = t => { t = clamp(t); const c = 1.7; return 1 + (c + 1) * Math.pow(t -
 const seg = (t, a, d) => clamp((t - a) / d);
 function R(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
 function rr(x, y, w, h, r) { X.beginPath(); X.roundRect(x, y, w, h, r); }
+const NOEMO = /[\u{1F000}-\u{1FAFF}\u{2600}-\u{2604}\u{2607}-\u{2618}\u{261A}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{20E3}]/gu;
+const clean = s => String(s).replace(NOEMO, '').replace(/\s{2,}/g, ' ').trim();
 function txt(s, x, y, size, color, o = {}) {
+  s = clean(s); if (!s) return;
   X.save(); X.font = `${o.weight || 900} ${size}px ${o.font || F}`; X.textAlign = o.align || 'center'; X.textBaseline = 'middle';
   if (o.glow) { X.shadowColor = o.glow; X.shadowBlur = o.blur || 30; }
   if (o.stroke) { X.lineJoin = 'round'; X.lineWidth = o.stroke; X.strokeStyle = o.sc || '#000'; X.strokeText(s, x, y); }
   X.fillStyle = color; X.fillText(s, x, y); X.restore();
 }
-function tw(s, size, weight = 900) { X.save(); X.font = `${weight} ${size}px ${F}`; const w = X.measureText(s).width; X.restore(); return w; }
+function tw(s, size, weight = 900) { s = clean(s); X.save(); X.font = `${weight} ${size}px ${F}`; const w = X.measureText(s).width; X.restore(); return w; }
 function fit(s, size, maxW, weight = 900) { const w = tw(s, size, weight); return w > maxW ? size * maxW / w : size; }
-function emoji(e, x, y, size, rot = 0, a = 1) { if (size <= 0) return; X.save(); X.globalAlpha *= a; X.translate(x, y); X.rotate(rot); X.font = `${size}px ${EM}`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.fillText(e, 0, 0); X.restore(); }
+function emoji(e, x, y, size, rot = 0, a = 1) { return; // sem emojis no vídeo
+  if (size <= 0) return; X.save(); X.globalAlpha *= a; X.translate(x, y); X.rotate(rot); X.font = `${size}px ${EM}`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.fillText(e, 0, 0); X.restore(); }
 function arrow(x0, y0, x1, y1, col, w = 10) {
   X.save(); X.strokeStyle = col; X.fillStyle = col; X.lineWidth = w; X.lineCap = 'round';
   X.beginPath(); X.moveTo(x0, y0); X.lineTo(x1, y1); X.stroke();
@@ -105,13 +109,21 @@ function phone(x, y, s, t, rot = 0) {
     emoji(['🛥️', '🌴', '🚗', '🐊', '💸', '🕺', '🏝️'][((i + base) % 7 + 7) % 7], 0, y + 170, 110); }
   X.restore(); X.restore();
 }
+function backpack(x, y, s, rot) { // mochila desenhada (sem emoji)
+  X.save(); X.translate(x, y); X.rotate(rot); X.scale(s, s);
+  X.strokeStyle = '#7a1f12'; X.lineWidth = 26; X.beginPath(); X.arc(0, -150, 70, Math.PI, 0); X.stroke();
+  rr(-150, -150, 300, 330, 70); X.fillStyle = '#d8442c'; X.fill();
+  rr(-150, -150, 300, 130, { upperLeft: 70, upperRight: 70, lowerLeft: 20, lowerRight: 20 }); X.fillStyle = '#b8361f'; X.fill();
+  rr(-95, 40, 190, 110, 26); X.fillStyle = '#b8361f'; X.fill(); X.fillStyle = '#f0c040'; X.fillRect(-15, -40, 30, 40); X.fillRect(-8, 60, 16, 30);
+  X.restore();
+}
 function weaponWheel(cx, cy, lt, pt) {
-  const k = eb(seg(pt, 0.1, 0.4)), items = ['🔫', '🔪', '💣', '🚀', '🏏', '🧨', '🪓', '🔦'], sel = Math.floor(pt * 2.5) % 8;
+  const k = eb(seg(pt, 0.1, 0.4)), items = ['PISTOLA', 'FACA', 'GRANADA', 'BAZUCA', 'TACO', 'EXPLOSIVO', 'FUZIL', 'ESCOPETA'], sel = Math.floor(pt * 2.5) % 8;
   X.save(); X.translate(cx, cy); X.scale(k, k);
   for (let i = 0; i < 8; i++) { const a0 = -Math.PI / 2 + i * Math.PI / 4 - Math.PI / 8, a1 = a0 + Math.PI / 4;
     X.beginPath(); X.arc(0, 0, 330, a0 + 0.02, a1 - 0.02); X.arc(0, 0, 130, a1 - 0.05, a0 + 0.05, true); X.closePath();
     X.fillStyle = i === sel ? 'rgba(255,212,0,0.85)' : 'rgba(10,10,20,0.75)'; X.fill(); X.strokeStyle = 'rgba(255,255,255,0.35)'; X.lineWidth = 3; X.stroke();
-    const am = (a0 + a1) / 2; emoji(items[i], Math.cos(am) * 230, Math.sin(am) * 230, 84); }
+    const am = (a0 + a1) / 2; txt(items[i], Math.cos(am) * 232, Math.sin(am) * 232, 30, i === sel ? '#111' : '#fff', { weight: 900 }); }
   X.beginPath(); X.arc(0, 0, 120, 0, Math.PI * 2); X.fillStyle = 'rgba(0,0,0,0.8)'; X.fill(); txt('∞', 0, 4, 90, '#ffd400');
   X.restore();
 }
@@ -120,10 +132,10 @@ function grainLayer() { const c = document.createElement('canvas'); c.width = 48
 
 // ---------- selos ----------
 const TAGS = {
-  ok: { t: '✅ CONFIRMADO PELA ROCKSTAR', c: '#19c37d' },
-  trailer: { t: '🎬 TRAILER / GAMEPLAY OFICIAL', c: '#2f8cff' },
-  preview: { t: '👀 VISTO EM PRÉVIAS', c: '#ff9a1f' },
-  rumor: { t: '⚠️ VAZAMENTO · NÃO CONFIRMADO', c: '#ff3b3b' },
+  ok: { t: 'CONFIRMADO PELA ROCKSTAR', c: '#19c37d' },
+  trailer: { t: 'TRAILER / GAMEPLAY OFICIAL', c: '#2f8cff' },
+  preview: { t: 'VISTO EM PRÉVIAS', c: '#ff9a1f' },
+  rumor: { t: 'VAZAMENTO · NÃO CONFIRMADO', c: '#ff3b3b' },
 };
 const REG = [
   ['VICE CITY', 'cidade grande, neon, praia e vida noturna', '#ff2e88'],
@@ -326,13 +338,13 @@ SCENES.n9 = (lt, s, P) => {
   grad([[0, '#1b2a41'], [1, '#0c1321']]);
   X.fillStyle = '#152033'; X.fillRect(-500, 860, W + 1000, 400);
   if (P.v === 'roda') { X.save(); X.translate(960, 540); X.scale(0.92, 0.92); weaponWheel(0, 0, lt, P.pt); X.restore(); }
-  else { emoji('🎒', 700, 560, 380, Math.sin(lt * 2) * 0.05);
+  else { backpack(700, 560, 1, Math.sin(lt * 2) * 0.04);
     ['💵', '📱', '🔦', '🔧', '🍔'].forEach((e, i) => { const k = eb(seg(P.pt, 0.3 + i * 0.12, 0.35)); const a = -1.4 + i * 0.7; emoji(e, 700 + Math.cos(a) * 330, 560 + Math.sin(a) * 300, 90 * k); }); }
   if (P.v === 'bolso') { const k = eb(seg(P.pt, 0.4, 0.35)); X.save(); X.translate(1350, 560); X.scale(k, k);
-    rr(-170, -190, 340, 380, 40); X.fillStyle = '#2c4a7a'; X.fill(); txt('BOLSO', 0, -140, 44, '#cfe'); emoji('🚀', 0, 20, 180, -0.6);
+    rr(-170, -190, 340, 380, 40); X.fillStyle = '#2c4a7a'; X.fill(); txt('BOLSO', 0, -140, 44, '#cfe'); txt('BAZUCA', 0, 30, 64, '#fff', { stroke: 8 });
     if (P.pt > 2.5) { X.strokeStyle = '#ff2b2b'; X.lineWidth = 24; X.beginPath(); X.moveTo(-150, -150); X.lineTo(150, 170); X.moveTo(150, -150); X.lineTo(-150, 170); X.stroke(); } X.restore(); }
   if (P.v === 'carro') { car(1400, 920, 1.2, '#2a2f3a'); arrow(1000, 520, 1300, 760, '#ffd400'); }
-  if (P.v === 'grana') { emoji('💵', 1350, 520, 150); emoji('🤝', 1350, 720, 150); }
+  if (P.v === 'grana') { txt('$', 1350, 560, 260, '#19c37d', { stroke: 14 }); txt('50 / 50', 1350, 760, 70, '#fff', { stroke: 10 }); }
 };
 
 SCENES.n10 = (lt, s, P) => {

@@ -28,9 +28,9 @@
      "k": "list",
      "h": "VEM AÍ",
      "i": [
-      "🔫 armas",
-      "🚨 fugas",
-      "💪 o seu corpo"
+      "armas",
+      "fugas",
+      "o seu corpo"
      ]
     },
     "v": "sunset",
@@ -40,7 +40,7 @@
     "t": "E a número dez vai mudar pra sempre o jeito que você foge da polícia. Então fica até o final.",
     "c": {
      "k": "big",
-     "a": "#10 🚨",
+     "a": "#10",
      "b": "fica até o final"
     },
     "v": "police",
@@ -94,7 +94,7 @@
     "t": "O Michael saía de terno, sem mochila nenhuma, e tirava uma bazuca do nada. E ninguém nunca questionou.",
     "c": {
      "k": "big",
-     "a": "🚀 DE ONDE SAIU ISSO?",
+     "a": "DE ONDE SAIU ISSO?",
      "b": "o mistério que todo mundo aceitou"
     },
     "v": "bolso",
@@ -108,7 +108,7 @@
     "t": "No GTA 6, a ideia é outra. Pelo vazamento de 2022 e pelas prévias, as armas grandes ficam numa bolsa ou no porta-malas do carro.",
     "c": {
      "k": "big",
-     "a": "🎒 BOLSA • 🚗 PORTA-MALAS",
+     "a": "BOLSA • PORTA-MALAS",
      "b": "cada arma no seu lugar"
     },
     "v": "carro",
@@ -200,7 +200,7 @@
     "t": "Você tava de boa com o Michael e, do nada, trocava pro Trevor fazendo alguma loucura no meio do deserto.",
     "c": {
      "k": "big",
-     "a": "🤪 TREVOR",
+     "a": "TREVOR",
      "b": "sempre aprontando no deserto"
     },
     "v": "tres",
@@ -315,9 +315,9 @@
      "k": "list",
      "h": "CONFIRMADO",
      "i": [
-      "🍔 comeu demais → engorda",
-      "💪 academia → músculo",
-      "😴 sem dormir → aparece"
+      "comeu demais → engorda",
+      "academia → músculo",
+      "sem dormir → aparece"
      ]
     },
     "v": "muda",
@@ -327,7 +327,7 @@
     "t": "E o gameplay ainda mostrou academia e um medidor de estamina.",
     "c": {
      "k": "big",
-     "a": "🏋️ ACADEMIA",
+     "a": "ACADEMIA",
      "b": "e medidor de estamina"
     },
     "v": "academia",
@@ -341,7 +341,7 @@
     "t": "Quem jogou San Andreas lembra do CJ comendo hambúrguer até ficar redondo. É esse espírito voltando, mais de vinte anos depois.",
     "c": {
      "k": "big",
-     "a": "🍔 O ESPÍRITO DO CJ",
+     "a": "O ESPÍRITO DO CJ",
      "b": "San Andreas, 2004"
     },
     "v": "sa"
@@ -401,7 +401,7 @@
     "t": "No GTA 6, segundo a Rockstar, o clima é localizado. Você pode estar no sol, olhando uma tempestade desabar a poucos quarteirões.",
     "c": {
      "k": "big",
-     "a": "☀️ AQUI  ⛈️ ALI",
+     "a": "SOL AQUI, CHUVA ALI",
      "b": "no mesmo mapa, ao mesmo tempo"
     },
     "v": "local",
@@ -411,7 +411,7 @@
     "t": "E a chuva deixa marca: a rua não seca por mágica quando o sol volta.",
     "c": {
      "k": "big",
-     "a": "💧 A RUA CONTINUA MOLHADA",
+     "a": "A RUA CONTINUA MOLHADA",
      "b": "o clima é persistente"
     },
     "v": "molhado"
@@ -422,9 +422,9 @@
      "k": "list",
      "h": "CONFIRMADO",
      "i": [
-      "🌀 furacões",
-      "🌧️ tempestades tropicais",
-      "⚡ raios e vento forte"
+      "furacões",
+      "tempestades tropicais",
+      "raios e vento forte"
      ]
     },
     "v": "furacao",
@@ -474,7 +474,7 @@
     "t": "O GTA 5 tinha o Chop, o cachorro do Franklin, alguns cervos, pumas no mato e tubarão no mar. Mas era pouco.",
     "c": {
      "k": "big",
-     "a": "🐕 CHOP E POUCOS AMIGOS",
+     "a": "CHOP E POUCOS AMIGOS",
      "b": "a fauna tímida do GTA 5"
     },
     "v": "fauna",
@@ -498,8 +498,8 @@
     "t": "Nos trailers já apareceram jacarés, flamingos e até iguanas, que são uma praga famosa na Flórida.",
     "c": {
      "k": "big",
-     "a": "🐊 🦩 🦎",
-     "b": "jacaré, flamingo e iguana"
+     "a": "JACARÉ • FLAMINGO • IGUANA",
+     "b": "já apareceram nos trailers"
     },
     "v": "invasoras",
     "clip": {
@@ -587,9 +587,9 @@
      "k": "list",
      "h": "NO CELULAR DO JOGO",
      "i": [
-      "📱 vídeos verticais",
-      "🤳 influenciadores",
-      "🔥 conteúdo viral"
+      "vídeos verticais",
+      "influenciadores",
+      "conteúdo viral"
      ]
     },
     "v": "feed"
@@ -607,7 +607,7 @@
     "t": "Agora imagina: você faz uma loucura no meio da rua e, minutos depois, o vídeo tá rodando no celular do jogo. A Rockstar ainda não disse se funciona assim, mas seria muito a cara do GTA.",
     "c": {
      "k": "im",
-     "a": "VOCÊ VIROU MEME 😂",
+     "a": "VOCÊ VIROU MEME",
      "b": "ideia nossa, ainda não confirmada"
     },
     "v": "meme"
@@ -677,7 +677,7 @@
     "t": "Nos trailers tem gente malhando na praia, fazendo festa e filmando tudo com o celular.",
     "c": {
      "k": "big",
-     "a": "🏖️ 🎉 📱",
+     "a": "PRAIA • FESTA • CELULAR",
      "b": "a rua tem vida própria"
     },
     "v": "vivos",
@@ -691,7 +691,7 @@
     "t": "E no gameplay apareceu um sistema parecido com o do Red Dead 2: dá pra cumprimentar ou provocar quem passa.",
     "c": {
      "k": "big",
-     "a": "👋 OI  •  😤 QUAL FOI?",
+     "a": "OI  •  QUAL FOI?",
      "b": "cumprimentar ou provocar"
     },
     "v": "cumprimentar",
@@ -770,7 +770,7 @@
     "t": "No GTA 5, assim que as estrelas sumiam, a cidade esquecia tudo. Você roubava, explodia, saía atropelando, e dois minutos depois era um cidadão exemplar.",
     "c": {
      "k": "big",
-     "a": "😇 CIDADÃO EXEMPLAR",
+     "a": "CIDADÃO EXEMPLAR",
      "b": "2 minutos depois do caos"
     },
     "v": "",
@@ -784,7 +784,7 @@
     "t": "Nas coberturas do gameplay de agosto, a imprensa notou um indicador que parece acompanhar o seu estilo: se você é discreto ou se sai atirando em tudo.",
     "c": {
      "k": "big",
-     "a": "📊 SEU ESTILO",
+     "a": "SEU ESTILO",
      "b": "um indicador acompanha"
     },
     "v": "",
@@ -955,9 +955,9 @@
      "k": "list",
      "h": "A FUGA DO GTA 5",
      "i": [
-      "👀 sai da visão",
-      "🧱 se esconde no beco",
-      "🎨 pinta o carro"
+      "sai da visão",
+      "se esconde no beco",
+      "pinta o carro"
      ]
     },
     "v": "gta5",
@@ -982,9 +982,9 @@
      "k": "list",
      "h": "A POLÍCIA REGISTRA",
      "i": [
-      "👕 roupa",
-      "🧑 rosto",
-      "🚗 carro"
+      "roupa",
+      "rosto",
+      "carro"
      ]
     },
     "v": "roupa",
@@ -1008,7 +1008,7 @@
     "t": "E no gameplay ainda apareceram cães policiais. Correr a pé ficou bem mais perigoso.",
     "c": {
      "k": "big",
-     "a": "🐕 CÃES POLICIAIS",
+     "a": "CÃES POLICIAIS",
      "b": "correr a pé ficou perigoso"
     },
     "v": "caes"
