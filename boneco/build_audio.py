@@ -103,6 +103,20 @@ n = int((tv_b - tv_a) * SR); put(fx, (band(rng.standard_normal(n), 250, 900) * 0
 crunch(T0('calm') + 1.0); crunch(T0('calm') + 2.6)
 RING = wT('toca', 'bell') + 0.4
 dingdong(RING)   # just a normal doorbell (no scare yet)
+def step(at, amp=0.07):
+    n = int(0.08 * SR); put(fx, (lowp(rng.standard_normal(n), 400) * np.exp(-np.arange(n) / SR * 45) * amp * 4).astype(np.float32), at)
+UP, OPEN = wT('levanta', 'open'), wT('abre', 'open')
+for at in np.arange(UP + 0.45, OPEN - 0.1, 0.32): step(at)
+def click(at, amp=0.12):
+    n = int(0.03 * SR); put(fx, (band(rng.standard_normal(n), 2000, 8000) * np.exp(-np.arange(n) / SR * 150) * amp).astype(np.float32), at)
+def creak(at, d=0.9, amp=0.05):
+    kk = np.arange(int(d * SR)) / SR; f = 180 + 60 * np.sin(2 * np.pi * 2.2 * kk) + 40 * kk
+    x = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * (0.5 + 0.5 * np.sin(2 * np.pi * 23 * kk)) * np.sin(np.pi * kk / d)
+    put(fx, (band(x, 300, 2500) * amp).astype(np.float32), at)
+click(OPEN + 0.05); creak(OPEN + 0.15)
+LOOKBOX = T0('porch') + 2.6
+for j, f in enumerate([1319, 1175, 1047]): put(mus, tone(f, 0.9, 0.03, 4), LOOKBOX + j * 0.35)
+
 whoosh(T0('calm') - 0.35, 0.6, 0.1)   # dissolve into the house
 # ---- mix (narration ducks the bed) ----
 duck = np.ones(N, np.float32); env = np.convolve(np.abs(voc), np.ones(4410) / 4410, 'same'); duck -= np.clip(env * 6, 0, 0.5)
@@ -111,6 +125,6 @@ fade = int(0.6 * SR); mix[:fade] *= np.linspace(0, 1, fade); mix[int(TOTAL * SR)
 mix = mix / max(1e-6, np.abs(mix).max()) * 0.9
 with wave.open('audio/mix.wav', 'w') as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
-json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'ring': round(RING, 3)}, open('timeline.json', 'w'), indent=1)
+json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'ring': round(RING, 3), 'up': round(UP, 3), 'open': round(OPEN, 3), 'lookbox': round(LOOKBOX, 3)}, open('timeline.json', 'w'), indent=1)
 for g in segs: print(f"{g['scene']:8s} start {g['start']:6.2f} dur {g['dur']:5.2f}")
 print('total', round(TOTAL, 2), 'ring', round(RING, 2))

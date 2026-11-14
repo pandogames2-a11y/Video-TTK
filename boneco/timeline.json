@@ -1,31 +1,50 @@
 {
- "total": 13.921,
+ "total": 20.491,
  "fps": 30,
  "segs": [
   {
    "scene": "title",
    "voice": "narr",
    "start": 0.0,
-   "dur": 3.732,
+   "dur": 3.681,
    "vstart": 0.9,
-   "vdur": 2.032
+   "vdur": 1.981
   },
   {
    "scene": "calm",
    "voice": "narr",
-   "start": 3.732,
-   "dur": 3.99,
-   "vstart": 4.232,
-   "vdur": 2.89
+   "start": 3.681,
+   "dur": 3.978,
+   "vstart": 4.181,
+   "vdur": 2.878
   },
   {
    "scene": "bell",
    "voice": "narr",
-   "start": 7.721,
-   "dur": 6.2,
-   "vstart": 8.021,
-   "vdur": 2.513
+   "start": 7.659,
+   "dur": 4.2,
+   "vstart": 7.959,
+   "vdur": 2.504
+  },
+  {
+   "scene": "open",
+   "voice": "narr",
+   "start": 11.859,
+   "dur": 3.432,
+   "vstart": 12.059,
+   "vdur": 2.982
+  },
+  {
+   "scene": "porch",
+   "voice": "none",
+   "start": 15.291,
+   "dur": 5.2,
+   "vstart": 15.541,
+   "vdur": 0
   }
  ],
- "ring": 10.445
+ "ring": 10.388,
+ "up": 13.025,
+ "open": 14.08,
+ "lookbox": 17.891
 }

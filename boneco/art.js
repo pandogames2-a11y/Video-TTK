@@ -92,7 +92,9 @@ function bean(x, y, o = {}) {   // the new protagonist: light brown, startled ey
   const s = o.s || 1; g.save(); g.translate(x, y - (o.jy || 0)); g.scale(o.flip ? -s : s, s * (o.sq || 1)); if (o.tilt) g.rotate(o.tilt);
   const sit = o.sit;
   if (sit) { line([-40, -150, -60, -40], 12); line([40, -150, 60, -40], 12); ell(-72, -28, 42, 22, '#e9e9ef'); ell(72, -28, 42, 22, '#e9e9ef'); }
-  else { line([-35, -120, -45, -25], 12); line([35, -120, 45, -25], 12); ell(-58, -18, 42, 22, '#e9e9ef'); ell(58, -18, 42, 22, '#e9e9ef'); }
+  else { const w = o.walk || 0, ph = o.phase || 0;
+    for (const [sx, off] of [[-1, 0], [1, Math.PI]]) { const sw = Math.sin(ph + off) * w, lift = Math.max(0, Math.cos(ph + off)) * w;
+      const fx = sx * 45 + sw * 34, fy = -25 - lift * 22; line([sx * 35, -120, fx, fy], 12); ell(fx + sx * 13, fy + 7, 42, 22, '#e9e9ef'); } }
   const by = sit ? -230 : -250;
   const aL = o.armL || [-110, by + 20, -150, by + 110], aR = o.armR || [110, by + 20, 150, by + 110];
   ell(0, by, 120, 155, '#c8874d', -0.08);

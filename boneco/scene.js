@@ -13,7 +13,7 @@ const noise = t => Math.sin(t * 7.3) * 0.5 + Math.sin(t * 13.1) * 0.3 + Math.sin
 
 // ---------- the outside of the house (its own world; ground GY) ----------
 const GY = 1500;
-function exterior(t) {
+function exterior(t, door = 0) {
   const sky = g.createLinearGradient(0, 0, 0, GY); sky.addColorStop(0, '#060a24'); sky.addColorStop(1, '#283066');
   g.fillStyle = sky; g.fillRect(-600, -300, 2400, GY + 300);
   g.fillStyle = '#f7f1d0'; for (let i = 0; i < 70; i++) { const x = (i * 197) % 2200 - 500, y = (i * 113) % 900 - 200; g.globalAlpha = 0.5 + 0.5 * Math.sin(t * 3 + i); g.fillRect(x, y, 4, 4); } g.globalAlpha = 1;
@@ -48,7 +48,14 @@ function exterior(t) {
   rect(196, 1200, 14, 200, '#3d4a6a', 2, 3); rect(410, 1200, 14, 200, '#3d4a6a', 2, 3);
   rect(690, 1200, 180, 200, '#f3ece0', 6); rect(702, 1212, 156, 176, '#141a40', 3, 4); line([780, 1212, 780, 1388], 4);
   // porch: roof, columns, door, light, steps
-  rect(470, 1180, 140, GY - 1180, '#7a3f2a', 4); ell(588, 1350, 9, 9, '#e2b84a', 0, 3); rect(495, 1210, 90, 60, '#ffd77a', 4, 4);
+  if (door <= 0) { rect(470, 1180, 140, GY - 1180, '#7a3f2a', 4); ell(588, 1350, 9, 9, '#e2b84a', 0, 3); rect(495, 1210, 90, 60, '#ffd77a', 4, 4); }
+  else {   // open: the warm hall behind, the door panel swung inwards against the left jamb
+    const hall = g.createLinearGradient(0, 1180, 0, GY); hall.addColorStop(0, '#f2c27a'); hall.addColorStop(1, '#b77a45');
+    rect(470, 1180, 140, GY - 1180, hall, 4);
+    g.fillStyle = '#8a5a38'; g.fillRect(474, GY - 60, 132, 56);   // hall floor
+    const w = 140 * (1 - 0.82 * door);
+    shape('#6a3522', () => { g.moveTo(470, 1180); g.lineTo(470 + w, 1180 + 16 * door); g.lineTo(470 + w, GY - 16 * door); g.lineTo(470, GY); g.closePath(); }, 5);
+  }
   shape('#3a3550', () => { g.moveTo(400, 1150); g.lineTo(680, 1150); g.lineTo(650, 1100); g.lineTo(430, 1100); g.closePath(); });
   rect(415, 1150, 22, GY - 1150, '#f3ece0', 2, 4); rect(643, 1150, 22, GY - 1150, '#f3ece0', 2, 4);
   ell(540, 1165, 16, 12, '#ffe8a8', 0, 4);
@@ -59,6 +66,32 @@ function exterior(t) {
   for (let x = -560; x < 1800; x += 60) { if (x > 420 && x < 660) continue; shape('#e9e2d4', () => { g.moveTo(x, GY + 250); g.lineTo(x, GY + 160); g.lineTo(x + 18, GY + 140); g.lineTo(x + 36, GY + 160); g.lineTo(x + 36, GY + 250); g.closePath(); }, 4); }
   line([-560, GY + 190, 420, GY + 190], 5); line([660, GY + 190, 1800, GY + 190], 5);
   rect(1180, 900, 70, GY - 900, '#3a2618', 10); for (const [x, y, r] of [[1215, 860, 230], [1080, 960, 160], [1350, 980, 170], [1215, 700, 170]]) ell(x, y, r, r * 0.85, '#16301f', 0, 6);
+}
+
+// ---------- the toy box left on the porch: cardboard, a clear window, the doll smiling inside ----------
+function toyBox(x, y, s = 1) {
+  g.save(); g.translate(x, y); g.scale(s, s);
+  rect(-62, -150, 124, 150, '#d6402f', 8);
+  for (let i = 0; i < 6; i++) { g.fillStyle = ['#f2c53d', '#3a8fd6', '#46a35a'][i % 3]; g.fillRect(-58, -146 + i * 24, 8, 24); g.fillRect(50, -146 + i * 24, 8, 24); }
+  rect(-62, -150, 124, 150, 'rgba(0,0,0,0)', 8);
+  g.save(); g.beginPath(); g.roundRect(-42, -122, 84, 96, 10); g.clip();
+  g.fillStyle = '#c9e6f5'; g.fillRect(-42, -122, 84, 96);
+  doll(0, -24, { s: 0.42 });
+  g.fillStyle = 'rgba(255,255,255,0.35)'; g.beginPath(); g.moveTo(-42, -80); g.lineTo(-10, -122); g.lineTo(6, -122); g.lineTo(-42, -60); g.fill();
+  g.restore();
+  g.beginPath(); g.roundRect(-42, -122, 84, 96, 10); g.lineWidth = 5; g.strokeStyle = OUT; g.stroke();
+  rect(-56, -148, 112, 22, '#f2c53d', 5, 4);
+  g.font = '900 15px "Inter Display", Inter'; g.textAlign = 'center'; g.fillStyle = '#c62828'; g.fillText('MEU AMIGÃO', 0, -132);
+  g.fillStyle = '#fff'; g.font = '900 12px "Inter Display", Inter'; g.fillText('AMIGO PARA SEMPRE!', 0, -8);
+  g.restore();
+}
+function rimLayer(M, cam, drawFn, rim = 'rgba(160,215,255,0.95)', grade = 0.25) {
+  const lay = mk(), sil = mk(); const prev = g; g = lay.getContext('2d'); camera(cam); drawFn(); g = prev;
+  { const tmp = mk(), tc = tmp.getContext('2d'); tc.drawImage(lay, 0, 0); nightGrade(tc, grade); tc.globalCompositeOperation = 'destination-in'; tc.drawImage(lay, 0, 0); const lc = lay.getContext('2d'); lc.setTransform(1, 0, 0, 1, 0, 0); lc.clearRect(0, 0, SW, SH); lc.drawImage(tmp, 0, 0); }
+  const sc = sil.getContext('2d'); sc.drawImage(lay, 0, 0); sc.globalCompositeOperation = 'source-in'; sc.fillStyle = rim; sc.fillRect(0, 0, SW, SH);
+  M.save(); M.setTransform(1, 0, 0, 1, 0, 0); M.shadowColor = rim; M.shadowBlur = 30; M.drawImage(sil, 0, 0); M.shadowBlur = 0;
+  for (let i = 0; i < 16; i++) { const a = i / 16 * Math.PI * 2; M.drawImage(sil, Math.cos(a) * 6, Math.sin(a) * 6); }
+  M.drawImage(lay, 0, 0); M.restore();
 }
 
 // ---------- the popcorn that flies when the bell rings ----------
@@ -79,7 +112,8 @@ function frame(t) {
   main.fillStyle = '#05040c'; main.fillRect(0, 0, SW, SH);
   const t1 = T0('calm'), tb = T0('bell');
   if (t < t1 + 0.2) drawExterior(t, t1);
-  if (t > t1 - 0.4) {   // inside (cross-dissolve in from the window)
+  if (t >= TL.open) drawPorch(t);
+  else if (t > t1 - 0.4) {   // inside (cross-dissolve in from the window)
     const a = ss(t1 - 0.4, t1 + 0.2, t);
     if (a < 1) { const tmp = mk(), prev = main; drawInterior(t, tmp.getContext('2d')); prev.save(); prev.setTransform(1, 0, 0, 1, 0, 0); prev.globalAlpha = a; prev.drawImage(tmp, 0, 0); prev.restore(); }
     else drawInterior(t, main);
@@ -101,16 +135,35 @@ function drawExterior(t, t1) {
   lightPool(main, cam, 540, 1170, 220, 'rgba(255,220,150,A)', 0.5);
   vignette(main, 0.6);
 }
+function drawPorch(t) {
+  // from the front yard: Pedrinho opens the door... nobody there. Just a toy box on the mat.
+  const k = t - TL.open, door = ease(clamp(k / 0.6));
+  const cam = camL({ x: 540, y: 1370, z: 2.6 }, { x: 540, y: 1560, z: 3.6 }, ease(clamp((t - TL.lookbox + 0.3) / 2.2)));
+  g = main; camera(cam); exterior(t, door);
+  nightGrade(main, 0.9);
+  lightPool(main, cam, 540, 1170, 230, 'rgba(255,220,150,A)', 0.55);
+  lightPool(main, cam, 540, 1360, 200, 'rgba(255,190,110,A)', 0.45 * door);
+  const lk = k < 0.9 ? [0, 0] : k < 1.7 ? [-1, 0] : k < 2.5 ? [1, 0] : [0, 1];
+  rimLayer(main, cam, () => {
+    if (door > 0.15) bean(540, GY - 12, { s: 0.52, look: lk, mouth: k > 2.6 ? 'o' : undefined, armL: [-110, -230, -140, -150], armR: k < 0.7 ? [110, -260, 170, -300] : [110, -230, 140, -150] });
+    toyBox(540, GY + 150, 0.5);
+  });
+  if (k > 2.7) { const q = clamp((k - 2.7) / 0.25), sc = q < 1 ? q + Math.sin(q * Math.PI) * 0.3 : 1; main.save(); main.setTransform(1, 0, 0, 1, 0, 0);
+    const sx = SW / 2 + (540 - cam.x) * cam.z, sy = SH / 2 + (GY - 300 - cam.y) * cam.z; main.translate(sx + 120, sy - 40); main.scale(sc, sc);
+    main.textAlign = 'center'; main.font = '900 120px "Inter Display", Inter'; main.lineWidth = 20; main.strokeStyle = '#08061a'; main.strokeText('?', 0, 0); main.fillStyle = '#ffffff'; main.fillText('?', 0, 0); main.restore(); }
+  vignette(main, 0.6);
+}
 function drawInterior(t, ctx) {
   const prev = main; const M = ctx;   // draw into ctx using the kit (which paints on `g` / `main`)
   const swap = c => { g = c; };
   const tb = T0('bell'), t1 = T0('calm');
   // camera: a slow drift on the sofa, a creeping push-in while the narrator builds up, then a whip-pan to the front door after the bell
   let cam;
-  const whip = RING + 1.25;
+  const whip = 1e9, UP = TL.up, WALK0 = UP + 0.45, WALK1 = TL.open - 0.1;
+  const px = lerp(1010, 470, ease(clamp((t - WALK0) / (WALK1 - WALK0))));   // Pedrinho's x while he walks to the door
   if (t < tb) cam = camL({ x: 1010, y: 1020, z: 1.2 }, { x: 1000, y: 1060, z: 1.3 }, ss(t1, tb, t));
-  else if (t < whip) cam = camL({ x: 1000, y: 1060, z: 1.3 }, { x: 990, y: 1090, z: 1.55 }, ease(clamp((t - tb) / (RING - tb))));
-  else { const k = ease(clamp((t - whip) / 1.1)); cam = camL({ x: 990, y: 1090, z: 1.55 }, { x: 330, y: 960, z: 1.25 }, k); }
+  else if (t < UP) cam = camL({ x: 1000, y: 1060, z: 1.3 }, { x: 990, y: 1090, z: 1.55 }, ease(clamp((t - tb) / (RING - tb))));
+  else { const k = ease(clamp((t - UP) / 0.6)); cam = camL({ x: 990, y: 1090, z: 1.55 }, { x: Math.max(380, px - 60), y: 1000, z: 1.3 }, k); }
   swap(M); M.setTransform(1, 0, 0, 1, 0, 0); M.fillStyle = '#05040c'; M.fillRect(0, 0, SW, SH);
   camera(cam); house();
   // the light strip under the front door + a shadow passing behind it (someone is out there...)
@@ -125,16 +178,20 @@ function drawInterior(t, ctx) {
   const hand = Math.max(0, Math.sin((t - t1) * 3.2));   // hand goes to the mouth and back
   const blink = (((t + 0.3) % 2.7) < 0.12) && rk < 0 ? 1 : 0;
   const scared = rk > 0;
-  const o = scared
+  const standing = t > UP + 0.25, walking = t > WALK0 && t < WALK1;
+  let o = scared
     ? { sit: true, s: 1.05, jy: jump * 35, look: rk > 0.25 ? [-1, -0.1] : [0, -0.3], mouth: 'o', armL: [-140, -170, -120, -130], armR: [140, -170, 120, -210] }
     : { sit: true, s: 1.05, look: [0, 0.35], blink, chew: hand > 0.7 ? 0 : 0.4 + 0.4 * Math.abs(Math.sin(t * 14)),
         armL: [-140, -170, -120, -130], armR: [140, -170, lerp(120, 40, hand), lerp(-210, -290, hand)] };
   const tilt = scared ? 0 : Math.sin(t * 1.4) * 0.015;
   o.tilt = tilt;
+  if (standing) o = { s: 1.05, flip: false, look: [-1, 0], walk: walking ? 0.9 : 0, phase: (t - WALK0) * 11, jy: walking ? Math.abs(Math.sin((t - WALK0) * 11)) * 8 : 0,
+    armL: walking ? [-120, -230, -150 + Math.sin((t - WALK0) * 11) * 40, -130] : [-110, -230, -150, -130], armR: t > WALK1 - 0.3 ? [110, -240, -60, -330] : [120, -230, 150 - Math.sin((t - WALK0) * 11) * 40, -130] };
+  else if (t > UP) o.jy = (o.jy || 0) + ss(UP, UP + 0.25, t) * 30;
   // characters (with rim) — paint them on this ctx
   const lay = mk(), sil = mk(); g = lay.getContext('2d'); camera(cam);
-  bean(1010, FY + 20, o);
-  popcorn(895, FY - 92 - jump * 35);
+  if (standing) { popcorn(880, FY - 150); bean(px, FY + 140, o); }   // popcorn left on the sofa
+  else { bean(1010, FY + 20, o); popcorn(895, FY - 92 - jump * 35); }
   { const tmp = mk(), tc = tmp.getContext('2d'); tc.drawImage(lay, 0, 0); nightGrade(tc, 0.25); tc.globalCompositeOperation = 'destination-in'; tc.drawImage(lay, 0, 0); const lc = lay.getContext('2d'); lc.setTransform(1, 0, 0, 1, 0, 0); lc.clearRect(0, 0, SW, SH); lc.drawImage(tmp, 0, 0); }
   const rim = 'rgba(160,215,255,0.95)';
   const sc = sil.getContext('2d'); sc.drawImage(lay, 0, 0); sc.globalCompositeOperation = 'source-in'; sc.fillStyle = rim; sc.fillRect(0, 0, SW, SH);
