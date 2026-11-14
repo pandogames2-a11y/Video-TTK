@@ -141,13 +141,14 @@ function doll(x, y, o = {}) {
   ell(-30 + look[0] * 8, ey + 3 + look[1] * 8, 4, 5, OUT, 0, 0); ell(30 + look[0] * 8, ey + 3 + look[1] * 8, 4, 5, OUT, 0, 0);
   if (evil) { line([-56, ey - 34, -12, ey - 18], 8); line([56, ey - 34, 12, ey - 18], 8); }
   else { curve(-48, ey - 34, -30, ey - 42, -12, ey - 34, 5); curve(12, ey - 34, 30, ey - 42, 48, ey - 34, 5); }
-  g.fillStyle = '#c9744a'; [[-58, 18], [-50, 26], [-64, 28], [52, 20], [60, 28], [46, 28]].forEach(([fx, fy]) => { g.beginPath(); g.arc(fx, ey + fy, 3, 0, 7); g.fill(); });
+  g.fillStyle = '#c9744a'; [[-50, 34], [-42, 40], [-58, 40], [40, 32], [48, 28], [54, 34]].forEach(([fx, fy]) => { g.beginPath(); g.arc(fx, ey + fy, 3, 0, 7); g.fill(); });
   if (evil) { shape('#4a1820', () => { g.moveTo(-34, ey + 30); g.quadraticCurveTo(0, ey + 62, 34, ey + 30); g.closePath(); }, 4); g.fillStyle = '#fff'; for (let i = -2; i <= 2; i++) g.fillRect(i * 12 - 5, ey + 32, 10, 9); line([-34, ey + 30, 34, ey + 30], 4); }
   else curve(-16, ey + 36, 0, ey + 46, 16, ey + 36, 5);
   if (o.scars !== false) {
-    curve(-70, ey - 30, -46, ey + 6, -20, ey + 40, 4, '#8a2f2a');
-    for (let k = 0; k < 5; k++) { const t = k / 4, px = -66 + t * 46, py = ey - 24 + t * 62; line([px - 8, py + 6, px + 8, py - 6], 3, '#8a2f2a'); }
-    curve(14, ey - 46, 38, ey - 54, 60, ey - 44, 4, '#8a2f2a'); for (let k = 0; k < 4; k++) { const px = 20 + k * 12; line([px, ey - 58, px, ey - 40], 3, '#8a2f2a'); }
+    // scars stay on the cheeks, clear of the eyes: a long stitched one on the left, a short one on the right
+    curve(-86, ey - 8, -86, ey + 28, -62, ey + 46, 4, '#8a2f2a');
+    for (let k = 0; k < 5; k++) { const t = 0.1 + k * 0.2, px = (1 - t) * (1 - t) * -86 + 2 * (1 - t) * t * -86 + t * t * -62, py = (1 - t) * (1 - t) * (ey - 8) + 2 * (1 - t) * t * (ey + 28) + t * t * (ey + 46); line([px - 8, py - 3, px + 8, py + 3], 3, '#8a2f2a'); }
+    curve(48, ey + 44, 64, ey + 38, 80, ey + 24, 4, '#8a2f2a'); for (let k = 0; k < 3; k++) { const px = 55 + k * 11, py = ey + 41 - k * 7; line([px - 5, py - 6, px + 5, py + 6], 3, '#8a2f2a'); }
   }
   shape('#e05a26', () => { g.moveTo(-74, by - 84); const sp = [[-90, -126], [-54, -114], [-48, -158], [-16, -124], [2, -170], [22, -126], [52, -156], [54, -114], [92, -122], [74, -88]]; sp.forEach(([px, py]) => g.lineTo(px, by + py)); g.quadraticCurveTo(0, by - 92, -74, by - 84); g.closePath(); }, 5);
   g.restore();
