@@ -1,0 +1,68 @@
+[
+  {
+    "scene": "title",
+    "voice": "narr",
+    "text": "Você sobreviveria ao boneco assassino?",
+    "lead": 0.9,
+    "tail": 0.8
+  },
+  {
+    "scene": "calm",
+    "voice": "narr",
+    "text": "É uma sexta-feira qualquer, você está na sua casa.",
+    "lead": 0.5,
+    "tail": 0.6
+  },
+  {
+    "scene": "bell",
+    "voice": "narr",
+    "text": "Até que, de repente, a campainha toca.",
+    "lead": 0.3,
+    "tail": 0.2,
+    "min": 4.2
+  },
+  {
+    "scene": "open",
+    "voice": "narr",
+    "text": "E então Pedrinho levanta do sofá e abre a porta.",
+    "lead": 0.2,
+    "tail": 0.25
+  },
+  {
+    "scene": "porch",
+    "voice": "narr",
+    "text": "Ele não vê ninguém lá fora, apenas uma caixa com um boneco dentro. Ele acha que foi um presente, mas ele mal espera o que está por vir.",
+    "lead": 1.0,
+    "tail": 2.2
+  },
+  {
+    "scene": "inside",
+    "voice": "narr",
+    "text": "Assim que ele entra de volta para casa, ele abre a caixa e deixa o boneco em cima da mesa e volta a assistir TV."
+  },
+  {
+    "scene": "erro1",
+    "voice": "narr",
+    "text": "É aí que Pedrinho comete o primeiro erro. Esse idiota não olha o que tem dentro do brinquedo. Pode haver um microfone escondido ou qualquer outro tipo de coisa para fazer mal a ele, mas ele nem suspeita."
+  },
+  {
+    "scene": "sleep",
+    "voice": "narr",
+    "text": "Em vez disso, ele só desliga o canal da TV e vai para a cama dormir, no andar de cima."
+  },
+  {
+    "scene": "noise",
+    "voice": "narr",
+    "text": "Assim que ele dorme, trinta minutos depois, ele começa a ouvir barulhos na sala."
+  },
+  {
+    "scene": "erro2",
+    "voice": "narr",
+    "text": "E é aí que ele comete o segundo erro. Que idiota vai verificar barulhos às três da manhã na sala? É só ele continuar dormindo."
+  },
+  {
+    "scene": "check",
+    "voice": "narr",
+    "text": "Mas não, Pedrinho vai checar. Ele leva apenas um celular para iluminar a casa, pois ele se esquece que existem lâmpadas nos cômodos."
+  }
+]
