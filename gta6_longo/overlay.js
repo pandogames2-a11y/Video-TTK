@@ -160,3 +160,14 @@ function styledCard(c, pt, dur, s, sc) {
       break; }
   }
 }
+
+// rótulos das animações 3D: título no topo, nome embaixo de cada objeto, valor em cima
+function explainLabels(ex, labels, pt, dur) {
+  const out = 1 - eio(seg(pt, dur - 0.3, 0.3)), kt = eo(seg(pt, 0.1, 0.4)) * out;
+  if (ex.title) { X.save(); X.globalAlpha = kt; X.translate(0, (1 - kt) * -20); scriptLine(ex.title, W / 2, 110, 60, 1); X.restore(); }
+  labels.forEach(l => { const a = l.k * out; if (a <= 0.01) return; X.save(); X.globalAlpha = a;
+    const size = labels.length > 4 ? 34 : 44;
+    pill(l.it.t, l.base.x, Math.min(H - 70, l.base.y + 40), size, 'purple', 1, 0.9 + 0.1 * l.k);
+    if (l.it.v) tx(l.it.v, l.top.x, l.top.y - 30, l.it.v.length > 3 ? 54 : 84, FA, '#fff', { sc: l.color, sb: 30, sy: 0 });
+    X.restore(); });
+}

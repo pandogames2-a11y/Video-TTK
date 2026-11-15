@@ -191,15 +191,6 @@
   "cred": "@onboxgaming4741"
  },
  {
-  "id": "n3_2",
-  "seg": "n3",
-  "part": 2,
-  "src": "gta6",
-  "n": 369,
-  "lead": 0.0,
-  "still": true
- },
- {
   "id": "n3_3",
   "seg": "n3",
   "part": 3,
@@ -304,15 +295,6 @@
   "lead": 0.0,
   "tail": false,
   "cred": "@onboxgaming4741"
- },
- {
-  "id": "n5_2",
-  "seg": "n5",
-  "part": 2,
-  "src": "gta6",
-  "n": 350,
-  "lead": 0.0,
-  "still": true
  },
  {
   "id": "n5_3",
@@ -526,26 +508,6 @@
   "still": true
  },
  {
-  "id": "n9_1",
-  "seg": "n9",
-  "part": 1,
-  "src": "gta5",
-  "n": 407,
-  "lead": 0.0,
-  "tail": false,
-  "cred": "@onboxgaming4741"
- },
- {
-  "id": "n9_2",
-  "seg": "n9",
-  "part": 2,
-  "src": "gta6",
-  "n": 141,
-  "lead": 0.0,
-  "tail": true,
-  "cred": ""
- },
- {
   "id": "n9_3",
   "seg": "n9",
   "part": 3,
@@ -615,25 +577,6 @@
   "part": 2,
   "src": "gta6",
   "n": 176,
-  "lead": 0.0,
-  "still": true
- },
- {
-  "id": "n10_3",
-  "seg": "n10",
-  "part": 3,
-  "src": "gta6",
-  "n": 167,
-  "lead": 0.0,
-  "tail": true,
-  "cred": ""
- },
- {
-  "id": "n10_4",
-  "seg": "n10",
-  "part": 4,
-  "src": "gta6",
-  "n": 387,
   "lead": 0.0,
   "still": true
  },

@@ -577,10 +577,12 @@ window.renderFrame = t => {
   const z = lerp(fOld.z, fNew.z, m) * (1 + 0.05 * drift), x = lerp(fOld.x, fNew.x, m) - 40 * drift, y = lerp(fOld.y, fNew.y, m), rot = lerp(fOld.rot, fNew.rot, m);
   X = BX; X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = '#000'; X.fillRect(0, 0, W, H);
   X.save(); X.translate(W / 2 + x, H / 2 + y); X.rotate(rot); X.scale(z, z); X.translate(-W / 2, -H / 2);
-  if (!clip) SCENES[s.scene](lt, s, { pi, pt, pdur, v: sc.parts[pi].v || '' });   // animação antiga só se não houver imagem real
+  const ex = sc.parts[pi].ex; let exLabels = null;
+  if (ex) { exLabels = window.EXPLAIN.render(s.id + '_' + pi, ex, pt, pdur); X.save(); X.setTransform(1, 0, 0, 1, 0, 0); X.drawImage(window.EXPLAIN.canvas, 0, 0); X.restore(); }   // animação 3D explicativa
+  else if (!clip) SCENES[s.scene](lt, s, { pi, pt, pdur, v: sc.parts[pi].v || '' });   // animação antiga só se não houver imagem real
   X.restore(); X = MAIN;
   X.setTransform(1, 0, 0, 1, 0, 0); X.drawImage(BUF, 0, 0);
-  if (vel > 0.15) { const dx = (fNew.x - fOld.x) * 0.06 * vel + (pi === 0 ? -60 * vel : 0); for (let k = 1; k <= 3; k++) { X.globalAlpha = 0.22 * vel; X.drawImage(BUF, -dx * k, 0); } X.globalAlpha = 1; }
+  if (vel > 0.15 && !ex) { const dx = (fNew.x - fOld.x) * 0.06 * vel + (pi === 0 ? -60 * vel : 0); for (let k = 1; k <= 3; k++) { X.globalAlpha = 0.22 * vel; X.drawImage(BUF, -dx * k, 0); } X.globalAlpha = 1; }
   // imagem real (gameplay, trailer, screenshot ou B-roll) em tela cheia, com leve movimento
   if (clip) {
     const ct = pt - clip.lead - (clip.t0 || 0), dur = Math.max(0.5, pdur - clip.lead - (clip.t0 || 0)), a = 1;
@@ -598,6 +600,7 @@ window.renderFrame = t => {
   glitchIn(pt, pi === 0 && si > 0);
   // textos no estilo da referência
   if (sc.num && pi === 0) titleCard(sc, pt, pdur);
+  else if (ex) explainLabels(ex, exLabels, pt, pdur);
   else if (c) styledCard(c, pt, pdur, s, sc);
   if (sc.num) chapterTag(sc, pi === 0 ? eo(seg(pt, pdur - 0.4, 0.4)) : 1);
   if (sc.num && pi > 0 && lt < 9 && sc.src) tx(sc.src, 40, H - 34, 20, FA, 'rgba(255,255,255,0.7)', { align: 'left', sb: 6, sy: 1 });
@@ -623,5 +626,6 @@ window.frameJPEG = async (t, q) => { CLIP_NOW = await clipAt(t); window.renderFr
   await document.fonts.load(`900 80px "Inter Display"`);
   for (const f of ['80px "Anton"', '80px "Kaushan"', '900 80px "Mont"', '80px "RubikDirt"']) await document.fonts.load(f, 'ÁÉÇãõ Aa');
   try { const r = await fetch('clips_ready.json'); if (r.ok) CLIPS = await r.json(); } catch (e) {}
+  while (!window.EXPLAIN_READY) await new Promise(r => setTimeout(r, 50));
   GRAIN = grainLayer(); buildChunks(); window.FPS = FPS; window.TOTAL = TOTAL; window.READY = true;
 })();

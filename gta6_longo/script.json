@@ -330,7 +330,27 @@
      ]
     },
     "v": "muda",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_15.jpg"
+    "ex": {
+     "k": "pillars",
+     "title": "Confirmado pela Rockstar",
+     "items": [
+      {
+       "t": "COMEU DEMAIS",
+       "v": "PESO",
+       "c": 2
+      },
+      {
+       "t": "ACADEMIA",
+       "v": "MÚSCULO",
+       "c": 1
+      },
+      {
+       "t": "SEM DORMIR",
+       "v": "APARÊNCIA",
+       "c": 3
+      }
+     ]
+    }
    },
    {
     "t": "E o gameplay ainda mostrou academia e um medidor de estamina.",
@@ -528,7 +548,24 @@
      "l": "ESPÉCIES"
     },
     "v": "fauna",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Leonida Keys/Leonida_Keys_04.jpg"
+    "ex": {
+     "k": "pillars",
+     "title": "Mais de 170 espécies",
+     "items": [
+      {
+       "t": "AVES",
+       "c": 3
+      },
+      {
+       "t": "MAMÍFEROS",
+       "c": 2
+      },
+      {
+       "t": "PEIXES E RÉPTEIS",
+       "c": 4
+      }
+     ]
+    }
    },
    {
     "t": "Nos trailers já apareceram jacarés, flamingos e até iguanas, que são uma praga famosa na Flórida.",
@@ -928,10 +965,23 @@
      "l": "O MAPA DO GTA 5"
     },
     "v": "",
-    "clip": {
-     "arquivo": "clips/fonte/drive/gta5_nocopyright.mp4",
-     "inicio": 2636.0,
-     "dur": 5.0
+    "ex": {
+     "k": "blocks",
+     "title": "Tamanho do mapa",
+     "items": [
+      {
+       "t": "GTA 5",
+       "v": "1×",
+       "s": 1,
+       "c": 3
+      },
+      {
+       "t": "GTA 6",
+       "v": "≈ 2×",
+       "s": 2,
+       "c": 1
+      }
+     ]
     }
    },
    {
@@ -941,10 +991,35 @@
      "i": 0
     },
     "v": "reg0",
-    "clip": {
-     "arquivo": "clips/fonte/trailer_lancamento.mp4",
-     "inicio": 52.0,
-     "dur": 2.4
+    "ex": {
+     "k": "pillars",
+     "title": "Seis regiões",
+     "items": [
+      {
+       "t": "VICE CITY",
+       "c": 1
+      },
+      {
+       "t": "LEONIDA KEYS",
+       "c": 5
+      },
+      {
+       "t": "GRASSRIVERS",
+       "c": 4
+      },
+      {
+       "t": "PORT GELLHORN",
+       "c": 2
+      },
+      {
+       "t": "AMBROSIA",
+       "c": 0
+      },
+      {
+       "t": "MOUNT KALAGA",
+       "c": 3
+      }
+     ]
     }
    },
    {
@@ -1065,10 +1140,23 @@
      ]
     },
     "v": "roupa",
-    "clip": {
-     "arquivo": "clips/fonte/trailer_lancamento.mp4",
-     "inicio": 46.35,
-     "dur": 2.8
+    "ex": {
+     "k": "pillars",
+     "title": "A polícia registra",
+     "items": [
+      {
+       "t": "ROUPA",
+       "c": 1
+      },
+      {
+       "t": "ROSTO",
+       "c": 0
+      },
+      {
+       "t": "CARRO",
+       "c": 3
+      }
+     ]
     }
    },
    {
@@ -1079,7 +1167,25 @@
      "b": "sabem do crime, não sabem quem"
     },
     "v": "vazada",
-    "img": "clips/fonte/rockstar_shots/shots/People/Lucia Caminos/Lucia_Caminos_14.jpg"
+    "ex": {
+     "k": "flow",
+     "title": "Segundo as prévias",
+     "items": [
+      {
+       "t": "TESTEMUNHA OU ALARME",
+       "c": 2
+      },
+      {
+       "t": "A POLÍCIA SABE DO CRIME",
+       "c": 3
+      },
+      {
+       "t": "ESTRELA VAZADA",
+       "v": "☆",
+       "c": 1
+      }
+     ]
+    }
    },
    {
     "t": "E no gameplay ainda apareceram cães policiais. Correr a pé ficou bem mais perigoso.",

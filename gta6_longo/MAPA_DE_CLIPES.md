@@ -39,7 +39,6 @@ Nada disso garante que o vídeo não receba reivindicação, mas reduz muito o r
 | `n2_6` | 02:16.9 | 2.8 s | 1.4 s | trailer_lancamento.mp4 | 66.45 s | É praticamente um Bonnie e Clyde em Vice City. |
 | `n3_0` | 02:22.2 | 4.7 s | 0.0 s | Jason_Duval_15.jpg | 0 s | Novidade número três: o corpo do seu personagem muda. |
 | `n3_1` | 02:26.9 | 11.0 s | 11.0 s | gta5_nocopyright.mp4 | 255.0 s | No GTA 5 até existiam atributos, tipo força e fôlego, que subiam conforme você j… |
-| `n3_2` | 02:37.9 | 12.3 s | 0.0 s | Jason_Duval_15.jpg | 0 s | No GTA 6, a Rockstar confirmou: comeu demais, o Jason e a Lucia engordam. Foi pr… |
 | `n3_3` | 02:50.2 | 3.8 s | 2.8 s | trailer_lancamento.mp4 | 56.45 s | E o gameplay ainda mostrou academia e um medidor de estamina. |
 | `n3_4` | 02:54.0 | 8.3 s | 0.0 s | Vice_City_22.jpg | 0 s | Quem jogou San Andreas lembra do CJ comendo hambúrguer até ficar redondo. É esse… |
 | `n3_5` | 03:02.3 | 11.7 s | 11.7 s | mixkit_32809.mp4 | 1.0 s | A dúvida é: isso muda a gameplay ou é só visual? Você correria menos com o Jason… |
@@ -51,7 +50,6 @@ Nada disso garante que o vídeo não receba reivindicação, mas reduz muito o r
 | `n4_5` | 03:51.7 | 9.4 s | 9.4 s | mixkit_9405.mp4 | 3.0 s | Imagina uma fuga de carro na pista encharcada, com o vento empurrando tudo e a p… |
 | `n5_0` | 04:02.3 | 4.6 s | 0.0 s | Grassrivers_04.jpg | 0 s | Novidade número cinco: Leonida está cheia de bicho. |
 | `n5_1` | 04:06.9 | 8.9 s | 8.9 s | gta5_nocopyright.mp4 | 228.5 s | O GTA 5 tinha o Chop, o cachorro do Franklin, alguns cervos, pumas no mato e tub… |
-| `n5_2` | 04:15.8 | 11.7 s | 0.0 s | Leonida_Keys_04.jpg | 0 s | No GTA 6 são mais de cento e setenta espécies, entre terra, ar e mar. Dezenas de… |
 | `n5_3` | 04:27.5 | 2.6 s | 1.3 s | trailer_lancamento.mp4 | 20.55 s | Nos trailers já apareceram jacarés, flamingos e até iguanas, que são uma praga f… |
 | `n5_4` | 04:34.5 | 3.0 s | 1.5 s | trailer_lancamento.mp4 | 27.2 s | Agora imagina fugir pelo pântano de Grassrivers e dar de cara com um jacaré. Sin… |
 | `n5_5` | 04:41.4 | 8.1 s | 0.0 s | Mount_Kalaga_National_Park_05.jpg | 0 s | E o site oficial fala em caça e pesca em Mount Kalaga. Então tudo indica que ess… |
@@ -74,8 +72,6 @@ Nada disso garante que o vídeo não receba reivindicação, mas reduz muito o r
 | `n8_3` | 07:00.7 | 9.5 s | 9.5 s | gta5_freetouse2.mp4 | 222.0 s | Um site chegou a falar em níveis, tipo profissional, agressivo e violento. Mas é… |
 | `n8_4` | 07:10.2 | 8.9 s | 8.9 s | mixkit_31376.mp4 | 2.0 s | Se for real, o jogo vai saber quem você é. E aí, você seria o ladrão calculista … |
 | `n9_0` | 07:20.3 | 5.4 s | 0.0 s | Vice_City_10.jpg | 0 s | Novidade número nove: um mapa que parece outro mundo. |
-| `n9_1` | 07:25.7 | 13.6 s | 13.6 s | gta5_nocopyright.mp4 | 2636.0 s | O GTA 5 tinha Los Santos e o interior de Blaine County, com o Monte Chiliad lá n… |
-| `n9_2` | 07:39.2 | 4.8 s | 2.4 s | trailer_lancamento.mp4 | 52.0 s | São seis regiões. Vice City, a cidade do neon e da praia. |
 | `n9_3` | 07:44.6 | 2.3 s | 0.0 s | Leonida_Keys_01.jpg | 0 s | As ilhas de Leonida Keys. |
 | `n9_4` | 07:46.9 | 2.3 s | 0.0 s | Grassrivers_05.jpg | 0 s | O pântano de Grassrivers. |
 | `n9_5` | 07:49.2 | 3.5 s | 0.0 s | Port_Gellhorn_06.jpg | 0 s | Port Gellhorn, uma cidade litorânea decadente. |
@@ -84,11 +80,9 @@ Nada disso garante que o vídeo não receba reivindicação, mas reduz muito o r
 | `n10_0` | 08:08.1 | 5.6 s | 0.0 s | Vice_City_17.jpg | 0 s | E a novidade número dez, a minha favorita: a polícia aprendeu a te procurar. |
 | `n10_1` | 08:13.7 | 11.5 s | 11.5 s | gta5_freetouse.mp4 | 261.0 s | No GTA 5, a fuga era sempre a mesma: quebra a linha de visão, se esconde num bec… |
 | `n10_2` | 08:25.2 | 5.9 s | 0.0 s | Lucia_Caminos_07.jpg | 0 s | No GTA 6, o nível máximo de procurado sobe de cinco para seis estrelas. |
-| `n10_3` | 08:31.1 | 5.6 s | 2.8 s | trailer_lancamento.mp4 | 46.35 s | E a polícia identifica você pela roupa, pelo rosto e pelo carro. Trocar de roupa… |
-| `n10_4` | 08:38.6 | 12.9 s | 0.0 s | Lucia_Caminos_14.jpg | 0 s | Pelas prévias da imprensa, a polícia só fica sabendo se alguém testemunhar ou se… |
 | `n10_5` | 08:51.5 | 6.1 s | 6.1 s | mixkit_17376.mp4 | 1.0 s | E no gameplay ainda apareceram cães policiais. Correr a pé ficou bem mais perigo… |
 | `n10_6` | 08:57.6 | 10.5 s | 0.0 s | Jason_and_Lucia_09.jpg | 0 s | Imagina: você assalta uma loja, sai pelos fundos, troca de jaqueta, pega outro c… |
 | `outro_0` | 09:08.4 | 5.8 s | 2.9 s | trailer_lancamento.mp4 | 67.95 s | E essas são apenas dez das novidades que fazem GTA 6 parecer um salto gigantesco… |
 | `outro_1` | 09:16.2 | 8.1 s | 0.0 s | Vice_City_08.jpg | 0 s | Mas agora eu quero saber: qual dessas novidades você mais está ansioso para expe… |
 
-Total: 71 trechos, 521 s na tela em 566 s de vídeo (92%). Do trailer de lançamento são usados só 25 s (câmera lenta).
+Total: 65 trechos, 460 s na tela em 566 s de vídeo (81%). Do trailer de lançamento são usados só 20 s (câmera lenta).

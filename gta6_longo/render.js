@@ -5,7 +5,7 @@ const root = __dirname; const types = {'.html': 'text/html', '.js': 'text/javasc
 const srv = http.createServer((q, r) => { const f = path.join(root, decodeURIComponent(q.url.split('?')[0])); fs.readFile(f, (e, d) => { if (e) { r.writeHead(404); r.end(); return; } r.writeHead(200, {'Content-Type': types[path.extname(f)] || 'application/octet-stream'}); r.end(d); }); });
 const [, , mode, a, b, out] = process.argv;
 srv.listen(0, async () => {
-  const br = await chromium.launch(); const pg = await br.newPage({viewport: {width: 1920, height: 1080}});
+  const br = await chromium.launch({args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist']}); const pg = await br.newPage({viewport: {width: 1920, height: 1080}});
   pg.on('pageerror', e => console.log('ERR', e.message));
   await pg.goto(`http://localhost:${srv.address().port}/index.html`); await pg.waitForFunction(() => window.READY, null, {timeout: 60000});
   const fps = await pg.evaluate(() => window.FPS), total = await pg.evaluate(() => window.TOTAL);
