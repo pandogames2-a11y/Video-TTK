@@ -138,7 +138,11 @@
      ]
     },
     "v": "roda",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_05.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_freetouse2.mp4",
+     "inicio": 392.0,
+     "dur": 9.0
+    }
    },
    {
     "t": "Só um aviso: a Rockstar ainda não confirmou esse sistema. O que o gameplay oficial mostrou é que a dupla divide dinheiro e armas.",
@@ -783,7 +787,11 @@
      "k": "sub"
     },
     "v": "sub",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_27.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_freetouse2.mp4",
+     "inicio": 266.0,
+     "dur": 9.0
+    }
    },
    {
     "t": "E a número dez é a minha favorita.",
@@ -793,7 +801,11 @@
      "b": "as que mais mudam o jogo"
     },
     "v": "segura",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_06.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_freetouse2.mp4",
+     "inicio": 322.0,
+     "dur": 9.0
+    }
    }
   ],
   "hl": [
@@ -854,7 +866,11 @@
      ]
     },
     "v": "niveis",
-    "img": "clips/fonte/rockstar_shots/shots/People/Lucia Caminos/Lucia_Caminos_05.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_freetouse2.mp4",
+     "inicio": 222.0,
+     "dur": 9.0
+    }
    },
    {
     "t": "Se for real, o jogo vai saber quem você é. E aí, você seria o ladrão calculista ou o maluco que explode tudo?",

@@ -12,7 +12,7 @@ import json, os, glob, subprocess, shutil
 
 FPS = 30
 # crédito dos canais de gameplay (aparece no selo do trecho e na descrição)
-CRED = {'gta5_trevor.mp4': '@NoCopyrightGameplays', 'gta5_freetouse.mp4': '@NoCopyrightGameplays', 'gta5_nocopyright.mp4': '@onboxgaming4741'}
+CRED = {'gta5_freetouse2.mp4': '', 'gta5_trevor.mp4': '@NoCopyrightGameplays', 'gta5_freetouse.mp4': '@NoCopyrightGameplays', 'gta5_nocopyright.mp4': '@onboxgaming4741'}
 GUIDE = '\n## Diretrizes para evitar problemas de direitos autorais no YouTube\n\nNada disso garante que o vídeo não receba reivindicação, mas reduz muito o risco:\n\n1. **Nunca use o áudio dos trailers.** As músicas dos trailers são licenciadas e o Content ID as reconhece na hora. O `prep_clips.py` já descarta o áudio de todos os trechos.\n2. **GTA 5: grave sua própria gameplay** com o rádio desligado e sem missões com música. Não use vídeos de outros criadores: reupload é o que mais gera strike.\n3. **Trechos curtos e comentados.** Cada trecho tem até 6 s e sempre fica com narração, cartões e legendas por cima (uso transformativo, de comentário). No total os trechos são no máximo cerca de 28% do vídeo; o resto é animação original.\n4. **Só material oficial do GTA 6:** trailers e o Extended Look publicados pela Rockstar. Nada de vazamentos (o item 9 fala do vazamento de 2022, mas sem mostrar as imagens).\n5. **Leia a política da Rockstar** sobre uso do material deles em vídeos (página "Policy on posting copyrighted Rockstar Games material", no suporte da Rockstar) antes de monetizar.\n6. **Dê o crédito.** O vídeo já mostra "imagens: Rockstar Games" durante os trechos; coloque também na descrição: "Imagens de GTA 6 e GTA 5: Rockstar Games. Vídeo de comentário/análise."\n7. **Miniatura com arte própria** (pode usar um quadro das animações deste vídeo).\n8. **Se vier reivindicação do Content ID:** isso não é strike. Você pode contestar dizendo que é uso transformativo de comentário, ou trocar o trecho e renderizar de novo. Strike só acontece com pedido manual de remoção.\n'
 TL = json.load(open('timeline.json')); SCRIPT = json.load(open('script.json')); S = {s['id']: s for s in SCRIPT}
 segs = {g['id']: g for g in TL['segs']}
@@ -57,7 +57,12 @@ for sg in SCRIPT:
         dur = round(src / speed, 2); tail = dur < tela - 0.05   # se não cobrir a frase, entra uma screenshot em movimento
         rows.append(dict(id=cid, t0=a + LEAD, dur=dur, src=src, speed=round(speed, 2), arquivo=f, inicio=ini, fala=p['t']))
         if not os.path.exists(f) or dur < 1.0: print('pulado:', cid, f); continue
-        out = f'clips/{cid}'; shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
+        out = f'clips/{cid}'; sig = json.dumps([f, ini, src, speed, c.get('crop'), tail], sort_keys=True)
+        if os.path.exists(f'{out}/sig.json') and open(f'{out}/sig.json').read() == sig:
+            n = len(glob.glob(f'{out}/f*.jpg')); ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta5' if 'gta5' in f else 'stock' if 'mixkit' in f else 'gta6', n=n, lead=LEAD, tail=tail, cred=CRED.get(os.path.basename(f), '')))
+            if tail: TAILS.append(TAILS.pop(0))
+            print(f'{cid}: igual, reaproveitado'); continue
+        shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
         vf = ('crop=iw*0.86:ih*0.86:iw*0.07:0,' if c.get('crop') else '') + 'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,'
         vf += (f'fps={FPS},setpts=PTS/{speed:.4f},minterpolate=fps={FPS}:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1' if speed < 0.99 else f'fps={FPS}')
         subprocess.run(['ffmpeg', '-loglevel', 'error', '-ss', str(ini), '-t', str(src), '-i', f, '-an', '-vf', vf, '-q:v', '3', f'{out}/f%04d.jpg'], check=True)
@@ -65,6 +70,7 @@ for sg in SCRIPT:
         if tail:
             tf = TAILS.pop(0); TAILS.append(tf)
             subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', tf, '-vf', 'scale=2112:1188:force_original_aspect_ratio=increase,crop=2112:1188', '-q:v', '3', f'{out}/tail.jpg'], check=True)
+        open(f'{out}/sig.json', 'w').write(sig)
         ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta5' if 'gta5' in f else 'stock' if 'mixkit' in f else 'gta6', n=n, lead=LEAD, tail=tail, cred=CRED.get(os.path.basename(f), '')))
         print(f'{cid}: {n / FPS:.1f} s na tela ({src:.1f} s de {os.path.basename(f)} a partir de {ini}s, velocidade {speed:.2f})')
 json.dump(ready, open('clips_ready.json', 'w'), ensure_ascii=False, indent=1)
