@@ -577,13 +577,13 @@ window.renderFrame = t => {
   const z = lerp(fOld.z, fNew.z, m) * (1 + 0.05 * drift), x = lerp(fOld.x, fNew.x, m) - 40 * drift, y = lerp(fOld.y, fNew.y, m), rot = lerp(fOld.rot, fNew.rot, m);
   X = BX; X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = '#000'; X.fillRect(0, 0, W, H);
   X.save(); X.translate(W / 2 + x, H / 2 + y); X.rotate(rot); X.scale(z, z); X.translate(-W / 2, -H / 2);
-  SCENES[s.scene](lt, s, { pi, pt, pdur, v: sc.parts[pi].v || '' });
+  if (!clip) SCENES[s.scene](lt, s, { pi, pt, pdur, v: sc.parts[pi].v || '' });   // animação antiga só se não houver imagem real
   X.restore(); X = MAIN;
   X.setTransform(1, 0, 0, 1, 0, 0); X.drawImage(BUF, 0, 0);
   if (vel > 0.15) { const dx = (fNew.x - fOld.x) * 0.06 * vel + (pi === 0 ? -60 * vel : 0); for (let k = 1; k <= 3; k++) { X.globalAlpha = 0.22 * vel; X.drawImage(BUF, -dx * k, 0); } X.globalAlpha = 1; }
   // imagem real (gameplay, trailer, screenshot ou B-roll) em tela cheia, com leve movimento
   if (clip) {
-    const ct = pt - clip.lead, dur = Math.max(clip.n / FPS, pdur - clip.lead), a = seg(ct, 0, 0.12);
+    const ct = pt - clip.lead - (clip.t0 || 0), dur = Math.max(0.5, pdur - clip.lead - (clip.t0 || 0)), a = 1;
     X.save(); X.globalAlpha = a;
     if (clip.still) { const u = eio(ct / dur), dir = (R(clip.id.length * 97 + clip.part * 31)() < 0.5) ? 1 : -1, zs = lerp(1.0, 1.1, u);
       X.translate(W / 2 + dir * lerp(-50, 50, u), H / 2 + lerp(20, -20, u)); X.scale(zs, zs); X.drawImage(clip.img, -1056, -594, 2112, 1188); }
@@ -610,10 +610,11 @@ async function clipAt(t) {
   const s = TL.segs.find(x => t >= x.start && t < x.end); if (!s || !CLIPS.length) return null;
   let pi = 0; for (let i = 0; i < s.parts.length; i++) if (t >= s.parts[i]) pi = i;
   const c = CLIPS.find(c => c.seg === s.id && c.part === pi); if (!c) return null;
-  const ct = t - (pi === 0 ? s.start : s.parts[pi]) - c.lead, k = Math.min(c.n - 1, Math.floor(ct * FPS)); if (k < 0) return null; // depois do fim, segura o último quadro até a frase acabar
-  const url = c.still ? `clips/${c.id}/img.jpg` : `clips/${c.id}/f${String(k + 1).padStart(4, '0')}.jpg`;
+  const ct = t - (pi === 0 ? s.start : s.parts[pi]) - c.lead, k0 = Math.floor(ct * FPS + 1e-6); if (k0 < 0) return null;
+  const tailNow = !c.still && k0 >= c.n && c.tail, k = Math.min(c.n - 1, k0);   // trecho acabou: screenshot em movimento (nunca congela)
+  const url = c.still ? `clips/${c.id}/img.jpg` : tailNow ? `clips/${c.id}/tail.jpg` : `clips/${c.id}/f${String(k + 1).padStart(4, '0')}.jpg`;
   let img = IMG.get(url); if (!img) { img = new Image(); img.src = url; await img.decode(); IMG.set(url, img); if (IMG.size > 90) IMG.delete(IMG.keys().next().value); }
-  return { ...c, img };
+  return tailNow ? { ...c, img, still: true, t0: c.n / FPS } : { ...c, img };
 }
 window.frameJPEG = async (t, q) => { CLIP_NOW = await clipAt(t); window.renderFrame(t); return cv.toDataURL('image/jpeg', q); };
 
