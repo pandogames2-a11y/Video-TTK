@@ -28,7 +28,7 @@ Nada disso garante que o vídeo não receba reivindicação, mas reduz muito o r
 | `n1_2` | 00:41.1 | 7.1 s | 7.1 s | gta5_freetouse.mp4 | 404.5 s | O Michael saía de terno, sem mochila nenhuma, e tirava uma bazuca do nada. E nin… |
 | `n1_3` | 00:48.2 | 9.6 s | 0.0 s | Jason_and_Lucia_08.jpg | 0 s | No GTA 6, a ideia é outra. Pelo vazamento de 2022 e pelas prévias, as armas gran… |
 | `n1_4` | 00:57.8 | 10.3 s | 0.0 s | Jason_Duval_17.jpg | 0 s | Imagina: você tá no meio de um tiroteio, a munição acaba, e a arma pesada ficou … |
-| `n1_5` | 01:08.2 | 9.0 s | 0.0 s | Jason_and_Lucia_05.jpg | 0 s | Isso transforma cada assalto num plano de verdade: o que levar, onde deixar e qu… |
+| `n1_5` | 01:08.2 | 9.0 s | 9.0 s | gta5_freetouse2.mp4 | 392.0 s | Isso transforma cada assalto num plano de verdade: o que levar, onde deixar e qu… |
 | `n1_6` | 01:17.2 | 10.9 s | 0.0 s | Jason_and_Lucia_15.jpg | 0 s | Só um aviso: a Rockstar ainda não confirmou esse sistema. O que o gameplay ofici… |
 | `n2_0` | 01:29.2 | 5.3 s | 0.0 s | Jason_and_Lucia_01.jpg | 0 s | Novidade número dois: em vez de três protagonistas, uma dupla. |
 | `n2_1` | 01:34.5 | 10.3 s | 10.3 s | gta5_trevor.mp4 | 0.0 s | No GTA 5 você trocava entre Michael, Franklin e Trevor. Era genial, mas cada um … |
@@ -66,12 +66,12 @@ Nada disso garante que o vídeo não receba reivindicação, mas reduz muito o r
 | `n7_3` | 06:03.2 | 3.7 s | 1.9 s | trailer_lancamento.mp4 | 54.55 s | Nos trailers tem gente malhando na praia, fazendo festa e filmando tudo com o ce… |
 | `n7_4` | 06:09.0 | 7.8 s | 0.0 s | Jason_and_Lucia_18.jpg | 0 s | E no gameplay apareceu um sistema parecido com o do Red Dead 2: dá pra cumprimen… |
 | `n7_5` | 06:16.8 | 6.0 s | 6.0 s | mixkit_4401.mp4 | 3.0 s | Ou seja, cada esquina pode virar uma história. Ou uma confusão. |
-| `mid_0` | 06:23.1 | 5.6 s | 0.0 s | Vice_City_27.jpg | 0 s | Se você chegou até aqui, deixa o like, porque as três últimas são as que mais mu… |
-| `mid_1` | 06:28.7 | 3.6 s | 0.0 s | Vice_City_06.jpg | 0 s | E a número dez é a minha favorita. |
+| `mid_0` | 06:23.1 | 5.6 s | 5.6 s | gta5_freetouse2.mp4 | 266.0 s | Se você chegou até aqui, deixa o like, porque as três últimas são as que mais mu… |
+| `mid_1` | 06:28.7 | 3.6 s | 3.6 s | gta5_freetouse2.mp4 | 322.0 s | E a número dez é a minha favorita. |
 | `n8_0` | 06:33.4 | 5.1 s | 0.0 s | Jason_and_Lucia_15.jpg | 0 s | Novidade número oito: o jogo pode começar a lembrar quem você é no crime. |
 | `n8_1` | 06:38.5 | 12.1 s | 12.1 s | gta5_freetouse.mp4 | 441.0 s | No GTA 5, assim que as estrelas sumiam, a cidade esquecia tudo. Você roubava, ex… |
 | `n8_2` | 06:50.6 | 10.1 s | 0.0 s | Jason_Duval_12.jpg | 0 s | Nas coberturas do gameplay de agosto, a imprensa notou um indicador que parece a… |
-| `n8_3` | 07:00.7 | 9.5 s | 0.0 s | Lucia_Caminos_05.jpg | 0 s | Um site chegou a falar em níveis, tipo profissional, agressivo e violento. Mas é… |
+| `n8_3` | 07:00.7 | 9.5 s | 9.5 s | gta5_freetouse2.mp4 | 222.0 s | Um site chegou a falar em níveis, tipo profissional, agressivo e violento. Mas é… |
 | `n8_4` | 07:10.2 | 8.9 s | 8.9 s | mixkit_31376.mp4 | 2.0 s | Se for real, o jogo vai saber quem você é. E aí, você seria o ladrão calculista … |
 | `n9_0` | 07:20.3 | 5.4 s | 0.0 s | Vice_City_10.jpg | 0 s | Novidade número nove: um mapa que parece outro mundo. |
 | `n9_1` | 07:25.7 | 13.6 s | 13.6 s | gta5_nocopyright.mp4 | 2636.0 s | O GTA 5 tinha Los Santos e o interior de Blaine County, com o Monte Chiliad lá n… |

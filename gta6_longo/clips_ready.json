@@ -88,10 +88,11 @@
   "id": "n1_5",
   "seg": "n1",
   "part": 5,
-  "src": "gta6",
-  "n": 271,
+  "src": "gta5",
+  "n": 272,
   "lead": 0.0,
-  "still": true
+  "tail": false,
+  "cred": "@NoCopyrightGameplays"
  },
  {
   "id": "n1_6",
@@ -451,19 +452,21 @@
   "id": "mid_0",
   "seg": "mid",
   "part": 0,
-  "src": "gta6",
-  "n": 169,
+  "src": "gta5",
+  "n": 170,
   "lead": 0.0,
-  "still": true
+  "tail": false,
+  "cred": "@NoCopyrightGameplays"
  },
  {
   "id": "mid_1",
   "seg": "mid",
   "part": 1,
-  "src": "gta6",
-  "n": 107,
+  "src": "gta5",
+  "n": 108,
   "lead": 0.0,
-  "still": true
+  "tail": false,
+  "cred": "@NoCopyrightGameplays"
  },
  {
   "id": "n8_0",
@@ -497,10 +500,11 @@
   "id": "n8_3",
   "seg": "n8",
   "part": 3,
-  "src": "gta6",
-  "n": 284,
+  "src": "gta5",
+  "n": 285,
   "lead": 0.0,
-  "still": true
+  "tail": false,
+  "cred": "@NoCopyrightGameplays"
  },
  {
   "id": "n8_4",
