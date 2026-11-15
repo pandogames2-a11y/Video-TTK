@@ -114,8 +114,14 @@ def creak(at, d=0.9, amp=0.05):
     x = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * (0.5 + 0.5 * np.sin(2 * np.pi * 23 * kk)) * np.sin(np.pi * kk / d)
     put(fx, (band(x, 300, 2500) * amp).astype(np.float32), at)
 click(OPEN + 0.05); creak(OPEN + 0.15)
-LOOKBOX = T0('porch') + 2.6
+LOOKBOX = wT('apenas', 'porch')
 for j, f in enumerate([1319, 1175, 1047]): put(mus, tone(f, 0.9, 0.03, 4), LOOKBOX + j * 0.35)
+PICK = wT('acha', 'porch')
+for at in np.arange(PICK + 0.05, PICK + 1.0, 0.3): step(at, 0.05)
+# "o que está por vir": the music box slows down and goes out of tune + a soft low swell (a hint, not a jump scare)
+VIR = wT('vir', 'porch')
+for j, f in enumerate([988, 932, 880, 831]): put(mus, tone(f, 1.2, 0.035, 2.5), VIR - 0.9 + j * 0.45)
+kk = np.arange(int(2.4 * SR)) / SR; put(fx, (np.sin(2 * np.pi * 49 * kk) * np.sin(np.pi * kk / 2.4) ** 2 * 0.12).astype(np.float32), VIR - 0.6)
 
 whoosh(T0('calm') - 0.35, 0.6, 0.1)   # dissolve into the house
 # ---- mix (narration ducks the bed) ----
@@ -125,6 +131,6 @@ fade = int(0.6 * SR); mix[:fade] *= np.linspace(0, 1, fade); mix[int(TOTAL * SR)
 mix = mix / max(1e-6, np.abs(mix).max()) * 0.9
 with wave.open('audio/mix.wav', 'w') as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
-json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'ring': round(RING, 3), 'up': round(UP, 3), 'open': round(OPEN, 3), 'lookbox': round(LOOKBOX, 3)}, open('timeline.json', 'w'), indent=1)
+json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'ring': round(RING, 3), 'up': round(UP, 3), 'open': round(OPEN, 3), 'lookbox': round(LOOKBOX, 3), 'pick': round(PICK, 3), 'vir': round(VIR, 3)}, open('timeline.json', 'w'), indent=1)
 for g in segs: print(f"{g['scene']:8s} start {g['start']:6.2f} dur {g['dur']:5.2f}")
 print('total', round(TOTAL, 2), 'ring', round(RING, 2))

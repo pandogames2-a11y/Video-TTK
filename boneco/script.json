@@ -30,8 +30,9 @@
   },
   {
     "scene": "porch",
-    "voice": "none",
-    "text": "",
-    "min": 5.2
+    "voice": "narr",
+    "text": "Ele não vê ninguém lá fora, apenas uma caixa com um boneco dentro. Ele acha que foi um presente, mas ele mal espera o que está por vir.",
+    "lead": 1.0,
+    "tail": 2.2
   }
 ]

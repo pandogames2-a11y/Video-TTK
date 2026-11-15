@@ -69,14 +69,14 @@ function exterior(t, door = 0) {
 }
 
 // ---------- the toy box left on the porch: cardboard, a clear window, the doll smiling inside ----------
-function toyBox(x, y, s = 1) {
+function toyBox(x, y, s = 1, d = {}) {
   g.save(); g.translate(x, y); g.scale(s, s);
   rect(-62, -150, 124, 150, '#d6402f', 8);
   for (let i = 0; i < 6; i++) { g.fillStyle = ['#f2c53d', '#3a8fd6', '#46a35a'][i % 3]; g.fillRect(-58, -146 + i * 24, 8, 24); g.fillRect(50, -146 + i * 24, 8, 24); }
   rect(-62, -150, 124, 150, 'rgba(0,0,0,0)', 8);
   g.save(); g.beginPath(); g.roundRect(-42, -122, 84, 96, 10); g.clip();
   g.fillStyle = '#c9e6f5'; g.fillRect(-42, -122, 84, 96);
-  doll(0, -24, { s: 0.42 });
+  doll(0, -27, { s: 0.27, look: d.look, evil: d.evil });
   g.fillStyle = 'rgba(255,255,255,0.35)'; g.beginPath(); g.moveTo(-42, -80); g.lineTo(-10, -122); g.lineTo(6, -122); g.lineTo(-42, -60); g.fill();
   g.restore();
   g.beginPath(); g.roundRect(-42, -122, 84, 96, 10); g.lineWidth = 5; g.strokeStyle = OUT; g.stroke();
@@ -135,23 +135,52 @@ function drawExterior(t, t1) {
   lightPool(main, cam, 540, 1170, 220, 'rgba(255,220,150,A)', 0.5);
   vignette(main, 0.6);
 }
+const W0 = (pre, seg) => (WORDS.find(w => w.seg === seg && w.text.toLowerCase().startsWith(pre)) || {}).t0;
 function drawPorch(t) {
-  // from the front yard: Pedrinho opens the door... nobody there. Just a toy box on the mat.
+  // from the front yard: Pedrinho opens the door... nobody there, just a toy box. He thinks it's a gift and picks it up.
+  // Then, inside the box, the doll's eyes move to us and turn red.
   const k = t - TL.open, door = ease(clamp(k / 0.6));
-  const cam = camL({ x: 540, y: 1370, z: 2.6 }, { x: 540, y: 1560, z: 3.6 }, ease(clamp((t - TL.lookbox + 0.3) / 2.2)));
+  const tNin = W0('ningu', 'porch'), tAp = W0('apenas', 'porch'), tAcha = W0('acha', 'porch'), tPres = W0('presente', 'porch'), tMas = W0('mas', 'porch'), tVir = W0('vir', 'porch');
+  const BOX = { x: 540, y: GY + 150 };
+  // Pedrinho walks down to the box and picks it up
+  const walk = clamp((t - tAcha) / 1.0), lift = ss(tAcha + 1.05, tAcha + 1.5, t);
+  const py = lerp(GY - 12, GY + 110, ease(walk)), ps = lerp(0.52, 0.6, ease(walk));
+  const held = t > tAcha + 1.05;
+  const hb = { x: 540, y: lerp(BOX.y, py - 28, lift) };   // box position while he lifts it to his chest
+  // camera
+  const A = { x: 540, y: 1370, z: 2.6 }, CLOSE = { x: 540, y: BOX.y - 60, z: 4.6 }, MID = { x: 540, y: 1480, z: 2.5 };
+  let cam;
+  if (t < tAp) cam = A;
+  else if (t < tAcha) cam = camL(A, CLOSE, ease(clamp((t - tAp) / 1.2)));
+  else if (t < tMas) cam = camL(CLOSE, MID, ease(clamp((t - tAcha) / 0.9)));
+  else { const target = { x: 540, y: hb.y - 37, z: 11 }; cam = camL(MID, target, ease(clamp((t - tMas) / 1.6))); }
   g = main; camera(cam); exterior(t, door);
   nightGrade(main, 0.9);
   lightPool(main, cam, 540, 1170, 230, 'rgba(255,220,150,A)', 0.55);
   lightPool(main, cam, 540, 1360, 200, 'rgba(255,190,110,A)', 0.45 * door);
-  const lk = k < 0.9 ? [0, 0] : k < 1.7 ? [-1, 0] : k < 2.5 ? [1, 0] : [0, 1];
+  // the doll: eyes slide to the camera, then glow red
+  const dLook = t > tVir - 1.0 ? [ease(clamp((t - tVir + 1.0) / 0.4)) * 0.9, 0.3] : [0, 0], dEvil = t > tVir + 0.1;
+  const lk = t < tNin ? [0, 0] : t < tNin + 0.6 ? [-1, 0] : t < tAp ? [1, 0] : t < tAcha ? [0, 1] : held ? [0, 0.9] : [0, 1];
+  const happy = t > tAcha;
   rimLayer(main, cam, () => {
-    if (door > 0.15) bean(540, GY - 12, { s: 0.52, look: lk, mouth: k > 2.6 ? 'o' : undefined, armL: [-110, -230, -140, -150], armR: k < 0.7 ? [110, -260, 170, -300] : [110, -230, 140, -150] });
-    toyBox(540, GY + 150, 0.5);
+    if (door > 0.15) {
+      const arms = held ? [[-110, -200, -70, -80], [110, -200, 70, -80]] : walk > 0.95 ? [[-110, -200, -60, -40], [110, -200, 60, -40]] : k < 0.7 ? [[-110, -230, -140, -150], [110, -260, 170, -300]] : [[-110, -230, -140, -150], [110, -230, 140, -150]];
+      bean(540, py, { s: ps, look: lk, mouth: !happy && t > tAp + 0.3 ? 'o' : undefined, walk: walk > 0 && walk < 1 ? 0.8 : 0, phase: (t - tAcha) * 11, sq: walk >= 1 && !held ? 0.92 : 1, armL: arms[0], armR: arms[1] });
+    }
+    toyBox(hb.x, held ? hb.y : BOX.y, 0.5, { look: dLook, evil: dEvil });
   });
-  if (k > 2.7) { const q = clamp((k - 2.7) / 0.25), sc = q < 1 ? q + Math.sin(q * Math.PI) * 0.3 : 1; main.save(); main.setTransform(1, 0, 0, 1, 0, 0);
-    const sx = SW / 2 + (540 - cam.x) * cam.z, sy = SH / 2 + (GY - 300 - cam.y) * cam.z; main.translate(sx + 120, sy - 40); main.scale(sc, sc);
+  if (t > tAp + 0.2 && t < tAcha) { const q = clamp((t - tAp - 0.2) / 0.25), sc = q < 1 ? q + Math.sin(q * Math.PI) * 0.3 : 1; main.save(); main.setTransform(1, 0, 0, 1, 0, 0);
+    const sx = SW / 2 + (560 - cam.x) * cam.z, sy = SH / 2 + (py - 300 * ps - cam.y) * cam.z; main.translate(Math.min(sx + 90, SW - 80), Math.max(sy, 120)); main.scale(sc, sc);
     main.textAlign = 'center'; main.font = '900 120px "Inter Display", Inter'; main.lineWidth = 20; main.strokeStyle = '#08061a'; main.strokeText('?', 0, 0); main.fillStyle = '#ffffff'; main.fillText('?', 0, 0); main.restore(); }
-  vignette(main, 0.6);
+  if (t > tPres - 0.2 && t < tMas + 0.2) {   // happy sparkles: "a gift!"
+    main.save(); main.setTransform(1, 0, 0, 1, 0, 0); const kk = t - tPres + 0.2;
+    for (let i = 0; i < 7; i++) { const an = i / 7 * Math.PI * 2 + kk * 1.5, r = 180 + 30 * Math.sin(kk * 4 + i); const cx = SW / 2 + (540 - cam.x) * cam.z, cy = SH / 2 + (py - 200 * ps - cam.y) * cam.z;
+      main.globalAlpha = Math.max(0, Math.sin(clamp(kk / 1.0) * Math.PI)); main.translate(cx + Math.cos(an) * r, cy + Math.sin(an) * r * 0.8); main.rotate(kk * 3 + i); main.fillStyle = '#ffe27a'; main.beginPath();
+      for (let j = 0; j < 8; j++) { const rr = j % 2 ? 8 : 22, a2 = j / 8 * Math.PI * 2; main.lineTo(Math.cos(a2) * rr, Math.sin(a2) * rr); } main.fill(); main.setTransform(1, 0, 0, 1, 0, 0); }
+    main.restore(); }
+  if (dEvil) { const gl = clamp((t - tVir - 0.1) / 0.3); main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalCompositeOperation = 'screen';
+    const cx = SW / 2 + (hb.x - cam.x) * cam.z, cy = SH / 2 + (hb.y - 37 - cam.y) * cam.z; const gr = main.createRadialGradient(cx, cy, 0, cx, cy, 380); gr.addColorStop(0, `rgba(255,30,20,${0.35 * gl})`); gr.addColorStop(1, 'rgba(255,30,20,0)'); main.fillStyle = gr; main.fillRect(0, 0, SW, SH); main.restore(); }
+  vignette(main, 0.6 + (t > tMas ? 0.15 : 0));
 }
 function drawInterior(t, ctx) {
   const prev = main; const M = ctx;   // draw into ctx using the kit (which paints on `g` / `main`)
