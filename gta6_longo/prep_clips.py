@@ -37,7 +37,7 @@ for sg in SCRIPT:
     for pi, p in enumerate(sg['parts']):
         c = p.get('clip')
         if p.get('img'):   # screenshot oficial: imagem parada com movimento de câmera
-            cid = f"{sg['id']}_{pi}"; a, b = part_span(sg['id'], pi); tela = round(min(TARGET, b - a - LEAD - 0.4), 2)
+            cid = f"{sg['id']}_{pi}"; a, b = part_span(sg['id'], pi); tela = round(b - a - LEAD, 2)   # imagem fica a frase inteira
             out = f'clips/{cid}'; shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
             subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', p['img'], '-vf', 'scale=2112:1188:force_original_aspect_ratio=increase,crop=2112:1188', '-q:v', '3', f'{out}/img.jpg'], check=True)
             ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta6', n=int(tela * FPS), lead=LEAD, still=True))

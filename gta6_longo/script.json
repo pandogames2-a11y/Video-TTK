@@ -6,7 +6,8 @@
    {
     "t": "Você acha que GTA 6 é só um GTA 5 mais bonito?",
     "c": null,
-    "v": "split"
+    "v": "split",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_15.jpg"
    },
    {
     "t": "Então se prepara, porque essas dez novidades vão mudar completamente a sua visão sobre o jogo.",
@@ -74,7 +75,8 @@
    {
     "t": "Novidade número um: a roda de armas que você conhece pode estar com os dias contados.",
     "c": null,
-    "v": "roda"
+    "v": "roda",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_09.jpg"
    },
    {
     "t": "Lembra no GTA 5? Você segurava um botão, a roda abria, e lá estava tudo: pistola, fuzil, lança-granadas, lança-míssil.",
@@ -135,7 +137,8 @@
       "quem carrega?"
      ]
     },
-    "v": "roda"
+    "v": "roda",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_05.jpg"
    },
    {
     "t": "Só um aviso: a Rockstar ainda não confirmou esse sistema. O que o gameplay oficial mostrou é que a dupla divide dinheiro e armas.",
@@ -178,7 +181,8 @@
    {
     "t": "Novidade número dois: em vez de três protagonistas, uma dupla.",
     "c": null,
-    "v": "dupla"
+    "v": "dupla",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_01.jpg"
    },
    {
     "t": "No GTA 5 você trocava entre Michael, Franklin e Trevor. Era genial, mas cada um vivia num canto do mapa, com a própria vida.",
@@ -291,7 +295,8 @@
    {
     "t": "Novidade número três: o corpo do seu personagem muda.",
     "c": null,
-    "v": "muda"
+    "v": "muda",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_15.jpg"
    },
    {
     "t": "No GTA 5 até existiam atributos, tipo força e fôlego, que subiam conforme você jogava. Mas o corpo continuava igualzinho.",
@@ -344,7 +349,8 @@
      "a": "O ESPÍRITO DO CJ",
      "b": "San Andreas, 2004"
     },
-    "v": "sa"
+    "v": "sa",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_22.jpg"
    },
    {
     "t": "A dúvida é: isso muda a gameplay ou é só visual? Você correria menos com o Jason acima do peso? A Rockstar ainda não disse.",
@@ -389,7 +395,8 @@
    {
     "t": "Novidade número quatro: o clima deixa de ser cenário e vira acontecimento.",
     "c": null,
-    "v": ""
+    "v": "",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Ambrosia/Ambrosia_02.jpg"
    },
    {
     "t": "No GTA 5, começava a chover e chovia praticamente no mapa inteiro, ao mesmo tempo.",
@@ -492,7 +499,8 @@
    {
     "t": "Novidade número cinco: Leonida está cheia de bicho.",
     "c": null,
-    "v": "fauna"
+    "v": "fauna",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Grassrivers/Grassrivers_04.jpg"
    },
    {
     "t": "O GTA 5 tinha o Chop, o cachorro do Franklin, alguns cervos, pumas no mato e tubarão no mar. Mas era pouco.",
@@ -587,7 +595,8 @@
    {
     "t": "Novidade número seis: as redes sociais chegaram a Leonida.",
     "c": null,
-    "v": "feed"
+    "v": "feed",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_18.jpg"
    },
    {
     "t": "No GTA 5, a internet do jogo tinha o Lifeinvader, a paródia de rede social, e o Bleeter. Era engraçado, mas era tudo texto e foto parada.",
@@ -675,7 +684,8 @@
    {
     "t": "Novidade número sete: as pessoas na rua parecem gente de verdade.",
     "c": null,
-    "v": "vivos"
+    "v": "vivos",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_05.jpg"
    },
    {
     "t": "No GTA 5, você via o mesmo pedestre três vezes no mesmo quarteirão. E todo mundo reagia igual: corria, gritava, ou ligava pra polícia.",
@@ -772,7 +782,8 @@
     "c": {
      "k": "sub"
     },
-    "v": "sub"
+    "v": "sub",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_27.jpg"
    },
    {
     "t": "E a número dez é a minha favorita.",
@@ -781,7 +792,8 @@
      "a": "#8  #9  #10",
      "b": "as que mais mudam o jogo"
     },
-    "v": "segura"
+    "v": "segura",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_06.jpg"
    }
   ],
   "hl": [
@@ -803,7 +815,8 @@
    {
     "t": "Novidade número oito: o jogo pode começar a lembrar quem você é no crime.",
     "c": null,
-    "v": ""
+    "v": "",
+    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_15.jpg"
    },
    {
     "t": "No GTA 5, assim que as estrelas sumiam, a cidade esquecia tudo. Você roubava, explodia, saía atropelando, e dois minutos depois era um cidadão exemplar.",
@@ -840,7 +853,8 @@
       "violento"
      ]
     },
-    "v": "niveis"
+    "v": "niveis",
+    "img": "clips/fonte/rockstar_shots/shots/People/Lucia Caminos/Lucia_Caminos_05.jpg"
    },
    {
     "t": "Se for real, o jogo vai saber quem você é. E aí, você seria o ladrão calculista ou o maluco que explode tudo?",
@@ -887,7 +901,8 @@
    {
     "t": "Novidade número nove: um mapa que parece outro mundo.",
     "c": null,
-    "v": ""
+    "v": "",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_10.jpg"
    },
    {
     "t": "O GTA 5 tinha Los Santos e o interior de Blaine County, com o Monte Chiliad lá no alto. Segundo a Rockstar, o mapa do GTA 6 tem mais ou menos o dobro do tamanho.",
@@ -991,7 +1006,8 @@
    {
     "t": "E a novidade número dez, a minha favorita: a polícia aprendeu a te procurar.",
     "c": null,
-    "v": "gta5"
+    "v": "gta5",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_17.jpg"
    },
    {
     "t": "No GTA 5, a fuga era sempre a mesma: quebra a linha de visão, se esconde num beco, ou passa na Los Santos Customs e pinta o carro. Pronto, sumiu.",
@@ -1018,7 +1034,8 @@
      "n": "★★★★★★",
      "l": "SEIS ESTRELAS"
     },
-    "v": "seis"
+    "v": "seis",
+    "img": "clips/fonte/rockstar_shots/shots/People/Lucia Caminos/Lucia_Caminos_07.jpg"
    },
    {
     "t": "E a polícia identifica você pela roupa, pelo rosto e pelo carro. Trocar de roupa e de carro passa a fazer parte da fuga.",
@@ -1119,7 +1136,8 @@
     "c": {
      "k": "cta"
     },
-    "v": ""
+    "v": "",
+    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_08.jpg"
    }
   ],
   "hl": [

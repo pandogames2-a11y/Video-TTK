@@ -581,30 +581,28 @@ window.renderFrame = t => {
   X.restore(); X = MAIN;
   X.setTransform(1, 0, 0, 1, 0, 0); X.drawImage(BUF, 0, 0);
   if (vel > 0.15) { const dx = (fNew.x - fOld.x) * 0.06 * vel + (pi === 0 ? -60 * vel : 0); for (let k = 1; k <= 3; k++) { X.globalAlpha = 0.22 * vel; X.drawImage(BUF, -dx * k, 0); } X.globalAlpha = 1; }
-  // trecho de gameplay/trailer: tela cheia, câmera lenta (já vem do prep), faixas de cinema
-  let bars = 0;
+  // imagem real (gameplay, trailer, screenshot ou B-roll) em tela cheia, com leve movimento
   if (clip) {
-    const ct = pt - clip.lead, dur = clip.n / FPS, a = Math.min(seg(ct, 0, 0.35), 1 - seg(ct, dur - 0.4, 0.4)); bars = a;
+    const ct = pt - clip.lead, dur = Math.max(clip.n / FPS, pdur - clip.lead), a = seg(ct, 0, 0.12);
     X.save(); X.globalAlpha = a;
-    if (clip.still) { // imagem oficial: Ken Burns (aproxima e desliza devagar, direção varia por frase)
-      const u = eio(ct / dur), dir = (R(clip.id.length * 97 + clip.part * 31)() < 0.5) ? 1 : -1, zs = lerp(1.0, 1.1, u);
-      X.translate(W / 2 + dir * lerp(-50, 50, u), H / 2 + lerp(20, -20, u)); X.scale(zs, zs); X.drawImage(clip.img, -1056, -594, 2112, 1188);
-    } else { const zc = 1.03 + 0.06 * (ct / dur); X.translate(W / 2 + 30 * (ct / dur), H / 2); X.scale(zc, zc); X.translate(-W / 2, -H / 2); X.drawImage(clip.img, 0, 0, W, H); }
+    if (clip.still) { const u = eio(ct / dur), dir = (R(clip.id.length * 97 + clip.part * 31)() < 0.5) ? 1 : -1, zs = lerp(1.0, 1.1, u);
+      X.translate(W / 2 + dir * lerp(-50, 50, u), H / 2 + lerp(20, -20, u)); X.scale(zs, zs); X.drawImage(clip.img, -1056, -594, 2112, 1188); }
+    else { const zc = 1.02 + 0.05 * (ct / dur); X.translate(W / 2 + 25 * (ct / dur), H / 2); X.scale(zc, zc); X.translate(-W / 2, -H / 2); X.drawImage(clip.img, 0, 0, W, H); }
     X.restore();
-    X.save(); X.globalAlpha = 0.15 * a; X.fillStyle = '#2a0a3a'; X.fillRect(0, 0, W, H); X.restore();
   }
-  // legibilidade (só onde precisa)
-  let g = X.createLinearGradient(0, 860, 0, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,0.65)'); X.fillStyle = g; X.fillRect(0, 860, W, 220);
-  if (sc.num) { g = X.createLinearGradient(0, 0, 0, 180); g.addColorStop(0, 'rgba(0,0,0,0.5)'); g.addColorStop(1, 'rgba(0,0,0,0)'); X.fillStyle = g; X.fillRect(0, 0, W, 180); }
-  if (bars > 0) { const bh = 96 * eio(bars); X.fillStyle = '#000'; X.fillRect(0, 0, W, bh); X.fillRect(0, H - bh, W, bh);
-    X.save(); X.globalAlpha = bars; const lab = clip.src === 'gta5' ? `GTA 5 · gameplay${clip.cred ? ': ' + clip.cred : ''}` : clip.src === 'stock' ? 'imagem ilustrativa · Mixkit' : 'GTA 6 · imagens: Rockstar Games'; txt(lab, W - 40, bh / 2 + 4, 22, 'rgba(255,255,255,0.75)', { weight: 700, align: 'right' }); X.restore(); }
-  if (c) { if (clip && c.k !== 'cta' && c.k !== 'recap') miniCard(c, pt, pdur); else card(c, pt, pdur, side, s); }
-  if (bars < 0.5) header(s, lt); slam(s, lt); captions(t);
-  // flash curto só na virada de novidade
-  const fl = si === 0 ? 0 : 0.6 * (1 - seg(lt, 0, 0.16)); if (fl > 0) { X.fillStyle = `rgba(255,255,255,${fl})`; X.fillRect(0, 0, W, H); }
-  const v = X.createRadialGradient(W / 2, H / 2, 650, W / 2, H / 2, 1200); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.45)'); X.fillStyle = v; X.fillRect(0, 0, W, H);
-  X.imageSmoothingEnabled = false; X.drawImage(GRAIN, 0, 0, W, H); X.imageSmoothingEnabled = true;
-  const fi = 1 - seg(t, 0, 0.6), fo = seg(t, TL.total - 1.2, 1.2), f = Math.max(fi, fo); if (f > 0) { X.fillStyle = `rgba(0,0,0,${f})`; X.fillRect(0, 0, W, H); }
+  const v = X.createRadialGradient(W / 2, H / 2, 700, W / 2, H / 2, 1250); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.3)'); X.fillStyle = v; X.fillRect(0, 0, W, H);
+  // crédito discreto da imagem (canto superior direito)
+  if (clip) { const lab = clip.src === 'gta5' ? `GTA 5 · gameplay${clip.cred ? ': ' + clip.cred : ''}` : clip.src === 'stock' ? 'imagem ilustrativa · Mixkit' : 'GTA 6 · imagens: Rockstar Games';
+    tx(lab, W - 40, 42, 20, FA, 'rgba(255,255,255,0.75)', { align: 'right', sb: 6, sy: 1 }); }
+  // transição tipo "glitch" a cada frase (mais forte na virada de novidade)
+  glitchIn(pt, pi === 0 && si > 0);
+  // textos no estilo da referência
+  if (sc.num && pi === 0) titleCard(sc, pt, pdur);
+  else if (c) styledCard(c, pt, pdur, s, sc);
+  if (sc.num) chapterTag(sc, pi === 0 ? eo(seg(pt, pdur - 0.4, 0.4)) : 1);
+  if (sc.num && pi > 0 && lt < 9 && sc.src) tx(sc.src, 40, H - 34, 20, FA, 'rgba(255,255,255,0.7)', { align: 'left', sb: 6, sy: 1 });
+  if (s.scene === 'n8' && pi > 0) { const v5 = (sc.parts[pi].v || '') === 'gta5'; wantedHUD(v5 ? 5 : 6, v5 ? Math.min(5, 1 + Math.floor(pt * 2)) : 6, pt, v5 ? '+1' : '+6'); }
+  const fi = 1 - seg(t, 0, 0.5), fo = seg(t, TL.total - 1.2, 1.2), f = Math.max(fi, fo); if (f > 0) { X.fillStyle = `rgba(0,0,0,${f})`; X.fillRect(0, 0, W, H); }
 };
 // trechos prontos (clips_ready.json, gerado por prep_clips.py): quadro carregado antes de desenhar
 let CLIPS = [], CLIP_NOW = null; const IMG = new Map();
@@ -612,7 +610,7 @@ async function clipAt(t) {
   const s = TL.segs.find(x => t >= x.start && t < x.end); if (!s || !CLIPS.length) return null;
   let pi = 0; for (let i = 0; i < s.parts.length; i++) if (t >= s.parts[i]) pi = i;
   const c = CLIPS.find(c => c.seg === s.id && c.part === pi); if (!c) return null;
-  const ct = t - (pi === 0 ? s.start : s.parts[pi]) - c.lead, k = Math.floor(ct * FPS); if (k < 0 || k >= c.n) return null;
+  const ct = t - (pi === 0 ? s.start : s.parts[pi]) - c.lead, k = Math.min(c.n - 1, Math.floor(ct * FPS)); if (k < 0) return null; // depois do fim, segura o último quadro até a frase acabar
   const url = c.still ? `clips/${c.id}/img.jpg` : `clips/${c.id}/f${String(k + 1).padStart(4, '0')}.jpg`;
   let img = IMG.get(url); if (!img) { img = new Image(); img.src = url; await img.decode(); IMG.set(url, img); if (IMG.size > 90) IMG.delete(IMG.keys().next().value); }
   return { ...c, img };
@@ -621,7 +619,8 @@ window.frameJPEG = async (t, q) => { CLIP_NOW = await clipAt(t); window.renderFr
 
 (async () => {
   TL = await (await fetch('timeline.json')).json(); SC = await (await fetch('script.json')).json(); TOTAL = TL.total;
-  await document.fonts.load(`900 80px "Inter Display"`); await document.fonts.load(`80px "Noto Color Emoji"`, '🐊');
+  await document.fonts.load(`900 80px "Inter Display"`);
+  for (const f of ['80px "Anton"', '80px "Kaushan"', '900 80px "Mont"', '80px "RubikDirt"']) await document.fonts.load(f, 'ÁÉÇãõ Aa');
   try { const r = await fetch('clips_ready.json'); if (r.ok) CLIPS = await r.json(); } catch (e) {}
   GRAIN = grainLayer(); buildChunks(); window.FPS = FPS; window.TOTAL = TOTAL; window.READY = true;
 })();

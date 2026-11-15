@@ -1,7 +1,7 @@
 // node render.js stills t1,t2 outDir      → JPEGs de teste
 // node render.js video f0 f1 out.mp4      → quadros [f0,f1) direto para o ffmpeg (sem salvar JPEGs em disco)
 const {chromium} = require('playwright'); const http = require('http'); const fs = require('fs'); const path = require('path'); const {spawn} = require('child_process');
-const root = __dirname; const types = {'.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.jpg': 'image/jpeg'};
+const root = __dirname; const types = {'.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.jpg': 'image/jpeg', '.woff2': 'font/woff2'};
 const srv = http.createServer((q, r) => { const f = path.join(root, decodeURIComponent(q.url.split('?')[0])); fs.readFile(f, (e, d) => { if (e) { r.writeHead(404); r.end(); return; } r.writeHead(200, {'Content-Type': types[path.extname(f)] || 'application/octet-stream'}); r.end(d); }); });
 const [, , mode, a, b, out] = process.argv;
 srv.listen(0, async () => {
