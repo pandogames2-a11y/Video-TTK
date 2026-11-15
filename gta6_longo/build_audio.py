@@ -113,7 +113,7 @@ def tts_eleven_part(text, prev, nxt, vs):
 
 # ---------- narração ----------
 LS = float(os.environ.get('LS', '0.86'))
-segs = []; voice = []; words = []; t = 0.4
+segs = []; voice = []; words = []; t = float(os.environ.get("PREROLL", "1.6"))   # abertura: fumaça antes da primeira fala
 for si, s in enumerate(S):
     seg = dict(id=s['id'], scene=s['scene'], start=round(max(0, t - 0.35), 3), parts=[])
     if s.get('num'): t += 0.9   # espaço para o número "bater" na tela antes da fala

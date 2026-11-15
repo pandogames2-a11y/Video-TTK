@@ -1,19 +1,10 @@
 [
  {
-  "id": "intro_0",
-  "seg": "intro",
-  "part": 0,
-  "src": "gta6",
-  "n": 111,
-  "lead": 0.0,
-  "still": true
- },
- {
   "id": "intro_1",
   "seg": "intro",
   "part": 1,
   "src": "gta6",
-  "n": 123,
+  "n": 111,
   "lead": 0.0,
   "tail": true,
   "cred": ""

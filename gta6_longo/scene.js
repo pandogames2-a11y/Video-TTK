@@ -577,8 +577,9 @@ window.renderFrame = t => {
   const z = lerp(fOld.z, fNew.z, m) * (1 + 0.05 * drift), x = lerp(fOld.x, fNew.x, m) - 40 * drift, y = lerp(fOld.y, fNew.y, m), rot = lerp(fOld.rot, fNew.rot, m);
   X = BX; X.setTransform(1, 0, 0, 1, 0, 0); X.fillStyle = '#000'; X.fillRect(0, 0, W, H);
   X.save(); X.translate(W / 2 + x, H / 2 + y); X.rotate(rot); X.scale(z, z); X.translate(-W / 2, -H / 2);
-  const ex = sc.parts[pi].ex; let exLabels = null;
-  if (ex) { exLabels = window.EXPLAIN.render(s.id + '_' + pi, ex, pt, pdur); X.save(); X.setTransform(1, 0, 0, 1, 0, 0); X.drawImage(window.EXPLAIN.canvas, 0, 0); X.restore(); }   // animação 3D explicativa
+  const ex = sc.parts[pi].ex, hook = sc.parts[pi].hook; let exLabels = null;
+  if (hook) { X.save(); X.setTransform(1, 0, 0, 1, 0, 0); hookIntro(t, pt, pdur, s.id); X.restore(); }
+  else if (ex) { exLabels = window.EXPLAIN.render(s.id + '_' + pi, ex, pt, pdur); X.save(); X.setTransform(1, 0, 0, 1, 0, 0); X.drawImage(window.EXPLAIN.canvas, 0, 0); X.restore(); }   // animação 3D explicativa
   else if (!clip) SCENES[s.scene](lt, s, { pi, pt, pdur, v: sc.parts[pi].v || '' });   // animação antiga só se não houver imagem real
   X.restore(); X = MAIN;
   X.setTransform(1, 0, 0, 1, 0, 0); X.drawImage(BUF, 0, 0);
@@ -597,15 +598,16 @@ window.renderFrame = t => {
   if (clip) { const lab = clip.src === 'gta5' ? `GTA 5 · gameplay${clip.cred ? ': ' + clip.cred : ''}` : clip.src === 'stock' ? 'imagem ilustrativa · Mixkit' : 'GTA 6 · imagens: Rockstar Games';
     tx(lab, W - 40, 42, 20, FA, 'rgba(255,255,255,0.75)', { align: 'right', sb: 6, sy: 1 }); }
   // transição tipo "glitch" a cada frase (mais forte na virada de novidade)
-  glitchIn(pt, pi === 0 && si > 0);
+  if (!hook) glitchIn(pt, pi === 0 && si > 0);
   // textos no estilo da referência
-  if (sc.num && pi === 0) titleCard(sc, pt, pdur);
+  if (hook) {}
+  else if (sc.num && pi === 0) titleCard(sc, pt, pdur);
   else if (ex) explainLabels(ex, exLabels, pt, pdur);
   else if (c) styledCard(c, pt, pdur, s, sc);
   if (sc.num) chapterTag(sc, pi === 0 ? eo(seg(pt, pdur - 0.4, 0.4)) : 1);
   if (sc.num && pi > 0 && lt < 9 && sc.src) tx(sc.src, 40, H - 34, 20, FA, 'rgba(255,255,255,0.7)', { align: 'left', sb: 6, sy: 1 });
   if (s.scene === 'n8' && pi > 0) { const v5 = (sc.parts[pi].v || '') === 'gta5'; wantedHUD(v5 ? 5 : 6, v5 ? Math.min(5, 1 + Math.floor(pt * 2)) : 6, pt, v5 ? '+1' : '+6'); }
-  const fi = 1 - seg(t, 0, 0.5), fo = seg(t, TL.total - 1.2, 1.2), f = Math.max(fi, fo); if (f > 0) { X.fillStyle = `rgba(0,0,0,${f})`; X.fillRect(0, 0, W, H); }
+  const fi = 0, fo = seg(t, TL.total - 1.2, 1.2), f = Math.max(fi, fo); if (f > 0) { X.fillStyle = `rgba(0,0,0,${f})`; X.fillRect(0, 0, W, H); }
 };
 // trechos prontos (clips_ready.json, gerado por prep_clips.py): quadro carregado antes de desenhar
 let CLIPS = [], CLIP_NOW = null; const IMG = new Map();

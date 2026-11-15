@@ -127,9 +127,9 @@ function wantedHUD(stars, lit, pt, plus) {
 }
 // transição entre frases: deslize rápido com rastro e franjas vermelho/azul (RGB)
 function glitchIn(pt, strong) {
-  const d = strong ? 0.3 : 0.2, e = 1 - seg(pt, 0, d); if (e <= 0) return;
+  if (pt < 0) return; const d = strong ? 0.3 : 0.2, e = 1 - seg(pt, 0, d); if (e <= 0) return;
   SNX.drawImage(cv, 0, 0); const dx = (strong ? 90 : 50) * e * e;
-  X.save(); X.globalCompositeOperation = 'lighter'; X.globalAlpha = 0.28 * e;
+  X.save(); X.globalCompositeOperation = 'screen'; X.globalAlpha = 0.16 * e;
   X.drawImage(SNAP, -dx, 0); X.drawImage(SNAP, dx, 0); X.restore();
   X.save(); X.globalAlpha = 0.35 * e; let g = X.createLinearGradient(0, 0, 220, 0); g.addColorStop(0, '#ff0033'); g.addColorStop(1, 'rgba(255,0,51,0)'); X.fillStyle = g; X.fillRect(0, 0, 220, H);
   g = X.createLinearGradient(W, 0, W - 220, 0); g.addColorStop(0, '#0057ff'); g.addColorStop(1, 'rgba(0,87,255,0)'); X.fillStyle = g; X.fillRect(W - 220, 0, 220, H); X.restore();
@@ -170,4 +170,58 @@ function explainLabels(ex, labels, pt, dur) {
     pill(l.it.t, l.base.x, Math.min(H - 70, l.base.y + 40), size, 'purple', 1, 0.9 + 0.1 * l.k);
     if (l.it.v) tx(l.it.v, l.top.x, l.top.y - 30, l.it.v.length > 3 ? 54 : 84, FA, '#fff', { sc: l.color, sb: 30, sy: 0 });
     X.restore(); });
+}
+
+// ---------- abertura: fundo preto, fumaça leve, frase surgindo com a narração, dois emblemas com informações ----------
+const SMOKE = (() => { const c = document.createElement('canvas'); c.width = 256; c.height = 256; const g = c.getContext('2d');
+  const r = g.createRadialGradient(128, 128, 0, 128, 128, 128); r.addColorStop(0, 'rgba(255,255,255,0.22)'); r.addColorStop(0.5, 'rgba(255,255,255,0.08)'); r.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = r; g.fillRect(0, 0, 256, 256); return c; })();
+function smoke(t, x0, x1, yBase, n, tint, a = 1) { // nuvens suaves subindo devagar
+  X.save(); X.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < n; i++) { const rnd = R(i * 7919 + 13), life = 5 + rnd() * 4, ph = rnd() * life, u = ((t + ph) % life) / life;
+    const x = lerp(x0, x1, rnd()) + Math.sin(t * 0.6 + i) * 40 + u * (rnd() - 0.5) * 160, y = yBase - u * (260 + rnd() * 220), s = 180 + u * 420 + rnd() * 120;
+    X.globalAlpha = a * Math.sin(Math.PI * u) * (0.35 + 0.4 * rnd()); X.filter = 'none';
+    X.save(); X.translate(x, y); X.rotate(t * 0.1 + i); X.drawImage(SMOKE, -s / 2, -s / 2, s, s); X.restore();
+    if (tint) { X.globalAlpha *= 0.5; X.fillStyle = tint; } }
+  X.restore();
+}
+function badge(x, y, title, sub, lines, grad, a, glow) {
+  if (a <= 0.01) return; X.save(); X.globalAlpha = a; X.translate(x, y + (1 - a) * 40);
+  const w = 360, h = 400;
+  X.shadowColor = glow; X.shadowBlur = 50; rr(-w / 2, -h / 2, w, h, 28); X.fillStyle = 'rgba(14,8,22,0.82)'; X.fill(); X.shadowBlur = 0;
+  X.lineWidth = 3; X.strokeStyle = glow; X.stroke();
+  const g = X.createLinearGradient(0, -150, 0, -40); g.addColorStop(0, grad[0]); g.addColorStop(1, grad[1]);
+  X.font = `130px ${FA}`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.fillStyle = g; X.shadowColor = glow; X.shadowBlur = 30; X.fillText(title, 0, -95); X.shadowBlur = 0;
+  tx(sub, 0, -10, 40, FS, '#fff', { shadow: false });
+  lines.forEach((l, i) => { const k = eo(seg(a, 0.4 + i * 0.15, 0.3)); tx(l, 0, 60 + i * 50, 34, FA, `rgba(255,255,255,${0.9 * k})`, { shadow: false, ls: 2 }); });
+  X.restore();
+}
+function hookIntro(t, pt, dur, sid) {
+  X.fillStyle = '#030206'; X.fillRect(0, 0, W, H);
+  const v = X.createRadialGradient(W / 2, 560, 50, W / 2, 560, 900); v.addColorStop(0, 'rgba(90,20,110,0.35)'); v.addColorStop(1, 'rgba(0,0,0,0)'); X.fillStyle = v; X.fillRect(0, 0, W, H);
+  smoke(t, 200, W - 200, 1040, 26, null, 0.9 * eo(seg(t, 0, 1.2)));
+  // frase sincronizada com a narração (palavra por palavra, com desfoque saindo)
+  const ws = TL.words.filter(w => w.seg === sid && w.part === 0);
+  const size = 88, sp = 24, words = ws.map(w => clean(w.text).toUpperCase()), widths = words.map(w => twf(w, size, FA));
+  const tot = widths.reduce((a, b) => a + b, 0) + sp * (words.length - 1), sc = Math.min(1, 1700 / tot);
+  X.save(); X.translate(W / 2, 250); X.scale(sc, sc); let x = -tot / 2;
+  ws.forEach((w, i) => { const k = eo(seg(t, w.t0 - 0.08, 0.35)); if (k > 0) { const hot = /GTA|6|5|BONITO/.test(words[i]);
+      X.save(); X.globalAlpha = k; X.filter = `blur(${(1 - k) * 10}px)`; X.translate(x + widths[i] / 2, (1 - k) * 30);
+      tx(words[i], 0, 0, size, FA, hot ? (words[i].includes('6') ? '#ff6fb5' : words[i].includes('5') ? '#7fb4ff' : '#ffd23f') : '#fff', { sc: hot ? 'rgba(255,80,170,0.6)' : 'rgba(0,0,0,0.6)', sb: 24, sy: 0 });
+      X.restore(); }
+    x += widths[i] + sp; });
+  X.restore();
+  // fumaça saindo da frase
+  smoke(t * 1.3, W / 2 - 700, W / 2 + 700, 330, 14, null, 0.55 * eo(seg(t, 1.6, 0.8)));
+  // emblemas (desenho próprio, não são as logos oficiais)
+  const ka = eo(seg(t, 1.9, 0.6)), kb = eo(seg(t, 2.5, 0.6));
+  badge(W / 2 - 520, 680, 'GTA 5', 'lançado em 2013', ['3 PROTAGONISTAS', '5 ESTRELAS', 'LOS SANTOS'], ['#b9d6ff', '#4f8cff'], ka, 'rgba(79,140,255,0.8)');
+  badge(W / 2 + 520, 680, 'GTA 6', 'chega em 2026', ['UMA DUPLA', '6 ESTRELAS', 'LEONIDA'], ['#ffd1ea', '#ff3d9a'], kb, 'rgba(255,61,154,0.85)');
+  // =? pulsando no meio, vira ≠ quando a frase termina
+  const kc = eo(seg(t, 2.9, 0.4)); if (kc > 0) { const done = ws.length && t > ws[ws.length - 1].t1 + 0.1, pulse = 1 + 0.06 * Math.sin(t * 8);
+    X.save(); X.globalAlpha = kc; X.translate(W / 2, 680); X.scale(pulse * kc, pulse * kc);
+    X.beginPath(); X.arc(0, 0, 90, 0, Math.PI * 2); X.fillStyle = done ? '#ff2b3a' : '#ffd23f'; X.shadowColor = done ? 'rgba(255,43,58,0.8)' : 'rgba(255,210,63,0.7)'; X.shadowBlur = 40; X.fill();
+    tx(done ? '≠' : '=?', 0, 6, done ? 120 : 84, FA, '#14060c', { shadow: false }); X.restore(); }
+  // pequeno flash de impacto na entrada da frase
+  const f = ws.length ? (1 - seg(t, ws[0].t0 - 0.05, 0.25)) * (t > ws[0].t0 - 0.05 ? 1 : 0) : 0; if (f > 0) { X.fillStyle = `rgba(255,255,255,${0.25 * f})`; X.fillRect(0, 0, W, H); }
 }

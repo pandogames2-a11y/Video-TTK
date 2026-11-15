@@ -7,7 +7,7 @@
     "t": "Você acha que GTA 6 é só um GTA 5 mais bonito?",
     "c": null,
     "v": "split",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_15.jpg"
+    "hook": true
    },
    {
     "t": "Então se prepara, porque essas dez novidades vão mudar completamente a sua visão sobre o jogo.",
@@ -19,8 +19,8 @@
     "v": "sunset",
     "clip": {
      "arquivo": "clips/fonte/trailer_lancamento.mp4",
-     "inicio": 25.0,
-     "dur": 2.1
+     "inicio": 25.5,
+     "dur": 1.9
     }
    },
    {
