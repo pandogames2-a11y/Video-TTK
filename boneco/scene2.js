@@ -300,22 +300,56 @@ function drawLate(t) {
     if (n === 'erro5' && t > tEmb - 0.4) arrowTo(cam, 290, 820, 'A SAÍDA TÁ AQUI!', ss(tEmb - 0.4, tEmb - 0.1, t), 1);
     if (shrug) textOut('?', SW / 2 + 160, 560, 130, '#ffffff', { s: popS(t - tAlg) });
   } else {
-    // back in bed, pleased with himself... and under the bed
-    const tDec = W0('decide', 'bed'), tEnc = W0('encerra', 'bed'), F0 = T0('final');
-    const cam0 = { x: 760, y: 1010, z: 1.15 }, under = { x: 640, y: 1290, z: 2.6 };
-    const cam = t < F0 + 0.3 ? cam0 : camL(cam0, under, ease(clamp((t - F0 - 0.3) / 1.6)));
-    g = main; camera(cam); bedroom(t, { clock: '03:20' });
-    nightGrade(main, 1.25); lightPool(main, cam, 250, 560, 380, 'rgba(120,160,255,A)', 0.35);
-    const evil = t > F0 + 1.8;
-    rimLayer(main, cam, () => {
-      if (t > F0) { g.save(); g.beginPath(); g.rect(330, 1196, 656, FB - 1196); g.clip(); doll(640, FB - 4, { s: 0.4, evil, knife: true, look: evil ? [0, 0.4] : [1, 0] }); g.restore(); }
-      beanLying(530, 1045, 0.6, { smile: true }); blanket();
-    });
-    if (evil) redEyes(cam, 640, FB - 4 - 225 * 0.4 + 5, 0.4, ss(F0 + 1.8, F0 + 2.2, t));
-    vignette(main, 0.6 + (t > F0 ? 0.15 : 0));
-    if (t < tDec + 0.5) { main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = `rgba(0,0,0,${1 - ss(tDec, tDec + 0.5, t)})`; main.fillRect(0, 0, SW, SH); main.restore(); }
-    if (t > tEnc && t < F0) textOut('Z', 450 + Math.sin(t * 2) * 10, 780 - ((t * 60) % 90), 60, '#ffffff', { a: 0.9 });
-    if (t > F0 + 2.6) textOut('hi-hi-hi…', 540, 780, 80, '#ffffff', { a: ss(F0 + 2.6, F0 + 2.9, t) });
+    // back in bed, pleased with himself... the doll rises behind him ON the bed, he screams; then the memorial T-shirt and the question
+    const tDec = W0('decide', 'bed'), SC = T0('scare'), SCR = SC + 1.6, CAM = T0('camisa'), CTA = T0('cta');
+    if (t < CAM) {
+      const shake = t > SCR && t < SCR + 0.8 ? (1 - (t - SCR) / 0.8) * 14 : 0;
+      const cam = { x: 700 + Math.sin(t * 61) * shake, y: 1010 + Math.cos(t * 53) * shake, z: t > SC ? lerp(1.15, 1.5, ease(clamp((t - SC) / 1.4))) : 1.15 };
+      g = main; camera(cam); bedroom(t, { clock: '03:20' });
+      nightGrade(main, 1.25); lightPool(main, cam, 250, 560, 380, 'rgba(120,160,255,A)', 0.35);
+      const rise = ss(SC + 0.1, SC + 1.0, t), awake = t > SC + 1.0, up = t > SCR;
+      if (t > SC) lightPool(main, cam, 420, 1000, 300, 'rgba(255,40,30,A)', 0.35 * rise);
+      rimLayer(main, cam, () => {
+        if (t > SC) { g.save(); g.beginPath(); g.rect(200, 0, 900, 1095); g.clip(); doll(425, lerp(1300, 1092, rise), { s: 0.5, evil: true, knife: true, look: [1, 0.3] }); g.restore(); }
+        if (up) { bean(610, 1180, { sit: true, s: 0.8, look: [-1, -0.2], mouth: 'o', sweat: true, jy: Math.max(0, Math.sin(clamp((t - SCR) / 0.35) * Math.PI)) * 40, armL: [-120, -260, -100, -380], armR: [120, -260, 100, -380] }); blanket(); }
+        else { beanLying(530, 1045, 0.6, { smile: !awake, awake }); blanket(); }
+      }, t > SC ? 'rgba(255,140,130,0.95)' : undefined);
+      if (t > SC + 0.6) redEyes(cam, 425, lerp(1300, 1092, rise) - 225 * 0.5 + 5, 0.5, rise);
+      vignette(main, 0.6 + (t > SC ? 0.15 : 0));
+      if (t < tDec + 0.5) { main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = `rgba(0,0,0,${1 - ss(tDec, tDec + 0.5, t)})`; main.fillRect(0, 0, SW, SH); main.restore(); }
+      if (t > tDec + 1.0 && t < SC) textOut('Z', 470 + Math.sin(t * 2) * 10, 780 - ((t * 60) % 90), 60, '#ffffff', { a: 0.9 });
+      if (t > SC + 0.9 && t < SCR) textOut('hi-hi-hi…', 330, 640, 64, '#ffffff', { a: ss(SC + 0.9, SC + 1.1, t) });
+      if (up) { textOut('AAAAAAH!', 560 + Math.sin(t * 40) * 8, 600, 120, '#ffffff', { s: popS(t - SCR, 0.2), rot: -0.05 }); if (t < SCR + 0.15) { main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = `rgba(255,255,255,${0.6 * (1 - (t - SCR) / 0.15)})`; main.fillRect(0, 0, SW, SH); main.restore(); } }
+      const fo = ss(CAM - 0.35, CAM, t); if (fo > 0) { main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = `rgba(0,0,0,${fo})`; main.fillRect(0, 0, SW, SH); main.restore(); }
+    } else {
+      // "vira estampa de camisa": a memorial T-shirt with his photo
+      const tEst = W0('estampa', 'camisa');
+      main.setTransform(1, 0, 0, 1, 0, 0); const bg = main.createRadialGradient(540, 900, 50, 540, 900, 1100); bg.addColorStop(0, '#2a2440'); bg.addColorStop(1, '#07060e'); main.fillStyle = bg; main.fillRect(0, 0, SW, SH);
+      const a = ss(CAM, CAM + 0.5, t), z = 1 + 0.06 * ss(CAM, CTA + 3, t), dim = t > CTA ? 0.45 * ss(CTA, CTA + 0.5, t) : 0;
+      g = main; g.save(); g.globalAlpha = a; g.translate(540, 980); g.scale(z, z);
+      shape('#f4f4f6', () => { g.moveTo(-170, -420); g.quadraticCurveTo(0, -360, 170, -420); g.lineTo(420, -300); g.lineTo(340, -120); g.lineTo(250, -170); g.lineTo(250, 420); g.lineTo(-250, 420); g.lineTo(-250, -170); g.lineTo(-340, -120); g.lineTo(-420, -300); g.closePath(); }, 8);
+      curve(-110, -405, 0, -330, 110, -405, 6);
+      const pr = ss(tEst - 0.1, tEst + 0.3, t);
+      if (pr > 0) {
+        g.globalAlpha = a * pr;
+        g.save(); g.beginPath(); g.arc(0, 40, 150, 0, Math.PI * 2); g.clip(); g.fillStyle = '#9fb6d6'; g.fillRect(-160, -120, 320, 320); bean(0, 300, { s: 0.85, look: [0, 0], armL: [-110, -230, -150, -130], armR: [110, -230, 150, -130] }); g.restore();
+        g.beginPath(); g.arc(0, 40, 150, 0, Math.PI * 2); g.lineWidth = 10; g.strokeStyle = '#1c1420'; g.stroke();
+        for (const sx of [-1, 1]) shape('#ffffff', () => { g.moveTo(sx * 150, 0); g.quadraticCurveTo(sx * 260, -60, sx * 230, 60); g.quadraticCurveTo(sx * 210, 90, sx * 150, 80); g.closePath(); }, 5);   // little wings
+        g.textAlign = 'center'; g.font = '900 64px "Inter Display", Inter'; g.fillStyle = '#1c1420'; g.fillText('SAUDADES', 0, -170);
+        g.font = '900 74px "Inter Display", Inter'; g.fillStyle = '#c62828'; g.fillText('PEDRINHO', 0, 280);
+        g.font = '900 34px "Inter Display", Inter'; g.fillStyle = '#1c1420'; g.fillText('ELE ABRIU A CAIXA', 0, 340);
+      }
+      g.restore();
+      if (dim > 0) { main.save(); main.fillStyle = `rgba(0,0,0,${dim})`; main.fillRect(0, 0, SW, SH); main.restore(); }
+      if (t > CTA) {   // the question: who's next?
+        const k = t - CTA; textOut('QUEM É O PRÓXIMO?', 540, 520, 92, '#ffd23f', { s: popS(k, 0.3) });
+        for (let i = 0; i < 3; i++) { const kk = clamp((k - 0.4 - i * 0.25) / 0.3); if (kk <= 0) continue; const x = 300 + i * 240, y = 980;
+          main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(x, y); main.scale(popS(kk * 0.3), popS(kk * 0.3)); main.fillStyle = '#0d0b16'; main.strokeStyle = '#7f6fb0'; main.lineWidth = 6;
+          main.beginPath(); main.ellipse(0, -60, 80, 100, 0, 0, 7); main.fill(); main.stroke(); main.beginPath(); main.roundRect(-90, 40, 180, 200, 60); main.fill(); main.stroke(); main.restore();
+          textOut('?', x, y - 60, 110, '#ffffff', { s: popS(kk * 0.3) }); }
+        textOut('COMENTA AÍ! ↓', 540, 1340, 80, '#ffffff', { a: ss(CTA + 1.2, CTA + 1.5, t) });
+      }
+    }
   }
   errCards(t);
 }

@@ -161,11 +161,21 @@ thud(wT('quarta', 'erro4') - 0.6, 0.35); click(wT('quarta', 'erro4') - 0.3, 0.15
 tick(wT('quinze', 'wait') - 0.2, TE('wait'), 0.03)
 creak(wT('sai', 'erro5'), 1.0, 0.05)
 rustle(wT('dormir', 'bed'), 0.9, 0.05)
-for j, f in enumerate([659, 587, 523, 494, 523]): put(mus, tone(f * 2, 0.6, 0.03, 5), wT('encerra', 'bed') + j * 0.4)
-FIN = T0('final')
-for j, f in enumerate([988, 932, 880, 831]): put(mus, tone(f, 1.2, 0.035, 2.5), FIN + 0.6 + j * 0.45)
-kk = np.arange(int(3.0 * SR)) / SR; put(fx, (np.sin(2 * np.pi * 49 * kk) * np.sin(np.pi * kk / 3.0) ** 2 * 0.14).astype(np.float32), FIN + 0.8)
-giggle(FIN + 2.3, 0.07)
+for j, f in enumerate([659, 587, 523, 494, 523]): put(mus, tone(f * 2, 0.6, 0.03, 5), wT('dormir', 'bed') + 0.4 + j * 0.4)
+SC = T0('scare')
+for j, f in enumerate([988, 932, 880]): put(mus, tone(f, 1.0, 0.03, 2.5), SC + 0.1 + j * 0.35)
+giggle(SC + 0.9, 0.07)
+def scream(at, d=1.3, amp=0.22):   # a cartoon "AAAAH!": a buzzy voice with a rising pitch and two vowel formants
+    kk = np.arange(int(d * SR)) / SR; f0 = 380 + 160 * np.minimum(kk / 0.25, 1) + 18 * np.sin(2 * np.pi * 7 * kk)
+    src = ((np.cumsum(f0) / SR) % 1.0) * 2 - 1
+    x = band(src, 700, 900) * 1.6 + band(src, 1100, 1400) + band(src, 2400, 2900) * 0.5
+    put(fx, (x * np.minimum(1, kk / 0.05) * np.minimum(1, (d - kk) / 0.3) * amp).astype(np.float32), at)
+SCREAM = SC + 1.6
+sting(SCREAM - 0.05, 0.2); scream(SCREAM)
+# "vira estampa de camisa": a sad little trombone, then a light tune for the question
+CA = wT('estampa', 'camisa')
+for j, f in enumerate([392, 370, 349, 330]): put(fx, (tone(f, 0.55 if j < 3 else 1.1, 0.06, 1.5)).astype(np.float32), CA + j * 0.45)
+for j, f in enumerate([523, 659, 784, 659, 523, 659]): put(mus, tone(f, 0.5, 0.03, 4), T0('cta') + 0.3 + j * 0.3)
 # ---- mix (narration ducks the bed) ----
 duck = np.ones(N, np.float32); env = np.convolve(np.abs(voc), np.ones(4410) / 4410, 'same'); duck -= np.clip(env * 6, 0, 0.5)
 mix = voc * 1.0 + fx + mus * duck

@@ -117,13 +117,27 @@
   {
     "scene": "bed",
     "voice": "narr",
-    "text": "Ele não acha o boneco em lugar algum, e então simplesmente decide dormir. Assim, Pedrinho encerra sua noite com sucesso, derrotando o brinquedo.",
-    "tail": 0.35
+    "text": "Ele não acha o boneco em lugar algum, e então simplesmente decide dormir.",
+    "tail": 1.6
   },
   {
-    "scene": "final",
+    "scene": "scare",
     "voice": "none",
     "text": "",
-    "min": 5.0
+    "min": 3.4
+  },
+  {
+    "scene": "camisa",
+    "voice": "narr",
+    "text": "Assim, Pedrinho ferra com tudo de vez e vira estampa de camisa.",
+    "lead": 0.4,
+    "tail": 0.9
+  },
+  {
+    "scene": "cta",
+    "voice": "narr",
+    "text": "E aí, quem vocês querem que o Pedrinho sobreviva agora?",
+    "lead": 0.2,
+    "tail": 2.2
   }
 ]
