@@ -26,14 +26,46 @@ def tts_piper(text, out):
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', raw, '-af', 'asetrate=22050*0.92,aresample=22050,atempo=1.04,highpass=f=60,acompressor=threshold=0.1:ratio=3,volume=1.4',
                     '-ar', '44100', '-ac', '1', out], check=True)
 
+# ElevenLabs narrator (TTS=eleven): "Will" — a calm, relaxed young man (the user asked for a calm ~20-year-old voice, not too high, not too deep).
+# Uses the /with-timestamps endpoint, so every word gets its exact time (no extra alignment credits). The key is injected by the network proxy.
+NARR = {'voice_id': 'bIHbv24MWmeRgasZH58o', 'name': 'Will', 'model_id': 'eleven_multilingual_v2', 'stability': 0.72, 'similarity_boost': 0.85, 'style': 0.0, 'seed': 4242}
+ELEVEN_HOSTS = os.environ.get('ELEVEN_HOSTS', 'api.elevenlabs.io,api.us.elevenlabs.io').split(',')
+def tts_eleven(text, out, prev='', nxt=''):
+    import hashlib, urllib.request, urllib.error, base64
+    os.makedirs('audio/cache', exist_ok=True)
+    key = hashlib.sha1(json.dumps([text, NARR, prev, nxt], sort_keys=True).encode()).hexdigest()[:16]
+    cj = f'audio/cache/{key}.json'
+    if not os.path.exists(cj):
+        body = json.dumps({'text': text, 'model_id': NARR['model_id'], 'seed': NARR['seed'], 'previous_text': prev, 'next_text': nxt,
+                           'voice_settings': {'stability': NARR['stability'], 'similarity_boost': NARR['similarity_boost'], 'style': NARR['style'], 'use_speaker_boost': True}}).encode()
+        err = None
+        for host in ELEVEN_HOSTS:
+            rq = urllib.request.Request(f"https://{host}/v1/text-to-speech/{NARR['voice_id']}/with-timestamps?output_format=mp3_44100_128", data=body, headers={'xi-api-key': 'proxy-injected', 'Content-Type': 'application/json'})
+            try: d = json.load(urllib.request.urlopen(rq, timeout=120)); json.dump(d, open(cj, 'w')); err = None; break
+            except urllib.error.HTTPError as e: err = f'{host}: {e.code} {e.read()[:200]}'
+        if err: raise SystemExit('ElevenLabs: ' + err)
+    d = json.load(open(cj)); mp3 = out + '.mp3'; open(mp3, 'wb').write(base64.b64decode(d['audio_base64']))
+    sp = float(os.environ.get('SPEED', '1'))   # speed the narration up without changing the pitch (keeps the episode under 3 min)
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', mp3, '-af', f'atempo={sp}', '-ar', '44100', '-ac', '1', out], check=True)
+    al = d.get('alignment') or d.get('normalized_alignment')
+    return [(c, a / sp, b / sp) for c, a, b in zip(al['characters'], al['character_start_times_seconds'], al['character_end_times_seconds'])]
+ELEVEN = os.environ.get('TTS') == 'eleven'
+ALIGN = {}
+
 # ---- voices + timeline ----
 segs, t = [], 0.0
 voice = {}
 for i, s in enumerate(S):
     lead, tail = s.get('lead', 0.25), s.get('tail', 0.35)
     if s['voice'] != 'none':
-        f = f'audio/v{i:02d}.wav'; tts_piper(s['text'], f)
-        x = readwav(f); nz = np.where(np.abs(x) > 0.01)[0]; x = x[max(0, nz[0] - 200): nz[-1] + 2000]; voice[i] = x
+        f = f'audio/v{i:02d}.wav'; say = s.get('say', s['text'])
+        if ELEVEN:
+            vo = [k for k in range(len(S)) if S[k]['voice'] != 'none']; j = vo.index(i)
+            prev = S[vo[j - 1]].get('say', S[vo[j - 1]]['text']) if j > 0 else ''; nxt = S[vo[j + 1]].get('say', S[vo[j + 1]]['text']) if j + 1 < len(vo) else ''
+            ALIGN[i] = tts_eleven(say, f, prev, nxt)
+        else: tts_piper(say, f)
+        x = readwav(f); nz = np.where(np.abs(x) > 0.01)[0]; cut = max(0, nz[0] - 200); x = x[cut: nz[-1] + 2000]; voice[i] = x
+        if i in ALIGN: ALIGN[i] = [(c, a - cut / SR, b - cut / SR) for c, a, b in ALIGN[i]]
         vd = len(x) / SR
     else: vd = 0
     dur = max(s.get('min', 0), lead + vd + tail)
@@ -51,6 +83,17 @@ for i, x in voice.items(): put(voc, x, segs[i]['vstart'])
 # ---- word timings (no API): spread the words over the speech, longer words get more time, commas add a pause ----
 words = []
 for i, x in voice.items():
+    if i in ALIGN:   # exact times from ElevenLabs: group the characters into words, then label them with the caption text
+        g = segs[i]; ws, cur = [], None
+        for c, a, b in ALIGN[i]:
+            if c.isspace(): cur = None; continue
+            if cur is None: cur = [a, b]; ws.append(cur)
+            else: cur[1] = b
+        toks = S[i]['text'].split()
+        if len(ws) == len(toks):
+            for w, (a, b) in zip(toks, ws): words.append({'seg': g['scene'], 'who': 'narr', 'text': w, 't0': round(g['vstart'] + a, 3), 't1': round(g['vstart'] + b, 3)})
+            continue
+        print('aviso: palavras não batem em', g['scene'], len(ws), len(toks))
     g = segs[i]; env = np.convolve(np.abs(x), np.ones(441) / 441, 'same'); on = np.where(env > env.max() * 0.08)[0]
     a, b = on[0] / SR, on[-1] / SR
     toks = S[i]['text'].split(); wts = [len(re.sub(r'\W', '', w)) + 2 + (3 if re.search(r'[,.?!…]$', w) else 0) for w in toks]

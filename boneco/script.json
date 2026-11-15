@@ -75,8 +75,9 @@
   {
     "scene": "ladrao",
     "voice": "narr",
-    "text": "E então, o que o Pedrinho pensa? Algum ladrão que invadiu aqui e roubou o boneco. Tipo, mano? Que ladrão entra numa casa e rouba um boneco cheio de cicatriz na cara, parecendo o Vaas do Far Cry?",
-    "tail": 0.35
+    "text": "E então, o que o Pedrinho pensa? Algum ladrão que invadiu aqui e roubou o boneco. Tipo, mano? Que ladrão entra numa casa e rouba um boneco cheio de cicatriz na cara, parecendo o Vaas do Far Cry 3?",
+    "tail": 0.35,
+    "say": "E então, o que o Pedrinho pensa? Algum ladrão que invadiu aqui e roubou o boneco. Tipo, mano? Que ladrão entra numa casa e rouba um boneco cheio de cicatriz na cara, parecendo o Vás do Far Crái três?"
   },
   {
     "scene": "erro3",
