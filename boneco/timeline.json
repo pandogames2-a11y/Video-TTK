@@ -1,196 +1,204 @@
 {
- "total": 161.4,
+ "total": 167.021,
  "fps": 30,
  "segs": [
   {
    "scene": "title",
    "voice": "narr",
    "start": 0.0,
-   "dur": 3.589,
+   "dur": 3.543,
    "vstart": 0.9,
-   "vdur": 1.889
+   "vdur": 1.843
   },
   {
    "scene": "calm",
    "voice": "narr",
-   "start": 3.589,
-   "dur": 3.808,
-   "vstart": 4.089,
-   "vdur": 2.708
+   "start": 3.543,
+   "dur": 3.837,
+   "vstart": 4.043,
+   "vdur": 2.737
   },
   {
    "scene": "bell",
    "voice": "narr",
-   "start": 7.398,
+   "start": 7.38,
    "dur": 4.2,
-   "vstart": 7.698,
-   "vdur": 2.379
+   "vstart": 7.68,
+   "vdur": 2.389
   },
   {
    "scene": "open",
    "voice": "narr",
-   "start": 11.598,
-   "dur": 3.21,
-   "vstart": 11.798,
-   "vdur": 2.76
+   "start": 11.58,
+   "dur": 3.285,
+   "vstart": 11.78,
+   "vdur": 2.835
   },
   {
    "scene": "porch",
    "voice": "narr",
-   "start": 14.807,
-   "dur": 10.427,
-   "vstart": 15.807,
-   "vdur": 7.227
+   "start": 14.865,
+   "dur": 10.27,
+   "vstart": 15.865,
+   "vdur": 7.07
   },
   {
    "scene": "inside",
    "voice": "narr",
-   "start": 25.235,
-   "dur": 6.611,
-   "vstart": 25.485,
-   "vdur": 6.011
+   "start": 25.135,
+   "dur": 6.684,
+   "vstart": 25.385,
+   "vdur": 6.084
   },
   {
    "scene": "erro1",
    "voice": "narr",
-   "start": 31.846,
-   "dur": 10.997,
-   "vstart": 32.096,
-   "vdur": 10.397
+   "start": 31.819,
+   "dur": 11.072,
+   "vstart": 32.069,
+   "vdur": 10.472
   },
   {
    "scene": "sleep",
    "voice": "narr",
-   "start": 42.843,
-   "dur": 5.403,
-   "vstart": 43.093,
-   "vdur": 4.803
+   "start": 42.891,
+   "dur": 5.377,
+   "vstart": 43.141,
+   "vdur": 4.777
   },
   {
    "scene": "noise",
    "voice": "narr",
-   "start": 48.246,
-   "dur": 6.073,
-   "vstart": 49.646,
-   "vdur": 4.323
+   "start": 48.268,
+   "dur": 6.053,
+   "vstart": 49.668,
+   "vdur": 4.303
   },
   {
    "scene": "erro2",
    "voice": "narr",
-   "start": 54.32,
-   "dur": 7.65,
-   "vstart": 54.57,
-   "vdur": 7.05
+   "start": 54.321,
+   "dur": 7.56,
+   "vstart": 54.571,
+   "vdur": 6.96
   },
   {
    "scene": "check",
    "voice": "narr",
-   "start": 61.969,
-   "dur": 7.736,
-   "vstart": 62.219,
-   "vdur": 7.136
+   "start": 61.881,
+   "dur": 7.979,
+   "vstart": 62.131,
+   "vdur": 7.379
   },
   {
    "scene": "desce",
    "voice": "narr",
-   "start": 69.706,
-   "dur": 8.82,
-   "vstart": 69.956,
-   "vdur": 8.22
+   "start": 69.861,
+   "dur": 9.022,
+   "vstart": 70.111,
+   "vdur": 8.422
   },
   {
    "scene": "ladrao",
    "voice": "narr",
-   "start": 78.526,
-   "dur": 11.643,
-   "vstart": 78.776,
-   "vdur": 11.043
+   "start": 78.883,
+   "dur": 11.619,
+   "vstart": 79.133,
+   "vdur": 11.019
   },
   {
    "scene": "erro3",
    "voice": "narr",
-   "start": 90.169,
-   "dur": 15.539,
-   "vstart": 90.419,
-   "vdur": 14.939
+   "start": 90.502,
+   "dur": 15.447,
+   "vstart": 90.752,
+   "vdur": 14.847
   },
   {
    "scene": "reveal",
    "voice": "narr",
-   "start": 105.707,
-   "dur": 6.576,
-   "vstart": 105.957,
-   "vdur": 5.126
+   "start": 105.949,
+   "dur": 6.608,
+   "vstart": 106.199,
+   "vdur": 5.158
   },
   {
    "scene": "chase",
    "voice": "narr",
-   "start": 112.284,
-   "dur": 8.073,
-   "vstart": 112.534,
-   "vdur": 7.023
+   "start": 112.557,
+   "dur": 8.104,
+   "vstart": 112.807,
+   "vdur": 7.054
   },
   {
    "scene": "erro4",
    "voice": "narr",
-   "start": 120.357,
-   "dur": 4.506,
-   "vstart": 120.607,
-   "vdur": 3.906
+   "start": 120.661,
+   "dur": 4.438,
+   "vstart": 120.911,
+   "vdur": 3.838
   },
   {
    "scene": "wait",
    "voice": "narr",
-   "start": 124.863,
-   "dur": 9.95,
-   "vstart": 125.113,
-   "vdur": 8.8
+   "start": 125.098,
+   "dur": 9.911,
+   "vstart": 125.348,
+   "vdur": 8.761
   },
   {
    "scene": "erro5",
    "voice": "narr",
-   "start": 134.813,
-   "dur": 8.026,
-   "vstart": 135.063,
-   "vdur": 7.426
+   "start": 135.01,
+   "dur": 7.985,
+   "vstart": 135.26,
+   "vdur": 7.385
   },
   {
    "scene": "bed",
    "voice": "narr",
-   "start": 142.839,
-   "dur": 5.562,
-   "vstart": 143.089,
-   "vdur": 3.712
+   "start": 142.995,
+   "dur": 5.485,
+   "vstart": 143.245,
+   "vdur": 3.635
   },
   {
    "scene": "scare",
    "voice": "none",
-   "start": 148.401,
+   "start": 148.48,
    "dur": 3.4,
-   "vstart": 148.651,
+   "vstart": 148.73,
    "vdur": 0
   },
   {
    "scene": "camisa",
    "voice": "narr",
-   "start": 151.801,
-   "dur": 4.612,
-   "vstart": 152.201,
-   "vdur": 3.312
+   "start": 151.88,
+   "dur": 4.629,
+   "vstart": 152.28,
+   "vdur": 3.329
   },
   {
    "scene": "cta",
    "voice": "narr",
-   "start": 156.413,
-   "dur": 4.986,
-   "vstart": 156.613,
-   "vdur": 2.586
+   "start": 156.508,
+   "dur": 3.488,
+   "vstart": 156.708,
+   "vdur": 2.688
+  },
+  {
+   "scene": "feijoes",
+   "voice": "narr",
+   "start": 159.997,
+   "dur": 7.024,
+   "vstart": 160.197,
+   "vdur": 4.624
   }
  ],
- "ring": 10.018,
- "up": 12.685,
- "open": 13.653,
- "lookbox": 17.314,
- "pick": 19.523,
- "vir": 22.649
+ "ring": 10.017,
+ "up": 12.694,
+ "open": 13.694,
+ "lookbox": 17.334,
+ "pick": 19.489,
+ "vir": 22.538
 }

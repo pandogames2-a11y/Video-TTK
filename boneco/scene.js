@@ -62,6 +62,7 @@ function exterior(t, door = 0) {
   rect(440, GY - 10, 200, 26, '#c9c2b4', 2, 4); rect(460, GY + 16, 160, 26, '#c9c2b4', 2, 4);
   // bushes, mailbox, picket fence, big tree
   for (const x of [200, 330, 750, 880]) ell(x, GY - 20, 70, 45, '#244a2e', 0, 5);
+  feijao(700, GY + 95, 0.85, 0.3);   // hidden bean #1 (front lawn)
   line([1010, GY + 250, 1010, GY + 120], 7); rect(970, GY + 70, 90, 55, '#2c3570', 20); rect(1056, GY + 70, 8, 30, '#c0392b', 2, 3);
   for (let x = -560; x < 1800; x += 60) { if (x > 420 && x < 660) continue; shape('#e9e2d4', () => { g.moveTo(x, GY + 250); g.lineTo(x, GY + 160); g.lineTo(x + 18, GY + 140); g.lineTo(x + 36, GY + 160); g.lineTo(x + 36, GY + 250); g.closePath(); }, 4); }
   line([-560, GY + 190, 420, GY + 190], 5); line([660, GY + 190, 1800, GY + 190], 5);
@@ -212,7 +213,7 @@ function drawInterior(t, ctx) {
   let o = scared
     ? { sit: true, s: 1.05, jy: jump * 35, look: rk > 0.25 ? [-1, -0.1] : [0, -0.3], mouth: 'o', armL: [-140, -170, -120, -130], armR: [140, -170, 120, -210] }
     : { sit: true, s: 1.05, look: [0, 0.35], blink, chew: hand > 0.7 ? 0 : 0.4 + 0.4 * Math.abs(Math.sin(t * 14)),
-        armL: [-140, -170, -120, -130], armR: [140, -170, lerp(120, 40, hand), lerp(-210, -290, hand)] };
+        armL: [-140, -170, -120, -130], armR: [140, -170, lerp(120, 30, hand), lerp(-210, -205, hand)] };
   const tilt = scared ? 0 : Math.sin(t * 1.4) * 0.015;
   o.tilt = tilt;
   if (standing) o = { s: 1.05, flip: false, look: [-1, 0], walk: walking ? 0.9 : 0, phase: (t - WALK0) * 11, jy: walking ? Math.abs(Math.sin((t - WALK0) * 11)) * 8 : 0,

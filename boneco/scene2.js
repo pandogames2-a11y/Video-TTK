@@ -23,13 +23,15 @@ function bedroom(t, o = {}) {
   rect(1060, 1140, 170, 22, '#6a4630', 4, 5); rect(1070, 1162, 150, FB - 1162, '#5a3a26', 4, 5); rect(1095, 1210, 100, 50, '#4a3020', 4, 4);
   rect(1090, 1080, 110, 60, '#1c1c22', 10, 4); g.font = '900 38px "JetBrains Mono", monospace'; g.textAlign = 'center'; g.fillStyle = '#ff3b30'; g.fillText(o.clock || '03:00', 1145, 1124);
 }
+function lyingArm(x, y, s) { g.save(); g.translate(x, y); g.scale(s, s); line([60, 20, 200, 30, 300, 10], 11); ell(300, 10, 20, 20, '#ffffff', 0, 5); g.restore(); }
 function blanket() { shape('#3a6fb0', () => { g.moveTo(610, 1050); g.quadraticCurveTo(820, 1025, 1010, 1070); g.lineTo(1010, 1170); g.lineTo(590, 1170); g.closePath(); }); for (let x = 650; x < 1000; x += 70) line([x, 1055, x - 10, 1165], 6, '#2f5d96'); }
 function beanLying(x, y, s, o = {}) {   // asleep in bed: body sideways, face upright on the pillow side
   g.save(); g.translate(x, y); g.scale(s, s);
-  ell(0, 0, 165, 105, '#c8874d'); curve(-150, -10, 0, 30, 150, -5, 6, '#8a4f22');
+  line([100, 10, 640, 20], 12); line([100, 40, 640, 50], 12);   // legs under the blanket, feet out at the end
+  ell(660, 0, 24, 44, '#e9e9ef', 0.1); ell(660, 40, 24, 44, '#e9e9ef', 0.1);
+  ell(0, 0, 165, 105, '#c8874d');
   const ex = -95, ey = -25;
   if (o.awake) { ell(ex - 35, ey, 30, 36, '#ffffff', 0, 5); ell(ex + 35, ey, 30, 36, '#ffffff', 0, 5); ell(ex - 35, ey + 4, 8, 9, OUT, 0, 0); ell(ex + 35, ey + 4, 8, 9, OUT, 0, 0); }
-  else if (o.oneEye) { curve(ex - 60, ey, ex - 35, ey + 14, ex - 10, ey, 6); ell(ex + 35, ey, 30, 36, '#ffffff', 0, 5); ell(ex + 35, ey + 4, 8, 9, OUT, 0, 0); }
   else { curve(ex - 60, ey, ex - 35, ey + 14, ex - 10, ey, 6); curve(ex + 10, ey, ex + 35, ey + 14, ex + 60, ey, 6); }
   if (o.smile) curve(ex - 25, ey + 50, ex, ey + 66, ex + 25, ey + 50, 6); else ell(ex, ey + 56, 10, 7, '#4a1820', 0, 4);
   g.restore();
@@ -131,7 +133,7 @@ function livingShot(t, cam, o, chars) {
 const TABLE = { x: 740, y: FY - 190 };
 function drawLate(t) {
   const seg = TL.segs.find(s => t >= s.start && t < s.start + s.dur) || TL.segs[TL.segs.length - 1], n = seg.scene, lt = t - seg.start;
-  const sofaO = (k = 0) => ({ sit: true, s: 1.05, look: [-0.6, 0.2], chew: 0.3 + 0.3 * Math.abs(Math.sin(t * 12)), armL: [-140, -170, -120, -130], armR: [140, -170, lerp(120, 40, k), lerp(-210, -290, k)] });
+  const sofaO = (k = 0) => ({ sit: true, s: 1.05, look: [-0.6, 0.2], chew: 0.3 + 0.3 * Math.abs(Math.sin(t * 12)), armL: [-140, -170, -120, -130], armR: [140, -170, lerp(120, 30, k), lerp(-210, -205, k)] });
   if (n === 'inside') {
     const tAbre = W0('abre', 'inside'), tDeixa = W0('deixa', 'inside'), tVolta = W0('volta', 'inside');
     const walkIn = clamp((t - seg.start) / (tAbre - seg.start - 0.1)), px1 = lerp(330, 600, ease(walkIn));
@@ -139,7 +141,7 @@ function drawLate(t) {
     const dollOut = ss(tDeixa - 0.2, tDeixa + 0.4, t);
     const cam = camL({ x: 560, y: 1040, z: 1.35 }, { x: 870, y: 1030, z: 1.05 }, ease(clamp((t - tVolta) / 1.2)));
     livingShot(t, cam, { tv: ss(tVolta + 0.6, tVolta + 1.2, t) }, () => {
-      toyBox(TABLE.x - 70, TABLE.y, 0.5, { empty: dollOut > 0.5 });
+      if (walkIn >= 1) toyBox(TABLE.x - 70, TABLE.y, 0.5, { empty: dollOut > 0.5 });
       if (dollOut > 0) { const k = dollOut, dx = lerp(TABLE.x - 70, TABLE.x + 40, k), dy = TABLE.y - Math.sin(k * Math.PI) * 120 * (k < 1 ? 1 : 0); doll(dx, dy, { s: 0.42 }); }
       if (toSofa >= 1) { bean(1010, FY + 20, sofaO(Math.max(0, Math.sin((t - tVolta) * 3)))); popcorn(895, FY - 92); }
       else { const walking = (walkIn > 0 && walkIn < 1) || (toSofa > 0 && toSofa < 1); popcorn(880, FY - 150);
@@ -148,18 +150,19 @@ function drawLate(t) {
     });
   } else if (n === 'erro1') {
     const tOlha = W0('olha', 'erro1'), tMic = W0('microfone', 'erro1'), tMas = W0('mas', 'erro1');
-    const wide = { x: 870, y: 1030, z: 1.05 }, close = { x: TABLE.x - 20, y: TABLE.y - 80, z: 2.1 };
+    const wide = { x: 870, y: 1030, z: 1.05 }, close = { x: 820, y: 1040, z: 1.4 };
     const cam = t < tOlha ? wide : t < tMas ? camL(wide, close, ease(clamp((t - tOlha) / 0.8))) : camL(close, wide, ease(clamp((t - tMas) / 0.8)));
     const turn = ss(tMas + 0.6, tMas + 1.4, t);
     livingShot(t, cam, { tv: 1 }, () => { toyBox(TABLE.x - 70, TABLE.y, 0.5, { empty: true }); doll(TABLE.x + 40, TABLE.y, { s: 0.42, look: [turn, 0.2] }); bean(1010, FY + 20, sofaO(Math.max(0, Math.sin((t - seg.start) * 3)))); popcorn(895, FY - 92); });
-    if (t > tMic - 0.2 && t < tMas + 0.2) {   // X-ray lens: a microphone and gears inside the toy
-      const a = ss(tMic - 0.2, tMic + 0.1, t) * (1 - ss(tMas - 0.1, tMas + 0.2, t)); const [x, y] = screenOf(cam, TABLE.x + 40, TABLE.y - 75);
-      main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.beginPath(); main.arc(x, y, 190, 0, 7); main.fillStyle = 'rgba(10,40,80,0.92)'; main.fill(); main.lineWidth = 10; main.strokeStyle = '#7fd3ff'; main.stroke();
-      main.strokeStyle = '#bfe6ff'; main.lineWidth = 5; main.beginPath(); main.ellipse(x, y + 10, 95, 120, 0, 0, 7); main.stroke();
-      main.beginPath(); main.roundRect(x - 26, y - 70, 52, 80, 26); main.stroke(); main.beginPath(); main.moveTo(x, y + 10); main.lineTo(x, y + 50); main.moveTo(x - 30, y + 50); main.lineTo(x + 30, y + 50); main.stroke();   // microphone
-      for (const [gx, gy, r] of [[x - 55, y + 70, 22], [x + 55, y + 60, 28]]) { main.beginPath(); main.arc(gx, gy, r, 0, 7); main.stroke(); for (let i = 0; i < 8; i++) { const an = i / 8 * Math.PI * 2 + t * 2; main.beginPath(); main.moveTo(gx + Math.cos(an) * r, gy + Math.sin(an) * r); main.lineTo(gx + Math.cos(an) * (r + 10), gy + Math.sin(an) * (r + 10)); main.stroke(); } }
-      main.fillStyle = Math.floor(t * 4) % 2 ? '#ff3b30' : '#5a1010'; main.beginPath(); main.arc(x + 40, y - 60, 10, 0, 7); main.fill();
-      main.restore(); textOut('MICROFONE?!', x, y - 240, 58, '#7fd3ff', { a });
+    if (t > tMic - 0.2 && t < tMas + 0.6) {   // a microphone icon at the top of the screen (nothing covers the toy), and a red light blinking on it
+      const a = ss(tMic - 0.2, tMic + 0.1, t) * (1 - ss(tMas + 0.3, tMas + 0.6, t)), sc = popS(t - tMic + 0.2, 0.3);
+      main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.translate(540, 400); main.scale(sc, sc);
+      main.fillStyle = 'rgba(10,30,60,0.92)'; main.strokeStyle = '#7fd3ff'; main.lineWidth = 8; main.beginPath(); main.roundRect(-300, -110, 600, 220, 40); main.fill(); main.stroke();
+      main.fillStyle = '#7fd3ff'; main.beginPath(); main.roundRect(-230, -75, 70, 110, 35); main.fill();
+      main.lineWidth = 10; main.beginPath(); main.arc(-195, -10, 58, 0.15, Math.PI - 0.15); main.stroke(); main.beginPath(); main.moveTo(-195, 48); main.lineTo(-195, 80); main.moveTo(-230, 82); main.lineTo(-160, 82); main.stroke();
+      main.textAlign = 'left'; main.textBaseline = 'middle'; main.font = '900 66px "Inter Display", Inter'; main.lineWidth = 12; main.strokeStyle = '#08061a'; main.lineJoin = 'round'; main.strokeText('MICROFONE?', -120, 0); main.fillStyle = '#ffffff'; main.fillText('MICROFONE?', -120, 0);
+      main.restore();
+      if (Math.floor(t * 4) % 2) { const [x, y] = screenOf(cam, TABLE.x + 40, TABLE.y - 70); main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.fillStyle = '#ff3b30'; main.beginPath(); main.arc(x, y, 9, 0, 7); main.fill(); main.globalCompositeOperation = 'screen'; const gr = main.createRadialGradient(x, y, 0, x, y, 50); gr.addColorStop(0, 'rgba(255,60,40,0.8)'); gr.addColorStop(1, 'rgba(255,60,40,0)'); main.fillStyle = gr; main.fillRect(x - 50, y - 50, 100, 100); main.restore(); }
     }
   } else if (n === 'sleep') {
     const tDes = W0('desliga', 'sleep'), tCama = W0('cama', 'sleep');
@@ -184,7 +187,7 @@ function drawLate(t) {
     rimLayer(main, cam0, () => {
       if (up) { const k = clamp((t - tMasN - 0.3) / 0.8); bean(lerp(700, 1150, ease(k)), FB + 40, { s: 0.85, look: [1, 0], walk: k < 1 ? 0.8 : 0, phase: t * 10, phone: t > tCel - 0.4, armR: [110, -240, 150, -330], armL: [-110, -230, -150, -130] }); }
       else if (sitUp) { bean(560, 1180, { sit: true, s: 0.8, look: t > tCont ? [0, 0] : [1, -0.2], mouth: 'o', sweat: true, armL: [-120, -200, -150, -150], armR: [120, -200, 150, -150] }); blanket(); }
-      else { beanLying(530, 1045, 0.6, { oneEye: t > tBar + 0.3, smile: t < tBar }); blanket(); }
+      else { beanLying(530, 1045, 0.6, { awake: t > tBar + 0.3, smile: t < tBar }); blanket(); lyingArm(530, 1045, 0.6); }
     });
     if (dark) { const k = clamp((t - tMasN - 0.3) / 0.8), x = lerp(700, 1150, ease(k)); darkness(cam0, [{ x: x + 125, y: FB - 240, r: 120, a: 0.8 }, { cone: true, x: x + 125, y: FB - 240, ang: 0.1, len: 700 }]); }
     vignette(main, 0.6);
@@ -218,11 +221,12 @@ function drawLate(t) {
       main.beginPath(); main.ellipse(x, y - 140, 300, 190, 0, 0, 7); main.fill(); main.stroke(); for (const [dx, dy, r] of [[40, 70, 26], [70, 130, 16]]) { main.beginPath(); main.arc(x + dx, y + dy, r, 0, 7); main.fill(); main.stroke(); }
       main.restore();
       const thief = { x: (x - SW / 2) / cam.z + cam.x, y: (y - 40 - SH / 2) / cam.z + cam.y }; const prev = main; const lay = mk(), c = lay.getContext('2d'); g = c; camera(cam);
-      g.save(); g.translate(thief.x - 40 + Math.sin(t * 8) * 6, thief.y); g.scale(0.45, 0.45);
-      bean(0, 0, { s: 1, look: [1, 0], walk: 0.8, phase: t * 9, armL: [-110, -230, -60, -330], armR: [110, -230, 170, -260] });
-      g.fillStyle = '#111'; g.fillRect(-110, -330, 220, 50); ell(-40, -305, 22, 16, '#fff', 0, 3); ell(40, -305, 22, 16, '#fff', 0, 3);   // burglar mask
-      for (let i = 0; i < 4; i++) line([-110, -220 + i * 40, 110, -220 + i * 40], 10, '#111');   // striped shirt
-      ell(240, -250, 90, 110, '#b08a5a'); shape('#e05a26', () => { g.moveTo(205, -350); g.lineTo(225, -400); g.lineTo(245, -355); g.lineTo(270, -395); g.lineTo(280, -345); g.closePath(); }, 5);   // the doll's hair poking out of the sack
+      g.save(); g.translate(thief.x - 20 + Math.sin(t * 8) * 6, thief.y); g.scale(0.42, 0.42);
+      doll(215, -330, { s: 0.42 });   // the doll, held up in his hand
+      bean(0, 0, { s: 1, look: [1, 0], walk: 0.8, phase: t * 9, armL: [-110, -230, -150, -130], armR: [110, -250, 200, -330] });
+      shape('#1c1c22', () => { g.moveTo(-105, -385); g.quadraticCurveTo(0, -470, 105, -385); g.closePath(); }, 5);   // beanie
+      shape('#1c1c22', () => g.roundRect(-92, -330, 184, 50, 25), 0);   // eye mask band
+      ell(-40, -305, 22, 18, '#ffffff', 0, 0); ell(40, -305, 22, 18, '#ffffff', 0, 0); ell(-34, -305, 8, 9, OUT, 0, 0); ell(46, -305, 8, 9, OUT, 0, 0);
       g.restore(); g = main; main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.drawImage(lay, 0, 0); main.restore();
       textOut('LADRÃO!', x, y - 290, 54, '#c62828', { a });
     }
@@ -312,7 +316,7 @@ function drawLate(t) {
       rimLayer(main, cam, () => {
         if (t > SC) { g.save(); g.beginPath(); g.rect(200, 0, 900, 1095); g.clip(); doll(425, lerp(1300, 1092, rise), { s: 0.5, evil: true, knife: true, look: [1, 0.3] }); g.restore(); }
         if (up) { bean(610, 1180, { sit: true, s: 0.8, look: [-1, -0.2], mouth: 'o', sweat: true, jy: Math.max(0, Math.sin(clamp((t - SCR) / 0.35) * Math.PI)) * 40, armL: [-120, -260, -100, -380], armR: [120, -260, 100, -380] }); blanket(); }
-        else { beanLying(530, 1045, 0.6, { smile: !awake, awake }); blanket(); }
+        else { beanLying(530, 1045, 0.6, { smile: !awake, awake }); blanket(); lyingArm(530, 1045, 0.6); }
       }, t > SC ? 'rgba(255,140,130,0.95)' : undefined);
       if (t > SC + 0.6) redEyes(cam, 425, lerp(1300, 1092, rise) - 225 * 0.5 + 5, 0.5, rise);
       vignette(main, 0.6 + (t > SC ? 0.15 : 0));
@@ -341,13 +345,19 @@ function drawLate(t) {
       }
       g.restore();
       if (dim > 0) { main.save(); main.fillStyle = `rgba(0,0,0,${dim})`; main.fillRect(0, 0, SW, SH); main.restore(); }
-      if (t > CTA) {   // the question: who's next?
+      if (t > CTA && t < T0('feijoes')) {   // the question: who's next?
         const k = t - CTA; textOut('QUEM É O PRÓXIMO?', 540, 520, 92, '#ffd23f', { s: popS(k, 0.3) });
         for (let i = 0; i < 3; i++) { const kk = clamp((k - 0.4 - i * 0.25) / 0.3); if (kk <= 0) continue; const x = 300 + i * 240, y = 980;
           main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(x, y); main.scale(popS(kk * 0.3), popS(kk * 0.3)); main.fillStyle = '#0d0b16'; main.strokeStyle = '#7f6fb0'; main.lineWidth = 6;
           main.beginPath(); main.ellipse(0, -60, 80, 100, 0, 0, 7); main.fill(); main.stroke(); main.beginPath(); main.roundRect(-90, 40, 180, 200, 60); main.fill(); main.stroke(); main.restore();
           textOut('?', x, y - 60, 110, '#ffffff', { s: popS(kk * 0.3) }); }
-        textOut('COMENTA AÍ! ↓', 540, 1340, 80, '#ffffff', { a: ss(CTA + 1.2, CTA + 1.5, t) });
+      }
+      if (t > T0('feijoes')) {   // the easter-egg question: a big bean with a "?" — no spoilers on where they were
+        const F = T0('feijoes'), k = t - F; main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = `rgba(5,4,12,${0.92 * ss(F, F + 0.4, t)})`; main.fillRect(0, 0, SW, SH); main.restore();
+        const lay = mk(); g = lay.getContext('2d'); g.setTransform(1, 0, 0, 1, 0, 0); g.translate(540, 900); g.scale(popS(k, 0.35) * 5, popS(k, 0.35) * 5); feijao(0, 0, 1, Math.sin(t * 3) * 0.12); g = main;
+        main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.drawImage(lay, 0, 0); main.restore();
+        textOut('VIU OS 3 FEIJÕES?', 540, 560, 90, '#ffd23f', { s: popS(k - 0.2, 0.3), a: ss(F + 0.2, F + 0.4, t) });
+        textOut('COMENTA AÍ! ↓', 540, 1260, 84, '#ffffff', { a: ss(W0('comenta', 'feijoes') - 0.2, W0('comenta', 'feijoes'), t), s: popS(t - W0('comenta', 'feijoes') + 0.2, 0.3) });
       }
     }
   }

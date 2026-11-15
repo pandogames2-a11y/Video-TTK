@@ -17,6 +17,13 @@ function camera(c) { g.setTransform(c.z, 0, 0, c.z, SW / 2 - c.x * c.z, SH / 2 -
 
 // ---------- the house (world units; floor line FY) ----------
 const FY = 1300;
+function feijao(x, y, s = 1, rot = 0) {   // easter egg: a small kidney bean with a tiny face
+  g.save(); g.translate(x, y); g.rotate(rot); g.scale(s, s);
+  shape('#8e3b2a', () => { g.moveTo(-30, -6); g.bezierCurveTo(-34, -30, 26, -34, 30, -8); g.bezierCurveTo(34, 14, 10, 20, 2, 10); g.bezierCurveTo(-6, 20, -28, 16, -30, -6); }, 4);
+  g.fillStyle = 'rgba(255,255,255,0.35)'; g.beginPath(); g.ellipse(-12, -16, 9, 4, -0.3, 0, 7); g.fill();
+  g.fillStyle = OUT; g.beginPath(); g.arc(-9, -4, 3, 0, 7); g.arc(9, -4, 3, 0, 7); g.fill(); curve(-6, 4, 0, 8, 6, 4, 2);
+  g.restore();
+}
 function kitchen() {   // to the right of the stairs, through a doorway
   const K0 = 2560, KF = 3900;
   rect(2500, 300, 60, FY - 300, '#efe6d6', 4, 5);   // doorway jamb
@@ -35,6 +42,7 @@ function kitchen() {   // to the right of the stairs, through a doorway
   rect(3000, FY - 176, 180, 176, '#3a3d44', 4, 5); rect(3020, FY - 140, 140, 90, '#1c1e24', 6, 4); line([3030, FY - 156, 3150, FY - 156], 6, '#9aa0a8');
   ell(3045, FY - 214, 30, 7, '#2a2a30', 0, 4); ell(3135, FY - 214, 30, 7, '#2a2a30', 0, 4);
   rect(3260, FY - 222, 150, 16, '#9aa6ae', 4, 4); line([3335, FY - 222, 3335, FY - 290, 3375, FY - 290], 7, '#9aa6ae');
+  feijao(2860, FY - 222, 0.8, 0.2);   // hidden bean #3 (kitchen counter)
   // knife block with ONE empty slot
   rect(2730, FY - 300, 70, 90, '#6a3f26', 6, 5); for (const [kx, empty] of [[2745, false], [2765, true], [2785, false]]) { if (!empty) line([kx, FY - 300, kx, FY - 340], 7, '#2a2a30'); else rect(kx - 5, FY - 302, 10, 6, '#1a1010', 1, 0); }
   // fridge
@@ -78,6 +86,7 @@ function house(opt = {}) {
   g.fillStyle = '#090c24'; g.beginPath(); g.moveTo(845, 785); g.lineTo(845, 690); g.lineTo(920, 640); g.lineTo(995, 690); g.lineTo(995, 720); g.lineTo(1060, 700); g.lineTo(1175, 712); g.lineTo(1175, 785); g.fill();
   g.fillStyle = '#ffd77a'; g.fillRect(880, 712, 22, 26); g.fillRect(930, 712, 22, 26);
   line([1010, 365, 1010, 785], 6); line([845, 570, 1175, 570], 6);
+  feijao(1160, 798, 0.7, -0.15);   // hidden bean #2 (living-room windowsill)
   rect(800, 325, 420, 22, '#5a3324', 8, 5);
   shape('#7d2e3a', () => { g.moveTo(808, 345); g.lineTo(880, 345); g.quadraticCurveTo(850, 580, 895, 860); g.lineTo(798, 860); g.closePath(); });
   shape('#7d2e3a', () => { g.moveTo(1212, 345); g.lineTo(1140, 345); g.quadraticCurveTo(1170, 580, 1125, 860); g.lineTo(1222, 860); g.closePath(); });
@@ -130,7 +139,6 @@ function bean(x, y, o = {}) {   // the new protagonist: light brown, startled ey
   const aL = o.armL || [-110, by + 20, -150, by + 110], aR = o.armR || [110, by + 20, 150, by + 110];
   ell(0, by, 120, 155, '#c8874d', -0.08);
   g.save(); g.beginPath(); g.ellipse(0, by, 116, 151, -0.08, 0, Math.PI * 2); g.clip(); g.fillStyle = 'rgba(255,255,255,0.13)'; g.beginPath(); g.ellipse(-50, by - 60, 50, 80, -0.3, 0, Math.PI * 2); g.fill(); g.restore();
-  curve(-10, by - 140, 30, by, -5, by + 145, 6, '#8a4f22');
   line([-95, by + 10, aL[0], aL[1], aL[2], aL[3]], 11); ell(aL[2], aL[3], 20, 20, '#ffffff', 0, 5);
   line([95, by + 10, aR[0], aR[1], aR[2], aR[3]], 11); ell(aR[2], aR[3], 20, 20, '#ffffff', 0, 5);
   if (o.phone) { rect(aR[2] - 14, aR[3] - 46, 30, 54, '#1c1c22', 6, 4); rect(aR[2] - 9, aR[3] - 40, 20, 40, '#bfe6ff', 3, 0); }

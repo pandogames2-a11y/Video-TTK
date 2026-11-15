@@ -138,6 +138,13 @@
     "voice": "narr",
     "text": "E aí, quem vocês querem que o Pedrinho sobreviva agora?",
     "lead": 0.2,
+    "tail": 0.6
+  },
+  {
+    "scene": "feijoes",
+    "voice": "narr",
+    "text": "Mas, aliás, você viu os feijões espalhados pela casa? Se sim, comenta aí.",
+    "lead": 0.2,
     "tail": 2.2
   }
 ]
