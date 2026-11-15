@@ -17,15 +17,40 @@ function camera(c) { g.setTransform(c.z, 0, 0, c.z, SW / 2 - c.x * c.z, SH / 2 -
 
 // ---------- the house (world units; floor line FY) ----------
 const FY = 1300;
+function kitchen() {   // to the right of the stairs, through a doorway
+  const K0 = 2560, KF = 3900;
+  rect(2500, 300, 60, FY - 300, '#efe6d6', 4, 5);   // doorway jamb
+  g.fillStyle = '#e8eef0'; g.fillRect(K0, -400, KF - K0, FY + 400);
+  for (let x = K0; x < KF; x += 60) for (let y = 560; y < FY - 210; y += 60) { g.fillStyle = (x / 60 + y / 60) % 2 ? '#d6e2e6' : '#eef3f5'; g.fillRect(x, y, 58, 58); }
+  // checkered floor
+  for (let x = K0, i = 0; x < KF; x += 90, i++) for (let y = FY, j = 0; y < FY + 900; y += 90, j++) { g.fillStyle = (i + j) % 2 ? '#2b2d36' : '#d9d9de'; g.fillRect(x, y, 90, 90); }
+  // window above the sink
+  rect(3200, 560, 260, 230, '#f3ece0', 6); const sk = g.createLinearGradient(0, 580, 0, 770); sk.addColorStop(0, '#0b1030'); sk.addColorStop(1, '#2a3270'); rect(3220, 580, 220, 190, sk, 3, 4); line([3330, 580, 3330, 770], 5);
+  // upper cabinets, hood
+  for (const x of [2650, 2830, 3500]) rect(x, 330, 170, 200, '#7d9bb0', 6);
+  shape('#b9c2c8', () => { g.moveTo(3000, 520); g.lineTo(3180, 520); g.lineTo(3150, 420); g.lineTo(3030, 420); g.closePath(); });
+  // counters + cabinets, stove, sink
+  rect(2640, FY - 210, 1060, 34, '#dcd6c8', 4, 5);
+  for (let x = 2650; x < 3690; x += 175) rect(x, FY - 176, 165, 176, '#7d9bb0', 4, 4);
+  rect(3000, FY - 176, 180, 176, '#3a3d44', 4, 5); rect(3020, FY - 140, 140, 90, '#1c1e24', 6, 4); line([3030, FY - 156, 3150, FY - 156], 6, '#9aa0a8');
+  ell(3045, FY - 214, 30, 7, '#2a2a30', 0, 4); ell(3135, FY - 214, 30, 7, '#2a2a30', 0, 4);
+  rect(3260, FY - 222, 150, 16, '#9aa6ae', 4, 4); line([3335, FY - 222, 3335, FY - 290, 3375, FY - 290], 7, '#9aa6ae');
+  // knife block with ONE empty slot
+  rect(2730, FY - 300, 70, 90, '#6a3f26', 6, 5); for (const [kx, empty] of [[2745, false], [2765, true], [2785, false]]) { if (!empty) line([kx, FY - 300, kx, FY - 340], 7, '#2a2a30'); else rect(kx - 5, FY - 302, 10, 6, '#1a1010', 1, 0); }
+  // fridge
+  rect(3720, 520, 180, FY - 520, '#e8ecef', 10); line([3720, 820, 3900, 820], 5); line([3740, 600, 3740, 780], 7); line([3740, 860, 3740, 1000], 7);
+  // pendant light
+  line([3150, -400, 3150, 220], 4); shape('#4a4f58', () => { g.moveTo(3100, 260); g.lineTo(3200, 260); g.lineTo(3175, 220); g.lineTo(3125, 220); g.closePath(); }, 4);
+}
 function house(opt = {}) {
-  g.fillStyle = '#b9c49c'; g.fillRect(-200, -400, 2800, FY + 400);
-  for (let x = -200; x < 2600; x += 70) { g.fillStyle = '#aab78c'; g.fillRect(x, -400, 12, FY + 400); }
-  g.fillStyle = '#eee4d0'; g.fillRect(-200, 120, 2800, 40); line([-200, 160, 2600, 160], 5);
-  g.fillStyle = '#efe6d6'; g.fillRect(-200, 960, 2800, FY - 960); line([-200, 960, 2600, 960], 6);
-  for (let x = -170; x < 2600; x += 190) rect(x, 990, 150, 270, '#e3d8c4', 4, 4);
-  g.fillStyle = '#9a6238'; g.fillRect(-200, FY, 2800, 900);
-  for (let y = FY + 70, k = 0; y < FY + 900; y += 80 + k * 10, k++) { line([-200, y, 2600, y], 3, '#7a4a28'); for (let x = -200 + (k % 2) * 140; x < 2600; x += 300) line([x, y - 70 - k * 10 + 4, x, y], 3, '#7a4a28'); }
-  rect(-200, FY - 26, 2800, 28, '#f3ece0', 0, 5);
+  g.fillStyle = '#b9c49c'; g.fillRect(-900, -400, 4800, FY + 400);
+  for (let x = -900; x < 3900; x += 70) { g.fillStyle = '#aab78c'; g.fillRect(x, -400, 12, FY + 400); }
+  g.fillStyle = '#eee4d0'; g.fillRect(-900, 120, 4800, 40); line([-900, 160, 3900, 160], 5);
+  g.fillStyle = '#efe6d6'; g.fillRect(-900, 960, 4800, FY - 960); line([-900, 960, 3900, 960], 6);
+  for (let x = -170; x < 3900; x += 190) rect(x, 990, 150, 270, '#e3d8c4', 4, 4);
+  g.fillStyle = '#9a6238'; g.fillRect(-900, FY, 4800, 900);
+  for (let y = FY + 70, k = 0; y < FY + 900; y += 80 + k * 10, k++) { line([-900, y, 3900, y], 3, '#7a4a28'); for (let x = -900 + (k % 2) * 140; x < 3900; x += 300) line([x, y - 70 - k * 10 + 4, x, y], 3, '#7a4a28'); }
+  rect(-900, FY - 26, 4800, 28, '#f3ece0', 0, 5);
   // front door (left) with a fan light, doorbell, coat hook + backpack
   rect(120, 470, 340, FY - 470, '#f3ece0', 8);
   if (opt.doorOpen) {
@@ -61,8 +86,7 @@ function house(opt = {}) {
   ell(1350, 250, 50, 50, '#f3ece0'); line([1350, 250, 1350, 218], 5); line([1350, 250, 1372, 262], 5);
   // staircase on the right, little basement door underneath
   g.fillStyle = '#d8ccb6'; g.beginPath(); g.moveTo(1880, FY); g.lineTo(2500, FY); g.lineTo(2500, 300); g.closePath(); g.fill();
-  rect(1990, 1010, 170, 280, '#6a3522', 6, 5); ell(2130, 1160, 9, 9, '#e2b84a', 0, 3);
-  g.font = '900 30px "Inter Display", Inter'; g.fillStyle = '#e8dcc4'; g.textAlign = 'center'; g.fillText('PORÃO', 2075, 1060);
+  rect(1990, 1010, 170, 280, '#c9bda4', 6, 4); ell(2130, 1160, 8, 8, '#8e5a35', 0, 3);   // closet under the stairs
   for (let i = 0; i < 10; i++) { const x = 1880 + i * 62, y = FY - (i + 1) * 100; rect(x, y, 2500 - x, 100, '#8e5a35', 2, 4); rect(x - 6, y - 10, 2500 - x + 6, 16, '#a86d42', 3, 4); }
   line([1840, FY - 280, 2500, FY - 280 - 660 * 1.6], 10);
   for (let i = 0; i < 10; i++) { const x = 1880 + i * 62 + 20; line([x, FY - (i + 1) * 100, x, FY - 280 - (x - 1840) * 1.6], 5); }
@@ -83,8 +107,15 @@ function house(opt = {}) {
   rect(ax, FY - 330, 260, 230, '#8a4a3e', 40); rect(ax - 20, FY - 170, 300, 110, '#9a5648', 26); rect(ax - 40, FY - 220, 70, 180, '#8a4a3e', 26); rect(ax + 250, FY - 220, 70, 180, '#8a4a3e', 26);
   rect(ax, FY - 60, 22, 60, '#3a2418', 6, 4); rect(ax + 238, FY - 60, 22, 60, '#3a2418', 6, 4);
   // side table + phone
-  rect(560, FY - 170, 130, 22, '#6a3f26', 4, 5); line([575, FY - 150, 575, FY], 7); line([675, FY - 150, 675, FY], 7);
-  rect(590, FY - 215, 70, 45, '#2d2d33', 8, 4);
+  rect(540, FY - 190, 250, 24, '#6a3f26', 4, 5); line([560, FY - 168, 560, FY], 8); line([770, FY - 168, 770, FY], 8);
+  rect(560, FY - 232, 74, 42, '#2d2d33', 8, 4); rect(566, FY - 250, 62, 20, '#3a3a42', 8, 4);   // landline phone
+  // basement door, right beside the front door (a plain door with a sign)
+  rect(-330, 560, 250, FY - 560, '#f3ece0', 6); rect(-305, 585, 200, FY - 585, opt.basementOpen ? '#05040a' : '#5a2e1c', 3, 5);
+  if (!opt.basementOpen) { rect(-280, 620, 150, 260, '#4e2717', 3, 4); rect(-280, 920, 150, 330, '#4e2717', 3, 4); ell(-130, 930, 10, 10, '#e2b84a', 0, 3); }
+  rect(-262, 500, 114, 44, '#2a2f55', 6, 4); g.font = '900 28px "Inter Display", Inter'; g.fillStyle = '#e8dcc4'; g.textAlign = 'center'; g.fillText('PORÃO', -205, 532);
+  // the light switch by the stairs (Pedrinho forgets it exists)
+  rect(1745, 840, 50, 80, '#f3ece0', 8, 4); rect(1762, 858, 16, 28, '#d9cfbd', 4, 3);
+  kitchen();
 }
 
 // ---------- characters ----------
@@ -102,6 +133,7 @@ function bean(x, y, o = {}) {   // the new protagonist: light brown, startled ey
   curve(-10, by - 140, 30, by, -5, by + 145, 6, '#8a4f22');
   line([-95, by + 10, aL[0], aL[1], aL[2], aL[3]], 11); ell(aL[2], aL[3], 20, 20, '#ffffff', 0, 5);
   line([95, by + 10, aR[0], aR[1], aR[2], aR[3]], 11); ell(aR[2], aR[3], 20, 20, '#ffffff', 0, 5);
+  if (o.phone) { rect(aR[2] - 14, aR[3] - 46, 30, 54, '#1c1c22', 6, 4); rect(aR[2] - 9, aR[3] - 40, 20, 40, '#bfe6ff', 3, 0); }
   const ey = by - 50, look = o.look || [0, 0], pr = o.tiny ? 7 : 11;
   ell(-40, ey, 38, 46, '#ffffff', 0, 5); ell(40, ey, 38, 46, '#ffffff', 0, 5);
   ell(-40 + look[0] * 14, ey + look[1] * 14, pr, pr * 1.15, OUT, 0, 0); ell(40 + look[0] * 14, ey + look[1] * 14, pr, pr * 1.15, OUT, 0, 0);
@@ -116,7 +148,8 @@ function bean(x, y, o = {}) {   // the new protagonist: light brown, startled ey
 // the killer doll: a toy coffee bean with orange hair, striped shirt, denim overalls and stitched scars
 function doll(x, y, o = {}) {
   const s = o.s || 1, evil = o.evil; g.save(); g.translate(x, y); g.scale(s, s);
-  line([-28, -70, -32, -16], 12); ell(-38, -10, 30, 15, '#c63a32'); line([28, -70, 32, -16], 12); ell(38, -10, 30, 15, '#c63a32');
+  { const w = o.walk || 0, ph = o.phase || 0;
+    for (const [sx, off] of [[-1, 0], [1, Math.PI]]) { const sw = Math.sin(ph + off) * w, lift = Math.max(0, Math.cos(ph + off)) * w; const fx = sx * 32 + sw * 30, fy = -16 - lift * 20; line([sx * 28, -70, fx, fy], 12); ell(fx + sx * 6, fy + 6, 30, 15, '#c63a32'); } }
   line([-60, -10, -18, -10], 4, '#ffffff'); line([18, -10, 60, -10], 4, '#ffffff');
   const by = -175;
   ell(0, by, 92, 118, '#e7b98c', -0.05);

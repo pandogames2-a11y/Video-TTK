@@ -34,5 +34,96 @@
     "text": "Ele não vê ninguém lá fora, apenas uma caixa com um boneco dentro. Ele acha que foi um presente, mas ele mal espera o que está por vir.",
     "lead": 1.0,
     "tail": 2.2
+  },
+  {
+    "scene": "inside",
+    "voice": "narr",
+    "text": "Assim que ele entra de volta para casa, ele abre a caixa e deixa o boneco em cima da mesa e volta a assistir TV."
+  },
+  {
+    "scene": "erro1",
+    "voice": "narr",
+    "text": "É aí que Pedrinho comete o primeiro erro. Esse idiota não olha o que tem dentro do brinquedo. Pode haver um microfone escondido ou qualquer outro tipo de coisa para fazer mal a ele, mas ele nem suspeita."
+  },
+  {
+    "scene": "sleep",
+    "voice": "narr",
+    "text": "Em vez disso, ele só desliga o canal da TV e vai para a cama dormir, no andar de cima."
+  },
+  {
+    "scene": "noise",
+    "voice": "narr",
+    "text": "Assim que ele dorme, trinta minutos depois, ele começa a ouvir barulhos na sala.",
+    "lead": 1.4
+  },
+  {
+    "scene": "erro2",
+    "voice": "narr",
+    "text": "E é aí que ele comete o segundo erro. Que idiota vai verificar barulhos às três da manhã na sala? É só ele continuar dormindo."
+  },
+  {
+    "scene": "check",
+    "voice": "narr",
+    "text": "Mas não, Pedrinho vai checar. Ele leva apenas um celular para iluminar a casa, pois ele se esquece que existem lâmpadas nos cômodos."
+  },
+  {
+    "scene": "desce",
+    "voice": "narr",
+    "text": "Assim que ele desce as escadas, ele vai checar de onde tava vindo o barulho estranho. Ele repara que o boneco que estava na caixa, em cima da mesa, tinha sumido.",
+    "tail": 0.35
+  },
+  {
+    "scene": "ladrao",
+    "voice": "narr",
+    "text": "E então, o que o Pedrinho pensa? Algum ladrão que invadiu aqui e roubou o boneco. Tipo, mano? Que ladrão entra numa casa e rouba um boneco cheio de cicatriz na cara, parecendo o Vaas do Far Cry?",
+    "tail": 0.35
+  },
+  {
+    "scene": "erro3",
+    "voice": "narr",
+    "text": "Então, alguma coisa faz barulho na cozinha. Vendo isso, o que o Pedrinho faz? Adivinha: erra pela terceira vez. Ao invés de ter ligado para a polícia, ele simplesmente vai pra cozinha falando: oi, quem é? Como se o suposto ladrão fosse responder amigavelmente.",
+    "tail": 0.35
+  },
+  {
+    "scene": "reveal",
+    "voice": "narr",
+    "text": "Pro azar do Pedrinho, era na verdade o brinquedo que ele tinha recebido, com uma Tramontina afiada na mão.",
+    "tail": 1.2
+  },
+  {
+    "scene": "chase",
+    "voice": "narr",
+    "text": "Então o brinquedo começa a correr atrás do Pedrinho. Desesperado, Pedrinho desce pro porão, que fica do lado da porta de entrada da casa.",
+    "tail": 0.8
+  },
+  {
+    "scene": "erro4",
+    "voice": "narr",
+    "text": "Sim, ele erra pela quarta vez, se trancando num cômodo onde não tem saída.",
+    "tail": 0.35
+  },
+  {
+    "scene": "wait",
+    "voice": "narr",
+    "text": "Após isso tudo, Pedrinho decide esperar por alguns minutos, torcendo para que a pequena aberração vá embora. Depois de quinze minutos, fica um silêncio na casa toda.",
+    "tail": 0.9
+  },
+  {
+    "scene": "erro5",
+    "voice": "narr",
+    "text": "E é então que Pedrinho erra pela última vez: ele sai do porão. Pra quê? Pra ver onde está o boneco, e não para ir embora desse maldito lugar.",
+    "tail": 0.35
+  },
+  {
+    "scene": "bed",
+    "voice": "narr",
+    "text": "Ele não acha o boneco em lugar algum, e então simplesmente decide dormir. Assim, Pedrinho encerra sua noite com sucesso, derrotando o brinquedo.",
+    "tail": 0.35
+  },
+  {
+    "scene": "final",
+    "voice": "none",
+    "text": "",
+    "min": 5.0
   }
 ]

@@ -76,7 +76,7 @@ function toyBox(x, y, s = 1, d = {}) {
   rect(-62, -150, 124, 150, 'rgba(0,0,0,0)', 8);
   g.save(); g.beginPath(); g.roundRect(-42, -122, 84, 96, 10); g.clip();
   g.fillStyle = '#c9e6f5'; g.fillRect(-42, -122, 84, 96);
-  doll(0, -27, { s: 0.27, look: d.look, evil: d.evil });
+  if (!d.empty) doll(0, -27, { s: 0.27, look: d.look, evil: d.evil });
   g.fillStyle = 'rgba(255,255,255,0.35)'; g.beginPath(); g.moveTo(-42, -80); g.lineTo(-10, -122); g.lineTo(6, -122); g.lineTo(-42, -60); g.fill();
   g.restore();
   g.beginPath(); g.roundRect(-42, -122, 84, 96, 10); g.lineWidth = 5; g.strokeStyle = OUT; g.stroke();
@@ -112,7 +112,8 @@ function frame(t) {
   main.fillStyle = '#05040c'; main.fillRect(0, 0, SW, SH);
   const t1 = T0('calm'), tb = T0('bell');
   if (t < t1 + 0.2) drawExterior(t, t1);
-  if (t >= TL.open) drawPorch(t);
+  if (t >= T0('inside')) drawLate(t);
+  else if (t >= TL.open) drawPorch(t);
   else if (t > t1 - 0.4) {   // inside (cross-dissolve in from the window)
     const a = ss(t1 - 0.4, t1 + 0.2, t);
     if (a < 1) { const tmp = mk(), prev = main; drawInterior(t, tmp.getContext('2d')); prev.save(); prev.setTransform(1, 0, 0, 1, 0, 0); prev.globalAlpha = a; prev.drawImage(tmp, 0, 0); prev.restore(); }

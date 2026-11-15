@@ -1,52 +1,180 @@
 {
- "total": 25.97,
+ "total": 155.739,
  "fps": 30,
  "segs": [
   {
    "scene": "title",
    "voice": "narr",
    "start": 0.0,
-   "dur": 3.692,
+   "dur": 3.583,
    "vstart": 0.9,
-   "vdur": 1.992
+   "vdur": 1.883
   },
   {
    "scene": "calm",
    "voice": "narr",
-   "start": 3.692,
-   "dur": 3.986,
-   "vstart": 4.192,
-   "vdur": 2.886
+   "start": 3.583,
+   "dur": 3.864,
+   "vstart": 4.083,
+   "vdur": 2.764
   },
   {
    "scene": "bell",
    "voice": "narr",
-   "start": 7.678,
+   "start": 7.447,
    "dur": 4.2,
-   "vstart": 7.978,
-   "vdur": 2.555
+   "vstart": 7.747,
+   "vdur": 2.388
   },
   {
    "scene": "open",
    "voice": "narr",
-   "start": 11.878,
-   "dur": 3.3,
-   "vstart": 12.078,
-   "vdur": 2.85
+   "start": 11.647,
+   "dur": 3.168,
+   "vstart": 11.847,
+   "vdur": 2.718
   },
   {
    "scene": "porch",
    "voice": "narr",
-   "start": 15.178,
-   "dur": 10.792,
-   "vstart": 16.178,
-   "vdur": 7.592
+   "start": 14.816,
+   "dur": 10.402,
+   "vstart": 15.816,
+   "vdur": 7.202
+  },
+  {
+   "scene": "inside",
+   "voice": "narr",
+   "start": 25.218,
+   "dur": 6.585,
+   "vstart": 25.468,
+   "vdur": 5.985
+  },
+  {
+   "scene": "erro1",
+   "voice": "narr",
+   "start": 31.803,
+   "dur": 11.038,
+   "vstart": 32.053,
+   "vdur": 10.438
+  },
+  {
+   "scene": "sleep",
+   "voice": "narr",
+   "start": 42.841,
+   "dur": 5.42,
+   "vstart": 43.091,
+   "vdur": 4.82
+  },
+  {
+   "scene": "noise",
+   "voice": "narr",
+   "start": 48.262,
+   "dur": 6.025,
+   "vstart": 49.662,
+   "vdur": 4.275
+  },
+  {
+   "scene": "erro2",
+   "voice": "narr",
+   "start": 54.287,
+   "dur": 7.527,
+   "vstart": 54.537,
+   "vdur": 6.927
+  },
+  {
+   "scene": "check",
+   "voice": "narr",
+   "start": 61.814,
+   "dur": 7.784,
+   "vstart": 62.064,
+   "vdur": 7.184
+  },
+  {
+   "scene": "desce",
+   "voice": "narr",
+   "start": 69.599,
+   "dur": 8.701,
+   "vstart": 69.849,
+   "vdur": 8.101
+  },
+  {
+   "scene": "ladrao",
+   "voice": "narr",
+   "start": 78.3,
+   "dur": 11.705,
+   "vstart": 78.55,
+   "vdur": 11.105
+  },
+  {
+   "scene": "erro3",
+   "voice": "narr",
+   "start": 90.005,
+   "dur": 15.408,
+   "vstart": 90.255,
+   "vdur": 14.808
+  },
+  {
+   "scene": "reveal",
+   "voice": "narr",
+   "start": 105.413,
+   "dur": 6.706,
+   "vstart": 105.663,
+   "vdur": 5.256
+  },
+  {
+   "scene": "chase",
+   "voice": "narr",
+   "start": 112.119,
+   "dur": 8.043,
+   "vstart": 112.369,
+   "vdur": 6.993
+  },
+  {
+   "scene": "erro4",
+   "voice": "narr",
+   "start": 120.161,
+   "dur": 4.47,
+   "vstart": 120.411,
+   "vdur": 3.87
+  },
+  {
+   "scene": "wait",
+   "voice": "narr",
+   "start": 124.632,
+   "dur": 9.827,
+   "vstart": 124.882,
+   "vdur": 8.677
+  },
+  {
+   "scene": "erro5",
+   "voice": "narr",
+   "start": 134.458,
+   "dur": 8.006,
+   "vstart": 134.708,
+   "vdur": 7.406
+  },
+  {
+   "scene": "bed",
+   "voice": "narr",
+   "start": 142.465,
+   "dur": 8.275,
+   "vstart": 142.715,
+   "vdur": 7.675
+  },
+  {
+   "scene": "final",
+   "voice": "none",
+   "start": 150.739,
+   "dur": 5.0,
+   "vstart": 150.989,
+   "vdur": 0
   }
  ],
- "ring": 10.439,
- "up": 12.992,
- "open": 13.991,
- "lookbox": 17.758,
- "pick": 20.074,
- "vir": 23.352
+ "ring": 10.079,
+ "up": 12.723,
+ "open": 13.68,
+ "lookbox": 17.309,
+ "pick": 19.496,
+ "vir": 22.591
 }

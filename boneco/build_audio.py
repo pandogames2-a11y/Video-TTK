@@ -20,7 +20,7 @@ def readwav(f):
 
 def tts_piper(text, out):
     raw = out + '.raw.wav'
-    subprocess.run(['python3', '-m', 'piper', '-m', D + '.onnx', '-c', D + '.onnx.json', '-f', raw, '--length-scale', '1.05', '--sentence-silence', '0.2'],
+    subprocess.run(['python3', '-m', 'piper', '-m', D + '.onnx', '-c', D + '.onnx.json', '-f', raw, '--length-scale', '0.9', '--sentence-silence', '0.12'],
                    input=text.encode(), check=True, capture_output=True)
     # a deeper, darker narrator for a horror episode
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', raw, '-af', 'asetrate=22050*0.92,aresample=22050,atempo=1.04,highpass=f=60,acompressor=threshold=0.1:ratio=3,volume=1.4',
@@ -59,6 +59,7 @@ for i, x in voice.items():
         d = (b - a) * k / tot; words.append({'seg': g['scene'], 'who': 'narr', 'text': w, 't0': round(g['vstart'] + c, 3), 't1': round(g['vstart'] + c + d * 0.8, 3)}); c += d
 json.dump(words, open('audio/words.json', 'w'), ensure_ascii=False, indent=0)
 def T0(n): return next(g['start'] for g in segs if g['scene'] == n)
+def TE(n): return next(g['start'] + g['dur'] for g in segs if g['scene'] == n)
 def wT(prefix, scene): return next(w['t0'] for w in words if w['seg'] == scene and w['text'].lower().startswith(prefix))
 
 # ---- sound design ----
@@ -124,6 +125,47 @@ for j, f in enumerate([988, 932, 880, 831]): put(mus, tone(f, 1.2, 0.035, 2.5), 
 kk = np.arange(int(2.4 * SR)) / SR; put(fx, (np.sin(2 * np.pi * 49 * kk) * np.sin(np.pi * kk / 2.4) ** 2 * 0.12).astype(np.float32), VIR - 0.6)
 
 whoosh(T0('calm') - 0.35, 0.6, 0.1)   # dissolve into the house
+# ---- the rest of the night ----
+def buzz(at, amp=0.08):   # "wrong!" buzzer for each ERRO card
+    kk = np.arange(int(0.45 * SR)) / SR; put(fx, (np.sign(np.sin(2 * np.pi * 110 * kk)) * 0.5 + np.sign(np.sin(2 * np.pi * 116 * kk)) * 0.5).astype(np.float32) * amp * np.exp(-kk * 2).astype(np.float32), at)
+def thud(at, amp=0.25):
+    kk = np.arange(int(0.4 * SR)) / SR; put(fx, (np.sin(2 * np.pi * 60 * kk) * np.exp(-kk * 12) * amp).astype(np.float32), at)
+def clang(at, amp=0.18):
+    kk = np.arange(int(1.2 * SR)) / SR; x = sum(np.sin(2 * np.pi * f * kk) for f in (523, 1390, 2210, 3170)) * np.exp(-kk * 4) * amp / 3
+    put(fx, x.astype(np.float32), at); put(fx, x[:int(0.6 * SR)].astype(np.float32) * 0.5, at + 0.22)
+def tick(a, b, amp=0.03):
+    for at in np.arange(a, b, 0.5): click(at, amp)
+def giggle(at, amp=0.06):   # a tiny toy "hi-hi-hi" made of chirps
+    for j in range(3):
+        kk = np.arange(int(0.12 * SR)) / SR; f = 900 + 500 * np.sin(np.pi * kk / 0.12)
+        put(fx, (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * kk / 0.12) * amp).astype(np.float32), at + j * 0.18)
+def rustle(at, d=0.6, amp=0.05):
+    n = int(d * SR); put(fx, (band(rng.standard_normal(n), 1500, 6000) * np.sin(np.pi * np.arange(n) / n) * amp).astype(np.float32), at)
+for pre, sc in [('primeiro', 'erro1'), ('segundo', 'erro2'), ('terceira', 'erro3'), ('quarta', 'erro4'), ('última', 'erro5')]: buzz(wT(pre, sc) + 0.1)
+thud(T0('inside') + 0.1, 0.18); rustle(wT('abre', 'inside'), 0.7)
+put(fx, (tone(1800, 0.25, 0.05, 20)).astype(np.float32), wT('desliga', 'sleep'))     # TV off "tchum"
+for at in np.arange(wT('cama', 'sleep'), TE('sleep') - 0.1, 0.34): step(at, 0.05)
+tick(T0('noise'), TE('noise'), 0.025)
+for j, at in enumerate([wT('barulhos', 'noise') - 0.4, wT('barulhos', 'noise') + 0.3, wT('barulhos', 'noise') + 0.9]): thud(at, 0.12); click(at + 0.1, 0.08)
+for at in np.arange(wT('checar', 'check'), TE('check'), 0.4): step(at, 0.045); creak(at + 0.05, 0.25, 0.02)
+for at in np.arange(T0('desce') + 0.2, wT('repara', 'desce'), 0.42): step(at, 0.04)
+clang(wT('barulho', 'erro3') - 0.1)
+for at in np.arange(wT('vai', 'erro3'), wT('como', 'erro3'), 0.38): step(at, 0.045)
+REVEAL = wT('brinquedo', 'reveal')
+sting(REVEAL - 0.1, 0.16); giggle(TE('reveal') - 0.9)
+# chase: frantic drums + running feet
+c0, c1 = T0('chase'), wT('porão', 'chase') + 0.3
+for at in np.arange(c0, c1, 0.125): thud(at, 0.06 if int((at - c0) / 0.125) % 2 else 0.1)
+for at in np.arange(c0 + 0.05, c1, 0.17): step(at, 0.05)
+thud(wT('quarta', 'erro4') - 0.6, 0.35); click(wT('quarta', 'erro4') - 0.3, 0.15)   # door slam + lock
+tick(wT('quinze', 'wait') - 0.2, TE('wait'), 0.03)
+creak(wT('sai', 'erro5'), 1.0, 0.05)
+rustle(wT('dormir', 'bed'), 0.9, 0.05)
+for j, f in enumerate([659, 587, 523, 494, 523]): put(mus, tone(f * 2, 0.6, 0.03, 5), wT('encerra', 'bed') + j * 0.4)
+FIN = T0('final')
+for j, f in enumerate([988, 932, 880, 831]): put(mus, tone(f, 1.2, 0.035, 2.5), FIN + 0.6 + j * 0.45)
+kk = np.arange(int(3.0 * SR)) / SR; put(fx, (np.sin(2 * np.pi * 49 * kk) * np.sin(np.pi * kk / 3.0) ** 2 * 0.14).astype(np.float32), FIN + 0.8)
+giggle(FIN + 2.3, 0.07)
 # ---- mix (narration ducks the bed) ----
 duck = np.ones(N, np.float32); env = np.convolve(np.abs(voc), np.ones(4410) / 4410, 'same'); duck -= np.clip(env * 6, 0, 0.5)
 mix = voc * 1.0 + fx + mus * duck
