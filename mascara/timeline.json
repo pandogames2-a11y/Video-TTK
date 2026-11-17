@@ -1,95 +1,95 @@
 {
- "total": 66.533,
+ "total": 67.355,
  "fps": 30,
  "segs": [
   {
    "scene": "title",
    "voice": "narr",
    "start": 0.0,
-   "dur": 3.622,
+   "dur": 3.289,
    "vstart": 0.8,
-   "vdur": 2.222
+   "vdur": 1.889
   },
   {
    "scene": "arrive",
    "voice": "narr",
-   "start": 3.622,
-   "dur": 6.493,
-   "vstart": 3.922,
-   "vdur": 5.793
+   "start": 3.289,
+   "dur": 7.065,
+   "vstart": 3.589,
+   "vdur": 6.365
   },
   {
    "scene": "sign",
    "voice": "narr",
-   "start": 10.115,
-   "dur": 5.788,
-   "vstart": 10.315,
-   "vdur": 5.088
+   "start": 10.353,
+   "dur": 6.865,
+   "vstart": 10.553,
+   "vdur": 6.165
   },
   {
    "scene": "fire",
    "voice": "narr",
-   "start": 15.903,
-   "dur": 8.412,
-   "vstart": 16.203,
-   "vdur": 7.312
+   "start": 17.219,
+   "dur": 8.5,
+   "vstart": 17.519,
+   "vdur": 7.4
   },
   {
    "scene": "wood",
    "voice": "narr",
-   "start": 24.315,
-   "dur": 5.837,
-   "vstart": 24.515,
-   "vdur": 4.737
+   "start": 25.719,
+   "dur": 5.535,
+   "vstart": 25.919,
+   "vdur": 4.435
   },
   {
    "scene": "search",
    "voice": "narr",
-   "start": 30.152,
-   "dur": 7.519,
-   "vstart": 30.352,
-   "vdur": 6.819
+   "start": 31.254,
+   "dur": 8.342,
+   "vstart": 31.454,
+   "vdur": 7.642
   },
   {
    "scene": "chase",
    "voice": "narr",
-   "start": 37.672,
-   "dur": 9.781,
-   "vstart": 38.172,
-   "vdur": 8.681
+   "start": 39.596,
+   "dur": 10.984,
+   "vstart": 40.096,
+   "vdur": 9.884
   },
   {
    "scene": "hide",
    "voice": "narr",
-   "start": 47.453,
-   "dur": 8.451,
-   "vstart": 47.653,
-   "vdur": 6.851
+   "start": 50.58,
+   "dur": 7.394,
+   "vstart": 50.78,
+   "vdur": 5.794
   },
   {
    "scene": "end",
    "voice": "narr",
-   "start": 55.904,
-   "dur": 3.815,
-   "vstart": 56.304,
-   "vdur": 2.815
+   "start": 57.973,
+   "dur": 3.959,
+   "vstart": 58.373,
+   "vdur": 2.959
   },
   {
    "scene": "cta",
    "voice": "narr",
-   "start": 59.719,
-   "dur": 2.551,
-   "vstart": 59.919,
-   "vdur": 2.051
+   "start": 61.932,
+   "dur": 2.036,
+   "vstart": 62.132,
+   "vdur": 1.536
   },
   {
    "scene": "feijoes",
    "voice": "narr",
-   "start": 62.27,
-   "dur": 4.263,
-   "vstart": 62.47,
-   "vdur": 3.063
+   "start": 63.968,
+   "dur": 3.388,
+   "vstart": 64.168,
+   "vdur": 2.188
   }
  ],
- "fall": 43.331
+ "fall": 45.594
 }
