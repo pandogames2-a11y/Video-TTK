@@ -34,7 +34,8 @@ def tc(t): m, s = divmod(t, 60); return f'{int(m):02d}:{s:04.1f}'
 # cada frase do roteiro pode ter "clip": {"arquivo", "inicio", "dur", "crop"}
 ready, rows = [], []
 used = {p.get('img') for s in SCRIPT for p in s['parts']}
-TAILS = [f for f in sorted(glob.glob('clips/fonte/rockstar_shots/shots/*/*/*.jpg')) if f not in used and ('Vice City' in f or 'Jason and Lucia' in f or 'Leonida Keys' in f)]
+TAILS = []
+TAIL_LOOPS = sorted(glob.glob('clips/fonte/rockstar_videos/loops/*.mp4'))
 for sg in SCRIPT:
     for pi, p in enumerate(sg['parts']):
         c = p.get('clip')
@@ -50,28 +51,32 @@ for sg in SCRIPT:
         f = c['arquivo']; ini = float(c.get('inicio', 0))
         avail = probe(f) - ini if os.path.exists(f) else 0
         tela = round(b - a - LEAD, 2)                                                      # o trecho cobre a frase inteira
-        if 'trailer' in f:   # trailer: só o pedaço escolhido (cortes curtos) — câmera lenta suave até 0,5x
+        if c.get('loop'):    # loop oficial: usa o arquivo inteiro e repete até a frase acabar
+            src = round(avail, 2); speed = 1.0
+        elif 'trailer' in f:   # trailer: só o pedaço escolhido (cortes curtos) — câmera lenta suave até 0,5x
             src = round(min(c.get('dur', 5), avail), 2); speed = max(MIN_SPEED, min(1.0, src / tela))
         else:                # gameplay / B-roll: arquivos longos, velocidade normal pela frase toda
             src = round(min(tela, avail), 2); speed = 1.0
-        dur = round(src / speed, 2); tail = dur < tela - 0.05   # se não cobrir a frase, entra uma screenshot em movimento
+        dur = round(src / speed, 2); tail = (not c.get('loop')) and dur < tela - 0.05   # se não cobrir a frase, entra um loop oficial em movimento
         rows.append(dict(id=cid, t0=a + LEAD, dur=dur, src=src, speed=round(speed, 2), arquivo=f, inicio=ini, fala=p['t']))
         if not os.path.exists(f) or dur < 1.0: print('pulado:', cid, f); continue
-        out = f'clips/{cid}'; sig = json.dumps([f, ini, src, speed, c.get('crop'), tail], sort_keys=True)
+        out = f'clips/{cid}'; sig = json.dumps([f, ini, src, speed, c.get('crop'), tail, c.get('loop'), 'v2'], sort_keys=True)
         if os.path.exists(f'{out}/sig.json') and open(f'{out}/sig.json').read() == sig:
-            n = len(glob.glob(f'{out}/f*.jpg')); ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta5' if 'gta5' in f else 'stock' if 'mixkit' in f else 'gta6', n=n, lead=LEAD, tail=tail, cred=CRED.get(os.path.basename(f), '')))
-            if tail: TAILS.append(TAILS.pop(0))
+            n = len(glob.glob(f'{out}/f*.jpg')); tn = len(glob.glob(f'{out}/t*.jpg')); ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta5' if 'gta5' in f else 'stock' if 'mixkit' in f else 'gta6', n=n, lead=LEAD, tail=tail, tn=tn, loop=bool(c.get('loop')), cred=CRED.get(os.path.basename(f), '')))
+            if tail: TAIL_LOOPS.append(TAIL_LOOPS.pop(0))
             print(f'{cid}: igual, reaproveitado'); continue
         shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
         vf = ('crop=iw*0.86:ih*0.86:iw*0.07:0,' if c.get('crop') else '') + 'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,'
         vf += (f'fps={FPS},setpts=PTS/{speed:.4f},minterpolate=fps={FPS}:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1' if speed < 0.99 else f'fps={FPS}')
         subprocess.run(['ffmpeg', '-loglevel', 'error', '-ss', str(ini), '-t', str(src), '-i', f, '-an', '-vf', vf, '-q:v', '3', f'{out}/f%04d.jpg'], check=True)
         n = len(glob.glob(f'{out}/f*.jpg'))
+        tn = 0
         if tail:
-            tf = TAILS.pop(0); TAILS.append(tf)
-            subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', tf, '-vf', 'scale=2112:1188:force_original_aspect_ratio=increase,crop=2112:1188', '-q:v', '3', f'{out}/tail.jpg'], check=True)
+            tf = TAIL_LOOPS.pop(0); TAIL_LOOPS.append(tf)
+            subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', tf, '-an', '-vf', f'scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps={FPS}', '-q:v', '3', f'{out}/t%04d.jpg'], check=True)
+            tn = len(glob.glob(f'{out}/t*.jpg'))
         open(f'{out}/sig.json', 'w').write(sig)
-        ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta5' if 'gta5' in f else 'stock' if 'mixkit' in f else 'gta6', n=n, lead=LEAD, tail=tail, cred=CRED.get(os.path.basename(f), '')))
+        ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta5' if 'gta5' in f else 'stock' if 'mixkit' in f else 'gta6', n=n, lead=LEAD, tail=tail, tn=tn, loop=bool(c.get('loop')), cred=CRED.get(os.path.basename(f), '')))
         print(f'{cid}: {n / FPS:.1f} s na tela ({src:.1f} s de {os.path.basename(f)} a partir de {ini}s, velocidade {speed:.2f})')
 json.dump(ready, open('clips_ready.json', 'w'), ensure_ascii=False, indent=1)
 print(len(ready), 'trechos prontos')

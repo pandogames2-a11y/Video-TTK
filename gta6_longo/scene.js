@@ -616,10 +616,11 @@ async function clipAt(t) {
   let pi = 0; for (let i = 0; i < s.parts.length; i++) if (t >= s.parts[i]) pi = i;
   const c = CLIPS.find(c => c.seg === s.id && c.part === pi); if (!c) return null;
   const ct = t - (pi === 0 ? s.start : s.parts[pi]) - c.lead, k0 = Math.floor(ct * FPS + 1e-6); if (k0 < 0) return null;
-  const tailNow = !c.still && k0 >= c.n && c.tail, k = Math.min(c.n - 1, k0);   // trecho acabou: screenshot em movimento (nunca congela)
-  const url = c.still ? `clips/${c.id}/img.jpg` : tailNow ? `clips/${c.id}/tail.jpg` : `clips/${c.id}/f${String(k + 1).padStart(4, '0')}.jpg`;
+  const tailNow = !c.still && k0 >= c.n && c.tail && c.tn > 0;   // trecho acabou: entra um loop oficial em movimento (nunca congela)
+  const k = c.loop ? k0 % c.n : Math.min(c.n - 1, k0), kt = tailNow ? (k0 - c.n) % c.tn : 0;
+  const url = c.still ? `clips/${c.id}/img.jpg` : tailNow ? `clips/${c.id}/t${String(kt + 1).padStart(4, '0')}.jpg` : `clips/${c.id}/f${String(k + 1).padStart(4, '0')}.jpg`;
   let img = IMG.get(url); if (!img) { img = new Image(); img.src = url; await img.decode(); IMG.set(url, img); if (IMG.size > 90) IMG.delete(IMG.keys().next().value); }
-  return tailNow ? { ...c, img, still: true, t0: c.n / FPS } : { ...c, img };
+  return { ...c, img };
 }
 window.frameJPEG = async (t, q) => { CLIP_NOW = await clipAt(t); window.renderFrame(t); return cv.toDataURL('image/jpeg', q); };
 

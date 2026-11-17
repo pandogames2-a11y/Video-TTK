@@ -35,7 +35,11 @@
      ]
     },
     "v": "sunset",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_11.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_freetouse2.mp4",
+     "inicio": 226.0,
+     "dur": 9
+    }
    },
    {
     "t": "E a número dez vai mudar pra sempre o jeito que você foge da polícia. Então fica até o final.",
@@ -76,7 +80,10 @@
     "t": "Novidade número um: a roda de armas que você conhece pode estar com os dias contados.",
     "c": null,
     "v": "roda",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_09.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/rockstar_videos/loops/assalto_loja.mp4",
+     "loop": true
+    }
    },
    {
     "t": "Lembra no GTA 5? Você segurava um botão, a roda abria, e lá estava tudo: pistola, fuzil, lança-granadas, lança-míssil.",
@@ -114,7 +121,10 @@
      "b": "cada arma no seu lugar"
     },
     "v": "carro",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_08.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/rockstar_videos/loops/casal_carro_praia.mp4",
+     "loop": true
+    }
    },
    {
     "t": "Imagina: você tá no meio de um tiroteio, a munição acaba, e a arma pesada ficou no carro, do outro lado da rua. Vai buscar ou improvisa?",
@@ -124,7 +134,11 @@
      "b": "vai buscar ou improvisa?"
     },
     "v": "carro",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_17.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_freetouse2.mp4",
+     "inicio": 186.0,
+     "dur": 12
+    }
    },
    {
     "t": "Isso transforma cada assalto num plano de verdade: o que levar, onde deixar e quem carrega o quê.",
@@ -152,7 +166,10 @@
      "b": "confirmado: dinheiro e armas divididos"
     },
     "v": "grana",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_15.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/rockstar_videos/loops/casal_capo.mp4",
+     "loop": true
+    }
    }
   ],
   "hl": [
@@ -186,7 +203,10 @@
     "t": "Novidade número dois: em vez de três protagonistas, uma dupla.",
     "c": null,
     "v": "dupla",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_01.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/rockstar_videos/loops/casal_abraco_neon.mp4",
+     "loop": true
+    }
    },
    {
     "t": "No GTA 5 você trocava entre Michael, Franklin e Trevor. Era genial, mas cada um vivia num canto do mapa, com a própria vida.",
@@ -254,7 +274,11 @@
      "b": "você decide quem age"
     },
     "v": "troca",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_02.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 33.0,
+     "dur": 2.7
+    }
    },
    {
     "t": "É praticamente um Bonnie e Clyde em Vice City.",
@@ -300,7 +324,11 @@
     "t": "Novidade número três: o corpo do seu personagem muda.",
     "c": null,
     "v": "muda",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_15.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_nocopyright.mp4",
+     "inicio": 262.0,
+     "dur": 6
+    }
    },
    {
     "t": "No GTA 5 até existiam atributos, tipo força e fôlego, que subiam conforme você jogava. Mas o corpo continuava igualzinho.",
@@ -420,7 +448,11 @@
     "t": "Novidade número quatro: o clima deixa de ser cenário e vira acontecimento.",
     "c": null,
     "v": "",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Ambrosia/Ambrosia_02.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_16515.mp4",
+     "inicio": 10.0,
+     "dur": 6
+    }
    },
    {
     "t": "No GTA 5, começava a chover e chovia praticamente no mapa inteiro, ao mesmo tempo.",
@@ -446,7 +478,10 @@
      "b": "no mesmo mapa, ao mesmo tempo"
     },
     "v": "local",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Ambrosia/Ambrosia_02.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/rockstar_videos/loops/vicecity_aereo.mp4",
+     "loop": true
+    }
    },
    {
     "t": "E a chuva deixa marca: a rua não seca por mágica quando o sol volta.",
@@ -637,7 +672,11 @@
     "t": "Novidade número seis: as redes sociais chegaram a Leonida.",
     "c": null,
     "v": "feed",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_18.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_21364.mp4",
+     "inicio": 10.0,
+     "dur": 6
+    }
    },
    {
     "t": "No GTA 5, a internet do jogo tinha o Lifeinvader, a paródia de rede social, e o Bleeter. Era engraçado, mas era tudo texto e foto parada.",
@@ -680,7 +719,10 @@
      "a": "A CARA DA FLÓRIDA"
     },
     "v": "feed",
-    "img": "clips/fonte/rockstar_shots/shots/People/Real Dimez/Real_Dimez_04.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/rockstar_videos/loops/casal_rua_neon.mp4",
+     "loop": true
+    }
    },
    {
     "t": "Agora imagina: você faz uma loucura no meio da rua e, minutos depois, o vídeo tá rodando no celular do jogo. A Rockstar ainda não disse se funciona assim, mas seria muito a cara do GTA.",
@@ -726,7 +768,11 @@
     "t": "Novidade número sete: as pessoas na rua parecem gente de verdade.",
     "c": null,
     "v": "vivos",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_05.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_nocopyright.mp4",
+     "inicio": 2190.0,
+     "dur": 6
+    }
    },
    {
     "t": "No GTA 5, você via o mesmo pedestre três vezes no mesmo quarteirão. E todo mundo reagia igual: corria, gritava, ou ligava pra polícia.",
@@ -756,7 +802,11 @@
      ]
     },
     "v": "vivos",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_13.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/mixkit/mixkit_4401.mp4",
+     "inicio": 10.0,
+     "dur": 9
+    }
    },
    {
     "t": "Nos trailers tem gente malhando na praia, fazendo festa e filmando tudo com o celular.",
@@ -780,7 +830,11 @@
      "b": "cumprimentar ou provocar"
     },
     "v": "cumprimentar",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_18.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_nocopyright.mp4",
+     "inicio": 2195.0,
+     "dur": 9
+    }
    },
    {
     "t": "Ou seja, cada esquina pode virar uma história. Ou uma confusão.",
@@ -865,7 +919,11 @@
     "t": "Novidade número oito: o jogo pode começar a lembrar quem você é no crime.",
     "c": null,
     "v": "",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_15.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_freetouse2.mp4",
+     "inicio": 326.0,
+     "dur": 6
+    }
    },
    {
     "t": "No GTA 5, assim que as estrelas sumiam, a cidade esquecia tudo. Você roubava, explodia, saía atropelando, e dois minutos depois era um cidadão exemplar.",
@@ -889,7 +947,11 @@
      "b": "um indicador acompanha"
     },
     "v": "",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason Duval/Jason_Duval_12.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/drive/gta5_freetouse.mp4",
+     "inicio": 220.0,
+     "dur": 11
+    }
    },
    {
     "t": "Um site chegou a falar em níveis, tipo profissional, agressivo e violento. Mas é uma fonte só, e a Rockstar não confirmou.",
@@ -955,7 +1017,10 @@
     "t": "Novidade número nove: um mapa que parece outro mundo.",
     "c": null,
     "v": "",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_10.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/rockstar_videos/loops/vicecity_aereo.mp4",
+     "loop": true
+    }
    },
    {
     "t": "O GTA 5 tinha Los Santos e o interior de Blaine County, com o Monte Chiliad lá no alto. Segundo a Rockstar, o mapa do GTA 6 tem mais ou menos o dobro do tamanho.",
@@ -1098,7 +1163,11 @@
     "t": "E a novidade número dez, a minha favorita: a polícia aprendeu a te procurar.",
     "c": null,
     "v": "gta5",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_17.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/trailer_lancamento.mp4",
+     "inicio": 46.35,
+     "dur": 2.8
+    }
    },
    {
     "t": "No GTA 5, a fuga era sempre a mesma: quebra a linha de visão, se esconde num beco, ou passa na Los Santos Customs e pinta o carro. Pronto, sumiu.",
@@ -1126,7 +1195,10 @@
      "l": "SEIS ESTRELAS"
     },
     "v": "seis",
-    "img": "clips/fonte/rockstar_shots/shots/People/Lucia Caminos/Lucia_Caminos_07.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/rockstar_videos/loops/lucia_carro_noite.mp4",
+     "loop": true
+    }
    },
    {
     "t": "E a polícia identifica você pela roupa, pelo rosto e pelo carro. Trocar de roupa e de carro passa a fazer parte da fuga.",
@@ -1209,7 +1281,10 @@
      "b": "isso é GTA 6"
     },
     "v": "roupa",
-    "img": "clips/fonte/rockstar_shots/shots/People/Jason and Lucia/Jason_and_Lucia_09.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/rockstar_videos/loops/assalto_loja.mp4",
+     "loop": true
+    }
    }
   ],
   "hl": [
@@ -1259,7 +1334,10 @@
      "k": "cta"
     },
     "v": "",
-    "img": "clips/fonte/rockstar_shots/shots/Places/Vice City/Vice_City_08.jpg"
+    "clip": {
+     "arquivo": "clips/fonte/rockstar_videos/loops/jason_neon.mp4",
+     "loop": true
+    }
    }
   ],
   "hl": [
