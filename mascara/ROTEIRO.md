@@ -15,3 +15,16 @@
 - Título-gancho: "Você sobreviveria ao assassino da máscara?" (ou "…ao assassino do acampamento?").
 - Erros possíveis: acampar ignorando a placa "NÃO ACAMPE AQUI"; nadar no lago à noite; se separar ("vou só pegar lenha" → só sobra o boné do Juca); correr e tropeçar no nada enquanto o vilão só anda (seta "ELE SÓ ANDA!"); se esconder no armário da cabana.
 - O vilão aparece atrás da fogueira sem ninguém notar (quadro `estilo_ep6_a.jpg`).
+
+### Sugestão de roteiro completo (17/11/2026 — só vale se o usuário aprovar ou reescrever)
+1. Você sobreviveria ao assassino da máscara? *(gancho do título)*
+2. É sexta-feira 13, e Pedrinho foi acampar com os amigos no Lago Cristal.
+3. Na entrada tinha uma placa: "Não acampe aqui". Eles acamparam ali mesmo. → ✗ ERRO Nº 1
+4. Na fogueira, o Juca contou a história de um assassino de máscara que vive no lago. Todo mundo riu. *(o vilão aparece atrás da fogueira e ninguém vê)*
+5. Até que o Juca foi pegar lenha sozinho. E só o boné dele voltou. → ✗ ERRO Nº 2 (se separar)
+6. Pedrinho, claro, achou que era brincadeira e foi procurar o Juca no escuro. → ✗ ERRO Nº 3, seta "O CARRO TÁ AQUI!"
+7. Lá estava ele. O assassino só anda, mas o Pedrinho corre e tropeça no nada. → seta "ELE SÓ ANDA!"
+8. Ele se esconde no armário da cabana, com a respiração mais alta do acampamento. → ✗ ÚLTIMO ERRO
+9. Assim, Pedrinho vira mais uma lenda do Lago Cristal. *(ano seguinte: a Bia conta a história dele na fogueira)*
+10. E aí, quem o Pedrinho enfrenta agora? E você viu os três feijões no acampamento? Comenta aí.
+(≈ 130 palavras ≈ 55 s)
