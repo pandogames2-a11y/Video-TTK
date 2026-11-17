@@ -93,6 +93,17 @@ for i, x in voice.items():
         if len(ws) == len(toks):
             for w, (a, b) in zip(toks, ws): words.append({'seg': g['scene'], 'who': 'narr', 'text': w, 't0': round(g['vstart'] + a, 3), 't1': round(g['vstart'] + b, 3)})
             continue
+        st = S[i].get('say', S[i]['text']).split()
+        if len(ws) == len(st):   # caption differs from the spoken text (e.g. "2%" said as "dois por cento"): match equal words, spread the rest
+            import difflib
+            sm = difflib.SequenceMatcher(None, [x.lower() for x in toks], [x.lower() for x in st], autojunk=False)
+            for op, a1, a2, b1, b2 in sm.get_opcodes():
+                if op == 'equal':
+                    for k in range(a2 - a1): words.append({'seg': g['scene'], 'who': 'narr', 'text': toks[a1 + k], 't0': round(g['vstart'] + ws[b1 + k][0], 3), 't1': round(g['vstart'] + ws[b1 + k][1], 3)})
+                elif a2 > a1:
+                    ta = ws[b1][0] if b2 > b1 else ws[max(0, b1 - 1)][1]; tb = ws[b2 - 1][1] if b2 > b1 else ta + 0.2
+                    for k in range(a2 - a1): words.append({'seg': g['scene'], 'who': 'narr', 'text': toks[a1 + k], 't0': round(g['vstart'] + ta + (tb - ta) * k / (a2 - a1), 3), 't1': round(g['vstart'] + ta + (tb - ta) * (k + 1) / (a2 - a1), 3)})
+            continue
         print('aviso: palavras não batem em', g['scene'], len(ws), len(toks))
     g = segs[i]; env = np.convolve(np.abs(x), np.ones(441) / 441, 'same'); on = np.where(env > env.max() * 0.08)[0]
     a, b = on[0] / SR, on[-1] / SR

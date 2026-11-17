@@ -1,13 +1,81 @@
 [
-  {"scene": "title", "voice": "narr", "text": "Você sobreviveria ao assassino da máscara?", "lead": 0.8, "tail": 0.6},
-  {"scene": "arrive", "voice": "narr", "text": "Sexta-feira 13. E o gênio do Pedrinho resolveu acampar com os amigos no Lago Cristal. Ótima ideia.", "say": "Sexta-feira treze. E o gênio do Pedrinho resolveu acampar com os amigos no Lago Cristal. Ótima ideia.", "lead": 0.3, "tail": 0.4},
-  {"scene": "sign", "voice": "narr", "text": "Na entrada tinha uma placa: \"Não acampe aqui\". E os neandertais acamparam ali mesmo. Claro.", "lead": 0.2, "tail": 0.5},
-  {"scene": "fire", "voice": "narr", "text": "Na fogueira, o Juca contou a história do assassino de máscara que vive no lago. Todo mundo riu. Menos o cara de máscara atrás da fogueira.", "lead": 0.3, "tail": 0.8},
-  {"scene": "wood", "voice": "narr", "text": "Juca queria visitar Jesus, então ele foi pegar lenha sozinho. E só o boné dele voltou.", "lead": 0.2, "tail": 0.9},
-  {"scene": "search", "voice": "narr", "text": "E o Pedrinho? Achou que era brincadeira, claro. Foi procurar o Juca com a lanterna do celular. Com 2% de bateria.", "say": "E o Pedrinho? Achou que era brincadeira, claro. Foi procurar o Juca com a lanterna do celular. Com dois por cento de bateria.", "lead": 0.2, "tail": 0.5},
-  {"scene": "chase", "voice": "narr", "text": "Lá estava ele. O assassino nem corre, só anda. E aquele animal, claro, vai tropeçar, né? Porque eles sempre tropeçam no nada. No nada!", "lead": 0.5, "tail": 0.6},
-  {"scene": "hide", "voice": "narr", "text": "Aí ele se esconde no armário da cabana, respirando mais alto que um búfalo. Esse animal não sabe respirar pelo nariz.", "lead": 0.2, "tail": 1.4},
-  {"scene": "end", "voice": "narr", "text": "Pronto. Pedrinho virou mais uma lenda do Lago Cristal.", "lead": 0.4, "tail": 0.6},
-  {"scene": "cta", "voice": "narr", "text": "E aí, quem o Pedrinho enfrenta agora?", "lead": 0.2, "tail": 0.3},
-  {"scene": "feijoes", "voice": "narr", "text": "E você viu os três feijões no acampamento? Comenta aí.", "lead": 0.2, "tail": 1.0}
+ {
+  "scene": "title",
+  "voice": "narr",
+  "text": "Você sobreviveria ao assassino da máscara?",
+  "lead": 0.8,
+  "tail": 0.6
+ },
+ {
+  "scene": "arrive",
+  "voice": "narr",
+  "text": "Sexta-feira 13. E o gênio do Pedrinho resolveu acampar com os amigos no Lago Cristal. Ótima ideia.",
+  "say": "Sexta-feira treze. E o gênio do Pedrinho resolveu acampar com os amigos no Lago Cristal. Ótima ideia.",
+  "lead": 0.2,
+  "tail": 0.25
+ },
+ {
+  "scene": "sign",
+  "voice": "narr",
+  "text": "Na entrada tinha uma placa: \"Não acampe aqui\". E os neandertais acamparam ali mesmo. Claro.",
+  "lead": 0.2,
+  "tail": 0.25
+ },
+ {
+  "scene": "fire",
+  "voice": "narr",
+  "text": "Na fogueira, o Juca contou a história do assassino de máscara que vive no lago. Todo mundo riu. Menos o cara de máscara atrás da fogueira.",
+  "lead": 0.2,
+  "tail": 0.55
+ },
+ {
+  "scene": "wood",
+  "voice": "narr",
+  "text": "Juca queria visitar Jesus, então ele foi pegar lenha sozinho. E só o boné dele voltou.",
+  "lead": 0.2,
+  "tail": 0.65
+ },
+ {
+  "scene": "search",
+  "voice": "narr",
+  "text": "E o Pedrinho? Achou que era brincadeira, claro. Foi procurar o Juca com a lanterna do celular. Com 2% de bateria.",
+  "say": "E o Pedrinho? Achou que era brincadeira, claro. Foi procurar o Juca com a lanterna do celular. Com dois por cento de bateria.",
+  "lead": 0.2,
+  "tail": 0.25
+ },
+ {
+  "scene": "chase",
+  "voice": "narr",
+  "text": "Lá estava ele. O assassino nem corre, só anda. E aquele animal, claro, vai tropeçar, né? Porque eles sempre tropeçam no nada. No nada!",
+  "lead": 0.2,
+  "tail": 0.35
+ },
+ {
+  "scene": "hide",
+  "voice": "narr",
+  "text": "Aí ele se esconde no armário da cabana, respirando mais alto que um búfalo. Esse animal não sabe respirar pelo nariz.",
+  "lead": 0.2,
+  "tail": 1.15
+ },
+ {
+  "scene": "end",
+  "voice": "narr",
+  "text": "Pronto. Pedrinho virou mais uma lenda do Lago Cristal.",
+  "lead": 0.2,
+  "tail": 0.35
+ },
+ {
+  "scene": "cta",
+  "voice": "narr",
+  "text": "E aí, quem o Pedrinho enfrenta agora?",
+  "lead": 0.2,
+  "tail": 0.25
+ },
+ {
+  "scene": "feijoes",
+  "voice": "narr",
+  "text": "E você viu os três feijões no acampamento? Comenta aí.",
+  "lead": 0.2,
+  "tail": 0.75
+ }
 ]
