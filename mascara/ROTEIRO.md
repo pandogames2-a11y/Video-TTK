@@ -20,11 +20,11 @@
 1. Você sobreviveria ao assassino da máscara? *(gancho do título)*
 2. É sexta-feira 13, e Pedrinho foi acampar com os amigos no Lago Cristal.
 3. Na entrada tinha uma placa: "Não acampe aqui". E os neandertais acamparam ali mesmo. → ✗ ERRO Nº 1
-4. Na fogueira, o Juca contou a história de um assassino de máscara que vive no lago. Todo mundo riu. *(o vilão aparece atrás da fogueira e ninguém vê)*
+4. Na fogueira, o Juca contou a história de um assassino de máscara que vive no lago. Todo mundo riu. Menos o cara de máscara atrás da fogueira. *(piada nova; o vilão aparece atrás da fogueira e ninguém vê)*
 5. Juca queria visitar Jesus, então ele foi pegar lenha sozinho. E só o boné dele voltou. → ✗ ERRO Nº 2 (se separar)
-6. Pedrinho, claro, achou que era brincadeira e foi procurar o Juca no escuro. → ✗ ERRO Nº 3, seta "O CARRO TÁ AQUI!"
-7. Lá estava ele. O assassino só anda, mas o Pedrinho corre e tropeça no nada. → seta "ELE SÓ ANDA!"
-8. Ele se esconde no armário da cabana, com a respiração mais alta do acampamento. → ✗ ÚLTIMO ERRO
+6. Pedrinho, claro, achou que era brincadeira e foi procurar o Juca no escuro. Com a lanterna do celular. Com 2% de bateria. *(piada nova)* → ✗ ERRO Nº 3, seta "O CARRO TÁ AQUI!"
+7. Lá estava ele. O assassino só anda, mas o Pedrinho corre e tropeça no nada. Literalmente no nada. *(piada nova)* → seta "ELE SÓ ANDA!"
+8. Ele se esconde no armário da cabana, com a respiração mais alta do que a de um búfalo. Esse animal não sabe respirar pelo nariz. → ✗ ÚLTIMO ERRO
 9. Assim, Pedrinho vira mais uma lenda do Lago Cristal. *(ano seguinte: a Bia conta a história dele na fogueira)*
 10. E aí, quem o Pedrinho enfrenta agora? E você viu os três feijões no acampamento? Comenta aí.
-(≈ 130 palavras ≈ 55 s)
+(≈ 167 palavras ≈ 1:05 — passa um pouco de 1 min; dá para cortar uma piada)
