@@ -21,7 +21,7 @@
 2. É sexta-feira 13, e Pedrinho foi acampar com os amigos no Lago Cristal.
 3. Na entrada tinha uma placa: "Não acampe aqui". E os neandertais acamparam ali mesmo. → ✗ ERRO Nº 1
 4. Na fogueira, o Juca contou a história de um assassino de máscara que vive no lago. Todo mundo riu. *(o vilão aparece atrás da fogueira e ninguém vê)*
-5. Até que o Juca foi pegar lenha sozinho. E só o boné dele voltou. → ✗ ERRO Nº 2 (se separar)
+5. Juca queria visitar Jesus, então ele foi pegar lenha sozinho. E só o boné dele voltou. → ✗ ERRO Nº 2 (se separar)
 6. Pedrinho, claro, achou que era brincadeira e foi procurar o Juca no escuro. → ✗ ERRO Nº 3, seta "O CARRO TÁ AQUI!"
 7. Lá estava ele. O assassino só anda, mas o Pedrinho corre e tropeça no nada. → seta "ELE SÓ ANDA!"
 8. Ele se esconde no armário da cabana, com a respiração mais alta do acampamento. → ✗ ÚLTIMO ERRO
