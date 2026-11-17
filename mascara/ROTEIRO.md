@@ -34,10 +34,10 @@
 2. Sexta-feira 13. E o gênio do Pedrinho resolveu acampar com os amigos no Lago Cristal. Ótima ideia.
 3. Na entrada tinha uma placa: "Não acampe aqui". E os neandertais acamparam ali mesmo. Claro. → ✗ ERRO Nº 1
 4. Na fogueira, o Juca contou a história do assassino de máscara que vive no lago. Todo mundo riu. Menos o cara de máscara atrás da fogueira. *(ninguém vê o vilão)*
-5. Juca queria visitar Jesus, então ele foi pegar lenha sozinho. No escuro. Na sexta-feira 13. E só o boné dele voltou. → ✗ ERRO Nº 2
-6. E o Pedrinho? Achou que era brincadeira, claro. Foi procurar o Juca com a lanterna do celular. Com 2% de bateria. Parabéns. → ✗ ERRO Nº 3, seta "O CARRO TÁ AQUI!"
+5. Juca queria visitar Jesus, então ele foi pegar lenha sozinho. E só o boné dele voltou. → ✗ ERRO Nº 2
+6. E o Pedrinho? Achou que era brincadeira, claro. Foi procurar o Juca com a lanterna do celular. Com 2% de bateria. → ✗ ERRO Nº 3, seta "O CARRO TÁ AQUI!"
 7. Lá estava ele. O assassino nem corre, só anda. E aquele animal, claro, vai tropeçar, né? Porque eles sempre tropeçam no nada. NO NADA! *(gritando)* → seta "ELE SÓ ANDA!"
 8. Aí ele se esconde no armário da cabana, respirando mais alto que um búfalo. Esse animal não sabe respirar pelo nariz. → ✗ ÚLTIMO ERRO
-9. Pronto. Pedrinho virou mais uma lenda do Lago Cristal. Quem diria.
+9. Pronto. Pedrinho virou mais uma lenda do Lago Cristal.
 10. E aí, quem o Pedrinho enfrenta agora? E você viu os três feijões no acampamento? Comenta aí.
-(≈ 180 palavras ≈ 1:10)
+(≈ 172 palavras ≈ 1:00 — cortes aprovados pelo usuário)
