@@ -1,0 +1,1206 @@
+[
+{
+"seg": "title",
+"who": "narr",
+"text": "Você",
+"t0": 0.808,
+"t1": 1.011
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "sobreviveria",
+"t0": 1.062,
+"t1": 1.534
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "ao",
+"t0": 1.653,
+"t1": 1.788
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "assassino",
+"t0": 1.821,
+"t1": 2.193
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "da",
+"t0": 2.286,
+"t1": 2.421
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "máscara?",
+"t0": 2.455,
+"t1": 2.86
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "Sexta-feira",
+"t0": 3.922,
+"t1": 4.375
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "13.",
+"t0": 4.488,
+"t1": 4.753
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "E",
+"t0": 4.819,
+"t1": 4.932
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "o",
+"t0": 4.96,
+"t1": 5.074
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "gênio",
+"t0": 5.102,
+"t1": 5.366
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "do",
+"t0": 5.432,
+"t1": 5.583
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "Pedrinho",
+"t0": 5.621,
+"t1": 5.999
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "resolveu",
+"t0": 6.093,
+"t1": 6.471
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "acampar",
+"t0": 6.565,
+"t1": 6.905
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "com",
+"t0": 6.99,
+"t1": 7.179
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "os",
+"t0": 7.226,
+"t1": 7.377
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "amigos",
+"t0": 7.415,
+"t1": 7.717
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "no",
+"t0": 7.792,
+"t1": 7.943
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "Lago",
+"t0": 7.981,
+"t1": 8.208
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "Cristal.",
+"t0": 8.264,
+"t1": 8.717
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "Ótima",
+"t0": 8.831,
+"t1": 9.095
+},
+{
+"seg": "arrive",
+"who": "narr",
+"text": "ideia.",
+"t0": 9.161,
+"t1": 9.539
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "Na",
+"t0": 10.32,
+"t1": 10.465
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "entrada",
+"t0": 10.502,
+"t1": 10.83
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "tinha",
+"t0": 10.911,
+"t1": 11.166
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "uma",
+"t0": 11.23,
+"t1": 11.412
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "placa:",
+"t0": 11.458,
+"t1": 11.713
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "\"Não",
+"t0": 11.776,
+"t1": 11.959
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "acampe",
+"t0": 12.004,
+"t1": 12.296
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "aqui\".",
+"t0": 12.368,
+"t1": 12.696
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "E",
+"t0": 12.778,
+"t1": 12.887
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "os",
+"t0": 12.915,
+"t1": 13.06
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "neandertais",
+"t0": 13.097,
+"t1": 13.57
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "acamparam",
+"t0": 13.689,
+"t1": 14.089
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "ali",
+"t0": 14.19,
+"t1": 14.372
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "mesmo.",
+"t0": 14.417,
+"t1": 14.781
+},
+{
+"seg": "sign",
+"who": "narr",
+"text": "Claro.",
+"t0": 14.872,
+"t1": 15.237
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "Na",
+"t0": 16.21,
+"t1": 16.343
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "fogueira,",
+"t0": 16.377,
+"t1": 16.811
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "o",
+"t0": 16.92,
+"t1": 17.02
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "Juca",
+"t0": 17.045,
+"t1": 17.246
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "contou",
+"t0": 17.296,
+"t1": 17.563
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "a",
+"t0": 17.63,
+"t1": 17.73
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "história",
+"t0": 17.756,
+"t1": 18.09
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "do",
+"t0": 18.173,
+"t1": 18.307
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "assassino",
+"t0": 18.34,
+"t1": 18.708
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "de",
+"t0": 18.8,
+"t1": 18.934
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "máscara",
+"t0": 18.967,
+"t1": 19.268
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "que",
+"t0": 19.343,
+"t1": 19.51
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "vive",
+"t0": 19.552,
+"t1": 19.752
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "no",
+"t0": 19.803,
+"t1": 19.936
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "lago.",
+"t0": 19.97,
+"t1": 20.271
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "Todo",
+"t0": 20.346,
+"t1": 20.546
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "mundo",
+"t0": 20.596,
+"t1": 20.83
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "riu.",
+"t0": 20.889,
+"t1": 21.156
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "Menos",
+"t0": 21.223,
+"t1": 21.457
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "o",
+"t0": 21.515,
+"t1": 21.616
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "cara",
+"t0": 21.641,
+"t1": 21.841
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "de",
+"t0": 21.891,
+"t1": 22.025
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "máscara",
+"t0": 22.059,
+"t1": 22.359
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "atrás",
+"t0": 22.435,
+"t1": 22.669
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "da",
+"t0": 22.727,
+"t1": 22.861
+},
+{
+"seg": "fire",
+"who": "narr",
+"text": "fogueira.",
+"t0": 22.894,
+"t1": 23.329
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "Juca",
+"t0": 24.515,
+"t1": 24.721
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "queria",
+"t0": 24.772,
+"t1": 25.046
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "visitar",
+"t0": 25.115,
+"t1": 25.423
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "Jesus,",
+"t0": 25.5,
+"t1": 25.843
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "então",
+"t0": 25.928,
+"t1": 26.168
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "ele",
+"t0": 26.228,
+"t1": 26.399
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "foi",
+"t0": 26.442,
+"t1": 26.613
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "pegar",
+"t0": 26.656,
+"t1": 26.896
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "lenha",
+"t0": 26.956,
+"t1": 27.196
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "sozinho.",
+"t0": 27.256,
+"t1": 27.667
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "E",
+"t0": 27.77,
+"t1": 27.872
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "só",
+"t0": 27.898,
+"t1": 28.035
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "o",
+"t0": 28.069,
+"t1": 28.172
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "boné",
+"t0": 28.198,
+"t1": 28.403
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "dele",
+"t0": 28.455,
+"t1": 28.66
+},
+{
+"seg": "wood",
+"who": "narr",
+"text": "voltou.",
+"t0": 28.712,
+"t1": 29.088
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "E",
+"t0": 30.358,
+"t1": 30.47
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "o",
+"t0": 30.497,
+"t1": 30.609
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "Pedrinho?",
+"t0": 30.637,
+"t1": 31.122
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "Achou",
+"t0": 31.243,
+"t1": 31.504
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "que",
+"t0": 31.569,
+"t1": 31.755
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "era",
+"t0": 31.802,
+"t1": 31.988
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "brincadeira,",
+"t0": 32.035,
+"t1": 32.631
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "claro.",
+"t0": 32.78,
+"t1": 33.153
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "Foi",
+"t0": 33.246,
+"t1": 33.433
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "procurar",
+"t0": 33.479,
+"t1": 33.852
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "o",
+"t0": 33.945,
+"t1": 34.057
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "Juca",
+"t0": 34.085,
+"t1": 34.308
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "com",
+"t0": 34.364,
+"t1": 34.551
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "a",
+"t0": 34.597,
+"t1": 34.709
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "lanterna",
+"t0": 34.737,
+"t1": 35.11
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "do",
+"t0": 35.203,
+"t1": 35.352
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "celular.",
+"t0": 35.389,
+"t1": 35.836
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "Com",
+"t0": 35.948,
+"t1": 36.135
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "2%",
+"t0": 36.181,
+"t1": 36.293
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "de",
+"t0": 36.321,
+"t1": 36.47
+},
+{
+"seg": "search",
+"who": "narr",
+"text": "bateria.",
+"t0": 36.507,
+"t1": 36.955
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "Lá",
+"t0": 38.177,
+"t1": 38.332
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "estava",
+"t0": 38.371,
+"t1": 38.682
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "ele.",
+"t0": 38.759,
+"t1": 39.07
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "O",
+"t0": 39.148,
+"t1": 39.264
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "assassino",
+"t0": 39.293,
+"t1": 39.72
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "nem",
+"t0": 39.827,
+"t1": 40.021
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "corre,",
+"t0": 40.07,
+"t1": 40.458
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "só",
+"t0": 40.555,
+"t1": 40.71
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "anda.",
+"t0": 40.749,
+"t1": 41.098
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "E",
+"t0": 41.186,
+"t1": 41.302
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "aquele",
+"t0": 41.331,
+"t1": 41.642
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "animal,",
+"t0": 41.72,
+"t1": 42.147
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "claro,",
+"t0": 42.254,
+"t1": 42.642
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "vai",
+"t0": 42.739,
+"t1": 42.933
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "tropeçar,",
+"t0": 42.981,
+"t1": 43.486
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "né?",
+"t0": 43.612,
+"t1": 43.884
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "Porque",
+"t0": 43.952,
+"t1": 44.263
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "eles",
+"t0": 44.34,
+"t1": 44.573
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "sempre",
+"t0": 44.632,
+"t1": 44.942
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "tropeçam",
+"t0": 45.02,
+"t1": 45.408
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "no",
+"t0": 45.505,
+"t1": 45.66
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "nada.",
+"t0": 45.699,
+"t1": 46.049
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "No",
+"t0": 46.136,
+"t1": 46.291
+},
+{
+"seg": "chase",
+"who": "narr",
+"text": "nada!",
+"t0": 46.33,
+"t1": 46.679
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "Aí",
+"t0": 47.661,
+"t1": 47.81
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "ele",
+"t0": 47.848,
+"t1": 48.035
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "se",
+"t0": 48.082,
+"t1": 48.231
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "esconde",
+"t0": 48.269,
+"t1": 48.606
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "no",
+"t0": 48.69,
+"t1": 48.839
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "armário",
+"t0": 48.877,
+"t1": 49.214
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "da",
+"t0": 49.298,
+"t1": 49.448
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "cabana,",
+"t0": 49.485,
+"t1": 49.897
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "respirando",
+"t0": 50.0,
+"t1": 50.449
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "mais",
+"t0": 50.561,
+"t1": 50.785
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "alto",
+"t0": 50.842,
+"t1": 51.066
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "que",
+"t0": 51.122,
+"t1": 51.309
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "um",
+"t0": 51.356,
+"t1": 51.506
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "búfalo.",
+"t0": 51.543,
+"t1": 51.955
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "Esse",
+"t0": 52.058,
+"t1": 52.282
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "animal",
+"t0": 52.339,
+"t1": 52.638
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "não",
+"t0": 52.713,
+"t1": 52.9
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "sabe",
+"t0": 52.947,
+"t1": 53.171
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "respirar",
+"t0": 53.227,
+"t1": 53.602
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "pelo",
+"t0": 53.695,
+"t1": 53.92
+},
+{
+"seg": "hide",
+"who": "narr",
+"text": "nariz.",
+"t0": 53.976,
+"t1": 54.35
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "Pronto.",
+"t0": 56.316,
+"t1": 56.669
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "Pedrinho",
+"t0": 56.757,
+"t1": 57.077
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "virou",
+"t0": 57.157,
+"t1": 57.381
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "mais",
+"t0": 57.437,
+"t1": 57.629
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "uma",
+"t0": 57.677,
+"t1": 57.837
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "lenda",
+"t0": 57.877,
+"t1": 58.102
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "do",
+"t0": 58.158,
+"t1": 58.286
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "Lago",
+"t0": 58.318,
+"t1": 58.51
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "Cristal.",
+"t0": 58.558,
+"t1": 58.942
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "E",
+"t0": 59.923,
+"t1": 60.018
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "aí,",
+"t0": 60.042,
+"t1": 60.264
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "quem",
+"t0": 60.32,
+"t1": 60.51
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "o",
+"t0": 60.557,
+"t1": 60.652
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "Pedrinho",
+"t0": 60.676,
+"t1": 60.993
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "enfrenta",
+"t0": 61.072,
+"t1": 61.389
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "agora?",
+"t0": 61.469,
+"t1": 61.786
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "E",
+"t0": 62.476,
+"t1": 62.58
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "você",
+"t0": 62.606,
+"t1": 62.813
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "viu",
+"t0": 62.865,
+"t1": 63.038
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "os",
+"t0": 63.081,
+"t1": 63.22
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "três",
+"t0": 63.254,
+"t1": 63.462
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "feijões",
+"t0": 63.514,
+"t1": 63.825
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "no",
+"t0": 63.903,
+"t1": 64.041
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "acampamento?",
+"t0": 64.076,
+"t1": 64.63
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "Comenta",
+"t0": 64.768,
+"t1": 65.079
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "aí.",
+"t0": 65.157,
+"t1": 65.399
+}
+]

@@ -1,0 +1,95 @@
+{
+ "total": 66.533,
+ "fps": 30,
+ "segs": [
+  {
+   "scene": "title",
+   "voice": "narr",
+   "start": 0.0,
+   "dur": 3.622,
+   "vstart": 0.8,
+   "vdur": 2.222
+  },
+  {
+   "scene": "arrive",
+   "voice": "narr",
+   "start": 3.622,
+   "dur": 6.493,
+   "vstart": 3.922,
+   "vdur": 5.793
+  },
+  {
+   "scene": "sign",
+   "voice": "narr",
+   "start": 10.115,
+   "dur": 5.788,
+   "vstart": 10.315,
+   "vdur": 5.088
+  },
+  {
+   "scene": "fire",
+   "voice": "narr",
+   "start": 15.903,
+   "dur": 8.412,
+   "vstart": 16.203,
+   "vdur": 7.312
+  },
+  {
+   "scene": "wood",
+   "voice": "narr",
+   "start": 24.315,
+   "dur": 5.837,
+   "vstart": 24.515,
+   "vdur": 4.737
+  },
+  {
+   "scene": "search",
+   "voice": "narr",
+   "start": 30.152,
+   "dur": 7.519,
+   "vstart": 30.352,
+   "vdur": 6.819
+  },
+  {
+   "scene": "chase",
+   "voice": "narr",
+   "start": 37.672,
+   "dur": 9.781,
+   "vstart": 38.172,
+   "vdur": 8.681
+  },
+  {
+   "scene": "hide",
+   "voice": "narr",
+   "start": 47.453,
+   "dur": 8.451,
+   "vstart": 47.653,
+   "vdur": 6.851
+  },
+  {
+   "scene": "end",
+   "voice": "narr",
+   "start": 55.904,
+   "dur": 3.815,
+   "vstart": 56.304,
+   "vdur": 2.815
+  },
+  {
+   "scene": "cta",
+   "voice": "narr",
+   "start": 59.719,
+   "dur": 2.551,
+   "vstart": 59.919,
+   "vdur": 2.051
+  },
+  {
+   "scene": "feijoes",
+   "voice": "narr",
+   "start": 62.27,
+   "dur": 4.263,
+   "vstart": 62.47,
+   "vdur": 3.063
+  }
+ ],
+ "fall": 43.331
+}

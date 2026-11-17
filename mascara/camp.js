@@ -80,6 +80,7 @@ function killer(x, y, o = {}) {
   line([108, by + 30, 150, by + 70 - raise * 120, hR[0], hR[1]], 15);
   if (o.machete !== false) { g.save(); g.translate(hR[0], hR[1]); g.rotate(-0.25 - raise * 0.5); rect(-11, -6, 22, 54, '#2a1c14', 6, 4); shape('#c9cfd8', () => { g.moveTo(-14, -6); g.lineTo(16, -6); g.quadraticCurveTo(30, -150, 6, -230); g.quadraticCurveTo(-18, -160, -14, -6); g.closePath(); }, 5); line([6, -30, 10, -200], 3, '#ffffff'); g.restore(); }
   ell(hR[0], hR[1], 22, 22, '#5d5a58', 0, 5);
+  if (o.back) { line([-110, by - 80, 110, by - 80], 7); g.restore(); return; }   // seen from behind: just the mask strap
   // hockey mask
   const my = by - 60;
   shape('#ecebe2', () => { g.moveTo(-82, my - 70); g.quadraticCurveTo(0, my - 120, 82, my - 70); g.quadraticCurveTo(96, my + 30, 52, my + 96); g.quadraticCurveTo(0, my + 130, -52, my + 96); g.quadraticCurveTo(-96, my + 30, -82, my - 70); }, 6);
