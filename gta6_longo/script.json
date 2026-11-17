@@ -831,9 +831,8 @@
     },
     "v": "cumprimentar",
     "clip": {
-     "arquivo": "clips/fonte/drive/gta5_nocopyright.mp4",
-     "inicio": 2195.0,
-     "dur": 9
+     "arquivo": "clips/fonte/rockstar_videos/loops/jason_neon.mp4",
+     "loop": true
     }
    },
    {

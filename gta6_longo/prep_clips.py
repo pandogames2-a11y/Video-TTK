@@ -59,7 +59,7 @@ for sg in SCRIPT:
             src = round(min(tela, avail), 2); speed = 1.0
         dur = round(src / speed, 2); tail = (not c.get('loop')) and dur < tela - 0.05   # se não cobrir a frase, entra um loop oficial em movimento
         rows.append(dict(id=cid, t0=a + LEAD, dur=dur, src=src, speed=round(speed, 2), arquivo=f, inicio=ini, fala=p['t']))
-        if not os.path.exists(f) or dur < 1.0: print('pulado:', cid, f); continue
+        if not os.path.exists(f) or dur < (0.5 if c.get('loop') else 1.0): print('pulado:', cid, f); continue
         out = f'clips/{cid}'; sig = json.dumps([f, ini, src, speed, c.get('crop'), tail, c.get('loop'), 'v2'], sort_keys=True)
         if os.path.exists(f'{out}/sig.json') and open(f'{out}/sig.json').read() == sig:
             n = len(glob.glob(f'{out}/f*.jpg')); tn = len(glob.glob(f'{out}/t*.jpg')); ready.append(dict(id=cid, seg=sg['id'], part=pi, src='gta5' if 'gta5' in f else 'stock' if 'mixkit' in f else 'gta6', n=n, lead=LEAD, tail=tail, tn=tn, loop=bool(c.get('loop')), cred=CRED.get(os.path.basename(f), '')))
