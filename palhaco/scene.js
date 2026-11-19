@@ -251,15 +251,9 @@ function sOutro(t) {   // who's next? + the 3 hidden beans
     const tc = W0('comenta', 'feijoes'); textOut('COMENTA AÍ! ↓', 540, 1260, 84, '#ffffff', { a: ss(tc - 0.2, tc, t), s: popS(t - tc + 0.2, 0.3) });
   }
 }
-function hook(t) {
-  const tw = WORDS.filter(w => w.seg === 'title'); const a = tw[0].t0 - 0.35, out = tw[tw.length - 1].t1 - 0.05, gone = out + 0.45;
-  if (t < a || t > gone) return;
-  const kin = clamp((t - a) / 0.3), sIn = kin < 1 ? kin + Math.sin(kin * Math.PI) * 0.18 : 1;
-  const s = sIn * (1 - ss(out, gone, t)); if (s <= 0.001) return;
-  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(540, 760); main.scale(s, s); main.textAlign = 'center'; main.lineJoin = 'round';
-  const tx = (str, y, size, fill) => { main.font = `900 ${size}px "Inter Display", Inter`; main.lineWidth = size * 0.18; main.strokeStyle = '#08061a'; main.strokeText(str, 0, y); main.fillStyle = fill; main.fillText(str, 0, y); };
-  tx('VOCÊ SOBREVIVERIA', -95, 96, '#ffffff'); tx('AO PALHAÇO', 20, 110, '#ff5a4a'); tx('DO BUEIRO?', 132, 112, '#ff5a4a');
-  main.restore();
+function hook(t) {   // the opening question (see titlefx.js)
+  const tw = WORDS.filter(w => w.seg === 'title');
+  titleFX(t, tw[0].t0 - 0.3, tw[tw.length - 1].t1 - 0.05, [{ txt: 'VOCÊ SOBREVIVERIA', size: 92, colors: ['#ffffff', '#d9e4ff'] }, { txt: 'AO PALHAÇO', size: 118, colors: ['#ff8a5a', '#e0241c'] }, { txt: 'DO BUEIRO?', size: 118, colors: ['#ff8a5a', '#e0241c'] }]);
 }
 const SCENES = { title: sTitle, play: sPlay, drain: sDrain, offer: sOffer, erro1: sErro1, juca: sJuca, home: sHome, bath: sBath, float: sFloat, cta: sOutro, feijoes: sOutro };
 const SHK = mk();
