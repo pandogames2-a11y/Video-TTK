@@ -44,9 +44,9 @@ const STAMPS = [[TL.err[0], 'ERRADO!', '#d8261c', 'ERRO Nº 1'], [TL.err[1], 'ER
 function stamps(t) {
   for (const [t0, txt, col, sub] of STAMPS) {
     const k = t - t0; if (k < 0 || k > 1.6) continue;
-    const s = k < 0.12 ? lerp(2.8, 1, ease(k / 0.12)) : 1 + 0.02 * Math.sin(Math.min(k, 0.4) * 30) * (1 - clamp(k / 0.4));
+    const s = k < 0.12 ? lerp(1.6, 1, ease(k / 0.12)) : 1 + 0.02 * Math.sin(Math.min(k, 0.4) * 30) * (1 - clamp(k / 0.4));
     const a = (k < 0.12 ? k / 0.12 : 1) * (1 - ss(1.3, 1.6, k));
-    main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.translate(540, 700); main.rotate(-0.16); main.scale(s, s);
+    main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.translate(540, 620); main.rotate(-0.16); main.scale(s, s);
     main.font = '900 150px "Inter Display", Inter'; const w = main.measureText(txt).width + 110;
     main.lineWidth = 16; main.strokeStyle = col; main.beginPath(); main.roundRect(-w / 2, -125, w, 250, 30); main.stroke();
     main.lineWidth = 6; main.beginPath(); main.roundRect(-w / 2 + 22, -103, w - 44, 206, 18); main.stroke();
@@ -60,6 +60,35 @@ function stamps(t) {
   }
 }
 function shakeAmt(t) { let a = 0; for (const [t0] of STAMPS) { const k = t - t0; if (k >= 0.08 && k < 0.45) a = Math.max(a, 16 * (1 - (k - 0.08) / 0.37)); } return a; }
+
+
+// sound effects shown as pictures (no text): a water splash, a padlock snapping shut, a balloon bursting
+function splash(cam, wx, wy, k) {
+  const [x, y] = screenOf(cam, wx, wy); main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = 1 - clamp((k - 0.5) / 0.4);
+  main.fillStyle = 'rgba(170,200,255,0.9)'; main.strokeStyle = '#08061a'; main.lineWidth = 4;
+  for (let i = 0; i < 14; i++) { const a = -Math.PI / 2 + (i / 13 - 0.5) * 2.2, v = 520 + (i * 53) % 260; const px = x + Math.cos(a) * v * k * cam.z * 0.8, py = y + (Math.sin(a) * v * k + 900 * k * k) * cam.z * 0.8;
+    main.beginPath(); main.ellipse(px, py, 10 * cam.z, 16 * cam.z, a + Math.PI / 2, 0, 7); main.fill(); main.stroke(); }
+  for (let i = 0; i < 5; i++) { main.beginPath(); main.moveTo(x + (i - 2) * 50, y - 20); main.lineTo(x + (i - 2) * 60, y - 20 - 160 * Math.min(1, k * 4)); main.strokeStyle = 'rgba(220,235,255,0.8)'; main.lineWidth = 6; main.stroke(); }
+  main.restore();
+}
+function padlock(cam, wx, wy, k) {
+  const [x, y] = screenOf(cam, wx, wy), s = popS(k, 0.2) * (1 - ss(1.7, 2.1, k)), shut = clamp((k - 0.25) / 0.15);
+  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(x, y); main.scale(s, s);
+  main.lineWidth = 16; main.strokeStyle = '#08061a'; main.beginPath(); main.arc(0, -40 + (1 - shut) * -30, 40, Math.PI, 0); main.stroke();
+  main.lineWidth = 9; main.strokeStyle = '#c9ccd2'; main.stroke();
+  main.fillStyle = '#f2c22a'; main.strokeStyle = '#08061a'; main.lineWidth = 7; main.beginPath(); main.roundRect(-60, -45, 120, 100, 16); main.fill(); main.stroke();
+  main.fillStyle = '#08061a'; main.beginPath(); main.arc(0, -5, 12, 0, 7); main.fill(); main.fillRect(-5, 0, 10, 28);
+  if (shut >= 1 && k < 0.7) { main.strokeStyle = '#ffffff'; main.lineWidth = 6; for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2; main.beginPath(); main.moveTo(Math.cos(a) * 90, Math.sin(a) * 90); main.lineTo(Math.cos(a) * 125, Math.sin(a) * 125); main.stroke(); } }
+  main.restore();
+}
+function burst(cam, wx, wy, k) {   // the balloon bursts right by his ear: a white shock ring + red rubber shreds
+  const [x, y] = screenOf(cam, wx, wy); main.save(); main.setTransform(1, 0, 0, 1, 0, 0);
+  main.globalAlpha = 1 - clamp(k / 0.5); main.strokeStyle = '#ffffff'; main.lineWidth = 14; main.beginPath(); main.arc(x, y, 60 + k * 900, 0, 7); main.stroke();
+  main.globalAlpha = 1 - clamp((k - 0.3) / 0.5);
+  for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2 + 0.3, d = 80 + k * 700; main.save(); main.translate(x + Math.cos(a) * d, y + Math.sin(a) * d + 400 * k * k); main.rotate(a + k * 8);
+    main.fillStyle = '#d6261e'; main.strokeStyle = '#08061a'; main.lineWidth = 5; main.beginPath(); main.moveTo(-26, -8); main.lineTo(22, -14); main.lineTo(26, 6); main.lineTo(-18, 12); main.closePath(); main.fill(); main.stroke(); main.restore(); }
+  main.restore();
+}
 
 // ---------- scenes ----------
 function sTitle(t) {
@@ -140,7 +169,7 @@ function sJuca(t) {   // Juca goes to check the drain up close... and gets pulle
     if (gone) capItem(lerp(DRAIN_X + 120, DRAIN_X - 380, capT), CURB + 30 + Math.sin(t * 5) * 4, Math.sin(t * 3) * 0.1, 0.62);
   });
   if (t > SN - 0.15 && t < SN + 0.1) glowEyes(cam, DRAIN_X, CURB + 30, 1);
-  if (t > SN && t < SN + 0.6) textOut('SHLOOP!', 540, 1080, 110, '#ffffff', { s: popS(t - SN), rot: 0.08 });
+  if (t > SN - 0.05 && t < SN + 0.9) splash(cam, DRAIN_X + 60, CURB + 20, t - SN + 0.05);   // water bursts out of the drain as he's pulled in
   rain(t, cam); vignette(main, 0.6);
 }
 function sHome(t) {   // runs home, locks the door — ACERTOU!
@@ -153,7 +182,7 @@ function sHome(t) {   // runs home, locks the door — ACERTOU!
     capItem(lerp(DRAIN_X - 380, DRAIN_X - 600, clamp((t - T0('home')) / 6)), CURB + 30 + Math.sin(t * 5) * 4, Math.sin(t * 3) * 0.1, 0.62);
     if (run < 0.97) pedro(px, py, { s: ps, look: run > 0.5 ? [0, -0.3] : [-1, 0], mouth: 'o', sweat: true, walk: 1, phase: t * 16, jy: Math.abs(Math.sin(t * 16)) * 10, ...walkArms(t * 16, 1.4) });
   }, undefined, 0.35);
-  if (t > tTr + 0.4 && t < tTr + 1.4) textOut('CLIC!', screenOf(cam, DOOR.x + 120, 0)[0], screenOf(cam, 0, GY - 300)[1], 80, '#ffffff', { s: popS(t - tTr - 0.4) });
+  if (t > tTr + 0.1 && t < tTr + 2.2) padlock(cam, DOOR.x + 100, GY - 300, t - tTr - 0.1);
   rain(t, cam); vignette(main, 0.55);
 }
 // ---------- the bathroom ----------
@@ -180,9 +209,10 @@ function sBath(t) {   // red balloons come out of the sink drain; he puts his ea
   characters(cam, () => {
     const n = Math.floor(clamp((t - tSo) / 0.35, 0, 6));
     for (let i = 0; i < n; i++) { const k = t - tSo - i * 0.35; balloon(SINK.x + Math.sin(i * 2.1) * 60 + k * 30 * (i % 2 ? 1 : -1), SINK.y - 20 - Math.min(k, 3) * 300, 0.55, Math.sin(t * 2 + i) * 0.4); }
+    if (t > tEn && t < POP) balloon(SINK.x + 40, SINK.y - 16, lerp(0.15, 0.4, ss(tEn, POP, t)), 0);   // one more balloon inflating right at his ear...
     bean(lerp(800, 600, go), BF, { s: 1.0, tilt: -0.45 * go, look: go > 0.5 ? [-1, 0.6] : [-1, -0.3], mouth: 'o', armL: [-120, -230, -150, -130] });
   }, undefined, 0.3);
-  if (t > POP) { const k = t - POP; fade(0.85 * (1 - clamp(k / 0.25)), '255,40,30'); textOut('POP!', 540, 760, 180, '#ffffff', { s: popS(k, 0.15), rot: -0.1 }); fade(ss(POP + 0.3, TE('bath'), t)); }
+  if (t > POP) { const k = t - POP; fade(0.85 * (1 - clamp(k / 0.25)), '255,40,30'); burst(cam, SINK.x + 40, SINK.y - 120, k); fade(ss(POP + 0.3, TE('bath'), t)); }
 }
 function sFloat(t) {   // up in the stormy sky: Juca and Pedrinho hanging from red balloons
   const k = t - T0('float');
