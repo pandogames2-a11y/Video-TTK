@@ -1,0 +1,13 @@
+[
+ {"scene": "title", "voice": "narr", "text": "Você sobreviveria ao palhaço do bueiro?", "lead": 0.8, "tail": 0.5},
+ {"scene": "play", "voice": "narr", "text": "Dia de chuva. Pedrinho e o Juca resolveram brincar de barquinho de papel na rua.", "lead": 0.2, "tail": 0.3},
+ {"scene": "drain", "voice": "narr", "text": "O barquinho desceu a enxurrada e caiu direto no bueiro.", "lead": 0.2, "tail": 0.9},
+ {"scene": "offer", "voice": "narr", "text": "E lá de dentro, um palhaço ofereceu o barquinho de volta. E um balão.", "lead": 0.2, "tail": 0.5},
+ {"scene": "erro1", "voice": "narr", "text": "Qualquer pessoa normal sairia correndo. O Pedrinho estendeu a mão.", "lead": 0.2, "tail": 1.0},
+ {"scene": "juca", "voice": "narr", "text": "O Juca, o gênio, achou que palhaço nenhum cabe num bueiro. E foi conferir de perto.", "lead": 0.2, "tail": 1.4},
+ {"scene": "home", "voice": "narr", "text": "Aí o Pedrinho correu pra casa e trancou a porta. Parabéns, o primeiro acerto da vida dele.", "lead": 0.2, "tail": 0.5},
+ {"scene": "bath", "voice": "narr", "text": "Mas na hora do banho, o ralo da pia começou a soltar balões vermelhos. E ele foi encostar o ouvido pra escutar.", "lead": 0.2, "tail": 1.3},
+ {"scene": "float", "voice": "narr", "text": "Pronto. Agora o Pedrinho também flutua.", "lead": 0.3, "tail": 1.0},
+ {"scene": "cta", "voice": "narr", "text": "E aí, quem o Pedrinho enfrenta agora?", "lead": 0.2, "tail": 0.4},
+ {"scene": "feijoes", "voice": "narr", "text": "E você achou os três feijões? Comenta aí.", "lead": 0.2, "tail": 0.8}
+]

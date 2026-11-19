@@ -1,4 +1,4 @@
-"""EP6 (máscara de hóquei) audio: narration, sound effects, mix and timeline.
+"""EP7 (palhaço do bueiro) audio: narration, sound effects, mix and timeline.
 Default voice is the free local Piper voice (preview). Later: TTS=eleven for the final narrator.
 Writes audio/mix.wav, timeline.json (scene times) and audio/words.json (time of each spoken word)."""
 import json, wave, re, subprocess, os
@@ -151,51 +151,40 @@ def engine(a, b, amp=0.05):
     x = np.sign(np.sin(2 * np.pi * (38 + 6 * np.sin(kk * 3)) * kk)) * 0.5 + rng.standard_normal(n) * 0.2
     put(fx, f32(lowp(x, 300) * env * amp), a)
 def door_slam(at): thud(at, 0.3); click(at + 0.02, 0.15)
-# night ambience: crickets, wind, the lake, and the campfire crackle near the fire scenes
+# rain ambience the whole episode (inside the bathroom it's muffled), a low drone
 k = np.arange(N) / SR
-crick = np.zeros(N, np.float32)
-pulse = np.arange(int(0.035 * SR)) / SR; pw = f32(np.sin(np.pi * pulse / 0.035) ** 2 * np.sin(2 * np.pi * 3600 * pulse))
-for c in np.arange(0.3, N / SR - 1, 0.9):
-    for j in range(3): put(crick, pw * 0.006 * (0.7 + 0.3 * rng.random()), c + j * 0.06 + rng.random() * 0.05)
-mus += crick + f32(lowp(rng.standard_normal(N), 180) * 0.012)
-drone = (np.sin(2 * np.pi * 55 * k) + 0.5 * np.sin(2 * np.pi * 82.4 * k + np.sin(2 * np.pi * 0.2 * k))) * 0.03 * (0.6 + 0.4 * np.sin(2 * np.pi * 0.1 * k))
-mus += f32(drone)
-def crackle(a, b, amp=0.05):
-    for at in np.arange(a, b, 0.07):
-        if rng.random() < 0.45: n = int(0.02 * SR); put(fx, f32(band(rng.standard_normal(n), 1500, 7000) * np.exp(-np.arange(n) / SR * 200) * amp * rng.random()), at)
-    n = int((b - a) * SR); put(fx, f32(lowp(rng.standard_normal(n), 250) * 0.03), a)
-crackle(T0('fire'), TE('wood')); crackle(T0('search'), wT('procurar', 'search'), 0.03); crackle(T0('end'), TE('end'))
-# a light, ironic campfire tune at the start (ukulele-ish plucks)
-for j, f in enumerate([392, 494, 587, 494, 440, 523, 659, 523, 392, 494, 587, 784]):
-    put(mus, tone(f, 0.5, 0.03, 5), 0.6 + j * 0.36)
-# the car arriving + doors
-engine(T0('arrive'), T0('arrive') + 2.6); door_slam(T0('arrive') + 2.9); door_slam(T0('arrive') + 3.2)
-for pre, sc in [('acamparam', 'sign'), ('sozinho', 'wood'), ('procurar', 'search'), ('esconde', 'hide')]: buzz(wT(pre, sc) + 0.05)
-put(fx, f32(tone(880, 0.3, 0.05, 8)), wT('acamparam', 'sign') - 0.3); whoosh(wT('acamparam', 'sign') - 0.35, 0.4, 0.1)   # the tent pops up
-# "todo mundo riu" — little laughs; then the sting for the man behind the fire
-RIU = wT('riu', 'fire')
-for j in range(7):
-    kk = np.arange(int(0.11 * SR)) / SR; f = 300 + 120 * (j % 3) + 200 * np.sin(np.pi * kk / 0.11)
-    put(fx, f32(np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * np.sin(np.pi * kk / 0.11) * 0.03), RIU - 0.1 + j * 0.15)
-MENOS = wT('menos', 'fire'); sting(MENOS + 0.2, 0.17)
-# Juca walks into the woods, then... the cap flies back
-for at in np.arange(wT('então', 'wood'), wT('sozinho', 'wood') + 0.8, 0.34): step(at, 0.05)
-BONE = wT('boné', 'wood'); thud(BONE - 0.3, 0.1); whoosh(BONE - 0.25, 0.35, 0.1); thud(BONE + 0.15, 0.05)
-for j, f in enumerate([392, 370, 349, 330]): put(fx, f32(tone(f, 0.45 if j < 3 else 0.9, 0.04, 1.5)), TE('wood') - 1.9 + j * 0.35)   # sad trombone (very short)
-for at in np.arange(wT('procurar', 'search'), TE('search'), 0.38): step(at, 0.045)
-put(fx, f32(tone(1200, 0.15, 0.05, 20)), wT('lanterna', 'search')); put(fx, f32(tone(600, 0.35, 0.05, 6)), wT('bateria', 'search') + 0.2)   # flashlight click, low-battery beep
-LA = T0('chase') + 0.2; sting(LA, 0.22)
-for at in np.arange(wT('anda', 'chase') - 0.8, TE('chase'), 0.8): step(at, 0.09, False)   # slow heavy steps
-TROP = wT('tropeçar', 'chase')
-for at in np.arange(wT('aquele', 'chase'), TROP + 0.3, 0.16): step(at, 0.05)
-FALL = TROP + 0.35; thud(FALL, 0.35); whoosh(FALL - 0.25, 0.3, 0.08)
-NADA2 = wT('nada!', 'chase'); thud(NADA2, 0.2)
-for at in np.arange(T0('hide'), wT('esconde', 'hide') + 0.4, 0.15): step(at, 0.05)
-door_slam(wT('esconde', 'hide') + 0.5)
-breath(wT('respirando', 'hide') - 0.2, 10, 0.1, 0.5)
-kk = np.arange(int(1.0 * SR)) / SR; put(fx, f32(lowp(np.sign(np.sin(2 * np.pi * 70 * kk)) * np.sin(np.pi * kk) * 0.12, 500)), wT('búfalo', 'hide') + 0.1)   # buffalo "MUUH"
-creak(TE('hide') - 1.2, 0.9, 0.06); sting(TE('hide') - 0.5, 0.2)
-for j, f in enumerate([392, 370, 349, 330]): put(fx, f32(tone(f, 0.55 if j < 3 else 1.1, 0.06, 1.5)), wT('lenda', 'end') + j * 0.42)
+rainn = lowp(rng.standard_normal(N), 3500) * 0.03 + band(rng.standard_normal(N), 3000, 9000) * 0.012
+b0, b1 = T0('bath'), TE('bath')
+rainn[int(b0 * SR):int(b1 * SR)] = lowp(rainn[int(b0 * SR):int(b1 * SR)], 500) * 0.6
+mus += f32(rainn)
+mus += f32((np.sin(2 * np.pi * 55 * k) + 0.5 * np.sin(2 * np.pi * 82.4 * k + np.sin(2 * np.pi * 0.2 * k))) * 0.03 * (0.6 + 0.4 * np.sin(2 * np.pi * 0.1 * k)))
+def drops(a, b, amp=0.04):   # water dripping / gurgle
+    for at in np.arange(a, b, 0.11):
+        if rng.random() < 0.5: kk = np.arange(int(0.06 * SR)) / SR; f = 600 + 900 * rng.random() + 1500 * kk; put(fx, f32(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-kk * 60) * amp), at)
+def ding(at, amp=0.08):   # the "right answer" chime
+    put(fx, f32(tone(1047, 0.8, amp, 4)), at); put(fx, f32(tone(1319, 0.9, amp, 4)), at + 0.12); put(fx, f32(tone(1568, 1.0, amp, 4)), at + 0.24)
+def pop(at, amp=0.3):
+    n = int(0.08 * SR); put(fx, f32(band(rng.standard_normal(n), 300, 6000) * np.exp(-np.arange(n) / SR * 60) * amp), at); thud(at, 0.2)
+def giggle(at, amp=0.06):   # a creepy little "hehehe"
+    for j in range(4):
+        kk = np.arange(int(0.11 * SR)) / SR; f = 520 - 60 * j + 160 * np.sin(np.pi * kk / 0.11)
+        put(fx, f32(np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * np.sin(np.pi * kk / 0.11) * amp), at + j * 0.16)
+# an out-of-tune circus tune when the clown shows up
+for j, f in enumerate([523, 494, 523, 659, 587, 523, 494, 440]): put(mus, tone(f * 0.97, 0.45, 0.03, 4), T0('offer') + 0.2 + j * 0.3)
+drops(T0('drain'), TE('drain')); put(fx, f32(tone(300, 0.6, 0.05, 6)), wT('bueiro', 'drain') + 0.2)   # plop into the drain
+sting(TE('drain') - 0.6, 0.12); giggle(T0('offer') + 0.3)
+# ERRORS: the buzzer always plays together with the red ERRO card + red flash
+ERR = [wT('estendeu', 'erro1'), wT('conferir', 'juca'), wT('encostar', 'bath')]
+for at in ERR: buzz(at, 0.1); thud(at, 0.3)   # stamp hit + buzzer
+sting(ERR[0] + 0.5, 0.15)
+SNATCH = TE('juca') - 1.0; whoosh(SNATCH - 0.15, 0.35, 0.15); thud(SNATCH, 0.25); giggle(SNATCH + 0.3, 0.05)
+for at in np.arange(T0('home') + 0.1, wT('trancou', 'home'), 0.17): step(at, 0.05)
+door_slam(wT('trancou', 'home') + 0.1); click(wT('trancou', 'home') + 0.45, 0.15)
+ACERTO = wT('acerto', 'home'); ding(ACERTO); thud(ACERTO, 0.25)
+drops(T0('bath'), TE('bath'), 0.03)
+for j in range(5): put(fx, f32(tone(180 + j * 20, 0.2, 0.05, 10)), wT('soltar', 'bath') + j * 0.35)   # balloons squeaking out
+POP = TE('bath') - 0.7; pop(POP); sting(POP + 0.05, 0.15)
+for j, f in enumerate([392, 370, 349, 330]): put(fx, f32(tone(f, 0.55 if j < 3 else 1.1, 0.06, 1.5)), wT('flutua', 'float') + j * 0.42)
 for j, f in enumerate([523, 659, 784, 659, 523, 659]): put(mus, tone(f, 0.5, 0.03, 4), T0('cta') + 0.3 + j * 0.3)
 # ---- mix (narration ducks the bed) ----
 duck = np.ones(N, np.float32); env = np.convolve(np.abs(voc), np.ones(4410) / 4410, 'same'); duck -= np.clip(env * 6, 0, 0.5)
@@ -204,6 +193,6 @@ fade = int(0.5 * SR); mix[:fade] *= np.linspace(0, 1, fade); mix[int(TOTAL * SR)
 mix = mix / max(1e-6, np.abs(mix).max()) * 0.9
 with wave.open('audio/mix.wav', 'w') as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
-json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'fall': round(FALL, 3)}, open('timeline.json', 'w'), indent=1)
+json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'err': [round(x, 3) for x in ERR], 'snatch': round(SNATCH, 3), 'pop': round(POP, 3)}, open('timeline.json', 'w'), indent=1)
 for g in segs: print(f"{g['scene']:8s} start {g['start']:6.2f} dur {g['dur']:5.2f}")
 print('total', round(TOTAL, 2))

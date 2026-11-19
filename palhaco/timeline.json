@@ -1,0 +1,101 @@
+{
+ "total": 50.218,
+ "fps": 30,
+ "segs": [
+  {
+   "scene": "title",
+   "voice": "narr",
+   "start": 0.0,
+   "dur": 3.307,
+   "vstart": 0.8,
+   "vdur": 2.007
+  },
+  {
+   "scene": "play",
+   "voice": "narr",
+   "start": 3.307,
+   "dur": 4.83,
+   "vstart": 3.507,
+   "vdur": 4.33
+  },
+  {
+   "scene": "drain",
+   "voice": "narr",
+   "start": 8.138,
+   "dur": 4.04,
+   "vstart": 8.338,
+   "vdur": 2.94
+  },
+  {
+   "scene": "offer",
+   "voice": "narr",
+   "start": 12.178,
+   "dur": 4.492,
+   "vstart": 12.378,
+   "vdur": 3.792
+  },
+  {
+   "scene": "erro1",
+   "voice": "narr",
+   "start": 16.67,
+   "dur": 4.559,
+   "vstart": 16.87,
+   "vdur": 3.359
+  },
+  {
+   "scene": "juca",
+   "voice": "narr",
+   "start": 21.229,
+   "dur": 6.146,
+   "vstart": 21.429,
+   "vdur": 4.546
+  },
+  {
+   "scene": "home",
+   "voice": "narr",
+   "start": 27.375,
+   "dur": 5.767,
+   "vstart": 27.575,
+   "vdur": 5.067
+  },
+  {
+   "scene": "bath",
+   "voice": "narr",
+   "start": 33.142,
+   "dur": 7.445,
+   "vstart": 33.342,
+   "vdur": 5.945
+  },
+  {
+   "scene": "float",
+   "voice": "narr",
+   "start": 40.586,
+   "dur": 3.486,
+   "vstart": 40.886,
+   "vdur": 2.186
+  },
+  {
+   "scene": "cta",
+   "voice": "narr",
+   "start": 44.072,
+   "dur": 2.607,
+   "vstart": 44.272,
+   "vdur": 2.007
+  },
+  {
+   "scene": "feijoes",
+   "voice": "narr",
+   "start": 46.679,
+   "dur": 3.538,
+   "vstart": 46.879,
+   "vdur": 2.538
+  }
+ ],
+ "err": [
+  19.313,
+  24.896,
+  37.579
+ ],
+ "snatch": 26.375,
+ "pop": 39.887
+}

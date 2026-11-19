@@ -1,0 +1,919 @@
+[
+{
+"seg": "title",
+"who": "narr",
+"text": "Você",
+"t0": 0.809,
+"t1": 1.001
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "sobreviveria",
+"t0": 1.049,
+"t1": 1.497
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "ao",
+"t0": 1.609,
+"t1": 1.738
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "palhaço",
+"t0": 1.77,
+"t1": 2.058
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "do",
+"t0": 2.13,
+"t1": 2.258
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "bueiro?",
+"t0": 2.29,
+"t1": 2.642
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "Dia",
+"t0": 3.51,
+"t1": 3.681
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "de",
+"t0": 3.724,
+"t1": 3.861
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "chuva.",
+"t0": 3.895,
+"t1": 4.237
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "Pedrinho",
+"t0": 4.322,
+"t1": 4.664
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "e",
+"t0": 4.749,
+"t1": 4.852
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "o",
+"t0": 4.878,
+"t1": 4.98
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "Juca",
+"t0": 5.006,
+"t1": 5.211
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "resolveram",
+"t0": 5.262,
+"t1": 5.673
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "brincar",
+"t0": 5.775,
+"t1": 6.083
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "de",
+"t0": 6.16,
+"t1": 6.297
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "barquinho",
+"t0": 6.331,
+"t1": 6.707
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "de",
+"t0": 6.801,
+"t1": 6.938
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "papel",
+"t0": 6.972,
+"t1": 7.211
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "na",
+"t0": 7.271,
+"t1": 7.408
+},
+{
+"seg": "play",
+"who": "narr",
+"text": "rua.",
+"t0": 7.442,
+"t1": 7.715
+},
+{
+"seg": "drain",
+"who": "narr",
+"text": "O",
+"t0": 8.343,
+"t1": 8.444
+},
+{
+"seg": "drain",
+"who": "narr",
+"text": "barquinho",
+"t0": 8.469,
+"t1": 8.839
+},
+{
+"seg": "drain",
+"who": "narr",
+"text": "desceu",
+"t0": 8.931,
+"t1": 9.2
+},
+{
+"seg": "drain",
+"who": "narr",
+"text": "a",
+"t0": 9.267,
+"t1": 9.368
+},
+{
+"seg": "drain",
+"who": "narr",
+"text": "enxurrada",
+"t0": 9.393,
+"t1": 9.763
+},
+{
+"seg": "drain",
+"who": "narr",
+"text": "e",
+"t0": 9.855,
+"t1": 9.956
+},
+{
+"seg": "drain",
+"who": "narr",
+"text": "caiu",
+"t0": 9.981,
+"t1": 10.183
+},
+{
+"seg": "drain",
+"who": "narr",
+"text": "direto",
+"t0": 10.233,
+"t1": 10.502
+},
+{
+"seg": "drain",
+"who": "narr",
+"text": "no",
+"t0": 10.569,
+"t1": 10.704
+},
+{
+"seg": "drain",
+"who": "narr",
+"text": "bueiro.",
+"t0": 10.737,
+"t1": 11.107
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "E",
+"t0": 12.384,
+"t1": 12.483
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "lá",
+"t0": 12.508,
+"t1": 12.64
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "de",
+"t0": 12.673,
+"t1": 12.806
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "dentro,",
+"t0": 12.839,
+"t1": 13.203
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "um",
+"t0": 13.294,
+"t1": 13.426
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "palhaço",
+"t0": 13.46,
+"t1": 13.757
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "ofereceu",
+"t0": 13.832,
+"t1": 14.163
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "o",
+"t0": 14.246,
+"t1": 14.345
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "barquinho",
+"t0": 14.37,
+"t1": 14.734
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "de",
+"t0": 14.825,
+"t1": 14.957
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "volta.",
+"t0": 14.99,
+"t1": 15.321
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "E",
+"t0": 15.404,
+"t1": 15.503
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "um",
+"t0": 15.528,
+"t1": 15.66
+},
+{
+"seg": "offer",
+"who": "narr",
+"text": "balão.",
+"t0": 15.694,
+"t1": 16.025
+},
+{
+"seg": "erro1",
+"who": "narr",
+"text": "Qualquer",
+"t0": 16.873,
+"t1": 17.199
+},
+{
+"seg": "erro1",
+"who": "narr",
+"text": "pessoa",
+"t0": 17.28,
+"t1": 17.54
+},
+{
+"seg": "erro1",
+"who": "narr",
+"text": "normal",
+"t0": 17.605,
+"t1": 17.865
+},
+{
+"seg": "erro1",
+"who": "narr",
+"text": "sairia",
+"t0": 17.93,
+"t1": 18.191
+},
+{
+"seg": "erro1",
+"who": "narr",
+"text": "correndo.",
+"t0": 18.256,
+"t1": 18.679
+},
+{
+"seg": "erro1",
+"who": "narr",
+"text": "O",
+"t0": 18.784,
+"t1": 18.882
+},
+{
+"seg": "erro1",
+"who": "narr",
+"text": "Pedrinho",
+"t0": 18.906,
+"t1": 19.232
+},
+{
+"seg": "erro1",
+"who": "narr",
+"text": "estendeu",
+"t0": 19.313,
+"t1": 19.638
+},
+{
+"seg": "erro1",
+"who": "narr",
+"text": "a",
+"t0": 19.72,
+"t1": 19.817
+},
+{
+"seg": "erro1",
+"who": "narr",
+"text": "mão.",
+"t0": 19.842,
+"t1": 20.102
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "O",
+"t0": 21.436,
+"t1": 21.535
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "Juca,",
+"t0": 21.559,
+"t1": 21.856
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "o",
+"t0": 21.93,
+"t1": 22.029
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "gênio,",
+"t0": 22.054,
+"t1": 22.383
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "achou",
+"t0": 22.466,
+"t1": 22.696
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "que",
+"t0": 22.754,
+"t1": 22.919
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "palhaço",
+"t0": 22.96,
+"t1": 23.256
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "nenhum",
+"t0": 23.331,
+"t1": 23.594
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "cabe",
+"t0": 23.66,
+"t1": 23.858
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "num",
+"t0": 23.907,
+"t1": 24.072
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "bueiro.",
+"t0": 24.113,
+"t1": 24.476
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "E",
+"t0": 24.566,
+"t1": 24.665
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "foi",
+"t0": 24.69,
+"t1": 24.855
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "conferir",
+"t0": 24.896,
+"t1": 25.225
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "de",
+"t0": 25.308,
+"t1": 25.44
+},
+{
+"seg": "juca",
+"who": "narr",
+"text": "perto.",
+"t0": 25.472,
+"t1": 25.802
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "Aí",
+"t0": 27.581,
+"t1": 27.721
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "o",
+"t0": 27.756,
+"t1": 27.861
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "Pedrinho",
+"t0": 27.887,
+"t1": 28.236
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "correu",
+"t0": 28.324,
+"t1": 28.604
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "pra",
+"t0": 28.673,
+"t1": 28.848
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "casa",
+"t0": 28.892,
+"t1": 29.102
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "e",
+"t0": 29.154,
+"t1": 29.259
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "trancou",
+"t0": 29.285,
+"t1": 29.6
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "a",
+"t0": 29.679,
+"t1": 29.783
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "porta.",
+"t0": 29.81,
+"t1": 30.159
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "Parabéns,",
+"t0": 30.247,
+"t1": 30.701
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "o",
+"t0": 30.815,
+"t1": 30.92
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "primeiro",
+"t0": 30.946,
+"t1": 31.296
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "acerto",
+"t0": 31.383,
+"t1": 31.663
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "da",
+"t0": 31.733,
+"t1": 31.872
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "vida",
+"t0": 31.907,
+"t1": 32.117
+},
+{
+"seg": "home",
+"who": "narr",
+"text": "dele.",
+"t0": 32.17,
+"t1": 32.484
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "Mas",
+"t0": 33.348,
+"t1": 33.514
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "na",
+"t0": 33.556,
+"t1": 33.688
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "hora",
+"t0": 33.721,
+"t1": 33.921
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "do",
+"t0": 33.97,
+"t1": 34.103
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "banho,",
+"t0": 34.136,
+"t1": 34.468
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "o",
+"t0": 34.551,
+"t1": 34.651
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "ralo",
+"t0": 34.676,
+"t1": 34.875
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "da",
+"t0": 34.924,
+"t1": 35.057
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "pia",
+"t0": 35.09,
+"t1": 35.256
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "começou",
+"t0": 35.298,
+"t1": 35.596
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "a",
+"t0": 35.671,
+"t1": 35.771
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "soltar",
+"t0": 35.796,
+"t1": 36.061
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "balões",
+"t0": 36.127,
+"t1": 36.393
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "vermelhos.",
+"t0": 36.459,
+"t1": 36.924
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "E",
+"t0": 37.04,
+"t1": 37.14
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "ele",
+"t0": 37.164,
+"t1": 37.33
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "foi",
+"t0": 37.372,
+"t1": 37.538
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "encostar",
+"t0": 37.579,
+"t1": 37.911
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "o",
+"t0": 37.994,
+"t1": 38.094
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "ouvido",
+"t0": 38.118,
+"t1": 38.384
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "pra",
+"t0": 38.45,
+"t1": 38.616
+},
+{
+"seg": "bath",
+"who": "narr",
+"text": "escutar.",
+"t0": 38.658,
+"t1": 39.056
+},
+{
+"seg": "float",
+"who": "narr",
+"text": "Pronto.",
+"t0": 40.894,
+"t1": 41.267
+},
+{
+"seg": "float",
+"who": "narr",
+"text": "Agora",
+"t0": 41.36,
+"t1": 41.598
+},
+{
+"seg": "float",
+"who": "narr",
+"text": "o",
+"t0": 41.657,
+"t1": 41.759
+},
+{
+"seg": "float",
+"who": "narr",
+"text": "Pedrinho",
+"t0": 41.784,
+"t1": 42.123
+},
+{
+"seg": "float",
+"who": "narr",
+"text": "também",
+"t0": 42.208,
+"t1": 42.479
+},
+{
+"seg": "float",
+"who": "narr",
+"text": "flutua.",
+"t0": 42.547,
+"t1": 42.92
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "E",
+"t0": 44.276,
+"t1": 44.369
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "aí,",
+"t0": 44.392,
+"t1": 44.607
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "quem",
+"t0": 44.661,
+"t1": 44.846
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "o",
+"t0": 44.892,
+"t1": 44.984
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "Pedrinho",
+"t0": 45.007,
+"t1": 45.315
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "enfrenta",
+"t0": 45.392,
+"t1": 45.699
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "agora?",
+"t0": 45.776,
+"t1": 46.084
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "E",
+"t0": 46.886,
+"t1": 46.994
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "você",
+"t0": 47.021,
+"t1": 47.236
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "achou",
+"t0": 47.289,
+"t1": 47.54
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "os",
+"t0": 47.603,
+"t1": 47.746
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "três",
+"t0": 47.782,
+"t1": 47.996
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "feijões?",
+"t0": 48.05,
+"t1": 48.48
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "Comenta",
+"t0": 48.587,
+"t1": 48.91
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "aí.",
+"t0": 48.99,
+"t1": 49.241
+}
+]
