@@ -9,9 +9,9 @@
 
 ## Sugestão de roteiro (esperando o usuário aprovar/ajustar) — ≈ 150 palavras ≈ 1 min
 1. Você sobreviveria ao palhaço do bueiro? *(gancho do título)*
-2. Dia de chuva. Pedrinho e o Juca resolveram brincar de barquinho de papel na rua. Programa radical.
+2. Dia de chuva. Pedrinho e o Juca resolveram brincar de barquinho de papel na rua.
 3. O barquinho desceu a enxurrada e caiu direto no bueiro. *(dois olhos amarelos acendem lá dentro)*
-4. E lá de dentro, um palhaço ofereceu o barquinho de volta. E um balão. De graça.
+4. E lá de dentro, um palhaço ofereceu o barquinho de volta. E um balão.
 5. Qualquer pessoa normal sairia correndo. O Pedrinho estendeu a mão. → ✗ ERRO Nº 1 (aceitar coisa de palhaço de bueiro), seta "CORRE!"
 6. O Juca, o gênio, achou que palhaço nenhum cabe num bueiro. E foi conferir de perto. → ✗ ERRO Nº 2 *(só o boné fica boiando na enxurrada)*
 7. Aí o Pedrinho correu pra casa e trancou a porta. Parabéns, o primeiro acerto da vida dele. *(seta verde "ACERTOU!")*
