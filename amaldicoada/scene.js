@@ -120,11 +120,11 @@ function sPulled(t) {   // the doll gets furious; an invisible force drags him a
   const cam = { x: lerp(880, 1500, ss(Pz, end, t)), y: HF + 0, z: lerp(1.3, 0.85, ss(Pz, Pz + 0.6, t)) };
   room(t, cam, { rock: rockA(t) * 3, tvMode: 'shop', doorOpen: t > Pz - 0.2 && !slam });
   if (t > E) lightPool(main, cam, 1060, HF, 600, 'rgba(255,30,30,A)', 0.35 * ss(E, E + 0.4, t));
-  characters(cam, () => doll2(1060, HF + 140, { s: 0.6, evil: t > E, look: [lerp(-1, 1, drag), 0.2] }), 'rgba(255,90,90,0.95)', 0.2);
+  characters(cam, () => doll2(lerp(1060, 980, ss(T0('pulled'), Pz, t)), lerp(HF + 140, HF + 40, ss(T0('pulled'), Pz, t)), { s: lerp(0.6, 0.52, ss(T0('pulled'), Pz, t)), evil: t > E, look: [lerp(-1, 1, drag), 0.2] }), 'rgba(255,90,90,0.95)', 0.2);
   if (!slam) characters(cam, () => {
     if (t < Pz) pedPlay(t, { noPad: true, look: [1, -0.4], mouth: 'o', sweat: true });
-    else { bean(px, PED.y - 60, { s: 0.85 * (drag > 0.8 ? lerp(1, 0.75, (drag - 0.8) / 0.2) : 1), tilt: 1.3, look: [-1, 0], mouth: 'o', sweat: true, armL: [-120, -230, -250, -330], armR: [120, -230, 250, -330] });
-      if (drag < 0.95) for (let i = 0; i < 4; i++) line([px - 200 - i * 60, PED.y - 60 - i * 40, px - 360 - i * 60, PED.y - 60 - i * 40], 6, 'rgba(255,255,255,0.6)'); }
+    else { bean(px, PED.y + 40, { s: 0.85 * (drag > 0.8 ? lerp(1, 0.75, (drag - 0.8) / 0.2) : 1), tilt: 1.3, look: [-1, 0], mouth: 'o', sweat: true, armL: [-120, -230, -250, -330], armR: [120, -230, 250, -330] });
+      if (drag < 0.95) for (let i = 0; i < 4; i++) line([px - 200 - i * 60, PED.y + 40 - i * 40, px - 360 - i * 60, PED.y + 40 - i * 40], 6, 'rgba(255,255,255,0.6)'); }
   });
   if (t > end && t < end + 0.15) fade(0.3, '0,0,0');
   vignette(main, 0.7);
