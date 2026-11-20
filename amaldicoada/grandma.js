@@ -46,7 +46,6 @@ function livingRoom(t, o = {}) {
   for (const sx of [-1, 1]) shape('rgba(240,235,225,0.85)', () => { const cx = -510 + sx * 140; g.moveTo(cx - 70, 300); g.lineTo(cx + 70, 300); g.quadraticCurveTo(cx + sx * 20, 560, cx + 60 * sx, 840); g.lineTo(cx - 60 * sx, 840); g.closePath(); }, 4);
   ell(1500, 260, 80, 80, '#d8c8a4', 0, 6); line([1500, 260, 1500, 205], 5); line([1500, 260, 1540, 280], 5); rect(1480, 340, 40, 160, '#6b4630', 6, 4); ell(1500, 520, 30, 30, '#c9a24a', 0, 4);   // pendulum clock
   for (const [px, py] of [[160, 380], [380, 340]]) { rect(px, py, 150, 190, '#b88a3e', 8, 6); rect(px + 15, py + 15, 120, 160, '#c8b48e', 4, 4); ell(px + 75, py + 85, 38, 50, '#7a5a3c', 0, 3); }
-  feijao(1500, 214, 0.5, 0.2);   // hidden bean #1 (on top of the wall clock)
   // the sofa where the grandparents nap, the TV and the rocking chair
   rect(-350, HF - 330, 560, 220, '#8a5a6a', 50); rect(-380, HF - 170, 620, 130, '#9a6a7a', 30); rect(-400, HF - 250, 90, 210, '#8a5a6a', 30); rect(180, HF - 250, 90, 210, '#8a5a6a', 30);
   for (let i = 0; i < 3; i++) ell(-240 + i * 170, HF - 260, 40, 26, '#efe6d6', 0, 4);   // doilies
@@ -54,7 +53,6 @@ function livingRoom(t, o = {}) {
   rect(1820, HF - 620, 300, 620, '#efe6d6', 8); rect(1845, HF - 600, 250, 600, o.doorOpen ? '#05040a' : '#6a3522', 4, 5);
   if (!o.doorOpen) { rect(1870, HF - 570, 200, 220, '#5a2c1a', 4, 4); rect(1870, HF - 320, 200, 280, '#5a2c1a', 4, 4); ell(2070, HF - 300, 10, 10, '#e2b84a', 0, 3); }
   rect(1880, HF - 700, 180, 56, '#e8dcc4', 6, 4); g.font = '900 24px "Inter Display", Inter'; g.fillStyle = '#4b2a1c'; g.textAlign = 'center'; g.fillText('HÓSPEDES', 1970, HF - 664);
-  feijao(-70, HF - 284, 0.5, 0.1);
   oldTV(700, HF - 220, t, o.tvOn !== false, o.tvMode);
   rockingChair(1350, HF, o.rock || 0);
 }
@@ -101,7 +99,6 @@ function guestRoom(t, o = {}) {
   rect(200, HF - 330, 640, 90, '#c9d4e6', 30); ell(280, HF - 350, 90, 40, '#f2efe6');   // mattress + pillow
   shape('#a0405a', () => { g.moveTo(380, HF - 340); g.lineTo(840, HF - 340); g.lineTo(850, HF - 200); g.lineTo(370, HF - 200); g.closePath(); }); for (let x = 420; x < 840; x += 70) line([x, HF - 338, x, HF - 202], 4, '#7e2e46');   // quilt
   rect(960, HF - 280, 200, 280, '#6b3d26', 6); rect(980, HF - 250, 160, 90, '#5a3220', 4, 4); line([1020, HF - 280, 1020, HF - 380], 8, '#3a2a20'); shape('#d8c49a', () => { g.moveTo(970, HF - 380); g.lineTo(1070, HF - 380); g.lineTo(1045, HF - 450); g.lineTo(995, HF - 450); g.closePath(); }, 5);
-  feijao(1120, HF - 292, 0.55, -0.1);   // hidden bean #3 (on the nightstand)
   rect(1300, HF - 760, 380, 760, '#5a3220', 10); line([1490, HF - 740, 1490, HF - 20], 5); ell(1470, HF - 400, 9, 9, '#c9a24a', 0, 3); ell(1510, HF - 400, 9, 9, '#c9a24a', 0, 3);   // wardrobe
 }
 function phoneUI(x, y, s, t, a = 1) {   // big phone on screen showing a game LIVE

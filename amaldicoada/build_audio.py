@@ -183,6 +183,48 @@ for j in range(4):
     put(fx, f32(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * kk / 0.11) * 0.05), NA + 0.4 + j * 0.16)   # a little girl's giggle
 for j, f in enumerate([392, 370, 349, 330]): put(fx, f32(tone(f, 0.55 if j < 3 else 1.1, 0.06, 1.5)), wT('pedrinho.', 'end') + j * 0.42)
 for j, f in enumerate([523, 659, 784, 659, 523, 659]): put(mus, tone(f, 0.5, 0.03, 4), T0('cta') + 0.3 + j * 0.3)
+# ---- more sound design (user asked for a bell at the opening and more sounds all along) ----
+def bell(at, f0=196, amp=0.22, d=4.5):   # a deep church-bell "DONG": inharmonic partials with a long decay
+    kk = np.arange(int(d * SR)) / SR
+    x = sum(a_ * np.sin(2 * np.pi * f0 * r * kk) * np.exp(-kk * dec) for r, a_, dec in [(0.5, 0.5, 0.8), (1, 1, 1.0), (1.19, 0.6, 1.4), (1.5, 0.4, 1.8), (2, 0.35, 2.2), (2.52, 0.25, 3.0), (3.0, 0.15, 3.5)])
+    put(fx, f32(x * amp / 2.5 * np.minimum(1, kk / 0.005)), at)
+bell(0.1); bell(wT('sobreviveria', 'title') + 0.05, 147, 0.16)
+def scrape(at, d, amp=0.08):   # body dragged on a wooden floor
+    n = int(d * SR); kk = np.arange(n) / SR; x = band(rng.standard_normal(n), 200, 1800) * (0.6 + 0.4 * np.sin(2 * np.pi * 9 * kk)) * np.sin(np.pi * kk / d)
+    put(fx, f32(x * amp), at)
+def heartbeat(a, b, amp=0.25, bpm=95):
+    for at in np.arange(a, b, 60 / bpm): thud(at, amp); thud(at + 0.18, amp * 0.6)
+def growl(at, d=1.2, amp=0.12):   # a distorted, low, angry breath
+    kk = np.arange(int(d * SR)) / SR; f = 70 + 15 * np.sin(2 * np.pi * 5 * kk)
+    x = np.tanh(4 * np.sin(2 * np.pi * np.cumsum(f) / SR)) * (0.5 + 0.5 * band(rng.standard_normal(len(kk)), 100, 900)) * np.sin(np.pi * kk / d)
+    put(fx, f32(x * amp), at)
+def coin(at, amp=0.06): put(fx, f32(tone(1568, 0.12, amp, 20)), at); put(fx, f32(tone(2093, 0.4, amp, 8)), at + 0.08)
+def thunder(at, amp=0.3):
+    n = int(3.0 * SR); kk = np.arange(n) / SR; put(fx, f32(lowp(rng.standard_normal(n), 220) * (np.exp(-kk * 1.2) + 0.5 * np.exp(-((kk - 0.4) ** 2) * 30)) * amp * 3), at)
+def squeak(at, amp=0.05):   # porcelain eyes turning
+    kk = np.arange(int(0.35 * SR)) / SR; f = 2200 + 600 * kk / 0.35; put(fx, f32(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * kk / 0.35) * amp), at)
+def tap(at, amp=0.05): click(at, amp)
+# controller button mashing while he plays
+for a_, b_ in [(T0('weekend'), TE('watch') - 0.5), (wT('continua', 'shoes'), FLICK)]:
+    for at in np.arange(a_, b_, 0.17):
+        if rng.random() < 0.6: tap(at, 0.03)
+# in-game sounds: a car passing, coins in the shoe store
+kk = np.arange(int(1.6 * SR)) / SR; put(fx, f32(lowp(np.sign(np.sin(2 * np.pi * (90 + 60 * kk) * kk)), 900) * np.sin(np.pi * kk / 1.6) * 0.03), T0('weekend') + 1.0)
+for j in range(3): coin(wT('loja', 'shoes') + j * 0.35)
+squeak(wT('observ', 'watch') - 0.1)
+thunder(FLICK - 0.1, 0.25)   # a storm outside makes the lights flicker
+for j in range(4): creak(T0('lights') + 2.0 + j * 0.9, 0.6, 0.03)   # the empty chair keeps rocking
+whoosh(BEH - 0.25, 0.3, 0.15)
+thud(PUNCH + 0.35, 0.15)   # the doll lands
+growl(ENF - 0.05, 1.3)
+scrape(wT('puxado', 'pulled'), TE('pulled') - 0.3 - wT('puxado', 'pulled'))
+creak(wT('puxado', 'pulled') - 0.2, 0.8, 0.06)   # guest-room door opening
+for j in range(6): tap(wT('celular', 'phone') + 0.3 + j * 0.14, 0.04)   # tapping the phone
+n = int(4 * SR); put(fx, f32(band(rng.standard_normal(n), 300, 3000) * 0.012), wT('abre', 'phone') + 0.2)   # tiny crowd/stream noise from the phone
+heartbeat(T0('notalone'), TE('notalone'), 0.2)
+for j, f in enumerate([659, 622, 587, 554, 523]): put(mus, tone(f * 2, 0.6, 0.03, 4), T0('end') + 0.2 + j * 0.4)   # music box, out of tune
+for i in range(3): whoosh(T0('cta') + 0.25 + i * 0.12, 0.2, 0.05)
+put(fx, f32(tone(330, 0.2, 0.08, 10)), T0('feijoes')); put(fx, f32(tone(660, 0.3, 0.06, 8)), T0('feijoes') + 0.1)   # "boing" for the bean
 # ---- mix (narration ducks the bed) ----
 duck = np.ones(N, np.float32); env = np.convolve(np.abs(voc), np.ones(4410) / 4410, 'same'); duck -= np.clip(env * 6, 0, 0.5)
 mix = voc * 1.0 + fx + mus * duck

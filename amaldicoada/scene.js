@@ -45,8 +45,11 @@ function room(t, cam, o = {}) {
   nightGrade(main, 0.9);
   const flick = o.dark || 0;
   lightPool(main, cam, 650, HF - 450, 650, 'rgba(255,170,140,A)', 0.55 * (1 - flick));
+  beans(cam, [[1500, 212, 0.8, 0.2], [600, HF - 626, 0.8, -0.1]]);   // hidden beans #1 (on top of the clock) and #2 (on top of the TV)
   if (flick) fade(0.85 * flick, '3,4,14');
 }
+// hidden beans: drawn on their own lighter layer (no glow) so they can be found, but still small
+function beans(cam, list) { characters(cam, () => list.forEach(([x, y, s, r]) => feijao(x, y, s, r)), 'rgba(0,0,0,0)', 0.3); }
 function pedPlay(t, o = {}) {   // sitting on the rug with the controller
   const tap = Math.abs(Math.sin(t * 9)) * 6;
   bean(o.x ?? PED.x, o.y ?? PED.y, { s: 0.85, sit: true, look: o.look || [-0.2, -0.6], mouth: o.mouth, sweat: o.sweat, jy: o.jy || 0,
@@ -129,7 +132,7 @@ function sPulled(t) {   // the doll gets furious; an invisible force drags him a
 function sPhone(t) {   // locked in the guest room: he opens a live of GTA instead of calling anyone
   const tA = W0('abre', 'phone'), tL = TL.err[1 + 1];
   const cam = camL({ x: 600, y: 1150, z: 0.85 }, { x: 560, y: 1250, z: 1.05 }, ss(T0('phone'), TE('phone'), t));
-  g = main; camera(cam); guestRoom(t); nightGrade(main, 1.2);
+  g = main; camera(cam); guestRoom(t); nightGrade(main, 1.2); beans(cam, [[1110, HF - 290, 0.8, -0.1]]);
   const phoneOn = t > W0('celular', 'phone');
   if (phoneOn) lightPool(main, cam, 600, HF - 50, 260, 'rgba(160,210,255,A)', 0.5);
   characters(cam, () => bean(560, HF + 160, { s: 0.85, sit: true, look: phoneOn ? [0.4, 0.5] : [0.8, -0.2], mouth: phoneOn ? undefined : 'o', phone: phoneOn, armR: [120, -170, 120, -160] }));
@@ -139,7 +142,7 @@ function sPhone(t) {   // locked in the guest room: he opens a live of GTA inste
 function sNotAlone(t) {   // he is not alone: the doll is on the bed right behind him
   const NA = TL.na, k = ss(NA - 0.1, NA + 0.3, t);
   const cam = camL({ x: 560, y: 1250, z: 1.05 }, { x: 600, y: 1150, z: 0.8 }, ease(clamp((t - T0('notalone')) / (TE('notalone') - T0('notalone')))));
-  g = main; camera(cam); guestRoom(t); nightGrade(main, 1.3);
+  g = main; camera(cam); guestRoom(t); nightGrade(main, 1.3); beans(cam, [[1110, HF - 290, 0.8, -0.1]]);
   lightPool(main, cam, 600, HF - 50, 260, 'rgba(160,210,255,A)', 0.5);
   if (k > 0) lightPool(main, cam, 420, HF - 420, 360, 'rgba(255,30,30,A)', 0.4 * k);
   if (k > 0) characters(cam, () => doll2(420, HF - 330, { s: 0.55, sit: true, evil: true, look: [1, 0.6] }), `rgba(255,90,90,${0.95 * k})`, 0.2);
