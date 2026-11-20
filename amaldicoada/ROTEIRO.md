@@ -13,7 +13,7 @@
 2. É um final de semana. Pedrinho está na casa dos seus avós, jogando GTA 6.
 3. Até que, de repente, numa cadeira de balanço, uma boneca começa a observá-lo.
 
-### Sugestão minha para o resto (só entra se o usuário aprovar)
+### Sugestão minha para o resto — DESCARTADA (20/11/2026: o usuário vai mandar o próprio roteiro a partir da frase 4)
 4. Detalhe: ninguém colocou a boneca ali.
 5. Qualquer pessoa normal sairia da sala. O Pedrinho virou a boneca de costas e voltou a jogar. → ERRADO! (ERRO Nº 1)
 6. Cinco minutos depois, ela estava de frente de novo. Mais perto.
