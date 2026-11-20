@@ -11,11 +11,15 @@ function rockingChair(x, y, rock = 0) {   // seen from the side-ish front; rock 
   rect(-180, -400, 70, 22, '#7a4a2c', 8, 5); rect(110, -400, 70, 22, '#7a4a2c', 8, 5);   // arm rests
   g.restore();
 }
-function oldTV(x, y, t, on = true) {   // a chunky old TV on a wooden stand, showing an open-world city game
+function oldTV(x, y, t, on = true, mode = 'city') {   // a chunky old TV on a wooden stand, showing an open-world city game
   rect(x - 220, y - 60, 440, 60, '#6a3f26', 6, 6); line([x - 190, y, x - 190, y + 150], 10, '#4a2a18'); line([x + 190, y, x + 190, y + 150], 10, '#4a2a18');
   rect(x - 240, y - 400, 480, 340, '#3a3a40', 26, 7);
   g.save(); g.beginPath(); g.roundRect(x - 210, y - 370, 360, 280, 18); g.clip();
-  if (on) {
+  if (on && mode === 'shop') {   // in-game shoe store: shelves of sneakers
+    g.fillStyle = '#f0e6d8'; g.fillRect(x - 210, y - 370, 360, 280);
+    for (let r = 0; r < 3; r++) { g.fillStyle = '#b88a3e'; g.fillRect(x - 210, y - 290 + r * 80, 360, 10);
+      for (let i = 0; i < 5; i++) { const sx = x - 190 + i * 70, sy = y - 296 + r * 80; shape(['#e0302a', '#3a8fd6', '#46a35a', '#f2c22a', '#ff7ab0'][(i + r) % 5], () => { g.moveTo(sx, sy); g.lineTo(sx + 50, sy); g.quadraticCurveTo(sx + 55, sy - 18, sx + 30, sy - 22); g.lineTo(sx + 12, sy - 30); g.lineTo(sx, sy - 22); g.closePath(); }, 3); } }
+  } else if (on) {
     const sk = g.createLinearGradient(0, y - 370, 0, y - 90); sk.addColorStop(0, '#ff7ab0'); sk.addColorStop(0.6, '#ffb36a'); sk.addColorStop(1, '#ffd98a'); g.fillStyle = sk; g.fillRect(x - 210, y - 370, 360, 280);
     g.fillStyle = '#5a2a6a'; for (let i = 0; i < 9; i++) { const bx = x - 210 + i * 42, bh = 60 + (i * 37) % 90; g.fillRect(bx, y - 150 - bh, 34, bh); }   // skyline
     for (let i = 0; i < 6; i++) { g.fillStyle = '#2a8a5a'; g.fillRect(x - 200 + i * 64, y - 175, 8, 50); ell(x - 196 + i * 64, y - 180, 20, 12, '#2a8a5a', 0, 0); }   // palm trees
@@ -46,7 +50,12 @@ function livingRoom(t, o = {}) {
   // the sofa where the grandparents nap, the TV and the rocking chair
   rect(-350, HF - 330, 560, 220, '#8a5a6a', 50); rect(-380, HF - 170, 620, 130, '#9a6a7a', 30); rect(-400, HF - 250, 90, 210, '#8a5a6a', 30); rect(180, HF - 250, 90, 210, '#8a5a6a', 30);
   for (let i = 0; i < 3; i++) ell(-240 + i * 170, HF - 260, 40, 26, '#efe6d6', 0, 4);   // doilies
-  oldTV(700, HF - 220, t, o.tvOn !== false);
+  // the guest-room door on the right (open/closed), and hidden bean #2 on the sofa doily
+  rect(1820, HF - 620, 300, 620, '#efe6d6', 8); rect(1845, HF - 600, 250, 600, o.doorOpen ? '#05040a' : '#6a3522', 4, 5);
+  if (!o.doorOpen) { rect(1870, HF - 570, 200, 220, '#5a2c1a', 4, 4); rect(1870, HF - 320, 200, 280, '#5a2c1a', 4, 4); ell(2070, HF - 300, 10, 10, '#e2b84a', 0, 3); }
+  rect(1880, HF - 700, 180, 56, '#e8dcc4', 6, 4); g.font = '900 24px "Inter Display", Inter'; g.fillStyle = '#4b2a1c'; g.textAlign = 'center'; g.fillText('HÓSPEDES', 1970, HF - 664);
+  feijao(-70, HF - 284, 0.5, 0.1);
+  oldTV(700, HF - 220, t, o.tvOn !== false, o.tvMode);
   rockingChair(1350, HF, o.rock || 0);
 }
 // the cursed doll: a pale porcelain grain with dark yarn braids, rosy cheeks, a crack on the forehead, a lace dress with a red bow. Never talks.
@@ -81,3 +90,30 @@ function doll2(x, y, o = {}) {
   g.restore();
 }
 function controller(x, y, s = 1, rot = 0) { g.save(); g.translate(x, y); g.rotate(rot); g.scale(s, s); shape('#22232a', () => { g.moveTo(-60, -20); g.quadraticCurveTo(0, -36, 60, -20); g.quadraticCurveTo(80, 30, 50, 30); g.quadraticCurveTo(0, 6, -50, 30); g.quadraticCurveTo(-80, 30, -60, -20); g.closePath(); }, 5); ell(30, -8, 6, 6, '#3ad0ff', 0, 0); ell(-30, -6, 8, 8, '#55555f', 0, 3); g.restore(); }
+
+// the guest room: dark, a bed with a quilt, a nightstand with a lamp (off), a wardrobe
+function guestRoom(t, o = {}) {
+  g.fillStyle = '#5a6a8a'; g.fillRect(-1200, -400, 4000, HF + 400);
+  for (let x = -1200; x < 2800; x += 90) line([x, -400, x, HF], 3, '#4e5c7a');   // striped wallpaper
+  g.fillStyle = '#5a3a24'; g.fillRect(-1200, HF, 4000, 1600); for (let y = HF + 60; y < HF + 1600; y += 70) line([-1200, y, 2800, y], 3, '#3e2616');
+  rect(-300, 300, 360, 460, '#efe6d6', 8); rect(-275, 325, 310, 410, '#0b1030', 4, 5); line([-120, 325, -120, 735], 5); ell(-20, 420, 26, 26, '#f7f1d0', 0, 4);   // window + moon
+  rect(160, HF - 260, 700, 120, '#7a4a2c', 10); rect(140, HF - 520, 60, 520, '#6b3d26', 10); rect(840, HF - 380, 50, 380, '#6b3d26', 10);   // bed frame
+  rect(200, HF - 330, 640, 90, '#c9d4e6', 30); ell(280, HF - 350, 90, 40, '#f2efe6');   // mattress + pillow
+  shape('#a0405a', () => { g.moveTo(380, HF - 340); g.lineTo(840, HF - 340); g.lineTo(850, HF - 200); g.lineTo(370, HF - 200); g.closePath(); }); for (let x = 420; x < 840; x += 70) line([x, HF - 338, x, HF - 202], 4, '#7e2e46');   // quilt
+  rect(960, HF - 280, 200, 280, '#6b3d26', 6); rect(980, HF - 250, 160, 90, '#5a3220', 4, 4); line([1020, HF - 280, 1020, HF - 380], 8, '#3a2a20'); shape('#d8c49a', () => { g.moveTo(970, HF - 380); g.lineTo(1070, HF - 380); g.lineTo(1045, HF - 450); g.lineTo(995, HF - 450); g.closePath(); }, 5);
+  feijao(1120, HF - 292, 0.55, -0.1);   // hidden bean #3 (on the nightstand)
+  rect(1300, HF - 760, 380, 760, '#5a3220', 10); line([1490, HF - 740, 1490, HF - 20], 5); ell(1470, HF - 400, 9, 9, '#c9a24a', 0, 3); ell(1510, HF - 400, 9, 9, '#c9a24a', 0, 3);   // wardrobe
+}
+function phoneUI(x, y, s, t, a = 1) {   // big phone on screen showing a game LIVE
+  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.translate(x, y); main.scale(s, s);
+  main.fillStyle = '#111216'; main.strokeStyle = '#08061a'; main.lineWidth = 10; main.beginPath(); main.roundRect(-170, -320, 340, 640, 44); main.fill(); main.stroke();
+  main.save(); main.beginPath(); main.roundRect(-150, -290, 300, 580, 26); main.clip();
+  const sk = main.createLinearGradient(0, -290, 0, 100); sk.addColorStop(0, '#ff7ab0'); sk.addColorStop(1, '#ffd98a'); main.fillStyle = sk; main.fillRect(-150, -290, 300, 400);
+  main.fillStyle = '#5a2a6a'; for (let i = 0; i < 7; i++) { const bh = 60 + (i * 37) % 90; main.fillRect(-150 + i * 44, 40 - bh, 36, bh); }
+  main.fillStyle = '#3a3a48'; main.fillRect(-150, 40, 300, 70); main.fillStyle = '#e0302a'; main.fillRect(-120 + ((t * 140) % 220), 50, 60, 24);
+  main.fillStyle = '#1c1d24'; main.fillRect(-150, 110, 300, 180);
+  for (let i = 0; i < 4; i++) { main.fillStyle = ['#7fd6ff', '#ffd23f', '#a0ff9a', '#ff9ad6'][i]; main.fillRect(-135, 130 + i * 38, 60 + (i * 31) % 80, 14); main.fillStyle = '#c9ccd4'; main.fillRect(-60 + (i * 31) % 80, 130 + i * 38, 120, 14); }   // chat
+  main.restore();
+  main.fillStyle = '#e0241c'; main.beginPath(); main.roundRect(-140, -280, 120, 44, 10); main.fill(); main.fillStyle = '#fff'; main.font = '900 28px "Inter Display", Inter'; main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillText('AO VIVO', -80, -257);
+  main.restore();
+}

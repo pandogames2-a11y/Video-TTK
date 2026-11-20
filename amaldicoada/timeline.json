@@ -1,0 +1,118 @@
+{
+ "total": 57.905,
+ "fps": 30,
+ "segs": [
+  {
+   "scene": "title",
+   "voice": "narr",
+   "start": 0.0,
+   "dur": 3.341,
+   "vstart": 0.8,
+   "vdur": 2.041
+  },
+  {
+   "scene": "weekend",
+   "voice": "narr",
+   "start": 3.341,
+   "dur": 5.382,
+   "vstart": 3.541,
+   "vdur": 4.882
+  },
+  {
+   "scene": "watch",
+   "voice": "narr",
+   "start": 8.724,
+   "dur": 5.316,
+   "vstart": 8.924,
+   "vdur": 4.516
+  },
+  {
+   "scene": "shoes",
+   "voice": "narr",
+   "start": 14.04,
+   "dur": 5.782,
+   "vstart": 14.24,
+   "vdur": 5.182
+  },
+  {
+   "scene": "lights",
+   "voice": "narr",
+   "start": 19.822,
+   "dur": 4.012,
+   "vstart": 20.022,
+   "vdur": 3.312
+  },
+  {
+   "scene": "behind",
+   "voice": "narr",
+   "start": 23.834,
+   "dur": 2.356,
+   "vstart": 24.034,
+   "vdur": 1.556
+  },
+  {
+   "scene": "punch",
+   "voice": "narr",
+   "start": 26.191,
+   "dur": 3.275,
+   "vstart": 26.391,
+   "vdur": 2.375
+  },
+  {
+   "scene": "pulled",
+   "voice": "narr",
+   "start": 29.466,
+   "dur": 6.16,
+   "vstart": 29.666,
+   "vdur": 5.36
+  },
+  {
+   "scene": "phone",
+   "voice": "narr",
+   "start": 35.626,
+   "dur": 8.622,
+   "vstart": 35.826,
+   "vdur": 8.022
+  },
+  {
+   "scene": "notalone",
+   "voice": "narr",
+   "start": 44.249,
+   "dur": 3.945,
+   "vstart": 44.449,
+   "vdur": 2.545
+  },
+  {
+   "scene": "end",
+   "voice": "narr",
+   "start": 48.194,
+   "dur": 3.621,
+   "vstart": 48.494,
+   "vdur": 2.421
+  },
+  {
+   "scene": "cta",
+   "voice": "narr",
+   "start": 51.814,
+   "dur": 2.673,
+   "vstart": 52.014,
+   "vdur": 2.073
+  },
+  {
+   "scene": "feijoes",
+   "voice": "narr",
+   "start": 54.488,
+   "dur": 3.418,
+   "vstart": 54.688,
+   "vdur": 2.418
+  }
+ ],
+ "err": [
+  15.795,
+  27.823,
+  41.3
+ ],
+ "flick": 21.856,
+ "punch": 27.873,
+ "na": 47.194
+}

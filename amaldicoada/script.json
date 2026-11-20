@@ -1,0 +1,97 @@
+[
+ {
+  "scene": "title",
+  "voice": "narr",
+  "text": "Você sobreviveria à boneca amaldiçoada?",
+  "lead": 0.8,
+  "tail": 0.5
+ },
+ {
+  "scene": "weekend",
+  "voice": "narr",
+  "text": "É um final de semana. Pedrinho está na casa dos seus avós, jogando GTA 6.",
+  "say": "É um final de semana. Pedrinho está na casa dos seus avós, jogando gê tê á seis.",
+  "lead": 0.2,
+  "tail": 0.3
+ },
+ {
+  "scene": "watch",
+  "voice": "narr",
+  "text": "Até que, de repente, numa cadeira de balanço, uma boneca começa a observá-lo.",
+  "lead": 0.2,
+  "tail": 0.6
+ },
+ {
+  "scene": "shoes",
+  "voice": "narr",
+  "text": "Pedrinho acha estranho, mas continua sua gameplay, visitando a loja de sapato do novo GTA.",
+  "say": "Pedrinho acha estranho, mas continua sua gueimplei, visitando a loja de sapato do novo gê tê á.",
+  "lead": 0.2,
+  "tail": 0.4
+ },
+ {
+  "scene": "lights",
+  "voice": "narr",
+  "text": "Até que, de repente, as luzes piscam e a boneca some.",
+  "lead": 0.2,
+  "tail": 0.5
+ },
+ {
+  "scene": "behind",
+  "voice": "narr",
+  "text": "Ela aparece atrás do Pedrinho.",
+  "lead": 0.2,
+  "tail": 0.6
+ },
+ {
+  "scene": "punch",
+  "voice": "narr",
+  "text": "Vendo isso, Pedrinho dá um soco na boneca.",
+  "lead": 0.2,
+  "tail": 0.7
+ },
+ {
+  "scene": "pulled",
+  "voice": "narr",
+  "text": "A boneca se enfurece, e o Pedrinho começa a ser puxado por uma força invisível pro quarto de hóspedes.",
+  "lead": 0.2,
+  "tail": 0.6
+ },
+ {
+  "scene": "phone",
+  "voice": "narr",
+  "text": "A sorte é que o Pedrinho estava com um celular no bolso. Mas, por causa do novo jogo, ele só abre uma live e começa a assistir mais gameplays de GTA.",
+  "say": "A sorte é que o Pedrinho estava com um celular no bolso. Mas, por causa do novo jogo, ele só abre uma laive e começa a assistir mais gueimpleis de gê tê á.",
+  "lead": 0.2,
+  "tail": 0.4
+ },
+ {
+  "scene": "notalone",
+  "voice": "narr",
+  "text": "Pro azar de Pedrinho, ele não estava sozinho no quarto.",
+  "lead": 0.2,
+  "tail": 1.2
+ },
+ {
+  "scene": "end",
+  "voice": "narr",
+  "text": "Agora, quem continuou a gameplay não foi o Pedrinho.",
+  "say": "Agora, quem continuou a gueimplei não foi o Pedrinho.",
+  "lead": 0.3,
+  "tail": 0.9
+ },
+ {
+  "scene": "cta",
+  "voice": "narr",
+  "text": "E aí, quem o Pedrinho enfrenta agora?",
+  "lead": 0.2,
+  "tail": 0.4
+ },
+ {
+  "scene": "feijoes",
+  "voice": "narr",
+  "text": "E você achou os três feijões? Comenta aí.",
+  "lead": 0.2,
+  "tail": 0.8
+ }
+]
