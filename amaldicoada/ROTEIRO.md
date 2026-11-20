@@ -21,3 +21,14 @@
 8. Pra resolver, ele chamou a boneca pra jogar junto. E deu o controle do player 2. → ERRADO! (ÚLTIMO ERRO)
 9. Pronto. Agora a boneca zera o GTA 6, e o Pedrinho mora na cadeira de balanço.
 10. E aí, quem o Pedrinho enfrenta agora? E você achou os três feijões? Comenta aí.
+
+### Resto do roteiro (do usuário, 20/11/2026) — animado
+4. Pedrinho acha estranho, mas continua sua gameplay, visitando a loja de sapato do novo GTA. → ERRADO! (ERRO Nº 1)
+5. Até que, de repente, as luzes piscam e a boneca some.
+6. Ela aparece atrás do Pedrinho.
+7. Vendo isso, Pedrinho dá um soco na boneca. → ERRADO! (ERRO Nº 2)
+8. A boneca se enfurece, e o Pedrinho começa a ser puxado por uma força invisível pro quarto de hóspedes.
+9. A sorte é que o Pedrinho estava com um celular no bolso. Mas, por causa do novo jogo, ele só abre uma live e começa a assistir mais gameplays de GTA. → ERRADO! (ÚLTIMO ERRO)
+10. Pro azar de Pedrinho, ele não estava sozinho no quarto.
+11. Agora, quem continuou a gameplay não foi o Pedrinho.
+12. (final padrão) E aí, quem o Pedrinho enfrenta agora? E você achou os três feijões? Comenta aí.
