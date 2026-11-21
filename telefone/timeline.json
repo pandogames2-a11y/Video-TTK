@@ -1,0 +1,111 @@
+{
+ "total": 51.339,
+ "fps": 30,
+ "segs": [
+  {
+   "scene": "title",
+   "voice": "narr",
+   "start": 0.0,
+   "dur": 3.747,
+   "vstart": 0.8,
+   "vdur": 2.447
+  },
+  {
+   "scene": "alone",
+   "voice": "narr",
+   "start": 3.747,
+   "dur": 5.604,
+   "vstart": 3.947,
+   "vdur": 5.104
+  },
+  {
+   "scene": "ring",
+   "voice": "narr",
+   "start": 9.351,
+   "dur": 4.787,
+   "vstart": 9.551,
+   "vdur": 3.787
+  },
+  {
+   "scene": "answer",
+   "voice": "narr",
+   "start": 14.138,
+   "dur": 3.156,
+   "vstart": 14.338,
+   "vdur": 2.556
+  },
+  {
+   "scene": "question",
+   "voice": "narr",
+   "start": 17.293,
+   "dur": 4.648,
+   "vstart": 17.493,
+   "vdur": 4.048
+  },
+  {
+   "scene": "explain",
+   "voice": "narr",
+   "start": 21.942,
+   "dur": 4.612,
+   "vstart": 22.142,
+   "vdur": 3.412
+  },
+  {
+   "scene": "alone2",
+   "voice": "narr",
+   "start": 26.554,
+   "dur": 5.212,
+   "vstart": 26.754,
+   "vdur": 4.212
+  },
+  {
+   "scene": "porch",
+   "voice": "narr",
+   "start": 31.766,
+   "dur": 4.16,
+   "vstart": 32.066,
+   "vdur": 3.16
+  },
+  {
+   "scene": "stairs",
+   "voice": "narr",
+   "start": 35.926,
+   "dur": 4.739,
+   "vstart": 36.126,
+   "vdur": 3.339
+  },
+  {
+   "scene": "end",
+   "voice": "narr",
+   "start": 40.665,
+   "dur": 4.499,
+   "vstart": 40.965,
+   "vdur": 3.399
+  },
+  {
+   "scene": "cta",
+   "voice": "narr",
+   "start": 45.164,
+   "dur": 2.624,
+   "vstart": 45.364,
+   "vdur": 2.024
+  },
+  {
+   "scene": "feijoes",
+   "voice": "narr",
+   "start": 47.788,
+   "dur": 3.551,
+   "vstart": 47.988,
+   "vdur": 2.551
+  }
+ ],
+ "err": [
+  24.905,
+  30.373,
+  38.62
+ ],
+ "ring": 11.591,
+ "ans": 14.949,
+ "light": 32.201,
+ "doorin": 39.765
+}

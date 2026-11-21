@@ -1,0 +1,86 @@
+[
+ {
+  "scene": "title",
+  "voice": "narr",
+  "text": "Você sobreviveria ao assassino do telefone?",
+  "lead": 0.8,
+  "tail": 0.5
+ },
+ {
+  "scene": "alone",
+  "voice": "narr",
+  "text": "Sexta à noite. Pedrinho está sozinho em casa, comendo pipoca e assistindo filme de terror.",
+  "lead": 0.2,
+  "tail": 0.3
+ },
+ {
+  "scene": "ring",
+  "voice": "narr",
+  "text": "Até que, de repente, o telefone toca. Número desconhecido.",
+  "lead": 0.2,
+  "tail": 0.8
+ },
+ {
+  "scene": "answer",
+  "voice": "narr",
+  "text": "O Pedrinho atende. Até aí, tudo normal.",
+  "lead": 0.2,
+  "tail": 0.4
+ },
+ {
+  "scene": "question",
+  "voice": "narr",
+  "text": "Do outro lado, alguém só quer saber qual é o filme de terror favorito dele.",
+  "lead": 0.2,
+  "tail": 0.4
+ },
+ {
+  "scene": "explain",
+  "voice": "narr",
+  "text": "E o Pedrinho, em vez de desligar, passou vinte minutos explicando.",
+  "lead": 0.2,
+  "tail": 1.0
+ },
+ {
+  "scene": "alone2",
+  "voice": "narr",
+  "text": "Aí perguntaram se ele estava sozinho. E ele respondeu: \"tô sim, pode vir!\"",
+  "lead": 0.2,
+  "tail": 0.8
+ },
+ {
+  "scene": "porch",
+  "voice": "narr",
+  "text": "A luz da varanda acende. Tem alguém de máscara no quintal.",
+  "lead": 0.3,
+  "tail": 0.7
+ },
+ {
+  "scene": "stairs",
+  "voice": "narr",
+  "text": "E o gênio, em vez de sair pela porta da frente, sobe a escada.",
+  "lead": 0.2,
+  "tail": 1.2
+ },
+ {
+  "scene": "end",
+  "voice": "narr",
+  "text": "Pronto. Agora o Pedrinho virou o filme de terror favorito de alguém.",
+  "lead": 0.3,
+  "tail": 0.8
+ },
+ {
+  "scene": "cta",
+  "voice": "narr",
+  "text": "E aí, quem o Pedrinho enfrenta agora?",
+  "lead": 0.2,
+  "tail": 0.4
+ },
+ {
+  "scene": "feijoes",
+  "voice": "narr",
+  "text": "E você achou os três feijões? Comenta aí.",
+  "lead": 0.2,
+  "tail": 0.8
+ }
+]

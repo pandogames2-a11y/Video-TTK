@@ -1,118 +1,118 @@
 {
- "total": 57.905,
+ "total": 56.62,
  "fps": 30,
  "segs": [
   {
    "scene": "title",
    "voice": "narr",
    "start": 0.0,
-   "dur": 3.341,
+   "dur": 3.268,
    "vstart": 0.8,
-   "vdur": 2.041
+   "vdur": 1.968
   },
   {
    "scene": "weekend",
    "voice": "narr",
-   "start": 3.341,
-   "dur": 5.382,
-   "vstart": 3.541,
-   "vdur": 4.882
+   "start": 3.268,
+   "dur": 5.109,
+   "vstart": 3.468,
+   "vdur": 4.609
   },
   {
    "scene": "watch",
    "voice": "narr",
-   "start": 8.724,
-   "dur": 5.316,
-   "vstart": 8.924,
-   "vdur": 4.516
+   "start": 8.377,
+   "dur": 4.91,
+   "vstart": 8.577,
+   "vdur": 4.11
   },
   {
    "scene": "shoes",
    "voice": "narr",
-   "start": 14.04,
-   "dur": 5.782,
-   "vstart": 14.24,
-   "vdur": 5.182
+   "start": 13.287,
+   "dur": 5.859,
+   "vstart": 13.487,
+   "vdur": 5.259
   },
   {
    "scene": "lights",
    "voice": "narr",
-   "start": 19.822,
-   "dur": 4.012,
-   "vstart": 20.022,
-   "vdur": 3.312
+   "start": 19.146,
+   "dur": 3.504,
+   "vstart": 19.346,
+   "vdur": 2.804
   },
   {
    "scene": "behind",
    "voice": "narr",
-   "start": 23.834,
-   "dur": 2.356,
-   "vstart": 24.034,
-   "vdur": 1.556
+   "start": 22.65,
+   "dur": 2.297,
+   "vstart": 22.85,
+   "vdur": 1.497
   },
   {
    "scene": "punch",
    "voice": "narr",
-   "start": 26.191,
-   "dur": 3.275,
-   "vstart": 26.391,
-   "vdur": 2.375
+   "start": 24.947,
+   "dur": 3.247,
+   "vstart": 25.147,
+   "vdur": 2.347
   },
   {
    "scene": "pulled",
    "voice": "narr",
-   "start": 29.466,
-   "dur": 6.16,
-   "vstart": 29.666,
-   "vdur": 5.36
+   "start": 28.194,
+   "dur": 5.704,
+   "vstart": 28.394,
+   "vdur": 4.904
   },
   {
    "scene": "phone",
    "voice": "narr",
-   "start": 35.626,
-   "dur": 8.622,
-   "vstart": 35.826,
-   "vdur": 8.022
+   "start": 33.898,
+   "dur": 9.237,
+   "vstart": 34.098,
+   "vdur": 8.637
   },
   {
    "scene": "notalone",
    "voice": "narr",
-   "start": 44.249,
-   "dur": 3.945,
-   "vstart": 44.449,
-   "vdur": 2.545
+   "start": 43.135,
+   "dur": 4.839,
+   "vstart": 43.335,
+   "vdur": 3.439
   },
   {
    "scene": "end",
    "voice": "narr",
-   "start": 48.194,
-   "dur": 3.621,
-   "vstart": 48.494,
-   "vdur": 2.421
+   "start": 47.975,
+   "dur": 3.563,
+   "vstart": 48.275,
+   "vdur": 2.363
   },
   {
    "scene": "cta",
    "voice": "narr",
-   "start": 51.814,
-   "dur": 2.673,
-   "vstart": 52.014,
-   "vdur": 2.073
+   "start": 51.537,
+   "dur": 2.169,
+   "vstart": 51.737,
+   "vdur": 1.569
   },
   {
    "scene": "feijoes",
    "voice": "narr",
-   "start": 54.488,
-   "dur": 3.418,
-   "vstart": 54.688,
-   "vdur": 2.418
+   "start": 53.706,
+   "dur": 2.914,
+   "vstart": 53.906,
+   "vdur": 1.914
   }
  ],
  "err": [
-  15.795,
-  27.823,
-  41.3
+  14.813,
+  26.605,
+  39.844
  ],
- "flick": 21.856,
- "punch": 27.873,
- "na": 47.194
+ "flick": 20.972,
+ "punch": 26.655,
+ "na": 46.974
 }
