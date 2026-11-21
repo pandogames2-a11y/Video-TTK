@@ -16,6 +16,6 @@
 6. E o Pedrinho, em vez de desligar, passou vinte minutos explicando. → ERRADO! (ERRO Nº 1) *(cartão "20 MINUTOS DEPOIS…")*
 7. Aí perguntaram se ele estava sozinho. E ele respondeu: "tô sim, pode vir!" → ERRADO! (ERRO Nº 2)
 8. A luz da varanda acende. Tem alguém de máscara no quintal.
-9. E o gênio, em vez de sair pela porta da frente, sobe a escada. → ERRADO! (ÚLTIMO ERRO)
+9. E o gênio, em vez de sair pela porta dos fundos, sobe a escada. → ERRADO! (ÚLTIMO ERRO)
 10. Pronto. Agora o Pedrinho virou o filme de terror favorito de alguém.
 11. E aí, quem o Pedrinho enfrenta agora? E você achou os três feijões? Comenta aí.

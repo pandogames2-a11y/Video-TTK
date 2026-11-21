@@ -42,6 +42,7 @@ function room(t, cam, o = {}) {
   if (o.porch) { g.save(); g.beginPath(); g.rect(845, 365, 330, 420); g.clip(); const gr = g.createRadialGradient(1060, 760, 10, 1060, 760, 260); gr.addColorStop(0, `rgba(255,220,130,${0.8 * o.porch})`); gr.addColorStop(1, 'rgba(255,220,130,0)'); g.fillStyle = gr; g.fillRect(845, 365, 330, 420);
     if (o.killer) ghost(1080, 905, { s: 0.5, knife: false }); g.restore(); }
   if (o.doorOpen && o.killerDoor) { g.save(); g.beginPath(); g.rect(150, 500, 280, FY - 500); g.clip(); ghost(290, FY + 40, { s: 1.0 * o.killerDoor, armR: [150, -200] }); g.restore(); }
+  if (!o.noPhone) landline(BASE.x, BASE.y, 1, 0, false);   // the red phone is always on the side table
   nightGrade(main, 1);
   const tv = 0.7 + 0.3 * Math.sin(t * 7.1) * Math.sin(t * 2.3);
   lightPool(main, cam, 1330, 840, 520, 'rgba(255,190,110,A)', 0.45);
@@ -81,14 +82,14 @@ function sAlone(t) {
 function sRing(t) {   // the phone rings (shakes + waves), the camera turns to it, unknown number
   const R = TL.ring, k = t - R;
   const cam = t < R + 0.2 ? { x: 1000, y: 1080, z: 1.25 } : camL({ x: 1000, y: 1080, z: 1.25 }, { x: 700, y: FY - 220, z: 1.9 }, ease(clamp((t - R - 0.2) / 0.8)));
-  room(t, cam); characters(cam, () => { landline(BASE.x, BASE.y, 1, k > 0 && (k % 2.2) < 1.6 ? t : 0); ped(t, { look: k > 0 ? [-1, 0] : [0, 0.35], mouth: k > 0 ? 'o' : undefined, chew: k <= 0 }); });
+  room(t, cam, { noPhone: true }); characters(cam, () => { landline(BASE.x, BASE.y, 1, k > 0 && (k % 2.2) < 1.6 ? t : 0); ped(t, { look: k > 0 ? [-1, 0] : [0, 0.35], mouth: k > 0 ? 'o' : undefined, chew: k <= 0 }); });
   if (k > 0 && (k % 2.2) < 1.6) ringWaves(cam, BASE.x, BASE.y - 40, k);
   const tN = W0('número', 'ring'); if (t > tN - 0.2) callerID(cam, ss(tN - 0.2, tN + 0.1, t));
   vignette(main, 0.6);
 }
 function sAnswer(t) {
   const cam = { x: 840, y: 1060, z: 1.25 }, A = TL.ans, up = t > A;
-  room(t, cam); characters(cam, () => { landline(BASE.x, BASE.y, 1, !up ? t : 0, up); ped(t, { call: up, look: up ? [-0.3, 0] : [-1, 0], popcorn: true }); });
+  room(t, cam, { noPhone: true }); characters(cam, () => { landline(BASE.x, BASE.y, 1, !up ? t : 0, up); ped(t, { call: up, look: up ? [-0.3, 0] : [-1, 0], popcorn: true }); });
   if (!up) ringWaves(cam, BASE.x, BASE.y - 40, t - TL.ring);
   vignette(main, 0.6);
 }
@@ -107,14 +108,14 @@ function movieBubble(cam, a) {   // "what's your favorite horror movie?" shown a
 }
 function sQuestion(t) {
   const cam = camL({ x: 840, y: 1060, z: 1.25 }, { x: 900, y: 1000, z: 1.1 }, ss(T0('question'), TE('question'), t));
-  room(t, cam); characters(cam, () => { landline(BASE.x, BASE.y, 1, 0, true); ped(t, { call: true, look: [-0.3, 0] }); });
+  room(t, cam, { noPhone: true }); characters(cam, () => { landline(BASE.x, BASE.y, 1, 0, true); ped(t, { call: true, look: [-0.3, 0] }); });
   breathWaves(cam, t); const tF = W0('filme', 'question'); if (t > tF - 0.3) movieBubble(cam, ss(tF - 0.3, tF, t));
   vignette(main, 0.6);
 }
 function sExplain(t) {   // he talks for twenty minutes, all excited; time flies
   const E = TL.err[0], c0 = T0('explain'), late = t > c0 + 1.0;
   const cam = { x: 900, y: 1000, z: 1.1 };
-  room(t, cam); characters(cam, () => { landline(BASE.x, BASE.y, 1, 0, true);
+  room(t, cam, { noPhone: true }); characters(cam, () => { landline(BASE.x, BASE.y, 1, 0, true);
     const w = Math.sin(t * 8); ped(t, { call: true, look: [0.3, -0.3], mouth: Math.sin(t * 13) > 0 ? 'o' : undefined, armR: [140, -230, 170 + w * 40, -300 + w * 50], popcorn: !late }); });
   if (late) { const [x, y] = screenOf(cam, 1350, 250); main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.strokeStyle = '#ffd23f'; main.lineWidth = 8; main.globalAlpha = 0.8; main.beginPath(); main.arc(x, y, 70, (t - c0) * 12, (t - c0) * 12 + 1.2); main.stroke(); main.restore(); }
   if (t > c0 + 1.0 && t < TE('explain')) textOut('20 MINUTOS DEPOIS…', 540, 520, 80, '#ffffff', { a: ss(c0 + 1.0, c0 + 1.3, t) * (1 - ss(TE('explain') - 0.4, TE('explain'), t)) });
@@ -123,7 +124,7 @@ function sExplain(t) {   // he talks for twenty minutes, all excited; time flies
 function sAlone2(t) {   // "tô sim, pode vir!" with a thumbs up
   const P = TL.err[1], open = t > P - 0.5;
   const cam = camL({ x: 900, y: 1000, z: 1.1 }, { x: 960, y: 980, z: 1.3 }, ss(T0('alone2'), TE('alone2'), t));
-  room(t, cam); characters(cam, () => { landline(BASE.x, BASE.y, 1, 0, true); ped(t, { call: true, look: [0.2, -0.2], popcorn: false, armR: open ? [140, -260, 200, -380] : [140, -170, 120, -210], mouth: open ? 'o' : undefined }); });
+  room(t, cam, { noPhone: true }); characters(cam, () => { landline(BASE.x, BASE.y, 1, 0, true); ped(t, { call: true, look: [0.2, -0.2], popcorn: false, armR: open ? [140, -260, 200, -380] : [140, -170, 120, -210], mouth: open ? 'o' : undefined }); });
   vignette(main, 0.6);
 }
 function sPorch(t) {   // the porch light comes on; someone with a mask in the yard (through the window)
@@ -137,7 +138,9 @@ function sStairs(t) {   // he runs UP the stairs instead of out the front door; 
   const S = TL.err[2], D = TL.doorin;
   const runK = clamp((t - T0('stairs') - 0.2) / (S - T0('stairs') - 0.2)), climb = clamp((t - S) / 1.4);
   let px = lerp(SOFA.x, 1880, ease(runK)), py = FY + 120;
-  if (climb > 0) { px = lerp(1880, 2420, climb); py = lerp(FY + 120, FY - 860, ss(0, 0.15, climb) * 0.12 + climb * 0.88); }
+  if (climb > 0) { const steps = 9, f = climb * steps, i = Math.min(steps - 1, Math.floor(f)), k = f - i;   // one hop per step, feet landing on each step
+    const x0 = 1880 + i * 62 + 40, y0 = FY - i * 100, x1 = 1880 + (i + 1) * 62 + 40, y1 = FY - (i + 1) * 100;
+    px = lerp(x0, x1, k); py = lerp(y0, y1, k) - Math.sin(k * Math.PI) * 40; }
   let cam = camL({ x: 700, y: 950, z: 0.8 }, { x: 2000, y: 800, z: 0.8 }, ease(clamp((t - T0('stairs') - 0.2) / (S + 1.2 - T0('stairs') - 0.2))));
   if (t > D - 0.15) cam = { x: 300, y: 900, z: 1.05 };   // cut to the front door opening behind him
   room(t, cam, { doorOpen: t > D, killerDoor: ss(D + 0.2, D + 0.7, t) });

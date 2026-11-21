@@ -115,7 +115,6 @@ function house(opt = {}) {
   rect(ax, FY - 60, 22, 60, '#3a2418', 6, 4); rect(ax + 238, FY - 60, 22, 60, '#3a2418', 6, 4);
   // side table + phone
   rect(540, FY - 190, 250, 24, '#6a3f26', 4, 5); line([560, FY - 168, 560, FY], 8); line([770, FY - 168, 770, FY], 8);
-  rect(560, FY - 232, 74, 42, '#2d2d33', 8, 4); rect(566, FY - 250, 62, 20, '#3a3a42', 8, 4);   // landline phone
   // basement door, right beside the front door (a plain door with a sign)
   rect(-330, 560, 250, FY - 560, '#f3ece0', 6); rect(-305, 585, 200, FY - 585, opt.basementOpen ? '#05040a' : '#5a2e1c', 3, 5);
   if (!opt.basementOpen) { rect(-280, 620, 150, 260, '#4e2717', 3, 4); rect(-280, 920, 150, 330, '#4e2717', 3, 4); ell(-130, 930, 10, 10, '#e2b84a', 0, 3); }
