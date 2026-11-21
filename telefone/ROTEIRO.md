@@ -11,9 +11,9 @@
 1. Você sobreviveria ao assassino do telefone?
 2. Sexta à noite. Pedrinho está sozinho em casa, comendo pipoca e assistindo filme de terror.
 3. Até que, de repente, o telefone toca. Número desconhecido.
-4. Qualquer pessoa normal deixaria tocar. O Pedrinho atendeu. → ERRADO! (ERRO Nº 1)
+4. O Pedrinho atende. Até aí, tudo normal.
 5. Do outro lado, alguém só quer saber qual é o filme de terror favorito dele.
-6. E o Pedrinho, claro, passou vinte minutos explicando. *(cartão "20 MINUTOS DEPOIS…")*
+6. E o Pedrinho, em vez de desligar, passou vinte minutos explicando. → ERRADO! (ERRO Nº 1) *(cartão "20 MINUTOS DEPOIS…")*
 7. Aí perguntaram se ele estava sozinho. E ele respondeu: "tô sim, pode vir!" → ERRADO! (ERRO Nº 2)
 8. A luz da varanda acende. Tem alguém de máscara no quintal.
 9. E o gênio, em vez de sair pela porta da frente, sobe a escada. → ERRADO! (ÚLTIMO ERRO)
