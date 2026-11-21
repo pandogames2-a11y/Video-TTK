@@ -16,6 +16,10 @@ O EP5 (`boneco/`) é o modelo a copiar. As regras antigas mais abaixo (3D, legen
 - **Comandos (dentro da pasta do episódio):** `python3 build_audio.py` (prévia, Piper) ou `TTS=eleven SPEED=1.15 python3 build_audio.py` (final) → `node render.js stills 10,20 <pasta>` (conferir quadros) → render em 4 processos: `node render.js frames A B <pasta>` → `ffmpeg -framerate 30 -i <pasta>/f%05d.jpg -i audio/mix.wav ... limpo.mp4` → `python3 make_vertical.py limpo.mp4 final.mp4 --native`. Entregar com envio de arquivo e **guardar o MP4 final na pasta do episódio** (o scratchpad some).
 - **Sessão nova:** abrir no repositório `pandogames2-a11y/Video-TTK` e no ambiente de nuvem **video-ttk-elevenlabs** (é ele que tem as chaves do ElevenLabs). Em máquina nova, rodar `bash setup.sh` antes.
 
+## Reviews de produtos para o Instagram (projeto novo, 21/11/2026)
+- O Pedrinho fica só no YouTube Shorts. Para o Instagram, o usuário quer vídeos de review com link de afiliado: **vídeo de alguém usando o produto no fundo** e **um personagem 2D novo na frente** falando do produto, com o **código do produto na tela**. Pasta `reviews/`.
+- Etapa atual: escolher o personagem. Opções desenhadas em `reviews/personagens.html` (`node shots.js` → `personagem_a..d.jpg`, folha `personagens_opcoes.jpg`): A "Achadinho" (boné virado + sacolinha), B "Dona Review" (óculos rosa + celular), C "Professor" (óculos, gravata-borboleta, lupa), D "Grãozinho Tech" (fone gamer).
+
 ## Temporada dos filmes (a partir do EP5)
 - O usuário quer expandir para "sobreviver" a vilões e situações de filmes e séries, **por etapas** (escolhas → roteiro → storyboard → vídeo) e com tudo nas especificações dele. Menu de escolhas: https://claude.ai/artifact/1Ke6fkm8S5Dg6rx9K1su46 (`temporada2/menu_episodio.html`).
 - **EP5: boneco assassino — PRONTO** (2:56, `boneco/boneco_assassino_ep5_tiktok.mp4`, entregue em 15/11/2026; inspirado no Chucky). Título: "Você sobreviveria ao boneco assassino?". Não usar o nome "Chucky"; o boneco é uma paródia em grão (veja abaixo).
