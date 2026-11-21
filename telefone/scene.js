@@ -40,7 +40,7 @@ function beans(cam, list) { characters(cam, () => list.forEach(([x, y, s, r]) =>
 function room(t, cam, o = {}) {
   g = main; camera(cam); house({ doorOpen: o.doorOpen });
   if (o.porch) { g.save(); g.beginPath(); g.rect(845, 365, 330, 420); g.clip(); const gr = g.createRadialGradient(1060, 760, 10, 1060, 760, 260); gr.addColorStop(0, `rgba(255,220,130,${0.8 * o.porch})`); gr.addColorStop(1, 'rgba(255,220,130,0)'); g.fillStyle = gr; g.fillRect(845, 365, 330, 420);
-    if (o.killer) ghost(1080, 905, { s: 0.5, knife: false }); g.restore(); }
+    if (o.killer > 0) ghost(1080, lerp(905 + 330, 905, ease(clamp(o.killer))), { s: 0.5, knife: false }); g.restore(); }
   if (o.doorOpen && o.killerDoor) { g.save(); g.beginPath(); g.rect(150, 500, 280, FY - 500); g.clip(); ghost(290, FY + 40, { s: 1.0 * o.killerDoor, armR: [150, -200] }); g.restore(); }
   if (!o.noPhone) landline(BASE.x, BASE.y, 1, 0, false);   // the red phone is always on the side table
   nightGrade(main, 1);
@@ -130,7 +130,7 @@ function sAlone2(t) {   // "tô sim, pode vir!" with a thumbs up
 function sPorch(t) {   // the porch light comes on; someone with a mask in the yard (through the window)
   const L = TL.light, M = W0('máscara', 'porch'), on = ss(L + 0.25, L + 0.35, t);
   const cam = camL({ x: 1010, y: 820, z: 1.2 }, { x: 1010, y: 700, z: 1.55 }, ease(clamp((t - T0('porch')) / 2.5)));
-  room(t, cam, { porch: on, killer: t > M - 0.3 });
+  room(t, cam, { porch: on, killer: (t - (M - 0.6)) / 0.9 });
   characters(cam, () => ped(t, { popcorn: false, look: t > M + 0.2 ? [0.3, -1] : [0, 0.2], mouth: t > M + 0.2 ? 'o' : undefined, sweat: t > M + 0.2 }));
   vignette(main, 0.65);
 }
