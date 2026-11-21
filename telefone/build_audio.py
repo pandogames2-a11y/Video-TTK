@@ -1,4 +1,4 @@
-"""EP8 (boneca amaldiçoada) audio: narration, sound effects, mix and timeline.
+"""EP9 (assassino do telefone) audio: narration, sound effects, mix and timeline.
 Default voice is the free local Piper voice (preview). Later: TTS=eleven for the final narrator.
 Writes audio/mix.wav, timeline.json (scene times) and audio/words.json (time of each spoken word)."""
 import json, wave, re, subprocess, os
@@ -151,39 +151,14 @@ def engine(a, b, amp=0.05):
     x = np.sign(np.sin(2 * np.pi * (38 + 6 * np.sin(kk * 3)) * kk)) * 0.5 + rng.standard_normal(n) * 0.2
     put(fx, f32(lowp(x, 300) * env * amp), a)
 def door_slam(at): thud(at, 0.3); click(at + 0.02, 0.15)
-# night ambience: clock ticking, a soft room tone, a low drone; the game's chiptune under the first scenes
+# night ambience: crickets outside, room tone, low drone, the wall clock
 k = np.arange(N) / SR
 mus += f32(lowp(rng.standard_normal(N), 200) * 0.01)
 mus += f32((np.sin(2 * np.pi * 55 * k) + 0.5 * np.sin(2 * np.pi * 82.4 * k + np.sin(2 * np.pi * 0.2 * k))) * 0.028 * (0.6 + 0.4 * np.sin(2 * np.pi * 0.1 * k)))
-for at in np.arange(0.4, T0('pulled'), 1.0): click(at, 0.02)   # wall clock
-def chip(a, b, amp=0.025):   # muffled video-game music from the TV
-    notes = [523, 659, 784, 659, 587, 698, 880, 698]
-    for j, at in enumerate(np.arange(a, b, 0.22)):
-        kk = np.arange(int(0.2 * SR)) / SR; f = notes[j % 8]; put(fx, f32(lowp(np.sign(np.sin(2 * np.pi * f * kk)) * np.exp(-kk * 10) * amp, 1800)), at)
-chip(0.3, T0('lights') + 0.3); chip(T0('phone') + 1.0, TE('phone'), 0.015); chip(T0('end'), TE('end'))
-def creakr(at, n=3, amp=0.04):   # the rocking chair
-    for j in range(n): creak(at + j * 0.9, 0.6, amp)
-creakr(wT('cadeira', 'watch') - 0.3, 3)
-sting(wT('observ', 'watch') + 0.1, 0.12)
-def ding(at, amp=0.08): put(fx, f32(tone(1047, 0.8, amp, 4)), at); put(fx, f32(tone(1319, 0.9, amp, 4)), at + 0.12)
-ERR = [wT('continua', 'shoes'), wT('soco', 'punch'), wT('live', 'phone')]
-for at in ERR: buzz(at, 0.1); thud(at, 0.3)   # stamp hit + buzzer
-FLICK = wT('piscam', 'lights')
-for j in range(5): click(FLICK + j * 0.13, 0.12); put(fx, f32(band(rng.standard_normal(int(0.08 * SR)), 80, 400) * 0.08), FLICK + j * 0.13)
-whoosh(wT('some', 'lights') + 0.05, 0.4, 0.1)
-BEH = wT('atrás', 'behind'); sting(BEH, 0.18)
-PUNCH = wT('soco', 'punch') + 0.05; thud(PUNCH, 0.4); whoosh(PUNCH - 0.15, 0.2, 0.12)
-ENF = wT('enfurece', 'pulled'); sting(ENF, 0.2)
-kk = np.arange(int(2.5 * SR)) / SR; put(fx, f32(lowp(rng.standard_normal(len(kk)), 300) * np.sin(np.pi * kk / 2.5) * 0.25), wT('puxado', 'pulled'))   # rumble
-door_slam(TE('pulled') - 0.25)
-for j, f in enumerate([880, 1175]): put(fx, f32(tone(f, 0.2, 0.05, 15)), wT('abre', 'phone') + j * 0.1)   # phone notification
-NA = TE('notalone') - 1.0; sting(NA, 0.2)
-for j in range(4):
-    kk = np.arange(int(0.11 * SR)) / SR; f = 700 - 60 * j + 160 * np.sin(np.pi * kk / 0.11)
-    put(fx, f32(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * kk / 0.11) * 0.05), NA + 0.4 + j * 0.16)   # a little girl's giggle
-for j, f in enumerate([392, 370, 349, 330]): put(fx, f32(tone(f, 0.55 if j < 3 else 1.1, 0.06, 1.5)), wT('pedrinho.', 'end') + j * 0.42)
-for j, f in enumerate([523, 659, 784, 659, 523, 659]): put(mus, tone(f, 0.5, 0.03, 4), T0('cta') + 0.3 + j * 0.3)
-# ---- more sound design (user asked for a bell at the opening and more sounds all along) ----
+pulse = np.arange(int(0.035 * SR)) / SR; pw = f32(np.sin(np.pi * pulse / 0.035) ** 2 * np.sin(2 * np.pi * 3600 * pulse))
+for c in np.arange(0.3, N / SR - 1, 0.9):
+    for j in range(3): put(mus, pw * 0.005, c + j * 0.06)
+for at in np.arange(0.4, TE('end'), 1.0): click(at, 0.018)
 def bell(at, f0=196, amp=0.22, d=4.5):   # a deep church-bell "DONG": inharmonic partials with a long decay
     kk = np.arange(int(d * SR)) / SR
     x = sum(a_ * np.sin(2 * np.pi * f0 * r * kk) * np.exp(-kk * dec) for r, a_, dec in [(0.5, 0.5, 0.8), (1, 1, 1.0), (1.19, 0.6, 1.4), (1.5, 0.4, 1.8), (2, 0.35, 2.2), (2.52, 0.25, 3.0), (3.0, 0.15, 3.5)])
@@ -204,27 +179,46 @@ def thunder(at, amp=0.3):
 def squeak(at, amp=0.05):   # porcelain eyes turning
     kk = np.arange(int(0.35 * SR)) / SR; f = 2200 + 600 * kk / 0.35; put(fx, f32(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * kk / 0.35) * amp), at)
 def tap(at, amp=0.05): click(at, amp)
-# controller button mashing while he plays
-for a_, b_ in [(T0('weekend'), TE('watch') - 0.5), (wT('continua', 'shoes'), FLICK)]:
-    for at in np.arange(a_, b_, 0.17):
-        if rng.random() < 0.6: tap(at, 0.03)
-# in-game sounds: a car passing, coins in the shoe store
-kk = np.arange(int(1.6 * SR)) / SR; put(fx, f32(lowp(np.sign(np.sin(2 * np.pi * (90 + 60 * kk) * kk)), 900) * np.sin(np.pi * kk / 1.6) * 0.03), T0('weekend') + 1.0)
-for j in range(3): coin(wT('loja', 'shoes') + j * 0.35)
-squeak(wT('observ', 'watch') - 0.1)
-thunder(FLICK - 0.1, 0.25)   # a storm outside makes the lights flicker
-for j in range(4): creak(T0('lights') + 2.0 + j * 0.9, 0.6, 0.03)   # the empty chair keeps rocking
-whoosh(BEH - 0.25, 0.3, 0.15)
-thud(PUNCH + 0.35, 0.15)   # the doll lands
-growl(ENF - 0.05, 1.3)
-scrape(wT('puxado', 'pulled'), TE('pulled') - 0.3 - wT('puxado', 'pulled'))
-creak(wT('puxado', 'pulled') - 0.2, 0.8, 0.06)   # guest-room door opening
-for j in range(6): tap(wT('celular', 'phone') + 0.3 + j * 0.14, 0.04)   # tapping the phone
-n = int(4 * SR); put(fx, f32(band(rng.standard_normal(n), 300, 3000) * 0.012), wT('abre', 'phone') + 0.2)   # tiny crowd/stream noise from the phone
-heartbeat(T0('notalone'), TE('notalone'), 0.2)
-for j, f in enumerate([659, 622, 587, 554, 523]): put(mus, tone(f * 2, 0.6, 0.03, 4), T0('end') + 0.2 + j * 0.4)   # music box, out of tune
+
+bell(0.1); bell(wT('sobreviveria', 'title') + 0.05, 147, 0.16)
+def movie(a, b, amp=0.02):   # muffled horror movie on the TV: low strings + a distant scream now and then
+    n = int((b - a) * SR); kk = np.arange(n) / SR
+    put(fx, f32(lowp(np.sin(2 * np.pi * 110 * kk) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.3 * kk)), 600) * amp), a)
+def tvscream(at, amp=0.05):
+    kk = np.arange(int(0.8 * SR)) / SR; f0 = 600 + 200 * np.minimum(kk / 0.2, 1); src = ((np.cumsum(f0) / SR) % 1) * 2 - 1
+    put(fx, f32(lowp(band(src, 800, 2500), 1500) * np.sin(np.pi * kk / 0.8) * amp), at)
+movie(0.3, T0('ring') + 0.4); tvscream(T0('alone') + 1.5)
+for j in range(3):
+    for i in range(5):
+        n = int(0.05 * SR); put(fx, f32(band(rng.standard_normal(n), 1500, 6000) * np.exp(-np.arange(n) / SR * 60) * 0.06), wT('pipoca', 'alone') + j * 0.6 + i * 0.09)   # crunch
+def ringtone(at, d=1.6, amp=0.07):   # classic phone ring: two tones gated at 20 Hz
+    kk = np.arange(int(d * SR)) / SR; x = (np.sin(2 * np.pi * 440 * kk) + np.sin(2 * np.pi * 480 * kk)) * (np.sin(2 * np.pi * 20 * kk) > 0)
+    put(fx, f32(x * amp * np.minimum(1, kk / 0.02)), at)
+RING = wT('toca', 'ring')
+for j in range(3):
+    if RING + j * 2.2 < wT('atende', 'answer') - 0.4: ringtone(RING + j * 2.2)
+ANS = W_ANS = wT('atende', 'answer'); click(ANS - 0.1, 0.12)
+def breath_phone(a, b, amp=0.05):   # heavy breathing through the phone line (band-limited)
+    for at in np.arange(a, b, 1.1):
+        m = int(0.6 * SR); kk = np.arange(m) / SR; put(fx, f32(band(rng.standard_normal(m), 400, 2200) * np.sin(np.pi * kk / 0.6) ** 2 * amp), at)
+breath_phone(ANS + 0.5, T0('explain'))
+sting(wT('favorito', 'question'), 0.1)
+ERR = [wT('explicando', 'explain'), wT('pode', 'alone2'), wT('sobe', 'stairs')]
+for at in ERR: buzz(at, 0.1); thud(at, 0.3)   # stamp hit + buzzer
+for at in np.arange(T0('explain') + 1.0, TE('explain'), 0.08): click(at, 0.02)   # time flies: fast clock ticks
+for i in range(3): whoosh(TE('explain') - 1.0 + i * 0.2, 0.25, 0.06)
+LIGHT = wT('luz', 'porch'); click(LIGHT + 0.25, 0.15); put(fx, f32(lowp(rng.standard_normal(int(2.5 * SR)), 120) * 0.04), LIGHT + 0.3)
+for at in np.arange(LIGHT + 0.6, TE('porch'), 0.6): step(at, 0.05)
+sting(wT('máscara', 'porch'), 0.2)
+SUBE = wT('sobe', 'stairs')
+for at in np.arange(T0('stairs'), SUBE, 0.17): step(at, 0.05, False)
+for j in range(8): step(SUBE + j * 0.16, 0.07, False); creak(SUBE + j * 0.16, 0.2, 0.02)
+DOOR_IN = TE('stairs') - 0.9; creak(DOOR_IN, 1.0, 0.06); sting(DOOR_IN + 0.3, 0.18)
+heartbeat(T0('stairs') + 0.5, TE('stairs'), 0.15)
+for j, f in enumerate([392, 370, 349, 330]): put(fx, f32(tone(f, 0.55 if j < 3 else 1.1, 0.06, 1.5)), wT('favorito', 'end') + j * 0.42)
 for i in range(3): whoosh(T0('cta') + 0.25 + i * 0.12, 0.2, 0.05)
-put(fx, f32(tone(330, 0.2, 0.08, 10)), T0('feijoes')); put(fx, f32(tone(660, 0.3, 0.06, 8)), T0('feijoes') + 0.1)   # "boing" for the bean
+for j, f in enumerate([523, 659, 784, 659, 523, 659]): put(mus, tone(f, 0.5, 0.03, 4), T0('cta') + 0.3 + j * 0.3)
+put(fx, f32(tone(330, 0.2, 0.08, 10)), T0('feijoes')); put(fx, f32(tone(660, 0.3, 0.06, 8)), T0('feijoes') + 0.1)
 # ---- mix (narration ducks the bed) ----
 duck = np.ones(N, np.float32); env = np.convolve(np.abs(voc), np.ones(4410) / 4410, 'same'); duck -= np.clip(env * 6, 0, 0.5)
 mix = voc * 1.0 + fx + mus * duck
@@ -232,6 +226,6 @@ fade = int(0.5 * SR); mix[:fade] *= np.linspace(0, 1, fade); mix[int(TOTAL * SR)
 mix = mix / max(1e-6, np.abs(mix).max()) * 0.9
 with wave.open('audio/mix.wav', 'w') as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
-json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'err': [round(x, 3) for x in ERR], 'flick': round(FLICK, 3), 'punch': round(PUNCH, 3), 'na': round(NA, 3)}, open('timeline.json', 'w'), indent=1)
+json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'err': [round(x, 3) for x in ERR], 'ring': round(RING, 3), 'ans': round(ANS, 3), 'light': round(LIGHT, 3), 'doorin': round(DOOR_IN, 3)}, open('timeline.json', 'w'), indent=1)
 for g in segs: print(f"{g['scene']:8s} start {g['start']:6.2f} dur {g['dur']:5.2f}")
 print('total', round(TOTAL, 2))
