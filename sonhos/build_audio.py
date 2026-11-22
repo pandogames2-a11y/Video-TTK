@@ -1,4 +1,4 @@
-"""EP9 (assassino do telefone) audio: narration, sound effects, mix and timeline.
+"""EP10 (homem dos sonhos) audio: narration, sound effects, mix and timeline.
 Default voice is the free local Piper voice (preview). Later: TTS=eleven for the final narrator.
 Writes audio/mix.wav, timeline.json (scene times) and audio/words.json (time of each spoken word)."""
 import json, wave, re, subprocess, os
@@ -151,71 +151,60 @@ def engine(a, b, amp=0.05):
     x = np.sign(np.sin(2 * np.pi * (38 + 6 * np.sin(kk * 3)) * kk)) * 0.5 + rng.standard_normal(n) * 0.2
     put(fx, f32(lowp(x, 300) * env * amp), a)
 def door_slam(at): thud(at, 0.3); click(at + 0.02, 0.15)
-# night ambience: crickets outside, room tone, low drone, the wall clock
+# ambience: night room tone + low drone; the clock ticks in the bedroom scenes
 k = np.arange(N) / SR
 mus += f32(lowp(rng.standard_normal(N), 200) * 0.01)
 mus += f32((np.sin(2 * np.pi * 55 * k) + 0.5 * np.sin(2 * np.pi * 82.4 * k + np.sin(2 * np.pi * 0.2 * k))) * 0.028 * (0.6 + 0.4 * np.sin(2 * np.pi * 0.1 * k)))
-pulse = np.arange(int(0.035 * SR)) / SR; pw = f32(np.sin(np.pi * pulse / 0.035) ** 2 * np.sin(2 * np.pi * 3600 * pulse))
-for c in np.arange(0.3, N / SR - 1, 0.9):
-    for j in range(3): put(mus, pw * 0.005, c + j * 0.06)
-for at in np.arange(0.4, TE('end'), 1.0): click(at, 0.018)
 def bell(at, f0=196, amp=0.22, d=4.5):   # a deep church-bell "DONG": inharmonic partials with a long decay
     kk = np.arange(int(d * SR)) / SR
     x = sum(a_ * np.sin(2 * np.pi * f0 * r * kk) * np.exp(-kk * dec) for r, a_, dec in [(0.5, 0.5, 0.8), (1, 1, 1.0), (1.19, 0.6, 1.4), (1.5, 0.4, 1.8), (2, 0.35, 2.2), (2.52, 0.25, 3.0), (3.0, 0.15, 3.5)])
     put(fx, f32(x * amp / 2.5 * np.minimum(1, kk / 0.005)), at)
+
 bell(0.1); bell(wT('sobreviveria', 'title') + 0.05, 147, 0.16)
-def scrape(at, d, amp=0.08):   # body dragged on a wooden floor
-    n = int(d * SR); kk = np.arange(n) / SR; x = band(rng.standard_normal(n), 200, 1800) * (0.6 + 0.4 * np.sin(2 * np.pi * 9 * kk)) * np.sin(np.pi * kk / d)
-    put(fx, f32(x * amp), at)
-def heartbeat(a, b, amp=0.25, bpm=95):
-    for at in np.arange(a, b, 60 / bpm): thud(at, amp); thud(at + 0.18, amp * 0.6)
+for at in np.arange(0.4, T0('dream'), 1.0): click(at, 0.018)
+# a creepy music box (a children's rhyme feel) under the legend
+for j, f in enumerate([659, 784, 659, 784, 880, 784, 659, 587]): put(mus, tone(f * 2, 0.6, 0.03, 4), T0('rule') + 0.3 + j * 0.45)
 def growl(at, d=1.2, amp=0.12):   # a distorted, low, angry breath
     kk = np.arange(int(d * SR)) / SR; f = 70 + 15 * np.sin(2 * np.pi * 5 * kk)
     x = np.tanh(4 * np.sin(2 * np.pi * np.cumsum(f) / SR)) * (0.5 + 0.5 * band(rng.standard_normal(len(kk)), 100, 900)) * np.sin(np.pi * kk / d)
     put(fx, f32(x * amp), at)
-def coin(at, amp=0.06): put(fx, f32(tone(1568, 0.12, amp, 20)), at); put(fx, f32(tone(2093, 0.4, amp, 8)), at + 0.08)
-def thunder(at, amp=0.3):
-    n = int(3.0 * SR); kk = np.arange(n) / SR; put(fx, f32(lowp(rng.standard_normal(n), 220) * (np.exp(-kk * 1.2) + 0.5 * np.exp(-((kk - 0.4) ** 2) * 30)) * amp * 3), at)
-def squeak(at, amp=0.05):   # porcelain eyes turning
-    kk = np.arange(int(0.35 * SR)) / SR; f = 2200 + 600 * kk / 0.35; put(fx, f32(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * kk / 0.35) * amp), at)
-def tap(at, amp=0.05): click(at, amp)
-
-bell(0.1); bell(wT('sobreviveria', 'title') + 0.05, 147, 0.16)
-def movie(a, b, amp=0.02):   # muffled horror movie on the TV: low strings + a distant scream now and then
-    n = int((b - a) * SR); kk = np.arange(n) / SR
-    put(fx, f32(lowp(np.sin(2 * np.pi * 110 * kk) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.3 * kk)), 600) * amp), a)
-def tvscream(at, amp=0.05):
-    kk = np.arange(int(0.8 * SR)) / SR; f0 = 600 + 200 * np.minimum(kk / 0.2, 1); src = ((np.cumsum(f0) / SR) % 1) * 2 - 1
-    put(fx, f32(lowp(band(src, 800, 2500), 1500) * np.sin(np.pi * kk / 0.8) * amp), at)
-movie(0.3, T0('ring') + 0.4); tvscream(T0('alone') + 1.5)
-for j in range(3):
-    for i in range(5):
-        n = int(0.05 * SR); put(fx, f32(band(rng.standard_normal(n), 1500, 6000) * np.exp(-np.arange(n) / SR * 60) * 0.06), wT('pipoca', 'alone') + j * 0.6 + i * 0.09)   # crunch
-def ringtone(at, d=1.6, amp=0.07):   # classic phone ring: two tones gated at 20 Hz
-    kk = np.arange(int(d * SR)) / SR; x = (np.sin(2 * np.pi * 440 * kk) + np.sin(2 * np.pi * 480 * kk)) * (np.sin(2 * np.pi * 20 * kk) > 0)
-    put(fx, f32(x * amp * np.minimum(1, kk / 0.02)), at)
-RING = wT('toca', 'ring')
-for j in range(3):
-    if RING + j * 2.2 < wT('atende', 'answer') - 0.4: ringtone(RING + j * 2.2)
-ANS = W_ANS = wT('atende', 'answer'); click(ANS - 0.1, 0.12)
-def breath_phone(a, b, amp=0.05):   # heavy breathing through the phone line (band-limited)
-    for at in np.arange(a, b, 1.1):
-        m = int(0.6 * SR); kk = np.arange(m) / SR; put(fx, f32(band(rng.standard_normal(m), 400, 2200) * np.sin(np.pi * kk / 0.6) ** 2 * amp), at)
-breath_phone(ANS + 0.5, T0('explain'))
-sting(wT('favorito', 'question'), 0.1)
-ERR = [wT('explicando', 'explain'), wT('pode', 'alone2'), wT('sobe', 'stairs')]
-for at in ERR: buzz(at, 0.1); thud(at, 0.3)   # stamp hit + buzzer
-for at in np.arange(T0('explain') + 1.0, TE('explain'), 0.08): click(at, 0.02)   # time flies: fast clock ticks
-for i in range(3): whoosh(TE('explain') - 1.0 + i * 0.2, 0.25, 0.06)
-LIGHT = wT('luz', 'porch'); click(LIGHT + 0.25, 0.15); put(fx, f32(lowp(rng.standard_normal(int(2.5 * SR)), 120) * 0.04), LIGHT + 0.3)
-for at in np.arange(LIGHT + 0.6, TE('porch'), 0.6): step(at, 0.05)
-sting(wT('máscara', 'porch'), 0.2)
-SUBE = wT('sobe', 'stairs')
-for at in np.arange(T0('stairs'), SUBE, 0.17): step(at, 0.05, False)
-for j in range(8): step(SUBE + j * 0.16, 0.07, False); creak(SUBE + j * 0.16, 0.2, 0.02)
-DOOR_IN = TE('stairs') - 0.9; creak(DOOR_IN, 1.0, 0.06); sting(DOOR_IN + 0.3, 0.18)
-heartbeat(T0('stairs') + 0.5, TE('stairs'), 0.15)
-for j, f in enumerate([392, 370, 349, 330]): put(fx, f32(tone(f, 0.55 if j < 3 else 1.1, 0.06, 1.5)), wT('favorito', 'end') + j * 0.42)
+def hiss(at, d=0.6, amp=0.06): n = int(d * SR); kk = np.arange(n) / SR; put(fx, f32(band(rng.standard_normal(n), 3000, 9000) * np.exp(-kk * 4) * amp), at)
+def gulp(at, amp=0.08):
+    for j in range(2): kk = np.arange(int(0.12 * SR)) / SR; f = 180 + 120 * kk / 0.12; put(fx, f32(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * kk / 0.12) * amp), at + j * 0.25)
+def scrape_metal(at, d=1.0, amp=0.07):   # claws on a metal wall: a screeching, wobbling tone + grit
+    kk = np.arange(int(d * SR)) / SR; f = 1800 + 300 * np.sin(2 * np.pi * 7 * kk) + 200 * kk
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.6 + band(rng.standard_normal(len(kk)), 2000, 7000) * 0.5
+    put(fx, f32(x * np.sin(np.pi * kk / d) * amp), at)
+def slash(at, amp=0.1): whoosh(at, 0.18, amp); n = int(0.05 * SR); put(fx, f32(band(rng.standard_normal(n), 4000, 9000) * np.exp(-np.arange(n) / SR * 60) * amp), at + 0.12)
+# the name said three times: each one a low "boom" + the music box going out of tune
+NAME = wT('ler', 'diary')
+for j in range(3): thud(NAME + 0.8 + j * 0.55, 0.18); put(mus, tone(392 - j * 20, 0.8, 0.04, 3), NAME + 0.8 + j * 0.55)
+click(wT('gravar', 'diary'), 0.1)   # phone starts recording
+ERR = [wT('três', 'diary'), wT('dar', 'hello'), wT('beliscou', 'pinch')]
+for at in ERR: buzz(at, 0.1); thud(at, 0.3)
+# energy drinks: can opening + gulps; game beeps; clock ticking faster
+CANS = wT('energ', 'awake')
+for j in range(3): hiss(CANS - 0.4 + j * 0.45, 0.3, 0.07); gulp(CANS - 0.2 + j * 0.45)
+for at in np.arange(T0('awake'), TE('sleep') - 0.6, 0.19):
+    if rng.random() < 0.5: click(at, 0.025)
+for j in range(6): put(fx, f32(tone(880 + (j % 3) * 220, 0.08, 0.025, 20)), wT('videogame', 'awake') + j * 0.15)
+for at in np.arange(wT('quatro', 'awake'), TE('awake'), 0.1): click(at, 0.02)
+# falling asleep: a soft snore, the controller slipping
+for j in range(2):
+    m = int(0.8 * SR); kk = np.arange(m) / SR; put(fx, f32(lowp(np.sign(np.sin(2 * np.pi * 45 * kk)), 400) * np.sin(np.pi * kk / 0.8) * 0.05), wT('cadeira', 'sleep') + j * 1.1)
+whoosh(TE('sleep') - 0.6, 0.6, 0.12)   # falling into the dream
+# the dream: boiler hum, steam, claws on the wall
+n = int((TE('pinch') - T0('dream')) * SR); kk = np.arange(n) / SR; put(mus, f32(lowp(np.sign(np.sin(2 * np.pi * 50 * kk)), 200) * 0.03), T0('dream'))
+for j in range(3): hiss(T0('dream') + 0.5 + j * 1.7, 0.8, 0.04)
+SCR = wT('arranha', 'dream'); scrape_metal(SCR, 1.2); scrape_metal(SCR + 1.4, 0.9, 0.05)
+for at in np.arange(wT('foi', 'hello'), TE('hello') - 0.1, 0.32): step(at, 0.05, False)
+sting(ERR[1] + 0.3, 0.15)
+PIN = ERR[2]; kk = np.arange(int(0.25 * SR)) / SR; put(fx, f32(np.sin(2 * np.pi * (600 + 900 * kk / 0.25) * kk) * np.sin(np.pi * kk / 0.25) * 0.06), PIN + 0.1)   # "boing" squeeze
+growl(PIN + 0.45, 1.2, 0.15)
+SL = TE('pinch') - 0.75
+for j in range(3): slash(SL + j * 0.12, 0.12)
+for j, f in enumerate([392, 370, 349, 330]): put(fx, f32(tone(f, 0.55 if j < 3 else 1.1, 0.06, 1.5)), wT('descansado', 'end') + j * 0.42)
+for j, f in enumerate([523, 659, 784, 659]): put(mus, tone(f * 2, 0.6, 0.025, 4), T0('end') + 0.2 + j * 0.45)   # lullaby
 for i in range(3): whoosh(T0('cta') + 0.25 + i * 0.12, 0.2, 0.05)
 for j, f in enumerate([523, 659, 784, 659, 523, 659]): put(mus, tone(f, 0.5, 0.03, 4), T0('cta') + 0.3 + j * 0.3)
 put(fx, f32(tone(330, 0.2, 0.08, 10)), T0('feijoes')); put(fx, f32(tone(660, 0.3, 0.06, 8)), T0('feijoes') + 0.1)
@@ -226,6 +215,6 @@ fade = int(0.5 * SR); mix[:fade] *= np.linspace(0, 1, fade); mix[int(TOTAL * SR)
 mix = mix / max(1e-6, np.abs(mix).max()) * 0.9
 with wave.open('audio/mix.wav', 'w') as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
-json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'err': [round(x, 3) for x in ERR], 'ring': round(RING, 3), 'ans': round(ANS, 3), 'light': round(LIGHT, 3), 'doorin': round(DOOR_IN, 3)}, open('timeline.json', 'w'), indent=1)
+json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'err': [round(x, 3) for x in ERR], 'name': round(NAME, 3), 'scr': round(SCR, 3), 'slash': round(SL, 3)}, open('timeline.json', 'w'), indent=1)
 for g in segs: print(f"{g['scene']:8s} start {g['start']:6.2f} dur {g['dur']:5.2f}")
 print('total', round(TOTAL, 2))
