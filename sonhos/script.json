@@ -1,0 +1,79 @@
+[
+ {
+  "scene": "title",
+  "voice": "narr",
+  "text": "Você sobreviveria ao homem dos sonhos?",
+  "lead": 0.8,
+  "tail": 0.5
+ },
+ {
+  "scene": "rule",
+  "voice": "narr",
+  "text": "Dizem que o homem dos sonhos não pega qualquer um. Só quem fala o nome dele em voz alta.",
+  "lead": 0.2,
+  "tail": 0.4
+ },
+ {
+  "scene": "diary",
+  "voice": "narr",
+  "text": "Ninguém mais lembrava esse nome. Até o Pedrinho achar um diário velho num brechó, e ler o nome em voz alta. Três vezes. Pra gravar um vídeo.",
+  "lead": 0.2,
+  "tail": 0.6
+ },
+ {
+  "scene": "awake",
+  "voice": "narr",
+  "text": "Assustado, ele decidiu nunca mais dormir. Tomou três energéticos e jogou videogame até as quatro da manhã.",
+  "lead": 0.2,
+  "tail": 0.4
+ },
+ {
+  "scene": "sleep",
+  "voice": "narr",
+  "text": "E dormiu na cadeira mesmo, com o controle na mão.",
+  "lead": 0.2,
+  "tail": 0.9
+ },
+ {
+  "scene": "dream",
+  "voice": "narr",
+  "text": "No sonho, ele está num corredor vermelho e verde. E alguém arranha a parede com garras de faca.",
+  "lead": 0.3,
+  "tail": 0.6
+ },
+ {
+  "scene": "hello",
+  "voice": "narr",
+  "text": "Qualquer um sairia correndo. O Pedrinho achou que era um sonho, e não um pesadelo, e foi dar oi.",
+  "lead": 0.2,
+  "tail": 0.6
+ },
+ {
+  "scene": "pinch",
+  "voice": "narr",
+  "text": "Aí ele lembrou: se você se beliscar, acorda. Só que ele beliscou o homem dos sonhos.",
+  "lead": 0.2,
+  "tail": 1.2
+ },
+ {
+  "scene": "end",
+  "voice": "narr",
+  "text": "Pronto. Agora o Pedrinho dorme pra sempre. Pelo menos tá descansado.",
+  "lead": 0.3,
+  "tail": 0.8
+ },
+ {
+  "scene": "cta",
+  "voice": "narr",
+  "text": "E aí, quem o Pedrinho enfrenta agora?",
+  "lead": 0.2,
+  "tail": 0.4
+ },
+ {
+  "scene": "feijoes",
+  "voice": "narr",
+  "text": "E você achou os três feijões? Comenta aí.",
+  "lead": 0.2,
+  "tail": 0.8
+ }
+]
