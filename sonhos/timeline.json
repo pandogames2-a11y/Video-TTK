@@ -1,102 +1,102 @@
 {
- "total": 56.404,
+ "total": 58.085,
  "fps": 30,
  "segs": [
   {
    "scene": "title",
    "voice": "narr",
    "start": 0.0,
-   "dur": 3.076,
+   "dur": 3.182,
    "vstart": 0.8,
-   "vdur": 1.776
+   "vdur": 1.882
   },
   {
    "scene": "rule",
    "voice": "narr",
-   "start": 3.076,
-   "dur": 5.198,
-   "vstart": 3.276,
-   "vdur": 4.598
+   "start": 3.182,
+   "dur": 4.853,
+   "vstart": 3.382,
+   "vdur": 4.253
   },
   {
    "scene": "diary",
    "voice": "narr",
-   "start": 8.274,
-   "dur": 8.562,
-   "vstart": 8.474,
-   "vdur": 7.762
+   "start": 8.035,
+   "dur": 10.411,
+   "vstart": 8.235,
+   "vdur": 9.611
   },
   {
    "scene": "awake",
    "voice": "narr",
-   "start": 16.836,
-   "dur": 6.524,
-   "vstart": 17.036,
-   "vdur": 5.924
+   "start": 18.446,
+   "dur": 6.551,
+   "vstart": 18.646,
+   "vdur": 5.951
   },
   {
    "scene": "sleep",
    "voice": "narr",
-   "start": 23.36,
-   "dur": 3.619,
-   "vstart": 23.56,
-   "vdur": 2.519
+   "start": 24.997,
+   "dur": 3.469,
+   "vstart": 25.197,
+   "vdur": 2.369
   },
   {
    "scene": "dream",
    "voice": "narr",
-   "start": 26.979,
-   "dur": 5.978,
-   "vstart": 27.279,
-   "vdur": 5.078
+   "start": 28.466,
+   "dur": 6.3,
+   "vstart": 28.766,
+   "vdur": 5.4
   },
   {
    "scene": "hello",
    "voice": "narr",
-   "start": 32.957,
-   "dur": 5.954,
-   "vstart": 33.157,
-   "vdur": 5.154
+   "start": 34.766,
+   "dur": 6.342,
+   "vstart": 34.966,
+   "vdur": 5.542
   },
   {
    "scene": "pinch",
    "voice": "narr",
-   "start": 38.911,
-   "dur": 6.338,
-   "vstart": 39.111,
-   "vdur": 4.938
+   "start": 41.108,
+   "dur": 6.923,
+   "vstart": 41.308,
+   "vdur": 5.523
   },
   {
    "scene": "end",
    "voice": "narr",
-   "start": 45.25,
+   "start": 48.031,
    "dur": 4.966,
-   "vstart": 45.55,
+   "vstart": 48.331,
    "vdur": 3.866
   },
   {
    "scene": "cta",
    "voice": "narr",
-   "start": 50.216,
-   "dur": 2.628,
-   "vstart": 50.416,
-   "vdur": 2.028
+   "start": 52.996,
+   "dur": 2.174,
+   "vstart": 53.196,
+   "vdur": 1.574
   },
   {
    "scene": "feijoes",
    "voice": "narr",
-   "start": 52.844,
-   "dur": 3.56,
-   "vstart": 53.044,
-   "vdur": 2.56
+   "start": 55.17,
+   "dur": 2.915,
+   "vstart": 55.37,
+   "vdur": 1.915
   }
  ],
  "err": [
-  14.317,
-  37.749,
-  42.322
+  14.994,
+  40.098,
+  45.45
  ],
- "name": 12.933,
- "scr": 30.382,
- "slash": 44.499
+ "name": 13.116,
+ "scr": 32.521,
+ "slash": 47.281
 }
