@@ -1,2 +1,6 @@
 audio/*.wav
 node_modules
+bg/
+clips/seg*.mp4
+clips/bg_intro.mp4
+clips/list.txt

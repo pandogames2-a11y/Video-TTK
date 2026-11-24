@@ -96,7 +96,6 @@ for k, (f, a) in enumerate([(220, 0), (174.6, 2.2), (196, 4.4), (164.8, 6.6)]):
         d = min(2.4, sol - a); t = np.arange(int(SR * d)) / SR
         pad = sum(np.sin(2 * np.pi * f * m * t) / m for m in (1, 1.5, 2)) * 0.035 * np.minimum(1, t * 3) * np.minimum(1, (d - t) * 3)
         put(mix, lowp(pad.astype(np.float32), 1800), a + VSTART * 0.3)
-boing(T['w_tenis'] + 0.1); ouch(T['w_machucam'] + 0.15)
 # riser into the reveal
 rd = 1.2; n = noise(rd); put(fx, hip(n, 1200) * np.linspace(0, 1, len(n)) ** 2 * 0.12, sol - rd + 0.1)
 impact(sol + 0.05); whoosh(sol + 0.05, 0.6, 0.2); sparkle(sol + 0.2)
