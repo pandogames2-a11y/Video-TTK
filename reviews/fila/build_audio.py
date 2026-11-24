@@ -21,12 +21,36 @@ def readwav(f):
     if ch > 1: x = x.reshape(-1, ch).mean(1)
     t = np.arange(int(len(x) * SR / sr)) / SR
     return np.interp(t, np.arange(len(x)) / sr, x).astype(np.float32)
-raw = 'audio/voice_raw.wav'
-subprocess.run(['python3', '-m', 'piper', '-m', D + '.onnx', '-c', D + '.onnx.json', '-f', raw, '--length-scale', '0.86', '--sentence-silence', '0.25'],
-               input=SAY.encode(), check=True, capture_output=True)
-# a brighter, friendlier "mascot" tone: pitch up a little, keep the speed
-subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', raw, '-af', 'asetrate=22050*1.12,aresample=22050,atempo=0.95,highpass=f=90,acompressor=threshold=0.1:ratio=3,volume=1.5',
-                '-ar', str(SR), '-ac', '1', 'audio/voice.wav'], check=True)
+# ElevenLabs (TTS=eleven): "Liam" (young adult man, warm, made for reels) — the user asked for a ~25-year-old man, cheerful but calm, elegant.
+# Library/native Brazilian voices and voice design need a paid plan via the API, so it is a default voice; higher stability keeps it calm.
+# /with-timestamps gives the exact time of every word.
+TIGER = {'voice_id': 'TX3LPaxmHKxFdv7VOQHJ', 'model_id': 'eleven_multilingual_v2', 'stability': 0.7, 'similarity_boost': 0.85, 'style': 0.1, 'seed': 4242}
+ELEVEN = os.environ.get('TTS') == 'eleven'
+ALIGN = None
+if ELEVEN:
+    import hashlib, urllib.request, urllib.error, base64
+    os.makedirs('audio/cache', exist_ok=True)
+    key = hashlib.sha1(json.dumps([SAY, TIGER], sort_keys=True).encode()).hexdigest()[:16]; cj = f'audio/cache/{key}.json'
+    if not os.path.exists(cj):
+        body = json.dumps({'text': SAY, 'model_id': TIGER['model_id'], 'seed': TIGER['seed'], 'voice_settings': {k: TIGER[k] for k in ('stability', 'similarity_boost', 'style')} | {'use_speaker_boost': True}}).encode()
+        err = None
+        for host in os.environ.get('ELEVEN_HOSTS', 'api.us.elevenlabs.io,api.elevenlabs.io').split(','):
+            rq = urllib.request.Request(f"https://{host}/v1/text-to-speech/{TIGER['voice_id']}/with-timestamps?output_format=mp3_44100_128", data=body, headers={'xi-api-key': 'proxy-injected', 'Content-Type': 'application/json'})
+            try: d = json.load(urllib.request.urlopen(rq, timeout=180)); json.dump(d, open(cj, 'w')); err = None; break
+            except urllib.error.HTTPError as e: err = f'{host}: {e.code} {e.read()[:300]}'
+        if err: raise SystemExit('ElevenLabs: ' + err)
+    d = json.load(open(cj)); open('audio/voice.mp3', 'wb').write(base64.b64decode(d['audio_base64']))
+    sp = float(os.environ.get('SPEED', '1'))
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'audio/voice.mp3', '-af', f'atempo={sp}', '-ar', str(SR), '-ac', '1', 'audio/voice.wav'], check=True)
+    al = d.get('alignment') or d.get('normalized_alignment')
+    ALIGN = [(c, a / sp, b / sp) for c, a, b in zip(al['characters'], al['character_start_times_seconds'], al['character_end_times_seconds'])]
+else:
+    raw = 'audio/voice_raw.wav'
+    subprocess.run(['python3', '-m', 'piper', '-m', D + '.onnx', '-c', D + '.onnx.json', '-f', raw, '--length-scale', '0.86', '--sentence-silence', '0.25'],
+                   input=SAY.encode(), check=True, capture_output=True)
+    # a brighter, friendlier "mascot" tone: pitch up a little, keep the speed
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', raw, '-af', 'asetrate=22050*1.12,aresample=22050,atempo=0.95,highpass=f=90,acompressor=threshold=0.1:ratio=3,volume=1.5',
+                    '-ar', str(SR), '-ac', '1', 'audio/voice.wav'], check=True)
 v = readwav('audio/voice.wav')
 vd = len(v) / SR
 # ---- word timings: split by punctuation at the longest silences, spread words by length inside each phrase ----
@@ -44,22 +68,33 @@ phrases = [p.strip() for p in re.split(r'(?<=[?.!:])\s+', TEXT) if p.strip()]
 cut = sorted(sorted(gaps, reverse=True)[:len(phrases) - 1], key=lambda g: g[1])
 bounds = [s0] + [x for g in cut for x in (g[1], g[2])] + [s1]
 words = []
-def spread(toks, a, b):
-    wts = [len(re.sub(r'\W', '', w)) + 1.5 for w in toks]; tot = sum(wts); c = a
-    for w, wt in zip(toks, wts):
-        d = (b - a) * wt / tot; words.append({'text': w, 't0': round(VSTART + c, 3), 't1': round(VSTART + c + d * 0.92, 3)}); c += d
-for k, ph in enumerate(phrases):
-    a, b = bounds[2 * k], bounds[2 * k + 1]
-    parts = [p.split() for p in re.split(r'(?<=,)\s+', ph)]
-    if len(parts) == 1: spread(parts[0], a, b); continue
-    # anchor each comma to the silence nearest to where it is expected (by word length)
-    lens = [sum(len(w) + 1.5 for w in p) for p in parts]; tot = sum(lens); acc = 0; pa = a
-    inside = [g for g in gaps if a < g[1] < b]
-    for p, L in zip(parts[:-1], lens[:-1]):
-        acc += L; exp = a + (b - a) * acc / tot
-        g = min(inside, key=lambda g: abs((g[1] + g[2]) / 2 - exp) - g[0] * 2) if inside else (0, exp, exp)
-        spread(p, pa, g[1]); pa = g[2]
-    spread(parts[-1], pa, b)
+if ALIGN:
+    cur, t0, t1 = '', None, None
+    for c, ca, cb in ALIGN + [(' ', 0, 0)]:
+        if c.isspace():
+            if cur: words.append({'text': cur, 't0': round(VSTART + t0, 3), 't1': round(VSTART + t1, 3)})
+            cur, t0 = '', None
+        else:
+            if t0 is None: t0 = ca
+            cur += c; t1 = cb
+    assert [w['text'] for w in words] == TEXT.split(), 'alignment words differ from the caption text'
+else:
+    def spread(toks, a, b):
+        wts = [len(re.sub(r'\W', '', w)) + 1.5 for w in toks]; tot = sum(wts); c = a
+        for w, wt in zip(toks, wts):
+            d = (b - a) * wt / tot; words.append({'text': w, 't0': round(VSTART + c, 3), 't1': round(VSTART + c + d * 0.92, 3)}); c += d
+    for k, ph in enumerate(phrases):
+        a, b = bounds[2 * k], bounds[2 * k + 1]
+        parts = [p.split() for p in re.split(r'(?<=,)\s+', ph)]
+        if len(parts) == 1: spread(parts[0], a, b); continue
+        # anchor each comma to the silence nearest to where it is expected (by word length)
+        lens = [sum(len(w) + 1.5 for w in p) for p in parts]; tot = sum(lens); acc = 0; pa = a
+        inside = [g for g in gaps if a < g[1] < b]
+        for p, L in zip(parts[:-1], lens[:-1]):
+            acc += L; exp = a + (b - a) * acc / tot
+            g = min(inside, key=lambda g: abs((g[1] + g[2]) / 2 - exp) - g[0] * 2) if inside else (0, exp, exp)
+            spread(p, pa, g[1]); pa = g[2]
+        spread(parts[-1], pa, b)
 mouth = [round(float(min(1, e / (env.max() * 0.55))), 3) for e in env[::1]]   # 100 per second
 END_SPEECH = VSTART + vd
 def wt(prefix, after=0, back_=0):
