@@ -5,7 +5,12 @@ import numpy as np
 from scipy.signal import butter, lfilter
 SR = 44100
 TEXT = ("Você já tá cansado de comprar aqueles tênis que a sola parece um pedaço de papelão e quando você vai fazer "
-        "qualquer atividade simples como uma caminhada já Machuca o seu pé? Então eu tenho a solução para você.")
+        "qualquer atividade simples como uma caminhada já Machuca o seu pé? Então eu tenho a solução para você. "
+        "Ele tem o cabedal de tela respirável, então seu pé não fica abafado. "
+        "O solado é alto e acolchoado, pra amortecer cada passo. "
+        "Fica firme no pé com o cadarço, combina com tudo, do treino ao dia a dia, e é da Fila, uma marca de confiança. "
+        "Então não perde tempo: cole o código que tá na tela no buscador do Mercado Livre e garanta o seu! "
+        "Ou comenta eu quero, que eu te mando o link!")
 SAY = TEXT
 D = '../../telefone/tts/vits-piper-pt_BR-faber-medium/pt_BR-faber-medium'
 os.makedirs('audio', exist_ok=True)
@@ -35,7 +40,7 @@ while i < idx[-1]:
         while not on[j]: j += 1
         gaps.append(((j - i) * 0.01, i * 0.01, j * 0.01)); i = j
     else: i += 1
-phrases = [p.strip() for p in re.split(r'(?<=[?.])\s+', TEXT) if p.strip()]
+phrases = [p.strip() for p in re.split(r'(?<=[?.!:])\s+', TEXT) if p.strip()]
 cut = sorted(sorted(gaps, reverse=True)[:len(phrases) - 1], key=lambda g: g[1])
 bounds = [s0] + [x for g in cut for x in (g[1], g[2])] + [s1]
 words = []
@@ -57,11 +62,23 @@ for k, ph in enumerate(phrases):
     spread(parts[-1], pa, b)
 mouth = [round(float(min(1, e / (env.max() * 0.55))), 3) for e in env[::1]]   # 100 per second
 END_SPEECH = VSTART + vd
-SHOTS = END_SPEECH + 0.2
-T = {'voice_start': VSTART, 'speech_end': round(END_SPEECH, 3), 'shot1': round(SHOTS, 3), 'shot2': round(SHOTS + 3.0, 3), 'shot3': round(SHOTS + 5.8, 3),
-     'final': round(SHOTS + 8.3, 3), 'end': round(SHOTS + 13.0, 3)}
-def wt(prefix): return next(w['t0'] for w in words if w['text'].lower().startswith(prefix))
+def wt(prefix, after=0, back_=0):
+    i = next(k for k, w in enumerate(words) if w['t0'] >= after and w['text'].lower().startswith(prefix))
+    return words[max(0, i - back_)]['t0']
+T = {'voice_start': VSTART, 'speech_end': round(END_SPEECH, 3), 'end': round(END_SPEECH + 1.8, 3)}
 T['w_tenis'] = wt('tênis'); T['w_machucam'] = wt('machuca'); T['w_entao'] = wt('então'); T['w_solucao'] = wt('solução')
+sol = T['w_solucao']
+# product sections, each starting on its sentence
+T['f_mesh'] = wt('ele', sol) - 0.05
+T['f_sole'] = wt('solado', sol, 1) - 0.05
+T['f_firm'] = wt('fica', T['f_sole']) - 0.05
+T['f_match'] = wt('combina', sol) - 0.05
+T['f_brand'] = wt('fila', sol, 3) - 0.05
+T['f_cta'] = wt('então', T['f_brand']) - 0.05
+T['w_cole'] = wt('cole', sol); T['w_codigo'] = wt('código', sol)
+T['f_comment'] = wt('ou', T['f_cta']) - 0.05
+T['shot1'] = T['f_mesh']
+T = {k: round(v, 3) for k, v in T.items()}
 json.dump({'T': T, 'words': words, 'mouth': mouth}, open('timeline.json', 'w'), ensure_ascii=False)
 # ---- music + effects ----
 N = int(SR * T['end']) + SR
@@ -113,8 +130,8 @@ while t0 + k * beat < T['end'] - 0.3:
         for f in ch: put(mix, lowp(tone(f, beat * 4, 0.03, 0.8, 'saw'), 2200), at)
         put(mix, tone(ch[0] / 2, beat * 3.5, 0.12, 1.2), at)                                                                  # bass
     k += 1
-for key in ('shot2', 'shot3', 'final'): whoosh(T[key], 0.45, 0.15)
-sparkle(T['final'] + 0.4); pop(T['final'] + 1.0); pop(T['final'] + 1.6)
+for key in ('f_mesh', 'f_sole', 'f_firm', 'f_match', 'f_brand', 'f_cta'): whoosh(T[key], 0.45, 0.13); pop(T[key] + 0.15, 0.07)
+sparkle(T['f_brand'] + 0.3); sparkle(T['w_codigo']); pop(T['f_comment'] + 0.2); pop(T['f_comment'] + 0.5)
 # fade out the end
 fade = int(SR * 0.8); e = int(SR * T['end']); mix[e - fade:e] *= np.linspace(1, 0, fade); mix[e:] = 0; fx[e:] = 0
 out = mix * 0.9 + fx

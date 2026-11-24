@@ -103,8 +103,25 @@ function mini(t, t0) {
   layer(() => tiger(200, 1900 + (1 - pin) * 500, 0.55, { mouth: 0, blink: blinkAt(t), time: t, bob: Math.abs(Math.sin(t * 4)) * 6, armL: [-40, -110, 'thumb'], armR: [-30, -60, 'thumb'], brows: 1, look: [0.5, -0.5], tilt: 0.06 }));
 }
 const ML_CODE = '2JUBS1-CKKG';
-function codeCard(t, t0) {
-  if (t < t0) return; const p = back((t - t0) / 0.45), a = cl((t - t0) / 0.2);
+// zoom the camera on a point of the sneaker photo (fx,fy in 0..1 of the image), centred at y=830
+function focusShot(img, fx, fy, z, dx, p) {
+  const W = 900, F = 1100, h = img.height * W / img.width, px = 540 - W / 2 + fx * W, py = F - h + fy * h;
+  main.save(); main.translate(540 + dx, 830); main.scale(z, z); main.translate(-px, -py); shoe(img, 540, F, W, { sweep: p * 1.2 }); main.restore();
+  const v = main.createRadialGradient(540, 830, 350, 540, 830, 1100); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.65)'); main.fillStyle = v; main.fillRect(0, 0, SW, SH);
+}
+// feature name in a purple pill (with a check mark)
+function featureLabel(txt, d) {
+  const p = back(d / 0.4); if (p <= 0) return;
+  main.save(); main.translate(540, 1270); main.scale(p, p); main.font = '900 62px Inter, sans-serif'; main.textAlign = 'center';
+  const tw = main.measureText(txt).width; if (tw + 150 > 1000) { const k = 1000 / (tw + 150); main.scale(k, k); }
+  const w = tw + 150;
+  main.fillStyle = '#7b4dff'; main.strokeStyle = '#fff'; main.lineWidth = 7; main.beginPath(); main.roundRect(-w / 2, -55, w, 110, 55); main.fill(); main.stroke();
+  main.fillStyle = '#fff'; main.beginPath(); main.arc(-w / 2 + 58, 0, 30, 0, 7); main.fill();
+  main.strokeStyle = '#7b4dff'; main.lineWidth = 9; main.lineCap = 'round'; main.beginPath(); main.moveTo(-w / 2 + 44, 2); main.lineTo(-w / 2 + 55, 13); main.lineTo(-w / 2 + 73, -10); main.stroke();
+  main.fillStyle = '#fff'; main.fillText(txt, 25, 22); main.restore();
+}
+function codeCard(t, t0, pulse = 1) {
+  if (t < t0) return; const p = back((t - t0) / 0.45) * pulse, a = cl((t - t0) / 0.2);
   main.save(); main.globalAlpha = a; main.translate(540, 250); main.scale(p, p);
   main.fillStyle = 'rgba(8,6,20,0.62)'; main.strokeStyle = 'rgba(255,221,46,0.9)'; main.lineWidth = 6;
   main.beginPath(); main.roundRect(-480, -135, 960, 285, 36); main.fill(); main.stroke();
@@ -145,39 +162,32 @@ window.renderFrame = function (t) {
     caption(t, 1330);
     // white flash at the reveal
     const fl = 1 - cl((t - T.w_solucao) / 0.35); if (t >= T.w_solucao && fl > 0) { main.fillStyle = `rgba(255,255,255,${fl * 0.8})`; main.fillRect(0, 0, SW, SH); }
-  } else if (t < T.shot2) {
-    // ---------- SHOT 1: side view, slow push-in + light sweep ----------
-    const p = (t - T.shot1) / (T.shot2 - T.shot1);
-    studio(t); main.save(); const z = 1 + p * 0.12; main.translate(540, 1000); main.scale(z, z); main.translate(-540, -1000);
-    shoe(IMG.s1, 540 - 30 + p * 60, 1080, 960, { sweep: p * 1.2 }); main.restore();
-    sparkles(t, 540, 850, 460, 8, 0.7);
-    mini(t, T.shot1);
-  } else if (t < T.shot3) {
-    // ---------- SHOT 2: three-quarter view, camera slides and tilts ----------
-    const p = (t - T.shot2) / (T.shot3 - T.shot2);
-    studio(t); main.save(); const z = 1.15 - p * 0.12; main.translate(540, 1000); main.rotate(-0.04 + p * 0.06); main.scale(z, z); main.translate(-540 + 80 - p * 160, -1000);
-    shoe(IMG.s3, 540, 1150, 900, { sweep: 1.1 - p * 1.2 }); main.restore();
-    mini(t, T.shot1);
-  } else if (t < T.final) {
-    // ---------- SHOT 3: macro on the thick cushioned sole ----------
-    const p = (t - T.shot3) / (T.final - T.shot3);
-    studio(t, 0, 0.7); main.save(); const z = 2.3 + p * 0.25; main.translate(540, 960); main.scale(z, z); main.translate(-540 - 80 + p * 160, -1045);
-    shoe(IMG.s1, 540, 1100, 900, { sweep: p }); main.restore();
-    const v = main.createRadialGradient(540, 960, 400, 540, 960, 1100); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.7)'); main.fillStyle = v; main.fillRect(0, 0, SW, SH);
   } else {
-    // ---------- FINAL: the shoe + the tiger, product code and the call to action (on screen only) ----------
-    const p = (t - T.final);
-    studio(t);
-    main.save(); main.translate(540, 900); const z = 0.95 + Math.sin(p * 1.2) * 0.02; main.scale(z, z); main.translate(-540, -900);
-    shoe(IMG.s3, 560, 1000 + Math.sin(p * 2) * 12, 820, { sweep: (p % 2.5) / 1.6, rot: Math.sin(p * 1.5) * 0.02 }); main.restore();
-    sparkles(t, 560, 760, 420, 10, 0.8);
-    bigText(T.final + 1.5, t, 1290, 'COMENTA', 78);
-    bigText(T.final + 1.7, t, 1390, '"EU QUERO"', 104, '#ffdd2e');
-    const pin = back((t - T.final - 0.2) / 0.5);
-    layer(() => tiger(880, 1900 + (1 - pin) * 500, 0.62, { mouth: 0, blink: bl, time: t, bob: Math.abs(Math.sin(t * 4)) * 6, armL: [-140, -150, 'point'], armR: [-40, -110, 'thumb'], brows: 1, look: [-0.5, -0.5], tilt: -0.06 }));
+    // ---------- PRODUCT: one shot per feature, the tiger keeps talking in the corner ----------
+    studio(t, 0, 0.9);
+    const sec = [['f_mesh', 'TELA RESPIRÁVEL'], ['f_sole', 'SOLADO ALTO E ACOLCHOADO'], ['f_firm', 'FIRME NO PÉ'], ['f_match', 'COMBINA COM TUDO'], ['f_brand', 'MARCA DE CONFIANÇA'], ['f_cta', null]];
+    let k = 0; while (k + 1 < sec.length && t >= T[sec[k + 1][0]]) k++;
+    const t0 = T[sec[k][0]], t1 = k + 1 < sec.length ? T[sec[k + 1][0]] : T.end, p = cl((t - t0) / (t1 - t0));
+    const key = sec[k][0];
+    if (key === 'f_mesh') focusShot(IMG.s1, 0.45, 0.33, 1.9 + p * 0.25, -40 + p * 80, p);
+    else if (key === 'f_sole') focusShot(IMG.s1, 0.5 - 0.1 + p * 0.2, 0.8, 2.3 + p * 0.15, 0, p);
+    else if (key === 'f_firm') focusShot(IMG.s3, 0.62, 0.22, 1.9 + p * 0.2, 0, p);
+    else if (key === 'f_match') { main.save(); const z = 1.12 - p * 0.1; main.translate(540, 900); main.rotate(-0.04 + p * 0.06); main.scale(z, z); main.translate(-540 + 70 - p * 140, -900); shoe(IMG.s3, 540, 1120, 860, { sweep: 1.1 - p * 1.2 }); main.restore(); }
+    else if (key === 'f_brand') { main.save(); const z = 1 + p * 0.1; main.translate(540, 900); main.scale(z, z); main.translate(-540, -900); shoe(IMG.s1, 520 + p * 40, 1060, 940, { sweep: p * 1.2 }); main.restore(); sparkles(t, 540, 830, 460, 10, 0.8); }
+    else { const q = t - t0; main.save(); main.translate(540, 880); const z = 0.92 + Math.sin(q * 1.2) * 0.02; main.scale(z, z); main.translate(-540, -880);
+      shoe(IMG.s3, 520, 1040 + Math.sin(q * 2) * 10, 780, { sweep: (q % 2.5) / 1.6, rot: Math.sin(q * 1.5) * 0.02 }); main.restore(); sparkles(t, 520, 820, 400, 10, 0.8); }
+    if (sec[k][1]) featureLabel(sec[k][1], t - t0);
+    if (t >= T.f_comment) { bigText(T.f_comment + 0.15, t, 1180, 'COMENTA', 78); bigText(T.f_comment + 0.35, t, 1280, '"EU QUERO"', 104, '#ffdd2e'); }
+    const cta = key === 'f_cta', pointCode = cta && t >= T.w_cole - 0.2 && t < T.f_comment;
+    const armL = pointCode ? [-120, -100, 'point'] : cta ? [-60, -120, 'thumb'] : [-150 + Math.sin(t * 3) * 15, -110 + Math.sin(t * 3) * 15, 'open'];
+    const armR = cta && t >= T.f_comment ? [-40, -110, 'thumb'] : [60, 85, 'open'];
+    layer(() => tiger(850, 1890, cta ? 0.7 : 0.62, { mouth: m, blink: bl, time: t, bob: talking ? Math.abs(Math.sin(t * 7.5)) * 10 : Math.sin(t * 2) * 3, tilt: Math.sin(t * 2.3) * 0.05, armL, armR, brows: 1, look: pointCode ? [-0.3, -0.8] : [-0.4, -0.2], squash: 1 + m * 0.02 }));
+    caption(t, 1440);
+    // a quick flash between features
+    const d = t - t0; if (d < 0.1 && k > 0) { main.fillStyle = `rgba(255,255,255,${0.3 * (1 - d / 0.1)})`; main.fillRect(0, 0, SW, SH); }
   }
   // Mercado Livre search code: on screen from the moment the sneaker appears until the end
-  codeCard(t, T.w_solucao + 0.35);
+  codeCard(t, T.w_solucao + 0.35, t >= T.w_codigo - 0.1 && t < T.f_comment ? 1 + 0.06 * Math.abs(Math.sin((t - T.w_codigo) * 6)) : 1);
   // fade from black at the start
   if (t < 0.25) { main.fillStyle = `rgba(0,0,0,${1 - t / 0.25})`; main.fillRect(0, 0, SW, SH); }
 };

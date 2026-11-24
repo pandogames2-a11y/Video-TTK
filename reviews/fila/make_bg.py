@@ -2,8 +2,9 @@
 # Cut to the words, cropped to vertical 1080x1920, exported as frames bg/f00000.jpg (30 fps) that index.html draws behind the tiger.
 import json, os, subprocess, shutil
 T = json.load(open('timeline.json'))
-W = {w['text'].lower().strip('.,?'): w['t0'] for w in T['words']}
-t_quando, t_como, t_ja, t_entao = W['quando'] - 0.1, W['como'] - 0.1, W['já'] - 0.1, W['então'] - 0.1
+W = {}
+for w in T['words']: W.setdefault(w['text'].lower().strip('.,?!:'), w['t0'])   # first time each word is said
+t_quando, t_como, t_ja, t_entao = W['quando'] - 0.1, W['como'] - 0.1, next(w['t0'] for w in T['words'] if w['t0'] > W['caminhada'] and w['text'].lower() == 'já') - 0.1, W['então'] - 0.1
 SEG = [  # clip, start in clip, duration, crop centre x (0..1)
     ('14766', 2.0, W['tênis'], 0.55),             # lacing up "aqueles tênis"
     ('16231', 0.4, t_quando - W['tênis'], 0.52),   # "a sola parece um pedaço de papelão"
