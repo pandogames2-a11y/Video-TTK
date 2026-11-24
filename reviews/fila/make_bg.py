@@ -3,13 +3,13 @@
 import json, os, subprocess, shutil
 T = json.load(open('timeline.json'))
 W = {w['text'].lower().strip('.,?'): w['t0'] for w in T['words']}
-t_quando, t_fazer, t_eles, t_entao = W['quando'] - 0.1, W['fazer'] - 0.15, W['eles'] - 0.1, W['então'] - 0.1
+t_quando, t_como, t_ja, t_entao = W['quando'] - 0.1, W['como'] - 0.1, W['já'] - 0.1, W['então'] - 0.1
 SEG = [  # clip, start in clip, duration, crop centre x (0..1)
-    ('14766', 2.0, W['tênis'] - 0.0, 0.55),
-    ('16231', 0.4, t_quando - W['tênis'], 0.52),
-    ('4893', 0.5, t_fazer - t_quando, 0.5),
-    ('40881', 2.0, t_eles - t_fazer, 0.5),
-    ('723', 5.0, t_entao - t_eles, 0.5),
+    ('14766', 2.0, W['tênis'], 0.55),             # lacing up "aqueles tênis"
+    ('16231', 0.4, t_quando - W['tênis'], 0.52),   # "a sola parece um pedaço de papelão"
+    ('40881', 2.0, t_como - t_quando, 0.5),        # "qualquer atividade simples"
+    ('4893', 0.3, t_ja - t_como, 0.5),             # "como uma caminhada"
+    ('723', 5.0, t_entao - t_ja, 0.5),             # "já machuca o seu pé?"
 ]
 os.makedirs('audio', exist_ok=True)
 parts = []

@@ -4,8 +4,8 @@ import json, os, re, subprocess, wave
 import numpy as np
 from scipy.signal import butter, lfilter
 SR = 44100
-TEXT = ("Você já tá cansado de comprar aqueles tênis que não duram nem um mês e, quando você vai caminhar "
-        "ou fazer qualquer outra coisa, eles machucam seus pés? Então eu tenho a solução.")
+TEXT = ("Você já tá cansado de comprar aqueles tênis que a sola parece um pedaço de papelão e quando você vai fazer "
+        "qualquer atividade simples como uma caminhada já Machuca o seu pé? Então eu tenho a solução para você.")
 SAY = TEXT
 D = '../../telefone/tts/vits-piper-pt_BR-faber-medium/pt_BR-faber-medium'
 os.makedirs('audio', exist_ok=True)
@@ -61,7 +61,7 @@ SHOTS = END_SPEECH + 0.2
 T = {'voice_start': VSTART, 'speech_end': round(END_SPEECH, 3), 'shot1': round(SHOTS, 3), 'shot2': round(SHOTS + 3.0, 3), 'shot3': round(SHOTS + 5.8, 3),
      'final': round(SHOTS + 8.3, 3), 'end': round(SHOTS + 13.0, 3)}
 def wt(prefix): return next(w['t0'] for w in words if w['text'].lower().startswith(prefix))
-T['w_tenis'] = wt('tênis'); T['w_machucam'] = wt('machucam'); T['w_entao'] = wt('então'); T['w_solucao'] = wt('solução')
+T['w_tenis'] = wt('tênis'); T['w_machucam'] = wt('machuca'); T['w_entao'] = wt('então'); T['w_solucao'] = wt('solução')
 json.dump({'T': T, 'words': words, 'mouth': mouth}, open('timeline.json', 'w'), ensure_ascii=False)
 # ---- music + effects ----
 N = int(SR * T['end']) + SR
