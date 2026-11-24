@@ -102,6 +102,19 @@ function mini(t, t0) {
   const pin = back((t - t0 - 0.3) / 0.5);
   layer(() => tiger(200, 1900 + (1 - pin) * 500, 0.55, { mouth: 0, blink: blinkAt(t), time: t, bob: Math.abs(Math.sin(t * 4)) * 6, armL: [-40, -110, 'thumb'], armR: [-30, -60, 'thumb'], brows: 1, look: [0.5, -0.5], tilt: 0.06 }));
 }
+const ML_CODE = '2JUBS1-CKKG';
+function codeCard(t, t0) {
+  if (t < t0) return; const p = back((t - t0) / 0.45), a = cl((t - t0) / 0.2);
+  main.save(); main.globalAlpha = a; main.translate(540, 250); main.scale(p, p);
+  main.fillStyle = 'rgba(8,6,20,0.62)'; main.strokeStyle = 'rgba(255,221,46,0.9)'; main.lineWidth = 6;
+  main.beginPath(); main.roundRect(-480, -135, 960, 285, 36); main.fill(); main.stroke();
+  main.textAlign = 'center'; main.lineJoin = 'round';
+  main.font = '900 50px Inter, sans-serif'; main.lineWidth = 12; main.strokeStyle = '#0c0a14';
+  for (const [txt, y] of [['COLE ESTE CÓDIGO NO BUSCADOR', -72], ['DO MERCADO LIVRE!', -14]]) { main.strokeText(txt, 0, y); main.fillStyle = '#fff'; main.fillText(txt, 0, y); }
+  // the code: big and yellow, with a light sweep every few seconds
+  main.font = '900 116px Inter, sans-serif'; main.lineWidth = 24; main.strokeText(ML_CODE, 0, 108); main.fillStyle = '#ffdd2e'; main.fillText(ML_CODE, 0, 108);
+  main.restore();
+}
 window.renderFrame = function (t) {
   const T = TL.T; main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = 1; main.filter = 'none';
   const talking = t >= T.voice_start && t < T.speech_end, m = mouthAt(t), bl = blinkAt(t);
@@ -158,12 +171,13 @@ window.renderFrame = function (t) {
     main.save(); main.translate(540, 900); const z = 0.95 + Math.sin(p * 1.2) * 0.02; main.scale(z, z); main.translate(-540, -900);
     shoe(IMG.s3, 560, 1000 + Math.sin(p * 2) * 12, 820, { sweep: (p % 2.5) / 1.6, rot: Math.sin(p * 1.5) * 0.02 }); main.restore();
     sparkles(t, 560, 760, 420, 10, 0.8);
-    badge(T.final + 0.9, t, 260, 'CÓDIGO DO PRODUTO', 'Nº 1');
     bigText(T.final + 1.5, t, 1290, 'COMENTA', 78);
     bigText(T.final + 1.7, t, 1390, '"EU QUERO"', 104, '#ffdd2e');
     const pin = back((t - T.final - 0.2) / 0.5);
     layer(() => tiger(880, 1900 + (1 - pin) * 500, 0.62, { mouth: 0, blink: bl, time: t, bob: Math.abs(Math.sin(t * 4)) * 6, armL: [-140, -150, 'point'], armR: [-40, -110, 'thumb'], brows: 1, look: [-0.5, -0.5], tilt: -0.06 }));
   }
+  // Mercado Livre search code: on screen from the moment the sneaker appears until the end
+  codeCard(t, T.w_solucao + 0.35);
   // fade from black at the start
   if (t < 0.25) { main.fillStyle = `rgba(0,0,0,${1 - t / 0.25})`; main.fillRect(0, 0, SW, SH); }
 };
