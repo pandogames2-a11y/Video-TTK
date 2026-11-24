@@ -21,10 +21,10 @@ def readwav(f):
     if ch > 1: x = x.reshape(-1, ch).mean(1)
     t = np.arange(int(len(x) * SR / sr)) / SR
     return np.interp(t, np.arange(len(x)) / sr, x).astype(np.float32)
-# ElevenLabs (TTS=eleven): "Liam" (young adult man, warm, made for reels) — the user asked for a ~25-year-old man, cheerful but calm, elegant.
-# Library/native Brazilian voices and voice design need a paid plan via the API, so it is a default voice; higher stability keeps it calm.
+# ElevenLabs (TTS=eleven): "Chris" (charming, down-to-earth) on the newest model eleven_v4 — chosen by the user from 3 samples
+# (Liam on multilingual_v2 sounded robotic). Library/native Brazilian voices need a paid plan via the API.
 # /with-timestamps gives the exact time of every word.
-TIGER = {'voice_id': 'TX3LPaxmHKxFdv7VOQHJ', 'model_id': 'eleven_multilingual_v2', 'stability': 0.7, 'similarity_boost': 0.85, 'style': 0.1, 'seed': 4242}
+TIGER = {'voice_id': 'iP95p4xoKVk53GoZ742B', 'model_id': 'eleven_v4', 'stability': 0.4, 'similarity_boost': 0.8, 'seed': 4242}
 ELEVEN = os.environ.get('TTS') == 'eleven'
 ALIGN = None
 if ELEVEN:
@@ -32,7 +32,7 @@ if ELEVEN:
     os.makedirs('audio/cache', exist_ok=True)
     key = hashlib.sha1(json.dumps([SAY, TIGER], sort_keys=True).encode()).hexdigest()[:16]; cj = f'audio/cache/{key}.json'
     if not os.path.exists(cj):
-        body = json.dumps({'text': SAY, 'model_id': TIGER['model_id'], 'seed': TIGER['seed'], 'voice_settings': {k: TIGER[k] for k in ('stability', 'similarity_boost', 'style')} | {'use_speaker_boost': True}}).encode()
+        body = json.dumps({'text': SAY, 'model_id': TIGER['model_id'], 'seed': TIGER['seed'], 'language_code': 'pt', 'voice_settings': {k: TIGER[k] for k in ('stability', 'similarity_boost')}}).encode()
         err = None
         for host in os.environ.get('ELEVEN_HOSTS', 'api.us.elevenlabs.io,api.elevenlabs.io').split(','):
             rq = urllib.request.Request(f"https://{host}/v1/text-to-speech/{TIGER['voice_id']}/with-timestamps?output_format=mp3_44100_128", data=body, headers={'xi-api-key': 'proxy-injected', 'Content-Type': 'application/json'})
