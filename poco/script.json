@@ -1,0 +1,12 @@
+[
+ {"scene": "title", "voice": "narr", "text": "Você sobreviveria à menina do poço?", "lead": 0.3, "tail": 0.5, "min": 2.8},
+ {"scene": "tape", "voice": "narr", "text": "Pedrinho comprou uma fita velha num brechó. Na etiqueta estava escrito: não assista.", "say": "Pedrinho comprou uma fita velha num brechó. Na etiqueta, estava escrito: não assista.", "lead": 0.2, "tail": 0.4},
+ {"scene": "watch", "voice": "narr", "text": "Claro que ele assistiu. Às três da manhã, sozinho, no escuro.", "lead": 0.2, "tail": 0.7},
+ {"scene": "call", "voice": "narr", "text": "Quando a fita acabou, o celular tocou, e uma voz sussurrou: sete dias.", "lead": 0.2, "tail": 0.8},
+ {"scene": "post", "voice": "narr", "text": "Ele achou que era trote, e postou o vídeo na internet. Agora a escola inteira tem sete dias.", "lead": 0.2, "tail": 0.6},
+ {"scene": "days", "voice": "narr", "text": "Sete dias depois, às três da manhã, a TV ligou sozinha, mostrando um poço.", "say": "Sete dias depois, às três da manhã, a tevê ligou sozinha, mostrando um poço.", "lead": 0.3, "tail": 0.5},
+ {"scene": "crawl", "voice": "narr", "text": "E de dentro dele saiu a menina, rastejando direto pra fora da tela.", "lead": 0.2, "tail": 0.5},
+ {"scene": "help", "voice": "narr", "text": "O certo era tirar a TV da tomada. Mas o Pedrinho achou que ela tava presa, e foi ajudar.", "say": "O certo era tirar a tevê da tomada. Mas o Pedrinho achou que ela tava presa, e foi ajudar.", "lead": 0.2, "tail": 1.4},
+ {"scene": "end", "voice": "narr", "text": "Pronto. Agora o Pedrinho mora dentro da fita. Pelo menos viralizou: um milhão de visualizações.", "lead": 0.3, "tail": 0.6},
+ {"scene": "cta", "voice": "narr", "text": "E aí, quem o Pedrinho enfrenta agora? Comenta aí.", "lead": 0.2, "tail": 1.2}
+]
