@@ -86,7 +86,7 @@ function counters(t) {   // ERROS 0/3 (top right) and PÁGINAS x/8 (top left)
     main.fillStyle = over ? '#ff4a3a' : '#ffffff'; main.font = '900 44px "Inter Display", Inter'; main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillText(`${pages}/8`, 30, 2); main.restore(); }
 }
 function beanHint(t) {   // "ACHE OS 3 FEIJÕES" at the start (people rewatch to look for them)
-  const a = T0('enter') - 0.2, b = TE('rule'); if (t < a || t > b) return; const k = popS(t - a, 0.3) * (1 - ss(b - 0.4, b, t));
+  const a = T0('enter') + 0.1, b = TE('rule'); if (t < a || t > b) return; const k = popS(t - a, 0.3) * (1 - ss(b - 0.4, b, t));
   main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(540, 250); main.scale(k, k); main.rotate(-0.03);
   main.fillStyle = '#ffd23f'; main.strokeStyle = '#08061a'; main.lineWidth = 6; main.beginPath(); main.roundRect(-250, -44, 500, 88, 44); main.fill(); main.stroke();
   const pg = g; g = main; feijao(-190, 2, 1.0, Math.sin(t * 4) * 0.2); g = pg;
@@ -107,10 +107,16 @@ function closeFace(t, amt = 1) {   // cold open / loop frame: the faceless man u
   slender(0, -14, { handL: [-160, -700], handR: [160, -700] }, 0.8); staticFX(0.35 * amt + 0.15 * Math.random()); vignette(main, 0.7);
 }
 function sCold(t) { closeFace(t); }
-function sTitle(t) {
-  const k = clamp((t - T0('title')) / (TE('title') - T0('title')));
-  setCam([0.6, 1.6, 8 - k * 1.2], [0, 1.6, -4]); aimFlash([0.3, 1.3, 2.6], [0.4, 1.0, -6], 1); draw3D();
-  ped(0, lerp(3, 2.4, k), { look: [0, -0.2], phone: 'R', light: true, armR: [150, -460, 140, -520], walk: 0.5, phase: t * 7 }); vignette(main, 0.6);
+function sTitle(t) {   // opening: Pedrinho (front right) stares at the faceless man between the trees (the slow zoom is applied in frame())
+  setCam([0.25, 1.6, 5.4], [-0.15, 1.55, -6]); aimFlash([0.5, 1.35, 1.6], [-0.7, 1.7, -6.2], 1); draw3D();
+  slender(-0.7, -6.2, {}, 0.7);
+  ped(0.5, 1.6, { look: [-1, -0.1], phone: 'R', light: true, armR: [150, -480, 160, -560], mouth: 'o', brows: -1, sweat: true, blink: false });
+  vignette(main, 0.6);
+}
+function titleZoom(t) {   // one very slow zoom keyframe on the whole picture (1.00 → 1.12 over ~2.4 s), centred between the two
+  const k = ease(clamp((t - T0('title')) / 2.4)), s = 1 + 0.12 * k, cx = 520, cy = 900;
+  const gl = document.getElementById('gl'), cc = SHK.getContext('2d'); cc.setTransform(1, 0, 0, 1, 0, 0); cc.clearRect(0, 0, SW, SH); cc.drawImage(gl, 0, 0); cc.drawImage(main.canvas, 0, 0);
+  main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = '#05040c'; main.fillRect(0, 0, SW, SH); main.translate(cx, cy); main.scale(s, s); main.translate(-cx, -cy); main.drawImage(SHK, 0, 0); main.setTransform(1, 0, 0, 1, 0, 0);
 }
 function sEnter(t) {   // walking in, filming with the phone
   const k = clamp((t - T0('enter')) / (TE('enter') - T0('enter'))), pz = lerp(2, -2.2, k);
@@ -221,14 +227,14 @@ function stamps(t) {
 function shakeAmt(t) { let a = 0; for (const [t0] of STAMPS) { const k = t - t0; if (k >= 0.08 && k < 0.45) a = Math.max(a, 16 * (1 - (k - 0.08) / 0.37)); } return a; }
 function hook(t) {
   const tw = WORDS.filter(w => w.seg === 'title'); if (!tw.length) return;
-  titleFX(t, tw[0].t0 - 0.3, tw[tw.length - 1].t1 - 0.05, [{ txt: 'VOCÊ SOBREVIVERIA', size: 92, colors: ['#ffffff', '#d9e4ff'] }, { txt: 'AO HOMEM', size: 116, colors: ['#ffffff', '#b9c2d8'] }, { txt: 'SEM ROSTO?', size: 116, colors: ['#ff8a8a', '#d01e2a'] }]);
+  titleFX(t, tw[0].t0 - 0.3, tw[tw.length - 1].t1 - 0.05, [{ txt: 'VOCÊ SOBREVIVERIA', size: 92, colors: ['#ffffff', '#d9e4ff'] }, { txt: 'AO HOMEM', size: 116, colors: ['#ffffff', '#b9c2d8'] }, { txt: 'SEM ROSTO?', size: 116, colors: ['#ff8a8a', '#d01e2a'] }], 400);
 }
 const SCENES = { cold: sCold, title: sTitle, enter: sEnter, rule: sRule, look: sLook, charge: sCharge, selfie: sSelfie, eighth: sEighth, grab: sGrab, end: sEnd, cta: sCta, feijoes: sFeijoes };
 const SHK = mk();
 function frame(t) {
   main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = 1; main.globalCompositeOperation = 'source-over';
   const sg = [...TL.segs].reverse().find(s => t >= s.start) || TL.segs[0];
-  SCENES[sg.scene](t);
+  SCENES[sg.scene](t); if (sg.scene === 'title') titleZoom(t);
   const sh = shakeAmt(t);
   if (sh > 0) { const gl = document.getElementById('gl'); const c = SHK.getContext('2d'); c.clearRect(0, 0, SW, SH); c.drawImage(gl, 0, 0); c.drawImage(main.canvas, 0, 0); main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = '#05040c'; main.fillRect(0, 0, SW, SH); main.drawImage(SHK, Math.sin(t * 90) * sh, Math.cos(t * 77) * sh); }
   counters(t); beanHint(t); stamps(t);

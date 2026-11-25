@@ -183,8 +183,7 @@ def scream(at, d=1.0, amp=0.18):
     x = band(src, 700, 900) * 1.6 + band(src, 1100, 1400) + band(src, 2400, 2900) * 0.5
     put(fx, f32(x * np.minimum(1, kk / 0.05) * np.minimum(1, (d - kk) / 0.3) * amp), at)
 # cold open: static + a scream (the same static closes the video, so it loops)
-static(0.0, TE('cold'), 0.16); scream(0.15, 0.9, 0.14)
-bell(TE('cold') + 0.02, 147, 0.18)
+bell(0.02, 147, 0.18)
 for at in np.arange(T0('enter'), TE('rule'), 0.55): leaves(at, 0.04)
 put(fx, f32(tone(1320, 0.12, 0.05, 20)), wT('gravar', 'enter'))   # "rec" beep
 for j, f in enumerate([659, 587, 523, 494]): put(mus, tone(f * 2, 0.7, 0.03, 3), T0('rule') + 0.2 + j * 0.5)   # eerie piano
