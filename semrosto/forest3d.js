@@ -20,6 +20,16 @@ for (let i = 0; i < 70; i++) {
   const t = inked(new THREE.CylinderGeometry(r * 0.7, r, h, 10), toon(['#3a2e26', '#2e241e', '#463a30'][i % 3])); t.position.set(x, h / 2, z); TREES.push(t);
   for (let b = 0; b < 3; b++) { const br = inked(new THREE.CylinderGeometry(0.03, 0.06, 1.6, 6), toon('#2e241e'), 0.08); br.position.set(x, 3 + b * 1.6 + rnd(), z); br.rotation.z = (rnd() - 0.5) * 2.2; br.rotation.y = rnd() * 6; }
 }
+// trees behind the entrance too (the walk-in shot looks back toward +z), with their own random stream so the rest of the set stays the same
+{ let sd = 77; const r2 = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 60; i++) {
+    let x = (r2() - 0.5) * 22, z = 7.5 + r2() * 22; if (Math.abs(x) < 1.6) x += Math.sign(x || 1) * 2.2;
+    const r = 0.14 + r2() * 0.18, h = 9 + r2() * 6;
+    const t = inked(new THREE.CylinderGeometry(r * 0.7, r, h, 10), toon(['#3a2e26', '#2e241e', '#463a30'][i % 3])); t.position.set(x, h / 2, z); TREES.push(t);
+    for (let b = 0; b < 3; b++) { const br = inked(new THREE.CylinderGeometry(0.03, 0.06, 1.6, 6), toon('#2e241e'), 0.08); br.position.set(x, 3 + b * 1.6 + r2(), z); br.rotation.z = (r2() - 0.5) * 2.2; br.rotation.y = r2() * 6; }
+  }
+  for (let i = 0; i < 120; i++) { const l = new THREE.Mesh(new THREE.CircleGeometry(0.08 + r2() * 0.08, 5), toon(['#5a3a1e', '#7a4a22', '#3a2a14'][i % 3])); l.rotation.x = -Math.PI / 2; l.rotation.z = r2() * 6; l.position.set((r2() - 0.5) * 16, 0.01, 4 + r2() * 24); scene.add(l); }
+}
 // pages pinned on trees
 function page(x, y, z, ry = 0) { const p = new THREE.Mesh(new THREE.PlaneGeometry(0.32, 0.42), new THREE.MeshToonMaterial({ color: '#f3eedc', gradientMap: grad, side: THREE.DoubleSide })); p.position.set(x, y, z); p.rotation.y = ry; scene.add(p); return p; }
 const PAGE1 = page(1.3, 1.5, -3.1, -0.4);

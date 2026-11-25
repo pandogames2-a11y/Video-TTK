@@ -31,8 +31,6 @@ function setCam(pos, look) { cam3.position.set(...pos); cam3.lookAt(...look); ca
 function draw3D() { renderer.render(scene, cam3); main.setTransform(1, 0, 0, 1, 0, 0); main.clearRect(0, 0, SW, SH); }
 function ped(x, z, o = {}) { const [px, py, d] = proj(x, 0, z); characters(SCR, () => pedro(px, py, { s: 1.7 * ppm(d) / 900, ...o }), 'rgba(200,220,255,0.95)', 0.25); }
 function slender(x, z, o = {}, rimA = 0.6) { const [px, py, d] = proj(x, 0, z); characters(SCR, () => faceless(px, py, { s: 2.6 * ppm(d) / 1360, ...o }), `rgba(210,215,255,${rimA})`, 0.45); }
-function beansAt(list) { characters(SCR, () => list.forEach(([x, y, z, r]) => { const [px, py, d] = proj(x, y, z); if (d > 0.5) feijao(px, py, 0.9 * ppm(d) / 200, r); }), 'rgba(0,0,0,0)', 0.3); }
-const BEANS = [[1.05, 0.04, -2.85, 0.2], [2.2, 1.46, -12.1, -0.1], [-1.1, 0.04, -11.6, 0.3]];   // hidden beans: root by page 1, on the exit sign, at the 7th-page tree
 let NOISE = null;
 function staticFX(a) {   // the faceless man's video static
   if (a <= 0) return; if (!NOISE) { NOISE = mk(); const c = NOISE.getContext('2d'), im = c.createImageData(SW / 4, SH / 4); for (let i = 0; i < im.data.length; i += 4) { const v = Math.random() * 255; im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 255; } c.putImageData(im, 0, 0); }
@@ -85,13 +83,6 @@ function counters(t) {   // ERROS 0/3 (top right) and PÁGINAS x/8 (top left)
     main.fillStyle = '#f3eedc'; main.strokeStyle = '#08061a'; main.lineWidth = 3; main.fillRect(-120, -24, 34, 46); main.strokeRect(-120, -24, 34, 46);
     main.fillStyle = over ? '#ff4a3a' : '#ffffff'; main.font = '900 44px "Inter Display", Inter'; main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillText(`${pages}/8`, 30, 2); main.restore(); }
 }
-function beanHint(t) {   // "ACHE OS 3 FEIJÕES" at the start (people rewatch to look for them)
-  const a = T0('enter') + 0.1, b = TE('rule'); if (t < a || t > b) return; const k = popS(t - a, 0.3) * (1 - ss(b - 0.4, b, t));
-  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(540, 250); main.scale(k, k); main.rotate(-0.03);
-  main.fillStyle = '#ffd23f'; main.strokeStyle = '#08061a'; main.lineWidth = 6; main.beginPath(); main.roundRect(-250, -44, 500, 88, 44); main.fill(); main.stroke();
-  const pg = g; g = main; feijao(-190, 2, 1.0, Math.sin(t * 4) * 0.2); g = pg;
-  main.fillStyle = '#1b1430'; main.font = '900 40px "Inter Display", Inter'; main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillText('ACHE OS 3 FEIJÕES!', 30, 4); main.restore();
-}
 function pageInsert(a, t) {   // close-up of page 1: "NÃO OLHE PRA TRÁS" scribbled
   if (a <= 0) return; main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.translate(540, 800); main.rotate(-0.05 + Math.sin(t * 2) * 0.01); main.scale(popS(a, 1), popS(a, 1));
   main.fillStyle = '#efe8d2'; main.strokeStyle = '#08061a'; main.lineWidth = 8; main.beginPath(); main.roundRect(-300, -380, 600, 760, 10); main.fill(); main.stroke();
@@ -123,13 +114,13 @@ function sEnter(t) {   // walking in, filming with the phone
   setCam([0.5, 1.5, pz - 3.3], [0, 1.35, pz + 2]); aimFlash([0.3, 1.4, pz - 0.2], [0.5, 1.2, pz - 6], 1); draw3D();
   ped(0, pz, { look: [0.2, -0.2], phone: 'R', light: true, armR: [150, -470, 120, -580], walk: 0.6, phase: t * 7, mouth: 'smile' });
   if (t > W0('gravar', 'enter') - 0.1) { main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = Math.floor(t * 2) % 2 ? '#ff2a2a' : '#7a1010'; main.beginPath(); main.arc(70, 380, 16, 0, 7); main.fill(); main.restore(); textOut('REC', 140, 380, 40, '#ffffff'); }
-  beansAt(BEANS); vignette(main, 0.6);
+  vignette(main, 0.6);
 }
 function sRule(t) {   // the first page on the tree
   const k = clamp((t - T0('rule')) / (TE('rule') - T0('rule')));
   setCam([-0.4, 1.6, 1.2], [0.7, 1.35, -3.2]); aimFlash([0.2, 1.4, -1.6], [1.3, 1.5, -3.1], 1); draw3D();
   ped(0.1, -1.7, { look: [0.8, -0.2], phone: 'R', light: true, armR: [150, -480, 160, -560], mouth: 'smile' });
-  beansAt(BEANS); vignette(main, 0.6);
+  vignette(main, 0.6);
 }
 function sLook(t) {   // the page says "don't look back"... he looks. The faceless man is right there.
   const L = TL.err[0], ins = ss(W0('escrito', 'look') - 0.2, W0('escrito', 'look') + 0.1, t) * (1 - ss(L - 0.5, L - 0.2, t));
@@ -159,13 +150,13 @@ function sSelfie(t) {   // the 7th page... he stops for a selfie. The flash show
   if (t > SH0 - 0.02 && t < SH0 + 1.2) slender(0.4, -15.5, {}, 0.6);
   ped(-0.6, -10.6, { look: [0.3, -0.5], phone: 'R', light: false, armR: [150, -520, 120, -700], phoneRot: 3.14, armL: [-150, -460, -110, -560], mouth: t > SH0 + 0.4 ? 'o' : 'smile', sweat: t > SH0 + 0.4 });
   fade(flashA * 0.9, '255,255,255');
-  beansAt(BEANS); vignette(main, 0.6);
+  vignette(main, 0.6);
 }
 function sEighth(t) {   // from behind the faceless man: the 8th page is on his back. Pedrinho stares.
   setCam([0.5, 1.9, -18.6], [0, 1.6, -12]); aimFlash([0, 1.4, -11.6], [0.2, 1.8, -16], 0.8); draw3D();
   ped(0.1, -11.6, { look: [0, -0.4], phone: 'R', light: true, armR: [150, -470, 140, -540], mouth: 'o' });
   slender(0, -15.6, { back: true, page: true }, 0.5);
-  beansAt(BEANS); vignette(main, 0.65);
+  vignette(main, 0.65);
 }
 function sGrab(t) {   // instead of running to the exit sign, he walks up to take the page... and the faceless man turns.
   const P = TL.err[2], GL = TL.glitch;
@@ -174,7 +165,7 @@ function sGrab(t) {   // instead of running to the exit sign, he walks up to tak
   setCam([0.5, 1.9, -18.6], [0.4, 1.6, -12]); aimFlash([0, 1.4, pz], [0.2, 1.8, -16], 0.8); draw3D();
   ped(0.1, pz, { look: [0, -0.5], phone: 'R', light: true, armR: [150, -470, 140, -540], armL: k > 0.6 ? [-150, -520, -60, -700] : undefined, walk: k > 0 && k < 1 ? 0.6 : 0, phase: t * 8, mouth: 'smile' });
   slender(0, -15.6, { back: true, page: true }, 0.5);
-  beansAt(BEANS); vignette(main, 0.65);
+  vignette(main, 0.65);
 }
 function sEnd(t) {   // the ninth page (a drawing of Pedrinho) on a tree; then the power bank on the leaves, still at 100%
   const D = W0('pelo', 'end');
@@ -200,15 +191,8 @@ function sCta(t) {
     for (let i = 0; i < 3; i++) { const kk = clamp((k - 0.25 - i * 0.12) / 0.25); if (kk <= 0) continue; const x = 300 + i * 240, y = 980;
       main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(x, y); main.scale(popS(kk * 0.3), popS(kk * 0.3)); main.fillStyle = '#0d0b16'; main.strokeStyle = '#7f6fb0'; main.lineWidth = 6;
       main.beginPath(); main.ellipse(0, -60, 80, 100, 0, 0, 7); main.fill(); main.stroke(); main.beginPath(); main.roundRect(-90, 40, 180, 200, 60); main.fill(); main.stroke(); main.restore();
-      textOut('?', x, y - 60, 110, '#ffffff', { s: popS(kk * 0.3) }); } }
-}
-function sFeijoes(t) {
-  if (t > TL.loop) { closeFace(t, ss(TL.loop, TL.loop + 0.4, t)); return; }   // ends on the same frame the video starts with → seamless loop
-  forestWide(t); const F = T0('feijoes'), k = t - F;
-  const lay = mk(); const pg = g; g = lay.getContext('2d'); g.translate(540, 900); g.scale(popS(k, 0.35) * 5, popS(k, 0.35) * 5); feijao(0, 0, 1, Math.sin(t * 3) * 0.12); g = pg;
-  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.drawImage(lay, 0, 0); main.restore();
-  textOut('VIU OS 3 FEIJÕES?', 540, 560, 90, '#ffd23f', { s: popS(k - 0.2, 0.3), a: ss(F + 0.2, F + 0.4, t) });
-  const tc = W0('comenta', 'feijoes'); textOut('COMENTA AÍ! ↓', 540, 1260, 84, '#ffffff', { a: ss(tc - 0.2, tc, t), s: popS(t - tc + 0.2, 0.3) });
+      textOut('?', x, y - 60, 110, '#ffffff', { s: popS(kk * 0.3) }); }
+    const tc = W0('comenta', 'cta'); if (t > tc - 0.2) textOut('COMENTA AÍ! ↓', 540, 1300, 84, '#ffffff', { a: ss(tc - 0.2, tc, t), s: popS(t - tc + 0.2, 0.3) }); }
 }
 // ---------- the ERRADO! stamps ----------
 const STAMPS = [[TL.err[0], 'ERRO Nº 1'], [TL.err[1], 'ERRO Nº 2'], [TL.err[2], 'ÚLTIMO ERRO']];
@@ -229,7 +213,7 @@ function hook(t) {
   const tw = WORDS.filter(w => w.seg === 'title'); if (!tw.length) return;
   titleFX(t, tw[0].t0 - 0.3, tw[tw.length - 1].t1 - 0.05, [{ txt: 'VOCÊ SOBREVIVERIA', size: 92, colors: ['#ffffff', '#d9e4ff'] }, { txt: 'AO HOMEM', size: 116, colors: ['#ffffff', '#b9c2d8'] }, { txt: 'SEM ROSTO?', size: 116, colors: ['#ff8a8a', '#d01e2a'] }], 400);
 }
-const SCENES = { cold: sCold, title: sTitle, enter: sEnter, rule: sRule, look: sLook, charge: sCharge, selfie: sSelfie, eighth: sEighth, grab: sGrab, end: sEnd, cta: sCta, feijoes: sFeijoes };
+const SCENES = { cold: sCold, title: sTitle, enter: sEnter, rule: sRule, look: sLook, charge: sCharge, selfie: sSelfie, eighth: sEighth, grab: sGrab, end: sEnd, cta: sCta };
 const SHK = mk();
 function frame(t) {
   main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = 1; main.globalCompositeOperation = 'source-over';
@@ -237,7 +221,7 @@ function frame(t) {
   SCENES[sg.scene](t); if (sg.scene === 'title') titleZoom(t);
   const sh = shakeAmt(t);
   if (sh > 0) { const gl = document.getElementById('gl'); const c = SHK.getContext('2d'); c.clearRect(0, 0, SW, SH); c.drawImage(gl, 0, 0); c.drawImage(main.canvas, 0, 0); main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = '#05040c'; main.fillRect(0, 0, SW, SH); main.drawImage(SHK, Math.sin(t * 90) * sh, Math.cos(t * 77) * sh); }
-  counters(t); beanHint(t); stamps(t);
+  counters(t); stamps(t);
   for (const n of ['look', 'selfie', 'eighth', 'end']) { const c = T0(n); fade(1 - ss(0, 0.2, Math.abs(t - c))); }
   hook(t);
 }

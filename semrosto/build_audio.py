@@ -184,6 +184,22 @@ def scream(at, d=1.0, amp=0.18):
     put(fx, f32(x * np.minimum(1, kk / 0.05) * np.minimum(1, (d - kk) / 0.3) * amp), at)
 # cold open: static + a scream (the same static closes the video, so it loops)
 bell(0.02, 147, 0.18)
+# suspense score for the opening (title → until he looks back): dark detuned pad, tremolo strings that slowly swell, low booms like a heartbeat, a ticking clock
+def suspense(a, b):
+    n = int((b - a) * SR); kk = np.arange(n) / SR; L = b - a
+    env = np.minimum(1, kk / 1.2) * np.minimum(1, (L - kk) / 0.6)
+    saw = lambda f: ((kk * f) % 1.0) * 2 - 1
+    pad = lowp(saw(55) + saw(55.4) + 0.7 * saw(110.2) + 0.5 * saw(116.5) + 0.4 * saw(82.4), 520) * (0.8 + 0.2 * np.sin(2 * np.pi * 0.25 * kk))
+    put(mus, f32(pad * env * 0.035), a)
+    grow = (kk / L) ** 1.5
+    trem = 0.55 + 0.45 * np.sin(2 * np.pi * 11 * kk)
+    st = sum(np.sin(2 * np.pi * f * kk + 0.3 * np.sin(2 * np.pi * 5.5 * kk)) for f in (659.3, 698.5, 987.8, 1046.5)) / 4
+    put(mus, f32(band(st, 400, 4000) * trem * env * (0.008 + 0.05 * grow)), a)
+    for j, at in enumerate(np.arange(0.4, L - 0.3, 1.5)):
+        m = int(0.9 * SR); q = np.arange(m) / SR; put(mus, f32(np.sin(2 * np.pi * (48 - 10 * q) * q) * np.exp(-q * 5) * (0.16 + 0.06 * at / L)), a + at)
+    for at in np.arange(0.2, L - 0.3, 0.5):
+        m = int(0.02 * SR); put(mus, f32(band(rng.standard_normal(m), 3000, 9000) * np.exp(-np.arange(m) / SR * 200) * 0.03), a + at)
+suspense(0.0, T0('look') + 0.4)
 for at in np.arange(T0('enter'), TE('rule'), 0.55): leaves(at, 0.04)
 put(fx, f32(tone(1320, 0.12, 0.05, 20)), wT('gravar', 'enter'))   # "rec" beep
 for j, f in enumerate([659, 587, 523, 494]): put(mus, tone(f * 2, 0.7, 0.03, 3), T0('rule') + 0.2 + j * 0.5)   # eerie piano
@@ -207,8 +223,7 @@ GL = TE('grab') - 1.0; static(GL, 1.0, 0.2); growl(GL, 1.0, 0.1)
 for j, f in enumerate([392, 370, 349, 330]): put(fx, f32(tone(f, 0.55 if j < 3 else 1.1, 0.06, 1.5)), wT('página', 'end') + j * 0.42)
 for j, f in enumerate([1047, 1319, 1568]): put(fx, f32(tone(f, 0.4, 0.05, 6)), wT('100%', 'end') + j * 0.1)   # charged ding
 for i in range(3): whoosh(T0('cta') + 0.25 + i * 0.12, 0.2, 0.05)
-put(fx, f32(tone(330, 0.2, 0.08, 10)), T0('feijoes')); put(fx, f32(tone(660, 0.3, 0.06, 8)), T0('feijoes') + 0.1)
-LOOP = TOTAL - 0.8; static(LOOP, 0.8, 0.16)
+LOOP = TOTAL + 10   # no loop static any more (the video no longer opens with static)
 # ---- mix (narration ducks the bed); no fade at start or end so the loop is seamless ----
 duck = np.ones(N, np.float32); env = np.convolve(np.abs(voc), np.ones(4410) / 4410, 'same'); duck -= np.clip(env * 6, 0, 0.5)
 mix = voc * 1.0 + fx + mus * duck

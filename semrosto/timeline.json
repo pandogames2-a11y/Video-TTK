@@ -1,5 +1,5 @@
 {
- "total": 52.978,
+ "total": 51.733,
  "fps": 30,
  "segs": [
   {
@@ -8,96 +8,88 @@
    "start": 0.0,
    "dur": 2.8,
    "vstart": 0.3,
-   "vdur": 1.843
+   "vdur": 1.825
   },
   {
    "scene": "enter",
    "voice": "narr",
    "start": 2.8,
-   "dur": 4.678,
+   "dur": 4.635,
    "vstart": 3.0,
-   "vdur": 4.178
+   "vdur": 4.135
   },
   {
    "scene": "rule",
    "voice": "narr",
-   "start": 7.478,
-   "dur": 4.171,
-   "vstart": 7.678,
-   "vdur": 3.571
+   "start": 7.435,
+   "dur": 4.134,
+   "vstart": 7.635,
+   "vdur": 3.534
   },
   {
    "scene": "look",
    "voice": "narr",
-   "start": 11.65,
-   "dur": 4.857,
-   "vstart": 11.85,
-   "vdur": 3.657
+   "start": 11.569,
+   "dur": 4.989,
+   "vstart": 11.769,
+   "vdur": 3.789
   },
   {
    "scene": "charge",
    "voice": "narr",
-   "start": 16.507,
-   "dur": 9.235,
-   "vstart": 16.707,
-   "vdur": 8.435
+   "start": 16.559,
+   "dur": 9.388,
+   "vstart": 16.759,
+   "vdur": 8.588
   },
   {
    "scene": "selfie",
    "voice": "narr",
-   "start": 25.742,
-   "dur": 3.765,
-   "vstart": 25.942,
-   "vdur": 2.765
+   "start": 25.947,
+   "dur": 3.95,
+   "vstart": 26.147,
+   "vdur": 2.95
   },
   {
    "scene": "eighth",
    "voice": "narr",
-   "start": 29.506,
-   "dur": 4.557,
-   "vstart": 29.706,
-   "vdur": 3.857
+   "start": 29.897,
+   "dur": 4.464,
+   "vstart": 30.097,
+   "vdur": 3.764
   },
   {
    "scene": "grab",
    "voice": "narr",
-   "start": 34.063,
-   "dur": 3.65,
-   "vstart": 34.263,
-   "vdur": 2.15
+   "start": 34.361,
+   "dur": 3.719,
+   "vstart": 34.561,
+   "vdur": 2.219
   },
   {
    "scene": "end",
    "voice": "narr",
-   "start": 37.713,
-   "dur": 7.227,
-   "vstart": 38.013,
-   "vdur": 6.527
+   "start": 38.079,
+   "dur": 7.189,
+   "vstart": 38.379,
+   "vdur": 6.489
   },
   {
    "scene": "cta",
    "voice": "narr",
-   "start": 44.94,
-   "dur": 4.691,
-   "vstart": 45.14,
-   "vdur": 4.191
-  },
-  {
-   "scene": "feijoes",
-   "voice": "narr",
-   "start": 49.631,
-   "dur": 3.347,
-   "vstart": 49.831,
-   "vdur": 2.147
+   "start": 45.268,
+   "dur": 6.465,
+   "vstart": 45.468,
+   "vdur": 5.065
   }
  ],
  "err": [
-  14.95,
-  27.912,
-  35.978
+  15.003,
+  28.254,
+  36.344
  ],
- "snap": 21.508,
- "shut": 27.962,
- "glitch": 36.713,
- "loop": 52.178
+ "snap": 21.662,
+ "shut": 28.304,
+ "glitch": 37.08,
+ "loop": 61.733
 }

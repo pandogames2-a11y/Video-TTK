@@ -68,15 +68,8 @@
  {
   "scene": "cta",
   "voice": "narr",
-  "text": "O link do carregador tá na descrição. E aí, quem o Pedrinho enfrenta agora?",
+  "text": "O link do carregador tá na descrição. E aí, quem o Pedrinho enfrenta agora? Comenta aí.",
   "lead": 0.2,
-  "tail": 0.3
- },
- {
-  "scene": "feijoes",
-  "voice": "narr",
-  "text": "Achou os três feijões? Comenta aí.",
-  "lead": 0.2,
-  "tail": 1.0
+  "tail": 1.2
  }
 ]
