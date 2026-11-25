@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style></head><body>
+<canvas id="c" width="1080" height="1080"></canvas>
+<script src="fila/tigre.js"></script>
+<script>
+// Instagram profile photo of the tiger mascot (1080x1080, safe inside the round crop)
+const S = 1080, main = document.getElementById('c').getContext('2d'); g = main;
+const V = new URLSearchParams(location.search).get('v') || 'a';
+const mk = () => { const c = document.createElement('canvas'); c.width = S; c.height = S; return c; };
+// background
+const bg = main.createRadialGradient(540, 470, 60, 540, 540, 760);
+if (V === 'a') { bg.addColorStop(0, '#8f5cff'); bg.addColorStop(0.55, '#4b23b8'); bg.addColorStop(1, '#1b0d4d'); }
+else { bg.addColorStop(0, '#ffe066'); bg.addColorStop(0.55, '#ffb31a'); bg.addColorStop(1, '#e0700a'); }
+main.fillStyle = bg; main.fillRect(0, 0, S, S);
+// sun rays
+main.save(); main.translate(540, 520); main.globalAlpha = V === 'a' ? 0.12 : 0.18; main.fillStyle = '#fff';
+for (let i = 0; i < 16; i++) { main.rotate(Math.PI * 2 / 16); main.beginPath(); main.moveTo(0, 0); main.lineTo(-60, -900); main.lineTo(60, -900); main.fill(); }
+main.restore();
+// sparkles
+function spark(x, y, s, a) { main.save(); main.fillStyle = `rgba(255,255,255,${a})`; main.beginPath(); main.moveTo(x, y - s); main.quadraticCurveTo(x, y, x + s, y); main.quadraticCurveTo(x, y, x, y + s); main.quadraticCurveTo(x, y, x - s, y); main.quadraticCurveTo(x, y, x, y - s); main.fill(); main.restore(); }
+for (const [x, y, s] of [[230, 300, 26], [850, 260, 34], [880, 520, 18], [200, 560, 18], [790, 150, 14]]) spark(x, y, s, 0.85);
+// tiger on its own layer with a white outline + soft shadow
+const lay = mk(), sil = mk(); g = lay.getContext('2d');
+tiger(540, 1110, 1.5, { mouth: 0.55, blink: 0, time: 0.6, tilt: -0.05, armL: [-150, -125, 'open'], armR: [-15, -55, 'thumb'], brows: 1, look: [0.05, 0.1] });
+g = main;
+const sc = sil.getContext('2d'); sc.drawImage(lay, 0, 0); sc.globalCompositeOperation = 'source-in'; sc.fillStyle = '#fff'; sc.fillRect(0, 0, S, S);
+main.save(); main.shadowColor = 'rgba(0,0,0,0.45)'; main.shadowBlur = 50; main.shadowOffsetY = 18; main.drawImage(sil, 0, 0); main.restore();
+for (let i = 0; i < 16; i++) { const a = i / 16 * Math.PI * 2; main.drawImage(sil, Math.cos(a) * 10, Math.sin(a) * 10); }
+main.drawImage(lay, 0, 0);
+window.READY = true;
+</script></body></html>

@@ -1,0 +1,238 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style></head><body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script src="tigre.js"></script>
+<script>
+const SW = 1080, SH = 1920, main = document.getElementById('c').getContext('2d'); g = main;
+const mk = () => { const c = document.createElement('canvas'); c.width = SW; c.height = SH; return c; };
+let TL, IMG = {};
+const cl = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ease = x => { x = cl(x); return x * x * (3 - 2 * x); };
+const back = x => { x = cl(x); const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+function load(src) { return new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; }); }
+
+// ---------- character layer with a white rim + soft shadow ----------
+function layer(draw, rim = '#ffffff') {
+  const lay = mk(), sil = mk(); const prev = g; g = lay.getContext('2d'); draw(); g = prev;
+  const sc = sil.getContext('2d'); sc.drawImage(lay, 0, 0); sc.globalCompositeOperation = 'source-in'; sc.fillStyle = rim; sc.fillRect(0, 0, SW, SH);
+  main.save(); main.shadowColor = 'rgba(0,0,0,0.5)'; main.shadowBlur = 40; main.shadowOffsetY = 14; main.drawImage(sil, 0, 0); main.restore();
+  for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2; main.drawImage(sil, Math.cos(a) * 7, Math.sin(a) * 7); }
+  main.drawImage(lay, 0, 0);
+}
+// ---------- studio background ----------
+function studio(t, hue = 0, glow = 1) {
+  main.save(); main.setTransform(1, 0, 0, 1, 0, 0);
+  const gr = main.createLinearGradient(0, 0, 0, SH); gr.addColorStop(0, '#0b0a1a'); gr.addColorStop(0.55, '#17122e'); gr.addColorStop(1, '#060510');
+  main.fillStyle = gr; main.fillRect(0, 0, SW, SH);
+  const rg = main.createRadialGradient(540, 1000, 50, 540, 1000, 900); rg.addColorStop(0, `rgba(150,110,255,${0.35 * glow})`); rg.addColorStop(1, 'rgba(150,110,255,0)');
+  main.fillStyle = rg; main.fillRect(0, 0, SW, SH);
+  // light beams from the top
+  main.globalCompositeOperation = 'screen';
+  for (const [x, a] of [[250, 0.18], [830, 0.15]]) {
+    const b = main.createLinearGradient(x, 0, 540, 1200); b.addColorStop(0, `rgba(210,190,255,${a * glow})`); b.addColorStop(1, 'rgba(210,190,255,0)');
+    main.fillStyle = b; main.beginPath(); main.moveTo(x - 40, 0); main.lineTo(x + 40, 0); main.lineTo(540 + 300 + (x - 540) * 0.2, 1250); main.lineTo(540 - 300 + (x - 540) * 0.2, 1250); main.fill();
+  }
+  // floating bokeh dust
+  for (let i = 0; i < 26; i++) {
+    const px = (i * 397 + t * (12 + i % 5 * 6)) % SW, py = (i * 733 % 1500) + Math.sin(t * 0.7 + i) * 30, r = 6 + (i % 4) * 6;
+    const bg = main.createRadialGradient(px, py, 0, px, py, r); bg.addColorStop(0, `rgba(220,200,255,${0.25 * glow})`); bg.addColorStop(1, 'rgba(220,200,255,0)');
+    main.fillStyle = bg; main.fillRect(px - r, py - r, r * 2, r * 2);
+  }
+  main.restore();
+}
+// ---------- the real sneaker photo, cinematic: glow, reflection on the floor, light sweep ----------
+function shoe(img, cx, floorY, w, o = {}) {
+  const h = img.height * w / img.width, x = cx - w / 2, y = floorY - h;
+  const c = mk(), cc = c.getContext('2d');
+  cc.save(); cc.translate(cx, floorY); cc.rotate(o.rot || 0); cc.translate(-cx, -floorY);
+  if (o.flip) { cc.translate(cx, 0); cc.scale(-1, 1); cc.translate(-cx, 0); }
+  cc.drawImage(img, x, y, w, h); cc.restore();
+  // light sweep across the shoe
+  if (o.sweep !== undefined) {
+    const sx = x - w * 0.6 + (w * 2.2) * o.sweep;
+    cc.save(); cc.globalCompositeOperation = 'source-atop';
+    const sg = cc.createLinearGradient(sx - 120, y, sx + 120, y + h * 0.4); sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(0.5, 'rgba(255,255,255,0.45)'); sg.addColorStop(1, 'rgba(255,255,255,0)');
+    cc.fillStyle = sg; cc.fillRect(x - 200, y - 200, w + 400, h + 400); cc.restore();
+  }
+  // contact shadow
+  main.save(); const sg = main.createRadialGradient(cx, floorY, 10, cx, floorY, w * 0.55); sg.addColorStop(0, 'rgba(0,0,0,0.75)'); sg.addColorStop(1, 'rgba(0,0,0,0)');
+  main.fillStyle = sg; main.setTransform(1, 0, 0, 0.12, 0, floorY * 0.88); main.fillRect(cx - w, floorY - w, w * 2, w * 2); main.restore();
+  // reflection
+  main.save(); main.globalAlpha = 0.28; main.translate(0, floorY * 2); main.scale(1, -1); main.drawImage(c, 0, 0); main.restore();
+  main.save(); const fg = main.createLinearGradient(0, floorY, 0, floorY + h * 0.7); fg.addColorStop(0, 'rgba(10,8,22,0)'); fg.addColorStop(1, 'rgba(10,8,22,1)');
+  main.fillStyle = fg; main.fillRect(-2000, floorY, SW + 4000, 3000); main.restore();
+  // rim glow
+  main.save(); main.shadowColor = o.glowCol || 'rgba(190,150,255,0.9)'; main.shadowBlur = 50; main.drawImage(c, 0, 0); main.restore();
+  main.drawImage(c, 0, 0);
+}
+function sparkles(t, cx, cy, R, n = 10, a = 1) {
+  main.save();
+  for (let i = 0; i < n; i++) {
+    const ph = (t * 0.8 + i / n) % 1, ang = i * 2.4, r = R * (0.5 + 0.5 * ((i * 37) % 10) / 10);
+    const x = cx + Math.cos(ang) * r, y = cy + Math.sin(ang) * r * 0.6, s = Math.sin(ph * Math.PI) * 18 * a;
+    main.fillStyle = `rgba(255,255,255,${Math.sin(ph * Math.PI) * a})`; main.beginPath();
+    main.moveTo(x, y - s); main.quadraticCurveTo(x, y, x + s, y); main.quadraticCurveTo(x, y, x, y + s); main.quadraticCurveTo(x, y, x - s, y); main.quadraticCurveTo(x, y, x, y - s); main.fill();
+  }
+  main.restore();
+}
+// ---------- one-word captions: white, dark outline, fade + slight blur/grow ----------
+function caption(t, y) {
+  const w = TL.words.find(w => t >= w.t0 - 0.04 && t < w.t1 + 0.12); if (!w) return;
+  const a = cl((t - w.t0 + 0.04) / 0.08) * cl((w.t1 + 0.12 - t) / 0.08), k = 0.9 + 0.1 * ease((t - w.t0 + 0.04) / 0.15);
+  const txt = w.text.replace(/[.,?!]/g, '').toUpperCase();
+  main.save(); main.globalAlpha = a; main.filter = `blur(${(1 - a) * 4}px)`; main.translate(540, y); main.scale(k, k);
+  main.textAlign = 'center'; main.font = '900 118px Inter, sans-serif'; main.lineJoin = 'round';
+  main.lineWidth = 24; main.strokeStyle = '#0c0a14'; main.strokeText(txt, 0, 0); main.fillStyle = '#fff'; main.fillText(txt, 0, 0); main.restore();
+}
+function mouthAt(t) { const i = Math.floor((t - TL.T.voice_start) * 100); const m = TL.mouth; if (i < 0 || i >= m.length) return 0; return Math.max(m[i], (m[i - 1] || 0) * 0.6, (m[i + 1] || 0) * 0.6); }
+function blinkAt(t) { const p = (t + 0.4) % 3.1; return p < 0.07 ? p / 0.07 : p < 0.14 ? 1 - (p - 0.07) / 0.07 : 0; }
+// badge
+function badge(t0, t, y, l1, l2, col = '#ffdd2e') {
+  const p = back((t - t0) / 0.45); if (t < t0) return;
+  main.save(); main.translate(540, y); main.scale(p, p); main.rotate(-0.03);
+  main.fillStyle = col; main.strokeStyle = '#1c1420'; main.lineWidth = 10; main.beginPath(); main.roundRect(-330, -100, 660, 200, 40); main.fill(); main.stroke();
+  main.fillStyle = '#1c1420'; main.textAlign = 'center'; main.font = '900 50px Inter, sans-serif'; main.fillText(l1, 0, -25); main.font = '900 96px Inter, sans-serif'; main.fillText(l2, 0, 72);
+  main.restore();
+}
+function bigText(t0, t, y, txt, size, col = '#fff') {
+  if (t < t0) return; const p = back((t - t0) / 0.4);
+  main.save(); main.translate(540, y); main.scale(p, p); main.textAlign = 'center'; main.font = `900 ${size}px Inter, sans-serif`; main.lineJoin = 'round';
+  main.lineWidth = size * 0.22; main.strokeStyle = '#0c0a14'; main.strokeText(txt, 0, 0); main.fillStyle = col; main.fillText(txt, 0, 0); main.restore();
+}
+
+function mini(t, t0) {
+  const pin = back((t - t0 - 0.3) / 0.5);
+  layer(() => tiger(200, 1900 + (1 - pin) * 500, 0.55, { mouth: 0, blink: blinkAt(t), time: t, bob: Math.abs(Math.sin(t * 4)) * 6, armL: [-40, -110, 'thumb'], armR: [-30, -60, 'thumb'], brows: 1, look: [0.5, -0.5], tilt: 0.06 }));
+}
+const ML_CODE = '2JUBS1-CKKG';
+// zoom the camera on a point of the sneaker photo (fx,fy in 0..1 of the image), centred at y=830
+function focusShot(img, fx, fy, z, dx, p) {
+  const W = 900, F = 1100, h = img.height * W / img.width, px = 540 - W / 2 + fx * W, py = F - h + fy * h;
+  main.save(); main.translate(540 + dx, 830); main.scale(z, z); main.translate(-px, -py); shoe(img, 540, F, W, { sweep: p * 1.2 }); main.restore();
+  const v = main.createRadialGradient(540, 830, 350, 540, 830, 1100); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.65)'); main.fillStyle = v; main.fillRect(0, 0, SW, SH);
+}
+// feature name in a purple pill (with a check mark)
+function featureLabel(txt, d) {
+  const p = back(d / 0.4); if (p <= 0) return;
+  main.save(); main.translate(540, 1270); main.scale(p, p); main.font = '900 62px Inter, sans-serif'; main.textAlign = 'center';
+  const tw = main.measureText(txt).width; if (tw + 150 > 1000) { const k = 1000 / (tw + 150); main.scale(k, k); }
+  const w = tw + 150;
+  main.fillStyle = '#7b4dff'; main.strokeStyle = '#fff'; main.lineWidth = 7; main.beginPath(); main.roundRect(-w / 2, -55, w, 110, 55); main.fill(); main.stroke();
+  main.fillStyle = '#fff'; main.beginPath(); main.arc(-w / 2 + 58, 0, 30, 0, 7); main.fill();
+  main.strokeStyle = '#7b4dff'; main.lineWidth = 9; main.lineCap = 'round'; main.beginPath(); main.moveTo(-w / 2 + 44, 2); main.lineTo(-w / 2 + 55, 13); main.lineTo(-w / 2 + 73, -10); main.stroke();
+  main.fillStyle = '#fff'; main.fillText(txt, 25, 22); main.restore();
+}
+function codeCard(t, t0, pulse = 1) {
+  if (t < t0) return; const p = back((t - t0) / 0.45) * pulse, a = cl((t - t0) / 0.2);
+  main.save(); main.globalAlpha = a; main.translate(540, 250); main.scale(p, p);
+  main.fillStyle = 'rgba(8,6,20,0.62)'; main.strokeStyle = 'rgba(255,221,46,0.9)'; main.lineWidth = 6;
+  main.beginPath(); main.roundRect(-480, -135, 960, 285, 36); main.fill(); main.stroke();
+  main.textAlign = 'center'; main.lineJoin = 'round';
+  main.font = '900 50px Inter, sans-serif'; main.lineWidth = 12; main.strokeStyle = '#0c0a14';
+  for (const [txt, y] of [['COLE ESTE CÓDIGO NO BUSCADOR', -72], ['DO MERCADO LIVRE!', -14]]) { main.strokeText(txt, 0, y); main.fillStyle = '#fff'; main.fillText(txt, 0, y); }
+  // the code: big and yellow, with a light sweep every few seconds
+  main.font = '900 116px Inter, sans-serif'; main.lineWidth = 24; main.strokeText(ML_CODE, 0, 108); main.fillStyle = '#ffdd2e'; main.fillText(ML_CODE, 0, 108);
+  main.restore();
+}
+// opening hook (first ~2.5 s): big question that drops in word by word, then shrinks away
+function hook(t) {
+  const out = 2.45; if (t > out + 0.35) return;
+  const lines = [['SEU', 'TÊNIS'], ['MACHUCA', 'O PÉ?']], cols = { 'MACHUCA': '#ffdd2e' };
+  const k = t < out ? 1 : 1 - ease((t - out) / 0.35);
+  main.save(); main.translate(540, 470); main.scale(k, k); main.globalAlpha = k;
+  main.textAlign = 'center'; main.lineJoin = 'round';
+  let i = 0;
+  lines.forEach((ln, r) => {
+    let size = r === 0 ? 130 : 150; main.font = `900 ${size}px Inter, sans-serif`;
+    let full = main.measureText(ln.join(' ')).width; if (full > 960) { size = Math.floor(size * 960 / full); main.font = `900 ${size}px Inter, sans-serif`; }
+    const ws = ln.map(w => main.measureText(w + ' ').width), tot = ws.reduce((a, b) => a + b, 0) - main.measureText(' ').width; let x = -tot / 2;
+    ln.forEach((w, j) => {
+      const t0 = 0.05 + i * 0.16, p = back((t - t0) / 0.35); i++;
+      if (p > 0) { const wx = x + main.measureText(w).width / 2, wy = r * 170 - (1 - Math.min(1, p)) * 120;
+        main.save(); main.translate(wx, wy); main.scale(p, p); main.rotate(r === 1 && j === 0 ? -0.04 : 0);
+        main.lineWidth = size * 0.22; main.strokeStyle = '#0c0a14'; main.strokeText(w, 0, 0); main.fillStyle = cols[w] || '#fff'; main.fillText(w, 0, 0); main.restore(); }
+      x += ws[j];
+    });
+  });
+  main.restore();
+}
+// Reels cover (1080x1920; the key content sits inside the centre 1080x1350 that the profile grid shows)
+window.renderCover = function () {
+  main.setTransform(1, 0, 0, 1, 0, 0); studio(1.3, 0, 1.1);
+  shoe(IMG.s3, 540, 1250, 820, { sweep: 0.45 }); sparkles(1.2, 540, 950, 450, 14, 1);
+  main.save(); main.textAlign = 'center'; main.lineJoin = 'round';
+  main.save(); main.translate(540, 450); main.rotate(-0.03);
+  main.font = '900 128px Inter, sans-serif'; main.lineWidth = 30; main.strokeStyle = '#0c0a14'; main.strokeText('ADEUS, SOLA', 0, 0); main.fillStyle = '#fff'; main.fillText('ADEUS, SOLA', 0, 0);
+  main.font = '900 140px Inter, sans-serif'; main.strokeText('DE PAPELÃO!', 0, 150); main.fillStyle = '#ffdd2e'; main.fillText('DE PAPELÃO!', 0, 150); main.restore();
+  main.translate(540, 1330); main.font = '900 46px Inter, sans-serif'; const w = main.measureText('ACHADINHO DO MERCADO LIVRE').width + 90;
+  main.fillStyle = '#7b4dff'; main.strokeStyle = '#fff'; main.lineWidth = 7; main.beginPath(); main.roundRect(-w / 2, -46, w, 92, 46); main.fill(); main.stroke();
+  main.fillStyle = '#fff'; main.fillText('ACHADINHO DO MERCADO LIVRE', 0, 16);
+  main.restore();
+  layer(() => tiger(880, 1800, 0.55, { mouth: 0.5, blink: 0, time: 0.4, armL: [-150, -125, 'point'], armR: [-15, -55, 'thumb'], brows: 1, look: [-0.5, -0.4], tilt: -0.06 }));
+};
+window.renderFrame = function (t) {
+  const T = TL.T; main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = 1; main.filter = 'none';
+  const talking = t >= T.voice_start && t < T.speech_end, m = mouthAt(t), bl = blinkAt(t);
+  if (t < T.shot1) {
+    // ---------- INTRO: the tiger talks about the problem, a worn-out sneaker appears; reveal at "solução" ----------
+    const rev = t >= T.w_solucao;
+    if (t >= T.bg_end) studio(t, 0, rev ? 1 : 0.45);
+    // real footage of the problem (lacing up, walking, running, sore), cut to the words
+    if (t < T.bg_end) {
+      const fi = Math.min(T.bg_frames - 1, Math.floor(t * 30)), im = BG[fi];
+      if (im) main.drawImage(im, 0, 0, SW, SH);
+      const sh = main.createLinearGradient(0, 1150, 0, SH); sh.addColorStop(0, 'rgba(0,0,0,0)'); sh.addColorStop(1, 'rgba(0,0,0,0.55)'); main.fillStyle = sh; main.fillRect(0, 0, SW, SH);
+      // "machucam": a red pulse around the edges
+      if (t > T.w_machucam - 0.1) { const p = 0.5 + 0.5 * Math.sin((t - T.w_machucam) * 12); const v = main.createRadialGradient(540, 960, 500, 540, 960, 1150); v.addColorStop(0, 'rgba(255,0,0,0)'); v.addColorStop(1, `rgba(255,20,20,${0.35 + 0.25 * p})`); main.fillStyle = v; main.fillRect(0, 0, SW, SH); }
+      // quick white blink on each cut
+      for (const c of T.bg_cuts.slice(1, -1)) { const d = t - c; if (d >= 0 && d < 0.12) { main.fillStyle = `rgba(255,255,255,${0.35 * (1 - d / 0.12)})`; main.fillRect(0, 0, SW, SH); } }
+    }
+    // the real sneaker rises in at "solução"
+    if (rev) { const p = back((t - T.w_solucao) / 0.6); main.save(); main.globalAlpha = cl((t - T.w_solucao) / 0.25);
+      shoe(IMG.s3, 540, 860, 760 * (0.6 + 0.4 * p), { sweep: (t - T.w_solucao) / 0.8 }); main.restore(); sparkles(t, 540, 650, 380, 12, cl((t - T.w_solucao) / 0.3)); }
+    // tiger
+    const worried = t < T.w_entao, pointing = t >= T.w_entao;
+    const wave = Math.sin(t * 5) * 10;
+    const armL = pointing ? [-160, -140, 'point'] : t < T.w_tenis ? [-120 + wave, -100 + wave, 'open'] : [150, 200 + Math.sin(t * 4) * 10, 'open'];
+    const armR = t > T.w_machucam - 0.3 && !pointing ? [-60, -150, 'open'] : [60, 85, 'open'];
+    const bob = talking ? Math.abs(Math.sin(t * 7.5)) * 10 : Math.sin(t * 2) * 3;
+    layer(() => tiger(850, 1890, 0.62, { mouth: m, blink: bl, time: t, bob, tilt: Math.sin(t * 2.3) * 0.05, armL, armR, brows: worried ? -0.8 : 1, look: pointing ? [-0.6, -0.6] : [-0.3, 0.1], squash: 1 + (talking ? m * 0.02 : 0) }));
+    caption(t, 1330);
+    // white flash at the reveal
+    const fl = 1 - cl((t - T.w_solucao) / 0.35); if (t >= T.w_solucao && fl > 0) { main.fillStyle = `rgba(255,255,255,${fl * 0.8})`; main.fillRect(0, 0, SW, SH); }
+  } else {
+    // ---------- PRODUCT: one shot per feature, the tiger keeps talking in the corner ----------
+    studio(t, 0, 0.9);
+    const sec = [['f_mesh', 'TELA RESPIRÁVEL'], ['f_sole', 'SOLADO ALTO E ACOLCHOADO'], ['f_firm', 'FIRME NO PÉ'], ['f_match', 'COMBINA COM TUDO'], ['f_brand', 'MARCA DE CONFIANÇA'], ['f_cta', null]];
+    let k = 0; while (k + 1 < sec.length && t >= T[sec[k + 1][0]]) k++;
+    const t0 = T[sec[k][0]], t1 = k + 1 < sec.length ? T[sec[k + 1][0]] : T.end, p = cl((t - t0) / (t1 - t0));
+    const key = sec[k][0];
+    if (key === 'f_mesh') focusShot(IMG.s1, 0.45, 0.33, 1.9 + p * 0.25, -40 + p * 80, p);
+    else if (key === 'f_sole') focusShot(IMG.s1, 0.5 - 0.1 + p * 0.2, 0.8, 2.3 + p * 0.15, 0, p);
+    else if (key === 'f_firm') focusShot(IMG.s3, 0.62, 0.22, 1.9 + p * 0.2, 0, p);
+    else if (key === 'f_match') { main.save(); const z = 1.12 - p * 0.1; main.translate(540, 900); main.rotate(-0.04 + p * 0.06); main.scale(z, z); main.translate(-540 + 70 - p * 140, -900); shoe(IMG.s3, 540, 1120, 860, { sweep: 1.1 - p * 1.2 }); main.restore(); }
+    else if (key === 'f_brand') { main.save(); const z = 1 + p * 0.1; main.translate(540, 900); main.scale(z, z); main.translate(-540, -900); shoe(IMG.s1, 520 + p * 40, 1060, 940, { sweep: p * 1.2 }); main.restore(); sparkles(t, 540, 830, 460, 10, 0.8); }
+    else { const q = t - t0; main.save(); main.translate(540, 880); const z = 0.92 + Math.sin(q * 1.2) * 0.02; main.scale(z, z); main.translate(-540, -880);
+      shoe(IMG.s3, 520, 1040 + Math.sin(q * 2) * 10, 780, { sweep: (q % 2.5) / 1.6, rot: Math.sin(q * 1.5) * 0.02 }); main.restore(); sparkles(t, 520, 820, 400, 10, 0.8); }
+    if (sec[k][1]) featureLabel(sec[k][1], t - t0);
+    if (t >= T.f_comment) { bigText(T.f_comment + 0.15, t, 1180, 'COMENTA', 78); bigText(T.f_comment + 0.35, t, 1280, '"EU QUERO"', 104, '#ffdd2e'); }
+    const cta = key === 'f_cta', pointCode = cta && t >= T.w_cole - 0.2 && t < T.f_comment;
+    const armL = pointCode ? [-120, -100, 'point'] : cta ? [-60, -120, 'thumb'] : [-150 + Math.sin(t * 3) * 15, -110 + Math.sin(t * 3) * 15, 'open'];
+    const armR = cta && t >= T.f_comment ? [-40, -110, 'thumb'] : [60, 85, 'open'];
+    layer(() => tiger(850, 1890, cta ? 0.7 : 0.62, { mouth: m, blink: bl, time: t, bob: talking ? Math.abs(Math.sin(t * 7.5)) * 10 : Math.sin(t * 2) * 3, tilt: Math.sin(t * 2.3) * 0.05, armL, armR, brows: 1, look: pointCode ? [-0.3, -0.8] : [-0.4, -0.2], squash: 1 + m * 0.02 }));
+    caption(t, 1440);
+    // a quick flash between features
+    const d = t - t0; if (d < 0.1 && k > 0) { main.fillStyle = `rgba(255,255,255,${0.3 * (1 - d / 0.1)})`; main.fillRect(0, 0, SW, SH); }
+  }
+  hook(t);
+  // Mercado Livre search code: on screen from the moment the sneaker appears until the end
+  codeCard(t, T.w_solucao + 0.35, t >= T.w_codigo - 0.1 && t < T.f_comment ? 1 + 0.06 * Math.abs(Math.sin((t - T.w_codigo) * 6)) : 1);
+  // fade from black at the start
+  if (t < 0.25) { main.fillStyle = `rgba(0,0,0,${1 - t / 0.25})`; main.fillRect(0, 0, SW, SH); }
+};
+(async () => {
+  TL = await (await fetch('timeline.json')).json();
+  IMG.s1 = await load('tenis_1.png'); IMG.s3 = await load('tenis_3.png');
+  window.BG = await Promise.all(Array.from({ length: TL.T.bg_frames }, (_, i) => load(`bg/f${String(i).padStart(5, '0')}.jpg`)));
+  await document.fonts.load('900 100px Inter');
+  window.READY = true;
+})();
+</script></body></html>

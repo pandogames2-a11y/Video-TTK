@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style></head><body>
+<canvas id="c" width="1640" height="924"></canvas>
+<script src="fila/tigre.js"></script>
+<script>
+// Facebook cover (1640x924). Key content stays inside the centre band (y 150-774) that every device shows,
+// and away from the bottom-left corner where the profile photo sits on desktop.
+const W = 1640, H = 924, main = document.getElementById('c').getContext('2d'); g = main;
+const mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c; };
+const bg = main.createRadialGradient(1180, 430, 80, 900, 470, 1100); bg.addColorStop(0, '#8f5cff'); bg.addColorStop(0.5, '#4b23b8'); bg.addColorStop(1, '#170a40');
+main.fillStyle = bg; main.fillRect(0, 0, W, H);
+main.save(); main.translate(1370, 470); main.globalAlpha = 0.1; main.fillStyle = '#fff';
+for (let i = 0; i < 20; i++) { main.rotate(Math.PI * 2 / 20); main.beginPath(); main.moveTo(0, 0); main.lineTo(-70, -1400); main.lineTo(70, -1400); main.fill(); }
+main.restore();
+function spark(x, y, s, a = 0.9) { main.save(); main.fillStyle = `rgba(255,255,255,${a})`; main.beginPath(); main.moveTo(x, y - s); main.quadraticCurveTo(x, y, x + s, y); main.quadraticCurveTo(x, y, x, y + s); main.quadraticCurveTo(x, y, x - s, y); main.quadraticCurveTo(x, y, x, y - s); main.fill(); main.restore(); }
+// floating shopping bags
+function bag(x, y, s, col, rot) { g = main; main.save(); main.translate(x, y); main.rotate(rot); main.scale(s, s);
+  curve(-28, -40, 0, -95, 28, -40, 9); rect(-55, -40, 110, 105, col, 14, 7); ell(0, 12, 18, 18, '#ffdd2e', 0, 5); main.restore(); }
+bag(1530, 260, 1.0, '#2fbf71', 0.2); bag(900, 200, 0.8, '#ff8a2e', -0.25); bag(1060, 760, 0.7, '#ff4f9a', -0.15);
+for (const [x, y, s] of [[960, 140, 22], [1470, 120, 30], [1580, 480, 18], [820, 720, 16], [1000, 640, 14], [1350, 130, 14]]) spark(x, y, s);
+// title (left-centre)
+main.save(); main.textAlign = 'left'; main.lineJoin = 'round';
+const tx = 230;
+main.font = '900 104px Inter, sans-serif'; main.lineWidth = 26; main.strokeStyle = '#0c0a14';
+main.strokeText('ACHADINHOS', tx, 320); main.fillStyle = '#fff'; main.fillText('ACHADINHOS', tx, 320);
+main.strokeText('QUE VALEM', tx, 430); main.fillText('QUE VALEM', tx, 430);
+main.font = '900 132px Inter, sans-serif'; main.strokeText('A PENA!', tx, 560); main.fillStyle = '#ffdd2e'; main.fillText('A PENA!', tx, 560);
+// pill
+main.font = '900 36px Inter, sans-serif'; const pt = 'COMENTA "EU QUERO" E RECEBA O LINK', pw = main.measureText(pt).width + 80;
+main.fillStyle = '#7b4dff'; main.strokeStyle = '#fff'; main.lineWidth = 6; main.beginPath(); main.roundRect(tx, 605, pw, 78, 39); main.fill(); main.stroke();
+main.fillStyle = '#fff'; main.fillText(pt, tx + 40, 657);
+main.restore();
+// tiger (right) with white outline + shadow
+const lay = mk(), sil = mk(); g = lay.getContext('2d');
+tiger(1370, 905, 1.0, { mouth: 0.55, blink: 0, time: 0.6, tilt: -0.05, armL: [-150, -125, 'open'], armR: [-15, -55, 'thumb'], brows: 1, look: [-0.3, 0.05] });
+g = main;
+const sc = sil.getContext('2d'); sc.drawImage(lay, 0, 0); sc.globalCompositeOperation = 'source-in'; sc.fillStyle = '#fff'; sc.fillRect(0, 0, W, H);
+main.save(); main.shadowColor = 'rgba(0,0,0,0.45)'; main.shadowBlur = 50; main.shadowOffsetY = 18; main.drawImage(sil, 0, 0); main.restore();
+for (let i = 0; i < 16; i++) { const a = i / 16 * Math.PI * 2; main.drawImage(sil, Math.cos(a) * 9, Math.sin(a) * 9); }
+main.drawImage(lay, 0, 0);
+window.READY = true;
+</script></body></html>
