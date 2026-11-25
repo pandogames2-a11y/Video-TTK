@@ -69,12 +69,14 @@ function faceless(x, y, o = {}) {
   const s = o.s || 1; g.save(); g.translate(x, y); g.scale(s, s);
   for (const sx of [-1, 1]) { g.beginPath(); g.moveTo(sx * 30, -620); g.lineTo(sx * 36, -20); g.lineWidth = 46; g.strokeStyle = OUT; g.stroke(); g.lineWidth = 36; g.strokeStyle = '#16161c'; g.stroke(); rect(sx * 36 - 30, -30, 60, 26, '#0a0a0e', 8, 5); }
   shape('#16161c', () => { g.moveTo(-90, -1180); g.lineTo(90, -1180); g.lineTo(100, -600); g.lineTo(-100, -600); g.closePath(); });
+  if (!o.back) {
   shape('#f2f2ee', () => { g.moveTo(-36, -1180); g.lineTo(36, -1180); g.lineTo(0, -960); g.closePath(); }, 5);   // shirt
   shape('#1a1a22', () => { g.moveTo(-10, -1170); g.lineTo(10, -1170); g.lineTo(14, -1010); g.lineTo(0, -985); g.lineTo(-14, -1010); g.closePath(); }, 4);   // tie
   line([-36, -1180, -60, -900], 5, '#0a0a0e'); line([36, -1180, 60, -900], 5, '#0a0a0e');   // lapels
+  } else line([0, -1180, 0, -620], 4, '#0a0a0e');   // back seam
   for (const sx of [-1, 1]) { const hd = (sx < 0 ? o.handL : o.handR) || [sx * 120, -560]; g.beginPath(); g.moveTo(sx * 84, -1160); g.quadraticCurveTo(sx * 140, -900, hd[0], hd[1]); g.lineWidth = 34; g.strokeStyle = OUT; g.stroke(); g.lineWidth = 24; g.strokeStyle = '#16161c'; g.stroke();
     ell(hd[0], hd[1], 20, 26, '#e8e6e0', 0, 5); for (let i = 0; i < 3; i++) line([hd[0] - 10 + i * 10, hd[1] + 20, hd[0] - 14 + i * 12, hd[1] + 60], 6, '#e8e6e0'); }   // long pale fingers
   if (o.page) { g.save(); g.translate(0, -1080); g.rotate(0.05); rect(-34, -44, 68, 88, '#f3eedc', 3, 4); for (let i = 0; i < 4; i++) line([-24, -26 + i * 16, 24, -26 + i * 16], 3, '#6a6050'); g.restore(); }   // the 8th page pinned on his back/chest
-  ell(0, -1270, 70, 92, '#efeee8', 0, 7);   // blank face, no features
+  ell(0, -1270, 70, 92, o.back ? '#d8d6d0' : '#efeee8', 0, 7);   // blank face, no features (from behind: just the bald head)
   g.restore();
 }

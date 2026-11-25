@@ -1,0 +1,87 @@
+[
+ {
+  "scene": "cold",
+  "voice": "none",
+  "text": "",
+  "min": 1.3
+ },
+ {
+  "scene": "title",
+  "voice": "narr",
+  "text": "Você sobreviveria ao homem sem rosto?",
+  "lead": 0.2,
+  "tail": 0.4
+ },
+ {
+  "scene": "enter",
+  "voice": "narr",
+  "text": "Pedrinho entrou numa floresta à noite pra gravar um vídeo de caça ao homem sem rosto.",
+  "lead": 0.2,
+  "tail": 0.3
+ },
+ {
+  "scene": "rule",
+  "voice": "narr",
+  "text": "A regra é simples: junte as oito páginas e nunca olhe pra trás.",
+  "lead": 0.2,
+  "tail": 0.4
+ },
+ {
+  "scene": "look",
+  "voice": "narr",
+  "text": "Na primeira página estava escrito: \"não olhe pra trás\". Ele olhou.",
+  "lead": 0.2,
+  "tail": 1.0
+ },
+ {
+  "scene": "charge",
+  "voice": "narr",
+  "text": "A lanterna do celular começou a apagar… mas ele tinha um carregador portátil mini no bolso. Encaixou direto no celular, lanterna acesa, e ele conseguiu fugir.",
+  "lead": 0.2,
+  "tail": 0.6
+ },
+ {
+  "scene": "selfie",
+  "voice": "narr",
+  "text": "Achou a sétima página… e parou pra tirar uma selfie com ela.",
+  "say": "Achou a sétima página… e parou pra tirar uma sélfi com ela.",
+  "lead": 0.2,
+  "tail": 0.8
+ },
+ {
+  "scene": "eighth",
+  "voice": "narr",
+  "text": "Faltava uma. A oitava página estava… nas costas do homem sem rosto.",
+  "lead": 0.2,
+  "tail": 0.5
+ },
+ {
+  "scene": "grab",
+  "voice": "narr",
+  "text": "Em vez de correr pra saída, ele foi pegar.",
+  "lead": 0.2,
+  "tail": 1.3
+ },
+ {
+  "scene": "end",
+  "voice": "narr",
+  "text": "Pronto. Agora o Pedrinho virou a nona página. Pelo menos o carregador sobreviveu. Ainda com 100% de bateria.",
+  "say": "Pronto. Agora o Pedrinho virou a nona página. Pelo menos o carregador sobreviveu. Ainda com cem por cento de bateria.",
+  "lead": 0.3,
+  "tail": 0.4
+ },
+ {
+  "scene": "cta",
+  "voice": "narr",
+  "text": "O link do carregador tá na descrição. E aí, quem o Pedrinho enfrenta agora?",
+  "lead": 0.2,
+  "tail": 0.3
+ },
+ {
+  "scene": "feijoes",
+  "voice": "narr",
+  "text": "Achou os três feijões? Comenta aí.",
+  "lead": 0.2,
+  "tail": 1.0
+ }
+]

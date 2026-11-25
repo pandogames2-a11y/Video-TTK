@@ -17,4 +17,6 @@
 7. Faltava uma. A oitava página estava… nas costas do homem sem rosto.
 8. Em vez de correr pra saída, ele foi pegar. → ERRADO! (ÚLTIMO ERRO)
 9. Pronto. Agora o Pedrinho virou a nona página. Pelo menos o carregador sobreviveu. Ainda com 100% de bateria.
-10. O código do carregador tá na tela. E aí, quem o Pedrinho enfrenta agora? Achou os três feijões? Comenta aí.
+10. O link do carregador tá na descrição. E aí, quem o Pedrinho enfrenta agora? Achou os três feijões? Comenta aí.
+
+- Link de afiliado (Shopee): https://s.shopee.com.br/6Ams9wv8Kt — vai na descrição do post (`LEGENDA_POST.txt`); na tela: "LINK NA DESCRIÇÃO" + "#publi · link de afiliado Shopee".

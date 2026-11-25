@@ -1,0 +1,111 @@
+{
+ "total": 54.143,
+ "fps": 30,
+ "segs": [
+  {
+   "scene": "cold",
+   "voice": "none",
+   "start": 0.0,
+   "dur": 1.3,
+   "vstart": 0.25,
+   "vdur": 0
+  },
+  {
+   "scene": "title",
+   "voice": "narr",
+   "start": 1.3,
+   "dur": 2.485,
+   "vstart": 1.5,
+   "vdur": 1.885
+  },
+  {
+   "scene": "enter",
+   "voice": "narr",
+   "start": 3.785,
+   "dur": 4.657,
+   "vstart": 3.985,
+   "vdur": 4.157
+  },
+  {
+   "scene": "rule",
+   "voice": "narr",
+   "start": 8.442,
+   "dur": 4.142,
+   "vstart": 8.642,
+   "vdur": 3.542
+  },
+  {
+   "scene": "look",
+   "voice": "narr",
+   "start": 12.584,
+   "dur": 4.954,
+   "vstart": 12.784,
+   "vdur": 3.754
+  },
+  {
+   "scene": "charge",
+   "voice": "narr",
+   "start": 17.538,
+   "dur": 9.156,
+   "vstart": 17.738,
+   "vdur": 8.356
+  },
+  {
+   "scene": "selfie",
+   "voice": "narr",
+   "start": 26.694,
+   "dur": 3.875,
+   "vstart": 26.894,
+   "vdur": 2.875
+  },
+  {
+   "scene": "eighth",
+   "voice": "narr",
+   "start": 30.569,
+   "dur": 4.566,
+   "vstart": 30.769,
+   "vdur": 3.866
+  },
+  {
+   "scene": "grab",
+   "voice": "narr",
+   "start": 35.134,
+   "dur": 3.746,
+   "vstart": 35.334,
+   "vdur": 2.246
+  },
+  {
+   "scene": "end",
+   "voice": "narr",
+   "start": 38.88,
+   "dur": 7.099,
+   "vstart": 39.18,
+   "vdur": 6.399
+  },
+  {
+   "scene": "cta",
+   "voice": "narr",
+   "start": 45.98,
+   "dur": 4.733,
+   "vstart": 46.18,
+   "vdur": 4.233
+  },
+  {
+   "scene": "feijoes",
+   "voice": "narr",
+   "start": 50.712,
+   "dur": 3.431,
+   "vstart": 50.912,
+   "vdur": 2.231
+  }
+ ],
+ "err": [
+  15.946,
+  28.943,
+  37.136
+ ],
+ "snap": 22.509,
+ "shut": 28.993,
+ "glitch": 37.88,
+ "loop": 53.343
+}

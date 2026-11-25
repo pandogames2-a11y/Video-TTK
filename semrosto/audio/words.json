@@ -1,0 +1,1003 @@
+[
+{
+"seg": "title",
+"who": "narr",
+"text": "Você",
+"t0": 1.504,
+"t1": 1.693
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "sobreviveria",
+"t0": 1.741,
+"t1": 2.182
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "ao",
+"t0": 2.293,
+"t1": 2.419
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "homem",
+"t0": 2.45,
+"t1": 2.671
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "sem",
+"t0": 2.726,
+"t1": 2.884
+},
+{
+"seg": "title",
+"who": "narr",
+"text": "rosto?",
+"t0": 2.924,
+"t1": 3.239
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "Pedrinho",
+"t0": 3.99,
+"t1": 4.306
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "entrou",
+"t0": 4.385,
+"t1": 4.637
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "numa",
+"t0": 4.7,
+"t1": 4.89
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "floresta",
+"t0": 4.937,
+"t1": 5.253
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "à",
+"t0": 5.331,
+"t1": 5.426
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "noite",
+"t0": 5.45,
+"t1": 5.671
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "pra",
+"t0": 5.726,
+"t1": 5.884
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "gravar",
+"t0": 5.923,
+"t1": 6.176
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "um",
+"t0": 6.239,
+"t1": 6.365
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "vídeo",
+"t0": 6.397,
+"t1": 6.618
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "de",
+"t0": 6.673,
+"t1": 6.799
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "caça",
+"t0": 6.831,
+"t1": 7.02
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "ao",
+"t0": 7.067,
+"t1": 7.194
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "homem",
+"t0": 7.225,
+"t1": 7.446
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "sem",
+"t0": 7.501,
+"t1": 7.659
+},
+{
+"seg": "enter",
+"who": "narr",
+"text": "rosto.",
+"t0": 7.699,
+"t1": 8.014
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "A",
+"t0": 8.65,
+"t1": 8.756
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "regra",
+"t0": 8.783,
+"t1": 9.032
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "é",
+"t0": 9.095,
+"t1": 9.201
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "simples:",
+"t0": 9.228,
+"t1": 9.549
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "junte",
+"t0": 9.629,
+"t1": 9.878
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "as",
+"t0": 9.94,
+"t1": 10.083
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "oito",
+"t0": 10.118,
+"t1": 10.332
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "páginas",
+"t0": 10.385,
+"t1": 10.706
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "e",
+"t0": 10.786,
+"t1": 10.893
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "nunca",
+"t0": 10.919,
+"t1": 11.169
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "olhe",
+"t0": 11.231,
+"t1": 11.445
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "pra",
+"t0": 11.498,
+"t1": 11.676
+},
+{
+"seg": "rule",
+"who": "narr",
+"text": "trás.",
+"t0": 11.72,
+"t1": 12.041
+},
+{
+"seg": "look",
+"who": "narr",
+"text": "Na",
+"t0": 12.788,
+"t1": 12.934
+},
+{
+"seg": "look",
+"who": "narr",
+"text": "primeira",
+"t0": 12.971,
+"t1": 13.337
+},
+{
+"seg": "look",
+"who": "narr",
+"text": "página",
+"t0": 13.429,
+"t1": 13.722
+},
+{
+"seg": "look",
+"who": "narr",
+"text": "estava",
+"t0": 13.795,
+"t1": 14.088
+},
+{
+"seg": "look",
+"who": "narr",
+"text": "escrito:",
+"t0": 14.161,
+"t1": 14.49
+},
+{
+"seg": "look",
+"who": "narr",
+"text": "\"não",
+"t0": 14.573,
+"t1": 14.756
+},
+{
+"seg": "look",
+"who": "narr",
+"text": "olhe",
+"t0": 14.802,
+"t1": 15.021
+},
+{
+"seg": "look",
+"who": "narr",
+"text": "pra",
+"t0": 15.076,
+"t1": 15.259
+},
+{
+"seg": "look",
+"who": "narr",
+"text": "trás\".",
+"t0": 15.305,
+"t1": 15.635
+},
+{
+"seg": "look",
+"who": "narr",
+"text": "Ele",
+"t0": 15.717,
+"t1": 15.9
+},
+{
+"seg": "look",
+"who": "narr",
+"text": "olhou.",
+"t0": 15.946,
+"t1": 16.312
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "A",
+"t0": 17.744,
+"t1": 17.846
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "lanterna",
+"t0": 17.872,
+"t1": 18.212
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "do",
+"t0": 18.297,
+"t1": 18.433
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "celular",
+"t0": 18.467,
+"t1": 18.774
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "começou",
+"t0": 18.85,
+"t1": 19.156
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "a",
+"t0": 19.233,
+"t1": 19.335
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "apagar…",
+"t0": 19.361,
+"t1": 19.735
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "mas",
+"t0": 19.829,
+"t1": 19.999
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "ele",
+"t0": 20.041,
+"t1": 20.212
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "tinha",
+"t0": 20.254,
+"t1": 20.492
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "um",
+"t0": 20.552,
+"t1": 20.688
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "carregador",
+"t0": 20.722,
+"t1": 21.131
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "portátil",
+"t0": 21.233,
+"t1": 21.573
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "mini",
+"t0": 21.658,
+"t1": 21.862
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "no",
+"t0": 21.913,
+"t1": 22.05
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "bolso.",
+"t0": 22.084,
+"t1": 22.424
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "Encaixou",
+"t0": 22.509,
+"t1": 22.849
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "direto",
+"t0": 22.934,
+"t1": 23.207
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "no",
+"t0": 23.275,
+"t1": 23.411
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "celular,",
+"t0": 23.445,
+"t1": 23.853
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "lanterna",
+"t0": 23.956,
+"t1": 24.296
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "acesa,",
+"t0": 24.381,
+"t1": 24.721
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "e",
+"t0": 24.806,
+"t1": 24.909
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "ele",
+"t0": 24.934,
+"t1": 25.104
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "conseguiu",
+"t0": 25.147,
+"t1": 25.521
+},
+{
+"seg": "charge",
+"who": "narr",
+"text": "fugir.",
+"t0": 25.615,
+"t1": 25.955
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "Achou",
+"t0": 26.9,
+"t1": 27.105
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "a",
+"t0": 27.156,
+"t1": 27.243
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "sétima",
+"t0": 27.265,
+"t1": 27.499
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "página…",
+"t0": 27.557,
+"t1": 27.878
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "e",
+"t0": 27.958,
+"t1": 28.046
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "parou",
+"t0": 28.067,
+"t1": 28.272
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "pra",
+"t0": 28.323,
+"t1": 28.469
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "tirar",
+"t0": 28.505,
+"t1": 28.709
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "uma",
+"t0": 28.76,
+"t1": 28.906
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "selfie",
+"t0": 28.943,
+"t1": 29.176
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "com",
+"t0": 29.235,
+"t1": 29.38
+},
+{
+"seg": "selfie",
+"who": "narr",
+"text": "ela.",
+"t0": 29.417,
+"t1": 29.65
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "Faltava",
+"t0": 30.774,
+"t1": 31.093
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "uma.",
+"t0": 31.173,
+"t1": 31.456
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "A",
+"t0": 31.527,
+"t1": 31.634
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "oitava",
+"t0": 31.66,
+"t1": 31.944
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "página",
+"t0": 32.015,
+"t1": 32.299
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "estava…",
+"t0": 32.37,
+"t1": 32.76
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "nas",
+"t0": 32.857,
+"t1": 33.034
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "costas",
+"t0": 33.079,
+"t1": 33.362
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "do",
+"t0": 33.433,
+"t1": 33.575
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "homem",
+"t0": 33.611,
+"t1": 33.859
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "sem",
+"t0": 33.921,
+"t1": 34.098
+},
+{
+"seg": "eighth",
+"who": "narr",
+"text": "rosto.",
+"t0": 34.143,
+"t1": 34.497
+},
+{
+"seg": "grab",
+"who": "narr",
+"text": "Em",
+"t0": 35.34,
+"t1": 35.465
+},
+{
+"seg": "grab",
+"who": "narr",
+"text": "vez",
+"t0": 35.496,
+"t1": 35.652
+},
+{
+"seg": "grab",
+"who": "narr",
+"text": "de",
+"t0": 35.692,
+"t1": 35.816
+},
+{
+"seg": "grab",
+"who": "narr",
+"text": "correr",
+"t0": 35.848,
+"t1": 36.097
+},
+{
+"seg": "grab",
+"who": "narr",
+"text": "pra",
+"t0": 36.16,
+"t1": 36.316
+},
+{
+"seg": "grab",
+"who": "narr",
+"text": "saída,",
+"t0": 36.355,
+"t1": 36.667
+},
+{
+"seg": "grab",
+"who": "narr",
+"text": "ele",
+"t0": 36.745,
+"t1": 36.901
+},
+{
+"seg": "grab",
+"who": "narr",
+"text": "foi",
+"t0": 36.94,
+"t1": 37.097
+},
+{
+"seg": "grab",
+"who": "narr",
+"text": "pegar.",
+"t0": 37.136,
+"t1": 37.448
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "Pronto.",
+"t0": 39.188,
+"t1": 39.604
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "Agora",
+"t0": 39.708,
+"t1": 39.973
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "o",
+"t0": 40.039,
+"t1": 40.152
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "Pedrinho",
+"t0": 40.181,
+"t1": 40.559
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "virou",
+"t0": 40.653,
+"t1": 40.918
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "a",
+"t0": 40.984,
+"t1": 41.097
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "nona",
+"t0": 41.126,
+"t1": 41.353
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "página.",
+"t0": 41.409,
+"t1": 41.825
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "Pelo",
+"t0": 41.929,
+"t1": 42.156
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "menos",
+"t0": 42.213,
+"t1": 42.478
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "o",
+"t0": 42.544,
+"t1": 42.657
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "carregador",
+"t0": 42.685,
+"t1": 43.139
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "sobreviveu.",
+"t0": 43.253,
+"t1": 43.82
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "Ainda",
+"t0": 43.962,
+"t1": 44.226
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "com",
+"t0": 44.292,
+"t1": 44.481
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "100%",
+"t0": 44.529,
+"t1": 44.718
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "de",
+"t0": 44.765,
+"t1": 44.916
+},
+{
+"seg": "end",
+"who": "narr",
+"text": "bateria.",
+"t0": 44.954,
+"t1": 45.408
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "O",
+"t0": 46.184,
+"t1": 46.287
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "link",
+"t0": 46.313,
+"t1": 46.519
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "do",
+"t0": 46.571,
+"t1": 46.709
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "carregador",
+"t0": 46.743,
+"t1": 47.156
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "tá",
+"t0": 47.259,
+"t1": 47.397
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "na",
+"t0": 47.431,
+"t1": 47.569
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "descrição.",
+"t0": 47.603,
+"t1": 48.085
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "E",
+"t0": 48.205,
+"t1": 48.308
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "aí,",
+"t0": 48.334,
+"t1": 48.575
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "quem",
+"t0": 48.635,
+"t1": 48.841
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "o",
+"t0": 48.893,
+"t1": 48.996
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "Pedrinho",
+"t0": 49.022,
+"t1": 49.366
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "enfrenta",
+"t0": 49.452,
+"t1": 49.796
+},
+{
+"seg": "cta",
+"who": "narr",
+"text": "agora?",
+"t0": 49.882,
+"t1": 50.226
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "Achou",
+"t0": 50.916,
+"t1": 51.176
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "os",
+"t0": 51.241,
+"t1": 51.39
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "três",
+"t0": 51.427,
+"t1": 51.65
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "feijões?",
+"t0": 51.706,
+"t1": 52.152
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "Comenta",
+"t0": 52.264,
+"t1": 52.598
+},
+{
+"seg": "feijoes",
+"who": "narr",
+"text": "aí.",
+"t0": 52.682,
+"t1": 52.942
+}
+]
