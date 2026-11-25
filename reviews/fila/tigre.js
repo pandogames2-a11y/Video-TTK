@@ -14,7 +14,12 @@ function arm(sx, sy, a1, a2, hand = 'open', mirror = 1) {
   line([ex + (hx - ex) * 0.78, ey + (hy - ey) * 0.78, ex + (hx - ex) * 0.9, ey + (hy - ey) * 0.9], 28, OUT); line([ex + (hx - ex) * 0.8, ey + (hy - ey) * 0.8, ex + (hx - ex) * 0.88, ey + (hy - ey) * 0.88], 18, '#ffffff');
   const CR = '#fff3e0';
   if (hand === 'point') { const ux = Math.cos(a2 * D2R), uy = Math.sin(a2 * D2R); line([hx, hy, hx + ux * 44, hy + uy * 44], 22, OUT); line([hx, hy, hx + ux * 42, hy + uy * 42], 12, CR); ell(hx, hy, 27, 27, CR, 0, 5); }
-  else if (hand === 'thumb') { ell(hx, hy, 28, 26, CR, 0, 5); line([hx - 4 * mirror, hy - 16, hx - 4 * mirror, hy - 46], 20, OUT); line([hx - 4 * mirror, hy - 18, hx - 4 * mirror, hy - 44], 11, CR); }
+  else if (hand === 'thumb') {   // a clear thumbs-up: wide fist with curled fingers + a short, fat thumb on top
+    const m = mirror;
+    ell(hx - 12 * m, hy - 36, 15, 24, CR, -0.25 * m, 5);
+    rect(hx - 34, hy - 24, 68, 52, CR, 18, 5);
+    for (let k = 0; k < 3; k++) line([hx + 8 * m, hy - 10 + k * 14, hx + 30 * m, hy - 10 + k * 14], 4);
+  }
   else ell(hx, hy, 29, 29, CR, 0, 5);
 }
 function eyes(ex1, ex2, ey, rx, ry, look, blink) {
