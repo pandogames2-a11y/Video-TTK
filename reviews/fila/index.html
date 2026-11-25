@@ -132,6 +132,42 @@ function codeCard(t, t0, pulse = 1) {
   main.font = '900 116px Inter, sans-serif'; main.lineWidth = 24; main.strokeText(ML_CODE, 0, 108); main.fillStyle = '#ffdd2e'; main.fillText(ML_CODE, 0, 108);
   main.restore();
 }
+// opening hook (first ~2.5 s): big question that drops in word by word, then shrinks away
+function hook(t) {
+  const out = 2.45; if (t > out + 0.35) return;
+  const lines = [['SEU', 'TÊNIS'], ['MACHUCA', 'O PÉ?']], cols = { 'MACHUCA': '#ffdd2e' };
+  const k = t < out ? 1 : 1 - ease((t - out) / 0.35);
+  main.save(); main.translate(540, 470); main.scale(k, k); main.globalAlpha = k;
+  main.textAlign = 'center'; main.lineJoin = 'round';
+  let i = 0;
+  lines.forEach((ln, r) => {
+    let size = r === 0 ? 130 : 150; main.font = `900 ${size}px Inter, sans-serif`;
+    let full = main.measureText(ln.join(' ')).width; if (full > 960) { size = Math.floor(size * 960 / full); main.font = `900 ${size}px Inter, sans-serif`; }
+    const ws = ln.map(w => main.measureText(w + ' ').width), tot = ws.reduce((a, b) => a + b, 0) - main.measureText(' ').width; let x = -tot / 2;
+    ln.forEach((w, j) => {
+      const t0 = 0.05 + i * 0.16, p = back((t - t0) / 0.35); i++;
+      if (p > 0) { const wx = x + main.measureText(w).width / 2, wy = r * 170 - (1 - Math.min(1, p)) * 120;
+        main.save(); main.translate(wx, wy); main.scale(p, p); main.rotate(r === 1 && j === 0 ? -0.04 : 0);
+        main.lineWidth = size * 0.22; main.strokeStyle = '#0c0a14'; main.strokeText(w, 0, 0); main.fillStyle = cols[w] || '#fff'; main.fillText(w, 0, 0); main.restore(); }
+      x += ws[j];
+    });
+  });
+  main.restore();
+}
+// Reels cover (1080x1920; the key content sits inside the centre 1080x1350 that the profile grid shows)
+window.renderCover = function () {
+  main.setTransform(1, 0, 0, 1, 0, 0); studio(1.3, 0, 1.1);
+  shoe(IMG.s3, 540, 1250, 820, { sweep: 0.45 }); sparkles(1.2, 540, 950, 450, 14, 1);
+  main.save(); main.textAlign = 'center'; main.lineJoin = 'round';
+  main.save(); main.translate(540, 450); main.rotate(-0.03);
+  main.font = '900 128px Inter, sans-serif'; main.lineWidth = 30; main.strokeStyle = '#0c0a14'; main.strokeText('ADEUS, SOLA', 0, 0); main.fillStyle = '#fff'; main.fillText('ADEUS, SOLA', 0, 0);
+  main.font = '900 140px Inter, sans-serif'; main.strokeText('DE PAPELÃO!', 0, 150); main.fillStyle = '#ffdd2e'; main.fillText('DE PAPELÃO!', 0, 150); main.restore();
+  main.translate(540, 1330); main.font = '900 46px Inter, sans-serif'; const w = main.measureText('ACHADINHO DO MERCADO LIVRE').width + 90;
+  main.fillStyle = '#7b4dff'; main.strokeStyle = '#fff'; main.lineWidth = 7; main.beginPath(); main.roundRect(-w / 2, -46, w, 92, 46); main.fill(); main.stroke();
+  main.fillStyle = '#fff'; main.fillText('ACHADINHO DO MERCADO LIVRE', 0, 16);
+  main.restore();
+  layer(() => tiger(880, 1800, 0.55, { mouth: 0.5, blink: 0, time: 0.4, armL: [-150, -125, 'point'], armR: [-15, -55, 'thumb'], brows: 1, look: [-0.5, -0.4], tilt: -0.06 }));
+};
 window.renderFrame = function (t) {
   const T = TL.T; main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = 1; main.filter = 'none';
   const talking = t >= T.voice_start && t < T.speech_end, m = mouthAt(t), bl = blinkAt(t);
@@ -186,6 +222,7 @@ window.renderFrame = function (t) {
     // a quick flash between features
     const d = t - t0; if (d < 0.1 && k > 0) { main.fillStyle = `rgba(255,255,255,${0.3 * (1 - d / 0.1)})`; main.fillRect(0, 0, SW, SH); }
   }
+  hook(t);
   // Mercado Livre search code: on screen from the moment the sneaker appears until the end
   codeCard(t, T.w_solucao + 0.35, t >= T.w_codigo - 0.1 && t < T.f_comment ? 1 + 0.06 * Math.abs(Math.sin((t - T.w_codigo) * 6)) : 1);
   // fade from black at the start
