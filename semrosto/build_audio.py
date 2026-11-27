@@ -63,7 +63,7 @@ for i, s in enumerate(S):
             vo = [k for k in range(len(S)) if S[k]['voice'] != 'none']; j = vo.index(i)
             prev = S[vo[j - 1]].get('say', S[vo[j - 1]]['text']) if j > 0 else ''; nxt = S[vo[j + 1]].get('say', S[vo[j + 1]]['text']) if j + 1 < len(vo) else ''
             ALIGN[i] = tts_eleven(say, f, prev, nxt)
-        else: tts_piper(say, f)
+        elif not (os.environ.get('KEEP') and os.path.exists(f)): tts_piper(say, f)   # KEEP=1 reuses the preview voice files (Piper changes a bit every run)
         x = readwav(f); nz = np.where(np.abs(x) > 0.01)[0]; cut = max(0, nz[0] - 200); x = x[cut: nz[-1] + 2000]; voice[i] = x
         if i in ALIGN: ALIGN[i] = [(c, a - cut / SR, b - cut / SR) for c, a, b in ALIGN[i]]
         vd = len(x) / SR
@@ -176,8 +176,20 @@ def heartbeat(a, b, amp=0.25, bpm=95):
 def static(at, d, amp=0.2):   # the faceless man's video static
     n = int(d * SR); kk = np.arange(n) / SR; x = rng.standard_normal(n) * (0.6 + 0.4 * np.sign(np.sin(2 * np.pi * 13 * kk))) + band(rng.standard_normal(n), 60, 200) * 2
     put(fx, f32(x * amp * np.minimum(1, (d - kk) / 0.05)), at)
-def leaves(at, amp=0.05):   # a footstep on dry leaves
-    n = int(0.12 * SR); put(fx, f32(band(rng.standard_normal(n), 1500, 7000) * np.exp(-np.arange(n) / SR * 30) * amp), at); step(at, amp * 0.6)
+FOOT = {'n': 0}
+def leaves(at, amp=0.05, run=False):   # a footstep on the forest floor: soft heel thump on dirt, then a toe roll that crunches dry leaves; now and then a twig snaps
+    FOOT['n'] += 1; i = FOOT['n']; side = 1.0 if i % 2 else 0.8; v = side * (0.85 + 0.3 * rng.random()); amp = amp * 1.6
+    m = int(0.12 * SR); q = np.arange(m) / SR
+    heel = lowp(rng.standard_normal(m), 260 if run else 200) * np.exp(-q * (45 if run else 35)) * 3.2 + np.sin(2 * np.pi * (70 + 20 * rng.random()) * q) * np.exp(-q * 40) * 0.8
+    put(fx, f32(heel * amp * v), at)
+    d = 0.16 if run else 0.22; m = int(d * SR); q = np.arange(m) / SR; cr = np.zeros(m)
+    for _ in range(int((26 if run else 20) * v)):   # dry-leaf crackles: tiny sharp clicks spread over the toe roll
+        p0 = int(rng.random() ** 1.6 * (m - 200)); w = int(SR * (0.0008 + 0.002 * rng.random())); cr[p0:p0 + w] += rng.standard_normal(w) * (0.4 + rng.random())
+    cr = band(cr, 900, 6500) * np.exp(-q * (12 if run else 9)) + band(rng.standard_normal(m), 400, 2500) * np.exp(-q * 18) * 0.25
+    put(fx, f32(cr * amp * 0.9 * v), at + (0.03 if run else 0.06))
+    if i % 9 == 4:   # twig snap
+        m = int(0.07 * SR); q = np.arange(m) / SR; tw = band(rng.standard_normal(m), 1200, 4000) * np.exp(-q * 70) + np.sin(2 * np.pi * 1700 * q) * np.exp(-q * 90) * 0.6
+        put(fx, f32(tw * amp * 1.3), at + 0.08)
 def scream(at, d=1.0, amp=0.18):
     kk = np.arange(int(d * SR)) / SR; f0 = 420 + 160 * np.minimum(kk / 0.25, 1) + 18 * np.sin(2 * np.pi * 7 * kk); src = ((np.cumsum(f0) / SR) % 1.0) * 2 - 1
     x = band(src, 700, 900) * 1.6 + band(src, 1100, 1400) + band(src, 2400, 2900) * 0.5
@@ -208,7 +220,7 @@ for at in ERR: buzz(at, 0.1); thud(at, 0.3)
 static(ERR[0] + 0.35, 0.6, 0.12); sting(ERR[0] + 0.3, 0.18); scream(ERR[0] + 0.5, 0.7, 0.1)
 # the run: fast leaves + heartbeat; phone low-battery beeps; the charger snapping in + charge chime
 RUN0 = T0('charge')
-for at in np.arange(RUN0, TE('charge') - 0.2, 0.2): leaves(at, 0.05)
+for at in np.arange(RUN0, TE('charge') - 0.2, 0.2): leaves(at, 0.05, run=True)
 heartbeat(RUN0, TE('charge'), 0.14, 130)
 AP = wT('apagar', 'charge')
 for j in range(3): put(fx, f32(tone(700, 0.12, 0.06, 20)), AP + j * 0.25)
