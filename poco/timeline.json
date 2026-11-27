@@ -1,5 +1,5 @@
 {
- "total": 50.448,
+ "total": 40.521,
  "fps": 30,
  "segs": [
   {
@@ -8,88 +8,80 @@
    "start": 0.0,
    "dur": 2.8,
    "vstart": 0.3,
-   "vdur": 1.865
+   "vdur": 1.866
   },
   {
    "scene": "tape",
    "voice": "narr",
    "start": 2.8,
-   "dur": 5.336,
+   "dur": 5.196,
    "vstart": 3.0,
-   "vdur": 4.736
+   "vdur": 4.596
   },
   {
-   "scene": "watch",
+   "scene": "skip",
    "voice": "narr",
-   "start": 8.136,
-   "dur": 4.558,
-   "vstart": 8.336,
-   "vdur": 3.658
+   "start": 7.996,
+   "dur": 5.557,
+   "vstart": 8.196,
+   "vdur": 4.757
   },
   {
-   "scene": "call",
+   "scene": "tvon",
    "voice": "narr",
-   "start": 12.694,
-   "dur": 5.131,
-   "vstart": 12.894,
-   "vdur": 4.131
+   "start": 13.553,
+   "dur": 4.618,
+   "vstart": 13.853,
+   "vdur": 3.818
   },
   {
-   "scene": "post",
+   "scene": "plug",
    "voice": "narr",
-   "start": 17.825,
-   "dur": 6.108,
-   "vstart": 18.025,
-   "vdur": 5.308
-  },
-  {
-   "scene": "days",
-   "voice": "narr",
-   "start": 23.933,
-   "dur": 5.321,
-   "vstart": 24.233,
-   "vdur": 4.521
+   "start": 18.17,
+   "dur": 3.807,
+   "vstart": 18.37,
+   "vdur": 3.007
   },
   {
    "scene": "crawl",
    "voice": "narr",
-   "start": 29.254,
-   "dur": 4.204,
-   "vstart": 29.454,
-   "vdur": 3.504
+   "start": 21.978,
+   "dur": 3.519,
+   "vstart": 22.178,
+   "vdur": 2.719
   },
   {
-   "scene": "help",
+   "scene": "run",
    "voice": "narr",
-   "start": 33.457,
-   "dur": 6.419,
-   "vstart": 33.657,
-   "vdur": 4.819
+   "start": 25.496,
+   "dur": 4.552,
+   "vstart": 25.696,
+   "vdur": 3.552
   },
   {
    "scene": "end",
    "voice": "narr",
-   "start": 39.876,
-   "dur": 6.238,
-   "vstart": 40.176,
-   "vdur": 5.338
+   "start": 30.048,
+   "dur": 6.151,
+   "vstart": 30.348,
+   "vdur": 5.251
   },
   {
    "scene": "cta",
    "voice": "narr",
-   "start": 46.114,
-   "dur": 4.334,
-   "vstart": 46.314,
-   "vdur": 2.934
+   "start": 36.199,
+   "dur": 4.323,
+   "vstart": 36.399,
+   "vdur": 2.923
   }
  ],
- "err": [
-  9.095,
-  19.592,
-  37.961
+ "ok": [
+  9.502,
+  20.509,
+  27.242
  ],
- "ins": 8.241,
- "ring": 14.728,
- "tvon": 26.723,
- "glitch": 38.876
+ "box": 10.106,
+ "tvon": 15.737,
+ "plug": 20.359,
+ "lock": 28.78
 }
