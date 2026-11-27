@@ -1,5 +1,5 @@
 {
- "total": 40.521,
+ "total": 41.193,
  "fps": 30,
  "segs": [
   {
@@ -8,80 +8,80 @@
    "start": 0.0,
    "dur": 2.8,
    "vstart": 0.3,
-   "vdur": 1.866
+   "vdur": 1.689
   },
   {
    "scene": "tape",
    "voice": "narr",
    "start": 2.8,
-   "dur": 5.196,
+   "dur": 6.408,
    "vstart": 3.0,
-   "vdur": 4.596
+   "vdur": 5.808
   },
   {
    "scene": "skip",
    "voice": "narr",
-   "start": 7.996,
-   "dur": 5.557,
-   "vstart": 8.196,
-   "vdur": 4.757
+   "start": 9.208,
+   "dur": 5.945,
+   "vstart": 9.408,
+   "vdur": 5.145
   },
   {
    "scene": "tvon",
    "voice": "narr",
-   "start": 13.553,
-   "dur": 4.618,
-   "vstart": 13.853,
-   "vdur": 3.818
+   "start": 15.153,
+   "dur": 4.455,
+   "vstart": 15.453,
+   "vdur": 3.655
   },
   {
    "scene": "plug",
    "voice": "narr",
-   "start": 18.17,
-   "dur": 3.807,
-   "vstart": 18.37,
-   "vdur": 3.007
+   "start": 19.608,
+   "dur": 3.785,
+   "vstart": 19.808,
+   "vdur": 2.985
   },
   {
    "scene": "crawl",
    "voice": "narr",
-   "start": 21.978,
-   "dur": 3.519,
-   "vstart": 22.178,
-   "vdur": 2.719
+   "start": 23.393,
+   "dur": 3.325,
+   "vstart": 23.593,
+   "vdur": 2.525
   },
   {
    "scene": "run",
    "voice": "narr",
-   "start": 25.496,
-   "dur": 4.552,
-   "vstart": 25.696,
-   "vdur": 3.552
+   "start": 26.718,
+   "dur": 4.599,
+   "vstart": 26.918,
+   "vdur": 3.599
   },
   {
    "scene": "end",
    "voice": "narr",
-   "start": 30.048,
-   "dur": 6.151,
-   "vstart": 30.348,
-   "vdur": 5.251
+   "start": 31.317,
+   "dur": 6.246,
+   "vstart": 31.617,
+   "vdur": 5.346
   },
   {
    "scene": "cta",
    "voice": "narr",
-   "start": 36.199,
-   "dur": 4.323,
-   "vstart": 36.399,
-   "vdur": 2.923
+   "start": 37.563,
+   "dur": 3.63,
+   "vstart": 37.763,
+   "vdur": 2.23
   }
  ],
  "ok": [
-  9.502,
-  20.509,
-  27.242
+  10.998,
+  22.003,
+  28.842
  ],
- "box": 10.106,
- "tvon": 15.737,
- "plug": 20.359,
- "lock": 28.78
+ "box": 12.149,
+ "tvon": 17.18,
+ "plug": 21.853,
+ "lock": 30.094
 }
