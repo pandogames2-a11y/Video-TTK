@@ -170,7 +170,83 @@ def static(at, d, amp=0.2):   # TV static (snow)
     put(fx, f32(x * amp * np.minimum(1, kk / 0.02) * np.minimum(1, (d - kk) / 0.05)), at)
 def tv_on(at, amp=0.2):   # CRT power-on: a thunk + a high whine + static burst
     thud(at, amp); kk = np.arange(int(1.5 * SR)) / SR; put(fx, f32(np.sin(2 * np.pi * 7800 * kk) * 0.012 * np.exp(-kk * 1.5)), at); static(at + 0.05, 0.5, amp * 0.6)
-#@@SFX@@
+
+# ======== EP13 sound design ========
+def suspense(a, b, amp=1.0):   # dark detuned pad + tremolo strings swelling + low booms + ticking (same family as EP11's opening)
+    n = int((b - a) * SR); kk = np.arange(n) / SR; L = b - a
+    env = np.minimum(1, kk / 1.0) * np.minimum(1, (L - kk) / 0.6)
+    saw = lambda f: ((kk * f) % 1.0) * 2 - 1
+    pad = lowp(saw(55) + saw(55.4) + 0.7 * saw(110.2) + 0.5 * saw(116.5) + 0.4 * saw(82.4), 520)
+    put(mus, f32(pad * env * 0.035 * amp), a)
+    st = sum(np.sin(2 * np.pi * f * kk + 0.3 * np.sin(2 * np.pi * 5.5 * kk)) for f in (659.3, 698.5, 987.8, 1046.5)) / 4
+    put(mus, f32(band(st, 400, 4000) * (0.55 + 0.45 * np.sin(2 * np.pi * 11 * kk)) * env * (0.01 + 0.04 * (kk / L) ** 1.5) * amp), a)
+    for at in np.arange(0.4, L - 0.3, 1.5):
+        m = int(0.9 * SR); q = np.arange(m) / SR; put(mus, f32(np.sin(2 * np.pi * (48 - 10 * q) * q) * np.exp(-q * 5) * 0.14 * amp), a + at)
+def grass_step(at, amp=0.05):   # running on grass: soft thump + short grassy swish
+    m = int(0.1 * SR); q = np.arange(m) / SR
+    put(fx, f32((lowp(rng.standard_normal(m), 220) * 3 * np.exp(-q * 40) + band(rng.standard_normal(m), 1500, 6000) * 0.5 * np.exp(-q * 30)) * amp * (0.8 + 0.4 * rng.random())), at)
+def walk_steps(a, b, gap, amp=0.05, hard=False):
+    for at in np.arange(a, b, gap):
+        if hard: step(at, amp, False)
+        else: grass_step(at, amp)
+def music_box(a, b, amp=0.05):   # the doll's counting song: a slow music-box tune, slightly out of tune, looped
+    notes = [67, 67, 64, 67, 69, 67, 64, 0, 62, 64, 67, 0, 60, 60, 0, 0]
+    at, i = a, 0
+    while at < b - 0.3:
+        n = notes[i % len(notes)]
+        if n:
+            f = 440 * 2 ** ((n - 69) / 12) * 2 * (1 + 0.006 * np.sin(i)); d = 0.9; q = np.arange(int(d * SR)) / SR
+            x = (np.sin(2 * np.pi * f * q) + 0.4 * np.sin(2 * np.pi * f * 2.76 * q) * np.exp(-q * 9) + 0.2 * np.sin(2 * np.pi * f * 5.4 * q) * np.exp(-q * 14)) * np.exp(-q * 4)
+            put(mus, f32(x * amp), at)
+        at += 0.26; i += 1
+def creak_turn(at, amp=0.06): creak(at, 0.7, amp); thud(at + 0.65, 0.12)
+def plim(at):
+    for j, f in enumerate([1319, 1760]): put(fx, f32(tone(f, 0.45, 0.06, 6)), at + j * 0.08)
+def squeak(at, amp=0.06):   # sneaker squeak / slip
+    q = np.arange(int(0.25 * SR)) / SR; f = 1700 + 500 * np.sin(2 * np.pi * 6 * q); put(fx, f32(np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-q * 8) * amp), at)
+def scanner(a, d, amp=0.04):
+    q = np.arange(int(d * SR)) / SR; x = np.sin(2 * np.pi * 220 * q) * (0.6 + 0.4 * np.sin(2 * np.pi * 3 * q)) + 0.3 * np.sin(2 * np.pi * 440.5 * q)
+    put(fx, f32(x * amp * np.minimum(1, q / 0.2) * np.minimum(1, (d - q) / 0.3)), a)
+def crowd(a, b, amp=0.02):   # people murmuring
+    n = int((b - a) * SR); q = np.arange(n) / SR; x = band(rng.standard_normal(n), 300, 1800) * (0.7 + 0.3 * np.sin(2 * np.pi * 1.7 * q) * np.sin(2 * np.pi * 0.6 * q))
+    put(fx, f32(x * amp * np.minimum(1, q / 0.5) * np.minimum(1, (b - a - q) / 0.5)), a)
+
+bell(0.02, 147, 0.16)
+suspense(0.0, T0('dorm') + 0.4)
+# street: his footsteps, the van arriving fast, brakes, sliding door, door slam, van leaving
+walk_steps(T0('street'), wT('quando', 'street') + 0.6, 0.5, 0.05, True)
+VAN_IN = wT('quando', 'street') - 0.4; VAN_STOP = wT('sequestrado', 'street') - 0.15
+engine(VAN_IN - 0.6, VAN_STOP + 2.6, 0.07); squeak(VAN_STOP - 0.2, 0.05); thud(VAN_STOP, 0.1)
+DOOR_O = VAN_STOP + 0.2; DOOR_C = VAN_STOP + 0.9; VAN_OUT = VAN_STOP + 1.2
+whoosh(DOOR_O, 0.3, 0.12); click(DOOR_O + 0.25, 0.2); door_slam(DOOR_C); whoosh(VAN_OUT, 1.0, 0.08)
+# dorm: room hum, waking up, murmuring
+n = int((TE('told') - T0('dorm')) * SR); put(mus, f32(np.sin(2 * np.pi * 60 * np.arange(n) / SR) * 0.012), T0('dorm'))
+crowd(T0('dorm') + 0.3, TE('told') - 0.2, 0.012)
+SCR_ON = T0('told') + 0.2; put(fx, f32(tone(880, 0.25, 0.06, 6)), SCR_ON); put(fx, f32(tone(660, 0.4, 0.05, 4)), SCR_ON + 0.18)
+sting(wT('sobreviver', 'told'), 0.12)
+# game 1: card whoosh + bell, the doll turns away on "batatinha"
+whoosh(T0('game1') + 0.1, 0.4, 0.1); bell(T0('game1') + 0.35, 196, 0.12)
+TURN_AWAY1 = wT('batatinha', 'game1'); creak_turn(TURN_AWAY1)
+SING1 = (T0('rule') + 0.2, wT('virou', 'turn')); music_box(*SING1)
+RUN1 = T0('rule') + 0.6
+walk_steps(RUN1, SING1[1], 0.17, 0.045); walk_steps(RUN1 + 0.08, SING1[1], 0.23, 0.025)
+SLIP = wT('escorregou', 'girl'); squeak(SLIP - 0.1, 0.07); whoosh(SLIP, 0.35, 0.08); thud(SLIP + 0.45, 0.28)
+put(fx, f32(tone(1568, 0.3, 0.04, 8)), wT('fila', 'fila') + 0.1); put(fx, f32(tone(2093, 0.4, 0.04, 6)), wT('fila', 'fila') + 0.2)
+for w in ('emborrachada', 'grossura', 'amortecendo', 'firmeza'): put(fx, f32(tone(1175, 0.18, 0.04, 10)), wT(w, 'fila'))
+TURN = wT('virou', 'turn'); creak_turn(TURN - 0.1); thud(TURN + 0.25, 0.18)
+OK1 = wT('milímetro', 'turn'); plim(OK1); scanner(TURN + 0.5, TE('rug') - TURN - 0.6, 0.035)
+put(fx, f32(np.concatenate([tone(196, 0.35, 0.05, 2), tone(185, 0.35, 0.05, 2), tone(175, 0.8, 0.05, 1.5)])), wT('estatelada', 'rug') + 0.2)   # sad trombone-ish
+TURN_AWAY2 = T0('finish') + 0.1; creak_turn(TURN_AWAY2)
+SING2 = (T0('finish') + 0.6, TE('finish') - 0.2); music_box(*SING2, 0.06)
+CROSS = wT('cruzou', 'finish'); walk_steps(SING2[0], CROSS + 0.3, 0.16, 0.05)
+OK2 = wT('passou', 'finish'); plim(OK2)
+for j, f in enumerate([523, 659, 784, 1047]): put(fx, f32(tone(f, 0.45 if j < 3 else 0.9, 0.06, 3)), CROSS + 0.1 + j * 0.12)
+for i in range(6): click(CROSS + 0.15 + i * 0.07, 0.08)   # confetti pops
+put(fx, f32(tone(1568, 0.5, 0.05, 5)), wT('tênis', 'lesson'))
+for i in range(3): whoosh(T0('cta') + 0.25 + i * 0.12, 0.2, 0.05)
+MARKS = {'van_in': round(VAN_IN, 3), 'van_stop': round(VAN_STOP, 3), 'door_o': round(DOOR_O, 3), 'door_c': round(DOOR_C, 3), 'van_out': round(VAN_OUT, 3),
+         'away1': round(TURN_AWAY1, 3), 'run1': round(RUN1, 3), 'sing1': [round(x, 3) for x in SING1], 'slip': round(SLIP, 3), 'turn': round(TURN, 3), 'ok': [round(OK1, 3), round(OK2, 3)],
+         'away2': round(TURN_AWAY2, 3), 'sing2': [round(x, 3) for x in SING2], 'cross': round(CROSS, 3)}
 # ---- mix (narration ducks the bed) ----
 duck = np.ones(N, np.float32); env = np.convolve(np.abs(voc), np.ones(4410) / 4410, 'same'); duck -= np.clip(env * 6, 0, 0.5)
 mix = voc * 1.0 + fx + mus * duck

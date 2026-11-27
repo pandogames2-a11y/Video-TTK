@@ -1,0 +1,133 @@
+{
+ "total": 79.414,
+ "fps": 30,
+ "segs": [
+  {
+   "scene": "title",
+   "voice": "narr",
+   "start": 0.0,
+   "dur": 3.668,
+   "vstart": 0.3,
+   "vdur": 2.868
+  },
+  {
+   "scene": "street",
+   "voice": "narr",
+   "start": 3.668,
+   "dur": 4.119,
+   "vstart": 3.968,
+   "vdur": 2.619
+  },
+  {
+   "scene": "dorm",
+   "voice": "narr",
+   "start": 7.787,
+   "dur": 6.522,
+   "vstart": 8.187,
+   "vdur": 5.722
+  },
+  {
+   "scene": "told",
+   "voice": "narr",
+   "start": 14.309,
+   "dur": 4.748,
+   "vstart": 14.509,
+   "vdur": 4.048
+  },
+  {
+   "scene": "game1",
+   "voice": "narr",
+   "start": 19.057,
+   "dur": 4.966,
+   "vstart": 19.357,
+   "vdur": 4.066
+  },
+  {
+   "scene": "rule",
+   "voice": "narr",
+   "start": 24.023,
+   "dur": 6.506,
+   "vstart": 24.223,
+   "vdur": 5.506
+  },
+  {
+   "scene": "girl",
+   "voice": "narr",
+   "start": 30.529,
+   "dur": 7.024,
+   "vstart": 30.729,
+   "vdur": 5.824
+  },
+  {
+   "scene": "fila",
+   "voice": "narr",
+   "start": 37.553,
+   "dur": 10.838,
+   "vstart": 37.753,
+   "vdur": 10.138
+  },
+  {
+   "scene": "turn",
+   "voice": "narr",
+   "start": 48.392,
+   "dur": 5.651,
+   "vstart": 48.592,
+   "vdur": 4.451
+  },
+  {
+   "scene": "rug",
+   "voice": "narr",
+   "start": 54.043,
+   "dur": 5.588,
+   "vstart": 54.243,
+   "vdur": 4.788
+  },
+  {
+   "scene": "finish",
+   "voice": "narr",
+   "start": 59.631,
+   "dur": 5.762,
+   "vstart": 59.831,
+   "vdur": 4.762
+  },
+  {
+   "scene": "lesson",
+   "voice": "narr",
+   "start": 65.393,
+   "dur": 6.339,
+   "vstart": 65.593,
+   "vdur": 5.639
+  },
+  {
+   "scene": "cta",
+   "voice": "narr",
+   "start": 71.732,
+   "dur": 7.681,
+   "vstart": 71.932,
+   "vdur": 6.281
+  }
+ ],
+ "van_in": 4.995,
+ "van_stop": 5.758,
+ "door_o": 5.958,
+ "door_c": 6.658,
+ "van_out": 6.958,
+ "away1": 21.487,
+ "run1": 24.623,
+ "sing1": [
+  24.223,
+  49.361
+ ],
+ "slip": 33.36,
+ "turn": 49.361,
+ "ok": [
+  52.419,
+  63.228
+ ],
+ "away2": 59.731,
+ "sing2": [
+  60.231,
+  65.193
+ ],
+ "cross": 61.79
+}

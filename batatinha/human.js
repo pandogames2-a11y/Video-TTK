@@ -1,7 +1,21 @@
 // The new Pedrinho: a regular teenage boy (2D, detailed), front-facing, origin at his feet.
 // o: s (scale), walk/phase, look [x,y], mouth ('smile'|'o'|'scream'|'flat'), brows (-1 scared .. 1 angry), armL/armR = [elbowX, elbowY, handX, handY] (relative),
 //    phone: 'L'|'R' (phone in that hand, flashlight on if o.light), sweat, blink, flip, tilt
-const SKIN = '#c98a5e', SKIN_D = '#a86c44', HAIR = '#2a1a12', HOOD = '#e8a423', HOOD_D = '#c4861a', JEANS = '#2f4f86', JEANS_D = '#223b66';
+let SKIN = '#c98a5e', SKIN_D = '#a86c44', HAIR = '#2a1a12', HOOD = '#e8a423', HOOD_D = '#c4861a', JEANS = '#2f4f86', JEANS_D = '#223b66';
+// other people (players in blue uniforms): draw with a different palette — withPal({SKIN, HAIR, HOOD, ...}, () => pedro(...))
+const UNIFORM = { HOOD: '#3f82d4', HOOD_D: '#2d64ad', JEANS: '#2d64ad', JEANS_D: '#234f8c' };
+function withPal(p, fn) { const old = { SKIN, SKIN_D, HAIR, HOOD, HOOD_D, JEANS, JEANS_D }; ({ SKIN = SKIN, SKIN_D = SKIN_D, HAIR = HAIR, HOOD = HOOD, HOOD_D = HOOD_D, JEANS = JEANS, JEANS_D = JEANS_D } = p); try { fn(); } finally { ({ SKIN, SKIN_D, HAIR, HOOD, HOOD_D, JEANS, JEANS_D } = old); } }
+// sneakers, side-ish view, origin = foot point; sx = which foot (-1 left, 1 right). kind: 'white' (his everyday ones), 'fila' (black mesh, thick white rubber sole), 'thin' (flat pink canvas, paper-thin sole)
+function sneaker(fx, fy, sx, kind = 'white') {
+  const up = kind === 'fila' ? '#1c1c22' : kind === 'thin' ? '#f08aa8' : '#f4f4f0', soleH = kind === 'fila' ? 28 : kind === 'thin' ? 6 : 14, soleC = kind === 'fila' ? '#f2f0f6' : kind === 'thin' ? '#f6e6ea' : '#d64036';
+  const lift = kind === 'fila' ? 14 : 0;
+  shape(up, () => { g.moveTo(fx - 34, fy - 8 - lift); g.quadraticCurveTo(fx - 30, fy - 36 - lift, fx + 4, fy - 32 - lift); g.quadraticCurveTo(fx + sx * 56 + 8, fy - 14 - lift, fx + sx * 50, fy + 14 - soleH + 14 - lift); g.lineTo(fx - 36, fy + 14 - soleH + 14 - lift); g.closePath(); }, 6);
+  rect(fx - 38, fy + 6 - (soleH - 14) - lift, sx > 0 ? 96 : 92, soleH, soleC, 6, 5);
+  if (kind === 'fila') { line([fx - 30, fy + 6 - lift, fx + 50 * sx * 0.9 + (sx < 0 ? 40 : 0), fy + 6 - lift], 3, '#c8c4d8');   // sole seam
+    for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) ell(fx - 18 + i * 12 + j * 6, fy - 22 + j * 9 - lift, 2.5, 2.5, '#3a3a46', 0, 0);   // mesh dots
+    line([fx - 22, fy - 4 - lift, fx + 14, fy - 18 - lift], 5, '#f2f0f6'); }   // white side stripe
+  for (let i = 0; i < 2; i++) line([fx - 14 + i * 12, fy - 28 + i * 4 - lift, fx + 2 + i * 12, fy - 22 + i * 4 - lift], 3, kind === 'fila' ? '#f2f0f6' : '#9aa0a8');   // laces
+}
 function pedro(x, y, o = {}) {
   const s = o.s || 1; g.save(); g.translate(x, y); g.scale(o.flip ? -s : s, s); if (o.tilt) g.rotate(o.tilt);
   const w = o.walk || 0, ph = o.phase || 0;
@@ -14,9 +28,7 @@ function pedro(x, y, o = {}) {
     g.lineCap = 'round'; g.lineJoin = 'round';
     g.beginPath(); g.moveTo(...hip); g.lineTo(...knee); g.lineTo(...foot); g.lineWidth = 62; g.strokeStyle = OUT; g.stroke(); g.lineWidth = 50; g.strokeStyle = sx < 0 ? JEANS : JEANS_D; g.stroke();
     line([knee[0] - 12, knee[1] - 10, knee[0] + 10, knee[1] + 6], 4, '#1a2a4a');
-    shape('#f4f4f0', () => { g.moveTo(foot[0] - 34, foot[1] - 8); g.quadraticCurveTo(foot[0] - 30, foot[1] - 34, foot[0] + 4, foot[1] - 30); g.quadraticCurveTo(foot[0] + sx * 56 + 8, foot[1] - 12, foot[0] + sx * 50, foot[1] + 14); g.lineTo(foot[0] - 36, foot[1] + 14); g.closePath(); }, 6);
-    rect(foot[0] - 38, foot[1] + 6, sx > 0 ? 96 : 92, 14, '#d64036', 6, 5);
-    for (let i = 0; i < 2; i++) line([foot[0] - 14 + i * 12, foot[1] - 26 + i * 4, foot[0] + 2 + i * 12, foot[1] - 20 + i * 4], 3, '#9aa0a8');
+    sneaker(foot[0], foot[1], sx, o.shoes);
   }
   };
   if (!o.sit) drawLegs(); else g.translate(0, SITY);
@@ -44,6 +56,7 @@ function pedro(x, y, o = {}) {
   shape(HOOD_D, () => { g.moveTo(-110, -560); g.quadraticCurveTo(-130, -620, -70, -640); g.lineTo(70, -640); g.quadraticCurveTo(130, -620, 110, -560); g.quadraticCurveTo(0, -585, -110, -560); g.closePath(); }, 6);
   // head
   const hy = -760, lk = o.look || [0, 0];
+  if (o.hair === 'long') shape(HAIR, () => { g.moveTo(-110, hy - 40); g.quadraticCurveTo(-140, hy + 120, -120, hy + 230); g.lineTo(120, hy + 230); g.quadraticCurveTo(140, hy + 120, 110, hy - 40); g.closePath(); });
   ell(-96, hy + 10, 18, 26, SKIN, 0, 6); ell(96, hy + 10, 18, 26, SKIN, 0, 6); curve(-100, hy, -92, hy + 12, -100, hy + 24, 3, SKIN_D); curve(100, hy, 92, hy + 12, 100, hy + 24, 3, SKIN_D);   // ears
   shape(SKIN, () => { g.moveTo(-92, hy - 60); g.quadraticCurveTo(-100, hy + 80, -40, hy + 120); g.quadraticCurveTo(0, hy + 140, 40, hy + 120); g.quadraticCurveTo(100, hy + 80, 92, hy - 60); g.quadraticCurveTo(0, hy - 120, -92, hy - 60); g.closePath(); });
   // hair: messy fringe
@@ -117,7 +130,7 @@ function wellGirl(x, y, o = {}) {
 function pedroBack(x, y, o = {}) {
   const s = o.s || 1; g.save(); g.translate(x, y); g.scale(s, s); if (o.tilt) g.rotate(o.tilt);
   if (o.sit) g.translate(0, 90);
-  else for (const sx of [-1, 1]) { const hip = [sx * 34, -300], foot = [sx * 40, -18]; g.beginPath(); g.moveTo(...hip); g.lineTo(...foot); g.lineWidth = 62; g.strokeStyle = OUT; g.lineCap = 'round'; g.stroke(); g.lineWidth = 50; g.strokeStyle = sx < 0 ? JEANS : JEANS_D; g.stroke(); rect(foot[0] - 38, foot[1] - 20, 76, 40, '#f4f4f0', 14, 6); }
+  else for (const sx of [-1, 1]) { const hip = [sx * 34, -300], foot = [sx * 40, -18]; g.beginPath(); g.moveTo(...hip); g.lineTo(...foot); g.lineWidth = 62; g.strokeStyle = OUT; g.lineCap = 'round'; g.stroke(); g.lineWidth = 50; g.strokeStyle = sx < 0 ? JEANS : JEANS_D; g.stroke(); if (o.shoes === 'fila') { rect(foot[0] - 38, foot[1] - 34, 76, 34, '#1c1c22', 12, 6); rect(foot[0] - 40, foot[1] - 4, 80, 26, '#f2f0f6', 8, 5); } else rect(foot[0] - 38, foot[1] - 20, 76, 40, '#f4f4f0', 14, 6); }
   const arm = (sx, a) => { g.beginPath(); g.moveTo(sx * 112, -540); g.lineTo(a[0], a[1]); g.lineTo(a[2], a[3]); g.lineWidth = 56; g.strokeStyle = OUT; g.lineCap = 'round'; g.lineJoin = 'round'; g.stroke(); g.lineWidth = 44; g.strokeStyle = sx < 0 ? HOOD_D : HOOD; g.stroke(); ell(a[2], a[3], 24, 26, SKIN, 0, 6); };
   const aL = o.armL || [-150, -440, -140, -330], aR = o.armR || [150, -440, 140, -330];
   arm(-1, aL); arm(1, aR);
@@ -132,4 +145,39 @@ function pedroBack(x, y, o = {}) {
   curve(-40, hy - 60, -10, hy - 20, -30, hy + 30, 3, '#140c08'); curve(30, hy - 70, 50, hy - 10, 30, hy + 40, 3, '#140c08');
   shape(HOOD_D, () => { g.moveTo(-104, -580); g.quadraticCurveTo(-110, -640, -60, -650); g.lineTo(60, -650); g.quadraticCurveTo(110, -640, 104, -580); g.quadraticCurveTo(0, -470, -104, -580); g.closePath(); }, 6);   // the hood lying on his back
   g.restore();
+}
+
+// the giant doll (original design): porcelain face, black bob with straight bangs, big red bow, navy dress with a wide white collar,
+// white socks, black strap shoes. ~2000 px tall at s=1 (= 14 m). o.turn: 0 = back to the field, 1 = facing it (turns by squashing sideways);
+// o.eyes: 'scan' (yellow glow) | 'red'; o.sway (head tilt while she sings)
+function bigDoll(x, y, o = {}) {
+  const s = o.s || 1, tr = o.turn || 0, sx = Math.max(0.05, Math.abs(Math.cos(Math.PI * tr))), front = tr > 0.5;
+  g.save(); g.translate(x, y); g.scale(s * sx, s);
+  const SK = '#f4e6da', SKD = '#dcc4b4', HR = '#141018', DR = '#24306a', DRD = '#1a2452', COL = '#f6f4ee', BOW = '#d8262c';
+  for (const lx of [-1, 1]) { rect(lx * 120 - 70, -560, 140, 300, SK, 30, 10); rect(lx * 120 - 74, -300, 148, 250, '#f8f8f4', 30, 10); shape('#121216', () => { g.moveTo(lx * 120 - 90, -60); g.quadraticCurveTo(lx * 120 - 100, -130, lx * 120, -120); g.quadraticCurveTo(lx * 120 + 110, -120, lx * 120 + 100, 0); g.lineTo(lx * 120 - 92, 0); g.closePath(); }, 10); line([lx * 120 - 60, -110, lx * 120 + 60, -110], 14, '#121216'); }
+  shape(DR, () => { g.moveTo(-210, -1180); g.quadraticCurveTo(-330, -800, -420, -520); g.quadraticCurveTo(0, -470, 420, -520); g.quadraticCurveTo(330, -800, 210, -1180); g.closePath(); }, 12);   // bell dress
+  for (let i = -3; i <= 3; i++) curve(i * 110, -540, i * 90, -800, i * 50, -1100, 5, DRD);   // pleats
+  if (front) { for (let i = 0; i < 3; i++) ell(0, -1080 + i * 120, 18, 18, COL, 0, 6); }
+  else line([0, -1180, 0, -560], 8, DRD);
+  for (const ax of [-1, 1]) { const sh = [ax * 220, -1130], hd = (ax < 0 ? o.handL : o.handR) || [ax * 300, -700];
+    g.beginPath(); g.moveTo(...sh); g.quadraticCurveTo(ax * 300, -950, hd[0], hd[1]); g.lineWidth = 120; g.strokeStyle = OUT; g.lineCap = 'round'; g.stroke(); g.lineWidth = 98; g.strokeStyle = DR; g.stroke();
+    ell(hd[0], hd[1] + 40, 70, 80, SK, 0, 10); }
+  shape(COL, () => { g.moveTo(-260, -1190); g.quadraticCurveTo(-240, -1030, -40, -1060); g.lineTo(0, -1140); g.lineTo(40, -1060); g.quadraticCurveTo(240, -1030, 260, -1190); g.quadraticCurveTo(0, -1240, -260, -1190); g.closePath(); }, 10);   // wide collar
+  g.save(); g.translate(0, -1230); g.rotate(o.sway || 0);
+  const hy = -330;
+  if (!front) { shape(HR, () => { g.ellipse(0, hy, 380, 380, 0, 0, Math.PI * 2); }, 12); for (let i = -3; i <= 3; i++) curve(i * 90, hy - 300, i * 110, hy, i * 100, hy + 330, 5, '#2a2434'); }
+  else {
+    shape(HR, () => { g.moveTo(-390, hy - 40); g.quadraticCurveTo(-400, hy - 400, 0, hy - 400); g.quadraticCurveTo(400, hy - 400, 390, hy - 40); g.lineTo(400, hy + 320); g.lineTo(-400, hy + 320); g.closePath(); }, 12);   // bob behind the face
+    ell(0, hy + 40, 310, 320, SK, 0, 12);
+    shape(HR, () => { g.moveTo(-330, hy - 10); g.quadraticCurveTo(-330, hy - 340, 0, hy - 340); g.quadraticCurveTo(330, hy - 340, 330, hy - 10); g.lineTo(-330, hy - 10); g.closePath(); }, 12);   // straight bangs
+    const eyeC = o.eyes === 'red' ? '#ff2a2a' : o.eyes === 'scan' ? '#ffe27a' : null;
+    for (const ex of [-1, 1]) { ell(ex * 120, hy + 80, 78, 92, '#0c0a12', 0, 10); ell(ex * 120 + 22, hy + 52, 22, 26, eyeC || '#ffffff', 0, 0); ell(ex * 120 - 24, hy + 110, 9, 9, '#ffffff', 0, 0);
+      if (eyeC) { g.save(); g.globalCompositeOperation = 'lighter'; const gr = g.createRadialGradient(ex * 120, hy + 80, 10, ex * 120, hy + 80, 170); gr.addColorStop(0, eyeC); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.globalAlpha = 0.55; g.fillStyle = gr; g.fillRect(ex * 120 - 170, hy - 90, 340, 340); g.restore(); }
+      for (let k = 0; k < 3; k++) line([ex * 120 + (k - 1) * 40, hy - 6, ex * 120 + (k - 1) * 52, hy - 30], 6, '#0c0a12'); }   // lashes
+    g.fillStyle = 'rgba(240,110,120,0.45)'; for (const ex of [-1, 1]) { g.beginPath(); g.ellipse(ex * 190, hy + 210, 60, 34, 0, 0, 7); g.fill(); }
+    shape('#c41e3a', () => { g.moveTo(-34, hy + 250); g.quadraticCurveTo(0, hy + 230, 34, hy + 250); g.quadraticCurveTo(0, hy + 290, -34, hy + 250); }, 6);   // tiny mouth
+  }
+  // bow on top
+  g.save(); g.translate(0, hy - 380); for (const bx of [-1, 1]) shape(BOW, () => { g.moveTo(0, 0); g.quadraticCurveTo(bx * 120, -130, bx * 230, -60); g.quadraticCurveTo(bx * 250, 40, bx * 200, 80); g.quadraticCurveTo(bx * 110, 60, 0, 0); }, 10); ell(0, 0, 56, 50, '#b01e24', 0, 10); g.restore();
+  g.restore(); g.restore();
 }
