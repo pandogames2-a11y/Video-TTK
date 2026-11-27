@@ -39,7 +39,7 @@ const LED_CV = document.createElement('canvas'); LED_CV.width = 128; LED_CV.heig
 const LED = new THREE.Mesh(new THREE.PlaneGeometry(0.22, 0.07), new THREE.MeshBasicMaterial({ map: LED_TX })); LED.position.set(0.25, 0.17, -3.145); scene.add(LED);
 box3(0.4, 0.02, 0.02, '#050505', -0.2, 0.17, -3.145, { ink: false });   // tape slot
 // wall socket + TV cable (the "right thing to do": pull the plug)
-box3(0.16, 0.22, 0.03, '#e8e2d4', 1.3, 0.45, -3.98); box3(0.07, 0.07, 0.04, '#2a2a30', 1.3, 0.45, -3.95);
+box3(0.16, 0.22, 0.03, '#e8e2d4', 1.3, 0.45, -3.98); const PLUG3 = box3(0.07, 0.07, 0.04, '#2a2a30', 1.3, 0.45, -3.95, { ink: false });
 const cable = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(1.3, 0.45, -3.93), new THREE.Vector3(1.2, 0.05, -3.85), new THREE.Vector3(0.6, 0.03, -3.8), new THREE.Vector3(0.4, 0.9, -3.88)]), 24, 0.015, 6), toon('#101014')); scene.add(cable);
 // beanbag in front of the TV
 const BEANBAG = new THREE.Mesh(new THREE.SphereGeometry(0.55, 32, 20), toon('#b8323a')); BEANBAG.scale.set(1, 0.6, 1); BEANBAG.position.set(0, 0.3, 0.45); BEANBAG.castShadow = BEANBAG.receiveShadow = true; scene.add(BEANBAG);

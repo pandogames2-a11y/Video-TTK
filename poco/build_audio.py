@@ -203,33 +203,36 @@ mus += f32(np.sin(2 * np.pi * 60 * k) * 0.006)
 for at in np.arange(0.2, N / SR - 1, 1.0):
     m = int(0.02 * SR); put(mus, f32(band(rng.standard_normal(m), 3000, 9000) * np.exp(-np.arange(m) / SR * 200) * 0.025), at)
 bell(0.02, 147, 0.18)
-suspense(0.0, T0('watch') + 0.6)
+suspense(0.0, T0('skip') + 0.2)
 for j, f in enumerate([659, 587, 523, 494, 440]): put(mus, tone(f * 2, 0.7, 0.03, 3), T0('tape') + 0.3 + j * 0.55)   # eerie piano
-ERR = [wT('assistiu', 'watch'), wT('postou', 'post'), wT('ajudar', 'help')]
-for at in ERR: buzz(at, 0.1); thud(at, 0.3)
-INS = wT('claro', 'watch') - 0.1; clunk(INS)   # tape into the VCR
-static(ERR[0] + 0.3, 0.8, 0.05)
-# the cursed video plays (low static under the narration), then it ends; the phone rings; the whisper
-static(T0('watch') + 1.2, TE('watch') - T0('watch') - 1.2, 0.025)
-RING = wT('tocou', 'call'); ring(RING - 0.2, RING + 1.6)
-WH = wT('sete', 'call'); whisper(WH - 0.05, 0.9, 0.09); sting(WH + 0.1, 0.16)
-heartbeat(WH + 0.4, TE('call'), 0.12, 80)
-# posting: send whoosh + notification pings that speed up
-whoosh(ERR[1] + 0.1, 0.35, 0.1)
-for j in range(10): ping(ERR[1] + 0.5 + j * max(0.08, 0.3 - j * 0.025), 0.035)
-# 7 days later: calendar flips, the TV turns on by itself, the well
-for j in range(7): click(T0('days') + 0.15 + j * 0.13, 0.1)
-TVON = wT('ligou', 'days'); tv_on(TVON)
-static(TVON + 0.5, TE('crawl') - TVON - 0.5, 0.03)
-suspense(TVON, TE('help'), 1.3)
-CR0 = wT('saiu', 'crawl')
-for at in np.arange(CR0, TE('crawl'), 0.42): crack(at, 0.1); drag(at + 0.1, 0.35, 0.04)
-for at in np.arange(T0('help'), ERR[2], 0.5): drag(at, 0.4, 0.03)
-heartbeat(T0('help'), TE('help') - 1.0, 0.14, 120)
-GL = TE('help') - 1.0; static(GL, 1.0, 0.22); growl(GL, 1.0, 0.1); scream(GL + 0.1, 0.8, 0.12)
-for j, f in enumerate([392, 370, 349, 330]): put(fx, f32(tone(f, 0.55 if j < 3 else 1.1, 0.06, 1.5)), wT('fita', 'end') + j * 0.42)   # sad trombone-ish
-VIR = wT('viralizou', 'end')
-for j in range(12): ping(VIR + j * 0.12, 0.03)
+def plim(at, amp=0.07):   # the "right choice" chime
+    for j, f in enumerate([1047, 1319, 1568, 2093]): put(fx, f32(tone(f, 0.5, amp, 5)), at + j * 0.06)
+OK = [wT('assistiu', 'skip'), wT('tomada', 'plug'), wT('correndo', 'run')]
+for at in OK: plim(at); whoosh(at - 0.05, 0.25, 0.06)
+# into the box + video game chiptune
+BOX = wT('guardou', 'skip'); thud(BOX + 0.3, 0.15); click(BOX + 0.3, 0.1)
+GAME = wT('jogar', 'skip')
+for j in range(int((TE('skip') - GAME) / 0.15)):
+    f = [523, 659, 784, 1047, 784, 659][j % 6]; kk = np.arange(int(0.12 * SR)) / SR
+    put(mus, f32(np.sign(np.sin(2 * np.pi * f * kk)) * 0.018 * np.exp(-kk * 10)), GAME + j * 0.15)
+# 3 a.m.: the TV turns on by itself
+TVON = wT('ligou', 'tvon'); tv_on(TVON)
+static(TVON + 0.5, TE('tvon') - TVON - 0.5, 0.03)
+suspense(TVON, TE('run'), 1.3)
+# the plug comes out: pop + the TV dies
+PLUG = OK[1] - 0.15; click(PLUG, 0.25); thud(PLUG, 0.2)
+kk = np.arange(int(0.6 * SR)) / SR; put(fx, f32(np.sin(2 * np.pi * (200 - 150 * kk) * kk) * 0.06 * np.exp(-kk * 6)), PLUG + 0.02)
+# even unplugged: static comes back, she crawls out
+DES = wT('desligada', 'crawl'); tv_on(DES + 0.2, 0.15); static(DES + 0.4, TE('crawl') - DES - 0.4, 0.035)
+CR0 = wT('sair', 'crawl')
+for at in np.arange(CR0 - 0.4, TE('run') - 1.2, 0.42): crack(at, 0.09); drag(at + 0.1, 0.35, 0.035)
+heartbeat(T0('run'), TE('run'), 0.14, 130)
+for at in np.arange(OK[2] - 0.1, wT('trancou', 'run') + 0.1, 0.2): step(at, 0.08, False)
+LOCK = wT('porta', 'run'); door_slam(LOCK - 0.15); click(LOCK + 0.25, 0.25); click(LOCK + 0.35, 0.2)
+# survived: a happy little fanfare, coins
+SURV = wT('sobreviveu', 'end')
+for j, f in enumerate([523, 659, 784, 1047]): put(fx, f32(tone(f, 0.45 if j < 3 else 0.9, 0.06, 3)), SURV + j * 0.12)
+for j in range(2): put(fx, f32(tone(2637, 0.3, 0.05, 8)), wT('reais', 'end') + j * 0.12)
 for i in range(3): whoosh(T0('cta') + 0.25 + i * 0.12, 0.2, 0.05)
 # ---- mix (narration ducks the bed) ----
 duck = np.ones(N, np.float32); env = np.convolve(np.abs(voc), np.ones(4410) / 4410, 'same'); duck -= np.clip(env * 6, 0, 0.5)
@@ -238,6 +241,6 @@ mix = mix[:int(TOTAL * SR)]
 mix = mix / max(1e-6, np.abs(mix).max()) * 0.9
 with wave.open('audio/mix.wav', 'w') as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
-json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'err': [round(x, 3) for x in ERR], 'ins': round(INS, 3), 'ring': round(RING, 3), 'tvon': round(TVON, 3), 'glitch': round(GL, 3)}, open('timeline.json', 'w'), indent=1)
+json.dump({'total': round(TOTAL, 3), 'fps': 30, 'segs': segs, 'ok': [round(x, 3) for x in OK], 'box': round(BOX, 3), 'tvon': round(TVON, 3), 'plug': round(PLUG, 3), 'lock': round(LOCK, 3)}, open('timeline.json', 'w'), indent=1)
 for g in segs: print(f"{g['scene']:8s} start {g['start']:6.2f} dur {g['dur']:5.2f}")
 print('total', round(TOTAL, 2))

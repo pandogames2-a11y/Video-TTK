@@ -60,6 +60,14 @@ function tvDraw(mode, t, o = {}) {
   const c = TVC; c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; c.filter = 'none';
   let col = '#c8dcff', I = 6 * (0.85 + 0.15 * Math.sin(t * 37) * Math.sin(t * 13));
   if (mode === 'off') { const gr = c.createRadialGradient(200, 140, 10, 256, 200, 320); gr.addColorStop(0, '#2a3230'); gr.addColorStop(1, '#0a0e0e'); c.fillStyle = gr; c.fillRect(0, 0, TW, TH); c.fillStyle = 'rgba(255,255,255,0.06)'; c.beginPath(); c.ellipse(150, 110, 120, 50, -0.4, 0, 7); c.fill(); I = 0; }
+  else if (mode === 'game') {   // a bright little platformer
+    const sk = c.createLinearGradient(0, 0, 0, TH); sk.addColorStop(0, '#46a8ff'); sk.addColorStop(1, '#a8e0ff'); c.fillStyle = sk; c.fillRect(0, 0, TW, TH);
+    const sc = (t * 90) % 128; c.fillStyle = '#ffffff'; for (let i = 0; i < 4; i++) { c.beginPath(); c.ellipse(i * 160 - sc + 60, 70 + (i % 2) * 30, 50, 18, 0, 0, 7); c.fill(); }
+    c.fillStyle = '#3ac060'; c.fillRect(0, 320, TW, 80); c.fillStyle = '#8a5a2a'; c.fillRect(0, 345, TW, 55);
+    for (let i = 0; i < 6; i++) { const x = i * 128 - sc; c.fillStyle = '#e8a030'; c.fillRect(x + 40, 210, 40, 40); c.strokeStyle = '#6a3a10'; c.lineWidth = 4; c.strokeRect(x + 40, 210, 40, 40); c.fillStyle = '#ffe14a'; c.beginPath(); c.arc(x + 100, 170 + Math.sin(t * 6 + i) * 6, 12, 0, 7); c.fill(); }
+    const jy = 320 - Math.abs(Math.sin(t * 4)) * 90; c.fillStyle = '#e8463a'; c.fillRect(150, jy - 50, 34, 50); c.fillStyle = '#ffd0a0'; c.fillRect(154, jy - 74, 26, 24);
+    col = '#6ad0ff'; I = 6;
+  }
   else if (mode === 'snow') { snow(c, t); I = 7 * (0.8 + 0.2 * Math.random()); col = '#d8e0ff'; }
   else if (mode === 'blue') { c.fillStyle = '#1830c8'; c.fillRect(0, 0, TW, TH); c.fillStyle = '#fff'; c.font = 'bold 44px monospace'; c.fillText('PLAY ▶', 40, 70); col = '#4060ff'; }
   else if (mode === 'tape') {   // fast black-and-white montage
@@ -89,9 +97,9 @@ function vhs(x, y, s = 1, rot = 0, label = true) {   // a black VHS tape (seen f
   if (label) { rect(-150, -92, 300, 52, '#f2ecd8', 4, 4); g.save(); g.font = 'italic 900 34px "Inter Display", Inter'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#b01818'; g.fillText('NÃO ASSISTA', 0, -65); g.restore(); }
   g.restore();
 }
-function tapeInsert(a, t) {   // close-up of the tape label with the thrift-store price sticker
+function tapeInsert(a, t, y0 = 820) {   // close-up of the tape label with the thrift-store price sticker
   if (a <= 0) return; main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; const pg = g; g = main;
-  main.translate(540, 820); main.rotate(-0.06 + Math.sin(t * 2) * 0.01); main.scale(popS(a, 1) * 1.9, popS(a, 1) * 1.9); vhs(0, 0, 1, 0, true);
+  main.translate(540, y0); main.rotate(-0.06 + Math.sin(t * 2) * 0.01); main.scale(popS(a, 1) * 1.9, popS(a, 1) * 1.9); vhs(0, 0, 1, 0, true);
   ell(140, 80, 46, 46, '#ff8a2a', 0, 5); main.fillStyle = '#1a1010'; main.font = '900 26px "Inter Display", Inter'; main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillText('R$ 2', 140, 82);
   g = pg; main.restore();
 }
@@ -130,21 +138,37 @@ function schoolPanel(a, t, k0) {   // "the whole school": a grid of classmates, 
 function laterCard(txt, a) { if (a <= 0) return; fade(a * 0.85, '4,4,12'); textOut(txt, 540, 900, 96, '#ffffff', { a, s: 0.9 + 0.1 * a }); }
 
 // ---------- counters ----------
-function counters(t) {   // ERROS x/3 (top right) and the days left (top left, after the phone call)
+function counters(t) {   // ACERTOS x/3 (top right), green
   if (t < T0('tape')) return;
-  const errs = TL.err.filter(e => t >= e).length, last = TL.err.filter(e => t >= e).pop();
+  const n = TL.ok.filter(e => t >= e).length, last = TL.ok.filter(e => t >= e).pop();
   const bump = last !== undefined ? popS(t - last, 0.25) : 1;
   main.save(); main.setTransform(1, 0, 0, 1, 0, 0);
-  main.translate(SW - 190, 130); main.scale(bump, bump); main.fillStyle = 'rgba(10,8,20,0.75)'; main.strokeStyle = errs ? '#d8261c' : '#ffffff'; main.lineWidth = 5; main.beginPath(); main.roundRect(-150, -42, 300, 84, 42); main.fill(); main.stroke();
-  main.fillStyle = errs ? '#ff4a3a' : '#ffffff'; main.font = '900 44px "Inter Display", Inter'; main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillText(`ERROS ${errs}/3`, 0, 2); main.restore();
-  const D7 = W0('sete', 'call'); if (t < D7) return;
-  const d0 = T0('days'), days = t < d0 + 0.1 ? 7 : Math.max(0, 7 - Math.floor((t - d0 - 0.1) / 0.13)), over = days === 0;
-  const bs = t < D7 + 0.3 ? popS(t - D7, 0.25) : over && t < d0 + 1.3 ? popS(t - d0 - 1.0, 0.25) : 1;
-  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(190, 130); main.scale(bs, bs);
-  main.fillStyle = 'rgba(10,8,20,0.75)'; main.strokeStyle = '#d8261c'; main.lineWidth = 5; main.beginPath(); main.roundRect(-150, -42, 300, 84, 42); main.fill(); main.stroke();
-  main.fillStyle = '#f3eedc'; main.strokeStyle = '#08061a'; main.lineWidth = 3; main.fillRect(-124, -24, 40, 44); main.strokeRect(-124, -24, 40, 44); main.fillStyle = '#c03030'; main.fillRect(-124, -24, 40, 12);
-  main.fillStyle = over ? '#ff4a3a' : '#ffffff'; main.font = '900 44px "Inter Display", Inter'; main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillText(`${days} ${days === 1 ? 'DIA' : 'DIAS'}`, 30, 2); main.restore();
+  main.translate(SW - 210, 130); main.scale(bump, bump); main.fillStyle = 'rgba(10,8,20,0.75)'; main.strokeStyle = n ? '#2ec85a' : '#ffffff'; main.lineWidth = 5; main.beginPath(); main.roundRect(-170, -42, 340, 84, 42); main.fill(); main.stroke();
+  main.fillStyle = n ? '#5cff8a' : '#ffffff'; main.font = '900 44px "Inter Display", Inter'; main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillText(`ACERTOS ${n}/3`, 0, 2); main.restore();
 }
+function cardBox(x, y, s) {   // an open cardboard box (front part only, so things can drop in behind it)
+  g.save(); g.translate(x, y); g.scale(s, s);
+  shape('#a8743e', () => { g.moveTo(-130, -170); g.lineTo(-200, -230); g.lineTo(-120, -240); g.lineTo(-70, -175); g.closePath(); }, 6);
+  shape('#a8743e', () => { g.moveTo(130, -170); g.lineTo(200, -230); g.lineTo(120, -240); g.lineTo(70, -175); g.closePath(); }, 6);
+  rect(-130, -175, 260, 175, '#c8945a', 6, 7); line([-130, -120, 130, -120], 4, '#a8743e'); rect(-30, -175, 60, 60, '#e8d8a8', 0, 0);
+  g.restore();
+}
+function pad(x, y, s) {   // game controller in his hands
+  g.save(); g.translate(x, y); g.scale(s, s);
+  shape('#26262e', () => { g.moveTo(-110, -30); g.quadraticCurveTo(-120, 60, -80, 70); g.quadraticCurveTo(-50, 70, -40, 30); g.lineTo(40, 30); g.quadraticCurveTo(50, 70, 80, 70); g.quadraticCurveTo(120, 60, 110, -30); g.quadraticCurveTo(0, -60, -110, -30); g.closePath(); }, 6);
+  ell(-55, -10, 16, 16, '#3a3a44', 0, 3); for (const [dx, dy, c] of [[50, -22, '#46e05a'], [72, -4, '#e04646'], [50, 12, '#4a8aff'], [28, -4, '#f2c53d']]) ell(dx, dy, 9, 9, c, 0, 3);
+  g.restore();
+}
+function plug2D(x, y, s, hand) {   // the TV plug, and his hand pulling it
+  g.save(); g.translate(x, y); g.scale(s, s);
+  line([0, 30, 40, 200, 220, 320], 14, '#101014');
+  rect(-40, -40, 80, 80, '#2a2a30', 12, 6); line([-14, -40, -14, -64], 8, '#c8c8c8'); line([14, -40, 14, -64], 8, '#c8c8c8');
+  if (hand) { g.beginPath(); g.moveTo(30, 0); g.lineTo(420, 60); g.lineWidth = 110; g.strokeStyle = OUT; g.lineCap = 'round'; g.stroke(); g.lineWidth = 92; g.strokeStyle = HOOD; g.stroke(); ell(20, 0, 70, 62, SKIN, 0, 7); for (let i = 0; i < 3; i++) line([-20 + i * 22, -50, -26 + i * 24, 40], 6, SKIN_D); }
+  g.restore();
+}
+function survived(a, t) { if (a <= 0) return; main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.translate(540, 560); const s = popS(a, 1); main.scale(s, s);
+  main.fillStyle = '#1fa84a'; main.strokeStyle = '#08061a'; main.lineWidth = 10; main.beginPath(); main.roundRect(-380, -90, 760, 180, 40); main.fill(); main.stroke();
+  main.fillStyle = '#ffffff'; main.font = '900 96px "Inter Display", Inter'; main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillText('SOBREVIVEU ✓', 0, 6); main.restore(); }
 
 // ---------- scenes ----------
 const BACKCAM = [[0.42, 1.5, 2.5], [-0.06, 1.0, -3.1]];   // over Pedrinho's shoulder, the TV ahead
@@ -167,96 +191,91 @@ function sTape(t) {   // standing in his room, showing the tape he bought; then 
   characters(SCR, () => vhs(hx, hy - 70 * hs, hs, -0.15, true), 'rgba(200,220,255,0.9)', 0.25);
   tapeInsert(ins, t); vignette(main, 0.6);
 }
-function sWatch(t) {   // the tape goes into the VCR... then he watches, alone, at 3 a.m.
-  const A = TL.err[0], C = TL.ins;
-  if (false) {   // VCR close-up (cut: too dark to read): the tape slides into the slot
-    tvDraw('blue', t, { light: 0.5 }); fill([0.2, 0.9, -2.5], 7); setCam([0.15, 0.36, -2.35], [-0.1, 0.2, -3.15]); draw3D();
-    const k = ease(clamp((t - C) / 0.55)); const [x, y, d] = proj(-0.2, 0.17, lerp(-2.75, -3.12, k)); const s = ppm(d) / 900 * 0.45;
-    if (k < 0.98) characters(SCR, () => { g.save(); g.beginPath(); const [sx, sy] = proj(-0.2, 0.17, -3.145); g.rect(0, 0, SW, sy + 4); g.restore(); vhs(x, y - 60 * s, s, 0, false); }, 'rgba(200,220,255,0.6)', 0.2);
-    vignette(main, 0.6); return;
+function sSkip(t) {   // he does NOT watch it: the tape goes into a box; then he plays video games
+  const OK0 = TL.ok[0], BX = TL.box, GA = W0('jogar', 'skip');
+  if (t < GA - 0.1) {
+    tvDraw('off', t); setCam([0.35, 1.25, 2.3], [0.15, 0.8, -2]); draw3D();
+    const fall = clamp((t - BX - 0.4) / 0.35), [bx, by, bd] = proj(0.62, 0, -0.35), bs = 0.45 * ppm(bd) / 260;
+    if (fall > 0 && fall < 1) { const [hx, hy, hd] = proj(0.33, 1.32, -0.7); const hs = 0.2 * ppm(hd) / 380; characters(SCR, () => vhs(lerp(hx, bx, ease(fall)), lerp(hy - 70 * hs, by - 150 * bs, fall * fall), hs, -0.15 + fall * 1.2, true), 'rgba(200,220,255,0.9)', 0.25); }
+    characters(SCR, () => cardBox(bx, by, bs), 'rgba(200,220,255,0.7)', 0.25);
+    const hold = t < BX + 0.4, no = t > OK0 - 0.3 && t < OK0 + 0.5;
+    ped(0, -0.7, { look: no ? [Math.sin(t * 18), 0] : hold ? [0.5, -0.3] : [0.8, 0.6], armR: hold ? [190, -560, 175, -700] : [200, -470, 260, -420], mouth: no ? 'flat' : 'smile', brows: no ? 0.6 : 0.2 });
+    if (hold) { const [hx, hy, hd] = proj(0.33, 1.32, -0.7); const hs = 0.2 * ppm(hd) / 380; characters(SCR, () => vhs(hx, hy - 70 * hs, hs, -0.15, true), 'rgba(200,220,255,0.9)', 0.25); }
+    vignette(main, 0.55); return;
   }
-  tvDraw(t < A - 0.05 ? 'blue' : 'tape', t); setCam([0.02, 1.05, -2.6], [0, 0.72, 0.3]); draw3D();
-  const fl = 0.6 + 0.4 * Math.abs(Math.sin(t * 23) * Math.sin(t * 7));
-  ped(0, PZ, { sit: true, look: [0, -0.1], mouth: 'o', brows: -0.4, armL: [-170, -420, -110, -300], armR: [170, -420, 110, -300], blink: 0 }, `rgba(220,235,255,${0.6 + 0.35 * fl})`);
-  fade(0.15 * (1 - fl), '0,0,10');
-  const T3 = W0('três', 'watch'); ledClock(ss(T3 - 0.15, T3 + 0.1, t) * (1 - ss(TE('watch') - 0.3, TE('watch'), t)), t);
-  vignette(main, 0.65);
+  tvDraw('game', t); setCam([0.02, 1.05, -2.6], [0, 0.72, 0.3]); draw3D();
+  const [px, py, pd] = proj(0, 0, PZ), ps = 1.7 * ppm(pd) / 900;
+  ped(0, PZ, { sit: true, look: [0, -0.2], mouth: 'smile', brows: 0.3, armL: [-170, -420, -50, -380], armR: [170, -420, 50, -380] }, 'rgba(170,220,255,0.95)');
+  characters(SCR, () => pad(px, py - (380 - 90) * ps, ps * 0.9), 'rgba(170,220,255,0.6)', 0.2);
+  vignette(main, 0.55);
 }
-function sCall(t) {   // the tape ends (static); the phone rings; he answers; a whisper: "seven days"
-  const R = TL.ring, V = W0('voz', 'call'), S7 = W0('sete', 'call');
-  tvDraw('snow', t); setCam([0.3, 1.1, -2.2], [0, 0.78, 0.3]); draw3D();
-  const ear = t > V - 0.2;
-  ped(0, PZ, { sit: true, look: ear ? [-0.6, 0] : [0.6, 0.4], mouth: t > S7 ? 'o' : 'flat', sweat: t > S7 + 0.2, brows: t > S7 ? -1 : 0, phone: 'R', light: true,
-    armR: ear ? [190, -600, 105, -760] : [180, -440, 140, -400], armL: [-170, -420, -110, -300] });
-  const ph = ss(R - 0.2, R + 0.1, t) * (1 - ss(V - 0.3, V, t));
-  if (ph > 0) { main.save(); main.globalAlpha = ph; main.restore(); phone2D(830, 1150, 0.62 * popS(t - R + 0.2, 0.25), 0.1, { mode: 'call' }, true, t); }
-  if (t > S7 - 0.1) { const k = t - S7; textOut('7 DIAS', 540, 560, 150, '#ffffff', { a: clamp(k / 0.2) * (1 - ss(1.4, 1.9, k)), s: 1 + k * 0.15 }); }
-  vignette(main, 0.65 + (t > S7 ? 0.1 : 0));
-}
-function sPost(t) {   // "it's a prank": he posts the video. Now the whole school has 7 days.
-  const P = TL.err[1], EI = W0('escola', 'post');
-  tvDraw('well', t, { girl: 1 }); setCam([0.65, 1.15, -2.0], [0, 0.78, 0.3]); draw3D();
-  ped(0, PZ, { sit: true, look: [0.7, 0.5], mouth: t < P ? 'smile' : 'smile', brows: 0.5, phone: 'R', light: true, armR: [180, -470, 120, -460], armL: [-170, -440, 20, -470] });
-  const pa = 1 - ss(EI - 0.3, EI, t);
-  if (pa > 0) { const up = clamp((t - T0('post') - 0.4) / Math.max(0.3, P - T0('post') - 0.4)); const likes = t < P ? 0 : Math.floor(Math.min(99999, Math.pow((t - P) * 6, 3.2)));
-    main.save(); main.globalAlpha = pa; phone2D(820, 1180, 0.68 * popS(t - T0('post'), 0.3), -0.08, { mode: t < P ? 'upload' : 'posted', k: up, likes }, false, t); main.restore(); }
-  schoolPanel(ss(EI - 0.2, EI + 0.05, t), t, EI + 0.3);
-  vignette(main, 0.6);
-}
-function sDays(t) {   // 7 days later, 3 a.m.: he dozed off on the beanbag; the TV turns on by itself and shows the well
-  const d0 = T0('days'), ON = TL.tvon, PO = W0('poço', 'days');
-  const mode = t < ON ? 'off' : t < PO - 0.1 ? 'snow' : 'well';
-  tvDraw(mode, t, { girl: 0 }); setCam(...BACKCAM); flat3D();
-  const awake = t > ON + 0.5;
-  pedB(0.05, PZ, { sit: true, tilt: awake ? 0 : 0.22, armL: [-150, -440, -120, -330], armR: [150, -440, 120, -330] }); beanOver();
+function sTvon(t) {   // 3 a.m.: he dozed off on the beanbag; the TV turns on by itself and shows the well
+  const ON = TL.tvon, PO = W0('poço', 'tvon'), T3 = W0('três', 'tvon');
+  tvDraw(t < ON ? 'off' : t < PO - 0.1 ? 'snow' : 'well', t, { girl: 0 }); setCam(...BACKCAM); flat3D();
+  pedB(0.05, PZ, { sit: true, tilt: t > ON + 0.5 ? 0 : 0.22, armL: [-150, -440, -120, -330], armR: [150, -440, 120, -330] }); beanOver();
   if (t > ON && t < ON + 0.15) fade(0.6 * (1 - (t - ON) / 0.15), '230,240,255');
   fade(t < ON ? 0.35 : 0, '0,0,8');
-  laterCard('7 DIAS DEPOIS…', ss(d0, d0 + 0.15, t) * (1 - ss(d0 + 1.1, d0 + 1.4, t)));
+  ledClock(ss(T3 - 0.15, T3 + 0.1, t) * (1 - ss(ON - 0.2, ON + 0.1, t)), t);
   vignette(main, 0.65);
 }
-function sCrawl(t) {   // on the screen she climbs out of the well and walks closer... then crawls OUT of the TV, into the room
-  const c0 = T0('crawl'), SA = W0('saiu', 'crawl'), RA = W0('rastejando', 'crawl'), E = TE('crawl');
-  const rise = clamp((t - c0) / Math.max(0.3, SA - c0)), walk = clamp((t - SA) / Math.max(0.3, RA - SA));
-  tvDraw('well', t, t < RA ? { girl: rise, walk } : { girl: null });
-  setCam([0.85, 0.95, 0.9], [-0.1, 0.75, -3.0]); flat3D();
-  if (t >= RA) {
-    const k = clamp((t - RA) / (E - RA + 1.0)), out = clamp(k / 0.35), drop = clamp((k - 0.35) / 0.15), fw = clamp((k - 0.5) / 0.5);
-    const z = k < 0.35 ? lerp(-3.2, -2.9, ease(out)) : lerp(-2.9, -2.1, ease(fw)), y = k < 0.35 ? 0.82 : lerp(0.82, 0, ease(drop));
-    girl(-0.08, y, z, { crawl: 1, ph: t * 6 }, k < 0.2 ? screenRect() : null);
-  }
-  pedB(0.05, PZ, { sit: true, armL: [-160, -460, -190, -560], armR: [160, -460, 190, -560] }); beanOver();
-  vignette(main, 0.68);
-}
-function sHelp(t) {   // the right thing: pull the plug. Instead he stands up and offers her a hand.
-  const M = W0('mas', 'help'), A = TL.err[2], GLT = TL.glitch;
-  if (t >= GLT) { glitchFace(t); return; }
-  if (t < M - 0.05) {   // the socket on the wall, glowing green
-    tvDraw('well', t, { girl: null }); fill([1.4, 1.0, -3.3], 5); setCam([1.5, 0.8, -2.85], [1.3, 0.45, -3.98]); draw3D();
-    const [sx, sy] = proj(1.3, 0.45, -3.96); const p = 0.5 + 0.5 * Math.sin(t * 8);
-    main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.strokeStyle = `rgba(60,255,120,${0.5 + 0.4 * p})`; main.lineWidth = 14; main.shadowColor = '#3cff78'; main.shadowBlur = 30; main.beginPath(); main.arc(sx, sy, 170 + p * 16, 0, 7); main.stroke(); main.restore();
-    textOut('O CERTO ✓', sx, sy - 280, 90, '#5cff8a', { s: popS(t - T0('help'), 0.3) });
+function sPlug(t) {   // he doesn't stare: he gets up and pulls the plug right away
+  const TI = W0('tirou', 'plug'), P = TL.plug;
+  if (t < TI - 0.1) {   // looks away from the screen and gets up
+    tvDraw('well', t, { girl: 0.2 }); setCam([0.02, 1.05, -2.6], [0, 0.72, 0.3]); draw3D();
+    ped(0, PZ, { sit: true, look: [1, 0.3], mouth: 'flat', brows: 0.6, armL: [-170, -420, -110, -300], armR: [170, -420, 110, -300] });
     vignette(main, 0.6); return;
   }
-  tvDraw('snow', t, { light: 0.8 }); setCam([1.0, 1.05, 1.7], [0.05, 0.62, -1.6]); draw3D();
-  const k = clamp((t - M) / Math.max(0.4, A - M));
-  girl(-0.45, 0, -1.6, { crawl: 1, ph: 1.2, reach: t > A - 0.3 }, null);
-  ped(0.45, -1.6, { look: [-1, 0.4], mouth: t > A ? 'smile' : 'flat', brows: 0.4, armL: k > 0.5 ? [-210, -540, -330, -500] : [-150, -440, -140, -330], walk: k < 0.5 ? 0.4 : 0, phase: t * 8 });
+  tvDraw(t < P ? 'well' : 'off', t, { girl: 0.2 }); fill([1.4, 1.0, -3.3], 5); setCam([1.5, 0.8, -2.85], [1.3, 0.45, -3.98]); draw3D();
+  const [sx, sy, sd] = proj(1.3, 0.45, -3.93), s = 0.07 * ppm(sd) / 80;
+  const reach = ease(clamp((t - TI) / Math.max(0.2, P - TI))), pull = ease(clamp((t - P) / 0.35));
+  const hx = lerp(SW + 300, sx, reach) + pull * 260, hy = sy + pull * 80;
+  characters(SCR, () => { plug2D(t < P ? sx : hx, t < P ? sy : hy, s, false); if (reach > 0) { g.save(); g.translate(hx, hy); g.scale(s, s); g.beginPath(); g.moveTo(30, 0); g.lineTo(600, 90); g.lineWidth = 110; g.strokeStyle = OUT; g.lineCap = 'round'; g.stroke(); g.lineWidth = 92; g.strokeStyle = HOOD; g.stroke(); ell(20, 0, 70, 62, SKIN, 0, 7); for (let i = 0; i < 3; i++) line([-20 + i * 22, -50, -26 + i * 24, 40], 6, SKIN_D); g.restore(); } }, 'rgba(200,220,255,0.8)', 0.25);
+  if (t > P && t < P + 0.12) fade(0.5 * (1 - (t - P) / 0.12), '255,255,255');
+  vignette(main, 0.6);
+}
+const PSTAND = [0.95, -2.35];   // where he stands after pulling the plug
+function sCrawl(t) {   // even unplugged, the TV comes back on... and she crawls out of the screen
+  const DES = W0('desligada', 'crawl') + 0.2, ME = W0('menina', 'crawl'), SA = W0('sair', 'crawl');
+  const rise = clamp((t - DES - 0.3) / Math.max(0.3, ME + 0.3 - DES - 0.3)), walk = clamp((t - ME - 0.3) / Math.max(0.3, SA - ME - 0.3));
+  tvDraw(t < DES ? 'off' : t < DES + 0.3 ? 'snow' : 'well', t, t < SA ? { girl: rise, walk } : { girl: null });
+  setCam([0.7, 1.0, 1.0], [0.3, 0.8, -3.0]); flat3D();
+  if (t >= SA) crawlOut(t, SA);
+  ped(...PSTAND, { look: [-1, 0], mouth: t > ME ? 'o' : 'flat', sweat: t > ME, brows: -1 });
+  vignette(main, 0.68);
+}
+function crawlOut(t, SA) { const k = clamp((t - SA) / 3.2), out = clamp(k / 0.3), drop = clamp((k - 0.3) / 0.15), fw = clamp((k - 0.45) / 0.55);
+  const z = k < 0.3 ? lerp(-3.2, -2.9, ease(out)) : lerp(-2.9, -1.6, ease(fw)), y = k < 0.3 ? 0.82 : lerp(0.82, 0, ease(drop));
+  girl(-0.08, y, z, { crawl: 1, ph: t * 6 }, k < 0.15 ? screenRect() : null); return z; }
+function sRun(t) {   // he doesn't help her: he runs out of the room and locks the door
+  const SA = W0('sair', 'crawl'), C = TL.ok[1 + 1], LK = TL.lock;
+  tvDraw('well', t, { girl: null }); setCam([1.3, 1.55, 3.6], [0.2, 0.75, -2]); flat3D();
+  crawlOut(t, SA);
+  const k = ease(clamp((t - C + 0.1) / Math.max(0.4, LK - 0.3 - C + 0.1))), x = lerp(PSTAND[0], 1.5, k), z = lerp(PSTAND[1], 2.0, k);
+  const running = k > 0 && k < 1;
+  ped(x, z, { look: running ? [0, 0] : [-1, 0], mouth: running ? 'scream' : 'flat', brows: running ? -1 : 0.7, sweat: true, walk: running ? 1 : 0, phase: t * 14,
+    armR: running ? [160, -470, 150 + Math.sin(t * 14) * 30, -540] : undefined, armL: running ? [-150, -440, -170 - Math.sin(t * 14) * 40, -360] : undefined });
+  const dk = ss(LK - 0.3, LK - 0.1, t); if (dk > 0) { fade(dk, '4,4,10'); padlock(clamp((t - LK) / 0.3), dk); }
   vignette(main, 0.65);
 }
-function glitchFace(t) {   // last second: her eye peeks through the hair, static over everything
-  tvDraw('snow', t); fill([-0.4, 0.8, -0.9], 3); setCam([-0.5, 0.42, -0.85], [-0.6, 0.34, -1.6]); draw3D();
-  girl(-0.6, 0, -1.6, { crawl: 1, ph: 1.2, hairPart: clamp((t - TL.glitch) / 0.3) }, null);
-  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = 0.14 + 0.1 * Math.random(); main.imageSmoothingEnabled = false; main.drawImage(NOISES[Math.floor(t * 30) % 4], 0, 0, SW, SH); main.restore();
-  vignette(main, 0.75);
-}
-function sEnd(t) {   // close on the TV: Pedrinho is inside the tape now, hands on the glass. At least it went viral.
-  const V = W0('viralizou', 'end');
-  tvDraw('ped', t); const k = ease(clamp((t - T0('end')) / 2.5));
-  setCam([-0.08, 1.13, lerp(-0.6, -1.4, k)], [-0.08, 1.05, -3.07]); draw3D();
-  if (t > V - 0.1) { const kk = t - V; const n = Math.floor(Math.min(1, kk / 1.4) ** 2 * 1000000);
-    textOut('▶ ' + n.toLocaleString('pt-BR'), 540, 1280, 92, '#ffffff', { s: popS(kk + 0.1, 0.3) }); textOut('VISUALIZAÇÕES', 540, 1385, 60, '#ffd23f', { s: popS(kk, 0.3) });
-    for (let i = 0; i < 8; i++) { const q = kk - i * 0.15; if (q < 0 || q > 1.6) continue; const x = 160 + hash(i) * 760, y = 1250 - q * 500; textOut('♥', x, y, 70, '#ff3a6a', { a: 1 - q / 1.6 }); } }
-  vignette(main, 0.55);
+function padlock(k, a) {   // the door gets locked: a padlock shackle snapping shut (visual, no text)
+  main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.translate(540, 860); main.scale(1.4, 1.4);
+  main.strokeStyle = '#c8c8d0'; main.lineWidth = 30; main.lineCap = 'round'; main.beginPath(); main.arc(0, -60 + (1 - ease(k)) * -60, 70, Math.PI, 0); main.lineTo(70, -60 + (1 - ease(k)) * -60 + 40 * (1 - ease(k))); main.stroke();
+  main.fillStyle = '#ffd23f'; main.strokeStyle = '#08061a'; main.lineWidth = 8; main.beginPath(); main.roundRect(-110, -60, 220, 170, 26); main.fill(); main.stroke();
+  main.fillStyle = '#08061a'; main.beginPath(); main.arc(0, 10, 18, 0, 7); main.fill(); main.fillRect(-7, 10, 14, 50); main.restore(); }
+function sEnd(t) {   // survived: she gives up at the locked door. Next day: the tape goes back to the thrift store, R$ 2 back.
+  const SV = W0('sobreviveu', 'end'), NX = W0('no', 'end'), RE = W0('reais', 'end');
+  if (t < NX - 0.1) {
+    tvDraw('snow', t, { light: 0.6 }); setCam([0.3, 1.4, -2.4], [1.5, 0.6, 3.5]); draw3D();
+    girl(1.55, 0, 3.2, { crawl: 1, ph: 1.2 + Math.sin(t * 1.5) * 0.3 }, null);
+    survived(ss(SV - 0.15, SV + 0.1, t), t); vignette(main, 0.6); return;
+  }
+  main.setTransform(1, 0, 0, 1, 0, 0); const bg = main.createLinearGradient(0, 0, 0, SH); bg.addColorStop(0, '#ffcf6a'); bg.addColorStop(1, '#ff8a4a'); main.fillStyle = bg; main.fillRect(0, 0, SW, SH);
+  main.fillStyle = 'rgba(255,255,255,0.25)'; for (let i = 0; i < 10; i++) { main.save(); main.translate(540, 700); main.rotate(i / 10 * Math.PI * 2 + t * 0.3); main.fillRect(0, -40, 1400, 80); main.restore(); }
+  characters(SCR, () => { pedro(540, 2050, { s: 1.55, mouth: 'smile', brows: 0.4, look: [0, 0], armR: [200, -600, 230, -760], armL: [-170, -440, -140, -330] }); }, 'rgba(255,255,255,0.9)', 0);
+  const ins = ss(NX + 0.3, NX + 0.6, t); tapeInsert(ins, t, 470);
+  const D = W0('devolveu', 'end'); if (t > D) { const k = t - D, sc = k < 0.12 ? lerp(1.6, 1, ease(k / 0.12)) : 1; main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(540, 480); main.rotate(-0.15); main.scale(sc, sc); main.strokeStyle = '#1fa84a'; main.lineWidth = 12; main.beginPath(); main.roundRect(-300, -70, 600, 140, 24); main.stroke(); main.fillStyle = '#1fa84a'; main.font = '900 96px "Inter Display", Inter'; main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillText('DEVOLVIDO', 0, 6); main.restore(); }
+  if (t > RE - 0.1) for (let i = 0; i < 2; i++) { const k = clamp((t - RE - i * 0.12) / 0.35); if (k <= 0) continue; const x = 760 + i * 70, y = lerp(1200, 860, ease(k)); main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.translate(x, y); main.fillStyle = '#ffd23f'; main.strokeStyle = '#08061a'; main.lineWidth = 6; main.beginPath(); main.arc(0, 0, 54, 0, 7); main.fill(); main.stroke(); main.fillStyle = '#8a5a10'; main.font = '900 46px "Inter Display", Inter'; main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillText('R$1', 0, 2); main.restore(); }
+  laterCard('NO DIA SEGUINTE…', ss(NX - 0.1, NX + 0.05, t) * (1 - ss(NX + 0.5, NX + 0.75, t)));
 }
 function sCta(t) {
   tvDraw('snow', t, { light: 0.7 }); setCam([2.6, 2.3, 3.2], [-0.2, 0.9, -2.0]); draw3D(); fade(0.5, '5,4,14');
@@ -269,34 +288,34 @@ function sCta(t) {
   const tc = W0('comenta', 'cta'); if (t > tc - 0.2) textOut('COMENTA AÍ! ↓', 540, 1300, 84, '#ffffff', { a: ss(tc - 0.2, tc, t), s: popS(t - tc + 0.2, 0.3) });
 }
 // ---------- the ERRADO! stamps ----------
-const STAMPS = [[TL.err[0], 'ERRO Nº 1'], [TL.err[1], 'ERRO Nº 2'], [TL.err[2], 'ÚLTIMO ERRO']];
-function stamps(t) {
+const STAMPS = [[TL.ok[0], 'ACERTO Nº 1'], [TL.ok[1], 'ACERTO Nº 2'], [TL.ok[2], 'ACERTO Nº 3']];
+function stamps(t) {   // green "ACERTOU!" stamp, tilted, at the top (clear of the captions)
   for (const [t0, sub] of STAMPS) {
-    const k = t - t0; if (k < 0 || k > 1.6) continue; const col = '#d8261c', txt = 'ERRADO!';
-    const s = k < 0.12 ? lerp(1.6, 1, ease(k / 0.12)) : 1, a = (k < 0.12 ? k / 0.12 : 1) * (1 - ss(1.3, 1.6, k));
-    main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.translate(540, 620); main.rotate(-0.16); main.scale(s, s);
-    main.font = '900 150px "Inter Display", Inter'; const w = main.measureText(txt).width + 110;
+    const k = t - t0; if (k < 0 || k > 1.1) continue; const col = '#1fb84f', txt = 'ACERTOU!';
+    const s = k < 0.12 ? lerp(1.6, 1, ease(k / 0.12)) : 1, a = (k < 0.12 ? k / 0.12 : 1) * (1 - ss(0.8, 1.1, k));
+    main.save(); main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = a; main.translate(540, 620); main.rotate(-0.12); main.scale(s, s);
+    main.font = '900 140px "Inter Display", Inter'; const w = main.measureText(txt).width + 110;
+    main.fillStyle = 'rgba(255,255,255,0.85)'; main.beginPath(); main.roundRect(-w / 2, -125, w, 250, 30); main.fill();
     main.lineWidth = 16; main.strokeStyle = col; main.beginPath(); main.roundRect(-w / 2, -125, w, 250, 30); main.stroke(); main.lineWidth = 6; main.beginPath(); main.roundRect(-w / 2 + 22, -103, w - 44, 206, 18); main.stroke();
     main.textAlign = 'center'; main.textBaseline = 'middle'; main.fillStyle = col; main.fillText(txt, 0, -28); main.font = '900 56px "Inter Display", Inter'; main.fillText(sub, 0, 88);
-    main.globalCompositeOperation = 'destination-out'; for (let i = 0; i < 40; i++) { const x = ((i * 137.7) % w) - w / 2, y = ((i * 71.3) % 230) - 115; main.beginPath(); main.arc(x, y, 2 + (i % 4), 0, 7); main.fill(); }
-    main.restore(); if (k < 0.18) fade(0.3 * (1 - k / 0.18), '255,40,30');
+    main.restore(); if (k < 0.18) fade(0.25 * (1 - k / 0.18), '60,255,120');
   }
 }
-function shakeAmt(t) { let a = 0; for (const [t0] of STAMPS) { const k = t - t0; if (k >= 0.08 && k < 0.45) a = Math.max(a, 16 * (1 - (k - 0.08) / 0.37)); } return a; }
+function shakeAmt(t) { return 0; }
 function hook(t) {
   const tw = WORDS.filter(w => w.seg === 'title'); if (!tw.length) return;
   titleFX(t, tw[0].t0 - 0.3, tw[tw.length - 1].t1 - 0.05, [{ txt: 'VOCÊ SOBREVIVERIA', size: 92, colors: ['#ffffff', '#d9e4ff'] }, { txt: 'À MENINA', size: 116, colors: ['#ffffff', '#b9c2d8'] }, { txt: 'DO POÇO?', size: 116, colors: ['#8affd0', '#1e9a7a'] }], 400);
 }
-const SCENES = { title: sTitle, tape: sTape, watch: sWatch, call: sCall, post: sPost, days: sDays, crawl: sCrawl, help: sHelp, end: sEnd, cta: sCta };
+const SCENES = { title: sTitle, tape: sTape, skip: sSkip, tvon: sTvon, plug: sPlug, crawl: sCrawl, run: sRun, end: sEnd, cta: sCta };
 const SHK = mk();
 function frame(t) {
-  main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = 1; main.globalCompositeOperation = 'source-over'; main.filter = 'none'; fill([0, 0, 0], 0);
+  main.setTransform(1, 0, 0, 1, 0, 0); main.globalAlpha = 1; main.globalCompositeOperation = 'source-over'; main.filter = 'none'; fill([0, 0, 0], 0); PLUG3.visible = cable.visible = t < TL.plug;
   const sg = [...TL.segs].reverse().find(s => t >= s.start) || TL.segs[0];
   SCENES[sg.scene](t); if (sg.scene === 'title') titleZoom(t);
   const sh = shakeAmt(t);
   if (sh > 0) { const c = SHK.getContext('2d'); c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, SW, SH); c.drawImage(GL, 0, 0); c.drawImage(main.canvas, 0, 0); main.setTransform(1, 0, 0, 1, 0, 0); main.fillStyle = '#05040c'; main.fillRect(0, 0, SW, SH); main.drawImage(SHK, Math.sin(t * 90) * sh, Math.cos(t * 77) * sh); }
   counters(t); stamps(t);
-  for (const n of ['tape', 'days', 'end']) { const c = T0(n); fade(1 - ss(0, 0.2, Math.abs(t - c))); }
+  for (const n of ['tape', 'tvon']) { const c = T0(n); fade(1 - ss(0, 0.2, Math.abs(t - c))); }
   hook(t);
 }
 window.renderFrame = t => { frame(t); return true; };
