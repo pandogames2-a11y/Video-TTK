@@ -1,0 +1,97 @@
+[
+ {
+  "scene": "title",
+  "voice": "narr",
+  "text": "Como sobreviver à batatinha frita 1, 2, 3.",
+  "say": "Como sobreviver à batatinha frita um, dois, três.",
+  "lead": 0.3,
+  "tail": 0.5,
+  "min": 3.0
+ },
+ {
+  "scene": "street",
+  "voice": "narr",
+  "text": "Pedrinho estava andando na rua quando foi sequestrado.",
+  "lead": 0.3,
+  "tail": 1.2
+ },
+ {
+  "scene": "dorm",
+  "voice": "narr",
+  "text": "Quando ele abriu os olhos, ele viu que estava num lugar cheio de camas e outras pessoas com uniformes azuis.",
+  "lead": 0.4,
+  "tail": 0.4
+ },
+ {
+  "scene": "told",
+  "voice": "narr",
+  "text": "Disseram para ele que ele teria que sobreviver a alguns jogos se quisesse sobreviver.",
+  "lead": 0.2,
+  "tail": 0.5
+ },
+ {
+  "scene": "game1",
+  "voice": "narr",
+  "text": "E então começou o primeiro jogo. Batatinha frita 1, 2, 3.",
+  "say": "E então começou o primeiro jogo. Batatinha frita, um, dois, três.",
+  "lead": 0.3,
+  "tail": 0.6
+ },
+ {
+  "scene": "rule",
+  "voice": "narr",
+  "text": "A regra era simples. Quando a boneca estivesse contando, deviam correr até chegar a linha de chegada.",
+  "lead": 0.2,
+  "tail": 0.8
+ },
+ {
+  "scene": "girl",
+  "voice": "narr",
+  "text": "Uma menina ao lado de Pedrinho estava correndo, mas escorregou por conta de o tênis dela ter a sola fina demais.",
+  "lead": 0.2,
+  "tail": 1.0
+ },
+ {
+  "scene": "fila",
+  "voice": "narr",
+  "text": "Pedrinho já não tinha esse problema. Ele estava com um Fila em seus pés, com a sola emborrachada e de grossura de mais de 3 centímetros, amortecendo e dando firmeza aos passos de Pedrinho.",
+  "say": "Pedrinho já não tinha esse problema. Ele estava com um Fíla em seus pés, com a sola emborrachada e de grossura de mais de três centímetros, amortecendo e dando firmeza aos passos de Pedrinho.",
+  "lead": 0.2,
+  "tail": 0.5
+ },
+ {
+  "scene": "turn",
+  "voice": "narr",
+  "text": "Quando a boneca virou, Pedrinho parou na hora. Firme. Sem escorregar nem um milímetro.",
+  "lead": 0.2,
+  "tail": 1.0
+ },
+ {
+  "scene": "rug",
+  "voice": "narr",
+  "text": "Já a menina ficou estatelada no chão… o que, tecnicamente, também conta como ficar parada.",
+  "lead": 0.2,
+  "tail": 0.6
+ },
+ {
+  "scene": "finish",
+  "voice": "narr",
+  "text": "Na última contagem, Pedrinho correu, cruzou a linha de chegada e passou do primeiro jogo.",
+  "lead": 0.2,
+  "tail": 0.8
+ },
+ {
+  "scene": "lesson",
+  "voice": "narr",
+  "text": "Então já sabe: pra sobreviver à batatinha frita, é só não se mexer… e ter um tênis que não te deixa escorregar.",
+  "lead": 0.2,
+  "tail": 0.5
+ },
+ {
+  "scene": "cta",
+  "voice": "narr",
+  "text": "O código do tênis tá na tela e o link na descrição. E aí, qual jogo o Pedrinho enfrenta agora? Comenta aí.",
+  "lead": 0.2,
+  "tail": 1.2
+ }
+]
